@@ -1,0 +1,14 @@
+# Run from the repository root after authenticating gcloud and selecting a project.
+# Replace the placeholders before execution.
+
+gcloud run deploy workbookcare-api `
+  --source ./apps/api `
+  --region asia-northeast3 `
+  --allow-unauthenticated `
+  --min 0 `
+  --max 3 `
+  --cpu 1 `
+  --memory 1Gi `
+  --timeout 300 `
+  --concurrency 4 `
+  --set-env-vars "APP_ENV=production,CORS_ORIGINS=https://YOUR_DOMAIN"

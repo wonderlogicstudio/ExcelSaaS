@@ -1,0 +1,37 @@
+﻿file,scenario,sheet,cell,expected_detection,expected_rule,expected_subtype,severity,description,why_it_matters,manual_check
+11_구매발주_관리.xlsx,구매·발주 및 미입고 관리,발주내역,G19,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,FUNCTION_PATTERN_DRIFT,HIGH,발주금액 열에서 곱셈 대신 SUM 사용,수량과 단가를 더해 금액이 크게 왜곡될 수 있음,G18·G20의 E×F 패턴과 비교
+11_구매발주_관리.xlsx,구매·발주 및 미입고 관리,발주내역,I31,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,RELATIVE_REFERENCE_DRIFT,HIGH,미입고수량이 현재 행이 아닌 이전 행 발주수량을 참조,다른 발주의 수량 기준으로 미입고가 계산될 수 있음,I30·I32의 현재 행 E-H 패턴과 비교
+11_구매발주_관리.xlsx,구매·발주 및 미입고 관리,발주내역,J43,SHOULD_DETECT,FORMULA_PATTERN_GAP,CONSTANT_OVERRIDE_CANDIDATE,MEDIUM,납기상태 계산열에 고정 텍스트 입력,입고수량이나 납기일이 바뀌어도 상태가 갱신되지 않음,J42·J44의 IF 상태식과 비교
+11_구매발주_관리.xlsx,구매·발주 및 미입고 관리,발주내역,G54,SHOULD_DETECT,FORMULA_PATTERN_GAP,BLANK_GAP_CANDIDATE,HIGH,발주금액 계산열 중간 셀이 비어 있음,공급처별 발주금액 집계에서 누락될 수 있음,G53·G55의 E×F 패턴과 비교
+12_현금흐름_자금계획.xlsx,일별 현금흐름·자금계획,자금계획,E21,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,FUNCTION_PATTERN_DRIFT,HIGH,순현금흐름 열에서 차감 대신 SUM 사용,출금이 차감되지 않고 더해져 잔액이 과대 계산될 수 있음,E20·E22의 C-D 패턴과 비교
+12_현금흐름_자금계획.xlsx,일별 현금흐름·자금계획,자금계획,F33,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,RELATIVE_REFERENCE_DRIFT,HIGH,기초잔액이 직전 행이 아닌 두 행 전 기말잔액을 참조,하루의 현금흐름이 누락될 수 있음,F32·F34의 직전 행 G 참조와 비교
+12_현금흐름_자금계획.xlsx,일별 현금흐름·자금계획,자금계획,G45,SHOULD_DETECT,FORMULA_PATTERN_GAP,CONSTANT_OVERRIDE_CANDIDATE,HIGH,기말잔액 열에 고정 금액 입력,이후 잔액 연결 전체가 잘못될 수 있음,G44·G46의 F+E 패턴과 비교
+12_현금흐름_자금계획.xlsx,일별 현금흐름·자금계획,자금계획,H57,SHOULD_DETECT,FORMULA_PATTERN_GAP,BLANK_GAP_CANDIDATE,MEDIUM,자금상태 계산열 중간 셀이 비어 있음,부족일수 집계에서 누락될 수 있음,H56·H58의 IF 상태식과 비교
+13_고정자산_감가상각.xlsx,고정자산·감가상각 관리,자산대장,G17,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,FUNCTION_PATTERN_DRIFT,HIGH,월상각액 열에서 나눗셈 대신 SUM 사용,월상각액이 비정상적으로 커질 수 있음,G16·G18의 D/E 패턴과 비교
+13_고정자산_감가상각.xlsx,고정자산·감가상각 관리,자산대장,H28,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,RELATIVE_REFERENCE_DRIFT,HIGH,누계상각이 현재 자산이 아닌 이전 행 경과개월을 참조,다른 자산의 사용기간이 적용될 수 있음,H27·H29의 현재 행 F×G 패턴과 비교
+13_고정자산_감가상각.xlsx,고정자산·감가상각 관리,자산대장,I39,SHOULD_DETECT,FORMULA_PATTERN_GAP,CONSTANT_OVERRIDE_CANDIDATE,HIGH,장부가액 계산열에 고정 금액 입력,취득가액과 누계상각 변경이 반영되지 않음,I38·I40의 D-H 패턴과 비교
+13_고정자산_감가상각.xlsx,고정자산·감가상각 관리,자산대장,F46,SHOULD_DETECT,FORMULA_PATTERN_GAP,BLANK_GAP_CANDIDATE,MEDIUM,경과개월 계산열의 중간 셀이 비어 있음,누계상각과 장부가액 계산이 누락될 수 있음,F45·F47의 DATEDIF 패턴과 비교
+14_영업수수료_계산.xlsx,영업사원 성과·수수료 계산,수수료계산,F14,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,FUNCTION_PATTERN_DRIFT,HIGH,순매출 열에서 매출-반품 대신 SUM 사용,반품이 차감되지 않아 순매출이 과대 계산될 수 있음,F13·F15의 D-E 패턴과 비교
+14_영업수수료_계산.xlsx,영업사원 성과·수수료 계산,수수료계산,G22,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,RELATIVE_REFERENCE_DRIFT,HIGH,수수료율이 현재 행이 아닌 이전 행 순매출을 참조,다른 사원의 실적 기준으로 요율이 결정될 수 있음,G21·G23의 현재 행 F/C 참조와 비교
+14_영업수수료_계산.xlsx,영업사원 성과·수수료 계산,수수료계산,H31,SHOULD_DETECT,FORMULA_PATTERN_GAP,CONSTANT_OVERRIDE_CANDIDATE,HIGH,수수료 계산열에 고정 금액 입력,순매출이나 요율 변경이 반영되지 않음,H30·H32의 F×G 패턴과 비교
+14_영업수수료_계산.xlsx,영업사원 성과·수수료 계산,수수료계산,J38,SHOULD_DETECT,FORMULA_PATTERN_GAP,BLANK_GAP_CANDIDATE,MEDIUM,총수수료 계산열 중간 셀이 비어 있음,급여 반영 및 총액 집계에서 누락될 수 있음,J37·J39의 H+I 패턴과 비교
+15_생산계획_실적.xlsx,생산계획·실적·수율 관리,생산실적,G20,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,FUNCTION_PATTERN_DRIFT,HIGH,계획차이 열에서 실적-계획 대신 SUM 사용,계획 대비 차이가 과대 계산될 수 있음,G19·G21의 E-D 패턴과 비교
+15_생산계획_실적.xlsx,생산계획·실적·수율 관리,생산실적,H32,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,RELATIVE_REFERENCE_DRIFT,HIGH,달성률이 현재 행 실적이 아닌 이전 행 실적을 참조,다른 생산일의 실적 기준으로 달성률이 계산될 수 있음,H31·H33의 E/D 현재행 패턴과 비교
+15_생산계획_실적.xlsx,생산계획·실적·수율 관리,생산실적,I44,SHOULD_DETECT,FORMULA_PATTERN_GAP,CONSTANT_OVERRIDE_CANDIDATE,HIGH,양품수량 계산열에 고정 값 입력,실적·불량 변경이 양품수량에 반영되지 않음,I43·I45의 E-F 패턴과 비교
+15_생산계획_실적.xlsx,생산계획·실적·수율 관리,생산실적,J56,SHOULD_DETECT,FORMULA_PATTERN_GAP,BLANK_GAP_CANDIDATE,MEDIUM,수율 계산열 중간 셀이 비어 있음,제품별 수율 집계와 품질 추이에서 누락될 수 있음,J55·J57의 I/E 패턴과 비교
+16_근태연차_정산.xlsx,근태·연차·초과근무 정산,정산,F17,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,FUNCTION_PATTERN_DRIFT,HIGH,잔여연차 열에서 발생-사용 대신 SUM 사용,사용연차가 차감되지 않아 잔여연차가 과대 계산될 수 있음,F16·F18의 D-E 패턴과 비교
+16_근태연차_정산.xlsx,근태·연차·초과근무 정산,정산,G28,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,RELATIVE_REFERENCE_DRIFT,HIGH,초과근무시간 SUMIFS가 현재 직원이 아닌 이전 행 사번을 참조,다른 직원의 근무시간이 연결될 수 있음,G27·G29의 현재 행 A 참조와 비교
+16_근태연차_정산.xlsx,근태·연차·초과근무 정산,정산,I37,SHOULD_DETECT,FORMULA_PATTERN_GAP,CONSTANT_OVERRIDE_CANDIDATE,HIGH,초과근무수당 계산열에 고정 금액 입력,근무시간·단가 변경이 수당에 반영되지 않음,I36·I38의 G×H 패턴과 비교
+16_근태연차_정산.xlsx,근태·연차·초과근무 정산,정산,K44,SHOULD_DETECT,FORMULA_PATTERN_GAP,BLANK_GAP_CANDIDATE,MEDIUM,총지급액 계산열 중간 셀이 비어 있음,지급총액과 요약 집계에서 누락될 수 있음,K43·K45의 I+J 패턴과 비교
+17_지점별_실적평가.xlsx,지점별 실적·평가 관리,지점평가,C14,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,RELATIVE_REFERENCE_DRIFT,HIGH,매출 SUMIFS가 현재 지점이 아닌 이전 행 지점코드를 참조,다른 지점 매출이 연결될 수 있음,C13·C15의 현재 행 A 기준과 비교
+17_지점별_실적평가.xlsx,지점별 실적·평가 관리,지점평가,E23,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,FUNCTION_PATTERN_DRIFT,HIGH,이익 열에서 매출-비용 대신 SUM 사용,비용이 차감되지 않아 이익이 과대 계산될 수 있음,E22·E24의 C-D 패턴과 비교
+17_지점별_실적평가.xlsx,지점별 실적·평가 관리,지점평가,H31,SHOULD_DETECT,FORMULA_PATTERN_GAP,CONSTANT_OVERRIDE_CANDIDATE,MEDIUM,평가점수 계산열에 고정 점수 입력,매출·마진 변경이 평가점수에 반영되지 않음,H30·H32의 F·G 가중합 패턴과 비교
+17_지점별_실적평가.xlsx,지점별 실적·평가 관리,지점평가,I38,SHOULD_DETECT,FORMULA_PATTERN_GAP,BLANK_GAP_CANDIDATE,MEDIUM,등급 계산열 중간 셀이 비어 있음,등급별 인원과 평가보고에서 누락될 수 있음,I37·I39의 IF 등급식과 비교
+18_공통비_원가배부.xlsx,부서별 공통비 원가배부,배부계산,E13,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,RELATIVE_REFERENCE_DRIFT,HIGH,기준합계 SUMIF가 현재 공통비코드가 아닌 이전 행 코드를 참조,다른 배부항목의 기준합계가 사용될 수 있음,E12·E14의 현재 행 A 참조와 비교
+18_공통비_원가배부.xlsx,부서별 공통비 원가배부,배부계산,F22,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,FUNCTION_PATTERN_DRIFT,HIGH,배부비율 열에서 나눗셈 대신 SUM 사용,배부비율이 비정상적으로 커져 원가가 왜곡될 수 있음,F21·F23의 D/E 패턴과 비교
+18_공통비_원가배부.xlsx,부서별 공통비 원가배부,배부계산,G31,SHOULD_DETECT,FORMULA_PATTERN_GAP,CONSTANT_OVERRIDE_CANDIDATE,HIGH,배부금액 열에 고정 금액 입력,공통비나 배부비율 변경이 반영되지 않음,G30·G32의 C×F 패턴과 비교
+18_공통비_원가배부.xlsx,부서별 공통비 원가배부,배부계산,I40,SHOULD_DETECT,FORMULA_PATTERN_GAP,BLANK_GAP_CANDIDATE,MEDIUM,검증차이 계산열 중간 셀이 비어 있음,배부 총액과 공통비 일치 여부 확인에서 누락될 수 있음,I39·I41의 H-C 패턴과 비교
+19_계정잔액_대사.xlsx,총계정원장·보조부 계정잔액 대사,대사표,B15,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,RELATIVE_REFERENCE_DRIFT,HIGH,GL잔액 SUMIFS가 현재 계정이 아닌 이전 행 계정코드를 참조,다른 계정의 총계정원장 잔액이 연결될 수 있음,B14·B16의 현재 행 A 기준과 비교
+19_계정잔액_대사.xlsx,총계정원장·보조부 계정잔액 대사,대사표,D27,SHOULD_DETECT,FORMULA_PATTERN_OUTLIER,FUNCTION_PATTERN_DRIFT,HIGH,차이 열에서 GL-보조부 대신 SUM 사용,차이가 상쇄되지 않고 합산되어 대사상태가 왜곡될 수 있음,D26·D28의 B-C 패턴과 비교
+19_계정잔액_대사.xlsx,총계정원장·보조부 계정잔액 대사,대사표,E39,SHOULD_DETECT,FORMULA_PATTERN_GAP,CONSTANT_OVERRIDE_CANDIDATE,MEDIUM,절대차이 열에 고정 금액 입력,GL·보조부 잔액 변경이 반영되지 않음,E38·E40의 ABS(D) 패턴과 비교
+19_계정잔액_대사.xlsx,총계정원장·보조부 계정잔액 대사,대사표,G46,SHOULD_DETECT,FORMULA_PATTERN_GAP,BLANK_GAP_CANDIDATE,MEDIUM,대사상태 계산열 중간 셀이 비어 있음,확인 필요 계정 집계에서 누락될 수 있음,G45·G47의 IF 상태식과 비교

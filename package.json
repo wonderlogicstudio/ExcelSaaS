@@ -1,0 +1,17 @@
+{
+  "name": "workbookcare",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace @workbookcare/web",
+    "build:web": "npm run build --workspace @workbookcare/web",
+    "test:web": "npm run test --workspace @workbookcare/web",
+    "verify:web": "npm run verify --workspace @workbookcare/web"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

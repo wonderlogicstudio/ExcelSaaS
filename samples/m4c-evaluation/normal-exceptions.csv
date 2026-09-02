@@ -1,0 +1,37 @@
+﻿file,scenario,sheet,cell,expected_detection,exception_type,reason
+01_월간매출_관리.xlsx,월간 매출·부가세 관리,판매내역,G66:I66,SHOULD_NOT_DETECT,SUBTOTAL_ROW,소계 행의 의도적인 SUM 수식
+01_월간매출_관리.xlsx,월간 매출·부가세 관리,판매내역,G67:I67,SHOULD_NOT_DETECT,MANUAL_ADJUSTMENT_ROW,업무상 의도된 수기 조정 행
+01_월간매출_관리.xlsx,월간 매출·부가세 관리,판매내역,G68:I68,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,소계와 조정을 합산하는 최종 합계 행
+02_재고수불_관리.xlsx,재고 수불·현재고 관리,입출고,F86,SHOULD_NOT_DETECT,SUBTOTAL_ROW,전체 이동금액 소계
+02_재고수불_관리.xlsx,재고 수불·현재고 관리,입출고,F87,SHOULD_NOT_DETECT,MANUAL_ADJUSTMENT_ROW,재고실사 차이를 반영한 의도적 수기 조정
+02_재고수불_관리.xlsx,재고 수불·현재고 관리,입출고,F88,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,소계와 조정을 합산한 최종 합계
+03_미수금_채권관리.xlsx,미수금·채권 연령 관리,매출채권,D56:G56,SHOULD_NOT_DETECT,SUBTOTAL_ROW,채권 소계
+03_미수금_채권관리.xlsx,미수금·채권 연령 관리,매출채권,D57:G57,SHOULD_NOT_DETECT,MANUAL_ADJUSTMENT_ROW,충당금 수기 조정
+03_미수금_채권관리.xlsx,미수금·채권 연령 관리,매출채권,D58:G58,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,소계와 조정의 최종 합계
+04_제품원가_계산.xlsx,제품별 제조원가 계산,원재료사용,F16,SHOULD_NOT_DETECT,PRODUCT_SUBTOTAL_ROW,세안비누 블록의 정상 소계
+04_제품원가_계산.xlsx,제품별 제조원가 계산,원재료사용,F27,SHOULD_NOT_DETECT,PRODUCT_SUBTOTAL_ROW,샴푸바 블록의 정상 소계
+04_제품원가_계산.xlsx,제품별 제조원가 계산,원재료사용,F38,SHOULD_NOT_DETECT,PRODUCT_SUBTOTAL_ROW,바디비누 블록의 정상 소계
+04_제품원가_계산.xlsx,제품별 제조원가 계산,원재료사용,F49,SHOULD_NOT_DETECT,PRODUCT_SUBTOTAL_ROW,선물세트 블록의 정상 소계
+05_예산대비실적.xlsx,부서별 예산 대비 실적,부서별분석,C18:F18,SHOULD_NOT_DETECT,DEPARTMENT_SUBTOTAL_ROW,영업1팀 정상 소계
+05_예산대비실적.xlsx,부서별 예산 대비 실적,부서별분석,C31:F31,SHOULD_NOT_DETECT,DEPARTMENT_SUBTOTAL_ROW,영업2팀 정상 소계
+05_예산대비실적.xlsx,부서별 예산 대비 실적,부서별분석,C44:F44,SHOULD_NOT_DETECT,DEPARTMENT_SUBTOTAL_ROW,생산팀 정상 소계
+05_예산대비실적.xlsx,부서별 예산 대비 실적,부서별분석,C57:F57,SHOULD_NOT_DETECT,DEPARTMENT_SUBTOTAL_ROW,관리팀 정상 소계
+05_예산대비실적.xlsx,부서별 예산 대비 실적,부서별분석,C58:F58,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,전사 합계
+06_급여_초과근무.xlsx,급여·초과근무 계산,급여계산,E56:I56,SHOULD_NOT_DETECT,SUBTOTAL_ROW,급여 소계
+06_급여_초과근무.xlsx,급여·초과근무 계산,급여계산,G57:I57,SHOULD_NOT_DETECT,MANUAL_ADJUSTMENT_ROW,일회성 지급 조정
+06_급여_초과근무.xlsx,급여·초과근무 계산,급여계산,E58:I58,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,소계와 조정 합계
+07_프로젝트_손익관리.xlsx,프로젝트 손익 관리,손익분석,B36:G36,SHOULD_NOT_DETECT,SUBTOTAL_ROW,프로젝트 전체 소계
+07_프로젝트_손익관리.xlsx,프로젝트 손익 관리,손익분석,B37:G37,SHOULD_NOT_DETECT,MANUAL_ADJUSTMENT_ROW,의도적인 경영조정
+07_프로젝트_손익관리.xlsx,프로젝트 손익 관리,손익분석,B38:G38,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,조정 반영 최종 합계
+08_대출상환_스케줄.xlsx,원리금 균등 대출 상환표,상환스케줄,C6,SHOULD_NOT_DETECT,FIRST_PERIOD_SEED,첫 회차 기초잔액은 조건 시트 원금을 직접 참조하는 정상 경계식
+08_대출상환_스케줄.xlsx,원리금 균등 대출 상환표,상환스케줄,D66:F66,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,상환기간 전체 합계
+09_구독_KPI_관리.xlsx,구독형 서비스 KPI 관리,월별KPI,E6,SHOULD_NOT_DETECT,FIRST_PERIOD_SEED,첫 달 기말MRR은 누적 전월이 없어 순증MRR로 시작하는 정상 경계식
+09_구독_KPI_관리.xlsx,구독형 서비스 KPI 관리,월별KPI,B30:H30,SHOULD_NOT_DETECT,SUMMARY_ROW,24개월 합계·평균 요약 행
+10_경영대시보드_정상패턴.xlsx,경영 대시보드 정상 통제 파일,거래데이터,A5:F125,SHOULD_NOT_DETECT,EXCEL_TABLE,원천 데이터가 Excel Table로 구성된 정상 구조
+10_경영대시보드_정상패턴.xlsx,경영 대시보드 정상 통제 파일,부서요약,B6:E9,SHOULD_NOT_DETECT,CLEAN_FORMULA_REGION,일관된 정상 반복 수식
+10_경영대시보드_정상패턴.xlsx,경영 대시보드 정상 통제 파일,부서요약,B10:E10,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,전사 합계
+10_경영대시보드_정상패턴.xlsx,경영 대시보드 정상 통제 파일,월별추이,B6:E17,SHOULD_NOT_DETECT,CLEAN_FORMULA_REGION,12개월 정상 반복 수식
+10_경영대시보드_정상패턴.xlsx,경영 대시보드 정상 통제 파일,월별추이,B18:E18,SHOULD_NOT_DETECT,SUBTOTAL_ROW,연간 소계
+10_경영대시보드_정상패턴.xlsx,경영 대시보드 정상 통제 파일,월별추이,B19:E19,SHOULD_NOT_DETECT,MANUAL_ADJUSTMENT_ROW,정상적인 경영조정
+10_경영대시보드_정상패턴.xlsx,경영 대시보드 정상 통제 파일,월별추이,B20:E20,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,조정 반영 합계
+10_경영대시보드_정상패턴.xlsx,경영 대시보드 정상 통제 파일,경영요약,A11:D14,SHOULD_NOT_DETECT,DASHBOARD_REFERENCE_BLOCK,요약 시트의 정상 참조 블록

@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-09-01T09:49:11",
+  "sample_count": 10,
+  "expected_findings": 36,
+  "normal_exceptions": 36,
+  "target_structure_checks": 36,
+  "target_structure_failures": [],
+  "files": [
+    {
+      "file": "01_월간매출_관리.xlsx",
+      "size_bytes": 16779,
+      "explicit_formula_error_tokens": false
+    },
+    {
+      "file": "02_재고수불_관리.xlsx",
+      "size_bytes": 16360,
+      "explicit_formula_error_tokens": false
+    },
+    {
+      "file": "03_미수금_채권관리.xlsx",
+      "size_bytes": 17664,
+      "explicit_formula_error_tokens": false
+    },
+    {
+      "file": "04_제품원가_계산.xlsx",
+      "size_bytes": 12044,
+      "explicit_formula_error_tokens": false
+    },
+    {
+      "file": "05_예산대비실적.xlsx",
+      "size_bytes": 16207,
+      "explicit_formula_error_tokens": false
+    },
+    {
+      "file": "06_급여_초과근무.xlsx",
+      "size_bytes": 22522,
+      "explicit_formula_error_tokens": false
+    },
+    {
+      "file": "07_프로젝트_손익관리.xlsx",
+      "size_bytes": 19932,
+      "explicit_formula_error_tokens": false
+    },
+    {
+      "file": "08_대출상환_스케줄.xlsx",
+      "size_bytes": 14006,
+      "explicit_formula_error_tokens": false
+    },
+    {
+      "file": "09_구독_KPI_관리.xlsx",
+      "size_bytes": 15221,
+      "explicit_formula_error_tokens": false
+    },
+    {
+      "file": "10_경영대시보드_정상패턴.xlsx",
+      "size_bytes": 16661,
+      "explicit_formula_error_tokens": false
+    }
+  ],
+  "guide_file": "M4C_예상결과_및_검증가이드.xlsx",
+  "guide_explicit_formula_error_tokens": false
+}

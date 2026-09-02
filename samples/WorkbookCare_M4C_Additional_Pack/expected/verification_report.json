@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-09-01T13:04:46",
+  "sample_count": 10,
+  "calibration_files": [
+    "11_구매발주_관리.xlsx",
+    "12_현금흐름_자금계획.xlsx",
+    "13_고정자산_감가상각.xlsx",
+    "14_영업수수료_계산.xlsx",
+    "15_생산계획_실적.xlsx",
+    "16_근태연차_정산.xlsx",
+    "17_지점별_실적평가.xlsx",
+    "18_공통비_원가배부.xlsx"
+  ],
+  "holdout_files": [
+    "19_계정잔액_대사.xlsx",
+    "20_다중사업부_정상통제.xlsx"
+  ],
+  "expected_findings": 36,
+  "normal_exceptions": 36,
+  "target_structure_checks": 36,
+  "target_structure_failures": [],
+  "explicit_formula_error_files": [],
+  "guide_formula_error_tokens": false,
+  "clean_control": "20_다중사업부_정상통제.xlsx",
+  "clean_control_expected_m4_findings": 0
+}

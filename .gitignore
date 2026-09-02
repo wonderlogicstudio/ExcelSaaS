@@ -1,0 +1,50 @@
+# Node
+node_modules/
+dist/
+.vite/
+coverage/
+playwright-report/
+test-results/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+.mypy_cache/
+.ruff_cache/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# User uploads and generated artifacts
+.tmp/
+storage/
+uploads/
+outputs/
+local-evaluation/
+artifacts/m4-a5/local/
+artifacts/m4-a5/evaluation.json
+artifacts/m4-a5/evaluation.csv
+artifacts/m4c-final/
+artifacts/local-dev/
+artifacts/verification/
+*.xlsx
+*.xlsm
+!samples/*.md
+!samples/**/*.xlsx
+!samples/**/*.xlsm
+
+# IDE / OS
+.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

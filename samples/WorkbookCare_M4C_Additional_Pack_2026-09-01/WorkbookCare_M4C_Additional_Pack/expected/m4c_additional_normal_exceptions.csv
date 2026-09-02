@@ -1,0 +1,37 @@
+﻿file,scenario,sheet,cell,expected_detection,exception_type,reason
+11_구매발주_관리.xlsx,구매·발주 및 미입고 관리,발주내역,E66:I66,SHOULD_NOT_DETECT,SUBTOTAL_ROW,전체 발주 소계
+11_구매발주_관리.xlsx,구매·발주 및 미입고 관리,발주내역,E67:I67,SHOULD_NOT_DETECT,MANUAL_ADJUSTMENT_ROW,긴급발주 수기 조정
+11_구매발주_관리.xlsx,구매·발주 및 미입고 관리,발주내역,E68:I68,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,소계와 조정의 최종 합계
+12_현금흐름_자금계획.xlsx,일별 현금흐름·자금계획,자금계획,F6,SHOULD_NOT_DETECT,FIRST_PERIOD_SEED,첫 행 기초잔액은 설정값을 직접 참조
+12_현금흐름_자금계획.xlsx,일별 현금흐름·자금계획,자금계획,C66:E66,SHOULD_NOT_DETECT,SUBTOTAL_ROW,월간 입출금 소계
+12_현금흐름_자금계획.xlsx,일별 현금흐름·자금계획,자금계획,C67:G68,SHOULD_NOT_DETECT,FINANCING_ADJUSTMENT,차입금 수기 조정과 조정 후 합계
+13_고정자산_감가상각.xlsx,고정자산·감가상각 관리,자산대장,D56:I56,SHOULD_NOT_DETECT,SUBTOTAL_ROW,자산 전체 소계
+13_고정자산_감가상각.xlsx,고정자산·감가상각 관리,자산대장,D57:I57,SHOULD_NOT_DETECT,DISPOSAL_ADJUSTMENT,처분 자산 수기 조정
+13_고정자산_감가상각.xlsx,고정자산·감가상각 관리,자산대장,D58:I58,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,처분조정 반영 합계
+14_영업수수료_계산.xlsx,영업사원 성과·수수료 계산,수수료계산,C46:J46,SHOULD_NOT_DETECT,SUBTOTAL_ROW,전체 영업사원 소계
+14_영업수수료_계산.xlsx,영업사원 성과·수수료 계산,수수료계산,C47:J47,SHOULD_NOT_DETECT,MANUAL_ALLOWANCE_ROW,팀장 정액 보너스 조정
+14_영업수수료_계산.xlsx,영업사원 성과·수수료 계산,수수료계산,C48:J48,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,소계와 조정의 최종 합계
+15_생산계획_실적.xlsx,생산계획·실적·수율 관리,생산실적,D66:I66,SHOULD_NOT_DETECT,SUBTOTAL_ROW,전체 생산 소계
+15_생산계획_실적.xlsx,생산계획·실적·수율 관리,생산실적,D67:I67,SHOULD_NOT_DETECT,QUALITY_ADJUSTMENT_ROW,실사에 따른 품질 수기 조정
+15_생산계획_실적.xlsx,생산계획·실적·수율 관리,생산실적,D68:I68,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,조정 반영 최종 합계
+16_근태연차_정산.xlsx,근태·연차·초과근무 정산,정산,D51:K51,SHOULD_NOT_DETECT,SUBTOTAL_ROW,직원 전체 소계
+16_근태연차_정산.xlsx,근태·연차·초과근무 정산,정산,D52:K52,SHOULD_NOT_DETECT,SPECIAL_LEAVE_ADJUSTMENT,특별휴가 수기 조정
+16_근태연차_정산.xlsx,근태·연차·초과근무 정산,정산,D53:K53,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,조정 반영 최종 합계
+17_지점별_실적평가.xlsx,지점별 실적·평가 관리,지점평가,B42:E42,SHOULD_NOT_DETECT,SUBTOTAL_ROW,전체 지점 소계
+17_지점별_실적평가.xlsx,지점별 실적·평가 관리,지점평가,B43:H43,SHOULD_NOT_DETECT,HEAD_OFFICE_ADJUSTMENT,본부 정책 수기 조정
+17_지점별_실적평가.xlsx,지점별 실적·평가 관리,지점평가,B44:E44,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,조정 반영 최종 합계
+18_공통비_원가배부.xlsx,부서별 공통비 원가배부,요약,B6:D10,SHOULD_NOT_DETECT,CATEGORY_SUMMARY_BLOCK,항목별 정상 집계 블록
+18_공통비_원가배부.xlsx,부서별 공통비 원가배부,배부계산,D6:I13,SHOULD_NOT_DETECT,ALLOCATION_METHOD_BLOCK,인원 기준의 정상 반복 배부 블록
+18_공통비_원가배부.xlsx,부서별 공통비 원가배부,배부계산,D22:I29,SHOULD_NOT_DETECT,ALLOCATION_METHOD_BLOCK,면적 기준의 정상 반복 배부 블록
+19_계정잔액_대사.xlsx,총계정원장·보조부 계정잔액 대사,대사표,B56:F56,SHOULD_NOT_DETECT,SUBTOTAL_ROW,계정 전체 소계
+19_계정잔액_대사.xlsx,총계정원장·보조부 계정잔액 대사,대사표,B57:G57,SHOULD_NOT_DETECT,TIMING_ADJUSTMENT_ROW,입출금 시차 수기 조정
+19_계정잔액_대사.xlsx,총계정원장·보조부 계정잔액 대사,대사표,B58:F58,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,조정 반영 최종 합계
+20_다중사업부_정상통제.xlsx,다중사업부 통합 경영관리 정상 통제,원천데이터,A5:G53,SHOULD_NOT_DETECT,EXCEL_TABLE,정상 원천 데이터 Table
+20_다중사업부_정상통제.xlsx,다중사업부 통합 경영관리 정상 통제,사업부요약,B6:H9,SHOULD_NOT_DETECT,CLEAN_FORMULA_REGION,사업부별 정상 반복 수식
+20_다중사업부_정상통제.xlsx,다중사업부 통합 경영관리 정상 통제,사업부요약,B10:H10,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,전사 합계
+20_다중사업부_정상통제.xlsx,다중사업부 통합 경영관리 정상 통제,월별추이,B6:F17,SHOULD_NOT_DETECT,CLEAN_FORMULA_REGION,12개월 정상 반복 수식
+20_다중사업부_정상통제.xlsx,다중사업부 통합 경영관리 정상 통제,월별추이,B18:F18,SHOULD_NOT_DETECT,SUBTOTAL_ROW,연간 소계
+20_다중사업부_정상통제.xlsx,다중사업부 통합 경영관리 정상 통제,월별추이,B19:F19,SHOULD_NOT_DETECT,MANAGEMENT_ADJUSTMENT_ROW,경영조정
+20_다중사업부_정상통제.xlsx,다중사업부 통합 경영관리 정상 통제,월별추이,B20:F20,SHOULD_NOT_DETECT,GRAND_TOTAL_ROW,조정 반영 합계
+20_다중사업부_정상통제.xlsx,다중사업부 통합 경영관리 정상 통제,분기요약,B6:E9,SHOULD_NOT_DETECT,QUARTER_SUMMARY_BLOCK,분기별 정상 집계 블록
+20_다중사업부_정상통제.xlsx,다중사업부 통합 경영관리 정상 통제,대시보드,A11:D14,SHOULD_NOT_DETECT,DASHBOARD_REFERENCE_BLOCK,요약 시트의 정상 참조 블록

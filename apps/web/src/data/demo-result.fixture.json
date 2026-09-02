@@ -1,0 +1,749 @@
+{
+  "fixture_metadata": {
+    "generated_at": "2026-09-01T02:34:47.886422+00:00",
+    "generated_from": "samples/demo-risky-workbook.xlsx",
+    "generator": "scripts/generate_demo_fixture.py",
+    "scanner_version": "0.1.3",
+    "rule_set_version": "2026.09.4"
+  },
+  "scan_result": {
+    "analysis_id": "85e5fcb8-d53f-49e1-a786-087bbbdd2785",
+    "filename": "demo-risky-workbook.xlsx",
+    "file_size_bytes": 7969,
+    "scanned_at": "2026-09-01T02:34:47.886214Z",
+    "scanner_version": "0.1.3",
+    "rule_set_version": "2026.09.4",
+    "workbook": {
+      "sheet_count": 3,
+      "hidden_sheet_count": 1,
+      "very_hidden_sheet_count": 1,
+      "formula_count": 13,
+      "merged_range_count": 1,
+      "external_link_count": 5,
+      "defined_name_count": 0,
+      "drawing_part_count": 3,
+      "has_macros": false,
+      "scanned_cell_count": 39,
+      "scan_truncated": false
+    },
+    "summary": {
+      "risk_score": 62,
+      "risk_band": "high",
+      "complexity_score": 5,
+      "complexity_band": "standard",
+      "issue_count": 12,
+      "critical_count": 1,
+      "warning_count": 7,
+      "info_count": 4,
+      "safe_candidate_count": 1,
+      "confirmation_required_count": 7,
+      "expert_review_count": 2,
+      "information_only_count": 2,
+      "repair_review_candidate_count": 10
+    },
+    "findings": [
+      {
+        "id": "f71b5cf9-b85d-4767-bd6b-961d60b10fc8",
+        "finding_key": "FILE_DRAWING_PARTS",
+        "rule_code": "FILE_DRAWING_PARTS",
+        "severity": "info",
+        "title": "차트·도형·이미지 요소가 포함되어 있습니다.",
+        "description": "파일 보존 위험 때문에 단순한 라이브러리 저장 방식으로 자동 수정하지 않습니다.",
+        "sheet": null,
+        "cell": null,
+        "confidence": 1.0,
+        "repair_class": "EXPERT_REVIEW",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "DEEP_VALIDATION_REQUIRED",
+          "repair_eligibility": "EXPERT_REVIEW_REQUIRED",
+          "user_confirmation_required": true,
+          "detected_fact": "차트·도형·이미지 요소가 포함된 파일 구조를 확인했습니다.",
+          "possible_impact": "파일을 다시 저장하는 작업은 표시 요소 보존 여부를 별도로 확인해야 할 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "차트·도형·이미지가 업무상 필요한지 확인",
+            "수정 전 파일 사본에서 표시 요소 보존 요구를 확인"
+          ],
+          "when_it_may_be_normal": [
+            "보고서·대시보드 표시를 위해 차트나 도형을 사용하는 경우"
+          ],
+          "when_action_is_recommended": [
+            "파일을 다시 저장하거나 구조를 바꾸려는 경우"
+          ],
+          "recommended_next_action": "표시 요소 보존이 필요하면 수정 전에 전문가 검토를 받으세요.",
+          "unchecked_scope": [
+            "차트·도형·이미지의 내용과 표시 정확도는 확인하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "표시 요소의 보존 위험과 수정 범위 검토"
+          ],
+          "recommended_service_code": "PRECISION_VERIFICATION",
+          "repair_readiness": {
+            "status": "PRECISION_VERIFICATION_REQUIRED",
+            "label": "정밀 검증 선행 대상",
+            "explanation": "수식 의미나 파일 충실도에 영향을 줄 수 있어, 현재 자동으로 수정하거나 수정 가능하다고 판단하지 않습니다.",
+            "required_steps": [
+              "정밀 검증",
+              "수정 방법 검토",
+              "변경 전 미리보기",
+              "사용자 승인",
+              "수정 후 재검증"
+            ],
+            "planned_service_codes": [
+              "PRECISION_VERIFICATION",
+              "APPROVED_REPAIR"
+            ]
+          }
+        }
+      },
+      {
+        "id": "70ad7204-cc8e-4de3-9d53-68034fe047e3",
+        "finding_key": "FORMULA_EXTERNAL_REFERENCE|월별매출|e2",
+        "rule_code": "FORMULA_EXTERNAL_REFERENCE",
+        "severity": "warning",
+        "title": "외부 통합문서 참조가 발견됨",
+        "description": "원본 파일이 이동되거나 갱신되지 않으면 오래된 값이 남을 수 있습니다.",
+        "sheet": "월별매출",
+        "cell": "E2",
+        "confidence": 0.99,
+        "repair_class": "CONFIRMATION_REQUIRED",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "USER_CONFIRMATION",
+          "repair_eligibility": "USER_CONFIRMATION_REQUIRED",
+          "user_confirmation_required": true,
+          "detected_fact": "수식 문자열에서 외부 통합문서 참조 표기를 확인했습니다.",
+          "possible_impact": "외부 원본이 이동되거나 갱신되지 않으면 오래된 값이 남을 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "수식의 대괄호 안 외부 파일명 확인",
+            "데이터 탭의 연결 또는 쿼리에서 연결 유지 필요 여부 확인",
+            "다른 PC에서도 해당 외부 파일에 접근해야 하는지 확인"
+          ],
+          "when_it_may_be_normal": [
+            "기준 데이터나 다른 보고서를 의도적으로 연결한 경우"
+          ],
+          "when_action_is_recommended": [
+            "외부 파일이 없거나 오래된 파일을 참조하거나 단독 배포가 필요한 경우"
+          ],
+          "recommended_next_action": "연결을 유지할지, 내부 값으로 전환할지 확인한 뒤 필요하면 수정하고 다시 검사하세요.",
+          "unchecked_scope": [
+            "외부 파일의 접근 가능 여부와 최신성은 확인하지 않았습니다.",
+            "Excel 계산 결과와 업무 규칙은 이번 검사에서 확인하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "외부 통합문서 참조 위치와 원본 파일명 확인",
+            "연결 유지 또는 내부 값 전환 방식 검토"
+          ],
+          "recommended_service_code": null,
+          "repair_readiness": {
+            "status": "USER_DECISION_REQUIRED",
+            "label": "사용자 결정 후 수정 검토 대상",
+            "explanation": "업무 의도에 따라 유지 또는 변경 판단이 달라질 수 있어, 사용자 확인 전에는 수정하지 않습니다.",
+            "required_steps": [
+              "업무 의도 확인",
+              "정밀 검증",
+              "변경 전 미리보기",
+              "사용자 승인",
+              "수정 후 재검증"
+            ],
+            "planned_service_codes": [
+              "PRECISION_VERIFICATION",
+              "APPROVED_REPAIR"
+            ]
+          }
+        }
+      },
+      {
+        "id": "27addf82-b60d-4602-a482-abf9624cc0b2",
+        "finding_key": "FORMULA_EXTERNAL_REFERENCE|월별매출|e3",
+        "rule_code": "FORMULA_EXTERNAL_REFERENCE",
+        "severity": "warning",
+        "title": "외부 통합문서 참조가 발견됨",
+        "description": "원본 파일이 이동되거나 갱신되지 않으면 오래된 값이 남을 수 있습니다.",
+        "sheet": "월별매출",
+        "cell": "E3",
+        "confidence": 0.99,
+        "repair_class": "CONFIRMATION_REQUIRED",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "USER_CONFIRMATION",
+          "repair_eligibility": "USER_CONFIRMATION_REQUIRED",
+          "user_confirmation_required": true,
+          "detected_fact": "수식 문자열에서 외부 통합문서 참조 표기를 확인했습니다.",
+          "possible_impact": "외부 원본이 이동되거나 갱신되지 않으면 오래된 값이 남을 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "수식의 대괄호 안 외부 파일명 확인",
+            "데이터 탭의 연결 또는 쿼리에서 연결 유지 필요 여부 확인",
+            "다른 PC에서도 해당 외부 파일에 접근해야 하는지 확인"
+          ],
+          "when_it_may_be_normal": [
+            "기준 데이터나 다른 보고서를 의도적으로 연결한 경우"
+          ],
+          "when_action_is_recommended": [
+            "외부 파일이 없거나 오래된 파일을 참조하거나 단독 배포가 필요한 경우"
+          ],
+          "recommended_next_action": "연결을 유지할지, 내부 값으로 전환할지 확인한 뒤 필요하면 수정하고 다시 검사하세요.",
+          "unchecked_scope": [
+            "외부 파일의 접근 가능 여부와 최신성은 확인하지 않았습니다.",
+            "Excel 계산 결과와 업무 규칙은 이번 검사에서 확인하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "외부 통합문서 참조 위치와 원본 파일명 확인",
+            "연결 유지 또는 내부 값 전환 방식 검토"
+          ],
+          "recommended_service_code": null,
+          "repair_readiness": {
+            "status": "USER_DECISION_REQUIRED",
+            "label": "사용자 결정 후 수정 검토 대상",
+            "explanation": "업무 의도에 따라 유지 또는 변경 판단이 달라질 수 있어, 사용자 확인 전에는 수정하지 않습니다.",
+            "required_steps": [
+              "업무 의도 확인",
+              "정밀 검증",
+              "변경 전 미리보기",
+              "사용자 승인",
+              "수정 후 재검증"
+            ],
+            "planned_service_codes": [
+              "PRECISION_VERIFICATION",
+              "APPROVED_REPAIR"
+            ]
+          }
+        }
+      },
+      {
+        "id": "5b950c33-8be3-49a5-822b-fb28decab7b7",
+        "finding_key": "FORMULA_EXTERNAL_REFERENCE|월별매출|e4",
+        "rule_code": "FORMULA_EXTERNAL_REFERENCE",
+        "severity": "warning",
+        "title": "외부 통합문서 참조가 발견됨",
+        "description": "원본 파일이 이동되거나 갱신되지 않으면 오래된 값이 남을 수 있습니다.",
+        "sheet": "월별매출",
+        "cell": "E4",
+        "confidence": 0.99,
+        "repair_class": "CONFIRMATION_REQUIRED",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "USER_CONFIRMATION",
+          "repair_eligibility": "USER_CONFIRMATION_REQUIRED",
+          "user_confirmation_required": true,
+          "detected_fact": "수식 문자열에서 외부 통합문서 참조 표기를 확인했습니다.",
+          "possible_impact": "외부 원본이 이동되거나 갱신되지 않으면 오래된 값이 남을 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "수식의 대괄호 안 외부 파일명 확인",
+            "데이터 탭의 연결 또는 쿼리에서 연결 유지 필요 여부 확인",
+            "다른 PC에서도 해당 외부 파일에 접근해야 하는지 확인"
+          ],
+          "when_it_may_be_normal": [
+            "기준 데이터나 다른 보고서를 의도적으로 연결한 경우"
+          ],
+          "when_action_is_recommended": [
+            "외부 파일이 없거나 오래된 파일을 참조하거나 단독 배포가 필요한 경우"
+          ],
+          "recommended_next_action": "연결을 유지할지, 내부 값으로 전환할지 확인한 뒤 필요하면 수정하고 다시 검사하세요.",
+          "unchecked_scope": [
+            "외부 파일의 접근 가능 여부와 최신성은 확인하지 않았습니다.",
+            "Excel 계산 결과와 업무 규칙은 이번 검사에서 확인하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "외부 통합문서 참조 위치와 원본 파일명 확인",
+            "연결 유지 또는 내부 값 전환 방식 검토"
+          ],
+          "recommended_service_code": null,
+          "repair_readiness": {
+            "status": "USER_DECISION_REQUIRED",
+            "label": "사용자 결정 후 수정 검토 대상",
+            "explanation": "업무 의도에 따라 유지 또는 변경 판단이 달라질 수 있어, 사용자 확인 전에는 수정하지 않습니다.",
+            "required_steps": [
+              "업무 의도 확인",
+              "정밀 검증",
+              "변경 전 미리보기",
+              "사용자 승인",
+              "수정 후 재검증"
+            ],
+            "planned_service_codes": [
+              "PRECISION_VERIFICATION",
+              "APPROVED_REPAIR"
+            ]
+          }
+        }
+      },
+      {
+        "id": "74412539-caca-4189-8dc4-6d86de38fb38",
+        "finding_key": "FORMULA_EXTERNAL_REFERENCE|월별매출|e5",
+        "rule_code": "FORMULA_EXTERNAL_REFERENCE",
+        "severity": "warning",
+        "title": "외부 통합문서 참조가 발견됨",
+        "description": "원본 파일이 이동되거나 갱신되지 않으면 오래된 값이 남을 수 있습니다.",
+        "sheet": "월별매출",
+        "cell": "E5",
+        "confidence": 0.99,
+        "repair_class": "CONFIRMATION_REQUIRED",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "USER_CONFIRMATION",
+          "repair_eligibility": "USER_CONFIRMATION_REQUIRED",
+          "user_confirmation_required": true,
+          "detected_fact": "수식 문자열에서 외부 통합문서 참조 표기를 확인했습니다.",
+          "possible_impact": "외부 원본이 이동되거나 갱신되지 않으면 오래된 값이 남을 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "수식의 대괄호 안 외부 파일명 확인",
+            "데이터 탭의 연결 또는 쿼리에서 연결 유지 필요 여부 확인",
+            "다른 PC에서도 해당 외부 파일에 접근해야 하는지 확인"
+          ],
+          "when_it_may_be_normal": [
+            "기준 데이터나 다른 보고서를 의도적으로 연결한 경우"
+          ],
+          "when_action_is_recommended": [
+            "외부 파일이 없거나 오래된 파일을 참조하거나 단독 배포가 필요한 경우"
+          ],
+          "recommended_next_action": "연결을 유지할지, 내부 값으로 전환할지 확인한 뒤 필요하면 수정하고 다시 검사하세요.",
+          "unchecked_scope": [
+            "외부 파일의 접근 가능 여부와 최신성은 확인하지 않았습니다.",
+            "Excel 계산 결과와 업무 규칙은 이번 검사에서 확인하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "외부 통합문서 참조 위치와 원본 파일명 확인",
+            "연결 유지 또는 내부 값 전환 방식 검토"
+          ],
+          "recommended_service_code": null,
+          "repair_readiness": {
+            "status": "USER_DECISION_REQUIRED",
+            "label": "사용자 결정 후 수정 검토 대상",
+            "explanation": "업무 의도에 따라 유지 또는 변경 판단이 달라질 수 있어, 사용자 확인 전에는 수정하지 않습니다.",
+            "required_steps": [
+              "업무 의도 확인",
+              "정밀 검증",
+              "변경 전 미리보기",
+              "사용자 승인",
+              "수정 후 재검증"
+            ],
+            "planned_service_codes": [
+              "PRECISION_VERIFICATION",
+              "APPROVED_REPAIR"
+            ]
+          }
+        }
+      },
+      {
+        "id": "d71fb7d8-ec92-493a-b2fa-d681f9585a39",
+        "finding_key": "FORMULA_EXTERNAL_REFERENCE|월별매출|e6",
+        "rule_code": "FORMULA_EXTERNAL_REFERENCE",
+        "severity": "warning",
+        "title": "외부 통합문서 참조가 발견됨",
+        "description": "원본 파일이 이동되거나 갱신되지 않으면 오래된 값이 남을 수 있습니다.",
+        "sheet": "월별매출",
+        "cell": "E6",
+        "confidence": 0.99,
+        "repair_class": "CONFIRMATION_REQUIRED",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "USER_CONFIRMATION",
+          "repair_eligibility": "USER_CONFIRMATION_REQUIRED",
+          "user_confirmation_required": true,
+          "detected_fact": "수식 문자열에서 외부 통합문서 참조 표기를 확인했습니다.",
+          "possible_impact": "외부 원본이 이동되거나 갱신되지 않으면 오래된 값이 남을 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "수식의 대괄호 안 외부 파일명 확인",
+            "데이터 탭의 연결 또는 쿼리에서 연결 유지 필요 여부 확인",
+            "다른 PC에서도 해당 외부 파일에 접근해야 하는지 확인"
+          ],
+          "when_it_may_be_normal": [
+            "기준 데이터나 다른 보고서를 의도적으로 연결한 경우"
+          ],
+          "when_action_is_recommended": [
+            "외부 파일이 없거나 오래된 파일을 참조하거나 단독 배포가 필요한 경우"
+          ],
+          "recommended_next_action": "연결을 유지할지, 내부 값으로 전환할지 확인한 뒤 필요하면 수정하고 다시 검사하세요.",
+          "unchecked_scope": [
+            "외부 파일의 접근 가능 여부와 최신성은 확인하지 않았습니다.",
+            "Excel 계산 결과와 업무 규칙은 이번 검사에서 확인하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "외부 통합문서 참조 위치와 원본 파일명 확인",
+            "연결 유지 또는 내부 값 전환 방식 검토"
+          ],
+          "recommended_service_code": null,
+          "repair_readiness": {
+            "status": "USER_DECISION_REQUIRED",
+            "label": "사용자 결정 후 수정 검토 대상",
+            "explanation": "업무 의도에 따라 유지 또는 변경 판단이 달라질 수 있어, 사용자 확인 전에는 수정하지 않습니다.",
+            "required_steps": [
+              "업무 의도 확인",
+              "정밀 검증",
+              "변경 전 미리보기",
+              "사용자 승인",
+              "수정 후 재검증"
+            ],
+            "planned_service_codes": [
+              "PRECISION_VERIFICATION",
+              "APPROVED_REPAIR"
+            ]
+          }
+        }
+      },
+      {
+        "id": "802300ed-e716-488d-be1c-88b7ff38238e",
+        "finding_key": "FORMULA_REF_ERROR|월별매출|b8",
+        "rule_code": "FORMULA_REF_ERROR",
+        "severity": "critical",
+        "title": "삭제되거나 이동된 참조가 수식에 포함되어 있습니다.",
+        "description": "수식 문자열에서 #REF! 참조 토큰을 확인했습니다. 계산 결과와 수식 의도는 이번 검사에서 확인하지 않았습니다.",
+        "sheet": "월별매출",
+        "cell": "B8",
+        "confidence": 1.0,
+        "repair_class": "EXPERT_REVIEW",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "DEEP_VALIDATION_REQUIRED",
+          "repair_eligibility": "EXPERT_REVIEW_REQUIRED",
+          "user_confirmation_required": true,
+          "detected_fact": "수식 문자열에서 #REF! 참조 토큰을 확인했습니다.",
+          "possible_impact": "참조가 끊긴 수식은 계산 결과에 영향을 줄 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "표시된 셀의 수식에서 #REF! 부분 확인",
+            "인접 수식과 원래 참조해야 할 행·열 범위 확인"
+          ],
+          "when_it_may_be_normal": [
+            "현재 구현된 규칙에서는 일반적인 정상 사례로 보지 않습니다."
+          ],
+          "when_action_is_recommended": [
+            "삭제되거나 이동된 참조가 의도된 범위를 가리키지 않는 경우"
+          ],
+          "recommended_next_action": "수식의 원래 참조 범위를 확인해 직접 수정한 뒤 다시 검사하세요.",
+          "unchecked_scope": [
+            "Excel 계산 결과와 업무 규칙은 이번 검사에서 확인하지 않았습니다.",
+            "주변 수식의 일관성과 참조 범위의 적절성은 검사하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "인접 수식과 참조 범위의 일관성 검사",
+            "삭제되거나 이동된 참조의 업무 의도 확인"
+          ],
+          "recommended_service_code": "PRECISION_VERIFICATION",
+          "repair_readiness": {
+            "status": "PRECISION_VERIFICATION_REQUIRED",
+            "label": "정밀 검증 선행 대상",
+            "explanation": "수식 의미나 파일 충실도에 영향을 줄 수 있어, 현재 자동으로 수정하거나 수정 가능하다고 판단하지 않습니다.",
+            "required_steps": [
+              "정밀 검증",
+              "수정 방법 검토",
+              "변경 전 미리보기",
+              "사용자 승인",
+              "수정 후 재검증"
+            ],
+            "planned_service_codes": [
+              "PRECISION_VERIFICATION",
+              "APPROVED_REPAIR"
+            ]
+          }
+        }
+      },
+      {
+        "id": "9b68cb42-7e9b-4f61-8265-b744de407e0f",
+        "finding_key": "FORMULA_VOLATILE|월별매출|b9",
+        "rule_code": "FORMULA_VOLATILE",
+        "severity": "info",
+        "title": "재계산이 잦은 휘발성 함수가 사용되었습니다.",
+        "description": "대규모 통합문서에서는 계산 지연의 원인이 될 수 있습니다.",
+        "sheet": "월별매출",
+        "cell": "B9",
+        "confidence": 0.95,
+        "repair_class": "INFORMATION_ONLY",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "INFO_ONLY",
+          "repair_eligibility": "NOT_APPLICABLE",
+          "user_confirmation_required": false,
+          "detected_fact": "휘발성 함수가 포함된 수식 문자열을 확인했습니다.",
+          "possible_impact": "수식 수가 많으면 계산 시간이나 파일 열기 속도에 영향을 줄 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "표시된 수식에서 INDIRECT, OFFSET 등 함수 확인",
+            "파일을 열거나 값을 바꿀 때 계산 지연이 있는지 관찰"
+          ],
+          "when_it_may_be_normal": [
+            "실시간 날짜·난수·동적 참조가 업무상 필요한 경우"
+          ],
+          "when_action_is_recommended": [
+            "계산 지연이 반복되거나 대체 함수가 가능한 경우"
+          ],
+          "recommended_next_action": "함수의 필요성을 확인하고, 성능 문제가 있을 때만 대체 방식을 검토하세요.",
+          "unchecked_scope": [
+            "실제 계산 시간과 성능 변화는 측정하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "휘발성 함수의 사용 위치와 횟수 확인",
+            "대체 가능한 함수와 계산 영향 검토"
+          ],
+          "recommended_service_code": null,
+          "repair_readiness": {
+            "status": "INFORMATION_ONLY",
+            "label": "즉시 수정 대상 아님",
+            "explanation": "현재는 유지보수·성능·구조 판단에 참고하는 정보이며 수정 경로를 제안하지 않습니다.",
+            "required_steps": [],
+            "planned_service_codes": []
+          }
+        }
+      },
+      {
+        "id": "e4a5c8d1-6575-4919-8ccf-dac5d1ed6258",
+        "finding_key": "FORMULA_WHOLE_COLUMN_REFERENCE|월별매출|b10",
+        "rule_code": "FORMULA_WHOLE_COLUMN_REFERENCE",
+        "severity": "info",
+        "title": "전체 열을 참조하는 수식입니다.",
+        "description": "수식 수가 많으면 계산량과 파일 성능에 영향을 줄 수 있습니다.",
+        "sheet": "월별매출",
+        "cell": "B10",
+        "confidence": 0.9,
+        "repair_class": "INFORMATION_ONLY",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "INFO_ONLY",
+          "repair_eligibility": "NOT_APPLICABLE",
+          "user_confirmation_required": false,
+          "detected_fact": "전체 열을 참조하는 수식 문자열을 확인했습니다.",
+          "possible_impact": "수식 수가 많으면 계산량과 파일 성능에 영향을 줄 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "표시된 수식에서 전체 열 참조 범위 확인",
+            "실제 데이터 범위와 계산 지연 여부 확인"
+          ],
+          "when_it_may_be_normal": [
+            "데이터 행 수가 자주 늘어나고 성능 문제가 없는 경우"
+          ],
+          "when_action_is_recommended": [
+            "수식 수가 많거나 계산·열기 속도가 느린 경우"
+          ],
+          "recommended_next_action": "성능 문제가 확인될 때 실제 데이터 범위로 제한할 수 있는지 검토하세요.",
+          "unchecked_scope": [
+            "실제 계산 시간과 성능 변화는 측정하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "전체 열 참조의 사용 위치와 필요 범위 확인",
+            "제한된 참조 범위로 변경할 수 있는지 검토"
+          ],
+          "recommended_service_code": null,
+          "repair_readiness": {
+            "status": "INFORMATION_ONLY",
+            "label": "즉시 수정 대상 아님",
+            "explanation": "현재는 유지보수·성능·구조 판단에 참고하는 정보이며 수정 경로를 제안하지 않습니다.",
+            "required_steps": [],
+            "planned_service_codes": []
+          }
+        }
+      },
+      {
+        "id": "b1a4a2a5-b4f1-4a64-bdb6-88573e5ceeaa",
+        "finding_key": "SHEET_HIDDEN|숨김기준정보",
+        "rule_code": "SHEET_HIDDEN",
+        "severity": "info",
+        "title": "숨겨진 시트가 있습니다.",
+        "description": "의도적으로 숨긴 시트인지 확인하는 것이 좋습니다.",
+        "sheet": "숨김기준정보",
+        "cell": null,
+        "confidence": 1.0,
+        "repair_class": "CONFIRMATION_REQUIRED",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "USER_CONFIRMATION",
+          "repair_eligibility": "USER_CONFIRMATION_REQUIRED",
+          "user_confirmation_required": true,
+          "detected_fact": "숨김 상태의 시트를 확인했습니다.",
+          "possible_impact": "숨김 시트의 용도를 모르면 수식 참조나 데이터 흐름을 놓칠 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "Excel의 시트 탭에서 숨김 해제 메뉴로 시트 이름 확인",
+            "수식이 해당 시트를 참조하는지 확인"
+          ],
+          "when_it_may_be_normal": [
+            "입력 보조 데이터나 보고서용 중간 계산을 의도적으로 숨긴 경우"
+          ],
+          "when_action_is_recommended": [
+            "숨김 시트의 용도나 참조 관계를 설명할 수 없는 경우"
+          ],
+          "recommended_next_action": "시트의 용도와 참조 관계를 확인한 뒤 숨김 유지 여부를 결정하세요.",
+          "unchecked_scope": [
+            "숨김 처리의 업무상 의도는 확인하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "숨김 시트의 용도와 참조 관계 확인"
+          ],
+          "recommended_service_code": null,
+          "repair_readiness": {
+            "status": "USER_DECISION_REQUIRED",
+            "label": "사용자 결정 후 수정 검토 대상",
+            "explanation": "업무 의도에 따라 유지 또는 변경 판단이 달라질 수 있어, 사용자 확인 전에는 수정하지 않습니다.",
+            "required_steps": [
+              "업무 의도 확인",
+              "정밀 검증",
+              "변경 전 미리보기",
+              "사용자 승인",
+              "수정 후 재검증"
+            ],
+            "planned_service_codes": [
+              "PRECISION_VERIFICATION",
+              "APPROVED_REPAIR"
+            ]
+          }
+        }
+      },
+      {
+        "id": "bebf72e4-9445-4c77-ae04-53056cabc5bb",
+        "finding_key": "SHEET_VERY_HIDDEN|systemcache",
+        "rule_code": "SHEET_VERY_HIDDEN",
+        "severity": "warning",
+        "title": "일반 메뉴에서 표시할 수 없는 VeryHidden 시트가 있습니다.",
+        "description": "VBA 또는 속성 편집으로만 표시되는 시트이므로 용도 확인이 필요합니다.",
+        "sheet": "SystemCache",
+        "cell": null,
+        "confidence": 1.0,
+        "repair_class": "CONFIRMATION_REQUIRED",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "DIRECT_CONFIRMATION",
+          "action_category": "USER_CONFIRMATION",
+          "repair_eligibility": "USER_CONFIRMATION_REQUIRED",
+          "user_confirmation_required": true,
+          "detected_fact": "일반 메뉴에서 표시할 수 없는 VeryHidden 시트를 확인했습니다.",
+          "possible_impact": "일반적인 시트 목록에서 보이지 않아 유지보수 시 놓칠 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "VBA 편집기 또는 시트 속성에서 VeryHidden 상태와 시트 이름 확인",
+            "참조 수식과 보호 목적을 확인"
+          ],
+          "when_it_may_be_normal": [
+            "보호용 보조 시트를 의도적으로 일반 메뉴에서 숨긴 경우"
+          ],
+          "when_action_is_recommended": [
+            "시트의 용도·접근 권한·참조 관계가 불명확한 경우"
+          ],
+          "recommended_next_action": "파일 관리 책임자와 용도를 확인한 뒤 표시 상태 변경 여부를 판단하세요.",
+          "unchecked_scope": [
+            "VeryHidden 처리의 업무상 의도는 확인하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "VeryHidden 시트의 용도와 참조 관계 확인"
+          ],
+          "recommended_service_code": null,
+          "repair_readiness": {
+            "status": "USER_DECISION_REQUIRED",
+            "label": "사용자 결정 후 수정 검토 대상",
+            "explanation": "업무 의도에 따라 유지 또는 변경 판단이 달라질 수 있어, 사용자 확인 전에는 수정하지 않습니다.",
+            "required_steps": [
+              "업무 의도 확인",
+              "정밀 검증",
+              "변경 전 미리보기",
+              "사용자 승인",
+              "수정 후 재검증"
+            ],
+            "planned_service_codes": [
+              "PRECISION_VERIFICATION",
+              "APPROVED_REPAIR"
+            ]
+          }
+        }
+      },
+      {
+        "id": "13ce2d0f-e393-476b-bd35-9b0f2853f826",
+        "finding_key": "NUMBER_STORED_AS_TEXT|월별매출|b6",
+        "rule_code": "NUMBER_STORED_AS_TEXT",
+        "severity": "warning",
+        "title": "숫자가 텍스트로 저장된 것으로 보입니다.",
+        "description": "같은 열의 숫자 패턴과 다르게 숫자 형태의 텍스트가 저장되어 있습니다. 합계 또는 조건부 집계에서 누락될 가능성이 있습니다. 실제 집계 결과와 변환 필요 여부는 이번 검사에서 확인하지 않았습니다.",
+        "sheet": "월별매출",
+        "cell": "B6",
+        "confidence": 0.97,
+        "repair_class": "SAFE_CANDIDATE",
+        "formula_pattern": null,
+        "guidance": {
+          "evidence_grade": "PATTERN_INFERENCE",
+          "action_category": "FIX_RECOMMENDED",
+          "repair_eligibility": "MANUAL_GUIDANCE_AVAILABLE",
+          "user_confirmation_required": false,
+          "detected_fact": "숫자처럼 보이는 텍스트가 같은 열의 숫자 패턴과 다르게 저장되어 있습니다.",
+          "possible_impact": "합계 또는 조건부 집계에서 누락될 가능성이 있습니다.",
+          "how_to_check_in_excel": [
+            "표시된 셀의 숫자 서식과 왼쪽 정렬 여부 확인",
+            "같은 열의 값과 함께 합계 또는 조건부 집계에 포함되는지 확인"
+          ],
+          "when_it_may_be_normal": [
+            "사번·전화번호·상품코드처럼 앞자리 0을 보존해야 하는 식별자인 경우"
+          ],
+          "when_action_is_recommended": [
+            "산술 계산 또는 집계에 쓰이는 값인데 텍스트로 저장된 경우"
+          ],
+          "recommended_next_action": "업무상 숫자 값인지 확인한 뒤 Excel의 숫자 변환을 사용하고 다시 검사하세요.",
+          "unchecked_scope": [
+            "사번·전화번호·상품코드처럼 텍스트로 유지해야 하는 값인지는 확인하지 않았습니다.",
+            "Excel 계산 결과와 업무 규칙은 이번 검사에서 확인하지 않았습니다."
+          ],
+          "recommended_next_checks": [
+            "숫자 변환 가능 항목과 식별자 항목 분류",
+            "합계와 조건부 집계에 미치는 영향 확인"
+          ],
+          "recommended_service_code": null,
+          "repair_readiness": {
+            "status": "REPAIR_CANDIDATE_AFTER_APPROVAL",
+            "label": "향후 승인 후 수정 검토 대상",
+            "explanation": "현재는 정적 분류만 제공하며, 정밀 검증·변경 전 미리보기·사용자 승인이 끝나기 전에는 수정하지 않습니다.",
+            "required_steps": [
+              "정밀 검증",
+              "변경 전 미리보기",
+              "사용자 승인",
+              "수정 후 재검증"
+            ],
+            "planned_service_codes": [
+              "PRECISION_VERIFICATION",
+              "APPROVED_REPAIR"
+            ]
+          }
+        }
+      }
+    ],
+    "quote": {
+      "status": "AVAILABLE",
+      "tier": "STANDARD",
+      "currency": "KRW",
+      "amount": 39000,
+      "headline": "현재 탐지된 구조 문제와 정밀검증 예상 범위를 기준으로 한 참고용 예상 금액입니다.",
+      "included": [
+        "현재 탐지된 구조 위험 신호 검토",
+        "정밀검증 예상 범위와 수정 가능성 분류",
+        "변경 계획에 필요한 추가 확인 항목"
+      ],
+      "excluded": [
+        "외부 파일이나 시스템의 실제 데이터 검증",
+        "차트·도형·이미지의 디자인 재구성",
+        "업무 의미가 필요한 수식 로직 재설계"
+      ],
+      "factors": [
+        "표준 난이도",
+        "수식 13개",
+        "자동 수정 후보 1건",
+        "확인 필요 7건"
+      ],
+      "amount_min": 29000,
+      "amount_max": 49000,
+      "pricing_note": "베타 가격 가설이며 현재 결제는 진행되지 않습니다. 최종 작업 범위와 가격은 향후 사용자 확인 후 확정됩니다.",
+      "service_code": "PRECISION_VERIFICATION",
+      "service_status": "PLANNED",
+      "planned_deliverables": [
+        "수식 일관성 검사",
+        "수정 후보 수식 또는 수정 방법",
+        "변경 전 미리보기와 사용자 승인",
+        "원본과 분리된 수정본 및 변경 내역서",
+        "수정 전후 비교와 수정 후 재검사 보고서"
+      ]
+    },
+    "limitations": [
+      "정적 구조 분석 결과이며 Excel 계산 엔진을 실행하지 않았습니다.",
+      "업무 의미상 잘못된 수식까지 모두 발견한다고 보장하지 않습니다.",
+      "현재 버전은 파일을 수정하거나 다시 저장하지 않습니다."
+    ]
+  }
+}
