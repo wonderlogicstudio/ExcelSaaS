@@ -19,11 +19,11 @@ if ($LASTEXITCODE -ne 0) {
 Pop-Location
 
 Push-Location $Api
-& .\.venv\Scripts\python.exe -m pytest
+& .\.venv\Scripts\python.exe -m pytest -p no:cacheprovider
 if ($LASTEXITCODE -ne 0) {
     throw "API tests failed."
 }
-& .\.venv\Scripts\python.exe -m ruff check .
+& .\.venv\Scripts\python.exe -m ruff check --no-cache .
 if ($LASTEXITCODE -ne 0) {
     throw "API lint verification failed."
 }

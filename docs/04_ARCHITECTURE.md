@@ -123,6 +123,10 @@ CREATED
 → EXPIRED / DELETED
 ```
 
+## Hosted-beta access boundary (H1 decision)
+
+Before any hosted-beta invitation, the browser calls a same-origin Cloudflare Worker route such as `/api`; it does not receive a Cloud Run origin. Cloudflare Access protects the beta hostname and Worker route. Cloud Run must require an authenticated control-plane invoker, and R2 remains private with opaque object keys. These are H1 architecture requirements, not resources H1 has deployed. See `docs/37_HOSTED_BETA_H1_DEPLOYMENT_FOUNDATION.md`.
+
 Failure states must preserve the last valid state and a user-safe error code.
 
 ## API sketch

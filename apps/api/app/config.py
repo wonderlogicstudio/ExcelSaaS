@@ -1,14 +1,26 @@
+import json
 from functools import lru_cache
+from typing import Annotated, Final
 
-from pydantic import Field, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic import Field, field_validator, model_validator
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
+
+SUPPORTED_APP_ENVS: Final = frozenset(
+    {"local", "development", "internal_beta", "hosted_beta", "production"}
+)
+HOSTED_APP_ENVS: Final = frozenset({"hosted_beta", "production"})
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     app_env: str = "development"
-    cors_origins: list[str] = ["http://localhost:5173"]
+    # Do not let pydantic-settings decode this before ``parse_origins`` runs.
+    # Deployment platforms pass environment variables as strings, and H1
+    # intentionally accepts either an exact JSON array or a comma-separated list.
+    cors_origins: Annotated[list[str], NoDecode] = Field(
+        default_factory=lambda: ["http://localhost:5173"]
+    )
     max_upload_mb: int = 10
     max_uncompressed_mb: int = 120
     max_zip_entries: int = 5000
@@ -22,12 +34,52 @@ class Settings(BaseSettings):
     formula_audit_max_candidate_count: int = Field(default=120, ge=1)
     file_retention_hours: int = 24
 
+    @field_validator("app_env")
+    @classmethod
+    def validate_app_env(cls, value: str) -> str:
+        normalized = value.strip().casefold()
+        if normalized not in SUPPORTED_APP_ENVS:
+            allowed = ", ".join(sorted(SUPPORTED_APP_ENVS))
+            raise ValueError(f"APP_ENV must be one of: {allowed}")
+        return normalized
+
     @field_validator("cors_origins", mode="before")
     @classmethod
     def parse_origins(cls, value: object) -> object:
         if isinstance(value, str):
-            return [item.strip() for item in value.split(",") if item.strip()]
+            stripped = value.strip()
+            if stripped.startswith("["):
+                try:
+                    return json.loads(stripped)
+                except json.JSONDecodeError:
+                    pass
+            return [item.strip() for item in stripped.split(",") if item.strip()]
         return value
+
+    @field_validator("cors_origins")
+    @classmethod
+    def validate_origins(cls, value: list[str]) -> list[str]:
+        normalized = [origin.strip().rstrip("/") for origin in value if origin.strip()]
+        if not normalized:
+            raise ValueError("CORS_ORIGINS must contain at least one exact origin")
+        if any(origin == "*" for origin in normalized):
+            raise ValueError("CORS_ORIGINS must not use a wildcard")
+        if any(not origin.startswith(("http://", "https://")) for origin in normalized):
+            raise ValueError("CORS_ORIGINS entries must include http:// or https://")
+        return normalized
+
+    @model_validator(mode="after")
+    def validate_hosted_environment(self) -> "Settings":
+        if self.app_env in HOSTED_APP_ENVS:
+            if any(not origin.startswith("https://") for origin in self.cors_origins):
+                raise ValueError(
+                    "hosted_beta and production require exact https:// CORS_ORIGINS entries"
+                )
+            if any("localhost" in origin or "127.0.0.1" in origin for origin in self.cors_origins):
+                raise ValueError(
+                    "hosted_beta and production must not allow localhost CORS origins"
+                )
+        return self
 
     @property
     def max_upload_bytes(self) -> int:

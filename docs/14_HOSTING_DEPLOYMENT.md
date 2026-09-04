@@ -36,6 +36,12 @@ Use only synthetic/sample data until privacy and retention controls are implemen
 - Budget alerts and maximum-instance caps.
 - Region selected based on Korean-user latency and data-policy review.
 
+### H1 security boundary
+
+H1 completion update (2026-09-04): the API image was built locally and executed as an unprivileged container user. Its liveness and readiness endpoints returned only safe service/version data. This verifies a local container foundation, not Cloud Run deployment, Cloudflare Access, R2 retention/deletion, authenticated invocation, or hosted beta access.
+
+Hosted beta is not an anonymous public API. The frontend calls a same-origin Worker control plane under Cloudflare Access; it does not call Cloud Run directly. The R2 bucket is private, and Cloud Run must require an authenticated control-plane invoker. H1 prepares these contracts and a conservative deployment example only. H2 must create and prove the actual Access, Worker-to-Cloud-Run authentication, R2 lifecycle/deletion, and synthetic end-to-end path.
+
 ## Cost controls
 
 - Minimum instances: zero during early beta unless cold start materially hurts conversion.

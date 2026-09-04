@@ -1,8 +1,18 @@
 # Current milestone
 
+> **Status override (2026-09-04): `HOSTED BETA H1 COMPLETED — H2 Deployment Awaiting Product Owner Approval`.** H1 is complete as a local deployment foundation only. No cloud resource, hosted endpoint, user file, access policy, or beta invitation was created. This override supersedes the in-progress wording retained below as historical scope context.
+
 ## Status
 
-`M4 COMPLETED — Formula Audit Release Candidate / Hosted Beta Approval Pending`
+`HOSTED BETA H1 COMPLETED — H2 Deployment Awaiting Product Owner Approval`
+
+## Completed H1 scope
+
+H1 prepares an invite-only hosted-beta foundation without deploying it. It may add environment separation, production container/readiness preparation, same-origin frontend configuration, safe logging/error contracts, file-lifecycle/timeout/access-control architecture, deployment and rollback guidance, and tests for those contracts. It does **not** create Cloudflare, R2, Google Cloud, Cloud Run, Artifact Registry, Secret Manager, domain, account, bucket, user upload, session, database, analytics, payment, repair, M3/M3.5 study, M5 rule, AI, VBA, or Power Query capability.
+
+The H1 architecture boundary is Cloudflare Access-protected beta hostname → Worker control plane → private R2 → authenticated Cloud Run. The browser must use same-origin `/api`, never a Cloud Run URL; Cloud Run must not gain an anonymous invoker as a shortcut. Formula audit remains default-off and unavailable in `hosted_beta` until the entire access path is separately verified in H2.
+
+H1 must preserve every M4 RC behavior and finish with a documented local container rehearsal outcome. If Docker or a required cloud account is unavailable, record the exact manual prerequisite; do not claim a cloud deployment or container test that did not occur.
 
 The product owner approved M4-C after validating the supplied synthetic practical sample pack. This milestone expands only the supported static formula syntax and the evidence subtype classifier inside the existing, separate `FORMULA_PATTERN_OUTLIER` and `FORMULA_PATTERN_GAP` internal-beta audit. Its acceptance corpus is `samples/m4c-evaluation/`: 36 labelled candidate locations and 36 labelled normal exceptions. The required outcome is the exact 36 labelled candidates with no unexpected candidates or normal-exception candidates; “more findings” is not a pass condition.
 

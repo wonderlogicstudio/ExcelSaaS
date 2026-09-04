@@ -5,5 +5,9 @@
   "assets": {
     "directory": "./dist",
     "not_found_handling": "single-page-application"
+  },
+  "vars": {
+    "APP_ENV": "hosted_beta",
+    "FORMULA_AUDIT_VISIBLE": "false"
   }
 }

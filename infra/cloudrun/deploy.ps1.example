@@ -1,14 +1,31 @@
-# Run from the repository root after authenticating gcloud and selecting a project.
-# Replace the placeholders before execution.
+# H1 safety-first example. It does not create a project, service account, secret,
+# or Cloud Run service by itself. Run only after H2 access-control approval.
+#
+# The service intentionally has NO public invoker. H2 must prove an authenticated
+# Worker-to-Cloud-Run invocation path before this command is used for a beta.
+param(
+  [Parameter(Mandatory)] [string]$ProjectId,
+  [Parameter(Mandatory)] [string]$FrontendOrigin,
+  [string]$Service = "workbookcare-api-beta",
+  [string]$Region = "asia-northeast3",
+  [string]$RuntimeServiceAccount = "workbookcare-api-beta@$ProjectId.iam.gserviceaccount.com"
+)
 
-gcloud run deploy workbookcare-api `
+if ($FrontendOrigin -notmatch '^https://') {
+  throw "FrontendOrigin must be an exact https:// hosted-beta origin."
+}
+
+gcloud run deploy $Service `
+  --project $ProjectId `
   --source ./apps/api `
-  --region asia-northeast3 `
-  --allow-unauthenticated `
+  --region $Region `
+  --no-allow-unauthenticated `
+  --ingress all `
+  --service-account $RuntimeServiceAccount `
   --min 0 `
-  --max 3 `
+  --max 2 `
   --cpu 1 `
   --memory 1Gi `
-  --timeout 300 `
-  --concurrency 4 `
-  --set-env-vars "APP_ENV=production,CORS_ORIGINS=https://YOUR_DOMAIN"
+  --timeout 60 `
+  --concurrency 1 `
+  --set-env-vars "APP_ENV=hosted_beta,CORS_ORIGINS=$FrontendOrigin,FORMULA_PATTERN_AUDIT_ENABLED=false,AI_EXPLANATIONS_ENABLED=false"

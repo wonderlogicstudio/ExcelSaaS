@@ -101,6 +101,18 @@ Approval question:
 
 > Can formula-pattern findings be accurate enough to add useful precision without misleading users?
 
+## Hosted Beta H1 — Deployment foundation and security boundary — COMPLETED
+
+Purpose: prepare an invite-only hosted-beta architecture without deploying or accepting user files.
+
+- Separate local, development, internal-beta, hosted-beta, and future production configuration.
+- Prepare a non-root Cloud Run container, content-free liveness/readiness contract, safe error/logging boundary, same-origin frontend configuration, and conservative deployment example.
+- Fix the required future chain: Cloudflare Access → Worker control plane → private R2 → authenticated Cloud Run → deletion attempt plus lifecycle backstop.
+- Document file lifecycle, cleanup failures, access-control, timeout/isolation, cost controls, deploy/rollback, and the human-owned H2 prerequisites.
+- Do not create cloud resources, enable `hosted_beta` formula audit, invite users, accept real files, or begin M3/M3.5, repair, payment, M5, AI, or public launch.
+
+Closure update (2026-09-04): H1 local Docker build, non-root liveness/readiness rehearsal, `verify.ps1`, and M4 RC regression verification passed. H2 deployment remains awaiting separate approval.
+
 ## M5 — Business-rule validation
 
 Deliverables:

@@ -39,6 +39,10 @@ This service will handle files that may contain payroll, customers, revenue, ban
 7. Use a separate short-lived `GET` token for downloads.
 8. Delete input and output objects automatically at expiry and allow immediate user deletion.
 
+## Hosted-beta origin boundary (H1 decision)
+
+Cloudflare Access applied only to a frontend is insufficient. The Worker control plane, R2 object permissions, and Cloud Run analysis origin must each reject bypass attempts. The browser uses a same-origin Worker API path; Cloud Run has no anonymous invoker. A later hosted-beta implementation must prove its authenticated Worker-to-Cloud-Run path, short-lived upload scope, cleanup on every failure mode, and lifecycle backstop before any deletion or access-control claim is shown to users.
+
 ## Workbook execution policy
 
 Never execute:

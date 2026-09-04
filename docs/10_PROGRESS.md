@@ -35,6 +35,7 @@
 - [x] M4-C quality remediation (summary-marker handling for formulas that reference a `총계` worksheet, synthetic Holdout recovery, and source-fixture ambiguity recorded).
 - [x] M4-C final baseline closure: 72/72 engine contract accepted with the explicit, narrow product-owner fixture waiver `M4C-2026-09-02-source-label-conflict`; source labels remain unchanged.
 - [x] M4-D Formula Audit Release Candidate & Hosted Beta Readiness: `m4-formula-audit-rc1`, configurable audit limits, safe no-partial-result states, memo-free category feedback, release verification command, support/failure/hosted-beta/manual-review documents.
+- [x] Hosted Beta H1 Deployment Foundation & Security Boundary: strict hosted environment/CORS contract, non-root API container, safe liveness/readiness/error/logging contracts, same-origin hosted-beta configuration, deployment/lifecycle/runbook documents, local container rehearsal, and regression verification. No cloud deployment or user upload.
 
 ## Current product state
 
