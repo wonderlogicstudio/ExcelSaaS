@@ -12,10 +12,12 @@
 > allow anonymous invocation, invite users, accept real workbooks, start H3/M5,
 > host Formula Audit, or add repair, payment, AI, or accounts.
 
-> **Current H2 implementation status:** local Worker/Access verification, opaque
-> R2 cleanup, body-bound HMAC verification, and API Gateway templates are in
-> progress. Provider secrets, same-service revision, Gateway creation, Worker
-> deployment, and synthetic positive/negative end-to-end verification remain open.
+> **Current H2 implementation status:** provider secrets, the existing Cloud Run
+> service's H2 revision, Gateway, and Access-protected Worker are deployed.
+> A browser upload exposed a Gateway path-translation defect (backend `POST /`
+> instead of `/v1/scans`). Its correction is deployed and the Gateway is ACTIVE;
+> H2 is not complete. Positive browser end-to-end, remaining security-negative, and
+> live deletion/lifecycle verification remain open. See `42_HOSTED_BETA_H2_PREFLIGHT.md`.
 
 > **Active scope override (2026-09-08): COMPLETED (2026-09-09) — Cloud Run preparation only; STOPPED BEFORE DEPLOYMENT.**
 > The current owner instruction narrows work to the existing FastAPI API container,

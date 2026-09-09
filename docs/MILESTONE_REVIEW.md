@@ -1,4 +1,40 @@
-# Milestone review — Cloud Run preparation only
+# Milestone review — H2 upload routing correction
+
+**2026-09-09: H2 IN PROGRESS, synthetic-only.** This current section supersedes
+the historical preparation/preflight reviews below. It is not H2 completion or
+permission to invite users, upload real workbooks, or start H3/M5.
+
+The browser upload's `Not Found` was traced to Gateway's operation-level
+`CONSTANT_ADDRESS`: Cloud Run logs showed `POST /` returning 404, and the deployed
+service config confirmed the rewrite. The OpenAPI template now explicitly uses
+`APPEND_PATH_TO_ADDRESS`, preserving `/v1/scans` and the body-bound HMAC path.
+
+Verification:
+
+- A template-driven regression reproduced the exact 404 before the fix; after
+  the fix, the real FastAPI scan route behind hosted HMAC validation returns 200
+  for a synthetic workbook and denies an unsigned call with 401.
+- Worker cleanup tests cover both a downstream 404 and a network failure.
+- Full M4 release/general verification passed: web 25, Worker 5, API 70,
+  TypeScript/production build, Ruff, supplied 36-target pack, and M4-C 72/72
+  under the existing named fixture waiver. M4-A.5 remains `CONDITIONAL_GO`.
+- Replacement Gateway config `workbookcare-beta-config-20260909203335` is
+  deployed; the existing Gateway is ACTIVE on it at 11:44:10 UTC. Google's
+  compiled backend rule has `APPEND_PATH_TO_ADDRESS` and
+  preserves the exact Access issuer/audience and Cloud Run JWT audience.
+- Cloud Run stays on `workbookcare-api-beta-00002-d5l` at 100%; no IAM, secret,
+  Access policy, Worker runtime, frontend, or scanner changes for this fix.
+- Wrangler reports zero objects/zero bytes and the enabled one-day lifecycle
+  rule for all prefixes. This is configuration/inventory evidence, not proof
+  of per-request deletion or an observed lifecycle expiration.
+- Post-rollout anonymous checks: Worker 302 (Access redirect), Gateway POST 401,
+  Cloud Run 403. R2 public development access is disabled with no custom domain.
+
+Open gates: authenticated browser synthetic retry,
+remaining live security-negative checks and immediate deletion/lifecycle evidence.
+Live resource IDs and rollback config are in `42_HOSTED_BETA_H2_PREFLIGHT.md`.
+
+## Historical review — Cloud Run preparation only
 
 > **Historical H1 review; H2 activation update (2026-09-09):** H1 remains
 > completed. H2 is approved and in progress for synthetic-only deployment. This

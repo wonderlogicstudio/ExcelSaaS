@@ -14,14 +14,62 @@ the Cloud Run Invoker role on the existing service.
 API Gateway has no Seoul location. The owner explicitly approved Tokyo
 `asia-northeast1` for the bridge to the existing Seoul `asia-northeast3` Cloud Run
 service. Request bodies therefore cross that regional boundary. H2 remains
-synthetic-only and must not claim Korean-only residency. Remaining gates are the
-provider-only HMAC secret, the revision of the same existing Cloud Run service,
-Gateway configuration, Worker deployment, and positive/negative cleanup proof.
+synthetic-only and must not claim Korean-only residency. The provider-only HMAC
+secret, same-service H2 revision, Gateway and Worker are deployed. Positive browser
+end-to-end and remaining security/deletion/lifecycle proof are still required.
+
+## Upload 404 remediation — 2026-09-09
+
+The authenticated browser reached the upload flow but received `Not Found`.
+Content-restricted Cloud Run request logs confirmed repeated `POST /` responses
+with status 404 at 11:28–11:29 UTC. The deployed Google service config confirmed
+`pathTranslation: CONSTANT_ADDRESS` for the `/v1/scans` operation.
+
+The template now explicitly sets `path_translation: APPEND_PATH_TO_ADDRESS`.
+Google's operation-level default otherwise drops the request path when the
+backend address contains only the origin. The Cloud Run origin and JWT audience
+remain unchanged. See [Google's path translation documentation](https://cloud.google.com/api-gateway/docs/passing-data).
+
+A template-driven test reproduced the exact `{"detail":"Not Found"}` before
+the fix. With the fix it reaches the real FastAPI scan route through hosted HMAC
+validation, returns 200 for a synthetic workbook, and denies an unsigned request
+with 401. Worker tests also prove deletion attempts after a backend 404 and a
+network failure. These are local regression tests, not live R2 deletion evidence.
+
+Replacement config `workbookcare-beta-config-20260909203335` and existing Tokyo
+gateway `workbookcare-beta-gateway` are ACTIVE; the gateway points to the new
+config as of 2026-09-09 11:44:10 UTC. The deployment script exited successfully.
+The compiled backend rule was rechecked: `APPEND_PATH_TO_ADDRESS` is active.
+Prior config
+`workbookcare-beta-config-20260909200234` is retained for rollback. No Cloud Run
+revision, IAM policy, Access policy, HMAC secret, or Worker code changes are needed
+for this routing correction.
+
+Previously deployed H2 resources:
+
+- Cloud Run `workbookcare-api-beta-00002-d5l`, Seoul, 100% traffic; still IAM-required.
+- Worker `workbookcare-beta`, version `ef00a4c7-4406-4314-9666-d70edc74ad65`.
+- Gateway `workbookcare-beta-gateway-3azf8h57.an.gateway.dev`, Tokyo.
+- Provider-only HMAC secret, existing private R2 bucket and `UPLOADS` binding.
+
+Read-only Wrangler inspection after the failed uploads reported `object_count: 0`
+and `bucket_size: 0 B`. The enabled `delete-uploads-after-1-day` rule applies to
+all prefixes. This inventory/lifecycle-configuration snapshot does not prove
+per-request immediate deletion or an actual one-day lifecycle expiration event.
+Wrangler also confirms public `r2.dev` access is disabled and no custom domains
+are attached to this bucket.
+
+Post-rollout anonymous probes: Worker GET redirects to Access (302), Gateway
+`POST /v1/scans` rejects a tokenless request (401), and Cloud Run health access is
+denied (403). These do not substitute for an authenticated browser scan or an
+Access-authenticated Gateway request without the Worker HMAC.
+
+H2 remains **IN PROGRESS** until the browser retry and remaining live gates pass.
 
 ## Local implementation evidence — 2026-09-09
 
-- `scripts/verify.ps1` passed: web 25 tests plus production build, Worker 3
-  security/cleanup tests, API 68 tests, Ruff, and the supplied M4-C 36-candidate
+- `scripts/verify.ps1` passed: web 25 tests plus production build, Worker 5
+  security/cleanup tests, API 70 tests, Ruff, and the supplied M4-C 36-candidate
   sample-pack check all passed. The only warning is the existing Starlette
   TestClient deprecation.
 - `scripts/verify-m4-release.ps1 -AcceptProductOwnerFixtureWaiver` passed: the
@@ -38,9 +86,9 @@ Gateway configuration, Worker deployment, and positive/negative cleanup proof.
 
 `HISTORICAL PRE-APPROVAL BLOCKER — resolved.` The target project, existing Cloud
 Run service, private R2 bucket, Access-protected Worker, Gateway API, and
-dedicated Gateway invoker account are now known and approved. This PC still has
-no authenticated `gcloud` or `wrangler`; the approved operator now has both
-authenticated locally. Use `infra/gateway/deploy.ps1` from Windows PowerShell or
+dedicated Gateway invoker account are now known and approved. The approved
+operator now has both `gcloud` and `wrangler` authenticated locally.
+Use `infra/gateway/deploy.ps1` from Windows PowerShell or
 `infra/gateway/deploy.sh.example` from Google Cloud Shell. Neither route stores
 deployment credentials in the repository.
 
@@ -97,7 +145,7 @@ No secret is committed, printed, added to a browser build, or accepted through c
 ## H2 verification after prerequisites
 
 - Deploy an Access-protected Worker/static frontend, private R2 bucket/lifecycle policy, authenticated API Gateway, and Cloud Run with no anonymous invoker.
-- Use only the repository synthetic workbook for upload, scan, optional separate Formula Audit, re-validation, and CSV path checks.
+- Use only the repository synthetic workbook for upload, scan, re-validation, and CSV path checks. Formula Audit remains unhosted and default-off.
 - Demonstrate denial for unauthenticated Worker, direct Gateway without the HMAC, direct Cloud Run, direct R2, expired upload authorization, malformed input, limit excess, timeout, and cleanup failure.
 - Verify immediate deletion attempts and the R2 lifecycle backstop with content-free events only.
 - Run standard and M4 regression verification before recording H2 completion.

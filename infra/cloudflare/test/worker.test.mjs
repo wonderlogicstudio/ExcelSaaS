@@ -129,3 +129,32 @@ test("a request without the Access assertion never reaches R2", async () => {
   assert.equal(response.status, 401);
   assert.equal(storage.size, 0);
 });
+
+for (const failure of ["backend-404", "network-error"]) {
+  test(`temporary upload is deleted after ${failure}`, async () => {
+    const { token, jwk } = await signedAccessToken();
+    const storage = createR2();
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (input) => {
+      if (String(input).endsWith("/cdn-cgi/access/certs")) {
+        return Response.json({ keys: [jwk] });
+      }
+      if (failure === "network-error") throw new Error("synthetic network failure");
+      return Response.json({ detail: "Not Found" }, { status: 404 });
+    };
+    try {
+      const response = await handleScan(makeRequest(token), {
+        UPLOADS: storage.r2,
+        API_GATEWAY_URL: "https://gateway.example.test/v1/scans",
+        CLOUDFLARE_ACCESS_TEAM_DOMAIN: TEAM_DOMAIN,
+        CLOUDFLARE_ACCESS_AUD: AUDIENCE,
+        WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET: HMAC_SECRET,
+      });
+      assert.equal(response.status, failure === "backend-404" ? 404 : 502);
+      assert.equal(storage.deletes, 1);
+      assert.equal(storage.size, 0);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+}

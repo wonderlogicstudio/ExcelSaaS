@@ -26,6 +26,9 @@ paths:
       x-google-backend:
         address: "${CLOUD_RUN_URL}"
         jwt_audience: "${CLOUD_RUN_URL}"
+        # Operation-level defaults to CONSTANT_ADDRESS and would discard
+        # /v1/scans, bypassing the intended route and returning a backend 404.
+        path_translation: APPEND_PATH_TO_ADDRESS
       responses:
         "200":
           description: Static scan result

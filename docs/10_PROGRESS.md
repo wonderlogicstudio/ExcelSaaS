@@ -12,18 +12,23 @@ Run Invoker role on the existing IAM-required `workbookcare-api-beta` service.
 
 Tokyo API Gateway (`asia-northeast1`) is explicitly approved to reach the existing
 Seoul Cloud Run service (`asia-northeast3`). The cross-region bridge is
-synthetic-only until H2 completes: provider secrets, an updated revision of the
-same Cloud Run service, API Gateway, deployed Worker assets/control route, and all
-positive/negative/deletion checks remain open. No invitations, real workbook use,
+synthetic-only until H2 completes. Provider secrets, the same Cloud Run service's
+H2 revision, Gateway, and Worker assets/control route are now deployed. A browser
+upload returned 404 because Gateway discarded `/v1/scans`; the routing correction
+is now deployed on the ACTIVE Gateway. Positive end-to-end and remaining security/deletion
+gates remain open. No invitations, real workbook use,
 repair, payment, hosted Formula Audit, AI, M5, or H3 work has started.
 
 Current local H2 evidence: standard verification passed with web 25 tests and
-production build, Worker 3 tests, API 68 tests, Ruff, and the M4-C supplied pack.
+production build, Worker 5 tests, API 70 tests, Ruff, and the M4-C supplied pack.
 M4 release verification passed under its existing narrow fixture waiver (72/72
 locations and top-level rules); M4-A.5 remains `CONDITIONAL_GO`. A freshly built
 local H2 container passed synthetic signed-upload, error, health, non-root, and
-temporary-file cleanup rehearsals. These results do not prove a deployed gateway,
-Access policy, R2 lifecycle, or Cloud Run revision.
+temporary-file cleanup rehearsals. New regression tests reproduce the original
+Gateway 404 and pass with path preservation, including unsigned-call denial and
+Worker cleanup on backend 404/network failure. Local tests do not prove the live
+end-to-end flow or R2 lifecycle. Deployment evidence is recorded in
+`42_HOSTED_BETA_H2_PREFLIGHT.md`.
 
 ## Current step — 2026-09-09
 
@@ -74,7 +79,7 @@ Earlier H2 status below is historical; do not resume deployment automatically.
 - [x] M4-C final baseline closure: 72/72 engine contract accepted with the explicit, narrow product-owner fixture waiver `M4C-2026-09-02-source-label-conflict`; source labels remain unchanged.
 - [x] M4-D Formula Audit Release Candidate & Hosted Beta Readiness: `m4-formula-audit-rc1`, configurable audit limits, safe no-partial-result states, memo-free category feedback, release verification command, support/failure/hosted-beta/manual-review documents.
 - [x] Hosted Beta H1 Deployment Foundation & Security Boundary: strict hosted environment/CORS contract, non-root API container, safe liveness/readiness/error/logging contracts, same-origin hosted-beta configuration, deployment/lifecycle/runbook documents, local container rehearsal, and regression verification. No cloud deployment or user upload.
-- [ ] Hosted Beta H2 Cloud Deployment, Private Upload Pipeline & Analysis Execution (scope approved but blocked before deployment: no GCP/Cloudflare targets, authenticated credentials, or required CLIs on this PC; no external invitation).
+- [ ] Hosted Beta H2 Cloud Deployment, Private Upload Pipeline & Analysis Execution (deployed, synthetic-only; upload routing corrected, final live verification remains open; no external invitation).
 
 ## Current product state
 
