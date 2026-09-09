@@ -17,12 +17,19 @@ H2 revision, Gateway, and Worker assets/control route are now deployed. A browse
 upload returned 404 because Gateway discarded `/v1/scans`; the routing correction
 is now deployed on the ACTIVE Gateway. An authenticated browser synthetic upload
 then completed with a 200 scan result and the R2 bucket returned to zero objects.
-Remaining security-negative and lifecycle-evidence gates remain open. No invitations,
-real workbook use,
-repair, payment, hosted Formula Audit, AI, M5, or H3 work has started.
+A deliberately malformed synthetic `.xlsx` then reached the same Cloud Run route,
+returned 415, and R2 again returned to zero objects. This proves normal and
+malformed terminal-path cleanup, but not every H2 live gate. The deployed Worker
+now limits each authenticated Access assertion to five upload attempts per minute;
+tests prove both over-limit files and rate-limited attempts stop before R2.
+The product owner reports browser CSV download success. The active project budget
+is KRW 10,000 with 50%, 90%, and 100% alerts. Remaining direct-Gateway
+HMAC-negative, browser re-validation, and observed-lifecycle-evidence gates remain
+open. No invitations, real workbook use, repair, payment, hosted Formula Audit,
+AI, M5, or H3 work has started.
 
-Current local H2 evidence: standard verification passed with web 25 tests and
-production build, Worker 5 tests, API 70 tests, Ruff, and the M4-C supplied pack.
+Current local H2 evidence: standard verification passed with web 26 tests and
+production build, Worker 7 tests, API 70 tests, Ruff, and the M4-C supplied pack.
 M4 release verification passed under its existing narrow fixture waiver (72/72
 locations and top-level rules); M4-A.5 remains `CONDITIONAL_GO`. A freshly built
 local H2 container passed synthetic signed-upload, error, health, non-root, and

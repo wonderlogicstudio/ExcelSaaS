@@ -20,6 +20,16 @@
       "bucket_name": "workbookcare-beta-uploads"
     }
   ],
+  "ratelimits": [
+    {
+      "name": "UPLOAD_RATE_LIMITER",
+      "namespace_id": "926108451",
+      "simple": {
+        "limit": 5,
+        "period": 60
+      }
+    }
+  ],
   "vars": {
     "APP_ENV": "hosted_beta",
     "MAX_UPLOAD_BYTES": "10485760",

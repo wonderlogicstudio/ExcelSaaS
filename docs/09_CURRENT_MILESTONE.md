@@ -15,10 +15,16 @@
 > **Current H2 implementation status:** provider secrets, the existing Cloud Run
 > service's H2 revision, Gateway, and Access-protected Worker are deployed.
 > A browser upload exposed a Gateway path-translation defect (backend `POST /`
-> instead of `/v1/scans`). Its correction is deployed and the Gateway is ACTIVE;
-> one authenticated browser synthetic upload has completed with an analysis result
-> and zero remaining R2 objects. H2 is not complete: remaining security-negative and
-> live deletion/lifecycle verification remain open. See `42_HOSTED_BETA_H2_PREFLIGHT.md`.
+> instead of `/v1/scans`). Its correction is deployed and the Gateway is ACTIVE.
+> An authenticated synthetic upload completed with an analysis result (Cloud Run
+> `POST /v1/scans` 200), and a deliberately malformed synthetic `.xlsx` was
+> rejected (415); after each request R2 returned to zero objects/zero bytes. H2
+> has an authenticated-session rate limit of five uploads per minute, and the
+> existing KRW 10,000 budget alerts are visible at 50%, 90%, and 100%. Browser
+> CSV download has been reported successful. H2 is not complete: direct-Gateway
+> HMAC-negative verification using a valid Access assertion, live browser
+> re-validation, and an observed one-day lifecycle expiration remain open. See
+> `42_HOSTED_BETA_H2_PREFLIGHT.md`.
 
 > **Active scope override (2026-09-08): COMPLETED (2026-09-09) — Cloud Run preparation only; STOPPED BEFORE DEPLOYMENT.**
 > The current owner instruction narrows work to the existing FastAPI API container,

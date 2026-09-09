@@ -1,0 +1,2 @@
+This is an intentionally invalid, synthetic .xlsx file for hosted-beta failure-cleanup verification.
+It is plain text, contains no workbook, no personal data, and must be rejected as INVALID_OOXML.

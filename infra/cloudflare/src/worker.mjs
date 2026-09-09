@@ -40,6 +40,10 @@ export async function handleScan(request, env) {
     return errorResponse(401, "ACCESS_ASSERTION_INVALID");
   }
 
+  if (!await uploadRateLimitAllows(assertion, env)) {
+    return errorResponse(429, "UPLOAD_RATE_LIMITED", { "Retry-After": "60" });
+  }
+
   const maxUploadBytes = parseMaxUploadBytes(env.MAX_UPLOAD_BYTES);
   const contentLength = request.headers.get("content-length");
   if (contentLength && Number(contentLength) > maxUploadBytes + 256 * 1024) {
@@ -97,8 +101,17 @@ function requiredEnvironmentIsPresent(env) {
       && env.API_GATEWAY_URL
       && env.CLOUDFLARE_ACCESS_TEAM_DOMAIN
       && env.CLOUDFLARE_ACCESS_AUD
-      && env.WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET,
+      && env.WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET
+      && env.UPLOAD_RATE_LIMITER
   );
+}
+
+async function uploadRateLimitAllows(assertion, env) {
+  // Use an irreversible, in-memory counter key. Neither an Access assertion nor
+  // an identity value is stored, returned, or written to a log.
+  const key = await sha256Hex(new TextEncoder().encode(assertion));
+  const outcome = await env.UPLOAD_RATE_LIMITER.limit({ key });
+  return outcome.success === true;
 }
 
 function parseMaxUploadBytes(value) {

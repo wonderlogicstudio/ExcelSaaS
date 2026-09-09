@@ -33,9 +33,26 @@ Verification:
   result. Cloud Run records `POST /v1/scans` 200 at 11:52:25 UTC and the R2 bucket
   immediately returned to zero objects/zero bytes. This completes the positive
   browser flow and successful-request cleanup evidence.
+- A deliberately malformed synthetic `.xlsx` reached `POST /v1/scans`, returned
+  415 at 12:09:52 UTC, and R2 again immediately reported zero objects/zero bytes.
+  This completes the malformed browser-failure cleanup check without exposing
+  workbook content in logs.
+- Worker version `50128bfe-4942-48e1-9732-b1bd07205464` now rate-limits each
+  authenticated Access assertion to five upload attempts per minute. The counter
+  uses only an irreversible token hash, returns 429 before R2, and is covered by
+  a Worker regression test. The browser and Worker now also reject a synthetic
+  file above 10 MiB before it reaches R2.
+- Post-deployment checks remain private: Worker 302 without Access, Gateway 401
+  without a bearer assertion, direct Cloud Run 403, R2 zero objects/bytes, no
+  `r2.dev` or custom domain, and enabled one-day expiration. The project has an
+  existing KRW 10,000 budget with 50%, 90%, and 100% alert thresholds. The owner
+  reports browser CSV download success.
 
 Open gates: direct Gateway denial with a valid Access assertion but no Worker HMAC,
-malformed/oversized browser upload failure cleanup, and observed lifecycle backstop.
+browser re-validation, and observed one-day lifecycle backstop. The configured
+lifecycle rule and normal plus malformed-path immediate cleanup are verified; an
+elapsed one-day expiration has not yet been observed. No persistent test route or
+service credential was created merely to simulate the valid-Access/no-HMAC call.
 Live resource IDs and rollback config are in `42_HOSTED_BETA_H2_PREFLIGHT.md`.
 
 ## Historical review — Cloud Run preparation only

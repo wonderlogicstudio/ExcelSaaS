@@ -97,4 +97,17 @@ describe('WorkbookCare landing page', () => {
 
     expect(screen.getByRole('alert')).toHaveTextContent('.xlsx와 .xlsm 파일만');
   });
+
+  it('rejects an over-limit workbook before calling the API', () => {
+    render(<App />);
+    const input = screen.getByLabelText('엑셀 파일 선택');
+    const file = new File(['synthetic'], 'synthetic-too-large.xlsx', {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    });
+    Object.defineProperty(file, 'size', { value: 10 * 1024 * 1024 + 1 });
+
+    fireEvent.change(input, { target: { files: [file] } });
+
+    expect(screen.getByRole('alert')).toHaveTextContent('10MB');
+  });
 });

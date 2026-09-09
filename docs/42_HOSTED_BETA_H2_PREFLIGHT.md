@@ -81,6 +81,49 @@ contradiction.
 
 H2 remains **IN PROGRESS** for the remaining live negative/deletion/lifecycle gates.
 
+## Malformed browser failure and cleanup — 2026-09-09
+
+The browser then submitted `samples/hosted-beta-invalid.xlsx`, a deliberately
+invalid plain-text, synthetic file carrying an `.xlsx` extension. Content-restricted
+Cloud Run logs record `POST /v1/scans` with status 415 at 12:09:52 UTC. A
+read-only R2 inspection immediately afterward returned `object_count: 0` and
+`bucket_size: 0 B`. This proves the malformed-input terminal path reaches the
+deployed route and does not leave a temporary object behind. It does not test the
+maximum-size, timeout, or forced-cleanup-failure paths, and it does not observe a
+one-day lifecycle expiration.
+
+Remaining H2 gates are therefore: an Access-authenticated direct Gateway call
+without the Worker HMAC (must be denied), live browser re-validation, and
+time-based observation of the configured one-day lifecycle backstop. CSV download
+is reported complete; automated coverage exercises the bounded size and cleanup
+error paths. No new credential or Access policy may be created merely to perform
+the direct-Gateway check without owner approval.
+
+## Operating controls and post-deployment verification — 2026-09-09
+
+The currently deployed Worker version `50128bfe-4942-48e1-9732-b1bd07205464`
+adds an `UPLOAD_RATE_LIMITER`: five upload attempts per 60 seconds for each
+authenticated Access assertion. Its counter key is an irreversible assertion hash;
+no assertion or identity is stored, returned, or logged. The Worker returns a safe
+429 before R2 when the limit is reached. Automated checks also prove a file over
+10 MiB is rejected before R2. The post-deployment standard suite passed with web
+26, Worker 7, and API 70 tests plus production build, Ruff, and the supplied
+M4-C pack.
+
+Read-only provider checks after this deployment confirm: Worker 302 without
+Access, Gateway 401 without a bearer assertion, direct Cloud Run 403, private R2
+with no `r2.dev` URL or custom domain, zero R2 objects/bytes, and the enabled
+one-day expiration rule. The existing project budget is KRW 10,000 with alerts
+at 50%, 90%, and 100%; the Budget API was enabled only to verify that rule.
+
+The product owner reports that browser CSV download succeeded. Direct browser
+re-validation has not yet been reported. A live valid-Access/no-HMAC Gateway
+probe also remains open: creating a persistent test route or service credential
+for this purpose was deliberately not performed because it would broaden the
+security surface. An observed lifecycle expiration must wait for the existing
+one-day rule to elapse; normal and malformed terminal-path cleanup have already
+been verified immediately.
+
 ## Local implementation evidence — 2026-09-09
 
 - `scripts/verify.ps1` passed: web 25 tests plus production build, Worker 5

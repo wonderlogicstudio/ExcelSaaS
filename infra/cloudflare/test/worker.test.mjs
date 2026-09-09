@@ -54,6 +54,10 @@ function createR2() {
   };
 }
 
+function rateLimiter(success = true) {
+  return { async limit() { return { success }; } };
+}
+
 function makeRequest(token) {
   const form = new FormData();
   form.set("file", new File(["synthetic workbook bytes"], "customer-visible-name.xlsx"));
@@ -91,6 +95,7 @@ test("signed scan stores an opaque temporary object, forwards a body-bound proof
       CLOUDFLARE_ACCESS_TEAM_DOMAIN: TEAM_DOMAIN,
       CLOUDFLARE_ACCESS_AUD: AUDIENCE,
       WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET: HMAC_SECRET,
+      UPLOAD_RATE_LIMITER: rateLimiter(),
       MAX_UPLOAD_BYTES: "10485760",
     });
     assert.equal(response.status, 200);
@@ -124,10 +129,68 @@ test("a request without the Access assertion never reaches R2", async () => {
       CLOUDFLARE_ACCESS_TEAM_DOMAIN: TEAM_DOMAIN,
       CLOUDFLARE_ACCESS_AUD: AUDIENCE,
       WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET: HMAC_SECRET,
+      UPLOAD_RATE_LIMITER: rateLimiter(),
     },
   );
   assert.equal(response.status, 401);
   assert.equal(storage.size, 0);
+});
+
+test("an over-limit workbook is rejected before it reaches R2", async () => {
+  const { token, jwk } = await signedAccessToken();
+  const storage = createR2();
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => Response.json({ keys: [jwk] });
+  try {
+    const form = new FormData();
+    form.set(
+      "file",
+      new File([new Uint8Array(10 * 1024 * 1024 + 1)], "synthetic-over-limit.xlsx"),
+    );
+    const response = await handleScan(
+      new Request("https://workbookcare-beta.example.test/api/v1/scans", {
+        method: "POST",
+        headers: { "cf-access-jwt-assertion": token },
+        body: form,
+      }),
+      {
+        UPLOADS: storage.r2,
+        API_GATEWAY_URL: "https://gateway.example.test/v1/scans",
+        CLOUDFLARE_ACCESS_TEAM_DOMAIN: TEAM_DOMAIN,
+        CLOUDFLARE_ACCESS_AUD: AUDIENCE,
+        WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET: HMAC_SECRET,
+        UPLOAD_RATE_LIMITER: rateLimiter(),
+        MAX_UPLOAD_BYTES: "10485760",
+      },
+    );
+    assert.equal(response.status, 413);
+    assert.equal((await response.json()).error.code, "FILE_TOO_LARGE");
+    assert.equal(storage.size, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("a rate-limited authenticated request never reaches R2", async () => {
+  const { token, jwk } = await signedAccessToken();
+  const storage = createR2();
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => Response.json({ keys: [jwk] });
+  try {
+    const response = await handleScan(makeRequest(token), {
+      UPLOADS: storage.r2,
+      API_GATEWAY_URL: "https://gateway.example.test/v1/scans",
+      CLOUDFLARE_ACCESS_TEAM_DOMAIN: TEAM_DOMAIN,
+      CLOUDFLARE_ACCESS_AUD: AUDIENCE,
+      WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET: HMAC_SECRET,
+      UPLOAD_RATE_LIMITER: rateLimiter(false),
+    });
+    assert.equal(response.status, 429);
+    assert.equal((await response.json()).error.code, "UPLOAD_RATE_LIMITED");
+    assert.equal(storage.size, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 for (const failure of ["backend-404", "network-error"]) {
@@ -149,6 +212,7 @@ for (const failure of ["backend-404", "network-error"]) {
         CLOUDFLARE_ACCESS_TEAM_DOMAIN: TEAM_DOMAIN,
         CLOUDFLARE_ACCESS_AUD: AUDIENCE,
         WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET: HMAC_SECRET,
+        UPLOAD_RATE_LIMITER: rateLimiter(),
       });
       assert.equal(response.status, failure === "backend-404" ? 404 : 502);
       assert.equal(storage.deletes, 1);
