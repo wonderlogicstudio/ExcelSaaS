@@ -29,9 +29,13 @@ Verification:
   of per-request deletion or an observed lifecycle expiration.
 - Post-rollout anonymous checks: Worker 302 (Access redirect), Gateway POST 401,
   Cloud Run 403. R2 public development access is disabled with no custom domain.
+- An authenticated browser synthetic upload then displayed the normal diagnosis
+  result. Cloud Run records `POST /v1/scans` 200 at 11:52:25 UTC and the R2 bucket
+  immediately returned to zero objects/zero bytes. This completes the positive
+  browser flow and successful-request cleanup evidence.
 
-Open gates: authenticated browser synthetic retry,
-remaining live security-negative checks and immediate deletion/lifecycle evidence.
+Open gates: direct Gateway denial with a valid Access assertion but no Worker HMAC,
+malformed/oversized browser upload failure cleanup, and observed lifecycle backstop.
 Live resource IDs and rollback config are in `42_HOSTED_BETA_H2_PREFLIGHT.md`.
 
 ## Historical review — Cloud Run preparation only

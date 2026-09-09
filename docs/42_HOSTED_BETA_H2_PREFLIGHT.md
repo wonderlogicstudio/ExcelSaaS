@@ -64,7 +64,22 @@ Post-rollout anonymous probes: Worker GET redirects to Access (302), Gateway
 denied (403). These do not substitute for an authenticated browser scan or an
 Access-authenticated Gateway request without the Worker HMAC.
 
-H2 remains **IN PROGRESS** until the browser retry and remaining live gates pass.
+## Positive browser scan — 2026-09-09
+
+An Access-authenticated browser submitted the approved synthetic workbook after
+the routing rollout and displayed the normal diagnosis result. Content-restricted
+Cloud Run logs record `POST /v1/scans` with status 200 at 11:52:25 UTC. Immediately
+afterward, a read-only R2 inspection returned `object_count: 0` and `bucket_size:
+0 B`. This proves the successful browser → Worker → Gateway → Cloud Run flow and
+that no object remained after this successful request; it does not prove a forced
+failure cleanup branch or a one-day lifecycle expiration event.
+
+The result screen distinguishes 10 findings needing possible review (1 safe repair
+candidate, 7 user-confirmation items, 2 expert-review items) from 2 informational
+items requiring no immediate modification. The counts are intentionally not a
+contradiction.
+
+H2 remains **IN PROGRESS** for the remaining live negative/deletion/lifecycle gates.
 
 ## Local implementation evidence — 2026-09-09
 

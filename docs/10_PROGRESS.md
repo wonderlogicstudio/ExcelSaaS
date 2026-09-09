@@ -15,8 +15,10 @@ Seoul Cloud Run service (`asia-northeast3`). The cross-region bridge is
 synthetic-only until H2 completes. Provider secrets, the same Cloud Run service's
 H2 revision, Gateway, and Worker assets/control route are now deployed. A browser
 upload returned 404 because Gateway discarded `/v1/scans`; the routing correction
-is now deployed on the ACTIVE Gateway. Positive end-to-end and remaining security/deletion
-gates remain open. No invitations, real workbook use,
+is now deployed on the ACTIVE Gateway. An authenticated browser synthetic upload
+then completed with a 200 scan result and the R2 bucket returned to zero objects.
+Remaining security-negative and lifecycle-evidence gates remain open. No invitations,
+real workbook use,
 repair, payment, hosted Formula Audit, AI, M5, or H3 work has started.
 
 Current local H2 evidence: standard verification passed with web 25 tests and
