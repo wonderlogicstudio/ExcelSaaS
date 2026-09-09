@@ -60,6 +60,15 @@ Access-protected browser
 
 The Worker must also attach a short-lived, body-bound HMAC signature that FastAPI verifies. This prevents an authenticated user from bypassing the Worker by calling the API Gateway directly. The HMAC exists only in the Cloudflare Worker secret store and Google Secret Manager.
 
+### API Gateway multipart representation
+
+Google API Gateway rejects OpenAPI 2.0 `type: file` parameters. The H2 gateway
+therefore represents the single multipart form field as `type: string`; its
+proxy does not enforce the form-data schema and forwards the original request.
+The Worker and FastAPI remain the enforcement points for the `.xlsx`/`.xlsm`
+allowlist, 10 MiB limit, multipart parsing, and body-bound HMAC. This is a
+provider compatibility representation, not a relaxation of upload validation.
+
 ## Why the additional API Gateway is required
 
 Cloud Run IAM accepts a Google-signed ID token from an authorized principal. A Cloudflare Worker is external to Google Cloud and cannot safely obtain that token without either workload-identity federation or a Google service-account private key. H1 prohibits storing such a long-lived key in Cloudflare.

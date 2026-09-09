@@ -17,7 +17,10 @@ paths:
         - name: file
           in: formData
           required: true
-          type: file
+          # Google API Gateway rejects OpenAPI 2.0 `type: file`.  It forwards
+          # form-data fields without enforcing their schema, so FastAPI remains
+          # the authority for workbook type, size, and body-bound HMAC checks.
+          type: string
       security:
         - cloudflare_access: []
       x-google-backend:
