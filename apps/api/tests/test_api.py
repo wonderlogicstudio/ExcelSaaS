@@ -5,6 +5,7 @@ import json
 
 from fastapi.testclient import TestClient
 
+from app import main
 from app.main import app, unexpected_error_handler
 
 client = TestClient(app)
@@ -66,6 +67,29 @@ def test_scan_endpoint_returns_structured_result(risky_workbook_bytes: bytes) ->
     assert payload["summary"]["issue_count"] >= 1
     assert payload["quote"]["currency"] == "KRW"
     assert payload["limitations"]
+
+
+def test_scan_emits_only_safe_operational_fields(monkeypatch, risky_workbook_bytes: bytes) -> None:
+    captured: list[tuple[str, dict[str, object]]] = []
+
+    def capture(event: str, **fields: object) -> None:
+        captured.append((event, fields))
+
+    monkeypatch.setattr(main, "log_safe_event", capture)
+    monkeypatch.setattr("app.observability.log_safe_event", capture)
+    response = client.post(
+        "/v1/scans",
+        files={"file": ("synthetic-private-name.xlsx", risky_workbook_bytes)},
+    )
+
+    assert response.status_code == 200
+    assert captured[0][0] == "scan_completed"
+    completed_fields = captured[0][1]
+    assert completed_fields["execution_status"] == "completed"
+    assert "processing_duration_bucket" in completed_fields
+    for _event, fields in captured:
+        forbidden = {"filename", "sheet", "cell", "finding_key", "formula", "value"}
+        assert not forbidden.intersection(fields)
 
 
 def test_scan_endpoint_returns_safe_error_shape() -> None:

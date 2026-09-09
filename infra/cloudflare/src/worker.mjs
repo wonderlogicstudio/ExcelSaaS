@@ -1,10 +1,34 @@
 const SCAN_ROUTE = "/api/v1/scans";
+const FEEDBACK_ROUTE = "/api/v1/feedback";
+const HMAC_NEGATIVE_TEST_ROUTE = "/api/v1/h2-control-plane-negative";
 const BACKEND_SCAN_PATH = "/v1/scans";
 const ACCESS_ASSERTION_HEADER = "cf-access-jwt-assertion";
 const SIGNATURE_HEADER = "x-workbookcare-signature";
 const TIMESTAMP_HEADER = "x-workbookcare-timestamp";
 const SIGNATURE_PREFIX = "v1=";
 const DEFAULT_MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
+const MAX_FEEDBACK_BYTES = 512;
+const FEEDBACK_RETENTION_SECONDS = 30 * 24 * 60 * 60;
+const FEEDBACK_CATEGORIES = new Set([
+  "HELPFUL",
+  "POSSIBLE_FALSE_POSITIVE",
+  "EXPLANATION_INSUFFICIENT",
+]);
+const FORMULA_AUDIT_SUBTYPES_BY_RULE = {
+  FORMULA_PATTERN_OUTLIER: new Set([
+    "FUNCTION_PATTERN_DRIFT",
+    "REFERENCE_SHEET_DRIFT",
+    "REFERENCE_CELL_DRIFT",
+    "RELATIVE_REFERENCE_DRIFT",
+    "ABSOLUTE_REFERENCE_DRIFT",
+    "RANGE_BOUNDARY_DRIFT",
+  ]),
+  FORMULA_PATTERN_GAP: new Set([
+    "CONSTANT_OVERRIDE_CANDIDATE",
+    "BLANK_GAP_CANDIDATE",
+  ]),
+};
+const OPAQUE_ID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 let cachedJwks;
 
@@ -14,6 +38,12 @@ export default {
     const url = new URL(request.url);
     if (url.pathname === SCAN_ROUTE) {
       return handleScan(request, env);
+    }
+    if (url.pathname === FEEDBACK_ROUTE) {
+      return handleFeedback(request, env);
+    }
+    if (url.pathname === HMAC_NEGATIVE_TEST_ROUTE) {
+      return handleHmacNegativeTest(request, env);
     }
     if (url.pathname.startsWith("/api/")) {
       return errorResponse(404, "API_ROUTE_NOT_FOUND");
@@ -95,6 +125,122 @@ export async function handleScan(request, env) {
   }
 }
 
+/**
+ * Persist only an allowlisted, value-free Formula Audit response category.
+ * It is intentionally independent from R2 and the Cloud Run analysis path.
+ */
+export async function handleFeedback(request, env) {
+  if (request.method !== "POST") {
+    return errorResponse(405, "METHOD_NOT_ALLOWED", { Allow: "POST" });
+  }
+  if (!feedbackEnvironmentIsPresent(env)) {
+    return errorResponse(503, "FEEDBACK_NOT_CONFIGURED");
+  }
+
+  const assertion = request.headers.get(ACCESS_ASSERTION_HEADER);
+  if (!assertion) {
+    return errorResponse(401, "ACCESS_ASSERTION_REQUIRED");
+  }
+  try {
+    await verifyAccessAssertion(assertion, env);
+  } catch {
+    return errorResponse(401, "ACCESS_ASSERTION_INVALID");
+  }
+  if (!await feedbackRateLimitAllows(assertion, env)) {
+    return errorResponse(429, "FEEDBACK_RATE_LIMITED", { "Retry-After": "60" });
+  }
+  if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
+    return errorResponse(415, "INVALID_FEEDBACK_CONTENT_TYPE");
+  }
+
+  const payloadText = await readRequestTextWithinLimit(request, MAX_FEEDBACK_BYTES);
+  if (payloadText === null) {
+    return errorResponse(413, "FEEDBACK_PAYLOAD_TOO_LARGE");
+  }
+  let payload;
+  try {
+    payload = JSON.parse(payloadText);
+  } catch {
+    return errorResponse(400, "INVALID_FEEDBACK_PAYLOAD");
+  }
+  if (!isAllowedFeedbackPayload(payload)) {
+    return errorResponse(400, "INVALID_FEEDBACK_PAYLOAD");
+  }
+
+  const feedbackId = crypto.randomUUID();
+  const record = {
+    feedback_id: feedbackId,
+    feedback_session_id: payload.feedback_session_id,
+    scanner_version: env.FEEDBACK_SCANNER_VERSION,
+    formula_audit_rule_set_version: env.FEEDBACK_FORMULA_AUDIT_RULE_SET_VERSION,
+    release_candidate_version: env.FEEDBACK_RELEASE_CANDIDATE_VERSION,
+    rule_code: payload.rule_code,
+    subtype: payload.subtype,
+    feedback_category: payload.feedback_category,
+    recorded_at: new Date().toISOString(),
+    environment: env.APP_ENV,
+  };
+  try {
+    await env.FEEDBACK.put(`feedback/${feedbackId}`, JSON.stringify(record), {
+      expirationTtl: FEEDBACK_RETENTION_SECONDS,
+    });
+  } catch {
+    return errorResponse(503, "FEEDBACK_STORAGE_UNAVAILABLE");
+  }
+  return Response.json(
+    { status: "FEEDBACK_RECORDED" },
+    { status: 202, headers: { "Cache-Control": "no-store" } },
+  );
+}
+
+/**
+ * Temporary, synthetic-only H2 control verification. A valid Access assertion
+ * is forwarded to Gateway without the Worker HMAC; success means the FastAPI
+ * boundary rejected it. This route neither accepts a file nor reads/writes R2.
+ * Remove it immediately after the one owner-approved verification completes.
+ */
+export async function handleHmacNegativeTest(request, env) {
+  if (request.method !== "GET") {
+    return errorResponse(405, "METHOD_NOT_ALLOWED", { Allow: "GET" });
+  }
+  if (!negativeTestEnvironmentIsPresent(env)) {
+    return errorResponse(503, "CONTROL_PLANE_NOT_CONFIGURED");
+  }
+
+  const assertion = request.headers.get(ACCESS_ASSERTION_HEADER);
+  if (!assertion) {
+    return errorResponse(401, "ACCESS_ASSERTION_REQUIRED");
+  }
+  try {
+    await verifyAccessAssertion(assertion, env);
+  } catch {
+    return errorResponse(401, "ACCESS_ASSERTION_INVALID");
+  }
+  if (!await uploadRateLimitAllows(assertion, env)) {
+    return errorResponse(429, "UPLOAD_RATE_LIMITED", { "Retry-After": "60" });
+  }
+
+  try {
+    const gatewayResponse = await fetch(env.API_GATEWAY_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${assertion}`,
+        "Content-Type": "application/octet-stream",
+      },
+      body: new Uint8Array([0]),
+    });
+    if (gatewayResponse.status === 401) {
+      return Response.json(
+        { status: "HMAC_NEGATIVE_CONFIRMED" },
+        { headers: { "Cache-Control": "no-store" } },
+      );
+    }
+  } catch {
+    // Deliberately hide control-plane/network details from the browser and logs.
+  }
+  return errorResponse(502, "HMAC_NEGATIVE_CHECK_FAILED");
+}
+
 function requiredEnvironmentIsPresent(env) {
   return Boolean(
     env.UPLOADS
@@ -106,12 +252,79 @@ function requiredEnvironmentIsPresent(env) {
   );
 }
 
+function feedbackEnvironmentIsPresent(env) {
+  return Boolean(
+    env.FEEDBACK
+      && env.UPLOAD_RATE_LIMITER
+      && env.CLOUDFLARE_ACCESS_TEAM_DOMAIN
+      && env.CLOUDFLARE_ACCESS_AUD
+      && env.FEEDBACK_SCANNER_VERSION
+      && env.FEEDBACK_FORMULA_AUDIT_RULE_SET_VERSION
+      && env.FEEDBACK_RELEASE_CANDIDATE_VERSION
+      && env.APP_ENV,
+  );
+}
+
+function negativeTestEnvironmentIsPresent(env) {
+  return Boolean(
+    env.API_GATEWAY_URL
+      && env.CLOUDFLARE_ACCESS_TEAM_DOMAIN
+      && env.CLOUDFLARE_ACCESS_AUD
+      && env.WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET
+      && env.UPLOAD_RATE_LIMITER,
+  );
+}
+
 async function uploadRateLimitAllows(assertion, env) {
   // Use an irreversible, in-memory counter key. Neither an Access assertion nor
   // an identity value is stored, returned, or written to a log.
   const key = await sha256Hex(new TextEncoder().encode(assertion));
   const outcome = await env.UPLOAD_RATE_LIMITER.limit({ key });
   return outcome.success === true;
+}
+
+async function feedbackRateLimitAllows(assertion, env) {
+  // Keep the feedback quota separate from uploads without retaining the assertion.
+  const assertionHash = await sha256Hex(new TextEncoder().encode(assertion));
+  const outcome = await env.UPLOAD_RATE_LIMITER.limit({ key: `feedback:${assertionHash}` });
+  return outcome.success === true;
+}
+
+async function readRequestTextWithinLimit(request, maximumBytes) {
+  if (!request.body) return "";
+  const reader = request.body.getReader();
+  const chunks = [];
+  let length = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    length += value.byteLength;
+    if (length > maximumBytes) {
+      await reader.cancel();
+      return null;
+    }
+    chunks.push(value);
+  }
+  const result = new Uint8Array(length);
+  let offset = 0;
+  for (const chunk of chunks) {
+    result.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(result);
+}
+
+function isAllowedFeedbackPayload(value) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+  const fields = Object.keys(value);
+  const expectedFields = ["feedback_session_id", "feedback_category", "rule_code", "subtype"];
+  if (fields.length !== expectedFields.length || !fields.every((field) => expectedFields.includes(field))) {
+    return false;
+  }
+  if (!OPAQUE_ID_PATTERN.test(value.feedback_session_id)) return false;
+  if (!FEEDBACK_CATEGORIES.has(value.feedback_category)) return false;
+  const allowedSubtypes = FORMULA_AUDIT_SUBTYPES_BY_RULE[value.rule_code];
+  return Boolean(allowedSubtypes?.has(value.subtype));
 }
 
 function parseMaxUploadBytes(value) {

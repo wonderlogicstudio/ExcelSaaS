@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { ResultFeedbackPanel } from './FeedbackCapture';
 import { LocalFeedbackRepository } from '../lib/feedback';
@@ -6,7 +6,7 @@ import { LocalFeedbackRepository } from '../lib/feedback';
 describe('FeedbackCapture', () => {
   beforeEach(() => window.localStorage.clear());
 
-  it('keeps a test result opinion in the local repository and allows deletion', () => {
+  it('keeps a test result opinion in the local repository and allows deletion', async () => {
     const repository = new LocalFeedbackRepository(window.localStorage);
     render(<ResultFeedbackPanel repository={repository} scannerVersion="0.1.3" />);
 
@@ -15,7 +15,9 @@ describe('FeedbackCapture', () => {
     });
     fireEvent.click(screen.getByRole('button', { name: '의견 저장' }));
 
-    expect(screen.getByText('이 브라우저에만 저장했습니다.')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('이 브라우저에만 저장했습니다.')).toBeInTheDocument();
+    });
     expect(repository.list()).toMatchObject([{
       feedback_scope: 'RESULT',
       feedback_category: 'NEEDS_REPAIR_OR_REVIEW_COPY',

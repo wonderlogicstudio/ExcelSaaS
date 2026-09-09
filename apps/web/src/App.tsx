@@ -6,10 +6,16 @@ import { M25ResultsPanel as ResultsPanel } from './components/M25ResultsPanel';
 import { FormulaAuditPanel } from './components/FormulaAuditPanel';
 import { StaticSections } from './components/StaticSections';
 import { Footer } from './components/Footer';
+import { LegalPage } from './components/LegalPage';
 import { demoResult } from './data/demo';
 import { runFormulaAudit, scanWorkbook, ScanApiError } from './lib/api';
 import { compareScanResults } from './lib/revalidation';
-import { feedbackCaptureEnabled, LocalFeedbackRepository } from './lib/feedback';
+import {
+  feedbackCaptureEnabled,
+  HostedFormulaAuditFeedbackRepository,
+  hostedFormulaAuditFeedbackEnabled,
+  LocalFeedbackRepository,
+} from './lib/feedback';
 import type { FindingUserStatus, FormulaAuditResult, ScanResult } from './types';
 
 const formulaAuditInternalBetaEnabled =
@@ -27,6 +33,12 @@ function wait(milliseconds: number) {
 }
 
 export default function App() {
+  if (window.location.pathname === '/privacy') {
+    return <LegalPage kind="privacy" />;
+  }
+  if (window.location.pathname === '/terms') {
+    return <LegalPage kind="terms" />;
+  }
   const uploadRef = useRef<HTMLDivElement>(null);
   const [busy, setBusy] = useState(false);
   const [stageIndex, setStageIndex] = useState(0);
@@ -45,7 +57,11 @@ export default function App() {
     feedbackCaptureEnabled ? new LocalFeedbackRepository() : null
   ));
   const [formulaAuditFeedbackRepository] = useState(() => (
-    formulaAuditInternalBetaEnabled ? new LocalFeedbackRepository() : null
+    formulaAuditInternalBetaEnabled
+      ? hostedFormulaAuditFeedbackEnabled
+        ? new HostedFormulaAuditFeedbackRepository()
+        : new LocalFeedbackRepository()
+      : null
   ));
 
   useEffect(() => {
@@ -208,6 +224,10 @@ export default function App() {
               <p className="hero__fineprint">
                 현재는 파일 구조를 정적으로 분석합니다. VBA, 외부 연결, 수식 계산은 실행하지 않으며 원본 파일도
                 바꾸지 않습니다.
+              </p>
+              <p className="hero__beta-notice">
+                Beta 안내: 결과는 참고 정보이며 원본 파일은 수정하지 않습니다.{' '}
+                <a href="/privacy">파일 처리 안내</a> · <a href="/terms">이용 안내</a>
               </p>
             </div>
             <div ref={uploadRef} className="hero__upload">

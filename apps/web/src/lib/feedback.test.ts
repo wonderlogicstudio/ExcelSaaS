@@ -1,5 +1,9 @@
-import { describe, expect, it, beforeEach } from 'vitest';
-import { FEEDBACK_STORAGE_KEY, LocalFeedbackRepository } from './feedback';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  FEEDBACK_STORAGE_KEY,
+  HostedFormulaAuditFeedbackRepository,
+  LocalFeedbackRepository,
+} from './feedback';
 
 describe('LocalFeedbackRepository', () => {
   beforeEach(() => window.localStorage.clear());
@@ -46,5 +50,52 @@ describe('LocalFeedbackRepository', () => {
     const repository = new LocalFeedbackRepository(window.localStorage);
     expect(JSON.stringify(repository.list())).not.toContain('memo');
     expect(window.localStorage.getItem(FEEDBACK_STORAGE_KEY)).not.toContain('memo');
+  });
+
+  it('sends only the hosted Formula Audit allowlist and retains no browser record', async () => {
+    const calls: Array<[string, RequestInit | undefined]> = [];
+    const send = vi.fn(async (input: string, init?: RequestInit) => {
+      calls.push([input, init]);
+      return new Response(null, { status: 202 });
+    });
+    const repository = new HostedFormulaAuditFeedbackRepository(send as typeof fetch);
+
+    await repository.save({
+      feedback_scope: 'FINDING',
+      feedback_category: 'POSSIBLE_FALSE_POSITIVE',
+      rule_code: 'FORMULA_PATTERN_OUTLIER',
+      opaque_finding_id: 'never-sent',
+      subtype: 'REFERENCE_CELL_DRIFT',
+      scanner_version: 'ignored-by-hosted-repository',
+    });
+
+    expect(calls).toHaveLength(1);
+    const [, init] = calls[0]!;
+    expect(init).toBeDefined();
+    const requestInit = init!;
+    expect(requestInit.method).toBe('POST');
+    const body = JSON.parse(requestInit.body as string);
+    expect(Object.keys(body).sort()).toEqual([
+      'feedback_category',
+      'feedback_session_id',
+      'rule_code',
+      'subtype',
+    ]);
+    expect(JSON.stringify(body)).not.toContain('never-sent');
+    expect(repository.list()).toEqual([]);
+  });
+
+  it('rejects an unsupported hosted category without sending it', async () => {
+    const send = vi.fn();
+    const repository = new HostedFormulaAuditFeedbackRepository(send as typeof fetch);
+
+    await expect(repository.save({
+      feedback_scope: 'FINDING',
+      feedback_category: 'NOT_HELPFUL',
+      rule_code: 'FORMULA_PATTERN_OUTLIER',
+      subtype: 'REFERENCE_CELL_DRIFT',
+      scanner_version: '0.1.3',
+    })).rejects.toThrow('INVALID_HOSTED_FEEDBACK');
+    expect(send).not.toHaveBeenCalled();
   });
 });

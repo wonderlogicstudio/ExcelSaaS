@@ -93,9 +93,10 @@ maximum-size, timeout, or forced-cleanup-failure paths, and it does not observe 
 one-day lifecycle expiration.
 
 Remaining H2 gates are therefore: an Access-authenticated direct Gateway call
-without the Worker HMAC (must be denied), live browser re-validation, and
-time-based observation of the configured one-day lifecycle backstop. CSV download
-is reported complete; automated coverage exercises the bounded size and cleanup
+without the Worker HMAC (must be denied) and time-based observation of the
+configured one-day lifecycle backstop. The product owner reports CSV download
+complete and completed synthetic browser re-validation; the comparison summary
+changed from `3/3` to `2/1`. Automated coverage exercises the bounded size and cleanup
 error paths. No new credential or Access policy may be created merely to perform
 the direct-Gateway check without owner approval.
 
@@ -116,9 +117,9 @@ with no `r2.dev` URL or custom domain, zero R2 objects/bytes, and the enabled
 one-day expiration rule. The existing project budget is KRW 10,000 with alerts
 at 50%, 90%, and 100%; the Budget API was enabled only to verify that rule.
 
-The product owner reports that browser CSV download succeeded. Direct browser
-re-validation has not yet been reported. A live valid-Access/no-HMAC Gateway
-probe also remains open: creating a persistent test route or service credential
+The product owner reports that browser CSV download succeeded and synthetic browser
+re-validation completed, with its comparison summary changing from `3/3` to `2/1`.
+A live valid-Access/no-HMAC Gateway probe also remains open: creating a persistent test route or service credential
 for this purpose was deliberately not performed because it would broaden the
 security surface. At 2026-09-09 12:37 UTC, one content-free synthetic lifecycle
 probe was written to the private remote bucket under an opaque test key and read

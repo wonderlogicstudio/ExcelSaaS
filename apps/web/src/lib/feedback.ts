@@ -34,12 +34,14 @@ export interface FeedbackDraft {
   rating?: FeedbackRating;
   rule_code?: string | null;
   opaque_finding_id?: string | null;
+  subtype?: string | null;
   scanner_version: string;
 }
 
 export interface FeedbackRepository {
+  readonly storageMode?: 'local' | 'hosted';
   list(): FeedbackRecord[];
-  save(draft: FeedbackDraft): FeedbackRecord;
+  save(draft: FeedbackDraft): FeedbackRecord | Promise<FeedbackRecord>;
   clear(): void;
 }
 
@@ -59,6 +61,8 @@ function createFeedbackId(): string {
 }
 
 export class LocalFeedbackRepository implements FeedbackRepository {
+  readonly storageMode = 'local' as const;
+
   constructor(
     private readonly storage: Storage | null = getBrowserStorage(),
   ) {}
@@ -114,4 +118,88 @@ export class LocalFeedbackRepository implements FeedbackRepository {
   }
 }
 
+const hostedFeedbackCategories = new Set<FeedbackCategory>([
+  'HELPFUL',
+  'POSSIBLE_FALSE_POSITIVE',
+  'EXPLANATION_INSUFFICIENT',
+]);
+const hostedFeedbackSubtypesByRule: Record<string, ReadonlySet<string>> = {
+  FORMULA_PATTERN_OUTLIER: new Set([
+    'FUNCTION_PATTERN_DRIFT',
+    'REFERENCE_SHEET_DRIFT',
+    'REFERENCE_CELL_DRIFT',
+    'RELATIVE_REFERENCE_DRIFT',
+    'ABSOLUTE_REFERENCE_DRIFT',
+    'RANGE_BOUNDARY_DRIFT',
+  ]),
+  FORMULA_PATTERN_GAP: new Set([
+    'CONSTANT_OVERRIDE_CANDIDATE',
+    'BLANK_GAP_CANDIDATE',
+  ]),
+};
+
+function opaqueSessionId(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  throw new Error('HOSTED_FEEDBACK_UNAVAILABLE');
+}
+
+/**
+ * H3's server-backed repository intentionally supports Formula Audit candidate
+ * categories only. It does not cache records or send any browser-side finding
+ * identifier, filename, location, formula, value, or free text.
+ */
+export class HostedFormulaAuditFeedbackRepository implements FeedbackRepository {
+  readonly storageMode = 'hosted' as const;
+  private readonly feedbackSessionId = opaqueSessionId();
+
+  constructor(
+    private readonly send: typeof fetch = fetch,
+    private readonly endpoint = '/api/v1/feedback',
+  ) {}
+
+  list(): FeedbackRecord[] {
+    return [];
+  }
+
+  clear(): void {
+    // Nothing is cached in this browser by the hosted repository.
+  }
+
+  async save(draft: FeedbackDraft): Promise<FeedbackRecord> {
+    const ruleCode = draft.rule_code ?? '';
+    const subtype = draft.subtype ?? '';
+    if (!hostedFeedbackCategories.has(draft.feedback_category)
+      || !hostedFeedbackSubtypesByRule[ruleCode]?.has(subtype)) {
+      throw new Error('INVALID_HOSTED_FEEDBACK');
+    }
+    const response = await this.send(this.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        feedback_session_id: this.feedbackSessionId,
+        feedback_category: draft.feedback_category,
+        rule_code: ruleCode,
+        subtype,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error('HOSTED_FEEDBACK_UNAVAILABLE');
+    }
+    return {
+      feedback_id: 'server-recorded',
+      feedback_scope: draft.feedback_scope,
+      feedback_category: draft.feedback_category,
+      rating: draft.rating ?? null,
+      rule_code: ruleCode,
+      opaque_finding_id: null,
+      scanner_version: draft.scanner_version,
+      created_at: new Date().toISOString(),
+    };
+  }
+}
+
 export const feedbackCaptureEnabled = import.meta.env.VITE_FEEDBACK_CAPTURE_ENABLED === 'true';
+export const hostedFormulaAuditFeedbackEnabled =
+  import.meta.env.VITE_HOSTED_BETA_FEEDBACK_ENABLED === 'true';

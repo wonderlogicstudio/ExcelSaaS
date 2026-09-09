@@ -1,4 +1,5 @@
 import { CheckCircle2, CircleHelp, FileSearch, LoaderCircle, ShieldAlert } from 'lucide-react';
+import { useState } from 'react';
 import type {
   Finding,
   FindingUserStatus,
@@ -99,15 +100,22 @@ function FormulaAuditFindingCard({
 }) {
   const evidence = candidate.formula_pattern;
   const identity = candidateIdentity(candidate);
-  const saveFeedback = (category: FeedbackCategory) => {
-    feedbackRepository?.save({
-      feedback_scope: 'FINDING',
-      feedback_category: category,
-      rating: category === 'HELPFUL' ? 'POSITIVE' : null,
-      rule_code: candidate.rule_code,
-      opaque_finding_id: candidate.id,
-      scanner_version: scannerVersion,
-    });
+  const [feedbackStatus, setFeedbackStatus] = useState<'idle' | 'saved' | 'failed'>('idle');
+  const saveFeedback = async (category: FeedbackCategory) => {
+    try {
+      await feedbackRepository?.save({
+        feedback_scope: 'FINDING',
+        feedback_category: category,
+        rating: category === 'HELPFUL' ? 'POSITIVE' : null,
+        rule_code: candidate.rule_code,
+        opaque_finding_id: candidate.id,
+        subtype: evidence?.pattern_subtype ?? null,
+        scanner_version: scannerVersion,
+      });
+      setFeedbackStatus('saved');
+    } catch {
+      setFeedbackStatus('failed');
+    }
   };
 
   return (
@@ -149,7 +157,13 @@ function FormulaAuditFindingCard({
               <button type="button" onClick={() => saveFeedback('POSSIBLE_FALSE_POSITIVE')}>오탐 의심</button>
               <button type="button" onClick={() => saveFeedback('EXPLANATION_INSUFFICIENT')}>설명 부족</button>
             </div>
-            <small>의견 유형만 이 브라우저에 저장합니다. 메모와 파일 내용은 입력·전송하지 않습니다.</small>
+            <small>
+              {feedbackRepository?.storageMode === 'hosted'
+                ? '의견 유형, 규칙 코드와 하위유형만 서버에 전송합니다. 메모와 파일 내용은 입력·전송하지 않습니다.'
+                : '의견 유형만 이 브라우저에 저장합니다. 메모와 파일 내용은 입력·전송하지 않습니다.'}
+            </small>
+            {feedbackStatus === 'saved' && <small role="status">의견을 저장했습니다.</small>}
+            {feedbackStatus === 'failed' && <small role="alert">의견을 저장하지 못했습니다. 나중에 다시 시도해 주세요.</small>}
           </div>
         )}
       </div>

@@ -1,5 +1,12 @@
 # Feedback Capture Readiness — M4-A
 
+> H3 update (2026-09-09): this document describes the local-only M4 baseline
+> below. H3 adds a separately designed, category-only Worker persistence path for
+> Formula Audit synthetic feedback; it is not deployed because the required
+> private Cloudflare KV namespace could not be created (Cloudflare API error
+> `10000`). The live hosted public Formula Audit UI remains disabled. The current
+> H3 contract and processing inventory are in `docs/44` and `docs/45`.
+
 ## 상태
 
 이 문서는 호스팅 이후 외부 사용자 검증을 준비하기 위한 개발 환경용 기반을 설명한다. 현재 Feedback UI는 `VITE_FEEDBACK_CAPTURE_ENABLED=true`일 때만 보이며, 기본값은 꺼져 있다. 서버 API, DB, 클라우드 저장, 운영 분석, 자동 전송은 없다.

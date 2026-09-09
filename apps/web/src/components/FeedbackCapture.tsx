@@ -50,18 +50,22 @@ function FeedbackForm({
   const [saved, setSaved] = useState(false);
   const name = scope === 'RESULT' ? '결과 의견 유형' : 'Finding 의견 유형';
 
-  const submit = (event: FormEvent<HTMLFormElement>) => {
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!category) return;
-    repository.save({
-      feedback_scope: scope,
-      feedback_category: category,
-      rating: feedbackRating(category),
-      rule_code: ruleCode ?? null,
-      opaque_finding_id: opaqueFindingId ?? null,
-      scanner_version: scannerVersion,
-    });
-    setSaved(true);
+    try {
+      await repository.save({
+        feedback_scope: scope,
+        feedback_category: category,
+        rating: feedbackRating(category),
+        rule_code: ruleCode ?? null,
+        opaque_finding_id: opaqueFindingId ?? null,
+        scanner_version: scannerVersion,
+      });
+      setSaved(true);
+    } catch {
+      setSaved(false);
+    }
   };
 
   return (

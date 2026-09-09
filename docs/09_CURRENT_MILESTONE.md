@@ -1,16 +1,20 @@
 # Current milestone
 
-> **Latest active scope (2026-09-09): Hosted Beta H2 is APPROVED and IN PROGRESS.**
-> This direction supersedes the earlier H1-only stop notice below. H1 remains
-> complete. The product owner has created the named private R2 bucket, lifecycle
-> rule, Access-protected Worker and R2 binding; enabled API Gateway; and granted
-> only the dedicated gateway service account Cloud Run Invoker on the existing
-> IAM-required `workbookcare-api-beta` service. The H2 bridge uses Tokyo
-> (`asia-northeast1`) API Gateway to the existing Seoul (`asia-northeast3`) Cloud
-> Run service by explicit owner approval. The cross-region path is synthetic-only
-> until every H2 verification gate passes. Do not create a new Cloud Run service,
-> allow anonymous invocation, invite users, accept real workbooks, start H3/M5,
-> host Formula Audit, or add repair, payment, AI, or accounts.
+> **Latest active scope (2026-09-09): Hosted Beta H3 is APPROVED and IN PROGRESS.**
+> H3 hardens the already-deployed, synthetic-only hosted beta before any external
+> invitation. It may add privacy-safe operations, protected category-only feedback
+> persistence, public beta notices, safe-error and monitoring contracts, final
+> synthetic verification, and rollback/go-no-go materials. It must not invite or
+> contact external users, process a real workbook, start M3/M3.5/M5, expose the
+> Formula Audit publicly, add account/payment/repair/AI capability, or weaken the
+> Access, private-R2, Gateway, or non-anonymous Cloud Run boundaries.
+>
+> **H2 dependency retained:** H2's deployed infrastructure is a prerequisite, but
+> its observed one-day R2 lifecycle expiration and owner-session HMAC-negative
+> confirmation remain open. H3 may implement and verify its own controls, but it
+> cannot receive a Hosted Beta Ready verdict until those H2 gates are evidenced.
+> The authoritative H3 scope, additions, and acceptance gates are in
+> [`44_HOSTED_BETA_H3_OPERATIONAL_HARDENING.md`](44_HOSTED_BETA_H3_OPERATIONAL_HARDENING.md).
 
 > **Current H2 implementation status:** provider secrets, the existing Cloud Run
 > service's H2 revision, Gateway, and Access-protected Worker are deployed.
@@ -21,9 +25,10 @@
 > rejected (415); after each request R2 returned to zero objects/zero bytes. H2
 > has an authenticated-session rate limit of five uploads per minute, and the
 > existing KRW 10,000 budget alerts are visible at 50%, 90%, and 100%. Browser
-> CSV download has been reported successful. H2 is not complete: direct-Gateway
-> HMAC-negative verification using a valid Access assertion, live browser
-> re-validation, and observation of the remote lifecycle probe's one-day
+> CSV download has been reported successful. The product owner also completed
+> browser re-validation of the synthetic comparison, whose summary changed from
+> `3/3` to `2/1`. H2 is not complete: direct-Gateway HMAC-negative verification
+> using a valid Access assertion and observation of the remote lifecycle probe's one-day
 > expiration (created 2026-09-09 12:37 UTC) remain open. See
 > `42_HOSTED_BETA_H2_PREFLIGHT.md`.
 

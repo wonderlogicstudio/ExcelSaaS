@@ -3,6 +3,8 @@ import test from "node:test";
 
 import {
   createControlPlaneSignature,
+  handleFeedback,
+  handleHmacNegativeTest,
   handleScan,
   verifyAccessAssertion,
 } from "../src/worker.mjs";
@@ -54,6 +56,21 @@ function createR2() {
   };
 }
 
+function createKv() {
+  const values = new Map();
+  const writes = [];
+  return {
+    kv: {
+      async put(key, value, options) {
+        writes.push({ key, value, options });
+        values.set(key, value);
+      },
+    },
+    get writes() { return writes; },
+    get values() { return values; },
+  };
+}
+
 function rateLimiter(success = true) {
   return { async limit() { return { success }; } };
 }
@@ -66,6 +83,20 @@ function makeRequest(token) {
     headers: { "cf-access-jwt-assertion": token },
     body: form,
   });
+}
+
+function feedbackEnvironment(token, storage, limiter = rateLimiter()) {
+  return {
+    FEEDBACK: storage.kv,
+    UPLOAD_RATE_LIMITER: limiter,
+    CLOUDFLARE_ACCESS_TEAM_DOMAIN: TEAM_DOMAIN,
+    CLOUDFLARE_ACCESS_AUD: AUDIENCE,
+    FEEDBACK_SCANNER_VERSION: "0.1.3",
+    FEEDBACK_FORMULA_AUDIT_RULE_SET_VERSION: "2026.09.5",
+    FEEDBACK_RELEASE_CANDIDATE_VERSION: "m4-formula-audit-rc1",
+    APP_ENV: "hosted_beta",
+    token,
+  };
 }
 
 test("access assertion requires the exact issuer, audience, and RS256 signature", async () => {
@@ -187,6 +218,223 @@ test("a rate-limited authenticated request never reaches R2", async () => {
     });
     assert.equal(response.status, 429);
     assert.equal((await response.json()).error.code, "UPLOAD_RATE_LIMITED");
+    assert.equal(storage.size, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("feedback persists only an allowlisted value-free Formula Audit record", async () => {
+  const { token, jwk } = await signedAccessToken();
+  const storage = createKv();
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => Response.json({ keys: [jwk] });
+  try {
+    const response = await handleFeedback(
+      new Request("https://workbookcare-beta.example.test/api/v1/feedback", {
+        method: "POST",
+        headers: {
+          "cf-access-jwt-assertion": token,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          feedback_session_id: crypto.randomUUID(),
+          feedback_category: "POSSIBLE_FALSE_POSITIVE",
+          rule_code: "FORMULA_PATTERN_OUTLIER",
+          subtype: "REFERENCE_CELL_DRIFT",
+        }),
+      }),
+      feedbackEnvironment(token, storage),
+    );
+    assert.equal(response.status, 202);
+    assert.deepEqual(await response.json(), { status: "FEEDBACK_RECORDED" });
+    assert.equal(storage.writes.length, 1);
+    assert.match(storage.writes[0].key, /^feedback\/[0-9a-f-]{36}$/);
+    assert.equal(storage.writes[0].options.expirationTtl, 30 * 24 * 60 * 60);
+    const stored = JSON.parse(storage.writes[0].value);
+    assert.deepEqual(Object.keys(stored).sort(), [
+      "environment",
+      "feedback_category",
+      "feedback_id",
+      "feedback_session_id",
+      "formula_audit_rule_set_version",
+      "recorded_at",
+      "release_candidate_version",
+      "rule_code",
+      "scanner_version",
+      "subtype",
+    ]);
+    assert.equal(stored.scanner_version, "0.1.3");
+    assert.equal(stored.rule_code, "FORMULA_PATTERN_OUTLIER");
+    assert.equal(Object.hasOwn(stored, "filename"), false);
+    assert.equal(Object.hasOwn(stored, "finding_key"), false);
+    assert.equal(Object.hasOwn(stored, "formula"), false);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("feedback rejects unknown fields and never writes them", async () => {
+  const { token, jwk } = await signedAccessToken();
+  const storage = createKv();
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => Response.json({ keys: [jwk] });
+  try {
+    const response = await handleFeedback(
+      new Request("https://workbookcare-beta.example.test/api/v1/feedback", {
+        method: "POST",
+        headers: {
+          "cf-access-jwt-assertion": token,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          feedback_session_id: crypto.randomUUID(),
+          feedback_category: "HELPFUL",
+          rule_code: "FORMULA_PATTERN_GAP",
+          subtype: "BLANK_GAP_CANDIDATE",
+          note: "synthetic forbidden free text",
+        }),
+      }),
+      feedbackEnvironment(token, storage),
+    );
+    assert.equal(response.status, 400);
+    assert.equal((await response.json()).error.code, "INVALID_FEEDBACK_PAYLOAD");
+    assert.equal(storage.writes.length, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("a rate-limited feedback request never reaches persistence", async () => {
+  const { token, jwk } = await signedAccessToken();
+  const storage = createKv();
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => Response.json({ keys: [jwk] });
+  try {
+    const response = await handleFeedback(
+      new Request("https://workbookcare-beta.example.test/api/v1/feedback", {
+        method: "POST",
+        headers: {
+          "cf-access-jwt-assertion": token,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          feedback_session_id: crypto.randomUUID(),
+          feedback_category: "HELPFUL",
+          rule_code: "FORMULA_PATTERN_GAP",
+          subtype: "BLANK_GAP_CANDIDATE",
+        }),
+      }),
+      feedbackEnvironment(token, storage, rateLimiter(false)),
+    );
+    assert.equal(response.status, 429);
+    assert.equal((await response.json()).error.code, "FEEDBACK_RATE_LIMITED");
+    assert.equal(storage.writes.length, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("feedback uses a separate non-identity rate-limit key", async () => {
+  const { token, jwk } = await signedAccessToken();
+  const storage = createKv();
+  const keys = [];
+  const limiter = {
+    async limit({ key }) {
+      keys.push(key);
+      return { success: true };
+    },
+  };
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => Response.json({ keys: [jwk] });
+  try {
+    const response = await handleFeedback(
+      new Request("https://workbookcare-beta.example.test/api/v1/feedback", {
+        method: "POST",
+        headers: {
+          "cf-access-jwt-assertion": token,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          feedback_session_id: crypto.randomUUID(),
+          feedback_category: "HELPFUL",
+          rule_code: "FORMULA_PATTERN_GAP",
+          subtype: "BLANK_GAP_CANDIDATE",
+        }),
+      }),
+      feedbackEnvironment(token, storage, limiter),
+    );
+    assert.equal(response.status, 202);
+    assert.equal(keys.length, 1);
+    assert.match(keys[0], /^feedback:[0-9a-f]{64}$/);
+    assert.equal(keys[0].includes(token), false);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("an oversized feedback payload never reaches persistence", async () => {
+  const { token, jwk } = await signedAccessToken();
+  const storage = createKv();
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => Response.json({ keys: [jwk] });
+  try {
+    const validPayload = JSON.stringify({
+      feedback_session_id: crypto.randomUUID(),
+      feedback_category: "HELPFUL",
+      rule_code: "FORMULA_PATTERN_GAP",
+      subtype: "BLANK_GAP_CANDIDATE",
+    });
+    const response = await handleFeedback(
+      new Request("https://workbookcare-beta.example.test/api/v1/feedback", {
+        method: "POST",
+        headers: {
+          "cf-access-jwt-assertion": token,
+          "content-type": "application/json",
+        },
+        body: `${validPayload}${" ".repeat(513)}`,
+      }),
+      feedbackEnvironment(token, storage),
+    );
+    assert.equal(response.status, 413);
+    assert.equal((await response.json()).error.code, "FEEDBACK_PAYLOAD_TOO_LARGE");
+    assert.equal(storage.writes.length, 0);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("a valid Access assertion without the Worker HMAC is rejected through Gateway", async () => {
+  const { token, jwk } = await signedAccessToken();
+  const storage = createR2();
+  const originalFetch = globalThis.fetch;
+  let gatewayRequest;
+  globalThis.fetch = async (input, init) => {
+    if (String(input).endsWith("/cdn-cgi/access/certs")) {
+      return Response.json({ keys: [jwk] });
+    }
+    gatewayRequest = new Request(input, init);
+    return Response.json({ error: { code: "CONTROL_PLANE_SIGNATURE_REQUIRED" } }, { status: 401 });
+  };
+  try {
+    const response = await handleHmacNegativeTest(
+      new Request("https://workbookcare-beta.example.test/api/v1/h2-control-plane-negative", {
+        headers: { "cf-access-jwt-assertion": token },
+      }),
+      {
+        UPLOADS: storage.r2,
+        API_GATEWAY_URL: "https://gateway.example.test/v1/scans",
+        CLOUDFLARE_ACCESS_TEAM_DOMAIN: TEAM_DOMAIN,
+        CLOUDFLARE_ACCESS_AUD: AUDIENCE,
+        WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET: HMAC_SECRET,
+        UPLOAD_RATE_LIMITER: rateLimiter(),
+      },
+    );
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).status, "HMAC_NEGATIVE_CONFIRMED");
+    assert.equal(gatewayRequest.headers.get("authorization"), `Bearer ${token}`);
+    assert.equal(gatewayRequest.headers.get("x-workbookcare-signature"), null);
+    assert.equal(gatewayRequest.headers.get("x-workbookcare-timestamp"), null);
     assert.equal(storage.size, 0);
   } finally {
     globalThis.fetch = originalFetch;

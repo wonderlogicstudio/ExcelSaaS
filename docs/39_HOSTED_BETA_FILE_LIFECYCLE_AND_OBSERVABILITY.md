@@ -43,6 +43,6 @@ Longer work, actual cancellation, automatic repair, or reprocessing requires a s
 
 ## Observability allowlist
 
-Only these fields may be emitted: opaque scan ID; scanner, base-rule-set, formula-audit-rule-set, and RC versions; file/sheet/formula count buckets; processing duration; rule code; subtype; execution status; and safe error code. `apps/api/app/observability.py` validates the allowlist before logging.
+Only these fields may be emitted: opaque scan ID; scanner, base-rule-set, formula-audit-rule-set, and RC versions; file/sheet/formula count buckets; a processing-duration bucket; rule code; subtype; execution status; and safe error code. `apps/api/app/observability.py` validates the allowlist before logging.
 
 Never emit filename, sheet name, cell address, finding key, formula, value, object URL, presigned URL, identity, company/customer identifier, credential, or free text. Generic failures return `INTERNAL_ERROR` without exception text. Expected unsafe-file errors retain their existing safe error code and message.

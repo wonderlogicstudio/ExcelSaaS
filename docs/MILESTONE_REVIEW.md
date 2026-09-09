@@ -46,10 +46,11 @@ Verification:
   without a bearer assertion, direct Cloud Run 403, R2 zero objects/bytes, no
   `r2.dev` or custom domain, and enabled one-day expiration. The project has an
   existing KRW 10,000 budget with 50%, 90%, and 100% alert thresholds. The owner
-  reports browser CSV download success.
+  reports browser CSV download success and completed synthetic browser
+  re-validation; the comparison summary changed from `3/3` to `2/1`.
 
-Open gates: direct Gateway denial with a valid Access assertion but no Worker HMAC,
-browser re-validation, and observed one-day lifecycle backstop. The configured
+Open gates: direct Gateway denial with a valid Access assertion but no Worker HMAC
+and observed one-day lifecycle backstop. The configured
 lifecycle rule and normal plus malformed-path immediate cleanup are verified; an
 elapsed one-day expiration has not yet been observed. No persistent test route or
 service credential was created merely to simulate the valid-Access/no-HMAC call.

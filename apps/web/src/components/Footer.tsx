@@ -11,6 +11,8 @@ export function Footer() {
         <div className="site-footer__links">
           <a href="#file-handling-principles">파일 처리 원칙</a>
           <a href="#faq">FAQ</a>
+          <a href="/privacy">개인정보 처리 안내</a>
+          <a href="/terms">Beta Notice</a>
           <span>© 2026 WorkbookCare</span>
         </div>
       </div>

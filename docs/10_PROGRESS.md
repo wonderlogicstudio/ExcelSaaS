@@ -2,6 +2,26 @@
 
 ## Current override — 2026-09-09
 
+**Hosted Beta H3 is approved and in progress.** H3 prepares the already deployed,
+synthetic-only beta for a later product-owner decision about invitations. It does
+not invite participants or permit real workbooks. H2 remains a dependency: the
+one-day R2 lifecycle probe still needs an observed expiration, and the temporary
+owner-session HMAC-negative check still needs its live confirmation and immediate
+route removal. H3 cannot be marked Hosted Beta Ready while either remains open.
+The scoped plan and engineering additions are in
+`docs/44_HOSTED_BETA_H3_OPERATIONAL_HARDENING.md`.
+
+H3 implementation now has content-free telemetry buckets, a strict
+category-only feedback Worker contract, a hosted browser client that sends only
+four allowlisted fields, and draft privacy/terms UI pages. The private Cloudflare
+KV namespace required for feedback was not created because Wrangler received
+Cloudflare API authentication error `10000`; therefore feedback persistence is
+not deployed or collecting data. The inventory, safe-error taxonomy, and
+synthetic/rollback checklist are `docs/45` through `47`; the current Go/No-Go is
+`HOSTED BETA NOT READY`.
+
+## Historical current override — 2026-09-09
+
 **Hosted Beta H2 is approved and in progress.** This section supersedes the
 earlier H1-only stop record below. The product owner created the private
 `workbookcare-beta-uploads` R2 bucket with a one-day deletion lifecycle, the
@@ -22,10 +42,11 @@ returned 415, and R2 again returned to zero objects. This proves normal and
 malformed terminal-path cleanup, but not every H2 live gate. The deployed Worker
 now limits each authenticated Access assertion to five upload attempts per minute;
 tests prove both over-limit files and rate-limited attempts stop before R2.
-The product owner reports browser CSV download success. The active project budget
-is KRW 10,000 with 50%, 90%, and 100% alerts. Remaining direct-Gateway
-HMAC-negative, browser re-validation, and observed-lifecycle-evidence gates remain
-open. A private synthetic lifecycle probe was remotely written and read back at
+The product owner reports browser CSV download success and completed synthetic
+browser re-validation; the comparison summary changed from `3/3` to `2/1`.
+The active project budget is KRW 10,000 with 50%, 90%, and 100% alerts. Remaining
+direct-Gateway HMAC-negative and observed-lifecycle-evidence gates remain open.
+A private synthetic lifecycle probe was remotely written and read back at
 2026-09-09 12:37 UTC without emitting its key or contents; it is awaiting the
 configured one-day expiration. No invitations, real workbook use, repair, payment,
 hosted Formula Audit, AI, M5, or H3 work has started.
