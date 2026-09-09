@@ -2,6 +2,7 @@
 node_modules/
 dist/
 .vite/
+.wrangler/
 coverage/
 playwright-report/
 test-results/

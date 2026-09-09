@@ -120,9 +120,12 @@ The product owner reports that browser CSV download succeeded. Direct browser
 re-validation has not yet been reported. A live valid-Access/no-HMAC Gateway
 probe also remains open: creating a persistent test route or service credential
 for this purpose was deliberately not performed because it would broaden the
-security surface. An observed lifecycle expiration must wait for the existing
-one-day rule to elapse; normal and malformed terminal-path cleanup have already
-been verified immediately.
+security surface. At 2026-09-09 12:37 UTC, one content-free synthetic lifecycle
+probe was written to the private remote bucket under an opaque test key and read
+back without outputting its key or bytes. The bucket summary count did not update
+immediately, so direct remote read is the creation evidence. An observed lifecycle
+expiration must wait for the existing one-day rule to elapse; normal and malformed
+terminal-path cleanup have already been verified immediately.
 
 ## Local implementation evidence — 2026-09-09
 

@@ -53,6 +53,9 @@ browser re-validation, and observed one-day lifecycle backstop. The configured
 lifecycle rule and normal plus malformed-path immediate cleanup are verified; an
 elapsed one-day expiration has not yet been observed. No persistent test route or
 service credential was created merely to simulate the valid-Access/no-HMAC call.
+A single content-free synthetic lifecycle probe was remotely written and read back
+at 2026-09-09 12:37 UTC without recording its key or bytes; it awaits the existing
+one-day expiration rule.
 Live resource IDs and rollback config are in `42_HOSTED_BETA_H2_PREFLIGHT.md`.
 
 ## Historical review — Cloud Run preparation only

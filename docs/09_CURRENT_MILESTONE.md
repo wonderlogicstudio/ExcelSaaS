@@ -23,7 +23,8 @@
 > existing KRW 10,000 budget alerts are visible at 50%, 90%, and 100%. Browser
 > CSV download has been reported successful. H2 is not complete: direct-Gateway
 > HMAC-negative verification using a valid Access assertion, live browser
-> re-validation, and an observed one-day lifecycle expiration remain open. See
+> re-validation, and observation of the remote lifecycle probe's one-day
+> expiration (created 2026-09-09 12:37 UTC) remain open. See
 > `42_HOSTED_BETA_H2_PREFLIGHT.md`.
 
 > **Active scope override (2026-09-08): COMPLETED (2026-09-09) — Cloud Run preparation only; STOPPED BEFORE DEPLOYMENT.**

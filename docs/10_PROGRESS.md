@@ -25,8 +25,10 @@ tests prove both over-limit files and rate-limited attempts stop before R2.
 The product owner reports browser CSV download success. The active project budget
 is KRW 10,000 with 50%, 90%, and 100% alerts. Remaining direct-Gateway
 HMAC-negative, browser re-validation, and observed-lifecycle-evidence gates remain
-open. No invitations, real workbook use, repair, payment, hosted Formula Audit,
-AI, M5, or H3 work has started.
+open. A private synthetic lifecycle probe was remotely written and read back at
+2026-09-09 12:37 UTC without emitting its key or contents; it is awaiting the
+configured one-day expiration. No invitations, real workbook use, repair, payment,
+hosted Formula Audit, AI, M5, or H3 work has started.
 
 Current local H2 evidence: standard verification passed with web 26 tests and
 production build, Worker 7 tests, API 70 tests, Ruff, and the M4-C supplied pack.
