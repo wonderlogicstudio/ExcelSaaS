@@ -14,6 +14,10 @@
   `3/3` to `2/1`.
 - [x] Tokenless Worker, Gateway, and Cloud Run negative probes are denied at
   their respective boundaries.
+- [x] Worker version `492348e8-96fa-4dd8-b035-beb650dd2074` explicitly sends
+  `/api/*` to Worker code before the SPA asset fallback. This corrects the
+  temporary HMAC-check route being rendered as the web application; an
+  authenticated owner-session result is still required.
 - [x] The private `FEEDBACK` KV binding is deployed; a tokenless feedback-route
   request is redirected to Cloudflare Access rather than reaching the Worker.
 - [x] H3 backend live recheck, 2026-09-09 14:09 UTC: revision

@@ -119,9 +119,15 @@ at 50%, 90%, and 100%; the Budget API was enabled only to verify that rule.
 
 The product owner reports that browser CSV download succeeded and synthetic browser
 re-validation completed, with its comparison summary changing from `3/3` to `2/1`.
-A live valid-Access/no-HMAC Gateway probe also remains open: creating a persistent test route or service credential
-for this purpose was deliberately not performed because it would broaden the
-security surface. At 2026-09-09 12:37 UTC, one content-free synthetic lifecycle
+A live valid-Access/no-HMAC Gateway probe remains open. A single temporary,
+content-free Worker route now performs that check without accepting a file or
+reading/writing R2. Its first deployment was shadowed by the SPA asset fallback,
+so an authenticated browser saw the normal page instead of the route. Worker
+version `492348e8-96fa-4dd8-b035-beb650dd2074` adds selective
+`assets.run_worker_first: ["/api/*"]`; tokenless requests remain redirected by
+Access. The owner-session check must now return `HMAC_NEGATIVE_CONFIRMED`, after
+which that temporary route is removed immediately. At 2026-09-09 12:37 UTC, one
+content-free synthetic lifecycle
 probe was written to the private remote bucket under an opaque test key and read
 back without outputting its key or bytes. The bucket summary count did not update
 immediately, so direct remote read is the creation evidence. An observed lifecycle

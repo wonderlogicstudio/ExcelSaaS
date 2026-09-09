@@ -29,6 +29,10 @@ public Cloud Run IAM member. Full local regression passed again: web 30, Worker
 13, API 72, production build, Ruff, and the supplied M4-C package. The R2
 lifecycle probe is not eligible for observation until 2026-09-10 12:37:58 UTC
 (2026-09-10 21:37:58 KST), so it remains correctly open rather than inferred.
+The H2 temporary no-HMAC route initially rendered the SPA because static assets
+were served first. Worker version `492348e8-96fa-4dd8-b035-beb650dd2074` now
+selectively runs Worker code first for `/api/*`; it awaits only the owner-session
+confirmation before the route is removed.
 The H3 safe-telemetry/error backend is now live in Cloud Run revision
 `workbookcare-api-beta-00003-bsp` from immutable image
 `sha256:5ab7065c318c2325f6124b41787e8297f4de6f428329151b6a1ca45c7cf35703`.
