@@ -39,9 +39,10 @@ Gateway configuration, Worker deployment, and positive/negative cleanup proof.
 `HISTORICAL PRE-APPROVAL BLOCKER — resolved.` The target project, existing Cloud
 Run service, private R2 bucket, Access-protected Worker, Gateway API, and
 dedicated Gateway invoker account are now known and approved. This PC still has
-no authenticated `gcloud` or `wrangler`; use Google Cloud Shell for the reviewed
-Gateway script at `infra/gateway/deploy.sh.example`, rather than installing or
-storing deployment credentials locally.
+no authenticated `gcloud` or `wrangler`; the approved operator now has both
+authenticated locally. Use `infra/gateway/deploy.ps1` from Windows PowerShell or
+`infra/gateway/deploy.sh.example` from Google Cloud Shell. Neither route stores
+deployment credentials in the repository.
 
 ## Required H2 control path
 
