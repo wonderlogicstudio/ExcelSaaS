@@ -23,6 +23,13 @@ is still not publicly exposed. The inventory, safe-error taxonomy, and
 synthetic/rollback checklist are `docs/45` through `47`; the current Go/No-Go is
 `HOSTED BETA NOT READY`.
 
+Read-only provider recheck at 2026-09-09 14:05 UTC reconfirmed Cloud Run max two,
+concurrency one, CPU one, 1 GiB, timeout 60 seconds, an ACTIVE Gateway, and no
+public Cloud Run IAM member. Full local regression passed again: web 30, Worker
+13, API 72, production build, Ruff, and the supplied M4-C package. The R2
+lifecycle probe is not eligible for observation until 2026-09-10 12:37:58 UTC
+(2026-09-10 21:37:58 KST), so it remains correctly open rather than inferred.
+
 ## Historical current override — 2026-09-09
 
 **Hosted Beta H2 is approved and in progress.** This section supersedes the

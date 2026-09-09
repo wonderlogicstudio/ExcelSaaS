@@ -16,6 +16,9 @@
   their respective boundaries.
 - [x] The private `FEEDBACK` KV binding is deployed; a tokenless feedback-route
   request is redirected to Cloudflare Access rather than reaching the Worker.
+- [x] Read-only 2026-09-09 recheck: Cloud Run retains max 2, concurrency 1,
+  CPU 1, 1 GiB, and 60 seconds; API Gateway is ACTIVE; Cloud Run has no public
+  IAM member.
 - [x] Source-level Worker/API tests cover bounded uploads, cleanup attempts,
   rate limits, safe errors, and content-free telemetry.
 
@@ -65,7 +68,7 @@ this provider-side exercise.
 `HOSTED BETA NOT READY`
 
 Critical blockers: the H2 no-HMAC proof and lifecycle-expiry observation remain
-open; protected feedback persistence cannot be deployed until Cloudflare KV access
-is fixed; final legal/support/provider-retention decisions and hosted
+open; protected feedback persistence still needs an authenticated synthetic
+write/read proof; final legal/support/provider-retention decisions and hosted
 desktop/mobile walkthrough remain human-owned; and the rollback rehearsal is not
 yet authorized or evidenced. No invitation or M3 activity is authorized.

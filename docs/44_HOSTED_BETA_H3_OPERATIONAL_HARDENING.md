@@ -67,12 +67,15 @@ key, formula, value, uploaded bytes, identity, organisation, URL, credential, or
 free text. Safe user error codes have one stable Korean message and no exception
 text.
 
-The Cloud Run control values observed on 2026-09-09 are: minimum instances zero
-(platform default), maximum two, CPU 1, memory 1 GiB, concurrency 1, and timeout
-60 seconds. They are intentionally conservative for synthetic validation, not a
-capacity claim. A Google Cloud budget already has KRW 10,000 thresholds at 50%,
-90%, and 100%; no recipient identity is recorded here. Cloudflare billing alert
-availability and recipient selection remain a human account-administrator check.
+The Cloud Run control values were rechecked at 2026-09-09 14:05 UTC: minimum
+instances zero (platform default; no minimum annotation), maximum two, CPU 1,
+memory 1 GiB, concurrency 1, and timeout 60 seconds. The current Tokyo Gateway
+is `ACTIVE`, and a read-only IAM check found no `allUsers` or
+`allAuthenticatedUsers` binding on Cloud Run. These are intentionally conservative
+synthetic-validation controls, not a capacity claim. A Google Cloud budget already
+has KRW 10,000 thresholds at 50%, 90%, and 100%; no recipient identity is
+recorded here. Cloudflare billing alert availability and recipient selection remain
+a human account-administrator check.
 
 ### Notice and privacy drafting
 
