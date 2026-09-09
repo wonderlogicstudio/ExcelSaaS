@@ -1,5 +1,43 @@
 # Current progress
 
+## Current override — 2026-09-09
+
+**Hosted Beta H2 is approved and in progress.** This section supersedes the
+earlier H1-only stop record below. The product owner created the private
+`workbookcare-beta-uploads` R2 bucket with a one-day deletion lifecycle, the
+Access-protected `workbookcare-beta` Worker with its `UPLOADS` R2 binding, enabled
+Google API Gateway, and granted only
+`workbookcare-gateway-invoker@workbookcare-beta.iam.gserviceaccount.com` the Cloud
+Run Invoker role on the existing IAM-required `workbookcare-api-beta` service.
+
+Tokyo API Gateway (`asia-northeast1`) is explicitly approved to reach the existing
+Seoul Cloud Run service (`asia-northeast3`). The cross-region bridge is
+synthetic-only until H2 completes: provider secrets, an updated revision of the
+same Cloud Run service, API Gateway, deployed Worker assets/control route, and all
+positive/negative/deletion checks remain open. No invitations, real workbook use,
+repair, payment, hosted Formula Audit, AI, M5, or H3 work has started.
+
+Current local H2 evidence: standard verification passed with web 25 tests and
+production build, Worker 3 tests, API 68 tests, Ruff, and the M4-C supplied pack.
+M4 release verification passed under its existing narrow fixture waiver (72/72
+locations and top-level rules); M4-A.5 remains `CONDITIONAL_GO`. A freshly built
+local H2 container passed synthetic signed-upload, error, health, non-root, and
+temporary-file cleanup rehearsals. These results do not prove a deployed gateway,
+Access policy, R2 lifecycle, or Cloud Run revision.
+
+## Current step — 2026-09-09
+
+**Cloud Run preparation completed; deployment stopped.** The owner's 2026-09-08
+instruction supersedes the broader H2 execution scope for this step. Container
+runtime logging is content-free, build context is restricted, and multipart spool
+cleanup is verified. Docker rehearsals passed on 8080/9091 and forced 500; web 23,
+API 65, build/Ruff, supplied M4-C pack and complete M4 RC verification passed with
+the existing fixture waiver. M4-A.5 remains CONDITIONAL_GO. No cloud resources,
+image push, frontend deployment, Cloudflare/R2, signup/payment/repair, or scanner
+behavior changes. Details: `43_CLOUD_RUN_PREPARATION.md` and `MILESTONE_REVIEW.md`.
+Earlier H2 status below is historical; do not resume deployment automatically.
+
+
 ## Completed
 
 - [x] Market and competitor research.
@@ -36,6 +74,7 @@
 - [x] M4-C final baseline closure: 72/72 engine contract accepted with the explicit, narrow product-owner fixture waiver `M4C-2026-09-02-source-label-conflict`; source labels remain unchanged.
 - [x] M4-D Formula Audit Release Candidate & Hosted Beta Readiness: `m4-formula-audit-rc1`, configurable audit limits, safe no-partial-result states, memo-free category feedback, release verification command, support/failure/hosted-beta/manual-review documents.
 - [x] Hosted Beta H1 Deployment Foundation & Security Boundary: strict hosted environment/CORS contract, non-root API container, safe liveness/readiness/error/logging contracts, same-origin hosted-beta configuration, deployment/lifecycle/runbook documents, local container rehearsal, and regression verification. No cloud deployment or user upload.
+- [ ] Hosted Beta H2 Cloud Deployment, Private Upload Pipeline & Analysis Execution (scope approved but blocked before deployment: no GCP/Cloudflare targets, authenticated credentials, or required CLIs on this PC; no external invitation).
 
 ## Current product state
 

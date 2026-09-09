@@ -1,8 +1,19 @@
-# Hosted Beta H2 — Deployment and Rollback Runbook Draft
+# Hosted Beta H2 — Deployment and Rollback Runbook
+
+> **Activation update (2026-09-09):** H2 is approved and synthetic-only. The
+> user has already created the private R2 bucket and one-day lifecycle rule,
+> protected the `workbookcare-beta` Worker with an account-member Access policy,
+> bound `UPLOADS`, enabled API Gateway, and granted the dedicated gateway service
+> account Cloud Run Invoker on the existing service. Gateway deployment is limited
+> to Tokyo (`asia-northeast1`) under the explicit cross-region approval. Do not
+> invite users or accept real workbooks while any checklist item remains open.
 
 ## Scope
 
-This is a reproducible procedure draft, not authorization to deploy. Complete it only after H1 is accepted and the product owner separately approves H2.
+This is the reproducible H2 procedure. It is approved only for synthetic files and
+the existing `workbookcare-api-beta` Cloud Run service; it is not authorization for
+an invitation, customer files, a public API, formula-audit hosting, repair, or a
+new Cloud Run service.
 
 ## Required human-owned prerequisites
 

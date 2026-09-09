@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+# Deploy only the H2 API Gateway bridge to the existing authenticated Cloud Run
+# service. Run from Google Cloud Shell after exporting the required values.
+# This script never changes Cloud Run IAM and never creates an anonymous invoker.
+set -Eeuo pipefail
+
+: "${PROJECT_ID:?Set PROJECT_ID (for example: workbookcare-beta)}"
+: "${CLOUD_RUN_URL:?Set the exact HTTPS Cloud Run service URL}"
+: "${CLOUDFLARE_ACCESS_ISSUER:?Set the exact Cloudflare Access issuer URL}"
+: "${CLOUDFLARE_ACCESS_JWKS_URI:?Set the exact Cloudflare Access JWKS URL}"
+: "${CLOUDFLARE_ACCESS_AUD:?Set the exact Access AUD tag}"
+: "${GATEWAY_INVOKER_SERVICE_ACCOUNT:?Set the dedicated Gateway invoker service-account email}"
+
+API_NAME="${API_NAME:-workbookcare-beta-api}"
+GATEWAY_NAME="${GATEWAY_NAME:-workbookcare-beta-gateway}"
+GATEWAY_REGION="${GATEWAY_REGION:-asia-northeast1}"
+
+if [[ "$GATEWAY_REGION" != "asia-northeast1" ]]; then
+  echo "H2 has an explicit Tokyo-only approval; GATEWAY_REGION must be asia-northeast1." >&2
+  exit 1
+fi
+for h2_url in "$CLOUD_RUN_URL" "$CLOUDFLARE_ACCESS_ISSUER" "$CLOUDFLARE_ACCESS_JWKS_URI"; do
+  if [[ ! "$h2_url" =~ ^https://[^[:space:]]+$ ]]; then
+    echo "Cloud Run, issuer, and JWKS values must be exact HTTPS URLs." >&2
+    exit 1
+  fi
+done
+if [[ ${#CLOUDFLARE_ACCESS_AUD} -lt 16 || "$CLOUDFLARE_ACCESS_AUD" == *$'\n'* || "$CLOUDFLARE_ACCESS_AUD" == *$'\r'* ]]; then
+  echo "CLOUDFLARE_ACCESS_AUD is invalid." >&2
+  exit 1
+fi
+if [[ ! "$GATEWAY_INVOKER_SERVICE_ACCOUNT" =~ ^[^@[:space:]]+@[^@[:space:]]+\.iam\.gserviceaccount\.com$ ]]; then
+  echo "GATEWAY_INVOKER_SERVICE_ACCOUNT must be one Google service-account email." >&2
+  exit 1
+fi
+
+script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+template_path="$script_dir/workbookcare-beta-openapi.yaml.template"
+config_name="workbookcare-beta-config-$(date -u +%Y%m%d%H%M%S)"
+rendered_spec="$(mktemp "${TMPDIR:-/tmp}/$config_name.XXXXXX.yaml")"
+trap 'rm -f "$rendered_spec"' EXIT
+
+export CLOUD_RUN_URL CLOUDFLARE_ACCESS_ISSUER CLOUDFLARE_ACCESS_JWKS_URI CLOUDFLARE_ACCESS_AUD
+python3 - "$template_path" "$rendered_spec" <<'PY'
+import os
+import sys
+
+template_path, rendered_path = sys.argv[1:]
+contents = open(template_path, encoding="utf-8").read()
+replacements = {
+    "${CLOUD_RUN_URL}": os.environ["CLOUD_RUN_URL"].rstrip("/"),
+    "${CLOUDFLARE_ACCESS_ISSUER}": os.environ["CLOUDFLARE_ACCESS_ISSUER"].rstrip("/"),
+    "${CLOUDFLARE_ACCESS_JWKS_URI}": os.environ["CLOUDFLARE_ACCESS_JWKS_URI"].rstrip("/"),
+    "${CLOUDFLARE_ACCESS_AUD}": os.environ["CLOUDFLARE_ACCESS_AUD"],
+}
+for placeholder, value in replacements.items():
+    contents = contents.replace(placeholder, value)
+if "${" in contents:
+    raise SystemExit("Rendered gateway specification still contains an unresolved placeholder.")
+open(rendered_path, "w", encoding="utf-8").write(contents)
+PY
+
+if ! gcloud api-gateway apis describe "$API_NAME" --project "$PROJECT_ID" >/dev/null 2>&1; then
+  gcloud api-gateway apis create "$API_NAME" --project "$PROJECT_ID"
+fi
+
+gcloud api-gateway api-configs create "$config_name" \
+  --api "$API_NAME" \
+  --openapi-spec "$rendered_spec" \
+  --backend-auth-service-account "$GATEWAY_INVOKER_SERVICE_ACCOUNT" \
+  --project "$PROJECT_ID"
+
+if gcloud api-gateway gateways describe "$GATEWAY_NAME" --location "$GATEWAY_REGION" --project "$PROJECT_ID" >/dev/null 2>&1; then
+  gcloud api-gateway gateways update "$GATEWAY_NAME" \
+    --api "$API_NAME" --api-config "$config_name" \
+    --location "$GATEWAY_REGION" --project "$PROJECT_ID"
+else
+  gcloud api-gateway gateways create "$GATEWAY_NAME" \
+    --api "$API_NAME" --api-config "$config_name" \
+    --location "$GATEWAY_REGION" --project "$PROJECT_ID"
+fi
+
+gcloud api-gateway gateways describe "$GATEWAY_NAME" \
+  --location "$GATEWAY_REGION" --project "$PROJECT_ID" \
+  --format='value(defaultHostname)'

@@ -13,7 +13,8 @@ Public browser configuration contains only product environment, same-origin API 
 | scanner limits | Cloud Run service | retain RC defaults unless separately approved |
 | Cloudflare API/R2 credentials | Worker secret store | no source, build log, browser, or Cloud Run injection unless a later design requires it |
 | Google service identity | Cloud Run IAM | workload identity/service account, not a checked-in key file |
-| optional HMAC secret | both secret stores | only if H2 approves a tested, timestamped, signed control-plane protocol |
+| `WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET` | Cloudflare Worker secret + Google Secret Manager | required in `hosted_beta`/`production`; 32+ characters, 60-second body-bound proof, never printed or committed |
+| `API_GATEWAY_URL` / exact Access AUD tag | Cloudflare Worker secret store | deployment routing/authentication configuration; neither is added to the browser build or Git |
 
 ## Required separation
 

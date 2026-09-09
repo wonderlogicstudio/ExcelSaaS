@@ -16,6 +16,10 @@ Push-Location $Root
 if ($LASTEXITCODE -ne 0) {
     throw "Web verification failed."
 }
+& npm.cmd run test:edge
+if ($LASTEXITCODE -ne 0) {
+    throw "Hosted-beta Worker verification failed."
+}
 Pop-Location
 
 Push-Location $Api

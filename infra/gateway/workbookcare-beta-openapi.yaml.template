@@ -1,0 +1,48 @@
+swagger: "2.0"
+info:
+  title: WorkbookCare Hosted Beta Gateway
+  description: Private bridge from Cloudflare Access to the existing authenticated Cloud Run service.
+  version: "1.0"
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /v1/scans:
+    post:
+      operationId: createScan
+      consumes:
+        - multipart/form-data
+      parameters:
+        - name: file
+          in: formData
+          required: true
+          type: file
+      security:
+        - cloudflare_access: []
+      x-google-backend:
+        address: "${CLOUD_RUN_URL}"
+        jwt_audience: "${CLOUD_RUN_URL}"
+      responses:
+        "200":
+          description: Static scan result
+        "400":
+          description: Safe request validation failure
+        "401":
+          description: Missing or invalid Cloudflare Access assertion
+        "403":
+          description: Access assertion does not satisfy the Worker proof
+        "413":
+          description: File limit exceeded
+        "415":
+          description: Unsupported workbook
+        "500":
+          description: Safe internal failure
+securityDefinitions:
+  cloudflare_access:
+    type: oauth2
+    flow: implicit
+    authorizationUrl: ""
+    x-google-issuer: "${CLOUDFLARE_ACCESS_ISSUER}"
+    x-google-jwks_uri: "${CLOUDFLARE_ACCESS_JWKS_URI}"
+    x-google-audiences: "${CLOUDFLARE_ACCESS_AUD}"

@@ -1,5 +1,10 @@
 # Hosted Beta H1 Final Report
 
+> **Historical H1 report; H2 activation update (2026-09-09):** H1 remains
+> completed. H2 is now approved and in progress for synthetic-only deployment of
+> the existing Cloud Run service through a Tokyo API Gateway bridge. This report
+> does not authorize or record an H2 completion.
+
 ## Decision
 
 `COMPLETED — Deployment Foundation & Security Boundary`

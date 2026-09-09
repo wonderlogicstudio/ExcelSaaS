@@ -1,18 +1,27 @@
 # Hosted Beta H1 — File Lifecycle, Failure, and Observability Contract
 
-## Proposed H2 upload lifecycle
+## Active H2 upload lifecycle
 
 ```text
-authorized user -> Worker creates opaque scan ID and opaque object key
--> short-lived, single-purpose private R2 upload authorization
--> Worker verifies object metadata/size before analysis request
--> authenticated Cloud Run analysis
+authorized user -> Access-protected Worker validates Access JWT
+-> Worker validates the bounded multipart file and creates an opaque R2 key
+-> Worker writes and reads one private R2 object without filename metadata
+-> Worker signs the exact outbound multipart body (60-second HMAC)
+-> API Gateway validates the same Access JWT and invokes authenticated Cloud Run
 -> value-free result response
 -> immediate deletion attempt
 -> R2 lifecycle expiration backstop
 ```
 
-The original filename is display-only in the browser and never forms an object key, scan ID, log field, metric, or URL. A browser cannot list a bucket, choose another object key, or call Cloud Run directly. An analysis request must be idempotent and bound to an authenticated upload session; H1 does not yet implement those endpoints or session storage.
+The original filename is display-only in the browser and never forms an object key, scan ID, log field, metric, or URL. A browser cannot list a bucket, choose another object key, or call Cloud Run directly.
+
+H2 does not use a browser presigned URL or an upload-session database. The Worker
+receives the bounded multipart body on the Access-protected same-origin route,
+uses an opaque `uploads/<UUID>` key only for the transient R2 copy, and sends the
+scan request itself. API Gateway requires the exact Access issuer/audience and
+FastAPI rejects missing, expired, altered, or invalid body-bound HMAC proof before
+multipart parsing. No opaque key, filename, object URL, JWT, HMAC, formula, or
+workbook content enters logs.
 
 ## Deletion outcomes required in H2
 

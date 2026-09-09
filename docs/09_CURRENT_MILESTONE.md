@@ -1,8 +1,43 @@
 # Current milestone
 
-> **Status override (2026-09-04): `HOSTED BETA H1 COMPLETED — H2 Deployment Awaiting Product Owner Approval`.** H1 is complete as a local deployment foundation only. No cloud resource, hosted endpoint, user file, access policy, or beta invitation was created. This override supersedes the in-progress wording retained below as historical scope context.
+> **Latest active scope (2026-09-09): Hosted Beta H2 is APPROVED and IN PROGRESS.**
+> This direction supersedes the earlier H1-only stop notice below. H1 remains
+> complete. The product owner has created the named private R2 bucket, lifecycle
+> rule, Access-protected Worker and R2 binding; enabled API Gateway; and granted
+> only the dedicated gateway service account Cloud Run Invoker on the existing
+> IAM-required `workbookcare-api-beta` service. The H2 bridge uses Tokyo
+> (`asia-northeast1`) API Gateway to the existing Seoul (`asia-northeast3`) Cloud
+> Run service by explicit owner approval. The cross-region path is synthetic-only
+> until every H2 verification gate passes. Do not create a new Cloud Run service,
+> allow anonymous invocation, invite users, accept real workbooks, start H3/M5,
+> host Formula Audit, or add repair, payment, AI, or accounts.
+
+> **Current H2 implementation status:** local Worker/Access verification, opaque
+> R2 cleanup, body-bound HMAC verification, and API Gateway templates are in
+> progress. Provider secrets, same-service revision, Gateway creation, Worker
+> deployment, and synthetic positive/negative end-to-end verification remain open.
+
+> **Active scope override (2026-09-08): COMPLETED (2026-09-09) — Cloud Run preparation only; STOPPED BEFORE DEPLOYMENT.**
+> The current owner instruction narrows work to the existing FastAPI API container,
+> privacy/temporary-upload review, local container rehearsal, and full regression
+> verification. No Google Cloud resources, frontend deployment, Cloudflare/R2,
+> authentication features, signup, payment, or repair are authorized in this step.
+> Earlier H2 deployment approval/preflight below is historical and does not authorize
+> resuming deployment now. Stop after the preparation review.
+
+> **Status override (2026-09-04): `H2 BLOCKED — awaiting dedicated cloud targets, operator credentials, and H2 authentication configuration`.** The product owner approved H2 scope, but this PC has neither the required deployment CLIs nor authenticated Cloudflare/Google Cloud targets. H2 must not bypass this with an anonymous Cloud Run service or a long-lived Google service-account key in Cloudflare.
+
+## Approved H2 scope
+
+H2 implements the private hosted-beta upload/control plane, Cloud Run analysis execution, deletion and lifecycle controls, and synthetic end-to-end/security-negative validation. The browser remains same-origin and Access-protected. A Cloudflare Worker validates the Access application token and forwards it to Google API Gateway, which validates the exact Cloudflare JWT issuer/audience and invokes Cloud Run through its own least-privilege service account. The Worker additionally signs the internal analysis request with a short-lived HMAC shared only through provider secret stores. This preserves no-anonymous Cloud Run and prevents a user from bypassing the Worker via the API Gateway.
+
+H2 must keep R2 private with opaque keys, avoid filename metadata, preserve all existing static-scan limits, use only synthetic workbooks for deployment verification, clean up each object on every terminal path, and retain the lifecycle backstop. It must not add a public account/dashboard, payment, repair, new rules, calculation, AI, VBA, Power Query, M3/M3.5 user sessions, or H3 hardening features.
+
+The approved implementation route is documented in `docs/42_HOSTED_BETA_H2_PREFLIGHT.md`: Cloudflare Access JWT validation in the Worker, the same exact issuer/audience validation in Google API Gateway, an API-Gateway-only Cloud Run Invoker service account, and a separate short-lived Worker HMAC signature checked by FastAPI. H2 resumes only after its named prerequisites are supplied.
 
 ## Status
+
+`HOSTED BETA H2 IN PROGRESS — synthetic-only; deployment and verification gates remain open`
 
 `HOSTED BETA H1 COMPLETED — H2 Deployment Awaiting Product Owner Approval`
 

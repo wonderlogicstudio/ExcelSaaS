@@ -1,31 +1,57 @@
-# H1 safety-first example. It does not create a project, service account, secret,
-# or Cloud Run service by itself. Run only after H2 access-control approval.
-#
-# The service intentionally has NO public invoker. H2 must prove an authenticated
-# Worker-to-Cloud-Run invocation path before this command is used for a beta.
+# Review-only template. Running this command DOES create/update a Cloud Run service.
+# Not executed during the Cloud Run preparation step. Use only after separate approval.
+# Prerequisites: existing approved project, Artifact Registry image digest, runtime
+# service account, APIs, billing, and an authenticated operator. No frontend/R2 setup.
 param(
   [Parameter(Mandatory)] [string]$ProjectId,
-  [Parameter(Mandatory)] [string]$FrontendOrigin,
+  [Parameter(Mandatory)] [string]$Image,
+  [Parameter(Mandatory)] [string]$RuntimeServiceAccount,
+  [Parameter(Mandatory)] [string]$ControlPlaneSecretName,
+  [string]$FrontendOrigin = "https://beta.example.invalid",
   [string]$Service = "workbookcare-api-beta",
-  [string]$Region = "asia-northeast3",
-  [string]$RuntimeServiceAccount = "workbookcare-api-beta@$ProjectId.iam.gserviceaccount.com"
+  [string]$Region = "asia-northeast3"
 )
 
-if ($FrontendOrigin -notmatch '^https://') {
-  throw "FrontendOrigin must be an exact https:// hosted-beta origin."
+$ErrorActionPreference = "Stop"
+$OriginUri = $null
+if (-not [Uri]::TryCreate($FrontendOrigin, [UriKind]::Absolute, [ref]$OriginUri) -or
+    $OriginUri.Scheme -ne "https" -or $OriginUri.IsLoopback -or
+    $OriginUri.UserInfo -or $OriginUri.Query -or $OriginUri.Fragment -or
+    $OriginUri.AbsolutePath -ne "/" -or $FrontendOrigin.Contains(",") -or
+    $FrontendOrigin.Contains("*")) {
+  throw "FrontendOrigin must be one exact non-local HTTPS origin."
+}
+if ($Image -notmatch '^[a-z0-9-]+-docker\.pkg\.dev/[^\s@]+@sha256:[a-f0-9]{64}$') {
+  throw "Image must be an Artifact Registry image pinned to its verified sha256 digest."
+}
+if ($ControlPlaneSecretName -notmatch '^[A-Za-z][A-Za-z0-9_-]{0,254}$') {
+  throw "ControlPlaneSecretName must be a Google Secret Manager secret name, not a value."
 }
 
+# Leave the image command/arguments intact: python -m app.runtime.
+# CORS is not authentication. Keep IAM enabled and do not grant allUsers or
+# allAuthenticatedUsers an invoker role. The reserved example origin deploys no site.
 gcloud run deploy $Service `
   --project $ProjectId `
-  --source ./apps/api `
+  --image $Image `
   --region $Region `
+  --port 8080 `
   --no-allow-unauthenticated `
+  --invoker-iam-check `
   --ingress all `
   --service-account $RuntimeServiceAccount `
   --min 0 `
   --max 2 `
+  --max-instances 2 `
   --cpu 1 `
   --memory 1Gi `
   --timeout 60 `
   --concurrency 1 `
-  --set-env-vars "APP_ENV=hosted_beta,CORS_ORIGINS=$FrontendOrigin,FORMULA_PATTERN_AUDIT_ENABLED=false,AI_EXPLANATIONS_ENABLED=false"
+  --startup-probe "httpGet.path=/health/ready,httpGet.port=8080,periodSeconds=5,timeoutSeconds=3,failureThreshold=12" `
+  --liveness-probe "httpGet.path=/health/live,httpGet.port=8080,periodSeconds=30,timeoutSeconds=5,failureThreshold=3" `
+  --set-env-vars "APP_ENV=hosted_beta,CORS_ORIGINS=$FrontendOrigin,FORMULA_PATTERN_AUDIT_ENABLED=false,AI_EXPLANATIONS_ENABLED=false" `
+  --set-secrets "WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET=$ControlPlaneSecretName:latest"
+
+if ($LASTEXITCODE -ne 0) {
+  throw "Cloud Run deployment failed."
+}

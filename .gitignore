@@ -34,6 +34,7 @@ artifacts/m4-a5/evaluation.csv
 artifacts/m4c-final/
 artifacts/local-dev/
 artifacts/verification/
+artifacts/cloudrun-scan-result.json
 *.xlsx
 *.xlsm
 !samples/*.md

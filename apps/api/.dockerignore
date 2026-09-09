@@ -1,12 +1,8 @@
-.env
-.env.*
-.venv/
-__pycache__/
-*.py[cod]
-.pytest_cache/
-.ruff_cache/
-*.egg-info/
-tests/
-*.xlsx
-*.xlsm
-*.log
+# Build context allowlist: no .env, uploads, samples, tests, logs, or local venv.
+*
+!Dockerfile
+!.dockerignore
+!pyproject.toml
+!app/
+!app/**/
+!app/**/*.py

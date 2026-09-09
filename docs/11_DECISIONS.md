@@ -1,5 +1,20 @@
 # Accepted decisions
 
+## Active H2 update — 2026-09-09
+
+**D-069 — Tokyo Gateway location.** API Gateway does not provide
+`asia-northeast3`. The product owner explicitly approved a private H2 gateway in
+Tokyo (`asia-northeast1`) to reach the existing Seoul (`asia-northeast3`) Cloud Run
+service. This creates a cross-region request path; no Korea-only residency claim
+is permitted, and the route remains synthetic-only until final H2 verification.
+
+**D-070 — body-bound Worker proof.** Cloud Run IAM authorizes the gateway service
+account, and API Gateway validates the Access token, but either alone would not
+prove a request passed through the Worker. Hosted scan routes therefore require a
+60-second HMAC over timestamp, method, path, and exact multipart body. The secret
+exists only in Cloudflare Worker secrets and Google Secret Manager; invalid or
+missing proofs are rejected before multipart parsing.
+
 | ID | Decision | Rationale | Status |
 |---|---|---|---|
 | D-001 | Web-first, not native mobile | Workbook handling, search acquisition, and payment iteration are better on the web | Accepted |
@@ -69,3 +84,5 @@
 | D-064 | Hosted beta is same-origin control plane, not a public Cloud Run API | Browser traffic terminates at an Access-protected Worker route; R2 stays private and Cloud Run needs authenticated invocation. H1 documents and prepares this boundary without deploying it | Accepted for H1 |
 | D-065 | Hosted environment configuration must fail closed before service startup | `hosted_beta` and `production` accept only declared environments and exact HTTPS CORS origins; wildcard and local origins fail validation. CORS accepts a JSON array or comma-separated environment string through one parser | Implemented and locally verified in H1 |
 | D-066 | Hosted observability may contain only an explicit safe allowlist | Application events reject workbook content, locations, object URLs, identities, and free text; unexpected failures return a generic safe code rather than exception text | Implemented and locally verified in H1 |
+| D-067 | H2 uses an API Gateway identity bridge instead of a Cloudflare-held Google key | Cloudflare Access JWT is validated by the Worker and API Gateway; API Gateway's dedicated service account alone invokes non-anonymous Cloud Run. FastAPI also requires a Worker HMAC, so authenticated users cannot bypass the Worker through the gateway | Accepted for H2; deployment blocked pending operator prerequisites |
+| D-068 | Cloud Run preparation preserves the scanner and uses a content-free container launcher | Uvicorn can re-log handled exceptions and openpyxl warnings can contain workbook text. The container omits arbitrary runtime message/traceback content, disables URL access logs, and preserves allowlisted events. Multipart cleanup is verified using existing FastAPI/Starlette ownership. Only the verified image digest is used in the future private deployment example; no deployment is authorized in this step | Implemented and locally verified 2026-09-09 |

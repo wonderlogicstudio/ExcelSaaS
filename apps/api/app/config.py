@@ -2,7 +2,7 @@ import json
 from functools import lru_cache
 from typing import Annotated, Final
 
-from pydantic import Field, field_validator, model_validator
+from pydantic import AliasChoices, Field, SecretStr, field_validator, model_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 SUPPORTED_APP_ENVS: Final = frozenset(
@@ -33,6 +33,15 @@ class Settings(BaseSettings):
     formula_audit_max_sheet_count: int = Field(default=200, ge=1)
     formula_audit_max_candidate_count: int = Field(default=120, ge=1)
     file_retention_hours: int = 24
+    # This is deliberately a provider-store-only secret. It is required only
+    # for the hosted control plane and is never emitted in API responses/logs.
+    control_plane_hmac_secret: SecretStr | None = Field(
+        default=None,
+        validation_alias=AliasChoices(
+            "WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET", "CONTROL_PLANE_HMAC_SECRET"
+        ),
+    )
+    control_plane_hmac_max_age_seconds: int = Field(default=60, ge=15, le=300)
 
     @field_validator("app_env")
     @classmethod
@@ -79,6 +88,14 @@ class Settings(BaseSettings):
                 raise ValueError(
                     "hosted_beta and production must not allow localhost CORS origins"
                 )
+            if self.control_plane_hmac_secret is None:
+                raise ValueError(
+                    "hosted_beta and production require WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET"
+                )
+            if len(self.control_plane_hmac_secret.get_secret_value()) < 32:
+                raise ValueError(
+                    "WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET must contain at least 32 characters"
+                )
         return self
 
     @property
@@ -88,6 +105,10 @@ class Settings(BaseSettings):
     @property
     def max_uncompressed_bytes(self) -> int:
         return self.max_uncompressed_mb * 1024 * 1024
+
+    @property
+    def control_plane_hmac_is_required(self) -> bool:
+        return self.app_env in HOSTED_APP_ENVS
 
 
 FORMULA_AUDIT_INTERNAL_ENVS = frozenset({"development", "internal_beta"})

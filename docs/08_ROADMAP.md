@@ -113,6 +113,17 @@ Purpose: prepare an invite-only hosted-beta architecture without deploying or ac
 
 Closure update (2026-09-04): H1 local Docker build, non-root liveness/readiness rehearsal, `verify.ps1`, and M4 RC regression verification passed. H2 deployment remains awaiting separate approval.
 
+## Hosted Beta H2 — Cloud deployment, private upload pipeline, and analysis execution — IN PROGRESS
+
+Purpose: create the isolated beta infrastructure and validate only synthetic workbook uploads through the Access-protected Worker, private R2, authenticated API Gateway, and non-anonymous Cloud Run path. H2 uses a short-lived Cloudflare Access JWT forwarded by the Worker to Google API Gateway plus a separate short-lived Worker HMAC signature at the FastAPI boundary; no Google service-account key is stored in Cloudflare.
+
+The product owner has approved the current private R2/Worker/Access resources,
+the gateway-only Cloud Run invoker, and Tokyo API Gateway (`asia-northeast1`) to
+reach the existing Seoul Cloud Run service (`asia-northeast3`). H2 must not invite
+users or start H3 until deployment, access, deletion, limit, timeout, privacy, and
+synthetic negative checks pass. Do not relax Cloud Run IAM or place a long-lived
+Google service-account key in Cloudflare.
+
 ## M5 — Business-rule validation
 
 Deliverables:

@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from .config import formula_audit_is_available, get_settings
+from .control_plane import ControlPlaneHmacMiddleware
 from .errors import WorkbookCareError
 from .m4_release import M4_FORMULA_AUDIT_RELEASE_CANDIDATE_VERSION
 from .models import ErrorBody, ErrorResponse, FormulaAuditResult, ScanResult
@@ -36,6 +37,7 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
+app.add_middleware(ControlPlaneHmacMiddleware, settings=settings)
 
 
 @app.exception_handler(WorkbookCareError)

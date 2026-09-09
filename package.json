@@ -9,7 +9,8 @@
     "dev:web": "npm run dev --workspace @workbookcare/web",
     "build:web": "npm run build --workspace @workbookcare/web",
     "test:web": "npm run test --workspace @workbookcare/web",
-    "verify:web": "npm run verify --workspace @workbookcare/web"
+    "verify:web": "npm run verify --workspace @workbookcare/web",
+    "test:edge": "node --test infra/cloudflare/test/worker.test.mjs"
   },
   "engines": {
     "node": ">=22"

@@ -1,8 +1,20 @@
 import type { ApiErrorPayload, FormulaAuditResult, ScanResult } from '../types';
 
-const apiBaseUrl =
-  (import.meta.env.VITE_API_BASE_URL as string | undefined)?.replace(/\/$/, '') ??
-  'http://localhost:8000';
+export function resolveApiBaseUrl(configuredBaseUrl: string | undefined, isProduction: boolean): string {
+  const configured = configuredBaseUrl?.trim().replace(/\/$/, '');
+  if (configured) {
+    return configured;
+  }
+  // A hosted build cannot accidentally expose the Cloud Run origin merely
+  // because a build variable was omitted. Local Vite development keeps its
+  // explicit FastAPI default for the existing offline workflow.
+  return isProduction ? '/api' : 'http://localhost:8000';
+}
+
+const apiBaseUrl = resolveApiBaseUrl(
+  import.meta.env.VITE_API_BASE_URL as string | undefined,
+  import.meta.env.PROD,
+);
 
 export class ScanApiError extends Error {
   readonly code: string;
