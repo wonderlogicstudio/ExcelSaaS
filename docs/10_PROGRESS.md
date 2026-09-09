@@ -29,6 +29,11 @@ public Cloud Run IAM member. Full local regression passed again: web 30, Worker
 13, API 72, production build, Ruff, and the supplied M4-C package. The R2
 lifecycle probe is not eligible for observation until 2026-09-10 12:37:58 UTC
 (2026-09-10 21:37:58 KST), so it remains correctly open rather than inferred.
+The H3 safe-telemetry/error backend is now live in Cloud Run revision
+`workbookcare-api-beta-00003-bsp` from immutable image
+`sha256:5ab7065c318c2325f6124b41787e8297f4de6f428329151b6a1ca45c7cf35703`.
+Its existing guardrails were preserved, and a direct unauthenticated health
+request returned `403`.
 
 ## Historical current override — 2026-09-09
 

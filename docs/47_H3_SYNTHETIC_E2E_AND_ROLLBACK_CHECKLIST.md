@@ -16,9 +16,12 @@
   their respective boundaries.
 - [x] The private `FEEDBACK` KV binding is deployed; a tokenless feedback-route
   request is redirected to Cloudflare Access rather than reaching the Worker.
-- [x] Read-only 2026-09-09 recheck: Cloud Run retains max 2, concurrency 1,
-  CPU 1, 1 GiB, and 60 seconds; API Gateway is ACTIVE; Cloud Run has no public
-  IAM member.
+- [x] H3 backend live recheck, 2026-09-09 14:09 UTC: revision
+  `workbookcare-api-beta-00003-bsp` runs immutable image
+  `sha256:5ab7065c318c2325f6124b41787e8297f4de6f428329151b6a1ca45c7cf35703`
+  with max 2, concurrency 1, CPU 1, 1 GiB, and 60 seconds. API Gateway remains
+  ACTIVE; Cloud Run has no public IAM member, and an unauthenticated direct
+  health request returned `403`.
 - [x] Source-level Worker/API tests cover bounded uploads, cleanup attempts,
   rate limits, safe errors, and content-free telemetry.
 
