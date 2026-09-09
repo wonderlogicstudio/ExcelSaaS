@@ -14,6 +14,8 @@
   `3/3` to `2/1`.
 - [x] Tokenless Worker, Gateway, and Cloud Run negative probes are denied at
   their respective boundaries.
+- [x] The private `FEEDBACK` KV binding is deployed; a tokenless feedback-route
+  request is redirected to Cloudflare Access rather than reaching the Worker.
 - [x] Source-level Worker/API tests cover bounded uploads, cleanup attempts,
   rate limits, safe errors, and content-free telemetry.
 
@@ -25,10 +27,9 @@
   2026-09-10 12:37:58 UTC (expiry may be delayed by the provider after eligibility).
 - [ ] Browser repeats normal upload, finding-zero sample, multi-finding sample,
   limit error, malformed input, re-validation, and CSV flow on the deployed URL.
-- [ ] Formula Audit remains inaccessible in the public hosted build. If the
-  approved protected feedback binding is later deployed, test only its
-  allowlisted synthetic payload, invalid payload, rate limit, and 30-day expiry
-  setting.
+- [ ] Formula Audit remains inaccessible in the public hosted build. Test the
+  deployed protected feedback binding only with an allowlisted synthetic payload,
+  an invalid payload, rate limit, and the configured 30-day expiry setting.
 - [ ] Inspect safe operational logs by field name and confirm no prohibited
   workbook or identity field appears.
 - [ ] Verify the platform timeout/temporary-failure user experience without

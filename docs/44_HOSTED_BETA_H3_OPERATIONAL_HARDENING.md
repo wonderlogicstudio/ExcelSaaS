@@ -47,13 +47,16 @@ path is exercised only with synthetic data until a later approved exposure step.
 ### Account prerequisite recorded 2026-09-09
 
 The repository implementation and tests are ready for a private `FEEDBACK` KV
-binding, but the account-side namespace was **not** created: Wrangler returned
-Cloudflare API authentication error `10000` when attempting namespace creation.
-No fallback database, browser cache, public endpoint, or weakened route will be
-used. The account administrator must either grant narrowly scoped Workers KV
-create/write access or create an approved private namespace and provide its ID.
-Only then may the binding, fixed server version variables, synthetic verification,
-and Worker deployment be performed.
+binding. The original namespace-creation attempt was rejected with Cloudflare API
+authentication error `10000`; the account administrator subsequently created the
+approved namespace on 2026-09-09 and supplied its ID. The Worker configuration
+now names that private binding and fixed server version values. Worker version
+`e5aee49a-47b2-4a8e-b265-7de17fc27ac5` deployed the binding on 2026-09-09. A
+tokenless header-only request to the feedback route received the expected
+Cloudflare Access 302, so it is not a public endpoint. No fallback database,
+browser cache, public endpoint, or weakened route is used. An authenticated
+synthetic write/read verification remains required before server feedback can be
+called fully evidenced or collecting data.
 
 ### Operations and safe errors
 

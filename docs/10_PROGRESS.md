@@ -13,10 +13,13 @@ The scoped plan and engineering additions are in
 
 H3 implementation now has content-free telemetry buckets, a strict
 category-only feedback Worker contract, a hosted browser client that sends only
-four allowlisted fields, and draft privacy/terms UI pages. The private Cloudflare
-KV namespace required for feedback was not created because Wrangler received
-Cloudflare API authentication error `10000`; therefore feedback persistence is
-not deployed or collecting data. The inventory, safe-error taxonomy, and
+four allowlisted fields, and draft privacy/terms UI pages. The account owner has
+now created the required private Cloudflare KV namespace after the original
+Wrangler API authentication error `10000`; Worker version
+`e5aee49a-47b2-4a8e-b265-7de17fc27ac5` deployed its protected binding. A
+tokenless read-only header check was redirected to Cloudflare Access. An
+authenticated synthetic persistence verification remains open, and Formula Audit
+is still not publicly exposed. The inventory, safe-error taxonomy, and
 synthetic/rollback checklist are `docs/45` through `47`; the current Go/No-Go is
 `HOSTED BETA NOT READY`.
 
