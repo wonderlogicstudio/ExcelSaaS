@@ -4,10 +4,10 @@ import test from "node:test";
 import {
   createControlPlaneSignature,
   handleFeedback,
-  handleHmacNegativeTest,
   handleScan,
   verifyAccessAssertion,
 } from "../src/worker.mjs";
+import worker from "../src/worker.mjs";
 
 const TEAM_DOMAIN = "https://old-breeze-11c7.cloudflareaccess.com";
 const AUDIENCE = "synthetic-worker-test-audience";
@@ -404,41 +404,13 @@ test("an oversized feedback payload never reaches persistence", async () => {
   }
 });
 
-test("a valid Access assertion without the Worker HMAC is rejected through Gateway", async () => {
-  const { token, jwk } = await signedAccessToken();
-  const storage = createR2();
-  const originalFetch = globalThis.fetch;
-  let gatewayRequest;
-  globalThis.fetch = async (input, init) => {
-    if (String(input).endsWith("/cdn-cgi/access/certs")) {
-      return Response.json({ keys: [jwk] });
-    }
-    gatewayRequest = new Request(input, init);
-    return Response.json({ error: { code: "CONTROL_PLANE_SIGNATURE_REQUIRED" } }, { status: 401 });
-  };
-  try {
-    const response = await handleHmacNegativeTest(
-      new Request("https://workbookcare-beta.example.test/api/v1/h2-control-plane-negative", {
-        headers: { "cf-access-jwt-assertion": token },
-      }),
-      {
-        UPLOADS: storage.r2,
-        API_GATEWAY_URL: "https://gateway.example.test/v1/scans",
-        CLOUDFLARE_ACCESS_TEAM_DOMAIN: TEAM_DOMAIN,
-        CLOUDFLARE_ACCESS_AUD: AUDIENCE,
-        WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET: HMAC_SECRET,
-        UPLOAD_RATE_LIMITER: rateLimiter(),
-      },
-    );
-    assert.equal(response.status, 200);
-    assert.equal((await response.json()).status, "HMAC_NEGATIVE_CONFIRMED");
-    assert.equal(gatewayRequest.headers.get("authorization"), `Bearer ${token}`);
-    assert.equal(gatewayRequest.headers.get("x-workbookcare-signature"), null);
-    assert.equal(gatewayRequest.headers.get("x-workbookcare-timestamp"), null);
-    assert.equal(storage.size, 0);
-  } finally {
-    globalThis.fetch = originalFetch;
-  }
+test("the retired HMAC-negative route is an API 404 rather than a SPA page", async () => {
+  const response = await worker.fetch(
+    new Request("https://workbookcare-beta.example.test/api/v1/h2-control-plane-negative"),
+    {},
+  );
+  assert.equal(response.status, 404);
+  assert.equal((await response.json()).error.code, "API_ROUTE_NOT_FOUND");
 });
 
 for (const failure of ["backend-404", "network-error"]) {

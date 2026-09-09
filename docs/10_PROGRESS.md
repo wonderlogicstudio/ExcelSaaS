@@ -5,9 +5,9 @@
 **Hosted Beta H3 is approved and in progress.** H3 prepares the already deployed,
 synthetic-only beta for a later product-owner decision about invitations. It does
 not invite participants or permit real workbooks. H2 remains a dependency: the
-one-day R2 lifecycle probe still needs an observed expiration, and the temporary
-owner-session HMAC-negative check still needs its live confirmation and immediate
-route removal. H3 cannot be marked Hosted Beta Ready while either remains open.
+one-day R2 lifecycle probe still needs an observed expiration. The owner-session
+HMAC-negative check passed and its temporary route has been removed. H3 cannot
+be marked Hosted Beta Ready while the lifecycle gate remains open.
 The scoped plan and engineering additions are in
 `docs/44_HOSTED_BETA_H3_OPERATIONAL_HARDENING.md`.
 
@@ -30,9 +30,9 @@ public Cloud Run IAM member. Full local regression passed again: web 30, Worker
 lifecycle probe is not eligible for observation until 2026-09-10 12:37:58 UTC
 (2026-09-10 21:37:58 KST), so it remains correctly open rather than inferred.
 The H2 temporary no-HMAC route initially rendered the SPA because static assets
-were served first. Worker version `492348e8-96fa-4dd8-b035-beb650dd2074` now
-selectively runs Worker code first for `/api/*`; it awaits only the owner-session
-confirmation before the route is removed.
+were served first. Selective Worker-first `/api/*` routing enabled an
+owner-session result of `HMAC_NEGATIVE_CONFIRMED`; the route and its dedicated
+test were removed in Worker version `762582e4-2d79-4e8b-be38-b5add1add5c2`.
 The H3 safe-telemetry/error backend is now live in Cloud Run revision
 `workbookcare-api-beta-00003-bsp` from immutable image
 `sha256:5ab7065c318c2325f6124b41787e8297f4de6f428329151b6a1ca45c7cf35703`.
@@ -63,8 +63,9 @@ now limits each authenticated Access assertion to five upload attempts per minut
 tests prove both over-limit files and rate-limited attempts stop before R2.
 The product owner reports browser CSV download success and completed synthetic
 browser re-validation; the comparison summary changed from `3/3` to `2/1`.
-The active project budget is KRW 10,000 with 50%, 90%, and 100% alerts. Remaining
-direct-Gateway HMAC-negative and observed-lifecycle-evidence gates remain open.
+The active project budget is KRW 10,000 with 50%, 90%, and 100% alerts. The
+direct-Gateway HMAC-negative gate is evidenced and its temporary route is
+removed; only observed lifecycle-expiry evidence remains open.
 A private synthetic lifecycle probe was remotely written and read back at
 2026-09-09 12:37 UTC without emitting its key or contents; it is awaiting the
 configured one-day expiration. No invitations, real workbook use, repair, payment,

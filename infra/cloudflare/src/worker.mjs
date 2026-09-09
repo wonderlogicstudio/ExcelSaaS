@@ -1,6 +1,5 @@
 const SCAN_ROUTE = "/api/v1/scans";
 const FEEDBACK_ROUTE = "/api/v1/feedback";
-const HMAC_NEGATIVE_TEST_ROUTE = "/api/v1/h2-control-plane-negative";
 const BACKEND_SCAN_PATH = "/v1/scans";
 const ACCESS_ASSERTION_HEADER = "cf-access-jwt-assertion";
 const SIGNATURE_HEADER = "x-workbookcare-signature";
@@ -41,9 +40,6 @@ export default {
     }
     if (url.pathname === FEEDBACK_ROUTE) {
       return handleFeedback(request, env);
-    }
-    if (url.pathname === HMAC_NEGATIVE_TEST_ROUTE) {
-      return handleHmacNegativeTest(request, env);
     }
     if (url.pathname.startsWith("/api/")) {
       return errorResponse(404, "API_ROUTE_NOT_FOUND");
@@ -193,54 +189,6 @@ export async function handleFeedback(request, env) {
   );
 }
 
-/**
- * Temporary, synthetic-only H2 control verification. A valid Access assertion
- * is forwarded to Gateway without the Worker HMAC; success means the FastAPI
- * boundary rejected it. This route neither accepts a file nor reads/writes R2.
- * Remove it immediately after the one owner-approved verification completes.
- */
-export async function handleHmacNegativeTest(request, env) {
-  if (request.method !== "GET") {
-    return errorResponse(405, "METHOD_NOT_ALLOWED", { Allow: "GET" });
-  }
-  if (!negativeTestEnvironmentIsPresent(env)) {
-    return errorResponse(503, "CONTROL_PLANE_NOT_CONFIGURED");
-  }
-
-  const assertion = request.headers.get(ACCESS_ASSERTION_HEADER);
-  if (!assertion) {
-    return errorResponse(401, "ACCESS_ASSERTION_REQUIRED");
-  }
-  try {
-    await verifyAccessAssertion(assertion, env);
-  } catch {
-    return errorResponse(401, "ACCESS_ASSERTION_INVALID");
-  }
-  if (!await uploadRateLimitAllows(assertion, env)) {
-    return errorResponse(429, "UPLOAD_RATE_LIMITED", { "Retry-After": "60" });
-  }
-
-  try {
-    const gatewayResponse = await fetch(env.API_GATEWAY_URL, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${assertion}`,
-        "Content-Type": "application/octet-stream",
-      },
-      body: new Uint8Array([0]),
-    });
-    if (gatewayResponse.status === 401) {
-      return Response.json(
-        { status: "HMAC_NEGATIVE_CONFIRMED" },
-        { headers: { "Cache-Control": "no-store" } },
-      );
-    }
-  } catch {
-    // Deliberately hide control-plane/network details from the browser and logs.
-  }
-  return errorResponse(502, "HMAC_NEGATIVE_CHECK_FAILED");
-}
-
 function requiredEnvironmentIsPresent(env) {
   return Boolean(
     env.UPLOADS
@@ -262,16 +210,6 @@ function feedbackEnvironmentIsPresent(env) {
       && env.FEEDBACK_FORMULA_AUDIT_RULE_SET_VERSION
       && env.FEEDBACK_RELEASE_CANDIDATE_VERSION
       && env.APP_ENV,
-  );
-}
-
-function negativeTestEnvironmentIsPresent(env) {
-  return Boolean(
-    env.API_GATEWAY_URL
-      && env.CLOUDFLARE_ACCESS_TEAM_DOMAIN
-      && env.CLOUDFLARE_ACCESS_AUD
-      && env.WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET
-      && env.UPLOAD_RATE_LIMITER,
   );
 }
 

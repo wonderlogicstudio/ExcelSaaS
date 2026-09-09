@@ -10,9 +10,9 @@ Formula Audit, add an account system, payment, repair, AI, a general database, o
 any claim that has not been verified.
 
 H2 remains a hard dependency. The existing one-day R2 lifecycle probe must be
-observed expired after its eligibility time, and the owner-session HMAC-negative
-probe must be confirmed and its temporary route removed. Until then, H3 can make
-progress but cannot declare the beta ready.
+observed expired after its eligibility time. The owner-session HMAC-negative
+probe has passed and its temporary route has been removed. Until the lifecycle
+event is observed, H3 can make progress but cannot declare the beta ready.
 
 ## H3 design additions
 
@@ -111,8 +111,6 @@ support-contact decisions as human blockers before any invitation.
 ## Human-owned items
 
 - Confirm the one-day lifecycle probe has expired after it becomes eligible.
-- Complete the owner-session HMAC-negative confirmation, then remove its
-  temporary route.
 - Choose a real support/deletion-request contact before an invitation.
 - Review and approve final privacy/terms wording with appropriate legal advice.
 - Confirm Cloudflare billing-alert options and recipients in the account UI.

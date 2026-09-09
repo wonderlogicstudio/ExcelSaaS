@@ -14,10 +14,10 @@
   `3/3` to `2/1`.
 - [x] Tokenless Worker, Gateway, and Cloud Run negative probes are denied at
   their respective boundaries.
-- [x] Worker version `492348e8-96fa-4dd8-b035-beb650dd2074` explicitly sends
-  `/api/*` to Worker code before the SPA asset fallback. This corrects the
-  temporary HMAC-check route being rendered as the web application; an
-  authenticated owner-session result is still required.
+- [x] Worker-first `/api/*` routing corrected the SPA fallback. The authenticated
+  owner session returned `HMAC_NEGATIVE_CONFIRMED`; Worker version
+  `762582e4-2d79-4e8b-be38-b5add1add5c2` then removed the temporary route and its
+  dedicated test.
 - [x] The private `FEEDBACK` KV binding is deployed; a tokenless feedback-route
   request is redirected to Cloudflare Access rather than reaching the Worker.
 - [x] H3 backend live recheck, 2026-09-09 14:09 UTC: revision
@@ -31,8 +31,6 @@
 
 ## Remaining synthetic verification
 
-- [ ] Owner-session direct-Gateway no-HMAC probe returns the expected HMAC denial;
-  immediately remove its temporary Worker route after evidence is recorded.
 - [ ] Observe the remote content-free R2 lifecycle probe expired after
   2026-09-10 12:37:58 UTC (expiry may be delayed by the provider after eligibility).
 - [ ] Browser repeats normal upload, finding-zero sample, multi-finding sample,

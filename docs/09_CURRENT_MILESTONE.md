@@ -10,9 +10,10 @@
 > Access, private-R2, Gateway, or non-anonymous Cloud Run boundaries.
 >
 > **H2 dependency retained:** H2's deployed infrastructure is a prerequisite, but
-> its observed one-day R2 lifecycle expiration and owner-session HMAC-negative
-> confirmation remain open. H3 may implement and verify its own controls, but it
-> cannot receive a Hosted Beta Ready verdict until those H2 gates are evidenced.
+> its observed one-day R2 lifecycle expiration remains open. The owner-session
+> HMAC-negative confirmation passed and its temporary route was removed. H3 may
+> implement and verify its own controls, but it cannot receive a Hosted Beta Ready
+> verdict until the lifecycle gate is evidenced.
 > The authoritative H3 scope, additions, and acceptance gates are in
 > [`44_HOSTED_BETA_H3_OPERATIONAL_HARDENING.md`](44_HOSTED_BETA_H3_OPERATIONAL_HARDENING.md).
 
@@ -27,9 +28,10 @@
 > existing KRW 10,000 budget alerts are visible at 50%, 90%, and 100%. Browser
 > CSV download has been reported successful. The product owner also completed
 > browser re-validation of the synthetic comparison, whose summary changed from
-> `3/3` to `2/1`. H2 is not complete: direct-Gateway HMAC-negative verification
-> using a valid Access assertion and observation of the remote lifecycle probe's one-day
-> expiration (created 2026-09-09 12:37 UTC) remain open. See
+> `3/3` to `2/1`. The direct-Gateway HMAC-negative verification using a valid
+> Access assertion passed, and its temporary Worker route was removed. H2 still
+> awaits observation of the remote lifecycle probe's one-day expiration (created
+> 2026-09-09 12:37 UTC). See
 > `42_HOSTED_BETA_H2_PREFLIGHT.md`.
 
 > **Active scope override (2026-09-08): COMPLETED (2026-09-09) — Cloud Run preparation only; STOPPED BEFORE DEPLOYMENT.**
