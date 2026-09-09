@@ -53,8 +53,12 @@ foreach ($placeholder in $replacements.Keys) {
 )
 
 try {
-  & $gcloudExecutable api-gateway apis describe $ApiName --project $ProjectId *> $null
-  if ($LASTEXITCODE -ne 0) {
+  $previousErrorActionPreference = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  & $gcloudExecutable api-gateway apis describe $ApiName --project $ProjectId 2>$null
+  $apiExists = $LASTEXITCODE -eq 0
+  $ErrorActionPreference = $previousErrorActionPreference
+  if (-not $apiExists) {
     & $gcloudExecutable api-gateway apis create $ApiName --project $ProjectId
   }
   if ($LASTEXITCODE -ne 0) { throw "API Gateway API creation/check failed." }
@@ -66,9 +70,13 @@ try {
     --project $ProjectId
   if ($LASTEXITCODE -ne 0) { throw "API Gateway API config creation failed." }
 
+  $previousErrorActionPreference = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
   & $gcloudExecutable api-gateway gateways describe $GatewayName `
-    --location $GatewayRegion --project $ProjectId *> $null
-  if ($LASTEXITCODE -eq 0) {
+    --location $GatewayRegion --project $ProjectId 2>$null
+  $gatewayExists = $LASTEXITCODE -eq 0
+  $ErrorActionPreference = $previousErrorActionPreference
+  if ($gatewayExists) {
     & $gcloudExecutable api-gateway gateways update $GatewayName `
       --api $ApiName --api-config $configName `
       --location $GatewayRegion --project $ProjectId
