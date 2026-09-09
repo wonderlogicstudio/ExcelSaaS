@@ -45,7 +45,11 @@ $replacements = @{
 foreach ($placeholder in $replacements.Keys) {
   $content = $content.Replace($placeholder, $replacements[$placeholder])
 }
-Set-Content -Path $renderedSpec -Value $content -Encoding utf8NoBOM
+[System.IO.File]::WriteAllText(
+  $renderedSpec,
+  $content,
+  (New-Object System.Text.UTF8Encoding($false))
+)
 
 try {
   gcloud api-gateway apis describe $ApiName --project $ProjectId *> $null
