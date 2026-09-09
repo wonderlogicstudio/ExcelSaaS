@@ -16,6 +16,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$gcloudExecutable = (Get-Command "gcloud.cmd" -ErrorAction Stop).Source
 if ($GatewayRegion -ne "asia-northeast1") {
   throw "H2 has an explicit Tokyo-only approval. Use asia-northeast1 or obtain a new approval."
 }
@@ -52,33 +53,33 @@ foreach ($placeholder in $replacements.Keys) {
 )
 
 try {
-  gcloud api-gateway apis describe $ApiName --project $ProjectId *> $null
+  & $gcloudExecutable api-gateway apis describe $ApiName --project $ProjectId *> $null
   if ($LASTEXITCODE -ne 0) {
-    gcloud api-gateway apis create $ApiName --project $ProjectId
+    & $gcloudExecutable api-gateway apis create $ApiName --project $ProjectId
   }
   if ($LASTEXITCODE -ne 0) { throw "API Gateway API creation/check failed." }
 
-  gcloud api-gateway api-configs create $configName `
+  & $gcloudExecutable api-gateway api-configs create $configName `
     --api $ApiName `
     --openapi-spec $renderedSpec `
     --backend-auth-service-account $GatewayInvokerServiceAccount `
     --project $ProjectId
   if ($LASTEXITCODE -ne 0) { throw "API Gateway API config creation failed." }
 
-  gcloud api-gateway gateways describe $GatewayName `
+  & $gcloudExecutable api-gateway gateways describe $GatewayName `
     --location $GatewayRegion --project $ProjectId *> $null
   if ($LASTEXITCODE -eq 0) {
-    gcloud api-gateway gateways update $GatewayName `
+    & $gcloudExecutable api-gateway gateways update $GatewayName `
       --api $ApiName --api-config $configName `
       --location $GatewayRegion --project $ProjectId
   } else {
-    gcloud api-gateway gateways create $GatewayName `
+    & $gcloudExecutable api-gateway gateways create $GatewayName `
       --api $ApiName --api-config $configName `
       --location $GatewayRegion --project $ProjectId
   }
   if ($LASTEXITCODE -ne 0) { throw "API Gateway gateway deployment failed." }
 
-  gcloud api-gateway gateways describe $GatewayName `
+  & $gcloudExecutable api-gateway gateways describe $GatewayName `
     --location $GatewayRegion --project $ProjectId `
     --format="value(defaultHostname)"
 } finally {
