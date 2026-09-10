@@ -1,6 +1,31 @@
 # Current progress
 
-## Current override — 2026-09-09
+## Current product work — 2026-09-10
+
+**Product P1 — Free-result navigation: IMPLEMENTED / VISUAL REVIEW PENDING.** The owner requested product
+development only, followed by full regression verification, commit, and GitHub
+synchronization. The selected scope adds browser-memory filters for severity,
+sheet, and local handling status to the existing free findings. See `docs/48`.
+Read-only startup confirmed a clean `main` and local/remote commit `4faae1b`.
+Baseline `scripts/verify.ps1` passed: web 30, Worker 13, API 72, TypeScript and
+production build, Ruff, and 36 exact M4-C supplied-pack candidates with no extras.
+One pre-existing Starlette/httpx deprecation warning remains.
+
+Implemented severity/sheet/status filters, visible match counts, reset, and a
+priority shortcut. Workbook-level findings remain selectable. Empty filters do
+not imply a clean scan. Status edits update the filtered list and preserve focus;
+new scans reset filters. Summary, quote, CSV, and local statuses remain intact.
+Post-change `scripts/verify.ps1` passed: web 36 (six new behavior regressions),
+Worker 13, API 72, TypeScript/build, Ruff, and 36 exact supplied-pack candidates
+with no extras. All test inputs are synthetic. No browser is connected to the
+computer-use runtime (`apps: []`, `browsers: []`), so desktop/mobile visual review
+and screenshots remain pending. See `MILESTONE_REVIEW.md` for the review package.
+
+No H2/H3 verification or deployment is resumed in this product task. Operational
+evidence and open gates below are retained; P1 does not authorize Hosted Beta
+Ready, external participants, or real workbook processing.
+
+## Separate operational status — 2026-09-09
 
 **Hosted Beta H3 is approved and in progress.** H3 prepares the already deployed,
 synthetic-only beta for a later product-owner decision about invitations. It does

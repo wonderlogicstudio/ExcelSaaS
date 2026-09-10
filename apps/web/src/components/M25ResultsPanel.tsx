@@ -1,3 +1,4 @@
+import { useRef, useState } from 'react';
 import {
   AlertOctagon,
   AlertTriangle,
@@ -78,6 +79,12 @@ const userStatusOptions: FindingUserStatus[] = [
   'IGNORED',
   'MARKED_NORMAL',
 ];
+
+type SeverityFilter = 'all' | 'priority' | Severity;
+
+function findingSheetOption(finding: Finding): string {
+  return finding.sheet ? `sheet:${finding.sheet}` : 'workbook';
+}
 
 const completedScope = [
   '파일 구조 검사',
@@ -248,7 +255,11 @@ function ScanScopeCard({ truncated }: { truncated: boolean }) {
   );
 }
 
-export function M25ResultsPanel({
+export function M25ResultsPanel(props: ResultsPanelProps) {
+  return <ResultsContent key={`${props.result.analysis_id}:${props.result.scanned_at}`} {...props} />;
+}
+
+function ResultsContent({
   result,
   isDemo,
   statuses = {},
@@ -258,6 +269,35 @@ export function M25ResultsPanel({
   onPrepareRevalidation = () => undefined,
   onReset,
 }: ResultsPanelProps) {
+  const [severityFilter, setSeverityFilter] = useState<SeverityFilter>('all');
+  const [sheetFilter, setSheetFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState<FindingUserStatus | 'all'>('all');
+  const findingsHeadingRef = useRef<HTMLDivElement>(null);
+  const statusFilterRef = useRef<HTMLSelectElement>(null);
+  const filtersActive = severityFilter !== 'all' || sheetFilter !== 'all' || statusFilter !== 'all';
+  const sheetOptions = [...new Map(result.findings.map((finding) => [
+    findingSheetOption(finding), finding.sheet || '통합문서 수준 (시트 지정 없음)',
+  ])).entries()];
+  const hasPriorityFindings = result.findings.some((finding) => finding.severity !== 'info');
+  const visibleFindings = result.findings.filter((finding) => (
+    (severityFilter === 'all' || (severityFilter === 'priority'
+      ? finding.severity !== 'info'
+      : finding.severity === severityFilter))
+    && (sheetFilter === 'all' || findingSheetOption(finding) === sheetFilter)
+    && (statusFilter === 'all' || (statuses[findingIdentity(finding)] ?? 'UNREVIEWED') === statusFilter)
+  ));
+  const resetFilters = () => {
+    setSeverityFilter('all');
+    setSheetFilter('all');
+    setStatusFilter('all');
+  };
+  const showPriorityFindings = () => {
+    setSeverityFilter('priority');
+    setSheetFilter('all');
+    setStatusFilter('all');
+    findingsHeadingRef.current?.focus({ preventScroll: true });
+    findingsHeadingRef.current?.scrollIntoView({ block: 'start' });
+  };
   const { summary, workbook, quote } = result;
   const riskLabel = summary.risk_band === 'low'
     ? '낮음'
@@ -395,7 +435,8 @@ export function M25ResultsPanel({
             <button
               className="button button--outline button--small"
               type="button"
-              onClick={() => document.querySelector('#priority-findings')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              onClick={showPriorityFindings}
+              disabled={!hasPriorityFindings}
             >
               우선 문제 확인하기
             </button>
@@ -406,21 +447,65 @@ export function M25ResultsPanel({
 
         <div className="result-columns">
           <div className="findings-panel">
-            <div className="panel-heading" id="priority-findings">
+            <div className="panel-heading" id="priority-findings" ref={findingsHeadingRef} tabIndex={-1}>
               <div><span className="card-label">근거가 있는 무료 결과</span><h3 id="all-findings-title">전체 Finding 목록</h3></div>
-              <span>{result.findings.length}개 전체 표시 · 클릭해 자세히 보기</span>
+              <span role="status" aria-live="polite" aria-atomic="true">
+                {filtersActive
+                  ? `총 ${result.findings.length}개 중 ${visibleFindings.length}개 표시`
+                  : `${result.findings.length}개 전체 표시 · 클릭해 자세히 보기`}
+              </span>
             </div>
-            {result.findings.length > 0 ? (
-              <div className="finding-list">{result.findings.map((finding) => (
+            {result.findings.length > 0 && (
+              <fieldset className="finding-filters" aria-describedby="finding-filter-note">
+                <legend>찾아볼 항목 선택</legend>
+                <div className="finding-filters__controls">
+                  <label>
+                    <span>중요도</span>
+                    <select value={severityFilter} onChange={(event) => setSeverityFilter(event.target.value as SeverityFilter)}>
+                      <option value="all">모든 중요도</option>
+                      <option value="priority">중요·주의 우선 확인</option>
+                      {(['critical', 'warning', 'info'] as const).map((severity) => (
+                        <option key={severity} value={severity}>{severityLabel[severity]}</option>
+                      ))}
+                    </select>
+                  </label>
+                  <label>
+                    <span>시트</span>
+                    <select value={sheetFilter} onChange={(event) => setSheetFilter(event.target.value)}>
+                      <option value="all">모든 위치</option>
+                      {sheetOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+                    </select>
+                  </label>
+                  <label>
+                    <span>처리 상태로 보기</span>
+                    <select ref={statusFilterRef} value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as FindingUserStatus | 'all')}>
+                      <option value="all">모든 처리 상태</option>
+                      {userStatusOptions.map((status) => <option key={status} value={status}>{userStatusLabel[status]}</option>)}
+                    </select>
+                  </label>
+                </div>
+                <div className="finding-filters__footer">
+                  <p id="finding-filter-note">필터는 목록에만 적용됩니다. 진단 요약과 CSV는 전체 결과를 기준으로 합니다.</p>
+                  <button className="button button--outline button--small" type="button" onClick={resetFilters} disabled={!filtersActive}>필터 초기화</button>
+                </div>
+              </fieldset>
+            )}
+            {visibleFindings.length > 0 ? (
+              <div className="finding-list">{visibleFindings.map((finding) => (
                 <FindingCard
                   key={findingIdentity(finding)}
                   finding={finding}
                   status={statuses[findingIdentity(finding)] ?? 'UNREVIEWED'}
-                  onStatusChange={(status) => onStatusChange(findingIdentity(finding), status)}
+                  onStatusChange={(status) => {
+                    onStatusChange(findingIdentity(finding), status);
+                    if (statusFilter !== 'all' && statusFilter !== status) statusFilterRef.current?.focus();
+                  }}
                   feedbackRepository={feedbackRepository}
                   scannerVersion={result.scanner_version}
                 />
               ))}</div>
+            ) : result.findings.length > 0 ? (
+              <p className="empty-result-note">선택한 조건에 맞는 항목이 없습니다. 필터를 초기화하면 전체 발견 항목을 볼 수 있습니다. 이 표시는 파일에 문제가 없다는 뜻이 아닙니다.</p>
             ) : (
               <p className="empty-result-note">현재 무료 검사 범위에서는 구조적 위험 신호를 발견하지 못했습니다. 수식의 업무적 정확성, 계산 결과, 업무 규칙 및 통계 모델은 검증하지 않았습니다.</p>
             )}

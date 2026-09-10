@@ -1,6 +1,27 @@
 # Current milestone
 
-> **Latest active scope (2026-09-09): Hosted Beta H3 is APPROVED and IN PROGRESS.**
+> **Current product scope (2026-09-10): Product P1 — Free-result navigation is APPROVED; implementation and automated verification passed, visual review is pending.**
+> The owner's current instruction authorizes a bounded next product improvement,
+> local regression verification, commit, and GitHub synchronization. P1 adds only
+> in-memory severity/sheet/handling-status filters to the existing free Finding
+> list, an explicit priority shortcut, match counts, reset, and safe empty states.
+> Acceptance: combine filters; preserve full scan summary, quote, CSV and local
+> statuses; reset filters for a new scan; keep keyboard/mobile operation usable;
+> pass `scripts/verify.ps1` and exercise the synthetic sample flow.
+>
+> H2/H3 operational work continues separately. Do not resume its remaining
+> verification, inspect live cloud resources, deploy, enable public Formula Audit
+> or feedback, invite users, process real files, or start M3/M3.5/M5, repair,
+> payment, accounts, calculation, or AI. The existing Hosted Beta NOT READY status
+> and its unresolved gates remain unchanged. Scope and rationale:
+> [`48_PRODUCT_P1_RESULT_NAVIGATION.md`](48_PRODUCT_P1_RESULT_NAVIGATION.md).
+> Full local verification passed: web 36, Worker 13, API 72, TypeScript/build,
+> Ruff, and the supplied M4-C pack (36 exact candidates, no extras). The connected
+> computer-use runtime reports no browsers, so desktop/mobile visual acceptance
+> is pending rather than claimed. Review: `MILESTONE_REVIEW.md`. Stop after the
+> authorized commit/GitHub synchronization; do not advance to another milestone.
+
+> **Separate operational scope (2026-09-09): Hosted Beta H3 is APPROVED and IN PROGRESS.**
 > H3 hardens the already-deployed, synthetic-only hosted beta before any external
 > invitation. It may add privacy-safe operations, protected category-only feedback
 > persistence, public beta notices, safe-error and monitoring contracts, final

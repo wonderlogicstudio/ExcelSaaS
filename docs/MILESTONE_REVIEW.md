@@ -1,4 +1,65 @@
-# Milestone review — H2 upload routing correction
+# Milestone review — Product P1 free-result navigation
+
+**2026-09-10: IMPLEMENTED / AUTOMATED CHECKS PASSED / VISUAL REVIEW PENDING.**
+
+The free result list previously required scanning every row to find the next
+item to check. Users can now combine severity, sheet, and local handling-status
+filters, see matching/total counts, and reset to all findings. The priority
+shortcut shows existing critical/warning findings across all locations and
+statuses. No-match text explicitly avoids a clean-workbook claim.
+
+This product slice was selected under the owner's instruction to continue
+bounded product development and synchronize GitHub. It neither resumes nor
+completes H2/H3. Operational evidence below remains historical and unchanged.
+
+## Changes and boundaries
+
+- `M25ResultsPanel.tsx`: memory-only filters; separately selectable workbook-level
+  locations; reset per analysis ID/timestamp; native controls, live counts, and
+  focus recovery when a status edit removes a row from the current filter.
+- `styles.css`: scoped filter layout, visible focus, 44px selects, and a single
+  column below 761px. Priority scrolling uses the existing CSS motion policy.
+- Six new behavioral regressions cover filter combinations, zero matches,
+  location distinction, priority, status retention/focus, new-scan reset, and
+  complete CSV/scan invariance.
+- Existing full summary, risk, quote, type/status totals, re-validation, and CSV
+  remain based on all findings. Original finding order is preserved. Filtering
+  does not send requests or write browser storage, URLs, logs, or feedback.
+- No API, scanner, Worker, cloud configuration, dependencies, feature gates,
+  privacy/retention policy, public Formula Audit/feedback, or deployment change.
+  Real files, invitations, repair, payment, accounts, calculation, AI, and M5 are
+  excluded. H2/H3 readiness remains unresolved in its own operational workflow.
+
+## Verification
+
+- Startup: clean local `main`, local and remote `4faae1b`.
+- Before change: `scripts/verify.ps1` passed with web 30 / Worker 13 / API 72.
+- After change: the same full command passed with web 36 / Worker 13 / API 72,
+  TypeScript and production build, Ruff, and M4-C supplied-pack verification
+  (36 exact candidates, no extras).
+- Existing synthetic sample-flow, same-session re-validation, internal-only
+  Formula Audit, API security, and Worker boundary regressions pass.
+- A pre-existing Starlette/httpx deprecation warning remains; dependencies were
+  not changed for this frontend scope.
+- Actual desktop/mobile visual checks could not run: the connected UI runtime
+  returned no available browser and an empty app/browser inventory. No screenshot
+  or real-browser completion is claimed. P1 visual acceptance remains pending.
+
+## Remaining local visual review
+
+With a connected local browser and synthetic sample only, open the development
+app and choose `샘플 결과 보기`. At 1440px and 390px, check labelled selects,
+visible focus, absence of horizontal overflow, priority navigation, combined
+filters, no-match recovery, and expanded evidence. Verify keyboard selection and
+reduced-motion behavior. Use `수정 후 다시 검사` with synthetic data to check the
+new result starts with all findings. Both CSV buttons must still export the
+complete current result. This checklist is not permission to deploy or resume
+live H2/H3 checks.
+
+Stop after the authorized Git commit and GitHub synchronization. Any next product
+slice and final P1 acceptance remain a product-owner review decision.
+
+## Historical review — H2 upload routing correction
 
 **2026-09-09: H2 IN PROGRESS, synthetic-only.** This current section supersedes
 the historical preparation/preflight reviews below. It is not H2 completion or

@@ -1,8 +1,9 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import type { ComponentProps } from 'react';
+import { useState, type ComponentProps } from 'react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { demoResult } from '../data/demo';
-import type { ScanResult } from '../types';
+import type { FindingUserStatus, ScanResult } from '../types';
+import * as diagnosisCsv from '../lib/diagnosisCsv';
 import { M25ResultsPanel } from './M25ResultsPanel';
 
 function renderResult(
@@ -50,7 +51,10 @@ function withFindings(findings: ScanResult['findings'], summary: Partial<ScanRes
 }
 
 describe('M2.5 results panel', () => {
-  afterEach(cleanup);
+  afterEach(() => {
+    cleanup();
+    vi.restoreAllMocks();
+  });
 
   it('shows the completed and unperformed free-scan scope before the result summary', () => {
     renderResult(demoResult);
@@ -146,5 +150,113 @@ describe('M2.5 results panel', () => {
     expect(screen.getAllByText('사용자 확인 필요').length).toBeGreaterThan(0);
     expect(screen.getAllByText('전문가 검토 필요').length).toBeGreaterThan(0);
     expect(screen.getAllByText('정보 제공 · 즉시 수정 불필요').length).toBeGreaterThan(0);
+  });
+
+  const filterResult = withFindings([
+    { ...demoResult.findings[0], id: 'triage-1', finding_key: 'triage-1', sheet: '합성 시트', cell: 'A1', severity: 'critical' },
+    { ...demoResult.findings[0], id: 'triage-2', finding_key: 'triage-2', sheet: '합성 시트', cell: 'A2', severity: 'warning' },
+    { ...demoResult.findings[0], id: 'triage-3', finding_key: 'triage-3', sheet: 'all', cell: 'A3', severity: 'info' },
+    { ...demoResult.findings[0], id: 'triage-4', finding_key: 'triage-4', sheet: null, cell: null, severity: 'warning' },
+  ]);
+
+  it('combines filters and distinguishes no matches from a clean scan without changing totals or CSV', () => {
+    const statuses: Record<string, FindingUserStatus> = { 'triage-2': 'REVIEWED' };
+    const download = vi.spyOn(diagnosisCsv, 'downloadDiagnosisCsv').mockImplementation(() => undefined);
+    const baseline = JSON.stringify(filterResult);
+    const baselineCsv = diagnosisCsv.buildDiagnosisCsv(filterResult, statuses);
+    renderResult(filterResult, { statuses });
+
+    fireEvent.change(screen.getByLabelText('중요도'), { target: { value: 'warning' } });
+    fireEvent.change(screen.getByLabelText('시트'), { target: { value: 'sheet:합성 시트' } });
+    fireEvent.change(screen.getByLabelText('처리 상태로 보기'), { target: { value: 'REVIEWED' } });
+    expect(document.querySelectorAll('details.finding')).toHaveLength(1);
+    expect(document.querySelector('details.finding')).toHaveTextContent('A2');
+    expect(screen.getByRole('status')).toHaveTextContent('총 4개 중 1개 표시');
+    expect(screen.getByText('규칙 기반 우선순위 점수 62 / 100')).toBeInTheDocument();
+    expect(screen.getByText('29,000원 ~ 49,000원')).toBeInTheDocument();
+
+    fireEvent.change(screen.getByLabelText('처리 상태로 보기'), { target: { value: 'UNREVIEWED' } });
+    expect(document.querySelectorAll('details.finding')).toHaveLength(0);
+    expect(screen.getByText(/선택한 조건에 맞는 항목이 없습니다/)).toHaveTextContent('파일에 문제가 없다는 뜻이 아닙니다');
+    expect(screen.queryByText('현재 무료 검사 범위에서는 구조적 위험 신호를 발견하지 못했습니다.')).not.toBeInTheDocument();
+    for (const button of screen.getAllByRole('button', { name: 'CSV 결과 다운로드' })) fireEvent.click(button);
+    expect(download).toHaveBeenCalledTimes(2);
+    expect(download).toHaveBeenNthCalledWith(1, filterResult, statuses);
+    expect(download).toHaveBeenNthCalledWith(2, filterResult, statuses);
+    expect(JSON.stringify(filterResult)).toBe(baseline);
+    expect(diagnosisCsv.buildDiagnosisCsv(filterResult, statuses)).toBe(baselineCsv);
+
+    fireEvent.click(screen.getByRole('button', { name: '필터 초기화' }));
+    expect(document.querySelectorAll('details.finding')).toHaveLength(4);
+    expect(screen.getByRole('status')).toHaveTextContent('4개 전체 표시');
+    expect(screen.getByRole('button', { name: '필터 초기화' })).toBeDisabled();
+  });
+
+  it('keeps workbook-level findings and a sheet named all individually selectable', () => {
+    renderResult(filterResult);
+    fireEvent.change(screen.getByLabelText('시트'), { target: { value: 'workbook' } });
+    expect(document.querySelectorAll('details.finding')).toHaveLength(1);
+    expect(document.querySelector('details.finding .finding__location')).toBeNull();
+    fireEvent.change(screen.getByLabelText('시트'), { target: { value: 'sheet:all' } });
+    expect(document.querySelectorAll('details.finding')).toHaveLength(1);
+    expect(document.querySelector('details.finding')).toHaveTextContent('all · A3');
+  });
+
+  it('opens priority findings across all sheets and statuses and moves keyboard focus to the list heading', () => {
+    renderResult(filterResult);
+    fireEvent.change(screen.getByLabelText('중요도'), { target: { value: 'info' } });
+    fireEvent.change(screen.getByLabelText('시트'), { target: { value: 'sheet:all' } });
+    fireEvent.change(screen.getByLabelText('처리 상태로 보기'), { target: { value: 'REVIEWED' } });
+    fireEvent.click(screen.getByRole('button', { name: '우선 문제 확인하기' }));
+    expect(screen.getByLabelText('중요도')).toHaveValue('priority');
+    expect(screen.getByLabelText('시트')).toHaveValue('all');
+    expect(screen.getByLabelText('처리 상태로 보기')).toHaveValue('all');
+    expect(document.querySelectorAll('details.finding')).toHaveLength(3);
+    expect(document.querySelectorAll('details.finding--info')).toHaveLength(0);
+    expect(document.querySelector('#priority-findings')).toHaveFocus();
+  });
+
+  it('updates the filtered work list as a local status changes and preserves status after clearing filters', () => {
+    const storage = vi.spyOn(Storage.prototype, 'setItem');
+    const fetch = vi.spyOn(globalThis, 'fetch');
+    function StatefulResult() {
+      const [statuses, setStatuses] = useState<Record<string, FindingUserStatus>>({});
+      return <M25ResultsPanel result={filterResult} isDemo={false} statuses={statuses} onReset={() => undefined}
+        onStatusChange={(key, status) => setStatuses((current) => ({ ...current, [key]: status }))} />;
+    }
+    render(<StatefulResult />);
+    fireEvent.change(screen.getByLabelText('처리 상태로 보기'), { target: { value: 'UNREVIEWED' } });
+    const first = document.querySelector('details.finding')!;
+    fireEvent.click(first.querySelector('summary')!);
+    fireEvent.change(first.querySelector('select')!, { target: { value: 'REVIEWED' } });
+    expect(document.querySelectorAll('details.finding')).toHaveLength(3);
+    expect(screen.getByLabelText('처리 상태로 보기')).toHaveFocus();
+    expect(screen.getByLabelText('처리 상태로 보기')).toHaveValue('UNREVIEWED');
+    fireEvent.click(screen.getByRole('button', { name: '필터 초기화' }));
+    expect(document.querySelectorAll('details.finding')).toHaveLength(4);
+    expect(document.querySelector('details.finding select')).toHaveValue('REVIEWED');
+    expect(storage).not.toHaveBeenCalled();
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it('resets filters when a new scan arrives so new findings cannot be silently hidden', () => {
+    const { rerender } = renderResult(filterResult);
+    fireEvent.change(screen.getByLabelText('중요도'), { target: { value: 'critical' } });
+    fireEvent.change(screen.getByLabelText('시트'), { target: { value: 'sheet:합성 시트' } });
+    fireEvent.change(screen.getByLabelText('처리 상태로 보기'), { target: { value: 'REVIEWED' } });
+    rerender(<M25ResultsPanel result={{ ...filterResult, analysis_id: 'next-synthetic-scan' }} isDemo={false} onReset={() => undefined} />);
+    expect(screen.getByLabelText('중요도')).toHaveValue('all');
+    expect(screen.getByLabelText('시트')).toHaveValue('all');
+    expect(screen.getByLabelText('처리 상태로 보기')).toHaveValue('all');
+    expect(document.querySelectorAll('details.finding')).toHaveLength(4);
+  });
+
+  it('does not offer a priority shortcut when only information or no findings exist', () => {
+    const { rerender } = renderResult(withFindings([filterResult.findings[2]]));
+    expect(screen.getByRole('button', { name: '우선 문제 확인하기' })).toBeDisabled();
+    expect(document.querySelectorAll('details.finding')).toHaveLength(1);
+    rerender(<M25ResultsPanel result={withFindings([])} isDemo={false} onReset={() => undefined} />);
+    expect(screen.getByRole('button', { name: '우선 문제 확인하기' })).toBeDisabled();
+    expect(screen.queryByRole('group', { name: '찾아볼 항목 선택' })).not.toBeInTheDocument();
   });
 });

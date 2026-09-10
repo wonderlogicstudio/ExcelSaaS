@@ -124,6 +124,20 @@ users or start H3 until deployment, access, deletion, limit, timeout, privacy, a
 synthetic negative checks pass. Do not relax Cloud Run IAM or place a long-lived
 Google service-account key in Cloudflare.
 
+## Product P1 — Free-result navigation — IMPLEMENTED / VISUAL REVIEW PENDING (2026-09-10)
+
+The owner requested bounded product development independently of the remaining
+H2/H3 operational checks. The selected next slice improves the existing M2.5
+free result workflow: in-memory severity, sheet, and handling-status filters;
+an explicit priority shortcut; visible match counts and reset. Summary, quote,
+CSV, scanner rules, and API contracts stay intact. Details and acceptance gates:
+`48_PRODUCT_P1_RESULT_NAVIGATION.md`.
+
+This does not complete H2/H3, begin external M3/M3.5 validation, or approve M5.
+Later candidates are clearer location-level re-validation comparisons, then a
+separately scoped M5 user-declared rule contract. No candidate is automatically
+approved by being listed here.
+
 ## M5 — Business-rule validation
 
 Deliverables:
