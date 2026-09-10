@@ -32,7 +32,9 @@
 ## Remaining synthetic verification
 
 - [ ] Observe the remote content-free R2 lifecycle probe expired after
-  2026-09-10 12:37:58 UTC (expiry may be delayed by the provider after eligibility).
+  2026-09-10 12:37:58 UTC. A 2026-09-10 22:21 KST read-only check still reported
+  two objects / 482 B; the enabled all-prefix rule has no bucket lock, and no
+  manual deletion was performed (provider expiry may be delayed after eligibility).
 - [ ] Browser repeats normal upload, finding-zero sample, multi-finding sample,
   limit error, malformed input, re-validation, and CSV flow on the deployed URL.
 - [ ] Formula Audit remains inaccessible in the public hosted build. Test the

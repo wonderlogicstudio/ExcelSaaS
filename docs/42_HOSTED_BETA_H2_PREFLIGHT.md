@@ -134,6 +134,14 @@ immediately, so direct remote read is the creation evidence. An observed lifecyc
 expiration must wait for the existing one-day rule to elapse; normal and malformed
 terminal-path cleanup have already been verified immediately.
 
+Read-only recheck at 2026-09-10 22:21 KST found `object_count: 2` and
+`bucket_size: 482 B`; the probe therefore cannot yet be recorded as expired. The
+all-prefix `delete-uploads-after-1-day` rule remains enabled, and no bucket lock
+rules are configured. No object was manually deleted, preserving the integrity of
+the lifecycle observation. Cloudflare documents that removal can take up to a
+further 24 hours after an object's expiry value, so this is pending rather than a
+rule-failure conclusion.
+
 ## Local implementation evidence — 2026-09-09
 
 - `scripts/verify.ps1` passed: web 25 tests plus production build, Worker 5
