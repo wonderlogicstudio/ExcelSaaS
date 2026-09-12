@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .models import Finding, FindingGuidance, RepairReadiness, ScanResult
-from .service_catalog import APPROVED_REPAIR, PRECISION_VERIFICATION
+from .models import Finding, FindingCounts, FindingGuidance, RepairReadiness, ScanResult
+from .service_catalog import APPROVED_REPAIR, PRECISION_VERIFICATION, get_product_offerings
 
 
 @dataclass(frozen=True, slots=True)
@@ -503,4 +503,16 @@ def add_finding_guidance(findings: list[Finding]) -> list[Finding]:
 
 def enrich_scan_result(result: ScanResult) -> ScanResult:
     """Add deterministic result guidance without changing scanner findings or summary."""
-    return result.model_copy(update={"findings": add_finding_guidance(result.findings)})
+    returned = len(result.findings)
+    return result.model_copy(
+        update={
+            "findings": add_finding_guidance(result.findings),
+            "products": get_product_offerings(),
+            "finding_counts": FindingCounts(
+                total_detected=result.summary.issue_count,
+                returned_details=returned,
+                omitted_details=max(0, result.summary.issue_count - returned),
+                scan_complete=not result.workbook.scan_truncated,
+            ),
+        }
+    )

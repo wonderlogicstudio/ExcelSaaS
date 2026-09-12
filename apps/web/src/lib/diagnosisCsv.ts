@@ -1,5 +1,6 @@
 import type { FindingUserStatus, ScanResult } from '../types';
 import { findingIdentity } from './revalidation';
+import { diagnosisCsvArtifact } from './products';
 
 export const userStatusLabel: Record<FindingUserStatus, string> = {
   UNREVIEWED: '확인 전',
@@ -31,7 +32,8 @@ export const csvHeaders = [
 ] as const;
 
 function escapeCsv(value: string | number | boolean | null | undefined): string {
-  const text = value === null || value === undefined ? '' : String(value);
+  const original = value === null || value === undefined ? '' : String(value);
+  const text = /^[\s\u0000-\u001f\u007f]*[=+@-]|^[\t\r\n]/u.test(original) ? `'${original}` : original;
   return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
 }
 
@@ -77,7 +79,7 @@ export function downloadDiagnosisCsv(
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement('a');
   anchor.href = url;
-  anchor.download = 'workbookcare-diagnosis.csv';
+  anchor.download = diagnosisCsvArtifact.filename;
   anchor.click();
   URL.revokeObjectURL(url);
 }

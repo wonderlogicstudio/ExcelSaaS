@@ -156,7 +156,7 @@ describe('M2.5 results panel', () => {
       'REVIEWED',
     );
     expect(screen.getByRole('heading', { name: '사용자 처리 상태' })).toBeInTheDocument();
-    expect(screen.getByText('시스템 판정이나 스캔 결과를 바꾸지 않습니다.')).toBeInTheDocument();
+    expect(screen.getByText('시스템 판정이나 스캔 결과를 바꾸지 않습니다. 확인함·정상으로 판단은 변경 승인이 아닙니다.')).toBeInTheDocument();
   });
 
   it('warns when the scanner stopped at the cell safety limit and supports mixed repair classes', () => {
@@ -199,7 +199,7 @@ describe('M2.5 results panel', () => {
     expect(document.querySelectorAll('details.finding')).toHaveLength(0);
     expect(screen.getByText(/선택한 조건에 맞는 항목이 없습니다/)).toHaveTextContent('파일에 문제가 없다는 뜻이 아닙니다');
     expect(screen.queryByText('현재 무료 검사 범위에서는 구조적 위험 신호를 발견하지 못했습니다.')).not.toBeInTheDocument();
-    for (const button of screen.getAllByRole('button', { name: 'CSV 결과 다운로드' })) fireEvent.click(button);
+    for (const button of screen.getAllByRole('button', { name: '진단 결과 CSV 다운로드' })) fireEvent.click(button);
     expect(download).toHaveBeenCalledTimes(2);
     expect(download).toHaveBeenNthCalledWith(1, filterResult, statuses);
     expect(download).toHaveBeenNthCalledWith(2, filterResult, statuses);

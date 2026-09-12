@@ -10,7 +10,10 @@ function finding(cell: string | null, sheet: string | null = '합성 비교'): F
 }
 
 function comparison(previous: Finding[], current: Finding[]) {
-  return compareScanResults({ ...demoResult, findings: previous }, { ...demoResult, findings: current });
+  return compareScanResults(
+    { ...demoResult, findings: previous, summary: { ...demoResult.summary, issue_count: previous.length } },
+    { ...demoResult, findings: current, summary: { ...demoResult.summary, issue_count: current.length } },
+  );
 }
 
 describe('re-validation location details', () => {

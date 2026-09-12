@@ -50,10 +50,13 @@ export function RevalidationPanel({ comparison, onPrepareRevalidation }: {
         <>
           {comparison.versionMismatch && <p className="revalidation-panel__warning">scanner 또는 규칙 세트 버전이 달라 비교 결과가 근사치일 수 있습니다.</p>}
           {(comparison.previousWasTruncated || comparison.currentWasTruncated) && <p className="revalidation-panel__warning">두 검사 중 하나 이상이 일부 셀만 검사했습니다. 비교 범위가 완전하지 않을 수 있습니다.</p>}
+          {(comparison.previousOmittedCount > 0 || comparison.currentOmittedCount > 0) && (
+            <p className="revalidation-panel__warning">상세 생략: 이전 검사 {comparison.previousOmittedCount}건 · 현재 검사 {comparison.currentOmittedCount}건. 반환된 상세만 비교하므로 신규·미탐지를 확정하지 않습니다.</p>
+          )}
           <div className="revalidation-grid">
-            <ComparisonGroup id="revalidation-removed" title="이번 재검사에서 더 이상 탐지되지 않음" findings={comparison.noLongerDetected} previous />
+            <ComparisonGroup id="revalidation-removed" title={comparison.comparisonComplete ? "이번 재검사에서 더 이상 탐지되지 않음" : "이전 상세에만 있음 · 미탐지 여부 확인 불가"} findings={comparison.noLongerDetected} previous />
             <ComparisonGroup id="revalidation-continuing" title="계속 탐지됨" findings={comparison.stillDetected} />
-            <ComparisonGroup id="revalidation-new" title="새롭게 탐지됨" findings={comparison.newlyDetected} />
+            <ComparisonGroup id="revalidation-new" title={comparison.comparisonComplete ? "새롭게 탐지됨" : "현재 상세에만 있음 · 신규 여부 확인 불가"} findings={comparison.newlyDetected} />
           </div>
           <p>‘더 이상 탐지되지 않음’은 같은 정적 규칙이 이번 위치에서 신호를 찾지 못했다는 뜻일 뿐, 업무적 해결이나 계산 결과의 정확성을 보장하지 않습니다.</p>
           <p className="revalidation-panel__limits">규칙과 위치를 기준으로 비교합니다. 시트 이름을 바꾸거나 셀을 이동하면 같은 항목이 ‘더 이상 탐지되지 않음’과 ‘새롭게 탐지됨’으로 나뉠 수 있습니다. 셀 값이나 계산 결과의 변경은 비교하지 않습니다.</p>

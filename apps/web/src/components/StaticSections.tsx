@@ -14,12 +14,16 @@ import {
   UserRoundCheck,
 } from 'lucide-react';
 
+import type { ProductOffering } from '../types';
+import { ProductCards } from './ProductCards';
+
 interface StaticSectionsProps {
+  products?: ProductOffering[];
   onStart: () => void;
   onDemo: () => void;
 }
 
-export function StaticSections({ onStart, onDemo }: StaticSectionsProps) {
+export function StaticSections({ onStart, onDemo, products }: StaticSectionsProps) {
   return (
     <>
       <section className="section section--viewport" id="how" aria-labelledby="how-title">
@@ -60,30 +64,9 @@ export function StaticSections({ onStart, onDemo }: StaticSectionsProps) {
           <div className="section-heading section-heading--center">
             <span className="section-kicker">서비스 범위와 현재 상태</span>
             <h2 id="service-scope-title">문제를 찾고, 검증 후 수정 여부를 결정하세요.</h2>
-            <p>현재는 무료 정적 진단만 사용할 수 있습니다. 정밀 검증·승인 후 수정·자동화 의뢰는 준비 중입니다.</p>
+            <p>무료 진단, 두 자료 비교 보고서, 승인 기반 수정 패키지의 범위와 받을 파일을 구분합니다. 현재는 무료 정적 진단만 사용할 수 있습니다.</p>
           </div>
-          <div className="service-scope-grid">
-            <article className="service-scope-card">
-              <span>현재 제공</span>
-              <h3>무료 진단</h3>
-              <p>파일 구조와 수식 문자열에서 위험 신호, 위치, 수정 가능성 분류를 확인합니다.</p>
-            </article>
-            <article className="service-scope-card">
-              <span>준비 중</span>
-              <h3>정밀 검증</h3>
-              <p>수식 일관성, 계산 영향, 업무 규칙을 추가로 확인하는 단계로 제공될 예정입니다.</p>
-            </article>
-            <article className="service-scope-card">
-              <span>향후 제공 예정</span>
-              <h3>승인 후 수정</h3>
-              <p>정밀 검증과 사용자 승인 뒤 원본과 분리된 수정본을 만드는 처리 단계입니다.</p>
-            </article>
-            <article className="service-scope-card">
-              <span>준비 중</span>
-              <h3>자동화 의뢰</h3>
-              <p>반복 작업과 파일 구조를 검토해 자동화 가능 범위를 정리하는 서비스입니다.</p>
-            </article>
-          </div>
+          <ProductCards products={products} onStart={onStart} />
         </div>
       </section>
 
@@ -105,7 +88,7 @@ export function StaticSections({ onStart, onDemo }: StaticSectionsProps) {
           <aside className="planned-status-card" aria-label="정밀 검증 서비스 상태">
             <span>현재 제공 상태</span>
             <strong>준비 중</strong>
-            <p>무료 진단 결과에서는 추천 항목만 안내합니다. 정밀 검증은 아직 실행하거나 구매할 수 없습니다.</p>
+            <p>무료 진단 결과에서는 추천 항목만 안내합니다. 향후 판매 패키지에 포함할 검증 활동이며 별도 유료 보고서 상품은 아닙니다. 현재 실행하거나 구매할 수 없습니다.</p>
           </aside>
         </div>
       </section>

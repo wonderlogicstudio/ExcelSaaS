@@ -175,6 +175,40 @@ class QuotePreview(BaseModel):
     planned_deliverables: list[str] = Field(default_factory=list)
 
 
+class ProductDeliverable(BaseModel):
+    kind: Literal[
+        "DIAGNOSIS_CSV",
+        "COMPARISON_REPORT_XLSX",
+        "COMPARISON_VERIFICATION_HTML",
+        "REPAIRED_WORKBOOK_XLSX",
+        "CHANGE_LOG_XLSX",
+        "REVALIDATION_HTML",
+    ]
+    label: str
+    filename: str
+
+
+class ProductOffering(BaseModel):
+    product_id: Literal["FREE_DIAGNOSIS", "TWO_FILE_COMPARISON", "APPROVED_REPAIR"]
+    title: str
+    capability_status: Literal["AVAILABLE", "PLANNED", "UNSUPPORTED"]
+    deliverables: list[ProductDeliverable]
+    includes_repaired_workbook: bool
+    # D01 has no checkout implementation. Price estimates and handling statuses
+    # cannot grant purchase or execution rights.
+    purchase_enabled: Literal[False] = False
+    scope: str
+    exclusions: list[str]
+    next_action: str
+
+
+class FindingCounts(BaseModel):
+    total_detected: int = Field(ge=0)
+    returned_details: int = Field(ge=0)
+    omitted_details: int = Field(ge=0)
+    scan_complete: bool
+
+
 class ScanResult(BaseModel):
     analysis_id: str
     filename: str
@@ -187,6 +221,8 @@ class ScanResult(BaseModel):
     findings: list[Finding]
     quote: QuotePreview
     limitations: list[str]
+    products: list[ProductOffering] = Field(default_factory=list)
+    finding_counts: FindingCounts | None = None
 
 
 class FormulaAuditResult(BaseModel):

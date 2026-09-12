@@ -28,6 +28,9 @@ import { formatFileSize, formatPriceRange } from '../lib/format';
 import type { FeedbackRepository } from '../lib/feedback';
 import { FindingFeedbackControl, ResultFeedbackPanel } from './FeedbackCapture';
 import { RevalidationPanel } from './RevalidationPanel';
+import { FindingViews } from './FindingViews';
+import { findingCounts } from '../lib/findingCounts';
+import { diagnosisCsvArtifact, displayedProducts } from '../lib/products';
 
 interface ResultsPanelProps {
   result: ScanResult;
@@ -135,23 +138,8 @@ function uniqueNextActions(findings: Finding[]): string[] {
   return [...new Set(findings.map((finding) => finding.guidance?.recommended_next_action).filter(Boolean))] as string[];
 }
 
-function FindingCard({
-  finding,
-  status,
-  onStatusChange,
-  feedbackRepository,
-  scannerVersion,
-}: {
-  finding: Finding;
-  status: FindingUserStatus;
-  onStatusChange: (status: FindingUserStatus) => void;
-  feedbackRepository?: FeedbackRepository | null;
-  scannerVersion: string;
-}) {
+function FindingExplanation({ finding }: { finding: Finding }) {
   const guidance = finding.guidance;
-  const repairReadiness = guidance?.repair_readiness;
-  const evidenceGrade = guidance?.evidence_grade ?? 'REFERENCE_SIGNAL';
-  const actionCategory = guidance?.action_category ?? 'INFO_ONLY';
   const unchecked = guidance?.unchecked_scope ?? [
     'Excel 계산 결과와 업무적 정확성은 이번 검사에서 확인하지 않았습니다.',
   ];
@@ -161,6 +149,59 @@ function FindingCard({
   const howToCheck = guidance?.how_to_check_in_excel ?? ['표시된 위치를 Excel에서 직접 확인'];
   const normalConditions = guidance?.when_it_may_be_normal ?? ['업무상 의도된 구조 또는 수식인 경우'];
   const actionConditions = guidance?.when_action_is_recommended ?? ['표시된 위치의 의도가 불명확한 경우'];
+
+  return <>
+        <dl className="finding__evidence">
+          <div><dt>발견된 사실</dt><dd>{guidance?.detected_fact ?? finding.description}</dd></div>
+          <div><dt>발생 가능한 영향</dt><dd>{guidance?.possible_impact ?? '이 항목의 영향은 추가 확인이 필요합니다.'}</dd></div>
+          <div><dt>사용자 권장 행동</dt><dd>{guidance?.recommended_next_action ?? '표시된 위치를 직접 확인하세요.'}</dd></div>
+          <div><dt>Excel에서 확인하는 방법</dt><dd>{howToCheck.join(' · ')}</dd></div>
+          <div><dt>정상일 수 있는 조건</dt><dd>{normalConditions.join(' ')}</dd></div>
+          <div><dt>조치를 우선 권장하는 경우</dt><dd>{actionConditions.join(' ')}</dd></div>
+          <div><dt>이번 검사에서 확인하지 않은 내용</dt><dd>{unchecked.join(' ')}</dd></div>
+          <div><dt>다음 정밀검증 항목</dt><dd>{nextChecks.join(' · ')}</dd></div>
+        </dl>
+  </>;
+}
+
+function FindingClassification({ finding }: { finding: Finding }) {
+  const repairReadiness = finding.guidance?.repair_readiness;
+  const evidenceGrade = finding.guidance?.evidence_grade ?? 'REFERENCE_SIGNAL';
+  const actionCategory = finding.guidance?.action_category ?? 'INFO_ONLY';
+  return <>
+        {repairReadiness && (
+          <div className="finding__repair-path">
+            <strong>향후 해결 경로</strong>
+            <span>{repairReadiness.label} · 준비 중</span>
+            <p>{repairReadiness.explanation}</p>
+            {repairReadiness.required_steps.length > 0 && (
+              <small>{repairReadiness.required_steps.join(' → ')}</small>
+            )}
+          </div>
+        )}
+        <div className="finding__meta">
+          <span>{repairLabel[finding.repair_class]}</span>
+          <span>다음 행동: {actionCategoryLabel[actionCategory]}</span>
+          <span>탐지 확실도: {evidenceGradeLabel[evidenceGrade]}</span>
+        </div>
+  </>;
+}
+
+function FindingCard({
+  finding,
+  status,
+  onStatusChange,
+  feedbackRepository,
+  scannerVersion,
+  sharedGuidance = false,
+}: {
+  finding: Finding;
+  status: FindingUserStatus;
+  onStatusChange: (status: FindingUserStatus) => void;
+  feedbackRepository?: FeedbackRepository | null;
+  scannerVersion: string;
+  sharedGuidance?: boolean;
+}) {
 
   return (
     <details className={`finding finding--${finding.severity}`}>
@@ -179,31 +220,8 @@ function FindingCard({
       <span className="finding__summary-hint" aria-hidden="true">자세히 보기</span>
       </summary>
       <div className="finding__details">
-        <dl className="finding__evidence">
-          <div><dt>발견된 사실</dt><dd>{guidance?.detected_fact ?? finding.description}</dd></div>
-          <div><dt>발생 가능한 영향</dt><dd>{guidance?.possible_impact ?? '이 항목의 영향은 추가 확인이 필요합니다.'}</dd></div>
-          <div><dt>사용자 권장 행동</dt><dd>{guidance?.recommended_next_action ?? '표시된 위치를 직접 확인하세요.'}</dd></div>
-          <div><dt>Excel에서 확인하는 방법</dt><dd>{howToCheck.join(' · ')}</dd></div>
-          <div><dt>정상일 수 있는 조건</dt><dd>{normalConditions.join(' ')}</dd></div>
-          <div><dt>조치를 우선 권장하는 경우</dt><dd>{actionConditions.join(' ')}</dd></div>
-          <div><dt>이번 검사에서 확인하지 않은 내용</dt><dd>{unchecked.join(' ')}</dd></div>
-          <div><dt>다음 정밀검증 항목</dt><dd>{nextChecks.join(' · ')}</dd></div>
-        </dl>
-        {repairReadiness && (
-          <div className="finding__repair-path">
-            <strong>향후 해결 경로</strong>
-            <span>{repairReadiness.label} · 준비 중</span>
-            <p>{repairReadiness.explanation}</p>
-            {repairReadiness.required_steps.length > 0 && (
-              <small>{repairReadiness.required_steps.join(' → ')}</small>
-            )}
-          </div>
-        )}
-        <div className="finding__meta">
-          <span>{repairLabel[finding.repair_class]}</span>
-          <span>다음 행동: {actionCategoryLabel[actionCategory]}</span>
-          <span>탐지 확실도: {evidenceGradeLabel[evidenceGrade]}</span>
-        </div>
+        {sharedGuidance ? <p>{finding.description}</p> : <FindingExplanation finding={finding} />}
+        <FindingClassification finding={finding} />
         <label className="finding__status-control">
           <span>사용자 처리 상태</span>
           <select
@@ -271,6 +289,9 @@ function ResultsContent({
   onReset,
 }: ResultsPanelProps) {
   const [severityFilter, setSeverityFilter] = useState<SeverityFilter>('all');
+  const [viewMode, setViewMode] = useState<'groups' | 'table'>('groups');
+  const counts = findingCounts(result);
+  const repairProduct = displayedProducts(result.products).find((product) => product.product_id === 'APPROVED_REPAIR')!;
   const [sheetFilter, setSheetFilter] = useState('all');
   const [statusFilter, setStatusFilter] = useState<FindingUserStatus | 'all'>('all');
   const findingsHeadingRef = useRef<HTMLDivElement>(null);
@@ -442,7 +463,8 @@ function ResultsContent({
               우선 문제 확인하기
             </button>
             <button className="button button--primary button--small" type="button" onClick={onPrepareRevalidation}>수정 후 다시 검사</button>
-            <button className="button button--outline button--small" type="button" onClick={() => downloadDiagnosisCsv(result, statuses)}><Download size={16} />CSV 결과 다운로드</button>
+            <a className="button button--outline button--small" href="#approved-repair">수정 패키지 안내 · 준비 중</a>
+            <button className="button button--outline button--small" type="button" onClick={() => downloadDiagnosisCsv(result, statuses)}><Download size={16} />{diagnosisCsvArtifact.label} 다운로드</button>
           </div>
         </section>
 
@@ -453,9 +475,18 @@ function ResultsContent({
               <span role="status" aria-live="polite" aria-atomic="true">
                 {filtersActive
                   ? `총 ${result.findings.length}개 중 ${visibleFindings.length}개 표시`
-                  : `${result.findings.length}개 전체 표시 · 클릭해 자세히 보기`}
+                  : counts.omitted_details > 0 ? `반환 상세 ${result.findings.length}개 표시 · 전체 발견 ${counts.total_detected}건`
+                    : `${result.findings.length}개 전체 표시 · 클릭해 자세히 보기`}
               </span>
             </div>
+            <p className="finding-coverage" id="finding-coverage">전체 발견 {counts.total_detected}건 · 반환 상세 {counts.returned_details}건 · 상세 생략 {counts.omitted_details}건 · 필터 표시 {visibleFindings.length}건</p>
+            {counts.omitted_details > 0 && <p className="empty-result-note">안전 제한으로 일부 발견 항목의 상세가 생략됐습니다. 위험 점수는 전체 발견 기준이며 목록과 CSV에는 반환 상세만 포함됩니다.</p>}
+            {!counts.scan_complete && <p className="empty-result-note">전체 발견 수는 검사한 범위 안의 수입니다. 검사하지 않은 셀의 위험 신호는 포함하지 않습니다.</p>}
+            <fieldset className="finding-view-switch">
+              <legend>결과 보기 방식</legend>
+              <label><input type="radio" name="finding-view" value="groups" checked={viewMode === 'groups'} onChange={() => setViewMode('groups')} />유형별 보기</label>
+              <label><input type="radio" name="finding-view" value="table" checked={viewMode === 'table'} onChange={() => setViewMode('table')} />전체 항목 표</label>
+            </fieldset>
             {result.findings.length > 0 && (
               <fieldset className="finding-filters" aria-describedby="finding-filter-note">
                 <legend>찾아볼 항목 선택</legend>
@@ -486,33 +517,39 @@ function ResultsContent({
                   </label>
                 </div>
                 <div className="finding-filters__footer">
-                  <p id="finding-filter-note">필터는 목록에만 적용됩니다. 진단 요약과 CSV는 전체 결과를 기준으로 합니다.</p>
+                  <p id="finding-filter-note">필터는 목록에만 적용됩니다. 진단 요약은 전체 발견, CSV는 필터 적용 전 반환 상세를 기준으로 합니다. 유형별 확인은 표시된 항목의 개인 처리 상태만 바꿉니다.</p>
                   <button className="button button--outline button--small" type="button" onClick={resetFilters} disabled={!filtersActive}>필터 초기화</button>
                 </div>
               </fieldset>
             )}
             {visibleFindings.length > 0 ? (
-              <div className="finding-list">{visibleFindings.map((finding) => (
-                <FindingCard
-                  key={findingIdentity(finding)}
-                  finding={finding}
-                  status={statuses[findingIdentity(finding)] ?? 'UNREVIEWED'}
-                  onStatusChange={(status) => {
-                    onStatusChange(findingIdentity(finding), status);
-                    if (statusFilter !== 'all' && statusFilter !== status) statusFilterRef.current?.focus();
-                  }}
-                  feedbackRepository={feedbackRepository}
-                  scannerVersion={result.scanner_version}
-                />
-              ))}</div>
+              <FindingViews findings={visibleFindings} allFindings={result.findings} mode={viewMode} statuses={statuses}
+                renderGuidance={(finding) => finding.guidance ? <FindingExplanation finding={finding} /> : <p>아래 개별 위치의 근거를 확인하세요.</p>}
+                onReviewGroup={(findings) => {
+                  if (statusFilter !== 'all' && statusFilter !== 'REVIEWED') statusFilterRef.current?.focus();
+                  for (const finding of findings) onStatusChange(findingIdentity(finding), 'REVIEWED');
+                }}
+                renderFinding={(finding, sharedGuidance) => (
+                  <FindingCard key={findingIdentity(finding)} finding={finding} sharedGuidance={sharedGuidance}
+                    status={statuses[findingIdentity(finding)] ?? 'UNREVIEWED'}
+                    onStatusChange={(status) => {
+                      onStatusChange(findingIdentity(finding), status);
+                      if (statusFilter !== 'all' && statusFilter !== status) statusFilterRef.current?.focus();
+                    }}
+                    feedbackRepository={feedbackRepository} scannerVersion={result.scanner_version}
+                  />
+                )}
+              />
             ) : result.findings.length > 0 ? (
               <p className="empty-result-note">선택한 조건에 맞는 항목이 없습니다. 필터를 초기화하면 전체 발견 항목을 볼 수 있습니다. 이 표시는 파일에 문제가 없다는 뜻이 아닙니다.</p>
+            ) : counts.total_detected > 0 ? (
+              <p className="empty-result-note">발견된 항목의 반환 상세가 없습니다. 상세 생략 수와 검사 한계를 확인하세요. 문제가 없다는 뜻이 아닙니다.</p>
             ) : (
               <p className="empty-result-note">현재 무료 검사 범위에서는 구조적 위험 신호를 발견하지 못했습니다. 수식의 업무적 정확성, 계산 결과, 업무 규칙 및 통계 모델은 검증하지 않았습니다.</p>
             )}
 
             <div className="finding-types" aria-label="문제 유형별 개수">
-              <h4>문제 유형별 개수</h4>
+              <h4>문제 유형별 개수</h4><p>반환 상세 기준 · 생략된 항목의 유형은 포함하지 않습니다.</p>
               {findingTypes.length > 0 ? (
                 <ul>{findingTypes.map((findingType) => (
                   <li key={findingType.ruleCode}>
@@ -530,7 +567,7 @@ function ResultsContent({
             <section className="user-status-panel" aria-labelledby="user-status-title">
               <div className="panel-heading">
                 <div><span className="card-label">이 브라우저 화면 안의 개인 메모</span><h3 id="user-status-title">사용자 처리 상태</h3></div>
-                <span>시스템 판정이나 스캔 결과를 바꾸지 않습니다.</span>
+                <span>시스템 판정이나 스캔 결과를 바꾸지 않습니다. 확인함·정상으로 판단은 변경 승인이 아닙니다.</span>
               </div>
               <div className="user-status-summary">
                 {userStatusOptions.map((status) => <span key={status}><strong>{userStatusCounts[status]}</strong>{userStatusLabel[status]}</span>)}
@@ -543,10 +580,10 @@ function ResultsContent({
             <section className="download-panel" aria-labelledby="download-title">
               <div>
                 <span className="card-label">현재 결과를 내보내기</span>
-                <h3 id="download-title">진단 결과 다운로드</h3>
-                <p>Excel에서 한글이 깨지지 않는 UTF-8 BOM CSV로 현재 Finding, 가이드, 처리 상태를 다운로드합니다.</p>
+                <h3 id="download-title">{diagnosisCsvArtifact.label} 다운로드</h3>
+                <p>UTF-8 BOM CSV로 필터 적용 전 반환 상세의 위치, 근거, 가이드, 처리 상태를 다운로드합니다. 상세 생략 항목과 수정본은 포함하지 않습니다. 수식으로 해석될 수 있는 텍스트는 안전하게 내보냅니다.</p>
               </div>
-              <button className="button button--outline" type="button" onClick={() => downloadDiagnosisCsv(result, statuses)}><Download size={17} />CSV 결과 다운로드</button>
+              <button className="button button--outline" type="button" onClick={() => downloadDiagnosisCsv(result, statuses)}><Download size={17} />{diagnosisCsvArtifact.label} 다운로드</button>
             </section>
 
             {feedbackRepository && (
@@ -611,8 +648,9 @@ function ResultsContent({
             {quote.pricing_note && <p className="pricing-note">{quote.pricing_note}</p>}
             <div className="quote-factors">{quote.factors.map((factor) => <span key={factor}>{factor}</span>)}</div>
             <div className="planned-deliverables">
-              <h4>정밀검증에서 향후 제공될 산출물</h4>
-              <ul>{(quote.planned_deliverables ?? []).map((item) => <li key={item}><FileClock size={16} />{item}</li>)}</ul>
+              <h4>승인 기반 수정 패키지의 향후 필수 파일 · 준비 중</h4>
+              <ul>{repairProduct.deliverables.map((item) => <li key={item.kind}><FileClock size={16} />{item.label}</li>)}</ul>
+              <p>정밀검증은 패키지에 포함할 검증 활동입니다. 위 참고 금액은 구매권이나 변경 승인이 아닙니다.</p>
             </div>
             <div className="scope-list">
               <h4>예상 범위에 포함</h4>

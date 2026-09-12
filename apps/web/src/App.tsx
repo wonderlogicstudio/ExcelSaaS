@@ -270,7 +270,7 @@ export default function App() {
             />
           </>
         )}
-        <StaticSections onStart={startUpload} onDemo={runDemo} />
+        <StaticSections products={result?.products} onStart={startUpload} onDemo={runDemo} />
       </main>
       <Footer />
     </div>

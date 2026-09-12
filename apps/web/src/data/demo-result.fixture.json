@@ -734,16 +734,102 @@
       "service_status": "PLANNED",
       "planned_deliverables": [
         "수식 일관성 검사",
-        "수정 후보 수식 또는 수정 방법",
-        "변경 전 미리보기와 사용자 승인",
-        "원본과 분리된 수정본 및 변경 내역서",
-        "수정 전후 비교와 수정 후 재검사 보고서"
+        "기술·업무 검증의 지원 및 제외 범위",
+        "향후 판매 패키지에 포함할 검증 활동 (별도 보고서 상품 아님)"
       ]
     },
     "limitations": [
       "정적 구조 분석 결과이며 Excel 계산 엔진을 실행하지 않았습니다.",
       "업무 의미상 잘못된 수식까지 모두 발견한다고 보장하지 않습니다.",
       "현재 버전은 파일을 수정하거나 다시 저장하지 않습니다."
-    ]
+    ],
+    "products": [
+      {
+        "product_id": "FREE_DIAGNOSIS",
+        "title": "무료 진단",
+        "capability_status": "AVAILABLE",
+        "deliverables": [
+          {
+            "kind": "DIAGNOSIS_CSV",
+            "label": "진단 결과 CSV",
+            "filename": "workbookcare-diagnosis.csv"
+          }
+        ],
+        "includes_repaired_workbook": false,
+        "purchase_enabled": false,
+        "scope": "한 파일의 구조적 위험 신호와 위치·근거를 확인하고 직접 수정한 파일을 같은 화면에서 다시 검사합니다.",
+        "exclusions": [
+          "수정본 생성",
+          "Excel 계산 결과·업무 정답 검증",
+          "두 자료 비교 보고서"
+        ],
+        "next_action": "테스트용 파일 무료 진단"
+      },
+      {
+        "product_id": "TWO_FILE_COMPARISON",
+        "title": "두 자료 비교 보고서",
+        "capability_status": "PLANNED",
+        "deliverables": [
+          {
+            "kind": "COMPARISON_REPORT_XLSX",
+            "label": "비교 보고서 XLSX",
+            "filename": "comparison_report_<job>.xlsx"
+          },
+          {
+            "kind": "COMPARISON_VERIFICATION_HTML",
+            "label": "비교 검증 HTML",
+            "filename": "comparison_verification_<job>.html"
+          }
+        ],
+        "includes_repaired_workbook": false,
+        "purchase_enabled": false,
+        "scope": "같은 정책으로 두 관측자료의 차이를 설명하는 독립 보고서 상품입니다. 비교 자료 B는 정답이 아닙니다.",
+        "exclusions": [
+          "수정본",
+          "정답표",
+          "원본 자동 덮어쓰기",
+          "수정 패키지 실행 권한"
+        ],
+        "next_action": "준비 중 · 두 자료 비교와 보고서 생성은 아직 시작하거나 구매할 수 없습니다."
+      },
+      {
+        "product_id": "APPROVED_REPAIR",
+        "title": "승인 기반 수정 패키지",
+        "capability_status": "PLANNED",
+        "deliverables": [
+          {
+            "kind": "REPAIRED_WORKBOOK_XLSX",
+            "label": "수정본 XLSX",
+            "filename": "workbookcare_repaired_<job>.xlsx"
+          },
+          {
+            "kind": "CHANGE_LOG_XLSX",
+            "label": "변경내역 XLSX",
+            "filename": "changes_<job>.xlsx"
+          },
+          {
+            "kind": "REVALIDATION_HTML",
+            "label": "재검증 HTML",
+            "filename": "verification_<job>.html"
+          }
+        ],
+        "includes_repaired_workbook": true,
+        "purchase_enabled": false,
+        "scope": "지원되는 문제의 정확한 변경계획을 별도로 승인한 뒤 원본과 분리된 수정본을 받는 패키지입니다.",
+        "exclusions": [
+          "원본 덮어쓰기",
+          "결제만으로 변경 실행",
+          "승인하지 않은 셀 변경",
+          "모든 Excel 오류 해결 보장"
+        ],
+        "next_action": "준비 중 · 수정 프로필과 납품 검증 전에는 구매할 수 없습니다."
+      }
+    ],
+    "finding_counts": {
+      "total_detected": 12,
+      "returned_details": 12,
+      "omitted_details": 0,
+      "scan_complete": true
+    }
   }
 }

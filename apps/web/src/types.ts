@@ -154,6 +154,32 @@ export interface QuotePreview {
   planned_deliverables?: string[];
 }
 
+export interface ProductDeliverable {
+  kind: 'DIAGNOSIS_CSV' | 'COMPARISON_REPORT_XLSX' | 'COMPARISON_VERIFICATION_HTML'
+    | 'REPAIRED_WORKBOOK_XLSX' | 'CHANGE_LOG_XLSX' | 'REVALIDATION_HTML';
+  label: string;
+  filename: string;
+}
+
+export interface ProductOffering {
+  product_id: 'FREE_DIAGNOSIS' | 'TWO_FILE_COMPARISON' | 'APPROVED_REPAIR';
+  title: string;
+  capability_status: 'AVAILABLE' | 'PLANNED' | 'UNSUPPORTED';
+  deliverables: ProductDeliverable[];
+  includes_repaired_workbook: boolean;
+  purchase_enabled: boolean;
+  scope: string;
+  exclusions: string[];
+  next_action: string;
+}
+
+export interface FindingCounts {
+  total_detected: number;
+  returned_details: number;
+  omitted_details: number;
+  scan_complete: boolean;
+}
+
 export interface ScanResult {
   analysis_id: string;
   filename: string;
@@ -166,6 +192,8 @@ export interface ScanResult {
   findings: Finding[];
   quote: QuotePreview;
   limitations: string[];
+  products?: ProductOffering[];
+  finding_counts?: FindingCounts | null;
 }
 
 export interface FormulaAuditResult {

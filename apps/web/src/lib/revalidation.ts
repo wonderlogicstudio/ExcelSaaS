@@ -1,7 +1,11 @@
 import type { Finding, ScanResult } from '../types';
+import { findingCounts } from './findingCounts';
 
 export interface RevalidationComparison {
   versionMismatch: boolean;
+  previousOmittedCount: number;
+  currentOmittedCount: number;
+  comparisonComplete: boolean;
   previousWasTruncated: boolean;
   currentWasTruncated: boolean;
   noLongerDetected: Finding[];
@@ -50,9 +54,17 @@ export function compareScanResults(
     .filter(([key]) => !previousFindings.has(key))
     .map(([, finding]) => finding);
 
+  const previousCounts = findingCounts(previous);
+  const currentCounts = findingCounts(current);
+  const versionMismatch = previous.scanner_version !== current.scanner_version
+    || previous.rule_set_version !== current.rule_set_version;
+
   return {
-    versionMismatch: previous.scanner_version !== current.scanner_version
-      || previous.rule_set_version !== current.rule_set_version,
+    versionMismatch,
+    previousOmittedCount: previousCounts.omitted_details,
+    currentOmittedCount: currentCounts.omitted_details,
+    comparisonComplete: !versionMismatch && previousCounts.scan_complete && currentCounts.scan_complete
+      && previousCounts.omitted_details === 0 && currentCounts.omitted_details === 0,
     previousWasTruncated: previous.workbook.scan_truncated,
     currentWasTruncated: current.workbook.scan_truncated,
     noLongerDetected,
