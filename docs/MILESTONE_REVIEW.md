@@ -1,5 +1,20 @@
 # Current review — V3.2 D01
 
+## D01 feedback follow-up — 2026-09-12
+
+The owner used existing M4 formula-pattern test files. Current beta free scanning
+does not execute the separate M4 audit. Actual local controls: 9/10 M4 files had
+zero free findings, one had 49, internal M4 had 36 candidates; free positive control
+had 12. The authenticated hosted all-files-zero report remains unverified.
+Clarified zero/partial/empty states, scanned cell/formula counts and excluded M4
+checks without changing scanner/CSV/risk/API/gates. Source `207e09c`.
+Full regression: web 61 / Worker 13 / API 75, build/Ruff/M4-C 36 exact. Actual local
+browser/API controls and reviewed desktop/mobile captures passed. Final targeted
+17 tests and hosted build passed after correcting legacy negative assertions.
+Beta version `dc94d91a-e969-479e-9087-f1f9758ec2ef` deployed 100%; bindings/Access preserved.
+Evidence: `delivery-v3_2/reviews/evidence/D01-zero-findings.json`.
+No hosted M4 exposure, Cloud Run change, authenticated beta scan, Git push or D02.
+
 ## Latest D01 beta release review — 2026-09-12
 
 The owner subsequently approved this deployment and continued deployment of

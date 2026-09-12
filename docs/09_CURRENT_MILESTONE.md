@@ -1,5 +1,14 @@
 # Current milestone
 
+> **D01 owner-feedback follow-up — 2026-09-12: zero-result scope clarification deployed.**
+> Owner identified M4 test files. Free scan and unperformed separate formula
+> validation are now explicit; partial/empty zero states are differentiated.
+> Source `207e09c`, beta version `dc94d91a-e969-479e-9087-f1f9758ec2ef` at 100%.
+> Verified web 61 / Worker 13 / API 75, hosted build, local API/browser 0/12 controls.
+> M4 hosted remains disabled; authenticated hosted all-files-zero report is not
+> independently reproduced. D01 review/evidence records this distinction.
+> No further bundle is approved; standing protected-beta deployment approval remains.
+
 > **Latest owner authorization — 2026-09-12: continuing deployment to the existing protected beta is APPROVED.**
 > Target: `https://workbookcare-beta.wonderlogic-studio.workers.dev/`.
 > After verification of each separately approved development unit, deploy its

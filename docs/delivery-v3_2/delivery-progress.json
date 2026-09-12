@@ -59,11 +59,11 @@
       ],
       "beta_deployment": {
         "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
-        "version": "9748b413-0acd-4a57-a0fd-9a5e3324f3db",
-        "deployed_at_utc": "2026-09-12T11:40:40.040495Z",
+        "version": "dc94d91a-e969-479e-9087-f1f9758ec2ef",
+        "deployed_at_utc": "2026-09-12T12:03:50.16917Z",
         "percentage": 100,
-        "rollback_version": "762582e4-2d79-4e8b-be38-b5add1add5c2",
-        "source_commit": "40e2e8998beef87cb844c1fc400f1e75eced2fa1",
+        "rollback_version": "9748b413-0acd-4a57-a0fd-9a5e3324f3db",
+        "source_commit": "207e09c8d1905eae679b5caffec196a6a4f2dafc",
         "cloud_run_revision_changed": false,
         "api_projection_deployed": false,
         "legacy_api_compatible_frontend": true,
@@ -71,7 +71,7 @@
         "anonymous_access_check": "PASS_302_TO_EXISTING_ACCESS",
         "authenticated_ui_check": "NOT_RUN_NO_CONNECTED_BROWSER",
         "hosted_synthetic_upload": "NOT_RUN",
-        "evidence": "reviews/evidence/D01-beta-release.json"
+        "evidence": "reviews/evidence/D01-zero-findings.json"
       },
       "initial_engineering_review_not_run": [
         "repair_engine/delivery",
@@ -84,6 +84,40 @@
         "remote push",
         "package oracle/examples as product verification",
         "D02-D08"
+      ],
+      "beta_deployment_history": [
+        {
+          "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
+          "version": "9748b413-0acd-4a57-a0fd-9a5e3324f3db",
+          "deployed_at_utc": "2026-09-12T11:40:40.040495Z",
+          "percentage": 100,
+          "rollback_version": "762582e4-2d79-4e8b-be38-b5add1add5c2",
+          "source_commit": "40e2e8998beef87cb844c1fc400f1e75eced2fa1",
+          "cloud_run_revision_changed": false,
+          "api_projection_deployed": false,
+          "legacy_api_compatible_frontend": true,
+          "binding_metadata_unchanged": true,
+          "anonymous_access_check": "PASS_302_TO_EXISTING_ACCESS",
+          "authenticated_ui_check": "NOT_RUN_NO_CONNECTED_BROWSER",
+          "hosted_synthetic_upload": "NOT_RUN",
+          "evidence": "reviews/evidence/D01-beta-release.json"
+        }
+      ],
+      "owner_feedback_followups": [
+        {
+          "report": "M4 test files show zero free findings",
+          "status": "SCOPE_UX_FIXED_AND_BETA_DEPLOYED",
+          "source_commit": "207e09c8d1905eae679b5caffec196a6a4f2dafc",
+          "web_tests": 61,
+          "worker_tests": 13,
+          "api_tests": 75,
+          "local_m4_candidates": 36,
+          "local_positive_control_findings": 12,
+          "hosted_all_zero_report_reproduced": false,
+          "hosted_m4_enabled": false,
+          "review": "reviews/D01.md",
+          "evidence": "reviews/evidence/D01-zero-findings.json"
+        }
       ]
     }
   },

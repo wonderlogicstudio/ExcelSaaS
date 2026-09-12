@@ -1,0 +1,317 @@
+{
+  "status": "SCOPE_UX_FIXED_AND_BETA_DEPLOYED",
+  "source_commit": "207e09c8d1905eae679b5caffec196a6a4f2dafc",
+  "owner_file_category": "Existing M4 formula-pattern synthetic test files",
+  "confirmed": "Free structural diagnosis excludes separate M4 patterns/gaps; hosted M4 remains disabled",
+  "unconfirmed": "The owner-reported all-files-zero result was not reproduced in an authenticated hosted session",
+  "controls": [
+    {
+      "control": "base-positive-control",
+      "total": 12,
+      "returned": 12,
+      "sheets": 3,
+      "formulas": 13,
+      "scanned_cells": 39,
+      "truncated": false,
+      "separate_internal_m4_candidates": null,
+      "rule_codes": [
+        "FILE_DRAWING_PARTS",
+        "FORMULA_EXTERNAL_REFERENCE",
+        "FORMULA_REF_ERROR",
+        "FORMULA_VOLATILE",
+        "FORMULA_WHOLE_COLUMN_REFERENCE",
+        "NUMBER_STORED_AS_TEXT",
+        "SHEET_HIDDEN",
+        "SHEET_VERY_HIDDEN"
+      ]
+    },
+    {
+      "control": "synthetic-control-0",
+      "total": 0,
+      "returned": 0,
+      "sheets": 5,
+      "formulas": 301,
+      "scanned_cells": 832,
+      "truncated": false,
+      "separate_internal_m4_candidates": 4,
+      "rule_codes": []
+    },
+    {
+      "control": "synthetic-control-1",
+      "total": 0,
+      "returned": 0,
+      "sheets": 5,
+      "formulas": 144,
+      "scanned_cells": 855,
+      "truncated": false,
+      "separate_internal_m4_candidates": 4,
+      "rule_codes": []
+    },
+    {
+      "control": "synthetic-control-2",
+      "total": 49,
+      "returned": 49,
+      "sheets": 5,
+      "formulas": 276,
+      "scanned_cells": 947,
+      "truncated": false,
+      "separate_internal_m4_candidates": 4,
+      "rule_codes": [
+        "FORMULA_DEEP_NESTING"
+      ]
+    },
+    {
+      "control": "synthetic-control-3",
+      "total": 0,
+      "returned": 0,
+      "sheets": 4,
+      "formulas": 58,
+      "scanned_cells": 456,
+      "truncated": false,
+      "separate_internal_m4_candidates": 4,
+      "rule_codes": []
+    },
+    {
+      "control": "synthetic-control-4",
+      "total": 0,
+      "returned": 0,
+      "sheets": 5,
+      "formulas": 215,
+      "scanned_cells": 660,
+      "truncated": false,
+      "separate_internal_m4_candidates": 4,
+      "rule_codes": []
+    },
+    {
+      "control": "synthetic-control-5",
+      "total": 0,
+      "returned": 0,
+      "sheets": 5,
+      "formulas": 310,
+      "scanned_cells": 1783,
+      "truncated": false,
+      "separate_internal_m4_candidates": 4,
+      "rule_codes": []
+    },
+    {
+      "control": "synthetic-control-6",
+      "total": 0,
+      "returned": 0,
+      "sheets": 5,
+      "formulas": 190,
+      "scanned_cells": 1399,
+      "truncated": false,
+      "separate_internal_m4_candidates": 4,
+      "rule_codes": []
+    },
+    {
+      "control": "synthetic-control-7",
+      "total": 0,
+      "returned": 0,
+      "sheets": 4,
+      "formulas": 366,
+      "scanned_cells": 482,
+      "truncated": false,
+      "separate_internal_m4_candidates": 4,
+      "rule_codes": []
+    },
+    {
+      "control": "synthetic-control-8",
+      "total": 0,
+      "returned": 0,
+      "sheets": 4,
+      "formulas": 176,
+      "scanned_cells": 877,
+      "truncated": false,
+      "separate_internal_m4_candidates": 4,
+      "rule_codes": []
+    },
+    {
+      "control": "synthetic-control-9",
+      "total": 0,
+      "returned": 0,
+      "sheets": 5,
+      "formulas": 96,
+      "scanned_cells": 781,
+      "truncated": false,
+      "separate_internal_m4_candidates": 0,
+      "rule_codes": []
+    }
+  ],
+  "local_browser": {
+    "kind": "LOCAL_SYNTHETIC_API_BROWSER",
+    "live_beta_verified": false,
+    "package_examples_used": false,
+    "checks": [
+      {
+        "width": 1440,
+        "zero_free_findings": 0,
+        "zero_formula_strings": 301,
+        "zero_scanned_cells": 832,
+        "positive_findings": 12,
+        "formula_audit_requests": 0,
+        "browser_errors": 0,
+        "horizontal_overflow": false,
+        "screenshot": "artifacts/screenshots/d01-zero/zero-1440.png"
+      },
+      {
+        "width": 390,
+        "zero_free_findings": 0,
+        "zero_formula_strings": 301,
+        "zero_scanned_cells": 832,
+        "positive_findings": 12,
+        "formula_audit_requests": 0,
+        "browser_errors": 0,
+        "horizontal_overflow": false,
+        "screenshot": "artifacts/screenshots/d01-zero/zero-390.png"
+      }
+    ],
+    "source_hashes": {
+      "zero": "2cb0633dab2dff6514ab2ab97182df530b778d712a22c7cf34b54895bd631c4e",
+      "positive": "3981d0f898c7db0bf500f7635cb4f0f740cfcbb579ef94e162f6f5ecd585773f"
+    },
+    "status": "PASS"
+  },
+  "cloud_read_only_metadata": {
+    "latest_ready_revision": "workbookcare-api-beta-00003-bsp",
+    "traffic": [
+      {
+        "revision": "workbookcare-api-beta-00003-bsp",
+        "percent": 100
+      }
+    ],
+    "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:5ab7065c318c2325f6124b41787e8297f4de6f428329151b6a1ca45c7cf35703",
+    "scanner_settings": {
+      "APP_ENV": "hosted_beta",
+      "SCAN_CELL_LIMIT": "DEFAULT",
+      "FINDING_LIMIT": "DEFAULT",
+      "FORMULA_PATTERN_AUDIT_ENABLED": "false"
+    }
+  },
+  "commands": [
+    {
+      "command": "gcloud run services describe workbookcare-api-beta --region=asia-northeast3 --format=json --quiet",
+      "exit_code": 0,
+      "result": "Selected non-secret scanner flags/image/revision only; no mutation"
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\d01-zero\\diagnose.py local",
+      "exit_code": 0,
+      "result": "9/10 base zero; one base 49; internal M4 36; base positive control 12"
+    },
+    {
+      "command": "npm.cmd run test:web -- --run src/components/D01ScanScope.test.tsx",
+      "exit_code": 1,
+      "result": "2 regressions failed before UI fix; npm warned on forwarded --run"
+    },
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- src/components/D01ScanScope.test.tsx src/components/M25ResultsPanel.test.tsx src/components/D01Results.test.tsx src/App.test.tsx",
+      "exit_code": 0,
+      "result": "27 passed"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+      "exit_code": 1,
+      "result": "Test type check rejected Testing Library exact option; corrected without relaxing assertions"
+    },
+    {
+      "command": "node.exe scripts/verify-zero-results.mjs",
+      "exit_code": 0,
+      "result": "Actual local API 0 and 12 findings at 1440/390; repeated after capture scroll correction, exit 0"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+      "exit_code": 0,
+      "result": "web 61 / Worker 13 / API 75, build/Ruff, M4-C 36 exact"
+    },
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- src/components/D01Results.test.tsx src/components/M25ResultsPanel.test.tsx",
+      "exit_code": 0,
+      "result": "17 passed after updating legacy negative assertions to the new heading"
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web -- --mode hosted_beta",
+      "exit_code": 0,
+      "result": "Explicit /api and all formula/feedback flags false"
+    },
+    {
+      "command": "wrangler deployments list / versions view",
+      "exit_code": 0,
+      "result": "Prior version and bindings inspected without raw provider output"
+    },
+    {
+      "command": "wrangler versions upload --dry-run --keep-vars --strict",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler versions upload --keep-vars --strict --tag d01-free-scope --message \"D01 free scan scope clarification; no M4 exposure\"",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler versions deploy dc94d91a-e969-479e-9087-f1f9758ec2ef@100 --yes --message \"Owner-reported zero-findings scope fix\"",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler deployments list / versions view and tokenless Access checks",
+      "exit_code": 0
+    }
+  ],
+  "wrangler_prefix": "npx.cmd --offline --no-install",
+  "wrangler_config": "infra/cloudflare/wrangler.jsonc",
+  "deployed_version": "dc94d91a-e969-479e-9087-f1f9758ec2ef",
+  "deployed_at_utc": "2026-09-12T12:03:50.16917Z",
+  "rollback_version": "9748b413-0acd-4a57-a0fd-9a5e3324f3db",
+  "traffic_percent": 100,
+  "binding_metadata_unchanged": true,
+  "binding_metadata_sha256": "4be60bd368f41301d66960dbeb695025a68dad759f69300c9429e07d85e89443",
+  "anonymous_access_after": [
+    {
+      "path": "/",
+      "status": 302,
+      "redirect_to_existing_access": true
+    },
+    {
+      "path": "/api/v1/scans",
+      "status": 302,
+      "redirect_to_existing_access": true
+    },
+    {
+      "path": "/api/v1/formula-audits",
+      "status": 302,
+      "redirect_to_existing_access": true
+    }
+  ],
+  "assets": [
+    {
+      "path": "apps/web/dist/assets/index-BjqffP3m.css",
+      "sha256": "c4daac22f45779775a9cf19d10008cd25a98978b3a56c1791e445af79035e1d9"
+    },
+    {
+      "path": "apps/web/dist/assets/index-DQbR3eMi.js",
+      "sha256": "6d3a9057860bad9fd7bf20a4b67cfd9c14a5140b2795d56f3887931b0703903d"
+    },
+    {
+      "path": "apps/web/dist/index.html",
+      "sha256": "d788bd6c82aa2a7bb155d83a29f5b508986280739e3b33983fc03ab652a13be2"
+    }
+  ],
+  "owner_package_originals_unchanged": 83,
+  "failures_and_limits": [
+    "Initial temporary diagnostic filename inspect.py shadowed the standard library; renamed and re-ran successfully",
+    "Docker daemon unavailable, so deployed image execution was not performed",
+    "URL-scoped browser connection unavailable; no authenticated beta scan/UI evidence",
+    "M4 synthetic pack has 36 local internal candidates, not 36 hosted findings",
+    "Existing Starlette/httpx deprecation warning retained"
+  ],
+  "not_run_or_changed": [
+    "M4 hosted exposure",
+    "Cloud Run/Gateway rollout",
+    "Access/IAM/storage policy changes",
+    "real customer data/payment/refund",
+    "H2/H3 remaining gates",
+    "Git push",
+    "D02"
+  ],
+  "record_history_preserved": true,
+  "standing_deployment_authorization_unchanged": true
+}
