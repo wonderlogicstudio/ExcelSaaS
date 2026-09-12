@@ -38,12 +38,13 @@
   },
   "repair_patch_fingerprint": "e5b02ed401a0caab858301a2353b22f7373d4389b898fe6c15c45dca00ffe1bd",
   "evidence": {
-    "D08-local.json": "652925cbdeb33a21694fecb274cf79d6cd262e29c75d7442e0f80b7c641e78c9",
+    "D08-local.json": "9b144a2ca7cef52996da99a646702ea7d0126390052ffab4c983a2db0e2bb23c",
     "D08-excel-reopen.json": "aac5d0685973562abd60b89f83c1563e8fe430e199a4d3606d7f0e0c8de95c25",
     "D08-preservation.json": "1d603573b4470b38f769dd8224f7afbe0377d627b24b186994f749efeaf0e3fe",
     "D08-negative-matrix.json": "ecccb109324fbe1e934ab49b740948af3ada05ef69e52c48eceb2489e5fcab6d",
     "D08-capacity.json": "7ee520c9366ea1150d117215d2f2bc24e97a5bbabfa10dd9f6b3afe98102b102",
-    "D08-input-open-probe.json": "1079ddc1c8710ced7fdde892fff354d6c24c29e4ea370eb171d0a08733a91125"
+    "D08-input-open-probe.json": "1079ddc1c8710ced7fdde892fff354d6c24c29e4ea370eb171d0a08733a91125",
+    "D08-commit.json": "a0b27e29d76ba64e8ad6567482a90f23689ff3ef39c73b0954b8f8be045e9a98"
   },
   "oracles": {
     "holdout-expected.json": "ec0d61bc44067c9a4da8ded78f3e8733b5925b0f8afbe403784689437b292724",
@@ -171,5 +172,6 @@
     "Durable commerce ledger, legal retention/refund/price/tax/support wording and owner release decision PENDING; current15min input/result and24h synthetic ledger are not approved commercial retention.",
     "M3 real user observations and M3.5 purchase evidence PENDING/DEFERRED; synthetic success is not all-file accuracy or market evidence.",
     "Remote push, production/anonymous release, invitations, real customer files/payment/refund, new paid resources and remaining H2/H3 checks NOT_RUN as out of scope."
-  ]
+  ],
+  "implementation_commit": "8880d179aca80e4fff9f5bb44ebf50a45a5e7037"
 }

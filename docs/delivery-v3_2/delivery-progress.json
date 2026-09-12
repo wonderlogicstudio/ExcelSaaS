@@ -473,7 +473,8 @@
       "evidence": "reviews/evidence/D08-local.json",
       "commerce_ready": false,
       "beta_deployment": "NOT_DEPLOYED_DOCKER_AND_LINUX_RUNTIME_PENDING",
-      "pg_sandbox": "NOT_RUN"
+      "pg_sandbox": "NOT_RUN",
+      "implementation_commit": "8880d179aca80e4fff9f5bb44ebf50a45a5e7037"
     }
   },
   "readiness": {
