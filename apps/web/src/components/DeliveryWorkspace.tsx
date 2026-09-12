@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import {OrderStatus} from './OrderStatus';
 import {RepairPlanPreview} from './RepairPlanPreview';
 import { resolveApiBaseUrl } from '../lib/api';
 
 type Preflight = { status: string; eligible_count: number; reason_codes: string[]; purchase_enabled: boolean;
   targets: {sheet:string;cell:string;eligible:boolean;current_type:string;reason_codes:string[]}[] };
-export type DeliveryJob = {job_id:string;revision:number;source_hash:string;status:string;expires_at:number;
+export type DeliveryJob = {order_id?:string|null;entitlement_active?:boolean;policy?:{profile:string;sheet:string;targets:string[];role?:string;anchor?:string;anchor_formula?:string;confirmed:boolean};job_id:string;revision:number;source_hash:string;status:string;expires_at:number;
   repair_execution_available?:boolean;approval_status?:string;delivery?:{delivery_id:string;patch_count:number;expires_at:number;files:Record<string,{bytes:number}>}|null;
   internal_rehearsal?:boolean;plan_summary?:{digest:string;status:string;patch_count:number;impact_count:number;formula_impact_count:number;coverage:{formula_count:number};reference:{status:string;case_count?:number}}|null;
   sheets:{name:string;cell_count:number}[];preflight:Preflight|null;purchase_enabled:boolean;source_unchanged:boolean};
@@ -33,14 +34,15 @@ export async function deliveryRequest<T>(body:object,signal?:AbortSignal):Promis
 }
 function fileBase64(file:File):Promise<string>{return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error('파일을 읽지 못했습니다.'));reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.readAsDataURL(file);});}
 
-export function DeliveryWorkspace({file}:{file:File}){
-  const [open,setOpen]=useState(false);const [consent,setConsent]=useState(false);const [job,setJob]=useState<DeliveryJob|null>(null);
+export function DeliveryWorkspace({file,initialJob}:{file?:File;initialJob?:DeliveryJob}){
+  const [open,setOpen]=useState(Boolean(initialJob));const [consent,setConsent]=useState(false);const [job,setJob]=useState<DeliveryJob|null>(initialJob??null);
   const [busy,setBusy]=useState(false);const [error,setError]=useState<string|null>(null);
   const [profile,setProfile]=useState(RP01);const [sheet,setSheet]=useState('');const [targets,setTargets]=useState('');
   const [role,setRole]=useState('');const [anchor,setAnchor]=useState('');const [formula,setFormula]=useState('');const [confirmed,setConfirmed]=useState(false);
   const [dirty,setDirty]=useState(false);const [maxBytes,setMaxBytes]=useState<number|null>(null);const abort=useRef<AbortController|null>(null);
   const heading=useRef<HTMLHeadingElement>(null);
   useEffect(()=>()=>abort.current?.abort(),[]);
+  useEffect(()=>{const p=initialJob?.policy;if(p){setProfile(p.profile);setSheet(p.sheet);setTargets(p.targets.join(', '));setRole(p.role??'');setAnchor(p.anchor??'');setFormula(p.anchor_formula??'');setConfirmed(p.confirmed)}},[initialJob]);
   const run=async(work:(signal:AbortSignal)=>Promise<void>)=>{
     abort.current?.abort();const controller=new AbortController();abort.current=controller;setBusy(true);setError(null);
     try{await work(controller.signal);}catch(e){if(!controller.signal.aborted)setError(e instanceof Error?e.message:'작업을 처리하지 못했습니다.');}
@@ -49,6 +51,7 @@ export function DeliveryWorkspace({file}:{file:File}){
   const edit=(change:()=>void)=>{change();setConfirmed(false);setDirty(true);};
   const start=()=>run(async signal=>{const limits=await deliveryRequest<{max_bytes:number}>({action:'capabilities'},signal);setMaxBytes(limits.max_bytes);setOpen(true);requestAnimationFrame(()=>heading.current?.focus());});
   const upload=()=>run(async signal=>{
+    if(!file)throw new Error('새 원본 파일을 선택하세요.');
     if(!consent)throw new Error('업로드 권한과 검사 동의를 확인하세요.');
     if(maxBytes!==null&&file.size>maxBytes)throw new Error(`사전 검사는 ${maxBytes/1024/1024}MiB 이하 파일만 지원합니다.`);
     const next=await deliveryRequest<DeliveryJob>({action:'create_input',filename:file.name,file_base64:await fileBase64(file),consent:true,request_key:crypto.randomUUID()},signal);
@@ -65,7 +68,7 @@ export function DeliveryWorkspace({file}:{file:File}){
   return <section id="repair-preflight" className="delivery-workspace shell" aria-label="수정 범위 사전 확인">
     <h2 ref={heading} tabIndex={-1}>수정 범위 사전 확인</h2><p>원본을 고정하고, 직접 지정한 업무 기준과 셀만 확인합니다. 이 확인은 변경 승인이 아닙니다.</p>
     <p className="delivery-beta-note">합성 파일용 사전 검사 베타 · 실제 결제 없음. 별도 내부 검증권이 있는 합성 작업만 승인 후 사본을 만들 수 있습니다. 작업은 15분 뒤 만료되며 서버 재시작 시 사라질 수 있습니다.</p>
-    {!job ? <div className="delivery-step"><h3>1. 원본 고정</h3><p>{file.name} · {maxBytes===null?'지원 한도 확인 중':`최대 ${maxBytes/1024/1024}MiB`}</p>
+    {!job ? <div className="delivery-step"><h3>1. 원본 고정</h3><p>{file?.name??'고정된 합성 원본'} · {maxBytes===null?'지원 한도 확인 중':`최대 ${maxBytes/1024/1024}MiB`}</p>
       <label className="delivery-check"><input type="checkbox" checked={consent} onChange={e=>setConsent(e.target.checked)}/>업로드 권한이 있는 합성 파일이며 사전 검사와 임시 보관에 동의합니다.</label>
       <button className="button button--primary" type="button" disabled={busy||!consent} onClick={upload}>원본 고정하고 계속</button></div>
       : <><p className="delivery-source-status">원본 고정 완료 · 변경하지 않음 · {job.sheets.length}개 시트</p>
@@ -87,6 +90,7 @@ export function DeliveryWorkspace({file}:{file:File}){
           <table className="delivery-targets"><caption>선택한 셀의 실제 사전 검사</caption><thead><tr><th>위치</th><th>현재 타입</th><th>확인 결과</th></tr></thead><tbody>{job.preflight.targets.map(t=><tr key={t.sheet+t.cell}><td>{t.sheet} · {t.cell}</td><td>{cellTypes[t.current_type]??t.current_type}</td><td>{t.eligible?'형식 조건 충족':'지원 제외'}</td></tr>)}</tbody></table>
           <button className="button button--primary" type="button" disabled>견적·수정 실행 준비 중</button>
         </section>}
+        {job.plan_summary&&!dirty&&<OrderStatus job={job} onRefresh={async()=>setJob(await deliveryRequest<DeliveryJob>({action:'get',job_id:job.job_id}))}/>}
         {job.preflight?.status==='PRELIMINARY_ONLY'&&!dirty&&<RepairPlanPreview job={job} onJob={setJob}/>}
         <div className="delivery-actions"><button className="button button--outline" type="button" disabled={busy} onClick={()=>run(async signal=>{setJob(await deliveryRequest<DeliveryJob>({action:'get',job_id:job.job_id},signal));})}>최신 작업 상태 확인</button>
           <button className="button button--ghost" type="button" disabled={busy} onClick={()=>run(async signal=>{const next=await deliveryRequest<DeliveryJob|{status:'DELETED'}>({action:'delete',job_id:job.job_id},signal);if(next.status==='DELETED'){setJob(null);setConsent(false);setConfirmed(false);}else{setJob(next as DeliveryJob);}})}>사전 검사 원본 삭제</button></div>

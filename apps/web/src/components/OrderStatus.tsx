@@ -1,0 +1,30 @@
+import {useEffect,useState} from 'react';
+import {deliveryRequest} from './DeliveryWorkspace';
+
+export type Order={order_id:string;job_id:string;product_id:string;mode:string;amount:string;payment:string;refund:string;entitlement:string;approval:string;job_status:string;artifact_status:string;validation:string;recovery:string|null;profile:string;patch_count:number;artifact_kinds:string[];input_expires_at:number|null;expires_at:number;delivery?:{files:Record<string,{bytes:number}>}|null};
+export const artifactLabels:Record<string,string>={REPAIRED_XLSX:'수정본 XLSX',CHANGES_XLSX:'변경내역 XLSX',VERIFICATION_HTML:'재검증 HTML',COMPARISON_REPORT_XLSX:'비교 보고서 XLSX',COMPARISON_VERIFICATION_HTML:'비교 재검증 HTML'};
+const paymentLabels:Record<string,string>={NONE:'결제 전',PENDING:'결제 확인 중',UNKNOWN:'결제 결과 확인 필요',PAID:'결제 확인됨',CANCELLED:'결제 취소됨'};
+const refundLabels:Record<string,string>={NONE:'없음',PENDING:'취소 확인 중',SUCCEEDED:'취소 확인 완료',FAILED:'추가 확인 필요'};
+export function OrderSummary({order}:{order:Order}){
+ const repair=order.product_id==='APPROVED_REPAIR';
+ return <div className="order-summary"><p className="delivery-beta-note">{order.mode==='LOCAL_CONTRACT'?'내부 계약 모형 시험 · 공식 PG 검증 아님':'공식 PG 테스트 모드 · 실제 결제 아님'} · 테스트 총액 {Number(order.amount).toLocaleString('ko-KR')}원 · 실제 가격·세금 정책 아님</p>
+ <dl className="order-state-grid"><div><dt>결제</dt><dd data-order-payment={order.payment}>{paymentLabels[order.payment]??order.payment}</dd></div><div><dt>{repair?'변경 승인':'변경 여부'}</dt><dd data-order-approval={order.approval}>{repair?(order.approval==='APPROVED'?'별도 승인 완료':'승인되지 않음'):'원본 변경 없음'}</dd></div><div><dt>파일 준비</dt><dd data-order-artifact={order.artifact_status}>{order.artifact_status==='READY'?`${order.artifact_kinds.length}개 파일 준비됨`:order.artifact_status==='EXPIRED'?'보관 만료':order.artifact_status==='QUARANTINED'?'검증 실패 · 격리':'아직 준비되지 않음'}</dd></div></dl>
+ {order.payment==='PAID'&&repair&&order.approval!=='APPROVED'&&order.artifact_status!=='READY'&&order.entitlement==='ACTIVE'&&<p role="status">결제 확인 · 변경 승인 대기. 아래의 정확한 변경계획을 확인하고 별도로 승인해야 사본을 만듭니다.</p>}
+ {order.payment==='UNKNOWN'&&<p role="status">결제 결과를 확인하지 못했습니다. 새로 결제하지 말고 이 주문의 상태를 다시 확인하세요.</p>}
+ {order.refund!=='NONE'&&<p data-order-refund={order.refund}>취소 처리: {refundLabels[order.refund]} · 추가 다운로드와 수정 실행 권리는 회수했습니다.</p>}
+ {order.job_status==='INPUT_EXPIRED'&&<p role="status">원본 보관이 만료되었습니다. 동일한 원본을 새로 업로드해 범위를 확인한 뒤 이 주문에 연결하거나, 주문 취소를 요청하세요. 예전 변경 승인은 재사용하지 않습니다.</p>}
+ <p>받을 파일: {order.artifact_kinds.map(k=>artifactLabels[k]).join(' · ')}. 같은 주문의 기술 재시도와 재다운로드에는 추가 결제가 없습니다.</p>
+ <details><summary>주문과 보관 정보</summary><p>주문 번호: <code>{order.order_id}</code></p><p>입력·출력은 업로드 후 15분, 합성 주문 기록은 24시간의 로컬 임시 보관입니다. 서버 재시작 시 사라질 수 있습니다.</p>{order.input_expires_at&&<p>파일 만료: {new Date(order.input_expires_at*1000).toLocaleString('ko-KR')}</p>}</details></div>;
+}
+export function OrderStatus({job,onRefresh,limitsConfirmed=false}:{job:{job_id:string;order_id?:string|null;status:string};onRefresh:()=>Promise<void>;limitsConfirmed?:boolean}){
+ const [restoreId,setRestoreId]=useState(()=>{try{return localStorage.getItem('workbookcare:restore-order')}catch{return null}});
+ const [mode,setMode]=useState('OFF');const [order,setOrder]=useState<Order|null>(null);const [ack,setAck]=useState(false);const [busy,setBusy]=useState(false);const [error,setError]=useState<string|null>(null);
+ useEffect(()=>{let current=true;deliveryRequest<{payment_mode:string}>({action:'capabilities'}).then(v=>{if(current)setMode(v.payment_mode)}).catch(()=>{});return()=>{current=false}},[]);
+ useEffect(()=>{let current=true;if(job.order_id)deliveryRequest<Order>({action:'order_get',order_id:job.order_id}).then(o=>{if(current)setOrder(o)}).catch(()=>{if(current)setError('주문 상태를 확인하지 못했습니다. 다시 확인하세요.')});return()=>{current=false}},[job.order_id,job.status]);
+ const run=async(work:()=>Promise<void>)=>{setBusy(true);setError(null);try{await work();await onRefresh()}catch(e){setError(e instanceof Error?e.message:'주문 상태를 확인하지 못했습니다.')}finally{setBusy(false)}};
+ if(mode==='OFF'&&!job.order_id)return null;
+ return <section className="delivery-step order-panel" aria-label="상품 주문 상태"><h3>주문과 변경 승인을 따로 확인하세요</h3>
+ {!order?<>{restoreId&&<div><p>보관이 끝난 기존 주문을 선택했습니다. 동일 원본·구매 범위만 연결할 수 있으며 변경 승인은 다시 필요합니다.</p><button type="button" className="button button--outline" disabled={busy} onClick={()=>run(async()=>{setOrder(await deliveryRequest<Order>({action:'order_restore',order_id:restoreId,job_id:job.job_id}));localStorage.removeItem('workbookcare:restore-order');setRestoreId(null)})}>기존 주문으로 원본 복구</button></div>}<p>현재는 합성 시험 전용입니다. 실제 결제·일반 구매를 제공하지 않습니다.</p><label className="delivery-check"><input type="checkbox" checked={ack} disabled={busy} onChange={e=>setAck(e.target.checked)}/>1,000원은 실제 가격이 아닌 테스트 총액이며, 주문 준비와 결제 확인이 변경 승인이 아님을 확인합니다.</label><button type="button" className="button button--outline" disabled={busy||!ack} onClick={()=>run(async()=>setOrder(await deliveryRequest<Order>({action:'order_create',job_id:job.job_id,request_key:crypto.randomUUID(),acknowledge_test_only:ack,acknowledge_limitations:limitsConfirmed})))}>합성 테스트 주문 준비</button></>
+ : <><OrderSummary order={order}/><div className="delivery-actions"><button type="button" className="button button--outline" disabled={busy} onClick={()=>run(async()=>setOrder(await deliveryRequest<Order>({action:'payment_reconcile',order_id:order.order_id})))}>이 주문의 결제 상태 확인</button><button type="button" className="button button--ghost" disabled={busy||order.payment==='CANCELLED'} onClick={()=>run(async()=>setOrder(await deliveryRequest<Order>({action:'order_cancel',order_id:order.order_id})))}>주문 취소 · 변경 거부</button></div>{order.mode==='TOSS_TEST'&&order.payment==='NONE'&&<p>공식 테스트 결제창의 인증 연결과 실제 승인·조회·취소 시험이 완료되어야 이용할 수 있습니다.</p>}</>}
+ {busy&&<p role="status">같은 주문의 상태를 확인하고 있습니다…</p>}{error&&<p role="alert">{error}</p>}</section>;
+}

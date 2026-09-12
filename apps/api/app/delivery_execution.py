@@ -17,6 +17,7 @@ from .delivery_inputs import digest, reject
 from .delivery_patch import patch_workbook, verify_output
 from .delivery_plan import REQUIRED_ARTIFACTS, reference_status, validate_plan
 from .delivery_rehearsal import entitled
+from .delivery_rights import effective_repair_grant
 from .errors import WorkbookCareError
 
 CONTROLS: dict[tuple[str, str], ExecutionControl] = {}
@@ -89,9 +90,11 @@ def approve(store, job, body, settings):
         "source_hash": plan["source_hash"],
         "plan_digest": plan["digest"],
         "candidate_ids": sorted(ids),
-        "entitlement_digest": digest(job["state"]["internal_grant"]),
+        "entitlement_digest": digest(effective_repair_grant(job, settings.app_env)),
         "created_at": time.time(),
-        "expires_at": min(plan["expires_at"], job["state"]["internal_grant"]["expires_at"]),
+        "expires_at": min(
+            plan["expires_at"], effective_repair_grant(job, settings.app_env)["expires_at"]
+        ),
     }
     return store.update(
         job, body.get("revision"), {**job["state"], "approval": approval, "status": "APPROVED"}
@@ -110,7 +113,7 @@ def validate_approval(job, settings):
         "source_hash": plan["source_hash"],
         "plan_digest": plan["digest"],
         "candidate_ids": sorted(p["candidate_id"] for p in plan["patches"]),
-        "entitlement_digest": digest(job["state"]["internal_grant"]),
+        "entitlement_digest": digest(effective_repair_grant(job, settings.app_env)),
     }
     if approval.get("expires_at", 0) <= time.time() or any(
         approval.get(k) != v for k, v in expected.items()
@@ -209,7 +212,7 @@ def execute(store, job, settings):
                 if (
                     min(
                         current["state"]["approval"]["expires_at"],
-                        current["state"]["internal_grant"]["expires_at"],
+                        effective_repair_grant(current, settings.app_env)["expires_at"],
                     )
                     <= time.time()
                 ):

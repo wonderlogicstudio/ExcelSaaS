@@ -1,5 +1,10 @@
 # Current milestone
 
+## ACTIVE APPROVED — D07 (2026-09-13)
+
+D06 local order/separate approval/recovery and actual UI/download/Excel verified; official PG sandbox/SDK and hosted/Linux remain PARTIAL. Read SECURITY_OPERATIONS.md and UX_AND_MENU.md. Reuse existing gates and strengthen UX, TTL, private access, cancellation, resource limits and operating evidence. Latest D01–D08 authorization applies; final owner review after D08. No live payment, remote push, prices, new paid resources or anonymous release.
+
+
 ## ACTIVE APPROVED — D06 (2026-09-13)
 
 D05 actual comparison UI/child engine/two reports and installed Excel verified. D02–D05 hosted/Linux remain pending Docker recovery; no commercial readiness.

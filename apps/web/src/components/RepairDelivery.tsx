@@ -4,8 +4,9 @@ import type {PlanDetail} from './RepairPlanPreview';
 
 const labels:Record<string,string>={REPAIRED_XLSX:'수정본 XLSX',CHANGES_XLSX:'변경내역 XLSX',VERIFICATION_HTML:'재검증 HTML'};
 export function RepairDelivery({job,detail,onJob}:{job:DeliveryJob;detail:PlanDetail;onJob:(job:DeliveryJob)=>void}){
+ const [selected,setSelected]=useState<string[]>([]);
  const [ack,setAck]=useState(false);const [busy,setBusy]=useState(false);const [error,setError]=useState<string|null>(null);
- useEffect(()=>setAck(false),[detail.digest]);
+ useEffect(()=>{setAck(false);setSelected([])},[detail.digest]);
  useEffect(()=>{
   if(!['RUNNING','CANCEL_REQUESTED'].includes(job.status))return;
   const c=new AbortController();let timer:ReturnType<typeof setTimeout>;
@@ -27,7 +28,8 @@ export function RepairDelivery({job,detail,onJob}:{job:DeliveryJob;detail:PlanDe
   : active ? <div role="status"><h4>{job.status==='CANCEL_REQUESTED'?'취소 요청됨 · 실행 종료와 임시 파일 정리 중':'승인한 사본을 만들고 검증 중'}</h4><p>필수 세 파일의 검증이 끝난 뒤 다운로드가 열립니다.</p><button type="button" className="button button--outline" disabled={job.status==='CANCEL_REQUESTED'} onClick={()=>run(async()=>onJob(await deliveryRequest<DeliveryJob>({action:'cancel',job_id:job.job_id})))}>실행 취소</button></div>
   : job.status==='CANCELLED' ? <p role="status">취소 완료 · 수정본을 게시하지 않았습니다. 새 계획을 계산하면 다시 시작할 수 있습니다.</p>
   : <>
-   {job.status==='QUARANTINED'&&<p role="alert">검증을 완료하지 못해 파일을 격리했습니다. 다운로드할 수 없습니다. 같은 승인 범위의 재시도에는 추가 결제가 없습니다.</p>}
+   <details className="delivery-reselection"><summary>일부 대상만 다시 선택하거나 전체 변경 거부</summary><p>다시 선택하면 전체 계산 영향을 새로 확인하고 기존 승인은 취소됩니다.</p>{detail.patches.map(p=><label className="delivery-check" key={p.candidate_id}><input type="checkbox" aria-label={`${p.sheet} ${p.cell} 다시 선택`} checked={selected.includes(p.candidate_id)} onChange={e=>setSelected(old=>e.target.checked?[...old,p.candidate_id]:old.filter(id=>id!==p.candidate_id))}/>{p.sheet} · {p.cell}</label>)}<button type="button" className="button button--outline" disabled={busy||selected.length===0} onClick={()=>run(async()=>onJob(await deliveryRequest<DeliveryJob>({action:'reselect_plan',job_id:job.job_id,revision:job.revision,plan_digest:detail.digest,candidate_ids:selected})))}>선택한 대상만 새 계획 계산</button><button type="button" className="button button--ghost" disabled={busy} onClick={()=>run(async()=>onJob(await deliveryRequest<DeliveryJob>({action:'cancel',job_id:job.job_id})))}>전체 변경 거부·취소</button></details>
+   {job.status==='QUARANTINED' &&<p role="alert">검증을 완료하지 못해 파일을 격리했습니다. 다운로드할 수 없습니다. 같은 승인 범위의 재시도에는 추가 결제가 없습니다.</p>}
    {job.approval_status!=='APPROVED' ? <><label className="delivery-check"><input type="checkbox" checked={ack} disabled={busy||!job.repair_execution_available} onChange={e=>setAck(e.target.checked)}/>위 {detail.patches.length}개 셀의 정확한 전후 변경과 계산 영향을 확인하고, 별도 사본에 적용하는 것을 승인합니다.</label>
     <button type="button" className="button button--primary" disabled={!ack||busy||!job.repair_execution_available} onClick={()=>run(async()=>onJob(await deliveryRequest<DeliveryJob>({action:'approve_plan',job_id:job.job_id,revision:job.revision,plan_digest:detail.digest,candidate_ids:detail.patches.map(p=>p.candidate_id),acknowledge_exact_changes:true})))}>이 변경계획 승인</button></>
     : <><p>현재 변경계획 승인 완료 · 결제나 앞 단계의 기준 확인과 별도로 기록했습니다.</p><button type="button" className="button button--primary" disabled={busy} onClick={()=>run(async()=>{onJob({...job,status:'RUNNING'});onJob(await deliveryRequest<DeliveryJob>({action:'execute',job_id:job.job_id}));})}>{job.status==='QUARANTINED'?'같은 승인 범위 다시 실행':'승인한 사본 만들기'}</button></>}

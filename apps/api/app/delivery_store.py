@@ -42,6 +42,9 @@ class DeliveryStore:
                 "KEY REFERENCES jobs(id) ON DELETE CASCADE, source BLOB NOT NULL, "
                 "snapshot TEXT NOT NULL)"
             )
+            from .payment_service import install
+
+            install(db)
         if os.name != "nt":
             self.path.chmod(0o600)
 

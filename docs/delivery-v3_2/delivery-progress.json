@@ -2,7 +2,7 @@
   "schema_version": 1,
   "copy_over_existing_progress": false,
   "prior_progress_path": "../10_PROGRESS.md",
-  "active_bundle": "D06",
+  "active_bundle": "D07",
   "bundles": {
     "D01": {
       "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
@@ -423,6 +423,24 @@
       "beta_deployment": "PENDING_DOCKER_ENGINE_RECOVERY"
     },
     "D06": {
+      "status": "PARTIAL",
+      "development_approved": true,
+      "owner_acceptance": "PENDING",
+      "history": [
+        {
+          "status": "IN_PROGRESS",
+          "reason": "before D06 local integration evidence"
+        }
+      ],
+      "local_engineering": "VERIFIED_AWAITING_OWNER",
+      "review": "reviews/D06.md",
+      "evidence": "reviews/evidence/D06-local.json",
+      "commerce_ready": false,
+      "pg_sandbox": "NOT_RUN",
+      "checkout_sdk": "NOT_CONNECTED",
+      "beta_deployment": "PENDING_DOCKER_ENGINE_RECOVERY"
+    },
+    "D07": {
       "status": "IN_PROGRESS",
       "development_approved": true,
       "owner_acceptance": "PENDING"
@@ -440,7 +458,7 @@
     "commercial_signal": "NOT_OBSERVED"
   },
   "customer_change_approval": "IMPLEMENTED_LOCAL_SYNTHETIC_ONLY_D04",
-  "next_recommended_bundle": "D06",
+  "next_recommended_bundle": "D07",
   "next_bundle_approved": true,
   "execution_stopped_after": null,
   "deployment_authorization": {

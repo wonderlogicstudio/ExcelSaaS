@@ -12,7 +12,7 @@ HOSTED_APP_ENVS: Final = frozenset({"hosted_beta", "production"})
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+    model_config = SettingsConfigDict(env_file=".env", extra="ignore", hide_input_in_errors=True)
 
     app_env: str = "development"
     # Do not let pydantic-settings decode this before ``parse_origins`` runs.
@@ -35,6 +35,9 @@ class Settings(BaseSettings):
     formula_audit_max_candidate_count: int = Field(default=120, ge=1)
     delivery_beta_enabled: bool = False
     delivery_data_dir: str | None = None
+    payment_mode: str = "OFF"
+    toss_test_secret: SecretStr | None = None
+    toss_test_client_key: SecretStr | None = None
     file_retention_hours: int = 24
     # This is deliberately a provider-store-only secret. It is required only
     # for the hosted control plane and is never emitted in API responses/logs.
@@ -45,6 +48,20 @@ class Settings(BaseSettings):
         ),
     )
     control_plane_hmac_max_age_seconds: int = Field(default=60, ge=15, le=300)
+
+    @field_validator("payment_mode")
+    @classmethod
+    def validate_payment_mode(cls, value: str) -> str:
+        if value not in {"OFF", "LOCAL_CONTRACT", "TOSS_TEST"}:
+            raise ValueError("Only disabled/local-contract/official-test payment modes exist")
+        return value
+
+    @field_validator("toss_test_secret", "toss_test_client_key")
+    @classmethod
+    def test_keys_only(cls, value):
+        if value is not None and not value.get_secret_value().startswith("test_"):
+            raise ValueError("Live payment keys are not permitted")
+        return value
 
     @field_validator("app_env")
     @classmethod

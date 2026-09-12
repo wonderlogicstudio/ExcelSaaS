@@ -15,6 +15,7 @@ from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 from starlette.concurrency import run_in_threadpool
 
+from . import payment_service as payments
 from .comparison_service import (
     create_comparison,
     download_comparison,
@@ -38,6 +39,7 @@ from .delivery_inputs import (
 from .delivery_plan import build_plan, customer_plan, plan_summary
 from .delivery_rehearsal import entitled
 from .delivery_store import INPUT_TTL_SECONDS, DeliveryStore
+from .payment_plan_actions import reselect, restore_order, retry_delivery, validate_paid_scope
 
 router = APIRouter()
 _stores: dict[str, DeliveryStore] = {}
@@ -82,7 +84,10 @@ def projection(job: dict) -> dict:
         "storage_mode": "BETA_EPHEMERAL_LOCAL_ADAPTER",
         "source_unchanged": True,
         "plan_summary": plan_summary(state["plan"]) if state.get("plan") else None,
-        "internal_rehearsal": entitled(job, get_settings().app_env),
+        "internal_rehearsal": entitled(job, get_settings().app_env) and not state.get("order_id"),
+        "entitlement_active": entitled(job, get_settings().app_env),
+        "order_id": state.get("order_id"),
+        "policy": state.get("policy"),
     }
 
 
@@ -125,6 +130,7 @@ async def delivery(request: Request):
             "artifacts",
             "internal_grant",
             "comparison_grant",
+            "payment_grant",
             "comparison_result",
             "plan",
             "entitlement",
@@ -145,6 +151,10 @@ async def delivery(request: Request):
             "calculation_status": "NOT_RUN",
             "purchase_enabled": False,
             "durable_commerce_storage": False,
+            "payment_mode": settings.payment_mode,
+            "official_pg_test_configured": bool(
+                settings.toss_test_secret and settings.payment_mode == "TOSS_TEST"
+            ),
         }
     elif action == "create_input":
         if body.get("consent") is not True:
@@ -166,6 +176,37 @@ async def delivery(request: Request):
         output = projection(
             await run_in_threadpool(create_comparison, store, owner, body, settings)
         )
+    elif action == "orders":
+        output = {"orders": payments.list_orders(store, owner)}
+    elif action in {
+        "order_get",
+        "payment_confirm",
+        "payment_reconcile",
+        "order_cancel",
+        "payment_event",
+    }:
+        order_id = body.get("order_id")
+        if action == "order_get":
+            order = payments.get_order(store, owner, order_id)
+        elif action == "order_cancel":
+            order = await run_in_threadpool(
+                payments.request_cancel, store, owner, order_id, settings
+            )
+        elif action == "payment_event":
+            order = await run_in_threadpool(
+                payments.event_hint, store, owner, order_id, body.get("event_id"), settings
+            )
+        else:
+            order = await run_in_threadpool(
+                payments.perform,
+                store,
+                owner,
+                order_id,
+                "confirm" if action == "payment_confirm" else "query",
+                settings,
+                payment_key=body.get("payment_key"),
+            )
+        output = payments.project_order(store, order)
     elif action == "list":
         output = {"jobs": [projection(job) for job in store.list_jobs(owner)]}
     else:
@@ -186,7 +227,19 @@ async def delivery(request: Request):
                 "비교 보고서 권리로 수정 작업을 실행하거나 받을 수 없습니다.",
                 403,
             )
-        if action == "prepare_comparison":
+        if action == "order_create":
+            output = payments.project_order(
+                store, payments.create_order(store, job, body, settings)
+            )
+        elif action == "order_restore":
+            output = payments.project_order(
+                store, restore_order(store, owner, body.get("order_id"), job)
+            )
+        elif action == "retry_delivery":
+            output = projection(await run_in_threadpool(retry_delivery, store, job, settings))
+        elif action == "reselect_plan":
+            output = projection(await run_in_threadpool(reselect, store, job, body, settings))
+        elif action == "prepare_comparison":
             output = projection(
                 await run_in_threadpool(prepare_comparison, store, job, body, settings)
             )
@@ -199,6 +252,11 @@ async def delivery(request: Request):
         elif action == "get":
             output = projection(job)
         elif action == "delete":
+            if job["state"].get("order_id"):
+                await run_in_threadpool(
+                    payments.request_cancel, store, owner, job["state"]["order_id"], settings
+                )
+                job = store.load(owner, job_id)
             if job["state"]["status"] in ACTIVE:
                 output = projection(cancel(store, job))
                 return JSONResponse(output, headers={"Cache-Control": "no-store"})
@@ -209,7 +267,13 @@ async def delivery(request: Request):
         elif action == "execute":
             output = projection(await run_in_threadpool(execute, store, job, settings))
         elif action == "cancel":
-            output = projection(cancel(store, job))
+            if job["state"].get("order_id"):
+                await run_in_threadpool(
+                    payments.request_cancel, store, owner, job["state"]["order_id"], settings
+                )
+                output = projection(store.load(owner, job_id))
+            else:
+                output = projection(cancel(store, job))
         elif action == "download":
             output = download(store, job, body.get("kind"), settings)
         elif action == "plan_details":
@@ -224,6 +288,7 @@ async def delivery(request: Request):
             if not job["state"].get("policy"):
                 reject("PREFLIGHT_REQUIRED", "업무 기준과 대상의 사전 검사를 먼저 완료하세요.")
             plan = await run_in_threadpool(build_plan, job, job["state"]["policy"])
+            validate_paid_scope(store, job, plan)
             state = {
                 **job["state"],
                 "status": plan_summary(plan)["status"],

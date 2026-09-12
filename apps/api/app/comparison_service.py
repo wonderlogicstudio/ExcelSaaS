@@ -22,6 +22,12 @@ PRODUCT = "TWO_FILE_COMPARISON"
 
 
 def comparison_entitled(job, settings):
+    if job["product"] != PRODUCT:
+        return False
+    if job["state"].get("order_id"):
+        from .delivery_rights import payment_grant
+
+        return bool(payment_grant(job, settings.app_env))
     grant = job["state"].get("comparison_grant") or {}
     registry = json.loads(
         Path(__file__).with_name("comparison_synthetic_sources.json").read_text(encoding="utf-8")
@@ -66,7 +72,9 @@ def project_comparison(job, settings):
         "preflight": state.get("comparison_preflight"),
         "spec_hash": state.get("spec_hash"),
         "comparison_spec": state.get("comparison_spec"),
-        "internal_rehearsal": authorized,
+        "internal_rehearsal": authorized and not state.get("order_id"),
+        "entitlement_active": authorized,
+        "order_id": state.get("order_id"),
         "result": state.get("comparison_result") if authorized else None,
         "delivery": state.get("delivery") if authorized else None,
         "includes_repaired_workbook": False,
@@ -300,7 +308,9 @@ def execute_comparison(store, job, body, settings):
             }
             with store.connection() as db:
                 db.execute("BEGIN IMMEDIATE")
-                if current["state"]["comparison_grant"]["expires_at"] <= time.time():
+                if (current["state"].get("payment_grant") or current["state"]["comparison_grant"])[
+                    "expires_at"
+                ] <= time.time():
                     reject("PUBLICATION_REVOKED", "보고서 권리가 만료되어 게시하지 않습니다.", 409)
                 changed = db.execute(
                     "UPDATE jobs SET state=?,revision=revision+1 WHERE id=? AND owner=? "
@@ -393,6 +403,8 @@ def download_comparison(store, job, kind, settings):
 def grant_comparison(store, job, settings):
     if settings.app_env != "internal_beta" or job["product"] != PRODUCT:
         reject("LOCAL_REHEARSAL_ONLY", "내부 합성 비교만 허용합니다.")
+    if job["state"].get("order_id"):
+        reject("ORDER_ALREADY_LINKED", "주문과 내부 검증권을 공유하지 않습니다.", 409)
     validate_spec(job)
     grant = {
         "kind": "INTERNAL_SYNTHETIC_COMPARISON",

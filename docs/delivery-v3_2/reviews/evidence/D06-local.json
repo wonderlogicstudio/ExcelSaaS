@@ -1,0 +1,260 @@
+{
+  "status": "PARTIAL",
+  "local_engineering": "VERIFIED_AWAITING_OWNER",
+  "base_commit": "625c547fd3ed61e001cfc3cc402fe56685641895",
+  "reused": [
+    "D02 immutable owner-bound jobs/CSRF/Access proof",
+    "D03 real calculated plan and exact digest",
+    "D04 separate approval, fenced atomic three-artifact delivery",
+    "D05 separate comparison rights/two-artifact reports"
+  ],
+  "implemented": [
+    "Independent synthetic order/payment/refund/approval/job/artifact axes; paid is never approval",
+    "OFF-by-default official Toss TEST-only adapter; confirm/query/full cancel, fixed origins, timeout and stable idempotency keys; no live keys",
+    "Private local contract receipt adapter clearly distinct from official PG evidence",
+    "Immutable quote source/SKU/profile/max target scope, no duplicated order or charge for retry",
+    "Unknown response same-order reconciliation, duplicate/reversed hint queries provider, terminal cancellation",
+    "Exact paid subset recalculates and requires new approval; expanded scope requires new quote",
+    "Revoke rights/fence/delete before cancellation confirmation; late publication cannot restore access",
+    "Revisit order list/download, missing artifact quarantine and same-order retry; expired identical input restoration resets approval"
+  ],
+  "verification": {
+    "full_regression": {
+      "web": 75,
+      "worker": 16,
+      "api": 196,
+      "m4_exact": 36,
+      "exit_code": 0
+    },
+    "payment_target_tests": 15,
+    "target_exit_code": 0,
+    "actual_browser": {
+      "kind": "LOCAL_CONTRACT_RECEIPT_WITH_ACTUAL_PRODUCT_UI_API_REPAIR_AND_COMPARISON",
+      "official_pg_verified": false,
+      "rows": [
+        {
+          "width": 1440,
+          "profile": "RP02",
+          "action": "deliver",
+          "order_id": "wc_d2c9c6f7701c4d96b1a3c54c77ed96a5",
+          "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+          "separate_approval": true,
+          "expected": {
+            "F3": 6000,
+            "F12": 18200,
+            "H2": 0
+          },
+          "screen_expected_match": true,
+          "revisit_redownload_same_hash": true,
+          "files": {
+            "REPAIRED_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d06\\browser-downloads\\1440-RP02-deliver\\REPAIRED_XLSX.xlsx",
+              "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+              "bytes": 2067
+            },
+            "CHANGES_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d06\\browser-downloads\\1440-RP02-deliver\\CHANGES_XLSX.xlsx",
+              "sha256": "24b38456d1b2f30782845821861b02a030241ba01a01399b2c7d64e67a399119",
+              "bytes": 9007
+            },
+            "VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d06\\browser-downloads\\1440-RP02-deliver\\VERIFICATION_HTML.html",
+              "sha256": "015be8632b07d317e88a00f3b999521190ccd0ae68e7b70ab9af44205104ca86",
+              "bytes": 4071
+            }
+          }
+        },
+        {
+          "width": 390,
+          "profile": "RP01",
+          "action": "subset",
+          "order_id": "wc_4e70ddd1340a48219aa26a59e250a8ec",
+          "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+          "separate_approval": true,
+          "expected": {
+            "B2": 12000,
+            "H2": 12000,
+            "F12": 12200
+          },
+          "screen_expected_match": true,
+          "revisit_redownload_same_hash": true,
+          "files": {
+            "REPAIRED_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d06\\browser-downloads\\390-RP01-subset\\REPAIRED_XLSX.xlsx",
+              "sha256": "564ae2d937158ca2eedcf06bd6212439df04e12bf9a287df0799f50d034b1056",
+              "bytes": 2049
+            },
+            "CHANGES_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d06\\browser-downloads\\390-RP01-subset\\CHANGES_XLSX.xlsx",
+              "sha256": "497d9de048084c1d17543bce48172abfb1d3b1e3879707345c79af7360c56f3d",
+              "bytes": 8951
+            },
+            "VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d06\\browser-downloads\\390-RP01-subset\\VERIFICATION_HTML.html",
+              "sha256": "6c6f80c56f07965f29635de7bf8087ffb8322f3c210890d9fe9484322180cc19",
+              "bytes": 4032
+            }
+          }
+        },
+        {
+          "width": 390,
+          "profile": "RP01",
+          "action": "reject",
+          "order_id": "wc_2a72e3032c7044039d5894490a65bc6a",
+          "payment_cancelled": true,
+          "patch_not_run": true,
+          "files": {}
+        },
+        {
+          "width": 1440,
+          "profile": "COMPARISON",
+          "action": "deliver",
+          "order_id": "wc_eef4d62439c44fc5ab2841bc3f19c7a0",
+          "screen_expected_match": true,
+          "expected": {
+            "source_rows": 14,
+            "A": "47900",
+            "B": "51000"
+          },
+          "files": {
+            "COMPARISON_REPORT_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d06\\browser-downloads\\1440-comparison\\COMPARISON_REPORT_XLSX.xlsx",
+              "sha256": "e90e3a32413bde8eec9fec650b9ce3d20f83ed311d04a707f581f040879eab12",
+              "bytes": 14740
+            },
+            "COMPARISON_VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d06\\browser-downloads\\1440-comparison\\COMPARISON_VERIFICATION_HTML.html",
+              "sha256": "e524c96b96380efc7d7677a61d4782a6d8d01c27e2e9281aac134b7a29be73ad",
+              "bytes": 6837
+            }
+          }
+        }
+      ],
+      "screenshots": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\1440-RP02-deliver-paid-awaiting.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\1440-RP02-deliver-ready.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\1440-RP02-deliver-html.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\1440-RP02-deliver-revisit.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\390-RP01-subset-paid-awaiting.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\390-RP01-subset-ready.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\390-RP01-subset-html.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\390-RP01-subset-revisit.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\390-RP01-reject-paid-awaiting.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\390-RP01-rejected.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d06\\1440-comparison-ready.png"
+      ]
+    },
+    "actual_excel": {
+      "excel_build": 20326,
+      "official_pg_verified": false,
+      "excel_version": "16.0",
+      "kind": "ACTUAL_PRODUCT_DOWNLOADS_REOPENED_IN_INSTALLED_EXCEL",
+      "results": [
+        {
+          "profile": "RP02",
+          "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+          "unchanged": true,
+          "expected_match": true,
+          "kind": "REPAIRED_XLSX"
+        },
+        {
+          "profile": "RP02",
+          "sha256": "24b38456d1b2f30782845821861b02a030241ba01a01399b2c7d64e67a399119",
+          "unchanged": true,
+          "expected_match": true,
+          "kind": "CHANGES_XLSX"
+        },
+        {
+          "profile": "RP01",
+          "sha256": "564ae2d937158ca2eedcf06bd6212439df04e12bf9a287df0799f50d034b1056",
+          "unchanged": true,
+          "expected_match": true,
+          "kind": "REPAIRED_XLSX"
+        },
+        {
+          "profile": "RP01",
+          "sha256": "497d9de048084c1d17543bce48172abfb1d3b1e3879707345c79af7360c56f3d",
+          "unchanged": true,
+          "expected_match": true,
+          "kind": "CHANGES_XLSX"
+        },
+        {
+          "profile": "COMPARISON",
+          "sha256": "e90e3a32413bde8eec9fec650b9ce3d20f83ed311d04a707f581f040879eab12",
+          "unchanged": true,
+          "expected_match": true,
+          "kind": "COMPARISON_REPORT_XLSX"
+        }
+      ],
+      "status": "PASS"
+    },
+    "screenshots_inspected": 11,
+    "owner_package_files_unchanged": 83,
+    "original_sample_files_unchanged": 68,
+    "repair_reference": {
+      "status": "PASS",
+      "case_count": 20,
+      "excel_version": "16.0",
+      "reference_digest": "b745516a9844401a05276476f1d07376c51dc675d10f7488cfaed962dbcc6eab"
+    },
+    "repair_compatibility": {
+      "status": "PASS",
+      "excel_version": "16.0",
+      "profiles": [
+        "RP01",
+        "RP02"
+      ],
+      "evidence_digest": "ea268506921f994240b229c525bb6cf46b3fef04acb54ab812dd519063f373c1"
+    }
+  },
+  "commands": [
+    {
+      "command": "pytest apps/api/tests/test_payment_delivery.py -q --tb=short",
+      "exit_code": 0,
+      "tests": 15
+    },
+    {
+      "command": "ruff check apps/api",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/verify-payment-delivery.mjs via run_d06_browser.py",
+      "exit_code": 0,
+      "cases": 4,
+      "new_artifacts": 8,
+      "same_hash_redownloads": 2
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_payment_delivery_excel.ps1",
+      "exit_code": 0,
+      "actual_excel_reopens": 5
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+      "exit_code": 0
+    },
+    {
+      "command": "docker version --format server version (12 second subprocess timeout, read-only)",
+      "exit_code": 1,
+      "result": "DAEMON_TIMEOUT; no restart performed"
+    }
+  ],
+  "not_run": [
+    "Official PG sandbox authorization/confirmation/query/cancel and external webhook delivery: account/credentials answer pending",
+    "Toss checkout SDK and authentication-return UI are not connected; current UI exposes local contract test only",
+    "Hosted D02-D06 and Linux packaging: Docker daemon unresponsive; restart approval unanswered",
+    "Live payments/refunds, price/tax/legal terms, new paid resources, real customer inputs, remote push, anonymous/public launch",
+    "Durable commerce persistence and production accounting retention; local ledger is ephemeral 24h test-only"
+  ],
+  "source_references": [
+    "https://docs.tosspayments.com/reference",
+    "https://docs.tosspayments.com/guides/v2/payment-window/integration",
+    "https://docs.tosspayments.com/reference/using-api/authorization"
+  ],
+  "evidence_limits": [
+    "HTTP MockTransport and local receipts are CONTRACT_ONLY, never PG_SANDBOX",
+    "Actual UI/API/calculation/XLSX/HTML/Excel checks cover fixed synthetic inputs, not arbitrary workbooks or commercial readiness",
+    "Final monotonic cancellation/retry guards were added after browser run, then target/full suite verified; UI flow unchanged"
+  ],
+  "next": "D07 already authorized; UX/TTL/operations and resource bounds"
+}
