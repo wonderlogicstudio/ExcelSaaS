@@ -2,7 +2,7 @@
   "schema_version": 1,
   "copy_over_existing_progress": false,
   "prior_progress_path": "../10_PROGRESS.md",
-  "active_bundle": "D01",
+  "active_bundle": "D02",
   "bundles": {
     "D01": {
       "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
@@ -22,23 +22,15 @@
         "unified_hosted_diagnosis_ux": "VERIFIED"
       },
       "verification": {
-        "web_tests": 73,
+        "web_tests": 75,
         "worker_tests": 14,
         "api_tests": 77,
-        "m4c_exact_candidates": 72,
-        "browser_widths": [
-          1440,
-          390
-        ],
         "local_desktop_uploads": 20,
         "local_mobile_uploads": 4,
-        "hosted_representative_uploads": 5,
-        "hosted_m4_exact_candidates": 12,
-        "prior_hosted_all20_exact72_reused": true,
-        "evidence_type": "ACTUAL_SYNTHETIC_LOCAL_AND_AUTHENTICATED_HOSTED_PRODUCT_UI",
-        "package_examples_are_product_evidence": false,
-        "strict_evaluator_reused": "BLOCKED_TWO_EXISTING_LABEL_CONFLICTS",
-        "accepted_evaluator_reused": "PASS_WITH_PRODUCT_OWNER_WAIVER"
+        "local_exact_candidates": 72,
+        "actual_hosted_uploads": 3,
+        "hosted_exact_candidates": 8,
+        "evidence": "reviews/evidence/D01-hierarchy.json"
       },
       "reused": [
         "M2.5 scanner/guidance/catalog",
@@ -65,10 +57,10 @@
         "saved authenticated Chrome screenshot artifact (screen capture inspected in session; local PNGs saved separately)"
       ],
       "beta_deployment": {
-        "version_id": "f9be71f3-d035-48cb-b9a9-7fcaa1e7469a",
-        "deployed_at_utc": "2026-09-12T14:57:33.503085Z",
+        "version_id": "91c06632-1302-4877-ae49-d4e44af3f3a2",
+        "deployed_at_utc": "2026-09-12T15:29:30.636898Z",
         "percentage": 100,
-        "rollback_version_id": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+        "rollback_version_id": "f9be71f3-d035-48cb-b9a9-7fcaa1e7469a",
         "binding_count": 13,
         "all_bindings_unchanged": true,
         "access": [
@@ -90,16 +82,9 @@
         ],
         "cloud_run_deployed": false,
         "gateway_deployed": false,
-        "source_commit": "d64c45178cf1",
-        "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
-        "cloud_run_revision": "workbookcare-api-beta-00004-hhk",
-        "gateway_config": "workbookcare-beta-m4-0ae6c63c06a7",
-        "authenticated_ui_check": "PASS_AGENT_REPRESENTATIVE5_12_EXACT_UNIFIED",
-        "evidence": "reviews/evidence/D01-unified-diagnosis.json",
-        "version": "f9be71f3-d035-48cb-b9a9-7fcaa1e7469a",
-        "rollback_version": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
-        "cloud_run_revision_changed": false,
-        "existing_binding_metadata_unchanged": true
+        "source_commit": "2c0b4d1a6b1f",
+        "version": "91c06632-1302-4877-ae49-d4e44af3f3a2",
+        "status": "WEB_DEPLOYED_ACCESS_PROTECTED"
       },
       "initial_engineering_review_not_run": [
         "repair_engine/delivery",
@@ -181,6 +166,43 @@
           "hosted_synthetic_upload": "20/20 free baseline + 72/72 exact M4",
           "evidence": "reviews/evidence/D01-m4-hosted.json",
           "authenticated_evidence": "reviews/evidence/D01-m4-hosted-browser.json"
+        },
+        {
+          "version_id": "f9be71f3-d035-48cb-b9a9-7fcaa1e7469a",
+          "deployed_at_utc": "2026-09-12T14:57:33.503085Z",
+          "percentage": 100,
+          "rollback_version_id": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+          "binding_count": 13,
+          "all_bindings_unchanged": true,
+          "access": [
+            {
+              "path": "/",
+              "status": 302,
+              "existing_access": true
+            },
+            {
+              "path": "/api/v1/scans",
+              "status": 302,
+              "existing_access": true
+            },
+            {
+              "path": "/api/v1/formula-audits",
+              "status": 302,
+              "existing_access": true
+            }
+          ],
+          "cloud_run_deployed": false,
+          "gateway_deployed": false,
+          "source_commit": "d64c45178cf1",
+          "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
+          "cloud_run_revision": "workbookcare-api-beta-00004-hhk",
+          "gateway_config": "workbookcare-beta-m4-0ae6c63c06a7",
+          "authenticated_ui_check": "PASS_AGENT_REPRESENTATIVE5_12_EXACT_UNIFIED",
+          "evidence": "reviews/evidence/D01-unified-diagnosis.json",
+          "version": "f9be71f3-d035-48cb-b9a9-7fcaa1e7469a",
+          "rollback_version": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+          "cloud_run_revision_changed": false,
+          "existing_binding_metadata_unchanged": true
         }
       ],
       "owner_feedback_followups": [
@@ -248,6 +270,12 @@
           "actual_hosted_uploads": 5,
           "local_exact_candidates": 72,
           "evidence": "reviews/evidence/D01-unified-diagnosis.json"
+        },
+        {
+          "report": "Summary/type/cell progressive disclosure",
+          "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+          "source_commit": "2c0b4d1a6b1f",
+          "evidence": "reviews/evidence/D01-hierarchy.json"
         }
       ],
       "not_run_before_m4_followup": [
@@ -295,6 +323,28 @@
             "strict_evaluator": "BLOCKED_TWO_EXISTING_LABEL_CONFLICTS",
             "accepted_evaluator": "PASS_WITH_PRODUCT_OWNER_WAIVER"
           }
+        },
+        {
+          "reason": "before progressive hierarchy",
+          "verification": {
+            "web_tests": 73,
+            "worker_tests": 14,
+            "api_tests": 77,
+            "m4c_exact_candidates": 72,
+            "browser_widths": [
+              1440,
+              390
+            ],
+            "local_desktop_uploads": 20,
+            "local_mobile_uploads": 4,
+            "hosted_representative_uploads": 5,
+            "hosted_m4_exact_candidates": 12,
+            "prior_hosted_all20_exact72_reused": true,
+            "evidence_type": "ACTUAL_SYNTHETIC_LOCAL_AND_AUTHENTICATED_HOSTED_PRODUCT_UI",
+            "package_examples_are_product_evidence": false,
+            "strict_evaluator_reused": "BLOCKED_TWO_EXISTING_LABEL_CONFLICTS",
+            "accepted_evaluator_reused": "PASS_WITH_PRODUCT_OWNER_WAIVER"
+          }
         }
       ],
       "not_run_unified_ux_followup": [
@@ -311,6 +361,11 @@
         "strict/waiver evaluator rerun in this UX follow-up (existing evidence reused)",
         "saved hosted screenshot artifact; CUA screen inspected in session, local PNGs saved separately"
       ]
+    },
+    "D02": {
+      "status": "IN_PROGRESS",
+      "development_approved": true,
+      "owner_acceptance": "PENDING"
     }
   },
   "readiness": {

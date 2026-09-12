@@ -1,5 +1,19 @@
 # Current review — V3.2 D01
 
+## D01 hierarchy verified — 2026-09-13
+
+최신 승인에 따라 전체 요약 → 유형별 공통 설명 → 필요한 셀의 위치·차이로 화면을 정리했다.
+같은 제목/설명을 반복하지 않으며 실제 동일한 설명만 유형에 한 번 올린다. 서로 다른 근거는 셀에 남긴다.
+추가 기준·검사 한계, 점수 상세, 직접 재검사·참고 견적은 펼쳐 확인한다. 기존 무료 CSV/점수/견적/상태 키·M4 의미는 유지된다.
+표적12개, 전체 회귀 웹75·Worker14·API77, TypeScript/build/Ruff exit0. 실제 로컬 desktop20/mobile4에서72 exact,
+그룹/셀/표/필터/확인함/CSV 불변과 캡처6장 직접 검토. 실제 로그인 베타03·01·20도 53/4/0건 및8개 exact 위치 일치.
+소스 `2c0b4d1a6b1f`, Worker `91c06632-1302-4877-ae49-d4e44af3f3a2`100%; 기존13바인딩/Access 유지, API·Gateway 변경 없음.
+명령·실패원인수정·재시험·화면·미실행은 [D01 계층 증거](delivery-v3_2/reviews/evidence/D01-hierarchy.json)에 기록했다.
+소유자 패키지83개 보존. 고객 원본 수정·Excel/PG 검증은 이 UI 보완의 증거가 아니다.
+이전 D01-only/정지 기록은 이력이다. **최신 사용자가 D08까지 개발과 단계별 실제 화면 검증을 승인했으므로 D02로 진행한다.**
+사용자 최종 검토는 요청대로 D08 뒤에 받으며 상용 공개/실결제 승인을 추정하지 않는다.
+
+
 ## Unified diagnosis UX completed — 2026-09-13 (KST)
 
 Owner-approved D01 single upload/progress/list implemented and deployed to protected beta.

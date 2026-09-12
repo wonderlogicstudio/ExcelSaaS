@@ -1,5 +1,13 @@
 # Current milestone
 
+## ACTIVE APPROVED — D02 (2026-09-13)
+
+D01 hierarchy implementation/regression and local/hosted screen expectations passed; see D01-hierarchy.json.
+Proceed with D02 immutable single-file inputs, owner binding, exact profile selection and fail-closed preflight.
+Read contracts/REPAIR_ELIGIBILITY.md and contracts/SECURITY_OPERATIONS.md. Reuse existing Access/HMAC/file validation.
+D03 calculation evidence absent means preliminary only, no repair quote/sale. Latest D01–D08 authorization below applies.
+
+
 ## APPROVED — D01 hierarchy refinement and D02–D08 execution (2026-09-13)
 
 Latest owner instruction approves summary → type groups → cell evidence, then development through D08.
