@@ -143,14 +143,21 @@ def test_circular_reference_and_hard_timeout_cleanup(tmp_path, monkeypatch):
 )
 def test_os_memory_limit_prevents_large_allocation():
     p = subprocess.Popen(
-        [sys.executable, "-c", "import sys; sys.stdin.read(1); bytearray(600*1024**2)"],
+        [
+            sys._base_executable,
+            "-I",
+            "-c",
+            "import sys,os; print(os.getpid(),flush=True); sys.stdin.read(1); "
+            "print('ALLOCATING',flush=True); bytearray(600*1024**2)",
+        ],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL,
     )
     with process_limits(p):
-        p.communicate(b"x", timeout=10)
-    assert p.returncode != 0
+        output, _ = p.communicate(b"x", timeout=10)
+    assert int(output.splitlines()[0]) == p.pid
+    assert b"ALLOCATING" in output and p.returncode != 0
 
 
 def test_real_api_free_projection_cannot_grant_details_or_execution(tmp_path, monkeypatch):

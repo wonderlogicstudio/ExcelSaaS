@@ -1,0 +1,918 @@
+{
+  "kind": "FIXED_V31_COMPARISON_CONTRACT_EXPECTATIONS_REQUIRING_ACTUAL_PRODUCT_EXECUTION",
+  "baseline": {
+    "label": "공개 합성 자료 / 이미 표준화된 값만 사용하는 계약 예시",
+    "A": [
+      {
+        "key": "0001",
+        "amount": "10000"
+      },
+      {
+        "key": "0002",
+        "amount": "25000"
+      },
+      {
+        "key": "0003",
+        "amount": "7000"
+      },
+      {
+        "key": "0004",
+        "amount": "3000"
+      },
+      {
+        "key": "0004",
+        "amount": "2000"
+      },
+      {
+        "key": "",
+        "amount": "900"
+      },
+      {
+        "key": "0006",
+        "amount": "0"
+      },
+      {
+        "key": "0007",
+        "amount": "값없음"
+      }
+    ],
+    "B": [
+      {
+        "key": "0001",
+        "amount": "10000"
+      },
+      {
+        "key": "0002",
+        "amount": "27000"
+      },
+      {
+        "key": "0005",
+        "amount": "8000"
+      },
+      {
+        "key": "0004",
+        "amount": "5000"
+      },
+      {
+        "key": "0006",
+        "amount": "0"
+      },
+      {
+        "key": "0007",
+        "amount": "1000"
+      }
+    ],
+    "expected_counts": {
+      "MATCHED": 2,
+      "AMOUNT_DIFF": 1,
+      "ONLY_A": 1,
+      "ONLY_B": 1,
+      "AMBIGUOUS": 1,
+      "INPUT_ERROR": 2
+    },
+    "expected_known_totals": {
+      "A": "47900",
+      "B": "51000"
+    },
+    "expected_0002_delta": "-2000",
+    "correctness_claim": false
+  },
+  "expected": {
+    "artifact_kind": "PUBLIC_SYNTHETIC_CONTRACT_EXAMPLE_NOT_PRODUCTION",
+    "summary": {
+      "counts": {
+        "MATCHED": 2,
+        "AMOUNT_DIFF": 1,
+        "ONLY_A": 1,
+        "ONLY_B": 1,
+        "AMBIGUOUS": 1,
+        "INPUT_ERROR": 2
+      },
+      "input_rows": {
+        "A": 8,
+        "B": 6
+      },
+      "known_amount_totals": {
+        "A": "47900",
+        "B": "51000"
+      },
+      "uncompared_known_amounts": {
+        "A": "5900",
+        "B": "6000"
+      },
+      "unknown_amount_row_counts": {
+        "A": 1,
+        "B": 0
+      },
+      "rows_preserved": true,
+      "known_amount_conservation": true,
+      "whole_ledger_correctness_verified": false
+    },
+    "records": [
+      {
+        "key": null,
+        "status": "INPUT_ERROR",
+        "reason": "INVALID_KEY",
+        "A": [
+          6
+        ],
+        "B": [],
+        "amount_A": null,
+        "amount_B": null,
+        "delta": null
+      },
+      {
+        "key": "0001",
+        "status": "MATCHED",
+        "reason": null,
+        "A": [
+          1
+        ],
+        "B": [
+          1
+        ],
+        "amount_A": "10000",
+        "amount_B": "10000",
+        "delta": "0"
+      },
+      {
+        "key": "0002",
+        "status": "AMOUNT_DIFF",
+        "reason": null,
+        "A": [
+          2
+        ],
+        "B": [
+          2
+        ],
+        "amount_A": "25000",
+        "amount_B": "27000",
+        "delta": "-2000"
+      },
+      {
+        "key": "0003",
+        "status": "ONLY_A",
+        "reason": null,
+        "A": [
+          3
+        ],
+        "B": [],
+        "amount_A": "7000",
+        "amount_B": null,
+        "delta": null
+      },
+      {
+        "key": "0004",
+        "status": "AMBIGUOUS",
+        "reason": "DUPLICATE_KEY",
+        "A": [
+          4,
+          5
+        ],
+        "B": [
+          4
+        ],
+        "amount_A": null,
+        "amount_B": "5000",
+        "delta": null
+      },
+      {
+        "key": "0005",
+        "status": "ONLY_B",
+        "reason": null,
+        "A": [],
+        "B": [
+          3
+        ],
+        "amount_A": null,
+        "amount_B": "8000",
+        "delta": null
+      },
+      {
+        "key": "0006",
+        "status": "MATCHED",
+        "reason": null,
+        "A": [
+          7
+        ],
+        "B": [
+          5
+        ],
+        "amount_A": "0",
+        "amount_B": "0",
+        "delta": "0"
+      },
+      {
+        "key": "0007",
+        "status": "INPUT_ERROR",
+        "reason": "INVALID_AMOUNT",
+        "A": [
+          8
+        ],
+        "B": [
+          6
+        ],
+        "amount_A": null,
+        "amount_B": "1000",
+        "delta": null
+      }
+    ]
+  },
+  "edges": {
+    "kind": "MANUALLY_SPECIFIED_SYNTHETIC_EXPECTATIONS_NOT_PRODUCTION_ENGINE",
+    "indexing": "A/B source data rows are 1-based, Excel physical row = data row + 1 for these tables",
+    "ordering": "Result record order is not prescribed; compare membership and status/delta",
+    "preflight_note": "Some raw engine cases intentionally produce a result model while the customer preflight must refuse checkout. Do not run paid analysis for those inputs.",
+    "cases": [
+      {
+        "id": "E01",
+        "title": "실제 0은 유효한 금액",
+        "A": [
+          {
+            "key_parts": [
+              "0"
+            ],
+            "amount": "0"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "0"
+            ],
+            "amount": "0"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "MATCHED",
+            "A": [
+              1
+            ],
+            "B": [
+              1
+            ],
+            "delta": "0"
+          }
+        ],
+        "expected_preflight": "ELIGIBLE"
+      },
+      {
+        "id": "E02",
+        "title": "음수 값과 delta",
+        "A": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "-200"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "-300"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "AMOUNT_DIFF",
+            "A": [
+              1
+            ],
+            "B": [
+              1
+            ],
+            "delta": "100"
+          }
+        ],
+        "expected_preflight": "ELIGIBLE"
+      },
+      {
+        "id": "E03",
+        "title": "허용오차 경계 안 delta도 보존",
+        "A": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "100"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "101"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "1",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "MATCHED",
+            "A": [
+              1
+            ],
+            "B": [
+              1
+            ],
+            "delta": "-1"
+          }
+        ],
+        "expected_preflight": "ELIGIBLE"
+      },
+      {
+        "id": "E04",
+        "title": "허용오차 경계 밖",
+        "A": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "100"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "102"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "1",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "AMOUNT_DIFF",
+            "A": [
+              1
+            ],
+            "B": [
+              1
+            ],
+            "delta": "-2"
+          }
+        ],
+        "expected_preflight": "ELIGIBLE"
+      },
+      {
+        "id": "E05",
+        "title": "선행0은 별도 키",
+        "A": [
+          {
+            "key_parts": [
+              "01"
+            ],
+            "amount": "10"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "1"
+            ],
+            "amount": "10"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "ONLY_A",
+            "A": [
+              1
+            ],
+            "B": [],
+            "delta": null
+          },
+          {
+            "status": "ONLY_B",
+            "A": [],
+            "B": [
+              1
+            ],
+            "delta": null
+          }
+        ],
+        "expected_preflight": "NOT_ELIGIBLE"
+      },
+      {
+        "id": "E06",
+        "title": "대소문자 변환 없음",
+        "A": [
+          {
+            "key_parts": [
+              "abc"
+            ],
+            "amount": "10"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "ABC"
+            ],
+            "amount": "10"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "ONLY_A",
+            "A": [
+              1
+            ],
+            "B": [],
+            "delta": null
+          },
+          {
+            "status": "ONLY_B",
+            "A": [],
+            "B": [
+              1
+            ],
+            "delta": null
+          }
+        ],
+        "expected_preflight": "NOT_ELIGIBLE"
+      },
+      {
+        "id": "E07",
+        "title": "앞뒤 공백 변환 없음",
+        "A": [
+          {
+            "key_parts": [
+              " K"
+            ],
+            "amount": "10"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "10"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "ONLY_A",
+            "A": [
+              1
+            ],
+            "B": [],
+            "delta": null
+          },
+          {
+            "status": "ONLY_B",
+            "A": [],
+            "B": [
+              1
+            ],
+            "delta": null
+          }
+        ],
+        "expected_preflight": "NOT_ELIGIBLE"
+      },
+      {
+        "id": "E08",
+        "title": "한쪽 중복 전체 그룹",
+        "A": [
+          {
+            "key_parts": [
+              "D"
+            ],
+            "amount": "10"
+          },
+          {
+            "key_parts": [
+              "D"
+            ],
+            "amount": "20"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "D"
+            ],
+            "amount": "30"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "AMBIGUOUS",
+            "A": [
+              1,
+              2
+            ],
+            "B": [
+              1
+            ],
+            "delta": null
+          }
+        ],
+        "expected_preflight": "NOT_ELIGIBLE"
+      },
+      {
+        "id": "E09",
+        "title": "양쪽 중복 전체 그룹",
+        "A": [
+          {
+            "key_parts": [
+              "D"
+            ],
+            "amount": "10"
+          },
+          {
+            "key_parts": [
+              "D"
+            ],
+            "amount": "20"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "D"
+            ],
+            "amount": "10"
+          },
+          {
+            "key_parts": [
+              "D"
+            ],
+            "amount": "20"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "AMBIGUOUS",
+            "A": [
+              1,
+              2
+            ],
+            "B": [
+              1,
+              2
+            ],
+            "delta": null
+          }
+        ],
+        "expected_preflight": "NOT_ELIGIBLE"
+      },
+      {
+        "id": "E10",
+        "title": "invalid A를 지워 ONLY_B로 만들지 않음",
+        "A": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "값없음"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "100"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "INPUT_ERROR",
+            "A": [
+              1
+            ],
+            "B": [
+              1
+            ],
+            "delta": null
+          }
+        ],
+        "expected_preflight": "NOT_ELIGIBLE"
+      },
+      {
+        "id": "E11",
+        "title": "중복과 invalid의 primary precedence",
+        "A": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "값없음"
+          },
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "100"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "100"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "AMBIGUOUS",
+            "A": [
+              1,
+              2
+            ],
+            "B": [
+              1
+            ],
+            "delta": null
+          }
+        ],
+        "expected_preflight": "NOT_ELIGIBLE"
+      },
+      {
+        "id": "E12",
+        "title": "빈키와 정상쌍",
+        "A": [
+          {
+            "key_parts": [
+              ""
+            ],
+            "amount": "900"
+          },
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "100"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "100"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "INPUT_ERROR",
+            "A": [
+              1
+            ],
+            "B": [],
+            "delta": null
+          },
+          {
+            "status": "MATCHED",
+            "A": [
+              2
+            ],
+            "B": [
+              1
+            ],
+            "delta": "0"
+          }
+        ],
+        "expected_preflight": "ELIGIBLE_WITH_LIMITATIONS"
+      },
+      {
+        "id": "E13",
+        "title": "복합키 단순연결 충돌 방지",
+        "A": [
+          {
+            "key_parts": [
+              "A|B",
+              "C"
+            ],
+            "amount": "1"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "A",
+              "B|C"
+            ],
+            "amount": "1"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "ONLY_A",
+            "A": [
+              1
+            ],
+            "B": [],
+            "delta": null
+          },
+          {
+            "status": "ONLY_B",
+            "A": [],
+            "B": [
+              1
+            ],
+            "delta": null
+          }
+        ],
+        "expected_preflight": "NOT_ELIGIBLE"
+      },
+      {
+        "id": "E14",
+        "title": "API 정수 문자열 정밀도",
+        "A": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "10000000000000001"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "10000000000000000"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "AMOUNT_DIFF",
+            "A": [
+              1
+            ],
+            "B": [
+              1
+            ],
+            "delta": "1"
+          }
+        ],
+        "expected_preflight": "ELIGIBLE"
+      },
+      {
+        "id": "E15",
+        "title": "미상금액을 0으로 바꾸지 않음",
+        "A": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": null
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "K"
+            ],
+            "amount": "0"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "INPUT_ERROR",
+            "A": [
+              1
+            ],
+            "B": [
+              1
+            ],
+            "delta": null
+          }
+        ],
+        "expected_preflight": "NOT_ELIGIBLE"
+      },
+      {
+        "id": "E16",
+        "title": "허용되는 부분모호 범위",
+        "A": [
+          {
+            "key_parts": [
+              "A"
+            ],
+            "amount": "10"
+          },
+          {
+            "key_parts": [
+              "D"
+            ],
+            "amount": "20"
+          },
+          {
+            "key_parts": [
+              "D"
+            ],
+            "amount": "30"
+          }
+        ],
+        "B": [
+          {
+            "key_parts": [
+              "A"
+            ],
+            "amount": "10"
+          },
+          {
+            "key_parts": [
+              "D"
+            ],
+            "amount": "50"
+          }
+        ],
+        "policy": {
+          "tolerance_krw": "0",
+          "normalization": "NONE"
+        },
+        "expected": [
+          {
+            "status": "MATCHED",
+            "A": [
+              1
+            ],
+            "B": [
+              1
+            ],
+            "delta": "0"
+          },
+          {
+            "status": "AMBIGUOUS",
+            "A": [
+              2,
+              3
+            ],
+            "B": [
+              2
+            ],
+            "delta": null
+          }
+        ],
+        "expected_preflight": "ELIGIBLE_WITH_LIMITATIONS"
+      }
+    ]
+  }
+}

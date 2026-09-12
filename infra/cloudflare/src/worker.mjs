@@ -493,28 +493,35 @@ export async function handleDelivery(request, env) {
     claims = await verifyAccessAssertion(assertion || "", env);
     if (typeof claims.sub !== "string" || !claims.sub || claims.sub.length > 512) throw new Error();
   } catch { return errorResponse(401, "ACCESS_ASSERTION_INVALID"); }
-  const raw = await readRequestTextWithinLimit(request, Math.floor(2 * 1024 * 1024 * 4 / 3) + 65536);
+  const raw = await readRequestTextWithinLimit(request, Math.floor(2 * 1024 * 1024 * 8 / 3) + 65536);
   if (raw === null) return errorResponse(413, "LIMIT_EXCEEDED");
   let payload;
   try { payload = JSON.parse(raw); } catch { return errorResponse(400, "INVALID_REQUEST"); }
   if (!payload || Array.isArray(payload) || typeof payload !== "object") return errorResponse(400, "INVALID_REQUEST");
-  let objectKey;
+  const objectKeys = [];
   try {
-    if (payload.action === "create_input") {
+    if (["create_input", "create_comparison"].includes(payload.action)) {
       if (!await uploadRateLimitAllows(assertion, env)) return errorResponse(429, "UPLOAD_RATE_LIMITED", {"Retry-After":"60"});
-      if (typeof payload.filename !== "string" || !/\.xlsx$/i.test(payload.filename)) return errorResponse(415, "UNSUPPORTED_FILE_TYPE");
-      if (typeof payload.file_base64 !== "string") return errorResponse(400, "INVALID_FILE");
-      const bytes = Uint8Array.from(atob(payload.file_base64), x => x.charCodeAt(0));
-      if (bytes.byteLength > 2 * 1024 * 1024) return errorResponse(413, "LIMIT_EXCEEDED");
-      objectKey = `uploads/${crypto.randomUUID()}`;
-      await env.UPLOADS.put(objectKey, bytes);
-      const stored = await env.UPLOADS.get(objectKey);
-      if (!stored) return errorResponse(502, "TEMPORARY_UPLOAD_UNAVAILABLE");
-      const storedBytes = new Uint8Array(await stored.arrayBuffer());
-      let encoded = "";
-      for (let i = 0; i < storedBytes.length; i += 8192) encoded += String.fromCharCode(...storedBytes.subarray(i, i + 8192));
-      payload.file_base64 = btoa(encoded);
-      payload.filename = "workbook.xlsx";
+      const pair = payload.action === "create_comparison";
+      if (pair && (!payload.sources || Object.keys(payload.sources).sort().join(",") !== "A,B")) return errorResponse(400, "COMPARISON_TWO_SOURCES_REQUIRED");
+      const inputs = pair ? [payload.sources.A, payload.sources.B] : [payload];
+      for (const input of inputs) {
+        const pattern = pair ? /\.(xlsx|csv)$/i : /\.xlsx$/i;
+        if (!input || typeof input.filename !== "string" || !pattern.test(input.filename)) return errorResponse(415, "UNSUPPORTED_FILE_TYPE");
+        if (typeof input.file_base64 !== "string") return errorResponse(400, "INVALID_FILE");
+        const bytes = Uint8Array.from(atob(input.file_base64), x => x.charCodeAt(0));
+        if (!bytes.byteLength || bytes.byteLength > 2 * 1024 * 1024) return errorResponse(413, "LIMIT_EXCEEDED");
+        const objectKey = `uploads/${crypto.randomUUID()}`;
+        objectKeys.push(objectKey);
+        await env.UPLOADS.put(objectKey, bytes);
+        const stored = await env.UPLOADS.get(objectKey);
+        if (!stored) return errorResponse(502, "TEMPORARY_UPLOAD_UNAVAILABLE");
+        const storedBytes = new Uint8Array(await stored.arrayBuffer());
+        let encoded = "";
+        for (let i = 0; i < storedBytes.length; i += 8192) encoded += String.fromCharCode(...storedBytes.subarray(i, i + 8192));
+        input.file_base64 = btoa(encoded);
+        input.filename = /\.csv$/i.test(input.filename) ? "source.csv" : "workbook.xlsx";
+      }
     }
     const secret = env.WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET;
     const identityProof = await createControlPlaneSignature(secret, 0, "OWNER", "/delivery-owner-v1", new TextEncoder().encode(claims.sub));
@@ -530,7 +537,7 @@ export async function handleDelivery(request, env) {
     },body}));
   } catch { return errorResponse(502, "DELIVERY_CONTROL_PLANE_UNAVAILABLE"); }
   finally {
-    if (objectKey) {
+    for (const objectKey of objectKeys) {
       try { await env.UPLOADS.delete(objectKey); }
       catch { console.warn('{"event":"temporary_upload_cleanup_failed"}'); }
     }

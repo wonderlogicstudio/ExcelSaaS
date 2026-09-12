@@ -1,0 +1,2 @@
+# Preserve exact bytes of immutable synthetic comparison sources.
+comparison-*.csv binary

@@ -1,5 +1,12 @@
 # Current milestone
 
+## ACTIVE APPROVED — D06 (2026-09-13)
+
+D05 actual comparison UI/child engine/two reports and installed Excel verified. D02–D05 hosted/Linux remain pending Docker recovery; no commercial readiness.
+Read PAYMENT_APPROVAL_DELIVERY.md and 02_CUSTOMER_OUTPUTS.md. Reuse owner/job/approval/fenced artifacts. Implement missing payment ledger/sandbox adapter/recovery and reconnect; official PG credentials missing means NOT_RUN, never substitute mocks as PG evidence.
+Latest D01–D08 authorization applies; final owner review after D08. No remote push/live payment/price decision/new paid resources/public release.
+
+
 ## ACTIVE APPROVED — D05 (2026-09-13)
 
 D04 local exact approval, real separate repair + three artifacts, desktop/mobile UI and installed Excel reopens verified. Hosted D02–D04 and Linux container remain pending Docker recovery; no commerce release.

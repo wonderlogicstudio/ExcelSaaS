@@ -1,0 +1,30 @@
+import {useState} from 'react';
+
+export const comparisonLabels:Record<string,string>={MATCHED:'일치',AMOUNT_DIFF:'금액 차이',ONLY_A:'A에만',ONLY_B:'B에만',AMBIGUOUS:'중복·모호',INPUT_ERROR:'자료오류'};
+const reasons:Record<string,string>={MATCHED:'확인한 기준에서 금액이 일치합니다. 업무 정답을 보장하지 않습니다.',AMOUNT_DIFF:'차액은 A−B입니다. 손실액이나 오류 확정 금액이 아닙니다.',ONLY_A:'선택한 B 자료에서 같은 유효 키를 찾지 못했습니다.',ONLY_B:'선택한 A 자료에서 같은 유효 키를 찾지 못했습니다.',AMBIGUOUS:'중복 키의 모든 행을 함께 보류합니다. 첫 행 선택이나 합산 매칭을 하지 않습니다.',INPUT_ERROR:'키나 금액의 자료오류입니다. 반대쪽의 정상 행도 함께 확인하세요.'};
+export type ComparisonRow={source_id:string;source_row_id:string;sheet:string;physical_row:number;raw_key_parts:{type:string;value:unknown}[];raw_amount:{type:string;value:unknown};amount:string|null;errors:string[]};
+export type ComparisonRecord={group_id:string;key_parts:string[]|null;status:string;reason:string|null;A:ComparisonRow[];B:ComparisonRow[];amount_A:string|null;amount_B:string|null;delta:string|null};
+export type ComparisonModel={spec_hash:string;records:ComparisonRecord[];summary:{group_count:number;counts:Record<string,number>;input_rows:Record<string,number>;assigned_rows:Record<string,number>;excluded_rows:Record<string,number>;known_amount_totals:Record<string,string>;unknown_amount_row_counts:Record<string,number>;uncompared_known_amounts:Record<string,string>}};
+export function amount(value:string|null){return value===null?'확인 불가':BigInt(value).toLocaleString('ko-KR');}
+function RowTable({rows}:{rows:ComparisonRow[]}){
+ const [page,setPage]=useState(0);const start=page*50;
+ return <><div className="comparison-table"><table><caption>A/B 원천 위치와 실제 관측 값</caption><thead><tr><th>원천 · 위치</th><th>키 원값</th><th>금액 원값</th><th>해석한 금액</th></tr></thead><tbody>{rows.slice(start,start+50).map(r=><tr key={r.source_row_id} data-comparison-row={r.source_row_id}><td>{r.source_id} · {r.sheet} {r.physical_row}행</td><td>{r.raw_key_parts.map(p=>`${p.type==='text'?'문자':p.type==='number'?'숫자':'확인 필요'}: ${String(p.value??'빈 셀')}`).join(' / ')}</td><td>{r.raw_amount.type==='blank'?'빈 셀':String(r.raw_amount.value??'')}<small>{r.errors.includes('INVALID_AMOUNT')?'금액 형식 확인 필요':''}</small></td><td>{amount(r.amount)}{r.amount!==null?'원':''}</td></tr>)}</tbody></table></div>{rows.length>50&&<div className="comparison-pages"><button type="button" disabled={page===0} onClick={()=>setPage(page-1)}>이전 원천 행</button><span>{start+1}–{Math.min(start+50,rows.length)} / {rows.length}행</span><button type="button" disabled={start+50>=rows.length} onClick={()=>setPage(page+1)}>다음 원천 행</button></div>}</>;
+}
+function Record({record}:{record:ComparisonRecord}){
+ const [open,setOpen]=useState(false);const key=record.key_parts?.join(' · ')??'키 확인 필요';
+ return <details className="comparison-record" data-comparison-key={record.key_parts?.join('|')??'INVALID'} onToggle={e=>setOpen(e.currentTarget.open)}><summary><strong>{key}</strong><span>A {record.A.length}행 · B {record.B.length}행{record.delta!==null?` · 차액 ${amount(record.delta)}원`:''}</span></summary>{open&&<div><dl className="comparison-observation"><div><dt>A 금액</dt><dd>{record.A.length===0?'—':record.A.length>1?'중복 · 합산하지 않음':amount(record.amount_A)}</dd></div><div><dt>B 금액</dt><dd>{record.B.length===0?'—':record.B.length>1?'중복 · 합산하지 않음':amount(record.amount_B)}</dd></div><div><dt>차액 A−B</dt><dd data-comparison-delta>{record.delta===null?'—':`${amount(record.delta)}원`}</dd></div></dl><RowTable rows={[...record.A,...record.B]}/></div>}</details>;
+}
+function Group({status,records}:{status:string;records:ComparisonRecord[]}){
+ const [open,setOpen]=useState(false);const [page,setPage]=useState(0);const start=page*20;
+ return <details className="comparison-group" data-comparison-status={status} onToggle={e=>setOpen(e.currentTarget.open)}><summary><strong>{comparisonLabels[status]}</strong><span>{records.length}그룹 · A {records.reduce((n,r)=>n+r.A.length,0)}행 · B {records.reduce((n,r)=>n+r.B.length,0)}행</span></summary>{open&&<div><p>{reasons[status]}</p>{records.length===0?<p>이 분류에 해당하는 항목이 없습니다.</p>:records.slice(start,start+20).map(r=><Record key={r.group_id} record={r}/>)}{records.length>20&&<div className="comparison-pages"><button type="button" disabled={page===0} onClick={()=>setPage(page-1)}>이전 거래</button><span>{start+1}–{Math.min(start+20,records.length)} / {records.length}그룹</span><button type="button" disabled={start+20>=records.length} onClick={()=>setPage(page+1)}>다음 거래</button></div>}</div>}</details>;
+}
+export function ComparisonResults({model}:{model:ComparisonModel}){
+ const [query,setQuery]=useState('');const [table,setTable]=useState(false);
+ const filtered=model.records.filter(r=>!query||(r.key_parts?.join(' ')??'키 확인 필요').includes(query));const summary=model.summary;
+ return <section className="comparison-results" aria-label="두 파일 비교 결과"><h3>전체 요약</h3><p className="comparison-count" data-comparison-summary>전체 {summary.group_count}그룹 · A {summary.input_rows.A}원천행 · B {summary.input_rows.B}원천행</p><p>미상 금액 A {summary.unknown_amount_row_counts.A}행 · B {summary.unknown_amount_row_counts.B}행 · 명시 제외 A {summary.excluded_rows.A}행 · B {summary.excluded_rows.B}행</p>
+  <dl className="comparison-observation"><div><dt>A 알려진 금액 합</dt><dd data-comparison-total="A">{amount(summary.known_amount_totals.A)}원</dd></div><div><dt>B 알려진 금액 합</dt><dd data-comparison-total="B">{amount(summary.known_amount_totals.B)}원</dd></div></dl>
+  <p>원천 행과 알려진 금액의 보존식을 확인했습니다. 미상 금액을 0으로 바꾸지 않았으며, 알려진 금액 합은 전체 장부합이나 손실액이 아닙니다.</p>
+  <div className="comparison-toolbar"><label>거래번호로 결과 찾기<input value={query} onChange={e=>setQuery(e.target.value)} /></label><button type="button" className="button button--outline" onClick={()=>setTable(!table)}>{table?'분류별 묶음 보기':'전체 원천 행 표 보기'}</button></div><p>현재 표시 {filtered.length}그룹 / 전체 {summary.group_count}그룹 · 내려받는 보고서는 전체 확정 범위입니다.</p>
+  {table?<RowTable rows={filtered.flatMap(r=>[...r.A,...r.B])}/>:['AMOUNT_DIFF','ONLY_A','ONLY_B','AMBIGUOUS','INPUT_ERROR','MATCHED'].map(status=><Group key={status+query} status={status} records={filtered.filter(r=>r.status===status)}/>)}
+ </section>;
+}

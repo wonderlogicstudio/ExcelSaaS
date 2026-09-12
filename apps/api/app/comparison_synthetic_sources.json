@@ -1,0 +1,28 @@
+{
+  "pairs": [
+    {
+      "case": "baseline",
+      "format": "csv",
+      "A": "af28b5b1283b76930ce6c4e2921036f5ebc9ced4e0de5e8afa65ffb3756d53cc",
+      "B": "a1fdca46ffab64615bc07f7f6972225c6444b53807ae7c8c1d5eca938e67e35f"
+    },
+    {
+      "case": "baseline",
+      "format": "xlsx",
+      "A": "813094ff0bf3c2fd415d3153bff37b586df4dede37de0c50702de99af7e9344d",
+      "B": "112a1bb640332cd8fecb8c400d2a2d8c704b320044323f304c3727947f868ef1"
+    },
+    {
+      "case": "equal",
+      "format": "csv",
+      "A": "b789554f04cdeeb207e87a5f5d0ed23cf7fe7a783ac45cb775482a08574fc1f9",
+      "B": "b789554f04cdeeb207e87a5f5d0ed23cf7fe7a783ac45cb775482a08574fc1f9"
+    },
+    {
+      "case": "large",
+      "format": "csv",
+      "A": "fe0448e7099f4fe8ec55a4dddb5fb30f7db4051c4cf129f7eebf5cf2917718a8",
+      "B": "723a04090740ab411821e25554667c4fcf4c65dc741953a9c602caca1c749764"
+    }
+  ]
+}

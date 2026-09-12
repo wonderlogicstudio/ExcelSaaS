@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>WorkbookCare 두 파일 비교 검증</title>
+<style>body{font:16px/1.65 "Malgun Gothic",Arial,sans-serif;color:#173b36;background:#f3f7f4;margin:0}main{max-width:1120px;margin:auto;padding:28px 16px}section{padding:24px;background:white;border:1px solid #cfdfd5;border-radius:16px;margin:20px 0}h1{font-size:28px}h2{font-size:21px}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:650px}th,td{padding:12px;text-align:left;vertical-align:top;border-bottom:1px solid #d9e4dd;overflow-wrap:anywhere}dd{margin:0 0 16px;overflow-wrap:anywhere}li{margin:8px 0}@media(max-width:600px){section{padding:16px}h1{font-size:24px}}</style>
+<main><header><p>WorkbookCare · 두 파일 비교</p><h1>같은 기준으로 관측한 두 자료의 검토 보고서</h1><p>A/B 원본은 바꾸지 않았습니다. B를 정답으로 사용하지 않으며, 수정본·정답표·손실확정 보고서가 아닙니다.</p></header>
+<section><h2>전체 요약</h2><p data-summary="groups">전체 @@total@@그룹 · A 선택 @@a_rows@@행 · B 선택 @@b_rows@@행</p><ul>@@groups@@</ul><p>알려진 금액 합: A <strong data-total="A">@@a_total@@</strong>원 · B <strong data-total="B">@@b_total@@</strong>원</p><p>미상 금액: A @@a_unknown@@행 · B @@b_unknown@@행. 미상 금액은 0으로 바꾸지 않았습니다.</p></section>
+<section><h2>검증 범위</h2><ul><li>PASS · 선택 데이터행 = 배정 행 + 명시 제외행</li><li>PASS · 알려진 금액 보존식</li><li>PASS · XLSX와 HTML의 전체 원천 행·원본·비교 기준 참조</li></ul><p>중복 키는 모든 원천 행을 함께 보류합니다. 금액 오류 행을 삭제해 한쪽 자료에만 있는 것으로 바꾸지 않습니다. 알려진 금액 합은 전체 장부합이나 손실액이 아닙니다.</p><p>일치는 확인한 기준에서의 관측 일치입니다. 한쪽 자료에만 있다는 결과는 실제 거래 누락의 확정이 아닙니다. 선택 범위 밖은 비교하지 않았습니다.</p></section>
+<section><h2>원천 행과 정확한 관측 값</h2><p>0은 실제 값, —는 없는 원천 또는 비교하지 않은 차액, 확인 불가는 금액 오류입니다.</p><div class="table"><table><thead><tr><th>분류</th><th>위치</th><th>키 원값·타입</th><th>금액 원값</th><th>정수 금액</th><th>A−B 차액</th></tr></thead><tbody>@@rows@@</tbody></table></div></section>
+<section><details><summary>원본·비교 기준·엔진 확인 정보</summary><dl>@@info@@</dl></details></section></main></html>

@@ -19,11 +19,12 @@ import { ProductCards } from './ProductCards';
 
 interface StaticSectionsProps {
   products?: ProductOffering[];
+  onCompare?: () => void;
   onStart: () => void;
   onDemo: () => void;
 }
 
-export function StaticSections({ onStart, onDemo, products }: StaticSectionsProps) {
+export function StaticSections({ onStart, onDemo, products, onCompare }: StaticSectionsProps) {
   return (
     <>
       <section className="section section--viewport" id="how" aria-labelledby="how-title">
@@ -64,9 +65,9 @@ export function StaticSections({ onStart, onDemo, products }: StaticSectionsProp
           <div className="section-heading section-heading--center">
             <span className="section-kicker">서비스 범위와 현재 상태</span>
             <h2 id="service-scope-title">문제를 찾고, 검증 후 수정 여부를 결정하세요.</h2>
-            <p>무료 진단, 두 자료 비교 보고서, 승인 기반 수정 패키지의 범위와 받을 파일을 구분합니다. 현재는 무료 정적 진단만 사용할 수 있습니다.</p>
+            <p>무료 진단, 두 자료 비교 보고서, 승인 기반 수정 패키지의 범위와 받을 파일을 구분합니다. {onCompare ? '무료 진단과 합성 자료의 비교·수정 사전 확인을 사용할 수 있습니다. 일반 구매는 준비 중입니다.' : '현재는 무료 정적 진단만 사용할 수 있습니다.'}</p>
           </div>
-          <ProductCards products={products} onStart={onStart} />
+          <ProductCards products={products} onStart={onStart} onCompare={onCompare} />
         </div>
       </section>
 

@@ -1,0 +1,438 @@
+{
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "base_commit": "13c56617eb84f9ff99c291767027c73f65c796b5",
+  "scope": "D05 actual exact-key KRW comparison UI/API/engine and two private reports; internal synthetic rights only",
+  "reused": [
+    "D02 immutable owner-bound SQLite/CSRF/Access HMAC v2/private upload transport",
+    "D04 publication fence, cancellation controls and all-artifact atomic storage",
+    "Original fixed V3.1 baseline and 16 edge oracles; copied facts into owned standalone test reference",
+    "Existing free/M4 and revalidation code unchanged"
+  ],
+  "implemented": [
+    "New bounded UTF-8 CSV/raw OOXML typed parser; no source load-save or formula execution/cache use",
+    "Exact text tuple keys, integer strings, invalid-key/duplicate/invalid-amount precedence and every-row/known-amount conservation",
+    "Owner-bound two-source immutable inputs/spec fingerprint and explicit equal period/meaning/KRW criteria",
+    "Separate comparison entitlement; free input errors/duplicate locations; no paid rows before rights",
+    "Actual eight-sheet values-only XLSX and escaped standalone HTML with every source row/type/amount/locator; semantic reopen validation",
+    "Atomic two-artifact READY, retry/reconnect/download, cancel fence and missing-file denial; comparison cannot execute/download repair",
+    "Summary -> issue groups -> transaction -> row evidence; common explanation once; mobile row cards, BigInt formatting and paged detail"
+  ],
+  "verification": {
+    "full_regression": {
+      "web": 75,
+      "worker": 16,
+      "api": 178,
+      "m4_exact": 36,
+      "exit_code": 0,
+      "before_final_report_semantic_guard_and_row_height_delta": true
+    },
+    "final_report_guard_target_tests": 9,
+    "final_target_exit": 0,
+    "ruff_exit": 0,
+    "typecheck_and_build_exit": 0,
+    "actual_browser": {
+      "kind": "ACTUAL_PRODUCT_COMPARISON_UI_API_CHILD_AND_DOWNLOADED_REPORTS",
+      "rows": [
+        {
+          "width": 1440,
+          "kind": "csv",
+          "caseName": "baseline",
+          "expected": {
+            "counts": {
+              "MATCHED": 2,
+              "AMOUNT_DIFF": 1,
+              "ONLY_A": 1,
+              "ONLY_B": 1,
+              "AMBIGUOUS": 1,
+              "INPUT_ERROR": 2
+            },
+            "groups": 8,
+            "rows": 14,
+            "A": "47,900원",
+            "B": "51,000원",
+            "key": "0002",
+            "delta": "-2,000원"
+          },
+          "source_pair_hash": "22db60c79509558b8707fddd9e1392c363bbc3eaf446c5edf5b0702e4840ff3d",
+          "spec_hash": "841a4c5e7fb5b77273c51f9001e5012afd75864c825e274ddc66531498502d29",
+          "screen_expected_match": true,
+          "reconnect": true,
+          "files": {
+            "COMPARISON_REPORT_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\1440-csv-baseline\\COMPARISON_REPORT_XLSX.xlsx",
+              "sha256": "797b742351befed669f4d81de68ff363774af29f7ac3536ecaadb323e7a5dcbd",
+              "bytes": 14733
+            },
+            "COMPARISON_VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\1440-csv-baseline\\COMPARISON_VERIFICATION_HTML.html",
+              "sha256": "e33cfbfffb3d4a661af702331d170c86f43415851ed275a25f8439c97abfc8be",
+              "bytes": 6817
+            }
+          }
+        },
+        {
+          "width": 390,
+          "kind": "csv",
+          "caseName": "baseline",
+          "expected": {
+            "counts": {
+              "MATCHED": 2,
+              "AMOUNT_DIFF": 1,
+              "ONLY_A": 1,
+              "ONLY_B": 1,
+              "AMBIGUOUS": 1,
+              "INPUT_ERROR": 2
+            },
+            "groups": 8,
+            "rows": 14,
+            "A": "47,900원",
+            "B": "51,000원",
+            "key": "0002",
+            "delta": "-2,000원"
+          },
+          "source_pair_hash": "22db60c79509558b8707fddd9e1392c363bbc3eaf446c5edf5b0702e4840ff3d",
+          "spec_hash": "841a4c5e7fb5b77273c51f9001e5012afd75864c825e274ddc66531498502d29",
+          "screen_expected_match": true,
+          "reconnect": true,
+          "files": {
+            "COMPARISON_REPORT_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\390-csv-baseline\\COMPARISON_REPORT_XLSX.xlsx",
+              "sha256": "49235d21f0677abf331e658d7616171dca212f1cc935eecfb88e2bdbdfb7356e",
+              "bytes": 14732
+            },
+            "COMPARISON_VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\390-csv-baseline\\COMPARISON_VERIFICATION_HTML.html",
+              "sha256": "e33cfbfffb3d4a661af702331d170c86f43415851ed275a25f8439c97abfc8be",
+              "bytes": 6817
+            }
+          }
+        },
+        {
+          "width": 1440,
+          "kind": "xlsx",
+          "caseName": "baseline",
+          "expected": {
+            "counts": {
+              "MATCHED": 2,
+              "AMOUNT_DIFF": 1,
+              "ONLY_A": 1,
+              "ONLY_B": 1,
+              "AMBIGUOUS": 1,
+              "INPUT_ERROR": 2
+            },
+            "groups": 8,
+            "rows": 14,
+            "A": "47,900원",
+            "B": "51,000원",
+            "key": "0002",
+            "delta": "-2,000원"
+          },
+          "source_pair_hash": "f9858c7ceedc2de1b2ac2172afa8579065da21442a807e9c233892b7387c8570",
+          "spec_hash": "849bc8eb731cf4c138e3d874145a6c80b1ece7cf2e9b82a7b076b4ad2ff71bc2",
+          "screen_expected_match": true,
+          "reconnect": true,
+          "files": {
+            "COMPARISON_REPORT_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\1440-xlsx-baseline\\COMPARISON_REPORT_XLSX.xlsx",
+              "sha256": "13bb0a2ce4a54e3b1a4da582897f522a44980d349ea3264c05a5c239c44082b1",
+              "bytes": 14764
+            },
+            "COMPARISON_VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\1440-xlsx-baseline\\COMPARISON_VERIFICATION_HTML.html",
+              "sha256": "c9ea175c4bb0bf94b7afbaa17fbe3884d6e8b720b0e3ba6f84efb8f23fa07c87",
+              "bytes": 6859
+            }
+          }
+        },
+        {
+          "width": 390,
+          "kind": "xlsx",
+          "caseName": "baseline",
+          "expected": {
+            "counts": {
+              "MATCHED": 2,
+              "AMOUNT_DIFF": 1,
+              "ONLY_A": 1,
+              "ONLY_B": 1,
+              "AMBIGUOUS": 1,
+              "INPUT_ERROR": 2
+            },
+            "groups": 8,
+            "rows": 14,
+            "A": "47,900원",
+            "B": "51,000원",
+            "key": "0002",
+            "delta": "-2,000원"
+          },
+          "source_pair_hash": "f9858c7ceedc2de1b2ac2172afa8579065da21442a807e9c233892b7387c8570",
+          "spec_hash": "849bc8eb731cf4c138e3d874145a6c80b1ece7cf2e9b82a7b076b4ad2ff71bc2",
+          "screen_expected_match": true,
+          "reconnect": true,
+          "files": {
+            "COMPARISON_REPORT_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\390-xlsx-baseline\\COMPARISON_REPORT_XLSX.xlsx",
+              "sha256": "8561d5fe519e5ae4825bae8bddfe803a56d821100d512fca25b61a857eccf936",
+              "bytes": 14763
+            },
+            "COMPARISON_VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\390-xlsx-baseline\\COMPARISON_VERIFICATION_HTML.html",
+              "sha256": "c9ea175c4bb0bf94b7afbaa17fbe3884d6e8b720b0e3ba6f84efb8f23fa07c87",
+              "bytes": 6859
+            }
+          }
+        },
+        {
+          "width": 390,
+          "kind": "csv",
+          "caseName": "equal",
+          "expected": {
+            "counts": {
+              "MATCHED": 2,
+              "AMOUNT_DIFF": 0,
+              "ONLY_A": 0,
+              "ONLY_B": 0,
+              "AMBIGUOUS": 0,
+              "INPUT_ERROR": 0
+            },
+            "groups": 2,
+            "rows": 4,
+            "A": "100원",
+            "B": "100원"
+          },
+          "source_pair_hash": "1a878c23f97404cf7ff51beb208c1b5d654099d999e2d66756f5976445f26185",
+          "spec_hash": "3054390a2a6d7e668d55dfd4b7149b32ff56f794eae3a79e3ef9530689455d2a",
+          "screen_expected_match": true,
+          "reconnect": true,
+          "files": {
+            "COMPARISON_REPORT_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\390-csv-equal\\COMPARISON_REPORT_XLSX.xlsx",
+              "sha256": "fab040906f90fbe2537f3332ae71571b82a5da1459c3848f3bd1a8b199d47b78",
+              "bytes": 13830
+            },
+            "COMPARISON_VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\390-csv-equal\\COMPARISON_VERIFICATION_HTML.html",
+              "sha256": "0c3bd0626fa5e3770137600b9867d993be29b5ac35044a00965e2e13c0545f0e",
+              "bytes": 4831
+            }
+          }
+        },
+        {
+          "width": 1440,
+          "kind": "csv",
+          "caseName": "large",
+          "expected": {
+            "counts": {
+              "MATCHED": 0,
+              "AMOUNT_DIFF": 1,
+              "ONLY_A": 0,
+              "ONLY_B": 0,
+              "AMBIGUOUS": 0,
+              "INPUT_ERROR": 0
+            },
+            "groups": 1,
+            "rows": 2,
+            "A": "10,000,000,000,000,001원",
+            "B": "10,000,000,000,000,000원",
+            "key": "K",
+            "delta": "1원"
+          },
+          "source_pair_hash": "384e07812867cc8668789dfda3076d3f67a28d4cf1e063f2a5cd6043f9cde62f",
+          "spec_hash": "7801cdfa28791d8bd15256a285b9df5ca2612c4d03a2b141fe5e7710ee9259f0",
+          "screen_expected_match": true,
+          "reconnect": true,
+          "files": {
+            "COMPARISON_REPORT_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\1440-csv-large\\COMPARISON_REPORT_XLSX.xlsx",
+              "sha256": "b60004aea7f6753ff003c0015a9b4d53fea463443eeefe53b7ddf305a0bd803f",
+              "bytes": 13729
+            },
+            "COMPARISON_VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d05\\browser-downloads\\1440-csv-large\\COMPARISON_VERIFICATION_HTML.html",
+              "sha256": "26f45f07573606442370794e2d86898525781b6aea15cad59997921651c37f2e",
+              "bytes": 4559
+            }
+          }
+        }
+      ],
+      "screenshots": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\1440-csv-baseline-summary.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\1440-csv-baseline-detail.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\1440-csv-baseline-html.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\390-csv-baseline-summary.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\390-csv-baseline-detail.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\390-csv-baseline-html.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\1440-xlsx-baseline-summary.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\1440-xlsx-baseline-detail.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\1440-xlsx-baseline-html.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\390-xlsx-baseline-summary.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\390-xlsx-baseline-detail.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\390-xlsx-baseline-html.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\390-csv-equal-summary.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\390-csv-equal-html.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\1440-csv-large-summary.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\1440-csv-large-detail.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d05\\1440-csv-large-html.png"
+      ]
+    },
+    "actual_excel": {
+      "status": "PASS",
+      "excel_version": "16.0",
+      "excel_build": 20326,
+      "results": [
+        {
+          "sha256": "797b742351befed669f4d81de68ff363774af29f7ac3536ecaadb323e7a5dcbd",
+          "width": 1440,
+          "case": "baseline",
+          "expected_matched": true,
+          "kind": "csv",
+          "no_formulas": true,
+          "source_rows": 14
+        },
+        {
+          "sha256": "49235d21f0677abf331e658d7616171dca212f1cc935eecfb88e2bdbdfb7356e",
+          "width": 390,
+          "case": "baseline",
+          "expected_matched": true,
+          "kind": "csv",
+          "no_formulas": true,
+          "source_rows": 14
+        },
+        {
+          "sha256": "13bb0a2ce4a54e3b1a4da582897f522a44980d349ea3264c05a5c239c44082b1",
+          "width": 1440,
+          "case": "baseline",
+          "expected_matched": true,
+          "kind": "xlsx",
+          "no_formulas": true,
+          "source_rows": 14
+        },
+        {
+          "sha256": "8561d5fe519e5ae4825bae8bddfe803a56d821100d512fca25b61a857eccf936",
+          "width": 390,
+          "case": "baseline",
+          "expected_matched": true,
+          "kind": "xlsx",
+          "no_formulas": true,
+          "source_rows": 14
+        },
+        {
+          "sha256": "fab040906f90fbe2537f3332ae71571b82a5da1459c3848f3bd1a8b199d47b78",
+          "width": 390,
+          "case": "equal",
+          "expected_matched": true,
+          "kind": "csv",
+          "no_formulas": true,
+          "source_rows": 4
+        },
+        {
+          "sha256": "b60004aea7f6753ff003c0015a9b4d53fea463443eeefe53b7ddf305a0bd803f",
+          "width": 1440,
+          "case": "large",
+          "expected_matched": true,
+          "kind": "csv",
+          "no_formulas": true,
+          "source_rows": 2
+        }
+      ],
+      "kind": "ACTUAL_DOWNLOADED_COMPARISON_REPORTS_REOPENED_IN_INSTALLED_EXCEL"
+    },
+    "screenshots_inspected": 18,
+    "owner_package_files_unchanged": 83,
+    "original_sample_files_unchanged": 68,
+    "repair_reference": {
+      "status": "PASS",
+      "case_count": 20,
+      "excel_version": "16.0",
+      "reference_digest": "b745516a9844401a05276476f1d07376c51dc675d10f7488cfaed962dbcc6eab"
+    },
+    "repair_compatibility": {
+      "status": "PASS",
+      "excel_version": "16.0",
+      "profiles": [
+        "RP01",
+        "RP02"
+      ],
+      "evidence_digest": "ea268506921f994240b229c525bb6cf46b3fef04acb54ab812dd519063f373c1"
+    }
+  },
+  "commands": [
+    {
+      "command": "python scripts/generate_comparison_fixtures.py",
+      "exit_code": 0
+    },
+    {
+      "command": "pytest tests/test_comparison_engine.py plus corrected memory/cancel process tests",
+      "exit_code": 0,
+      "tests": 23
+    },
+    {
+      "command": "pytest apps/api/tests/test_comparison_engine.py apps/api/tests/test_comparison_service.py -q",
+      "exit_code": 0,
+      "tests": 27
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+      "exit_code": 0
+    },
+    {
+      "command": "pytest apps/api/tests/test_comparison_service.py -q --tb=short",
+      "exit_code": 0,
+      "tests": 9
+    },
+    {
+      "command": "ruff check apps/api",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/verify-comparison-output.mjs (owned internal API/Vite run_d05_browser.py)",
+      "exit_code": 0,
+      "cases": 6,
+      "downloads": 12
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_comparison_excel.ps1",
+      "exit_code": 0,
+      "actual_excel_reopens": 6
+    },
+    {
+      "command": "node artifacts/verification/d05/render-excel.mjs",
+      "exit_code": 0,
+      "purpose": "Actual Excel PDF visual review; summary row height corrected to one page"
+    }
+  ],
+  "recovered_failures": [
+    {
+      "exit_code": 1,
+      "stage": "Initial child-process tests",
+      "cause": "Windows venv launcher starts a different base Python child. Memory/PID boundary applied to launcher was racy. Use base executable, isolated trusted module path, returned actual child PID equality. Strengthened prior D03/D04 memory/cancel tests to exercise real process, not merely a nonzero launcher exit."
+    },
+    {
+      "exit_code": 1,
+      "stage": "Initial report/API tests",
+      "cause": "A broad metadata replacement compared human criteria against manifest hash-only fields. Separated criteria and hash validation; added summary/value semantic guards. API criteria mismatch negative expected 422 while contract rejects 400; corrected test status, not policy."
+    },
+    {
+      "exit_code": 1,
+      "stage": "Initial browser run",
+      "cause": "Immediate locator count preceded lazy details render. Wait for actual row visibility, then assert all rows; no expected data changed."
+    },
+    {
+      "exit_code": 1,
+      "stage": "Initial Ruff checks",
+      "cause": "New draft formatting and long strings; formatted and shortened messages before final PASS."
+    }
+  ],
+  "evidence_limits": [
+    "Local fixed synthetic entitlement is not a PG transaction or real paid user right",
+    "File limits remain conservative beta 2MiB each/4MiB total; 20k selected rows and 250k cells are bounds, not measured capacity guarantees",
+    "30s kill/cleanup applies to parsing/comparison child; full supported-capacity/concurrent report workload remains D07/D08 validation",
+    "18 screenshots comprise 17 UI/HTML screens plus one installed-Excel PDF render; final output guard/layout rerun reproduced six screen flows and six Excel opens"
+  ],
+  "not_run": [
+    "D02-D05 authenticated hosted deployment/screens and Linux container: Docker unavailable, restart answer pending",
+    "Official PG sandbox and live payment/refund, commerce readiness, prices/customer files",
+    "Git remote push, new paid resources, production/public release, H2/H3 remaining checks",
+    "Final owner acceptance and D06-D08 remaining work"
+  ],
+  "next": "D06 payment/approval/delivery separation and recovery; already approved through D08"
+}

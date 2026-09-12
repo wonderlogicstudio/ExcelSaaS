@@ -197,7 +197,7 @@ def test_cancel_fence_prevents_late_publication_and_duplicate_worker(
 def test_actual_owned_process_is_killed_before_cancel_finishes():
     control = ExecutionControl()
     child = subprocess.Popen(
-        [sys.executable, "-c", "import time; time.sleep(60)"],
+        [sys._base_executable, "-c", "import time; time.sleep(60)"],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )

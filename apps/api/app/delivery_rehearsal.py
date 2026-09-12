@@ -38,6 +38,11 @@ def main():
     if not row:
         reject("JOB_NOT_FOUND", "합성 검증 작업이 없습니다.")
     job = store.load(row["owner"], args.job_id)
+    if job["product"] == "TWO_FILE_COMPARISON":
+        from .comparison_service import grant_comparison
+        grant_comparison(store, job, get_settings())
+        print("Internal synthetic comparison grant issued; no repair right or payment created.")
+        return
     if job["snapshot"]["source_hash"] not in SYNTHETIC_SOURCE_HASHES:
         reject("SYNTHETIC_FIXTURE_REQUIRED", "고정된 합성 입력만 허용합니다.")
     state = {

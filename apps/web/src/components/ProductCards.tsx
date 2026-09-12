@@ -7,7 +7,7 @@ const anchors = {
   APPROVED_REPAIR: 'approved-repair',
 };
 
-export function ProductCards({ products, onStart }: { products?: ProductOffering[]; onStart: () => void }) {
+export function ProductCards({ products, onStart, onCompare }: { products?: ProductOffering[]; onStart: () => void; onCompare?: () => void }) {
   return (
     <>
       <div className="product-cards">
@@ -26,6 +26,8 @@ export function ProductCards({ products, onStart }: { products?: ProductOffering
             <p>{product.next_action}</p>
             {product.product_id === 'FREE_DIAGNOSIS' ? (
               <button className="button button--primary" type="button" onClick={onStart} disabled={product.capability_status !== 'AVAILABLE'}>무료 진단 시작</button>
+            ) : product.product_id === 'TWO_FILE_COMPARISON' && onCompare ? (
+              <button className="button button--outline" type="button" onClick={onCompare}>비교 범위 사전 확인</button>
             ) : (
               <button className="button button--outline" type="button" disabled>{product.product_id === 'APPROVED_REPAIR' ? '수정 범위 확인' : '두 자료 비교 시작'} · {product.capability_status === 'UNSUPPORTED' ? '지원 불가' : '준비 중'}</button>
             )}

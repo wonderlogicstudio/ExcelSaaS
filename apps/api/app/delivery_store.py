@@ -37,6 +37,11 @@ class DeliveryStore:
                 "delivery_id TEXT NOT NULL, data BLOB NOT NULL, manifest TEXT NOT "
                 "NULL, PRIMARY KEY(job_id,kind))"
             )
+            db.execute(
+                "CREATE TABLE IF NOT EXISTS secondary_sources (job_id TEXT PRIMARY "
+                "KEY REFERENCES jobs(id) ON DELETE CASCADE, source BLOB NOT NULL, "
+                "snapshot TEXT NOT NULL)"
+            )
         if os.name != "nt":
             self.path.chmod(0o600)
 
@@ -79,15 +84,25 @@ class DeliveryStore:
         request_key: str,
         *,
         product: str = "APPROVED_REPAIR",
+        secondary: tuple[bytes, dict] | None = None,
     ) -> dict:
+        if product not in {"APPROVED_REPAIR", "TWO_FILE_COMPARISON"} or (
+            product == "TWO_FILE_COMPARISON"
+        ) != (secondary is not None):
+            reject("INVALID_PRODUCT_SOURCE", "상품과 원본 개수가 일치하지 않습니다.")
         with self.connection() as db:
             db.execute("BEGIN IMMEDIATE")
             old = db.execute(
-                "SELECT id,snapshot,expires FROM jobs WHERE owner=? AND request_key=?",
+                "SELECT id,snapshot,expires,product FROM jobs WHERE owner=? AND request_key=?",
                 (owner, request_key),
             ).fetchone()
             if old:
-                if json.loads(old["snapshot"])["source_hash"] != snapshot["source_hash"]:
+                if (
+                    json.loads(old["snapshot"])["source_hash"] != snapshot["source_hash"]
+                    or old["product"] != product
+                    or json.loads(old["snapshot"]).get("source_pair_hash")
+                    != snapshot.get("source_pair_hash")
+                ):
                     reject(
                         "IDEMPOTENCY_CONFLICT", "같은 요청 식별자로 원본을 바꿀 수 없습니다.", 409
                     )
@@ -121,7 +136,25 @@ class DeliveryStore:
                         request_key,
                     ),
                 )
+                if secondary is not None:
+                    db.execute(
+                        "INSERT INTO secondary_sources VALUES (?,?,?)",
+                        (job_id, secondary[0], json.dumps(secondary[1])),
+                    )
         return self.load(owner, job_id)
+
+    def load_secondary(self, job: dict) -> bytes:
+        with self.connection() as db:
+            row = db.execute(
+                "SELECT * FROM secondary_sources WHERE job_id=?", (job["id"],)
+            ).fetchone()
+        if (
+            row is None
+            or hashlib.sha256(row["source"]).hexdigest()
+            != json.loads(row["snapshot"])["source_hash"]
+        ):
+            reject("INPUT_INTEGRITY_FAILED", "두 번째 원본의 무결성을 확인하지 못했습니다.", 409)
+        return row["source"]
 
     def load(self, owner: str, job_id: str) -> dict:
         with self.connection() as db:
@@ -140,6 +173,8 @@ class DeliveryStore:
             reject(
                 "INPUT_INTEGRITY_FAILED", "원본 무결성 확인에 실패하여 작업을 차단했습니다.", 409
             )
+        if job["product"] == "TWO_FILE_COMPARISON":
+            self.load_secondary(job)
         return job
 
     def update(self, job: dict, revision: int, state: dict) -> dict:

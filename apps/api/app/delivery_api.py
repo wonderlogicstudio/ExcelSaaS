@@ -15,6 +15,13 @@ from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 from starlette.concurrency import run_in_threadpool
 
+from .comparison_service import (
+    create_comparison,
+    download_comparison,
+    execute_comparison,
+    prepare_comparison,
+    project_comparison,
+)
 from .config import get_settings
 from .delivery_execution import ACTIVE, approve, cancel, compatibility_status, download, execute
 from .delivery_inputs import (
@@ -48,6 +55,8 @@ def get_store() -> DeliveryStore:
 
 
 def projection(job: dict) -> dict:
+    if job["product"] == "TWO_FILE_COMPARISON":
+        return project_comparison(job, get_settings())
     state = job["state"]
     snapshot = job["snapshot"]
     return {
@@ -99,7 +108,7 @@ async def delivery(request: Request):
             cookie = token
         owner = hashlib.sha256(token.encode()).hexdigest()
     raw = await request.body()
-    if len(raw) > MAX_BYTES * 4 // 3 + 64 * 1024:
+    if len(raw) > MAX_BYTES * 8 // 3 + 64 * 1024:
         reject("LIMIT_EXCEEDED", "사전 검사 요청 한도를 초과했습니다.", 413)
     try:
         body = json.loads(raw)
@@ -115,6 +124,8 @@ async def delivery(request: Request):
             "approval",
             "artifacts",
             "internal_grant",
+            "comparison_grant",
+            "comparison_result",
             "plan",
             "entitlement",
         ]
@@ -151,6 +162,10 @@ async def delivery(request: Request):
         snapshot = inspect_input(name, payload, settings)
         store.cleanup()
         output = projection(store.create(owner, payload, snapshot, key))
+    elif action == "create_comparison":
+        output = projection(
+            await run_in_threadpool(create_comparison, store, owner, body, settings)
+        )
     elif action == "list":
         output = {"jobs": [projection(job) for job in store.list_jobs(owner)]}
     else:
@@ -158,7 +173,30 @@ async def delivery(request: Request):
         if not isinstance(job_id, str) or len(job_id) > 64:
             reject("INVALID_JOB", "작업을 다시 선택하세요.")
         job = store.load(owner, job_id)
-        if action == "get":
+        if job["product"] == "TWO_FILE_COMPARISON" and action in {
+            "approve_plan",
+            "execute",
+            "download",
+            "plan_details",
+            "prepare_plan",
+            "preflight",
+        }:
+            reject(
+                "PRODUCT_ACTION_MISMATCH",
+                "비교 보고서 권리로 수정 작업을 실행하거나 받을 수 없습니다.",
+                403,
+            )
+        if action == "prepare_comparison":
+            output = projection(
+                await run_in_threadpool(prepare_comparison, store, job, body, settings)
+            )
+        elif action == "execute_comparison":
+            output = projection(
+                await run_in_threadpool(execute_comparison, store, job, body, settings)
+            )
+        elif action == "comparison_download":
+            output = download_comparison(store, job, body.get("kind"), settings)
+        elif action == "get":
             output = projection(job)
         elif action == "delete":
             if job["state"]["status"] in ACTIVE:

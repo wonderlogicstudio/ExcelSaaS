@@ -520,3 +520,20 @@ test("delivery uses verified Access owner in v2 proof and rejects forged origin 
     assert.equal((await forwarded.json()).filename,"workbook.xlsx");assert.equal(storage.size,0);assert.equal(storage.deletes,1);
   } finally {globalThis.fetch=originalFetch;}
 });
+
+test("two-source delivery preserves both bytes and deletes both private objects on success or partial failure", async () => {
+ const {token,jwk}=await signedAccessToken();const originalFetch=globalThis.fetch;
+ for(const failure of [false,true]){
+  const storage=createR2();let forwarded;let reads=0;
+  const get=storage.r2.get;storage.r2.get=async key=>{reads++;return failure&&reads===2?null:get(key);};
+  globalThis.fetch=async(input,init)=>{if(String(input).endsWith('/cdn-cgi/access/certs'))return Response.json({keys:[jwk]});forwarded=new Request(input,init);return Response.json({status:'INPUT_FIXED'});};
+  const env={APP_ENV:'hosted_beta',DELIVERY_BETA_ENABLED:'true',UPLOADS:storage.r2,API_GATEWAY_URL:'https://gateway.example.test/v1/scans',CLOUDFLARE_ACCESS_TEAM_DOMAIN:TEAM_DOMAIN,CLOUDFLARE_ACCESS_AUD:AUDIENCE,WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET:HMAC_SECRET,UPLOAD_RATE_LIMITER:rateLimiter()};
+  const sources={A:{filename:'synthetic-secret-A.csv',file_base64:btoa('key,amount\n001,100')},B:{filename:'synthetic-secret-B.xlsx',file_base64:btoa('synthetic OOXML bytes')}};
+  const request=()=>new Request('https://workbookcare-beta.example.test/api/v1/delivery',{method:'POST',headers:{Origin:'https://workbookcare-beta.example.test','Content-Type':'application/json','X-WorkbookCare-CSRF':'1','cf-access-jwt-assertion':token},body:JSON.stringify({action:'create_comparison',sources})});
+  try{
+   const response=await worker.fetch(request(),env);assert.equal(response.status,failure?502:200);assert.equal(storage.size,0);assert.equal(storage.deletes,2);
+   if(!failure){const body=await forwarded.json();assert.equal(body.sources.A.filename,'source.csv');assert.equal(body.sources.B.filename,'workbook.xlsx');assert.equal(body.sources.A.file_base64,sources.A.file_base64);assert.equal(body.sources.B.file_base64,sources.B.file_base64);}
+   assert.equal((await worker.fetch(request(),{...env,UPLOAD_RATE_LIMITER:rateLimiter(false)})).status,429);assert.equal(storage.deletes,2);
+  }finally{globalThis.fetch=originalFetch;}
+ }
+});

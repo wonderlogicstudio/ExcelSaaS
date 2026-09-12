@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, FileSearch, ShieldCheck, Sparkles } from 'lucide-react';
+import { ComparisonWorkspace } from './components/ComparisonWorkspace';
+import './comparison.css';
 import { DeliveryWorkspace } from './components/DeliveryWorkspace';
 import './delivery.css';
 import { Header } from './components/Header';
@@ -51,6 +53,7 @@ export default function App() {
   const activeRequest = useRef(0);
   const activeController = useRef<AbortController | null>(null);
   useEffect(() => () => { activeController.current?.abort(); }, []);
+  const [comparisonOpen, setComparisonOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [stageIndex, setStageIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -325,7 +328,8 @@ export default function App() {
             {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={result.analysis_id} file={sourceFile} />}
           </>
         )}
-        <StaticSections products={result?.products} onStart={startUpload} onDemo={runDemo} />
+        {deliveryBetaEnabled && <ComparisonWorkspace open={comparisonOpen} onOpen={() => setComparisonOpen(true)} />}
+        <StaticSections products={result?.products} onStart={startUpload} onDemo={runDemo} onCompare={deliveryBetaEnabled ? () => setComparisonOpen(true) : undefined} />
       </main>
       <Footer />
     </div>
