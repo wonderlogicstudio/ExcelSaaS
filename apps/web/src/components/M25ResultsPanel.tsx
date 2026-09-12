@@ -210,12 +210,15 @@ function FindingCard({
       <div className="finding__body">
         <div className="finding__heading">
           <span className={`severity severity--${finding.severity}`}>{severityLabel[finding.severity]}</span>
-          <code>{finding.rule_code}</code>
+          {!sharedGuidance && <code>{finding.rule_code}</code>}
+          {sharedGuidance && !finding.sheet && !finding.cell && <span>통합문서 전체</span>}
           {(finding.sheet || finding.cell) && (
             <span className="finding__location">{[finding.sheet, finding.cell].filter(Boolean).join(' · ')}</span>
           )}
         </div>
-        <h4>{finding.title}</h4>
+        {sharedGuidance
+          ? <p className="finding__handling-summary">{userStatusLabel[status]}</p>
+          : <h4>{finding.title}</h4>}
       </div>
       <span className="finding__summary-hint" aria-hidden="true">자세히 보기</span>
       </summary>
@@ -488,7 +491,9 @@ function ResultsContent({
                 {filtersActive
                   ? `총 ${result.findings.length}개 중 ${visibleFindings.length}개 표시`
                   : counts.omitted_details > 0 ? `반환 상세 ${result.findings.length}개 표시 · 전체 발견 ${counts.total_detected}건`
-                    : `${result.findings.length}개 전체 표시 · 클릭해 자세히 보기`}
+                    : viewMode === 'groups'
+                      ? `${new Set(visibleFindings.map((finding) => finding.rule_code)).size}개 유형으로 묶음 · 위치 ${visibleFindings.length}건`
+                      : `${result.findings.length}개 전체 표시 · 클릭해 자세히 보기`}
               </span>
             </div>
             <p className="finding-coverage" id="finding-coverage">전체 발견 {counts.total_detected}건 · 반환 상세 {counts.returned_details}건 · 상세 생략 {counts.omitted_details}건 · 필터 표시 {visibleFindings.length}건</p>

@@ -99,7 +99,7 @@ describe('M2.5 results panel', () => {
   it('shows one concise list and summarizes the finding types', () => {
     renderResult(demoResult);
 
-    expect(screen.getByText(`${demoResult.findings.length}개 전체 표시 · 클릭해 자세히 보기`)).toBeInTheDocument();
+    expect(screen.getByText(`${new Set(demoResult.findings.map((finding) => finding.rule_code)).size}개 유형으로 묶음 · 위치 ${demoResult.findings.length}건`)).toBeInTheDocument();
     expect(document.querySelectorAll('details.finding')).toHaveLength(demoResult.findings.length);
     expect(screen.getByText('문제 유형별 개수')).toBeInTheDocument();
   });
@@ -108,6 +108,7 @@ describe('M2.5 results panel', () => {
     const { container } = renderResult(demoResult);
     const firstFinding = container.querySelector('details.finding');
 
+    fireEvent.click(container.querySelector('.finding-group__locations > summary')!);
     expect(firstFinding).not.toHaveAttribute('open');
     fireEvent.click(firstFinding!.querySelector('summary')!);
     expect(firstFinding).toHaveAttribute('open');
@@ -124,14 +125,14 @@ describe('M2.5 results panel', () => {
 
     expect(screen.getByRole('heading', { name: '무료 구조 검사: 발견 0건' })).toBeInTheDocument();
     expect(screen.getByText('반환된 무료 구조 검사 항목이 없습니다. 위의 검사 범위와 미수행 항목을 확인하세요. 수식 패턴·누락이나 계산 정확성의 검증 결과가 아닙니다.')).toBeInTheDocument();
-    expect(screen.getByText('0개 전체 표시 · 클릭해 자세히 보기')).toBeInTheDocument();
+    expect(screen.getByText('0개 유형으로 묶음 · 위치 0건')).toBeInTheDocument();
     expect(screen.getByText('현재 발견 결과 기준으로는 수정 검토 대상을 제안하지 않습니다. 정밀 검증과 승인 기반 수정은 아직 제공하지 않습니다.')).toBeInTheDocument();
 
     rerender(<M25ResultsPanel result={withFindings(demoResult.findings.slice(0, 1))} isDemo={false} onReset={() => undefined} />);
-    expect(screen.getByText('1개 전체 표시 · 클릭해 자세히 보기')).toBeInTheDocument();
+    expect(screen.getByText('1개 유형으로 묶음 · 위치 1건')).toBeInTheDocument();
 
     rerender(<M25ResultsPanel result={withFindings(demoResult.findings.slice(0, 2))} isDemo={false} onReset={() => undefined} />);
-    expect(screen.getByText('2개 전체 표시 · 클릭해 자세히 보기')).toBeInTheDocument();
+    expect(screen.getByText(`${new Set(demoResult.findings.slice(0, 2).map((finding) => finding.rule_code)).size}개 유형으로 묶음 · 위치 2건`)).toBeInTheDocument();
 
     rerender(
       <M25ResultsPanel
@@ -208,7 +209,7 @@ describe('M2.5 results panel', () => {
 
     fireEvent.click(screen.getByRole('button', { name: '필터 초기화' }));
     expect(document.querySelectorAll('details.finding')).toHaveLength(4);
-    expect(screen.getByRole('status')).toHaveTextContent('4개 전체 표시');
+    expect(screen.getByRole('status')).toHaveTextContent('1개 유형으로 묶음 · 위치 4건');
     expect(screen.getByRole('button', { name: '필터 초기화' })).toBeDisabled();
   });
 
