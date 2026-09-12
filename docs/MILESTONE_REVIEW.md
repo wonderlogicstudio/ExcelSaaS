@@ -1,5 +1,19 @@
 # Current review — V3.2 D01
 
+## Protected beta M4 follow-up completed — 2026-09-12
+
+The approved expected-results connection is deployed and agent-verified on the actual authenticated beta:
+20 unique synthetic uploads,72/72 exact sheet/cell/rule/subtype,no extras; controls10/20 zero.
+Free counts03=49/11=59/others0, grouped locations,score/CSV and approval separation are preserved.
+Existing engine reused; automatic separate M4, gated API/Worker/Gateway connection and mobile layout repaired.
+Final full regression exit0:web69/Worker14/API77,TypeScript/build/Ruff; actual container72 and local UI72 pass.
+Strict evaluator remains BLOCKED solely by existing case18 E13/F22 target/normal label conflicts; existing waiver accepted,
+no fixture/threshold/waiver edits. Source `0ae6c63c06a7`. Worker `c222ac45-36ab-48c0-a0b1-e0d66f4755d8`,
+Cloud Run `workbookcare-api-beta-00004-hhk`, Gateway `workbookcare-beta-m4-0ae6c63c06a7`; Access/IAM/private storage preserved.
+Evidence: `delivery-v3_2/reviews/evidence/D01-m4-hosted.json` and `D01-m4-hosted-browser.json`.
+Owner83/sample68 hashes unchanged. No Excel/PG/repair delivery,paid resource,remote push,H2/H3 completion or D02 execution.
+D01 engineering verified,owner acceptance pending; stop here. Earlier M4-disabled/pending notes are historical.
+
 ## D01 authenticated hosted sample verification — 2026-09-12
 
 The connected, logged-in Chrome beta was exercised by the agent using actual

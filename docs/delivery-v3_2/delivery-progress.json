@@ -21,16 +21,20 @@
         "prior_records_and_security_boundaries_preserved": "VERIFIED"
       },
       "verification": {
-        "web_tests": 59,
-        "worker_tests": 13,
-        "api_tests": 75,
-        "m4c_exact_candidates": 36,
+        "web_tests": 69,
+        "worker_tests": 14,
+        "api_tests": 77,
+        "m4c_exact_candidates": 72,
         "browser_widths": [
           1440,
           390
         ],
-        "evidence_type": "LOCAL_SYNTHETIC_PRODUCT_INTEGRATION",
-        "package_examples_are_product_evidence": false
+        "evidence_type": "ACTUAL_SYNTHETIC_LOCAL_CONTAINER_AND_AUTHENTICATED_HOSTED_PRODUCT_INTEGRATION",
+        "package_examples_are_product_evidence": false,
+        "hosted_unique_uploads": 20,
+        "hosted_m4_exact_candidates": 72,
+        "strict_evaluator": "BLOCKED_TWO_EXISTING_LABEL_CONFLICTS",
+        "accepted_evaluator": "PASS_WITH_PRODUCT_OWNER_WAIVER"
       },
       "reused": [
         "M2.5 scanner/guidance/catalog",
@@ -44,35 +48,36 @@
         "CF/UXR completion code/reviews"
       ],
       "not_run": [
-        "repair_engine/delivery",
-        "calculation/Excel reference",
-        "PG sandbox/live",
-        "payment/refund",
-        "real customer data",
-        "pricing approval",
-        "remote push",
-        "package oracle/examples as product verification",
-        "D02-D08",
-        "Cloud Run/Gateway rollout",
-        "H2/H3 remaining operational gates",
-        "authenticated hosted M4 audit (disabled/unavailable)"
+        "Excel application/calculation/reference engine",
+        "PG sandbox/live or payment/refund",
+        "repair engine/approval/delivery execution",
+        "real customer files",
+        "pricing decisions",
+        "new paid resources",
+        "anonymous or production M4",
+        "H2/H3 remaining operational gates/readiness",
+        "Git remote push",
+        "D02 or later bundles",
+        "saved authenticated Chrome screenshot artifact (screen capture inspected in session; local PNGs saved separately)"
       ],
       "beta_deployment": {
-        "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
-        "version": "673f2895-2142-4215-8024-9acb14fa53ae",
-        "deployed_at_utc": "2026-09-12T12:34:31.774566Z",
+        "status": "WEB_WORKER_API_GATEWAY_DEPLOYED_ACCESS_PROTECTED",
+        "version": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
         "percentage": 100,
-        "rollback_version": "dc94d91a-e969-479e-9087-f1f9758ec2ef",
-        "source_commit": "5828aca1292e07a653292a68acbad07ec3f49fc0",
-        "cloud_run_revision_changed": false,
-        "api_projection_deployed": false,
-        "legacy_api_compatible_frontend": true,
-        "binding_metadata_unchanged": true,
-        "anonymous_access_check": "PASS_302_TO_EXISTING_ACCESS",
-        "authenticated_ui_check": "PASS_AGENT_AUTHENTICATED_FREE_UI_AND_GROUPS",
-        "hosted_synthetic_upload": "PASS_AGENT_21_ACTUAL_FREE_UPLOADS",
-        "evidence": "reviews/evidence/D01-grouped-findings.json",
-        "authenticated_evidence": "reviews/evidence/D01-hosted-browser.json"
+        "source_commit": "0ae6c63c06a7",
+        "cloud_run_revision": "workbookcare-api-beta-00004-hhk",
+        "cloud_run_revision_changed": true,
+        "api_projection_deployed": true,
+        "gateway_config": "workbookcare-beta-m4-0ae6c63c06a7",
+        "rollback_version": "673f2895-2142-4215-8024-9acb14fa53ae",
+        "rollback_cloud_run_revision": "workbookcare-api-beta-00003-bsp",
+        "rollback_gateway_config": "workbookcare-beta-config-20260909203335",
+        "existing_binding_metadata_unchanged": true,
+        "added_formula_audit_binding": true,
+        "authenticated_ui_check": "PASS_AGENT_20_ACTUAL_UPLOADS_72_EXACT_M4",
+        "hosted_synthetic_upload": "20/20 free baseline + 72/72 exact M4",
+        "evidence": "reviews/evidence/D01-m4-hosted.json",
+        "authenticated_evidence": "reviews/evidence/D01-m4-hosted-browser.json"
       },
       "initial_engineering_review_not_run": [
         "repair_engine/delivery",
@@ -118,6 +123,23 @@
           "authenticated_ui_check": "NOT_RUN_NO_CONNECTED_BROWSER",
           "hosted_synthetic_upload": "NOT_RUN",
           "evidence": "reviews/evidence/D01-zero-findings.json"
+        },
+        {
+          "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
+          "version": "673f2895-2142-4215-8024-9acb14fa53ae",
+          "deployed_at_utc": "2026-09-12T12:34:31.774566Z",
+          "percentage": 100,
+          "rollback_version": "dc94d91a-e969-479e-9087-f1f9758ec2ef",
+          "source_commit": "5828aca1292e07a653292a68acbad07ec3f49fc0",
+          "cloud_run_revision_changed": false,
+          "api_projection_deployed": false,
+          "legacy_api_compatible_frontend": true,
+          "binding_metadata_unchanged": true,
+          "anonymous_access_check": "PASS_302_TO_EXISTING_ACCESS",
+          "authenticated_ui_check": "PASS_AGENT_AUTHENTICATED_FREE_UI_AND_GROUPS",
+          "hosted_synthetic_upload": "PASS_AGENT_21_ACTUAL_FREE_UPLOADS",
+          "evidence": "reviews/evidence/D01-grouped-findings.json",
+          "authenticated_evidence": "reviews/evidence/D01-hosted-browser.json"
         }
       ],
       "owner_feedback_followups": [
@@ -166,8 +188,45 @@
           "new_deployment": false,
           "next_scope_approval": "M4_BETA_CONNECTION_NOT_RECEIVED",
           "evidence": "reviews/evidence/D01-hosted-browser.json"
+        },
+        {
+          "report": "Owner requested expected results on existing beta",
+          "status": "M4_CONNECTED_DEPLOYED_AND_HOSTED_72_EXACT",
+          "source_commit": "0ae6c63c06a7",
+          "approval": "LATEST_OWNER_REQUEST_PLUS_STANDING_PROTECTED_BETA_DEPLOYMENT",
+          "hosted_m4_enabled": true,
+          "actual_hosted_uploads": 20,
+          "exact_m4_candidates": 72,
+          "source_files_and_owner_records_preserved": true,
+          "evidence": "reviews/evidence/D01-m4-hosted.json"
         }
-      ]
+      ],
+      "not_run_before_m4_followup": [
+        "repair_engine/delivery",
+        "calculation/Excel reference",
+        "PG sandbox/live",
+        "payment/refund",
+        "real customer data",
+        "pricing approval",
+        "remote push",
+        "package oracle/examples as product verification",
+        "D02-D08",
+        "Cloud Run/Gateway rollout",
+        "H2/H3 remaining operational gates",
+        "authenticated hosted M4 audit (disabled/unavailable)"
+      ],
+      "verification_before_m4_followup": {
+        "web_tests": 59,
+        "worker_tests": 13,
+        "api_tests": 75,
+        "m4c_exact_candidates": 36,
+        "browser_widths": [
+          1440,
+          390
+        ],
+        "evidence_type": "LOCAL_SYNTHETIC_PRODUCT_INTEGRATION",
+        "package_examples_are_product_evidence": false
+      }
     }
   },
   "readiness": {

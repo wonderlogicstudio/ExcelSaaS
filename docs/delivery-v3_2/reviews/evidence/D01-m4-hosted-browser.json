@@ -1,0 +1,395 @@
+{
+  "rows": [
+    {
+      "case": "01",
+      "checked_at_utc": "2026-09-12T14:00:34.649Z",
+      "actual": [
+        "판매내역|G23|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "판매내역|G52|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "판매내역|H37|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "판매내역|I48|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 832,
+      "formula_count": 301,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "02",
+      "checked_at_utc": "2026-09-12T14:00:52.729Z",
+      "actual": [
+        "입출고|F18|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "입출고|F34|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "입출고|F55|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE",
+        "입출고|F69|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 855,
+      "formula_count": 144,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "03",
+      "checked_at_utc": "2026-09-12T14:01:42.265Z",
+      "actual": [
+        "매출채권|F17|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "매출채권|G29|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "매출채권|H41|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE",
+        "매출채권|I36|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT"
+      ],
+      "free_findings": 49,
+      "scanned_cells": 947,
+      "formula_count": 276,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "04",
+      "checked_at_utc": "2026-09-12T14:02:52.545Z",
+      "actual": [
+        "원재료사용|F11|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "원재료사용|F22|FORMULA_PATTERN_OUTLIER|ABSOLUTE_REFERENCE_DRIFT",
+        "원재료사용|F33|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "원재료사용|F44|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 456,
+      "formula_count": 58,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "05",
+      "checked_at_utc": "2026-09-12T14:03:40.871Z",
+      "actual": [
+        "부서별분석|C50|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "부서별분석|D12|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "부서별분석|E25|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "부서별분석|F38|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 660,
+      "formula_count": 215,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "06",
+      "checked_at_utc": "2026-09-12T14:04:43.260Z",
+      "actual": [
+        "급여계산|D18|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "급여계산|E26|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "급여계산|G33|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE",
+        "급여계산|I44|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 1783,
+      "formula_count": 310,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "07",
+      "checked_at_utc": "2026-09-12T14:05:27.689Z",
+      "actual": [
+        "손익분석|C11|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "손익분석|E17|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "손익분석|F23|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "손익분석|G29|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 1399,
+      "formula_count": 190,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "08",
+      "checked_at_utc": "2026-09-12T14:06:08.417Z",
+      "actual": [
+        "상환스케줄|D20|FORMULA_PATTERN_OUTLIER|REFERENCE_CELL_DRIFT",
+        "상환스케줄|E34|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "상환스케줄|F52|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "상환스케줄|G47|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 482,
+      "formula_count": 366,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "09",
+      "checked_at_utc": "2026-09-12T14:06:51.532Z",
+      "actual": [
+        "월별KPI|B10|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "월별KPI|D14|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "월별KPI|G18|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE",
+        "월별KPI|H23|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 877,
+      "formula_count": 176,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "10",
+      "checked_at_utc": "2026-09-12T14:07:10.555Z",
+      "actual": [],
+      "free_findings": 0,
+      "scanned_cells": 781,
+      "formula_count": 96,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 0,
+      "no_feedback": true,
+      "completed_state": "후보 없음"
+    },
+    {
+      "case": "11",
+      "checked_at_utc": "2026-09-12T14:08:37.978Z",
+      "actual": [
+        "발주내역|G19|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "발주내역|G54|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE",
+        "발주내역|I31|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "발주내역|J43|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE"
+      ],
+      "free_findings": 59,
+      "scanned_cells": 893,
+      "formula_count": 214,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "12",
+      "checked_at_utc": "2026-09-12T14:09:43.215Z",
+      "actual": [
+        "자금계획|E21|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "자금계획|F33|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "자금계획|G45|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "자금계획|H57|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 569,
+      "formula_count": 258,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "13",
+      "checked_at_utc": "2026-09-12T14:10:29.642Z",
+      "actual": [
+        "자산대장|F46|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE",
+        "자산대장|G17|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "자산대장|H28|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "자산대장|I39|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 539,
+      "formula_count": 220,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "14",
+      "checked_at_utc": "2026-09-12T14:11:17.335Z",
+      "actual": [
+        "수수료계산|F14|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "수수료계산|G22|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "수수료계산|H31|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "수수료계산|J38|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 1848,
+      "formula_count": 296,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "15",
+      "checked_at_utc": "2026-09-12T14:12:01.144Z",
+      "actual": [
+        "생산실적|G20|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "생산실적|H32|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "생산실적|I44|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "생산실적|J56|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 850,
+      "formula_count": 327,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "16",
+      "checked_at_utc": "2026-09-12T14:12:42.012Z",
+      "actual": [
+        "정산|F17|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "정산|G28|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "정산|I37|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "정산|K44|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 1945,
+      "formula_count": 376,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "17",
+      "checked_at_utc": "2026-09-12T14:13:24.296Z",
+      "actual": [
+        "지점평가|C14|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "지점평가|E23|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "지점평가|H31|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "지점평가|I38|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 1988,
+      "formula_count": 262,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "18",
+      "checked_at_utc": "2026-09-12T14:14:10.445Z",
+      "actual": [
+        "배부계산|E13|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "배부계산|F22|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "배부계산|G31|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "배부계산|I40|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 483,
+      "formula_count": 253,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "19",
+      "checked_at_utc": "2026-09-12T14:15:12.300Z",
+      "actual": [
+        "대사표|B15|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "대사표|D27|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "대사표|E39|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "대사표|G46|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free_findings": 0,
+      "scanned_cells": 3590,
+      "formula_count": 312,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 2,
+      "no_feedback": true,
+      "completed_state": "후보 있음"
+    },
+    {
+      "case": "20",
+      "checked_at_utc": "2026-09-12T14:15:30.949Z",
+      "actual": [],
+      "free_findings": 0,
+      "scanned_cells": 582,
+      "formula_count": 141,
+      "free_matches": true,
+      "grouped_collapsed": true,
+      "group_count": 0,
+      "no_feedback": true,
+      "completed_state": "후보 없음"
+    }
+  ],
+  "ui_checks": [
+    {
+      "case": "03",
+      "group_disclosure": "PASS",
+      "leaf_evidence": "PASS",
+      "hosted_screenshot_inspected": true
+    },
+    {
+      "case": "03",
+      "free_group": 49,
+      "free_summary_after_m4_review": "UNCHANGED",
+      "approval_notice_present": true
+    },
+    {
+      "case": "11",
+      "free_group": 59,
+      "one_free_type": true
+    }
+  ],
+  "source": "Compact export of DOM-backed actual CUA results, losslessly expanded. Expected tuples were compared in the browser session and again against the original manifests when recording.",
+  "checks": [
+    "visible file chooser with actual synthetic XLSX",
+    "new result after reset, no stale prior result",
+    "automatic M4 completion state/candidate count",
+    "every exact sheet/cell/rule/subtype, including no extras",
+    "free counts/scanned cells/formula strings",
+    "default collapsed groups and feedback UI absent"
+  ],
+  "request_limits": "Existing five requests/60sec unchanged; spaced uploads; no rate-limit bypass",
+  "recovered_harness_errors": [
+    "initial duplicated samples path triggered empty-file validation, corrected to existing sample directory",
+    "short CUA waitFor deadline before async completion; subsequent DOM read completed; no duplicate API retries"
+  ],
+  "evidence_kind": "ACTUAL_AUTHENTICATED_HOSTED_BROWSER_UPLOADS",
+  "status": "PASS_20_FILES_72_EXACT",
+  "origin": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+  "source_commit": "0ae6c63c06a7",
+  "worker_version": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+  "validation_against_original_manifests": "72/72 exact sheet/cell/top-rule/subtype, no extras, clean controls10/20 zero",
+  "all_uploads_automatic_m4": true,
+  "excel_execution_or_recalculation": false
+}

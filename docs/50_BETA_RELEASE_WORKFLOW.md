@@ -36,17 +36,22 @@ $env:VITE_PRODUCT_ENV='hosted_beta'
 $env:VITE_API_BASE_URL='/api'
 $env:VITE_FEEDBACK_CAPTURE_ENABLED='false'
 $env:VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED='false'
+$env:VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED='true'
 $env:VITE_HOSTED_BETA_FEEDBACK_ENABLED='false'
 npm.cmd run build --workspace @workbookcare/web -- --mode hosted_beta
 ```
 
-These visibility defaults remain until the owner separately approves exposure.
+The owner approved automatic separate M4 on this protected beta on 2026-09-12.
+Production M4 and feedback remain off. The API requires both
+`FORMULA_PATTERN_AUDIT_ENABLED=true` and `HOSTED_BETA_FORMULA_AUDIT_ENABLED=true`
+in hosted_beta with HMAC required. Preserve every other environment/secret/IAM setting.
 Use the installed Wrangler version. D01 used 4.130.0 via
 `npx.cmd --offline --no-install wrangler` with config
 `infra/cloudflare/wrangler.jsonc`. Do not save credentials to repository files.
 
-Use `versions upload --dry-run --keep-vars --strict`, then upload the verified
-version with a release-specific tag/message. Compare the new version's binding
+Use `versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true`, then upload the verified
+version with the same explicit `--var FORMULA_AUDIT_ENABLED:true` override and a release-specific tag/message.
+The checked-in Worker default stays false. Compare the new version's binding
 metadata with the previously active version before `versions deploy <id>@100`.
 The versions workflow preserves existing triggers/routes; do not replace the
 Access policy or create a preview route to bypass login. Secret values must not
@@ -69,4 +74,19 @@ be read for these comparisons. These commands are described in the official
   deployable and compatible; verify the resulting active version. Do not disable
   Access or alter storage/security policies as a rollback shortcut.
 
-Latest D01 evidence: [release record](delivery-v3_2/reviews/evidence/D01-beta-release.json).
+Initial D01 beta evidence: [release record](delivery-v3_2/reviews/evidence/D01-beta-release.json).
+
+## Approved M4 API/Gateway release
+
+Use the existing Artifact Registry repository and pin the tested image digest.
+Update only the existing Cloud Run image and the two approved M4 flags, initially
+with `--no-traffic`. Check the created revision Ready/ContainerReady conditions,
+not only the service latestReady field: a no-traffic revision can be RETIRED.
+Preserve service spec/secret references and IAM, then explicitly shift traffic.
+Clone the current existing Gateway OpenAPI config, add only `/v1/formula-audits`,
+and retain the backend service identity/security/JWT audience/path translation.
+Create a config version on the same API and update the same Gateway; no new gateway.
+Keep the prior revision/config/Worker IDs for rollback. See the official
+[Cloud Run revision guide](https://docs.cloud.google.com/run/docs/managing/revisions) and
+[Gateway config guide](https://docs.cloud.google.com/api-gateway/docs/creating-api-config).
+Latest release/rollback/actual hosted evidence: [M4 follow-up](delivery-v3_2/reviews/evidence/D01-m4-hosted.json).

@@ -1,0 +1,871 @@
+{
+  "date_utc": "2026-09-12T14:17:00.127301+00:00",
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "source_commit": "0ae6c63c06a7",
+  "cause": "Existing M4 evaluator produced expected72; protected beta previously ran free scan only and had no M4 Worker/Gateway/API/UI connection. Prior free-only verification did not resolve owner expectation.",
+  "implemented": [
+    "dual opt-in hosted API gate requiring HMAC, production denied",
+    "M4 Worker path reuses Access/limits/private R2/HMAC/finally-delete",
+    "same Gateway service identity/backend auth with one additional route",
+    "automatic separate M4 after supported file scan",
+    "same-rule collapsed M4 groups with original leaf evidence/status",
+    "abort/stale response protection",
+    "mobile leaf summary containment fix"
+  ],
+  "reused": [
+    "existing M4 engine/rules/thresholds/finding keys",
+    "existing free scanner,score,quote,CSV",
+    "D01 grouped FindingViews and approval boundary",
+    "existing Access/IAM/HMAC/private storage guards",
+    "existing H3 private binding; feedback UI remains off"
+  ],
+  "expected": {
+    "metrics": {
+      "file_count": 20,
+      "expected_finding_count": 72,
+      "location_true_positive_count": 72,
+      "location_false_negative_count": 0,
+      "top_rule_match_count": 72,
+      "top_rule_false_negative_count": 0,
+      "subtype_match_count": 72,
+      "subtype_mismatch_or_missing_count": 0,
+      "unexpected_candidate_count": 0,
+      "normal_exception_label_count": 72,
+      "normal_exception_false_positive_count": 0,
+      "source_manifest_target_normal_conflict_count": 2,
+      "scan_failure_count": 0,
+      "clean_control_file_count": 2,
+      "clean_control_candidate_count": 0,
+      "finding_key_instability_count": 0,
+      "baseline_regression_count": 0,
+      "formula_text_exposure_count": 0,
+      "raw_value_field_count": 0,
+      "total_evaluation_ms": 5929.402
+    },
+    "strict_exit_code": 1,
+    "strict_status": "BLOCKED_SOURCE_LABEL_CONFLICTS",
+    "accepted_status": "PASS_WITH_PRODUCT_OWNER_WAIVER",
+    "waiver_id": "M4C-2026-09-02-source-label-conflict",
+    "source_conflicts": [
+      "18 배부계산!E13 is also inside normal D6:I13",
+      "18 배부계산!F22 is also inside normal D22:I29"
+    ],
+    "expected_and_waiver_edited": false,
+    "duplicate_additional_packs": "23 byte-identical files;20 unique workbooks across three Workbook-prefixed directories"
+  },
+  "preservation": {
+    "owner_package_files": 83,
+    "sample_pack_files": 68,
+    "all_hashes_unchanged": true
+  },
+  "commands": [
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0,
+      "stage": "baseline",
+      "result": "web63 / Worker13 / API75; TypeScript/build/Ruff; main M4 36 exact"
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe scripts/evaluate_m4c_all.py --output-dir artifacts/verification/m4-hosted/strict",
+      "exit_code": 1,
+      "result": "BLOCKED only by existing two target/normal label conflicts; 72/72 location/rule/subtype, no extras"
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe scripts/evaluate_m4c_all.py --output-dir artifacts/verification/m4-hosted/accepted --accept-product-owner-fixture-waiver",
+      "exit_code": 0,
+      "result": "PASS_WITH_PRODUCT_OWNER_WAIVER; existing waiver unchanged"
+    },
+    {
+      "command": "targeted API formula-audit + Gateway tests; Worker tests; web hosted-beta + FormulaAuditPanel tests",
+      "exit_code": 1,
+      "stage": "RED",
+      "result": "new beta API/Worker gates absent; new web auto flow missing; failures reproduced"
+    },
+    {
+      "command": "targeted API/Gateway pytest; npm test:edge; hosted-beta and FormulaAuditPanel Vitest",
+      "exit_code": 0,
+      "stage": "GREEN",
+      "result": "API9, Worker14, new hosted web6; legacy panel selector corrected after grouping"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0,
+      "stage": "final after mobile correction",
+      "result": "web69 / Worker14 / API77; TypeScript/build/Ruff; main M4 36 exact; existing Starlette warning"
+    },
+    {
+      "command": "docker build --platform linux/amd64 -t workbookcare-api:m4-hosted-20260912 apps/api",
+      "exit_code": 0,
+      "result": "allowlisted API context; tested image pinned for release"
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe scripts/verify_cloudrun_container.py --image workbookcare-api:m4-hosted-20260912",
+      "exit_code": 0,
+      "result": "ports8080/9091, safe500/redaction/cleanup, default M4 off"
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe scripts/verify-hosted-m4-container.py --image workbookcare-api:m4-hosted-20260912",
+      "exit_code": 0,
+      "result": "actual hosted-mode HMAC requests,20 fixtures/72 exact; invalid file failure, cleanup"
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\m4-hosted\\run_browser.py",
+      "exit_code": 1,
+      "stage": "initial harness",
+      "result": "Playwright root dependency unavailable; reuse installed artifacts/verification/d01/browser-runtime"
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\m4-hosted\\run_browser.py",
+      "exit_code": 0,
+      "stage": "final actual local browser",
+      "result": "desktop20/mobile4 exact, auto flow/free CSV invariance, keyboard, no overlap/pageerror; screenshots inspected"
+    },
+    {
+      "command": "deploy.py api first attempt (gcloud deploy exit0)",
+      "exit_code": 1,
+      "result": "helper incorrectly used service latestReady for no-traffic revision; traffic stayed old; checked revision Ready/ContainerReady and resumed same created revision"
+    },
+    {
+      "command": "docker tag workbookcare-api:m4-hosted-20260912 asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api:m4-beta-0ae6c63c06a7 && docker push <same tagged image>",
+      "exit_code": 0,
+      "note": "two sequential commands; image pinned in release.image"
+    },
+    {
+      "command": "gcloud run deploy workbookcare-api-beta --image asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:e57d3782741461d315b55770b1c45e4ecff2d1981535831d9b50f0b1b40343db --region asia-northeast3 --project workbookcare-beta --no-traffic --update-env-vars FORMULA_PATTERN_AUDIT_ENABLED=true,HOSTED_BETA_FORMULA_AUDIT_ENABLED=true --format=json --quiet",
+      "exit_code": 0
+    },
+    {
+      "command": "gcloud run services update-traffic workbookcare-api-beta --region asia-northeast3 --project workbookcare-beta --to-revisions workbookcare-api-beta-00004-hhk=100 --format=json --quiet",
+      "exit_code": 0
+    },
+    {
+      "command": "gcloud api-gateway api-configs create workbookcare-beta-m4-0ae6c63c06a7 --api workbookcare-beta-api --openapi-spec <temporary copy of existing spec plus M4 path> --backend-auth-service-account <unchanged existing identity> --project workbookcare-beta --format=json --quiet",
+      "exit_code": 0,
+      "redactions": "temporary path and service account email omitted"
+    },
+    {
+      "command": "gcloud api-gateway gateways update workbookcare-beta-gateway --location asia-northeast1 --api workbookcare-beta-api --api-config workbookcare-beta-m4-0ae6c63c06a7 --project workbookcare-beta --format=json --quiet",
+      "exit_code": 0
+    },
+    {
+      "command": "npx.cmd --offline --no-install wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --config infra/cloudflare/wrangler.jsonc",
+      "exit_code": 0
+    },
+    {
+      "command": "npx.cmd --offline --no-install wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --tag m4-beta-0ae6c63c06a7 --message 'Approved protected beta automatic M4 expected results' --config infra/cloudflare/wrangler.jsonc",
+      "exit_code": 0
+    },
+    {
+      "command": "npx.cmd --offline --no-install wrangler versions deploy c222ac45-36ab-48c0-a0b1-e0d66f4755d8@100 --yes --message 'Approved automatic M4 on Access protected beta' --config infra/cloudflare/wrangler.jsonc",
+      "exit_code": 0
+    },
+    {
+      "command": "CUA visible file chooser -> actual beta upload -> DOM expected tuple/free metadata comparison for each20",
+      "exit_code": null,
+      "result": "PASS; browser actions do not have process exit codes",
+      "recovered_harness_errors": [
+        "first path accidentally duplicated samples; zero-byte guard rejected; corrected existing directory variable",
+        "CUA waitFor returned ~3-second deadline before completion; subsequent DOM read confirmed completed audit; no duplicate API retry"
+      ]
+    }
+  ],
+  "provider_commands": [
+    {
+      "phase": "baseline",
+      "command": "gcloud run services describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud api-gateway gateways describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud api-gateway api-configs describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "wrangler versions view 673f2895-2142-4215-8024-9acb14fa53ae",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud run services get-iam-policy",
+      "exit_code": 0
+    },
+    {
+      "phase": "image",
+      "command": "git rev-parse HEAD",
+      "exit_code": 0
+    },
+    {
+      "phase": "image",
+      "command": "docker tag verified local image",
+      "exit_code": 0
+    },
+    {
+      "phase": "image",
+      "command": "docker push existing Artifact Registry repository",
+      "exit_code": 0
+    },
+    {
+      "phase": "image",
+      "command": "docker inspect pushed digest",
+      "exit_code": 0
+    },
+    {
+      "phase": "api",
+      "command": "gcloud run services describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "api",
+      "command": "gcloud run services get-iam-policy",
+      "exit_code": 0
+    },
+    {
+      "phase": "api",
+      "command": "gcloud run deploy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api",
+      "command": "gcloud run services describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "api",
+      "command": "gcloud run services describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "api",
+      "command": "gcloud run services get-iam-policy",
+      "exit_code": 0
+    },
+    {
+      "phase": "api",
+      "command": "gcloud run services describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "api",
+      "command": "gcloud run revisions describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "api",
+      "command": "gcloud run services get-iam-policy",
+      "exit_code": 0
+    },
+    {
+      "phase": "api",
+      "command": "gcloud run services update-traffic",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway gateways describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway api-configs describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "web",
+      "command": "npm run build --workspace @workbookcare/web -- --mode hosted_beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-upload",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-upload",
+      "command": "wrangler versions upload --dry-run",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-upload",
+      "command": "wrangler versions upload --keep-vars",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway api-configs create",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway gateways update",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-deploy",
+      "command": "wrangler versions view c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-deploy",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-deploy",
+      "command": "wrangler versions deploy c222ac45-36ab-48c0-a0b1-e0d66f4755d8@100",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway gateways describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway api-configs describe",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler versions view c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services get-iam-policy",
+      "exit_code": 0
+    }
+  ],
+  "local_browser": {
+    "evidence_kind": "ACTUAL_LOCAL_BROWSER_AND_API_AUTOMATIC_M4",
+    "rows": [
+      {
+        "width": 1440,
+        "case": "01",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "02",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "03",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 49
+      },
+      {
+        "width": 1440,
+        "case": "04",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "05",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "06",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "07",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "08",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "09",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "10",
+        "expected": 0,
+        "actual": 0,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "11",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 59
+      },
+      {
+        "width": 1440,
+        "case": "12",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "13",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "14",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "15",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "16",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "17",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "18",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "19",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "case": "20",
+        "expected": 0,
+        "actual": 0,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 390,
+        "case": "01",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 390,
+        "case": "03",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 49
+      },
+      {
+        "width": 390,
+        "case": "11",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 59
+      },
+      {
+        "width": 390,
+        "case": "20",
+        "expected": 0,
+        "actual": 0,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      }
+    ],
+    "screenshots": [
+      "artifacts/screenshots/m4-hosted/collapsed-1440.png",
+      "artifacts/screenshots/m4-hosted/expanded-1440.png",
+      "artifacts/screenshots/m4-hosted/collapsed-390.png",
+      "artifacts/screenshots/m4-hosted/expanded-390.png"
+    ],
+    "checks": [
+      {
+        "width": 1440,
+        "keyboard_disclosure": true,
+        "leaf_evidence": true,
+        "m4_review_free_csv_unchanged": true,
+        "review_network_calls": 0
+      },
+      {
+        "width": 390,
+        "candidate_summary_contained_without_overlap": true
+      },
+      {
+        "width": 390,
+        "keyboard_disclosure": true,
+        "leaf_evidence": true,
+        "m4_review_free_csv_unchanged": true,
+        "review_network_calls": 0
+      }
+    ],
+    "status": "PASS",
+    "total_unique_expected_candidates": 72
+  },
+  "container": {
+    "status": "PASS",
+    "evidence_kind": "ACTUAL_LOCAL_HOSTED_MODE_CONTAINER",
+    "image": "workbookcare-api:m4-hosted-20260912",
+    "rows": [
+      {
+        "case": "01",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "02",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "03",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 49,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "04",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "05",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "06",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "07",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "08",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "09",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "10",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 0,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "11",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 59,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "12",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "13",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "14",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "15",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "16",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "17",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "18",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "19",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 4,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      },
+      {
+        "case": "20",
+        "audit_http": 200,
+        "free_http": 200,
+        "exact_candidates": 0,
+        "free_findings": 0,
+        "temporary_files_removed": true
+      }
+    ],
+    "invalid_file_status": "FAILED",
+    "excel_recalculation": false,
+    "hosted_browser": false
+  },
+  "hosted_evidence": "D01-m4-hosted-browser.json",
+  "release": {
+    "before": {
+      "cloud_run_revision": "workbookcare-api-beta-00003-bsp",
+      "cloud_run_image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:5ab7065c318c2325f6124b41787e8297f4de6f428329151b6a1ca45c7cf35703",
+      "cloud_run_invariant_sha256": "8155f3d04a083c9b72be987271d18ffeb4cc2212d4e7efbee1fe743fa88b7c47",
+      "iam_sha256": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342",
+      "gateway_config": "workbookcare-beta-config-20260909203335",
+      "gateway_spec_sha256": "f4a2ec93652305dab71df7b5e6860d5bcd27fbc5c6dcbe9698f9172df50c62d5",
+      "gateway_identity_sha256": "eb75142eb654af2bfef3317a6a0dc4b95cc02f43912ac5c2d0012c5db7c9f234",
+      "worker_version": "673f2895-2142-4215-8024-9acb14fa53ae",
+      "worker_bindings_sha256": "4be60bd368f41301d66960dbeb695025a68dad759f69300c9429e07d85e89443",
+      "access": [
+        {
+          "path": "/",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/scans",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/formula-audits",
+          "status": 302,
+          "existing_access": true
+        }
+      ]
+    },
+    "after": {
+      "cloud_run_revision": "workbookcare-api-beta-00004-hhk",
+      "cloud_run_traffic_percent": 100,
+      "cloud_run_invariants_preserved": true,
+      "iam_preserved_no_public_members": true,
+      "gateway_config": "workbookcare-beta-m4-0ae6c63c06a7",
+      "gateway_only_added_m4_path": true,
+      "gateway_identity_preserved": true,
+      "worker_version": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+      "worker_existing_bindings_preserved": true,
+      "formula_audit_enabled": true,
+      "access": [
+        {
+          "path": "/",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/scans",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/formula-audits",
+          "status": 302,
+          "existing_access": true
+        }
+      ]
+    },
+    "image": {
+      "source_commit": "0ae6c63c06a7",
+      "tag": "m4-beta-0ae6c63c06a7",
+      "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:e57d3782741461d315b55770b1c45e4ecff2d1981535831d9b50f0b1b40343db"
+    },
+    "api": {
+      "revision": "workbookcare-api-beta-00004-hhk",
+      "rollback_revision": "workbookcare-api-beta-00003-bsp",
+      "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:e57d3782741461d315b55770b1c45e4ecff2d1981535831d9b50f0b1b40343db",
+      "flags": {
+        "FORMULA_PATTERN_AUDIT_ENABLED": "true",
+        "HOSTED_BETA_FORMULA_AUDIT_ENABLED": "true"
+      },
+      "invariants_preserved": true,
+      "iam_preserved": true
+    },
+    "gateway": {
+      "config": "workbookcare-beta-m4-0ae6c63c06a7",
+      "rollback_config": "workbookcare-beta-config-20260909203335",
+      "spec_sha256": "2bcbe8c0e05c07974ba441593379028e95ec3490b755fdca7b110bf6ab5d4835",
+      "identity_preserved": true
+    },
+    "worker": {
+      "version_id": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+      "rollback_version_id": "673f2895-2142-4215-8024-9acb14fa53ae",
+      "previous_bindings_preserved": true,
+      "formula_audit_enabled": true
+    },
+    "web": {
+      "flags": {
+        "VITE_PRODUCT_ENV": "hosted_beta",
+        "VITE_API_BASE_URL": "/api",
+        "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+        "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+        "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+        "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false"
+      },
+      "assets": {
+        "apps/web/dist/index.html": "36ae918a6d562cacf053289f70ebf2bef46a42f387319a671a5b4d4d3e0faf5b",
+        "apps/web/dist/assets/index-0mm7apYy.js": "62d072aad6a44aae3f07269ecd05f1e6ad1c0ad4f9cfdf7ea6876660bdf53a76",
+        "apps/web/dist/assets/index-CY4IthcL.css": "d545d03b7730110a350815550902feb37f1bb570dbf2a3bed4a090f13830eb27"
+      }
+    }
+  },
+  "not_run": [
+    "Excel application/calculation/reference engine",
+    "PG sandbox/live or payment/refund",
+    "repair engine/approval/delivery execution",
+    "real customer files",
+    "pricing decisions",
+    "new paid resources",
+    "anonymous or production M4",
+    "H2/H3 remaining operational gates/readiness",
+    "Git remote push",
+    "D02 or later bundles",
+    "saved authenticated Chrome screenshot artifact (screen capture inspected in session; local PNGs saved separately)"
+  ],
+  "stop": "D01 follow-up complete; owner acceptance pending; D02 not approved"
+}
