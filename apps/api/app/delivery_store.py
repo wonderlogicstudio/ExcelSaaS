@@ -48,6 +48,9 @@ class DeliveryStore:
             from .delivery_operations import install as install_operations
 
             install_operations(db)
+            from .delivery_receipts import install as install_receipts
+
+            install_receipts(db)
         if os.name != "nt":
             self.path.chmod(0o600)
 

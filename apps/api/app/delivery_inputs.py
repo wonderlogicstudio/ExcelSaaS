@@ -174,7 +174,15 @@ def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
             ]
             if row_numbers != sorted(set(row_numbers)) or any(n < 1 for n in row_numbers):
                 issues.add("UNSUPPORTED_ROW_STRUCTURE")
+            from openpyxl.utils.cell import coordinate_to_tuple
+
             for row in tree.findall(NS + "sheetData/" + NS + "row"):
+                positions = [
+                    coordinate_to_tuple(valid_cell(c.get("r")))[1]
+                    for c in row.findall(NS + "c")
+                ]
+                if positions != sorted(positions):
+                    issues.add("UNSUPPORTED_CELL_ORDER")
                 if any(
                     re.sub("[A-Z]+", "", valid_cell(c.get("r"))) != row.get("r")
                     for c in row.findall(NS + "c")

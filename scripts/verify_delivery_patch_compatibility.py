@@ -8,7 +8,9 @@ from app.delivery_plan import build_plan
 from app.delivery_patch import patch_workbook,verify_output
 from app.delivery_artifacts import make_artifacts
 from app.delivery_execution import patch_fingerprint
-out=R/'artifacts/verification/d04/compatibility';out.mkdir(parents=True,exist_ok=True)
+import argparse
+parser=argparse.ArgumentParser();parser.add_argument('--stage',choices=['d04','d08'],default='d04');stage=parser.parse_args().stage
+out=R/f'artifacts/verification/{stage}/compatibility';out.mkdir(parents=True,exist_ok=True)
 store=DeliveryStore(out/'private-state');store.cleanup();rows=[]
 source=(R/'samples/delivery-v3_2/delivery-rp01-rp02.xlsx').read_bytes()
 for tag,profile,targets in [('RP01',PROFILE_1,['B2','B3']),('RP02',PROFILE_2,['F3'])]:

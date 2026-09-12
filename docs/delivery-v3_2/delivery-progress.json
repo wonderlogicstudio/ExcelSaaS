@@ -455,29 +455,43 @@
       "review": "reviews/D07.md",
       "evidence": "reviews/evidence/D07-local.json",
       "commerce_ready": false,
-      "beta_deployment": "PENDING_DOCKER_ENGINE_RECOVERY"
+      "beta_deployment": "PENDING_DOCKER_ENGINE_RECOVERY",
+      "implementation_commit": "1564ebe4036c5830d4bcbaaa6060ac87cb3b20ef"
     },
     "D08": {
-      "status": "IN_PROGRESS",
+      "status": "PARTIAL",
       "development_approved": true,
-      "owner_acceptance": "PENDING"
+      "owner_acceptance": "PENDING",
+      "history": [
+        {
+          "status": "IN_PROGRESS",
+          "reason": "before actual holdout/Excel/failure correction/final review"
+        }
+      ],
+      "local_engineering": "VERIFIED_AWAITING_OWNER",
+      "review": "reviews/D08.md",
+      "evidence": "reviews/evidence/D08-local.json",
+      "commerce_ready": false,
+      "beta_deployment": "NOT_DEPLOYED_DOCKER_AND_LINUX_RUNTIME_PENDING",
+      "pg_sandbox": "NOT_RUN"
     }
   },
   "readiness": {
     "repair_profiles": {
-      "RP01": "NOT_EVALUATED",
-      "RP02": "NOT_EVALUATED"
+      "RP01": "LOCAL_ENGINEERING_VERIFIED_HOSTED_PG_COMMERCIAL_PENDING",
+      "RP02": "LOCAL_ENGINEERING_VERIFIED_HOSTED_PG_COMMERCIAL_PENDING"
     },
     "repair_delivery": "LOCAL_ENGINEERING_VERIFIED_HOSTED_AND_COMMERCE_PENDING",
     "comparison_delivery": "LOCAL_ENGINEERING_VERIFIED_HOSTED_AND_COMMERCE_PENDING",
     "operations": "LOCAL_GUARDS_VERIFIED_HOSTED_AND_POLICY_PENDING",
     "owner_release_approved": false,
-    "commercial_signal": "NOT_OBSERVED"
+    "commercial_signal": "NOT_OBSERVED",
+    "release_manifest": "release_manifest.json"
   },
   "customer_change_approval": "IMPLEMENTED_LOCAL_SYNTHETIC_ONLY_D04",
-  "next_recommended_bundle": "D08",
-  "next_bundle_approved": true,
-  "execution_stopped_after": null,
+  "next_recommended_bundle": null,
+  "next_bundle_approved": false,
+  "execution_stopped_after": "D08",
   "deployment_authorization": {
     "target": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
     "approved": true,
@@ -507,5 +521,7 @@
   "owner_review_timing": "AFTER_D08_AS_REQUESTED_2026_09_13",
   "customer_change_approval_history": [
     "NOT_IMPLEMENTED_BY_D01"
-  ]
+  ],
+  "next_recommended_unit": "EXISTING_PROTECTED_BETA_DELIVERY_DEPLOYMENT_AND_SCREEN_VERIFICATION",
+  "current_status": "PARTIAL_AWAITING_OWNER"
 }

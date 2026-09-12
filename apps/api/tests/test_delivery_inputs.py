@@ -150,6 +150,10 @@ def test_actual_api_owner_cookie_preflight_and_negative_version(tmp_path, monkey
     assert checked.status_code == 200 and checked.json()["preflight"]["eligible_count"] == 2
     assert client.post("/v1/delivery", headers=headers, json=request).status_code == 409
     other = make_client(settings, monkeypatch)
+    receipt_request = {"action": "verify_approval_receipt", "job_id": job["job_id"]}
+    assert other.post("/v1/delivery", headers=headers, json=receipt_request).status_code == 404
+    assert client.post("/v1/delivery", json=receipt_request).status_code == 403
+    assert client.post("/v1/delivery", headers=headers, json=receipt_request).status_code == 409
     assert (
         other.post(
             "/v1/delivery", headers=headers, json={"action": "get", "job_id": job["job_id"]}

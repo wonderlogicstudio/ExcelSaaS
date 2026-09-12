@@ -1,7 +1,7 @@
-﻿param([string]$Directory='compatibility')
+﻿param([string]$Directory='compatibility',[ValidateSet('d04','d08')][string]$Stage='d04')
 $ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
-$verificationRoot=Join-Path $root 'artifacts/verification/d04'
+$verificationRoot=Join-Path $root ('artifacts/verification/'+$Stage)
 $dir=[IO.Path]::GetFullPath((Join-Path $verificationRoot $Directory))
 if(-not $dir.StartsWith($verificationRoot+[IO.Path]::DirectorySeparatorChar,[StringComparison]::OrdinalIgnoreCase)){throw 'Verification directory outside synthetic artifact root'}
 $inputs=Get-Content -LiteralPath (Join-Path $verificationRoot 'compatibility/inputs.json') -Raw -Encoding UTF8 | ConvertFrom-Json

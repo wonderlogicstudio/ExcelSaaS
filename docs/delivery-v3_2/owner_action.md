@@ -1,4 +1,19 @@
-# D01 사용자 확인
+# V3.2 D01–D08 사용자 확인
+
+## D08 최종 사용자 확인 — 여기서 정지
+
+현재는 로컬 검증 결과입니다. 기존 베타 사이트는 D01 상태이며 D02–D08 화면은 아직 반영되지 않았습니다. 아래 로컬 증거와 파일로 먼저 검토할 수 있습니다.
+
+1. 전체 요약 → 유형 묶음 → 셀 위치·차이 순서로 필요한 근거만 펼쳐지는지 확인하세요. [D01 검토](reviews/D01.md), [최종 비교 모바일](../../artifacts/screenshots/d08-comparison/390-comparison-holdout-summary.png).
+2. [새 합성 원본](../../samples/delivery-v3_2/delivery-holdout-v2.xlsx)과 [RP01 실제 수정본](../../artifacts/verification/d08/browser-downloads/1440-RP01-holdout/REPAIRED_XLSX.xlsx)을 비교해 B2=-1,250/B3=7,200/H2=5,950 및 ID00042·서식 보존을 확인하세요. [변경내역](../../artifacts/verification/d08/browser-downloads/1440-RP01-holdout/CHANGES_XLSX.xlsx), [재검증HTML](../../artifacts/verification/d08/browser-downloads/1440-RP01-holdout/VERIFICATION_HTML.html).
+3. [RP02 실제 수정본](../../artifacts/verification/d08/browser-downloads/1440-RP02-holdout/REPAIRED_XLSX.xlsx)의 F3=2,800/F12=16,890과 정확한 승인 수식, [서버 승인 기록 확인 화면](../../artifacts/screenshots/d08/390-RP02-holdout-receipt.png)을 확인하세요. [변경내역](../../artifacts/verification/d08/browser-downloads/1440-RP02-holdout/CHANGES_XLSX.xlsx), [재검증HTML](../../artifacts/verification/d08/browser-downloads/1440-RP02-holdout/VERIFICATION_HTML.html).
+4. [비교 보고서](../../artifacts/verification/d08-comparison/browser-downloads/1440-comparison-holdout/COMPARISON_REPORT_XLSX.xlsx)와 [HTML](../../artifacts/verification/d08-comparison/browser-downloads/1440-comparison-holdout/COMPARISON_VERIFICATION_HTML.html)의7그룹·250/190원·차액20원, 원천12행과 B가 정답이 아닌 별도 상품임을 확인하세요.
+5. [지원 제외 화면](../../artifacts/screenshots/d08-ux/390-negative-invalid-cell-order.png)과 [상품별 미완료 항목](release_manifest.json)을 확인하세요. 결제 모형·승인·납품을 실제 PG/상용 준비와 혼동하지 않습니다.
+
+**다음 한 단위 제안:** 기존 Access 보호 베타의 납품 경로 배포·화면 검증. Docker 복구(재시작 질문 미응답)와 JDK/POI Linux 패키징·운영 한도를 해결한 뒤 같은 합성 예상 값을 사이트에서 확인합니다. 새 묶음이나 배포를 자동 실행하지 않습니다. 실제 PG/영속 원장/가격·법률 승인도 미완료이므로 현재 판매 OFF를 유지합니다.
+
+아래는 이전 단계별 기록입니다. 각 단계의 “다음 단위” 문구는 당시 이력이며 위 최종 정지가 우선합니다.
+
 
 ## D07 확인 행동 — 최종 확인은 D08 뒤
 

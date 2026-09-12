@@ -4,7 +4,7 @@ import { resolveApiBaseUrl } from '../lib/api';
 
 type Preflight = { status: string; eligible_count: number; reason_codes: string[]; purchase_enabled: boolean;
   targets: {sheet:string;cell:string;eligible:boolean;current_type:string;reason_codes:string[]}[] };
-export type DeliveryJob = {order_id?:string|null;entitlement_active?:boolean;policy?:{profile:string;sheet:string;targets:string[];role?:string;anchor?:string;anchor_formula?:string;confirmed:boolean};job_id:string;revision:number;source_hash:string;status:string;expires_at:number;
+export type DeliveryJob = {approval_receipt?:{payload:{source_hash:string;plan_digest:string};signature:string}|null;order_id?:string|null;entitlement_active?:boolean;policy?:{profile:string;sheet:string;targets:string[];role?:string;anchor?:string;anchor_formula?:string;confirmed:boolean};job_id:string;revision:number;source_hash:string;status:string;expires_at:number;
   repair_execution_available?:boolean;approval_status?:string;delivery?:{delivery_id:string;patch_count:number;expires_at:number;files:Record<string,{bytes:number}>}|null;
   internal_rehearsal?:boolean;plan_summary?:{digest:string;status:string;patch_count:number;impact_count:number;formula_impact_count:number;coverage:{formula_count:number};reference:{status:string;case_count?:number}}|null;
   sheets:{name:string;cell_count:number}[];preflight:Preflight|null;purchase_enabled:boolean;source_unchanged:boolean};
@@ -16,6 +16,7 @@ const reasons:Record<string,string>={
   NO_ELIGIBLE_CHANGES:'현재 선택에서 형식 조건을 충족하는 변경 대상이 없습니다.',
   NOT_UNAMBIGUOUS_INTEGER_TEXT:'선행 0·단위·날짜·공백·소수·초과 정밀도 또는 숫자 텍스트가 아닌 셀입니다.',
   TARGET_NOT_TRUE_BLANK:'실제 빈 셀이 아닙니다. 빈 문자열·수식·값을 덮어쓰지 않습니다.',
+  UNSUPPORTED_CELL_ORDER:'셀의 저장 순서가 비정상입니다. Excel에서 파일 복구 여부를 확인하세요. 현재는 수정하지 않습니다.',
   UNSUPPORTED_PACKAGE_PART:'차트·확장 기능 등 아직 보존을 검증하지 않은 파일 구조가 있습니다.',
   UNSUPPORTED_SHEET_STRUCTURE:'보호·병합·표 등 지원하지 않는 시트 구조가 있습니다.',
   UNSUPPORTED_FORMULA:'현재 범위에서 검증하지 않은 함수나 참조가 있습니다.',
@@ -88,7 +89,7 @@ export function DeliveryWorkspace({file,initialJob}:{file?:File;initialJob?:Deli
         {dirty&&job.preflight&&<p role="status">기준이 바뀌었습니다. 새 기준으로 다시 검사해야 합니다.</p>}
         {job.preflight&&!dirty&&!job.plan_summary&&<section className="delivery-preflight-result" aria-label="사전 검사 결과"><h3>3. 사전 검사 결과</h3>
           <strong>{job.preflight.status==='PRELIMINARY_ONLY'?'대상 형식 확인 · 추가 검증 필요':'선택한 범위의 수정 조건 미충족'}</strong>
-          <p>형식 조건 충족 {job.preflight.eligible_count}건</p><p>{job.plan_summary?'아래에서 변경계획과 승인 단계를 확인하세요. 현재 일반 구매는 제공하지 않습니다.':'다음 단계에서 계산 영향을 확인할 수 있습니다. 아직 수정 가능 또는 견적 가능 상태가 아닙니다.'}</p>
+          <p>형식 조건 충족 {job.preflight.eligible_count}건</p><p>{job.preflight.status==='PRELIMINARY_ONLY'?'다음 단계에서 계산 영향을 확인할 수 있습니다. 아직 수정 가능 또는 견적 가능 상태가 아닙니다.':'현재 선택한 범위로는 계산·주문·수정을 진행할 수 없습니다. 아래 이유를 확인하고 기준 또는 대상을 다시 선택하세요.'}</p>
           <ul>{[...new Set([...job.preflight.reason_codes,...job.preflight.targets.flatMap(t=>t.reason_codes)])].map(code=><li key={code}>{reasons[code]??'지원 범위를 충족하지 않습니다. 현재는 수동 확인이 필요합니다.'}</li>)}</ul>
           <table className="delivery-targets"><caption>선택한 셀의 실제 사전 검사</caption><thead><tr><th>위치</th><th>현재 타입</th><th>확인 결과</th></tr></thead><tbody>{job.preflight.targets.map(t=><tr key={t.sheet+t.cell}><td>{t.sheet} · {t.cell}</td><td>{cellTypes[t.current_type]??t.current_type}</td><td>{t.eligible?'형식 조건 충족':'지원 제외'}</td></tr>)}</tbody></table>
 

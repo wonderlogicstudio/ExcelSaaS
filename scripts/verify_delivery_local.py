@@ -10,7 +10,7 @@ import httpx
 
 ROOT = Path(__file__).resolve().parents[1]
 parser = argparse.ArgumentParser()
-parser.add_argument('--stage', choices=['d07','d07-comparison','d07-operations','d08','d08-comparison'], required=True)
+parser.add_argument('--stage', choices=['d07','d07-comparison','d07-operations','d08','d08-comparison','d08-ux'], required=True)
 parser.add_argument('--script', choices=['verify-payment-delivery.mjs','verify-comparison-output.mjs','verify-delivery-operations.mjs','verify-delivery-holdout.mjs'], required=True)
 args = parser.parse_args()
 for port in [8189,5189]:

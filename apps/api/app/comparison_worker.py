@@ -32,15 +32,11 @@ def comparison(message):
 
 def report(message):
     if message["action"] == "comparison_artifacts":
-        from app.comparison_artifacts import (
-            make_comparison_artifacts,
-            validate_comparison_artifacts,
-        )
+        from app.comparison_artifacts import make_comparison_artifacts
 
         package = make_comparison_artifacts(message["model"], message["job"])
-        validate_comparison_artifacts(package, message["model"])
     else:
-        from app.delivery_artifacts import make_artifacts, validate_artifacts
+        from app.delivery_artifacts import make_artifacts
 
         package = make_artifacts(
             message["job"],
@@ -48,7 +44,6 @@ def report(message):
             base64.b64decode(message["repaired_base64"], validate=True),
             message["verification"],
         )
-        validate_artifacts(package, message["plan"])
     for artifact in package["artifacts"].values():
         artifact["data_base64"] = base64.b64encode(artifact.pop("data")).decode()
     return package

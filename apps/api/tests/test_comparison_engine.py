@@ -182,3 +182,17 @@ def test_swap_order_invariance_and_explicit_exclusions():
     assert result["summary"]["excluded_rows"]["A"] == 1
     assert result["summary"]["assigned_rows"]["A"] == 7
     assert result["summary"]["excluded_known_amount_totals"]["A"] == "900"
+
+
+def test_validated_row_capacity_accepts_boundary_and_rejects_before_report():
+    from app.comparison_engine import MAX_ROWS
+
+    assert MAX_ROWS == 1000
+    rows = [{"key": f"K{i:05d}", "amount": str(i)} for i in range(1, MAX_ROWS + 1)]
+    result = actual(rows, rows)
+    assert result["summary"]["group_count"] == 1000
+    assert result["summary"]["known_amount_totals"] == {"A": "500500", "B": "500500"}
+    with pytest.raises(WorkbookCareError):
+        read_source(
+            "synthetic.csv", source_bytes(rows + [{"key": "EXTRA", "amount": "1"}]), Settings()
+        )

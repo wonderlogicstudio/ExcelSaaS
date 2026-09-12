@@ -80,6 +80,7 @@ def projection(job: dict) -> dict:
         "repair_execution_available": entitled(job, get_settings().app_env)
         and compatibility_status()["status"] == "PASS",
         "approval_status": "APPROVED" if state.get("approval") else "NOT_APPROVED",
+        "approval_receipt": (state.get("approval") or {}).get("receipt"),
         "delivery": state.get("delivery"),
         "failure_code": state.get("failure_code"),
         "storage_mode": "BETA_EPHEMERAL_LOCAL_ADAPTER",
@@ -141,7 +142,15 @@ async def delivery(request: Request):
     store.cleanup()
     action = body.get("action")
     if action == "capabilities":
+        from . import comparison_engine as comparison
+
         output = {
+            "comparison_limits": {
+                "max_bytes": comparison.MAX_BYTES,
+                "max_rows": comparison.MAX_ROWS,
+                "max_columns": comparison.MAX_COLUMNS,
+                "max_cells": comparison.MAX_SELECTED_CELLS,
+            },
             "profiles": [PROFILE_1, PROFILE_2],
             "max_bytes": MAX_BYTES,
             "max_cells": MAX_CELLS,
@@ -267,6 +276,10 @@ async def delivery(request: Request):
                 return JSONResponse(output, headers={"Cache-Control": "no-store"})
             store.delete(owner, job_id)
             output = {"status": "DELETED"}
+        elif action == "verify_approval_receipt":
+            from .delivery_receipts import verify_current
+
+            output = verify_current(store, job)
         elif action == "approve_plan":
             output = projection(approve(store, job, body, settings))
         elif action == "execute":

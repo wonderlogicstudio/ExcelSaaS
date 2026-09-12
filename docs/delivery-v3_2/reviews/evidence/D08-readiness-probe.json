@@ -1,0 +1,25 @@
+{
+  "owner_package_files_preserved": 83,
+  "original_samples_preserved": 68,
+  "repair_reference": {
+    "status": "PASS",
+    "case_count": 20,
+    "excel_version": "16.0",
+    "reference_digest": "b745516a9844401a05276476f1d07376c51dc675d10f7488cfaed962dbcc6eab"
+  },
+  "repair_compatibility": {
+    "status": "PASS",
+    "excel_version": "16.0",
+    "profiles": [
+      "RP01",
+      "RP02"
+    ],
+    "evidence_digest": "50632dfbd30f018ffbd1ab97da0de370e7c0b5ac6f15b4475e83926bfa6c6c03"
+  },
+  "docker": {
+    "status": "TIMEOUT",
+    "timeout_seconds": 12,
+    "restart_attempted": false,
+    "reason": "Existing daemon unresponsive; unanswered restart request; other container impact possible"
+  }
+}

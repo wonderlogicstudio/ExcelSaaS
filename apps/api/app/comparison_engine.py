@@ -20,7 +20,7 @@ from .security import validate_ooxml
 
 PROFILE = "TWO_LEDGER_EXACT_KEY_KRW_V1"
 VERSION = "exact-key-krw-v1"
-MAX_ROWS = 20_000
+MAX_ROWS = 1_000
 MAX_COLUMNS = 50
 MAX_SELECTED_CELLS = 250_000
 MAX_FIELD = 4096
@@ -296,7 +296,7 @@ def select_rows(source: dict, side: str, selection: dict) -> dict:
     except (KeyError, ValueError, TypeError):
         reject(
             "COMPARISON_SELECTION_INVALID",
-            "헤더·범위·키 1~3열·금액 열과 20,000행/50열/250,000셀 한도를 확인하세요.",
+            "헤더·범위·키 1~3열·금액 열과 1,000행/50열/250,000셀 한도를 확인하세요.",
         )
     cells = sheet["cells"]
     blank = {"type": "blank", "value": None}

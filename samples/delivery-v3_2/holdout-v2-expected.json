@@ -1,0 +1,85 @@
+{
+  "kind": "D08_ORDERED_INPUT_V2_SAME_PREDECLARED_MANUAL_EXPECTED_VALUES",
+  "existing_oracles_unchanged": true,
+  "repair": {
+    "file": "delivery-holdout-v2.xlsx",
+    "unchanged_id_A2": "00042",
+    "before": {
+      "F2": 4590,
+      "F12": 14090,
+      "H2": 0
+    },
+    "RP01": {
+      "targets": [
+        "B2",
+        "B3"
+      ],
+      "expected": {
+        "B2": -1250,
+        "B3": 7200,
+        "H2": 5950,
+        "F2": 4590,
+        "F12": 14090
+      },
+      "style_preserved": [
+        "A2",
+        "B2",
+        "B3",
+        "F2",
+        "F3",
+        "F4",
+        "F12"
+      ]
+    },
+    "RP02": {
+      "anchor": "F2",
+      "target": "F3",
+      "formula": "=ROUND(C3*D3*(1-E3),0)",
+      "expected": {
+        "F2": 4590,
+        "F3": 2800,
+        "F12": 16890,
+        "H2": 0
+      },
+      "unchanged_text": {
+        "B2": "-1,250",
+        "B3": "7,200"
+      }
+    }
+  },
+  "normal_exception": {
+    "file": "delivery-holdout-no-change-v2.xlsx",
+    "rp01_eligible_count": 0,
+    "cannot_order": true
+  },
+  "comparison": {
+    "A_rows": 7,
+    "B_rows": 5,
+    "groups": 7,
+    "counts": {
+      "MATCHED": 1,
+      "AMOUNT_DIFF": 1,
+      "ONLY_A": 1,
+      "ONLY_B": 1,
+      "AMBIGUOUS": 1,
+      "INPUT_ERROR": 2
+    },
+    "known_A": "250",
+    "known_B": "190",
+    "unknown_A": 1,
+    "unknown_B": 0,
+    "delta_key": "DIF",
+    "delta": "20",
+    "duplicate_key": "DUP",
+    "duplicate_rows": 3,
+    "error_key": "ERR",
+    "error_rows": 2
+  },
+  "source_hashes": {
+    "comparison-holdout-A.csv": "3062b1408ed6e82e51972c9006253f13fba2a3e96b01e1e29ee67b09de1d34a6",
+    "comparison-holdout-B.csv": "874a54705a803e027d4967ebdebc5d8d0cbb309890029506f8cb8904ad48f054",
+    "delivery-holdout-v2.xlsx": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+    "delivery-holdout-no-change-v2.xlsx": "509991a1fb11c7b5c797594e38a81fc1f98f370026b70bfc1e54f71914338efc"
+  },
+  "supersedes_positive_input": "holdout-expected.json (invalid cell order retained as negative)"
+}

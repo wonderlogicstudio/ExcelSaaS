@@ -1,0 +1,37 @@
+{
+  "status": "LOCAL_PRODUCT_NEGATIVE_GATES_VERIFIED_OFFICIAL_PG_NOT_RUN",
+  "groups": [
+    {
+      "area": "Missing/changed/stale/wrong owner approval or entitlement; comparison rights cannot repair",
+      "proof": "apps/api/tests/test_delivery_execution.py and test_payment_delivery.py; full regression216"
+    },
+    {
+      "area": "Receipt signature/source/plan/owner_binding/key_id tamper; authentic historical receipt cannot restore revoked grant",
+      "proof": "test_delivery_receipts.py; final target9"
+    },
+    {
+      "area": "Receipt endpoint wrong owner404 / missingCSRF403 / noapproval409",
+      "proof": "test_delivery_inputs.py::test_actual_api_owner_cookie_preflight_and_negative_version; final target9"
+    },
+    {
+      "area": "0changes/ID/nonblank/broken cell order cannot calculate or order",
+      "proof": "d08-ux browser4 expected screens"
+    },
+    {
+      "area": "Same order subset/reject/expiry/revisit/restore/new approval/retry; no duplicate local logical charge",
+      "proof": "D06 and D07 actual browser+Excel evidence, current full regression; receipt simulation only"
+    },
+    {
+      "area": "Wrong owner/SKU/refund/expiry/missing companion/forgedOrigin/bodyowner/kill switch blocks private artifacts",
+      "proof": "test_delivery_operations, delivery_inputs, delivery_execution, comparison_service, Worker16"
+    },
+    {
+      "area": "Atomic concurrent attempt cap3 including initial; child deadline cleanup; real30s TTL sweep without request",
+      "proof": "test_delivery_operations.py; not a3concurrent-worker capacity guarantee"
+    },
+    {
+      "area": "Official PG sandbox authenticated purchase/cancel/return/webhook",
+      "status": "NOT_RUN; LOCAL_CONTRACT is not provider evidence"
+    }
+  ]
+}

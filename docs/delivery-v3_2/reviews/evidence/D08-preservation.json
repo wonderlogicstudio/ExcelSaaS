@@ -1,0 +1,42 @@
+[
+  {
+    "width": 1440,
+    "profile": "RP01",
+    "changed_members": [
+      "xl/workbook.xml",
+      "xl/worksheets/sheet1.xml"
+    ],
+    "style_part_unchanged": true,
+    "all_other_members_byte_identical": true
+  },
+  {
+    "width": 1440,
+    "profile": "RP02",
+    "changed_members": [
+      "xl/workbook.xml",
+      "xl/worksheets/sheet1.xml"
+    ],
+    "style_part_unchanged": true,
+    "all_other_members_byte_identical": true
+  },
+  {
+    "width": 390,
+    "profile": "RP01",
+    "changed_members": [
+      "xl/workbook.xml",
+      "xl/worksheets/sheet1.xml"
+    ],
+    "style_part_unchanged": true,
+    "all_other_members_byte_identical": true
+  },
+  {
+    "width": 390,
+    "profile": "RP02",
+    "changed_members": [
+      "xl/workbook.xml",
+      "xl/worksheets/sheet1.xml"
+    ],
+    "style_part_unchanged": true,
+    "all_other_members_byte_identical": true
+  }
+]

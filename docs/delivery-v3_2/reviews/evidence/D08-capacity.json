@@ -1,0 +1,39 @@
+{
+  "kind": "ACTUAL_WINDOWS_CHILD_PROCESS_CAPACITY_MEASUREMENT_NOT_HOSTED_LOAD_TEST",
+  "cases": [
+    {
+      "rows_per_source": 1000,
+      "source_bytes_each": 11904,
+      "expected_groups": 1000,
+      "expected_known_total": "500500",
+      "comparison": "PASS",
+      "comparison_seconds": 1.144,
+      "report": "PASS",
+      "file_bytes": {
+        "COMPARISON_REPORT_XLSX": 154501,
+        "COMPARISON_VERIFICATION_HTML": 387247
+      },
+      "seconds": 7.221
+    },
+    {
+      "rows_per_source": 5000,
+      "source_bytes_each": 63904,
+      "expected_groups": 5000,
+      "expected_known_total": "12502500",
+      "status": "LIMIT_REJECTED_NOT_SUPPORTED_CAPACITY",
+      "error_code": "COMPARISON_TABLE_LIMIT",
+      "report": "NOT_COMPLETED",
+      "seconds": 1.038
+    },
+    {
+      "rows_per_source": 20000,
+      "source_bytes_each": 268905,
+      "expected_groups": 20000,
+      "expected_known_total": "200010000",
+      "status": "LIMIT_REJECTED_NOT_SUPPORTED_CAPACITY",
+      "error_code": "COMPARISON_TABLE_LIMIT",
+      "report": "NOT_COMPLETED",
+      "seconds": 1.01
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "F2": 2700,
+    "file": "delivery-rp01-rp02.xlsx",
+    "opened": true
+  },
+  {
+    "error": "EXCEL_OPEN_FAILED",
+    "file": "delivery-holdout.xlsx",
+    "opened": false
+  },
+  {
+    "F2": 4590,
+    "file": "delivery-holdout-v2.xlsx",
+    "opened": true
+  }
+]

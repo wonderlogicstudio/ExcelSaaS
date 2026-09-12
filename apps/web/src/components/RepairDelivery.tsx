@@ -4,9 +4,10 @@ import type {PlanDetail} from './RepairPlanPreview';
 
 const labels:Record<string,string>={REPAIRED_XLSX:'수정본 XLSX',CHANGES_XLSX:'변경내역 XLSX',VERIFICATION_HTML:'재검증 HTML'};
 export function RepairDelivery({job,detail,onJob}:{job:DeliveryJob;detail:PlanDetail;onJob:(job:DeliveryJob)=>void}){
+ const [receiptVerified,setReceiptVerified]=useState(false);
  const [selected,setSelected]=useState<string[]>([]);
  const [ack,setAck]=useState(false);const [busy,setBusy]=useState(false);const [error,setError]=useState<string|null>(null);
- useEffect(()=>{setAck(false);setSelected([])},[detail.digest]);
+ useEffect(()=>{setAck(false);setSelected([]);setReceiptVerified(false)},[detail.digest]);
  useEffect(()=>{
   if(!['RUNNING','CANCEL_REQUESTED'].includes(job.status))return;
   const c=new AbortController();let timer:ReturnType<typeof setTimeout>;
@@ -35,6 +36,7 @@ export function RepairDelivery({job,detail,onJob}:{job:DeliveryJob;detail:PlanDe
     : <><p>현재 변경계획 승인 완료 · 결제나 앞 단계의 기준 확인과 별도로 기록했습니다.</p><button type="button" className="button button--primary" disabled={busy} onClick={()=>run(async()=>{onJob({...job,status:'RUNNING'});onJob(await deliveryRequest<DeliveryJob>({action:'execute',job_id:job.job_id}));})}>{job.status==='QUARANTINED'?'같은 승인 범위 다시 실행':'승인한 사본 만들기'}</button></>}
    {!job.repair_execution_available&&<p>파일 호환성 또는 수정 권리 검증이 완료되어야 실행할 수 있습니다.</p>}
   </>}
+  {job.approval_receipt&&<details className="delivery-technical"><summary>승인 기록과 원본 연결 확인</summary><p>원본 SHA-256: <code>{job.approval_receipt.payload.source_hash}</code></p><p>변경계획 SHA-256: <code>{job.approval_receipt.payload.plan_digest}</code></p><button type="button" className="button button--outline" disabled={busy} onClick={()=>run(async()=>{const proof=await deliveryRequest<{signature_valid:boolean}>({action:'verify_approval_receipt',job_id:job.job_id});setReceiptVerified(proof.signature_valid)})}>승인 기록 서버 검증</button>{receiptVerified&&<p role="status">서버 서명이 원본·변경계획과 일치합니다. 이 기록은 새 자료의 실행 권리가 아닙니다.</p>}</details>}
   {error&&<p role="alert">{error}</p>}
  </section>;
 }

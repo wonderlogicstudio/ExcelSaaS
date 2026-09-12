@@ -1,5 +1,10 @@
 # Current milestone
 
+## STOPPED AFTER D08 — 사용자 확인 대기 (2026-09-13)
+
+D01–D08 승인 범위의 로컬 구현·실제 화면·Excel 검증을 마쳤다. 전체 판정 PARTIAL: D02 이후 beta/Linux/PG/상용 운영의 필수 미완료 증거를 release_manifest.json에 분리했다. 다음 묶음 자동 실행 금지. 원격 push·일반 공개·상용 판매 없음. 다음 한 단위 제안은 기존 Access 베타 납품 배포와 실제 사이트 예상 값 확인이며, Docker 복구와 Linux 패키징/한도를 먼저 해결해야 한다. 이전 ACTIVE 제목은 아래 역사 기록으로만 보존한다.
+
+
 ## ACTIVE APPROVED — D08 (2026-09-13)
 
 D07 local UI/TTL/private access/child reports/recovery verified. Hosted/Linux/PG and commercial policy remain PARTIAL. Read 07_ACCEPTANCE_AND_RELEASE.md and 02_CUSTOMER_OUTPUTS.md. Run new immutable synthetic holdouts through actual UI/API/engine/artifacts, inspect expected on-screen values and installed Excel, add missing negative acceptance, and produce SKU-specific release_manifest. Do not convert NOT_RUN to PASS. Final owner review and stop after D08; no new milestone, remote push, real payment, prices, paid resources or anonymous release.

@@ -8,7 +8,10 @@ import time
 from .config import get_settings
 from .delivery_inputs import reject
 
-SYNTHETIC_SOURCE_HASHES = {"e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070"}
+SYNTHETIC_SOURCE_HASHES = {
+    "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+    "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+}
 
 
 def entitled(job: dict, app_env: str) -> bool:

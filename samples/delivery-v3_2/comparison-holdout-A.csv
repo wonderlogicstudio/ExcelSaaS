@@ -1,0 +1,8 @@
+ID,금액
+000A,0
+DIF,200
+LEFT,-25
+,50
+DUP,10
+DUP,15
+ERR,bad

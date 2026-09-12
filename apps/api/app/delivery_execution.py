@@ -97,15 +97,22 @@ def approve(store, job, body, settings):
             plan["expires_at"], effective_repair_grant(job, settings.app_env)["expires_at"]
         ),
     }
+    from .delivery_receipts import sign
+
+    approval["receipt"] = sign(store, approval)
     return store.update(
         job, body.get("revision"), {**job["state"], "approval": approval, "status": "APPROVED"}
     )
 
 
-def validate_approval(job, settings):
+def validate_approval(job, settings, store):
     require_right(job, settings)
     plan = validate_plan(job)
     approval = job["state"].get("approval") or {}
+    from .delivery_receipts import valid
+
+    if approval and not valid(store, approval):
+        reject("APPROVAL_RECEIPT_INVALID", "현재 승인 기록의 서명을 확인하지 못했습니다.", 409)
     expected = {
         "owner": job["owner"],
         "job_id": job["id"],
@@ -139,7 +146,7 @@ def execute(store, job, settings):
         return store.load(job["owner"], job["id"])
     if job["state"]["status"] in ACTIVE:
         return job
-    plan = validate_approval(job, settings)
+    plan = validate_approval(job, settings, store)
     if job["state"]["status"] not in {"APPROVED", "QUARANTINED"}:
         reject("EXECUTION_NOT_AVAILABLE", "새 변경계획 승인이 필요합니다.", 409)
     from .delivery_operations import claim_attempt
@@ -191,7 +198,7 @@ def execute(store, job, settings):
             control.check()
             validate_package(package, REQUIRED_ARTIFACTS)
             current = store.load(job["owner"], job["id"])
-            validate_approval(current, settings)
+            validate_approval(current, settings, store)
             if (
                 current["state"].get("publication_fence") != fence
                 or current["state"]["status"] != "RUNNING"

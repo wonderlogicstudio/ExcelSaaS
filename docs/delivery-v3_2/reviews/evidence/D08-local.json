@@ -1,0 +1,928 @@
+{
+  "status": "PARTIAL",
+  "local_engineering": "VERIFIED_AWAITING_OWNER",
+  "base_commit": "1564ebe4036c5830d4bcbaaa6060ac87cb3b20ef",
+  "reused": [
+    "D01 unified summary/type/cell hierarchy, free CSV/location/evidence/risk score and separate M4 totals",
+    "D02 fixed source/private owner/HMAC/CSRF, D03 POI20-case Excel reference and immutable plans",
+    "D04 separate source-preserving patch/three validated files/approval fence",
+    "D05 separate exact A/B comparison/two reports and D06 private order recovery/local receipt simulation",
+    "D07 TTL30s sweep, owner isolation/no-store, attempt cap, child deadline, missing companion quarantine/recovery/keyboard"
+  ],
+  "implemented": [
+    "Server-authenticated HMAC approval receipt binds owner/source/plan/product/entitlement/expiry; tampering rejected before execution; UI server verification; receipt alone grants no execution right",
+    "New frozen independent values/styles/normal exceptions and comparison holdouts; invalid-order V1 kept as negative and V2 preserves same expected business values",
+    "Actual measured1000-row comparison cap returned by server and displayed by UI; no silent default range truncation; redundant second full report validation removed (maker still validates)",
+    "Invalid OOXML cell order excluded before calculation/quote; unsupported next-step copy and mobile invalid amount readability fixed",
+    "SKU-specific release manifest and preservation evidence; prior owner83/sample68 histories preserved; stop after D08"
+  ],
+  "verification": {
+    "full_regression": {
+      "web": 75,
+      "worker": 16,
+      "api": 216,
+      "m4_exact": 36,
+      "exit_code": 0
+    },
+    "final_web_exit_code": 0,
+    "final_api_target_tests": 9,
+    "final_api_target_exit_code": 0,
+    "ruff_exit_code": 0,
+    "browser": {
+      "d08": {
+        "kind": "D08_NEW_FROZEN_HOLDOUT_ACTUAL_PRODUCT_UI_API_ENGINE_AND_DOWNLOADS",
+        "official_pg_verified": false,
+        "rows": [
+          {
+            "width": 1440,
+            "profile": "RP01",
+            "action": "deliver",
+            "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+            "plan_digest": "dcfb46c573b115db71961970ba2de662313a74cdce14efe6b8d2b44d36c8c35e",
+            "receipt": {
+              "signature_valid": true,
+              "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+              "plan_digest": "dcfb46c573b115db71961970ba2de662313a74cdce14efe6b8d2b44d36c8c35e",
+              "receipt_digest": "01eceb086fdb380358a45f3fb41a6045690dd13270e7ab3b85319d9fc9816446",
+              "historical_receipt_only": true
+            },
+            "expected": {
+              "B2": -1250,
+              "B3": 7200,
+              "H2": 5950,
+              "F2": 4590,
+              "F12": 14090
+            },
+            "screen_expected_match": true,
+            "keyboard_approval": true,
+            "revisit_redownload_same_hash": true,
+            "files": {
+              "REPAIRED_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\1440-RP01-holdout\\REPAIRED_XLSX.xlsx",
+                "sha256": "ffb64f8ce5855dd27b617c9d7313dc9d209b78e413ab663920a53e1d713955e0",
+                "bytes": 2714
+              },
+              "CHANGES_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\1440-RP01-holdout\\CHANGES_XLSX.xlsx",
+                "sha256": "4e4ed9c4f68a2523c8509e73e03ba034551de06e3e0edd98983a1a6a7349d224",
+                "bytes": 9055
+              },
+              "VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\1440-RP01-holdout\\VERIFICATION_HTML.html",
+                "sha256": "eb8f1b30eb100d454b01b199fab32fa1113daf6c6e95c50e19615f6b5f02e986",
+                "bytes": 4132
+              }
+            }
+          },
+          {
+            "width": 1440,
+            "profile": "RP02",
+            "action": "deliver",
+            "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+            "plan_digest": "82c13fcca3eaec483afa8316ca66388e0bef0d7e0085caf76fca61d2f61d6dc9",
+            "receipt": {
+              "signature_valid": true,
+              "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+              "plan_digest": "82c13fcca3eaec483afa8316ca66388e0bef0d7e0085caf76fca61d2f61d6dc9",
+              "receipt_digest": "aefe2e043393f1772c51764b52ab5e18d148170314f88ccdb08d8a3d16d09792",
+              "historical_receipt_only": true
+            },
+            "expected": {
+              "F2": 4590,
+              "F3": 2800,
+              "F12": 16890,
+              "H2": 0
+            },
+            "screen_expected_match": true,
+            "keyboard_approval": true,
+            "revisit_redownload_same_hash": true,
+            "files": {
+              "REPAIRED_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\1440-RP02-holdout\\REPAIRED_XLSX.xlsx",
+                "sha256": "de6b33c559c89f881d01a34a413197725e17ffafde948b80fa4673eae7b4a462",
+                "bytes": 2728
+              },
+              "CHANGES_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\1440-RP02-holdout\\CHANGES_XLSX.xlsx",
+                "sha256": "41150d523a1a12dfbfa99ddefc3985eb802200b7b7c83af6034c0bd7b2c841ed",
+                "bytes": 9010
+              },
+              "VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\1440-RP02-holdout\\VERIFICATION_HTML.html",
+                "sha256": "39652dab11b58502208bb7c898d3b2341a84e37246e632fb333eda9992f353fc",
+                "bytes": 4071
+              }
+            }
+          },
+          {
+            "width": 390,
+            "profile": "RP01",
+            "action": "deliver",
+            "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+            "plan_digest": "74e6742326ad51407f884801f97f9940fd6976c6ff0f0d4a17f494dd8666e3ef",
+            "receipt": {
+              "signature_valid": true,
+              "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+              "plan_digest": "74e6742326ad51407f884801f97f9940fd6976c6ff0f0d4a17f494dd8666e3ef",
+              "receipt_digest": "3c801b89be143312d4fa3c96eb014c255bc9bd543e4927ee409c01919a3786c6",
+              "historical_receipt_only": true
+            },
+            "expected": {
+              "B2": -1250,
+              "B3": 7200,
+              "H2": 5950,
+              "F2": 4590,
+              "F12": 14090
+            },
+            "screen_expected_match": true,
+            "keyboard_approval": true,
+            "revisit_redownload_same_hash": true,
+            "files": {
+              "REPAIRED_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\390-RP01-holdout\\REPAIRED_XLSX.xlsx",
+                "sha256": "ffb64f8ce5855dd27b617c9d7313dc9d209b78e413ab663920a53e1d713955e0",
+                "bytes": 2714
+              },
+              "CHANGES_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\390-RP01-holdout\\CHANGES_XLSX.xlsx",
+                "sha256": "73098300f57a3bd8d3c30a648c03962b89abe7528626b4b5dab4f7e8102cd06c",
+                "bytes": 9052
+              },
+              "VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\390-RP01-holdout\\VERIFICATION_HTML.html",
+                "sha256": "67e14ff96019dddaf25f268dc1dd5c74e2a6a8ad863a73693efc4c42c4d2c409",
+                "bytes": 4132
+              }
+            }
+          },
+          {
+            "width": 390,
+            "profile": "RP02",
+            "action": "deliver",
+            "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+            "plan_digest": "bf8eeaccdd2a010d41a1af8ee6ca83a078e28e2a70e3b0cecef4a49993963abd",
+            "receipt": {
+              "signature_valid": true,
+              "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+              "plan_digest": "bf8eeaccdd2a010d41a1af8ee6ca83a078e28e2a70e3b0cecef4a49993963abd",
+              "receipt_digest": "63aed988566a964c81c1bf3b5016806ea0eff1bc9bc86aaf615c03273d4c0036",
+              "historical_receipt_only": true
+            },
+            "expected": {
+              "F2": 4590,
+              "F3": 2800,
+              "F12": 16890,
+              "H2": 0
+            },
+            "screen_expected_match": true,
+            "keyboard_approval": true,
+            "revisit_redownload_same_hash": true,
+            "files": {
+              "REPAIRED_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\390-RP02-holdout\\REPAIRED_XLSX.xlsx",
+                "sha256": "de6b33c559c89f881d01a34a413197725e17ffafde948b80fa4673eae7b4a462",
+                "bytes": 2728
+              },
+              "CHANGES_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\390-RP02-holdout\\CHANGES_XLSX.xlsx",
+                "sha256": "6a9fe61ec06e18bec05d2627bfdff29504aa0756959a276c7e297fa4fec8c145",
+                "bytes": 9009
+              },
+              "VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\390-RP02-holdout\\VERIFICATION_HTML.html",
+                "sha256": "bf15eb38f07c6cf42956b1586efc447b20402bac2515d190f59509f891658445",
+                "bytes": 4071
+              }
+            }
+          },
+          {
+            "width": 390,
+            "profile": "RP01",
+            "action": "negative",
+            "caseName": "no-change",
+            "screen_expected_match": true,
+            "eligible_count": 0,
+            "no_order": true,
+            "no_execution": true,
+            "files": {}
+          },
+          {
+            "width": 390,
+            "profile": "RP01",
+            "action": "negative",
+            "caseName": "identifier",
+            "screen_expected_match": true,
+            "eligible_count": 0,
+            "no_order": true,
+            "no_execution": true,
+            "files": {}
+          },
+          {
+            "width": 390,
+            "profile": "RP02",
+            "action": "negative",
+            "caseName": "nonblank",
+            "screen_expected_match": true,
+            "eligible_count": 0,
+            "no_order": true,
+            "no_execution": true,
+            "files": {}
+          },
+          {
+            "width": 390,
+            "profile": "RP01",
+            "action": "negative",
+            "caseName": "invalid-cell-order",
+            "screen_expected_match": true,
+            "eligible_count": 0,
+            "no_order": true,
+            "no_execution": true,
+            "files": {}
+          },
+          {
+            "width": 1440,
+            "profile": "COMPARISON",
+            "action": "deliver",
+            "source_pair_hash": "99b44c16cc7ab73655a81db81a6344f7520e260c2a1d1cc44d3abd9b11162838",
+            "spec_hash": "902434e101a649d097ae35723ae69452b819f34911dd970f095ce3b387f2b4b7",
+            "expected": {
+              "A_rows": 7,
+              "B_rows": 5,
+              "groups": 7,
+              "counts": {
+                "MATCHED": 1,
+                "AMOUNT_DIFF": 1,
+                "ONLY_A": 1,
+                "ONLY_B": 1,
+                "AMBIGUOUS": 1,
+                "INPUT_ERROR": 2
+              },
+              "known_A": "250",
+              "known_B": "190",
+              "unknown_A": 1,
+              "unknown_B": 0,
+              "delta_key": "DIF",
+              "delta": "20",
+              "duplicate_key": "DUP",
+              "duplicate_rows": 3,
+              "error_key": "ERR",
+              "error_rows": 2,
+              "A": "250",
+              "B": "190",
+              "source_rows": 12
+            },
+            "screen_expected_match": true,
+            "limits_match_server": true,
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\1440-comparison-holdout\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "5d1f5fd890fed40e55380e2e9760f9ca5d99538b118ae1667b0f51c6ac5586d2",
+                "bytes": 14535
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\1440-comparison-holdout\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "3c626312a3295b11f220d66733d902e01fb7831dc5e927a1f6971e7a8183a273",
+                "bytes": 6363
+              }
+            }
+          },
+          {
+            "width": 390,
+            "profile": "COMPARISON",
+            "action": "deliver",
+            "source_pair_hash": "99b44c16cc7ab73655a81db81a6344f7520e260c2a1d1cc44d3abd9b11162838",
+            "spec_hash": "902434e101a649d097ae35723ae69452b819f34911dd970f095ce3b387f2b4b7",
+            "expected": {
+              "A_rows": 7,
+              "B_rows": 5,
+              "groups": 7,
+              "counts": {
+                "MATCHED": 1,
+                "AMOUNT_DIFF": 1,
+                "ONLY_A": 1,
+                "ONLY_B": 1,
+                "AMBIGUOUS": 1,
+                "INPUT_ERROR": 2
+              },
+              "known_A": "250",
+              "known_B": "190",
+              "unknown_A": 1,
+              "unknown_B": 0,
+              "delta_key": "DIF",
+              "delta": "20",
+              "duplicate_key": "DUP",
+              "duplicate_rows": 3,
+              "error_key": "ERR",
+              "error_rows": 2,
+              "A": "250",
+              "B": "190",
+              "source_rows": 12
+            },
+            "screen_expected_match": true,
+            "limits_match_server": true,
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\390-comparison-holdout\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "e5abfb6264b22aefa09d863db767ef069555db15038234edbb5103c81e2b8133",
+                "bytes": 14538
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\browser-downloads\\390-comparison-holdout\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "3c626312a3295b11f220d66733d902e01fb7831dc5e927a1f6971e7a8183a273",
+                "bytes": 6363
+              }
+            }
+          }
+        ],
+        "screenshots": [
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-RP01-holdout-expected-plan.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-RP01-holdout-ready.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-RP01-holdout-receipt.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-RP01-holdout-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-RP01-holdout-revisit.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-RP02-holdout-expected-plan.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-RP02-holdout-ready.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-RP02-holdout-receipt.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-RP02-holdout-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-RP02-holdout-revisit.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-RP01-holdout-expected-plan.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-RP01-holdout-ready.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-RP01-holdout-receipt.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-RP01-holdout-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-RP01-holdout-revisit.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-RP02-holdout-expected-plan.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-RP02-holdout-ready.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-RP02-holdout-receipt.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-RP02-holdout-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-RP02-holdout-revisit.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-negative-no-change.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-negative-identifier.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-negative-nonblank.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-negative-invalid-cell-order.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-comparison-holdout-summary.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-comparison-holdout-DIF.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-comparison-holdout-DUP.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-comparison-holdout-ERR.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\1440-comparison-holdout-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-comparison-holdout-summary.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-comparison-holdout-DIF.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-comparison-holdout-DUP.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-comparison-holdout-ERR.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08\\390-comparison-holdout-html.png"
+        ]
+      },
+      "d08-ux": {
+        "kind": "D08_NEW_FROZEN_HOLDOUT_ACTUAL_PRODUCT_UI_API_ENGINE_AND_DOWNLOADS",
+        "official_pg_verified": false,
+        "rows": [
+          {
+            "width": 390,
+            "profile": "RP01",
+            "action": "negative",
+            "caseName": "no-change",
+            "screen_expected_match": true,
+            "eligible_count": 0,
+            "no_order": true,
+            "no_execution": true,
+            "files": {}
+          },
+          {
+            "width": 390,
+            "profile": "RP01",
+            "action": "negative",
+            "caseName": "identifier",
+            "screen_expected_match": true,
+            "eligible_count": 0,
+            "no_order": true,
+            "no_execution": true,
+            "files": {}
+          },
+          {
+            "width": 390,
+            "profile": "RP02",
+            "action": "negative",
+            "caseName": "nonblank",
+            "screen_expected_match": true,
+            "eligible_count": 0,
+            "no_order": true,
+            "no_execution": true,
+            "files": {}
+          },
+          {
+            "width": 390,
+            "profile": "RP01",
+            "action": "negative",
+            "caseName": "invalid-cell-order",
+            "screen_expected_match": true,
+            "eligible_count": 0,
+            "no_order": true,
+            "no_execution": true,
+            "files": {}
+          }
+        ],
+        "screenshots": [
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-ux\\390-negative-no-change.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-ux\\390-negative-identifier.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-ux\\390-negative-nonblank.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-ux\\390-negative-invalid-cell-order.png"
+        ]
+      },
+      "d08-comparison": {
+        "kind": "D08_NEW_FROZEN_HOLDOUT_ACTUAL_PRODUCT_UI_API_ENGINE_AND_DOWNLOADS",
+        "official_pg_verified": false,
+        "rows": [
+          {
+            "width": 1440,
+            "profile": "COMPARISON",
+            "action": "deliver",
+            "source_pair_hash": "99b44c16cc7ab73655a81db81a6344f7520e260c2a1d1cc44d3abd9b11162838",
+            "spec_hash": "902434e101a649d097ae35723ae69452b819f34911dd970f095ce3b387f2b4b7",
+            "expected": {
+              "A_rows": 7,
+              "B_rows": 5,
+              "groups": 7,
+              "counts": {
+                "MATCHED": 1,
+                "AMOUNT_DIFF": 1,
+                "ONLY_A": 1,
+                "ONLY_B": 1,
+                "AMBIGUOUS": 1,
+                "INPUT_ERROR": 2
+              },
+              "known_A": "250",
+              "known_B": "190",
+              "unknown_A": 1,
+              "unknown_B": 0,
+              "delta_key": "DIF",
+              "delta": "20",
+              "duplicate_key": "DUP",
+              "duplicate_rows": 3,
+              "error_key": "ERR",
+              "error_rows": 2,
+              "A": "250",
+              "B": "190",
+              "source_rows": 12
+            },
+            "screen_expected_match": true,
+            "limits_match_server": true,
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-comparison\\browser-downloads\\1440-comparison-holdout\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "b5e2f65d70b63f9d26f6a5ab66344746866782bf02bf6090fb4628cbbd7412e2",
+                "bytes": 14538
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-comparison\\browser-downloads\\1440-comparison-holdout\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "3c626312a3295b11f220d66733d902e01fb7831dc5e927a1f6971e7a8183a273",
+                "bytes": 6363
+              }
+            }
+          },
+          {
+            "width": 390,
+            "profile": "COMPARISON",
+            "action": "deliver",
+            "source_pair_hash": "99b44c16cc7ab73655a81db81a6344f7520e260c2a1d1cc44d3abd9b11162838",
+            "spec_hash": "902434e101a649d097ae35723ae69452b819f34911dd970f095ce3b387f2b4b7",
+            "expected": {
+              "A_rows": 7,
+              "B_rows": 5,
+              "groups": 7,
+              "counts": {
+                "MATCHED": 1,
+                "AMOUNT_DIFF": 1,
+                "ONLY_A": 1,
+                "ONLY_B": 1,
+                "AMBIGUOUS": 1,
+                "INPUT_ERROR": 2
+              },
+              "known_A": "250",
+              "known_B": "190",
+              "unknown_A": 1,
+              "unknown_B": 0,
+              "delta_key": "DIF",
+              "delta": "20",
+              "duplicate_key": "DUP",
+              "duplicate_rows": 3,
+              "error_key": "ERR",
+              "error_rows": 2,
+              "A": "250",
+              "B": "190",
+              "source_rows": 12
+            },
+            "screen_expected_match": true,
+            "limits_match_server": true,
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-comparison\\browser-downloads\\390-comparison-holdout\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "0cbc3cfd4cb84494496e7f2637f9031308a8595277cb250a5d586461524ee538",
+                "bytes": 14537
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-comparison\\browser-downloads\\390-comparison-holdout\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "3c626312a3295b11f220d66733d902e01fb7831dc5e927a1f6971e7a8183a273",
+                "bytes": 6363
+              }
+            }
+          }
+        ],
+        "screenshots": [
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-comparison\\1440-comparison-holdout-summary.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-comparison\\1440-comparison-holdout-DIF.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-comparison\\1440-comparison-holdout-DUP.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-comparison\\1440-comparison-holdout-ERR.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-comparison\\1440-comparison-holdout-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-comparison\\390-comparison-holdout-summary.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-comparison\\390-comparison-holdout-DIF.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-comparison\\390-comparison-holdout-DUP.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-comparison\\390-comparison-holdout-ERR.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d08-comparison\\390-comparison-holdout-html.png"
+        ]
+      }
+    },
+    "excel": {
+      "d08": {
+        "style_reference": {
+          "F12": "#,##0|False|0|14544639|14.29",
+          "B2": "#,##0|False|0|14544639|14.29",
+          "A2": "@|True|14492177|16777215|14.29",
+          "F2": "#,##0|False|0|14544639|14.29",
+          "B3": "#,##0|False|0|14544639|14.29",
+          "F4": "#,##0|False|0|14544639|14.29",
+          "F3": "#,##0|False|0|14544639|14.29"
+        },
+        "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+        "original_expected_match": true,
+        "kind": "D08_ACTUAL_HOLDOUT_DOWNLOADS_IN_INSTALLED_EXCEL",
+        "pdfs": [
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\RP01-holdout-excel.pdf",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\RP02-holdout-excel.pdf",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08\\comparison-holdout-excel.pdf"
+        ],
+        "official_pg_verified": false,
+        "excel_version": "16.0",
+        "results": [
+          {
+            "unchanged": true,
+            "style_preserved": true,
+            "width": 1440,
+            "profile": "RP01",
+            "sha256": "ffb64f8ce5855dd27b617c9d7313dc9d209b78e413ab663920a53e1d713955e0",
+            "kind": "REPAIRED_XLSX",
+            "expected_match": true
+          },
+          {
+            "unchanged": true,
+            "style_preserved": false,
+            "width": 1440,
+            "profile": "RP01",
+            "sha256": "4e4ed9c4f68a2523c8509e73e03ba034551de06e3e0edd98983a1a6a7349d224",
+            "kind": "CHANGES_XLSX",
+            "expected_match": true
+          },
+          {
+            "unchanged": true,
+            "style_preserved": true,
+            "width": 1440,
+            "profile": "RP02",
+            "sha256": "de6b33c559c89f881d01a34a413197725e17ffafde948b80fa4673eae7b4a462",
+            "kind": "REPAIRED_XLSX",
+            "expected_match": true
+          },
+          {
+            "unchanged": true,
+            "style_preserved": false,
+            "width": 1440,
+            "profile": "RP02",
+            "sha256": "41150d523a1a12dfbfa99ddefc3985eb802200b7b7c83af6034c0bd7b2c841ed",
+            "kind": "CHANGES_XLSX",
+            "expected_match": true
+          },
+          {
+            "unchanged": true,
+            "style_preserved": true,
+            "width": 390,
+            "profile": "RP01",
+            "sha256": "ffb64f8ce5855dd27b617c9d7313dc9d209b78e413ab663920a53e1d713955e0",
+            "kind": "REPAIRED_XLSX",
+            "expected_match": true
+          },
+          {
+            "unchanged": true,
+            "style_preserved": false,
+            "width": 390,
+            "profile": "RP01",
+            "sha256": "73098300f57a3bd8d3c30a648c03962b89abe7528626b4b5dab4f7e8102cd06c",
+            "kind": "CHANGES_XLSX",
+            "expected_match": true
+          },
+          {
+            "unchanged": true,
+            "style_preserved": true,
+            "width": 390,
+            "profile": "RP02",
+            "sha256": "de6b33c559c89f881d01a34a413197725e17ffafde948b80fa4673eae7b4a462",
+            "kind": "REPAIRED_XLSX",
+            "expected_match": true
+          },
+          {
+            "unchanged": true,
+            "style_preserved": false,
+            "width": 390,
+            "profile": "RP02",
+            "sha256": "6a9fe61ec06e18bec05d2627bfdff29504aa0756959a276c7e297fa4fec8c145",
+            "kind": "CHANGES_XLSX",
+            "expected_match": true
+          },
+          {
+            "unchanged": true,
+            "style_preserved": false,
+            "width": 1440,
+            "profile": "COMPARISON",
+            "sha256": "5d1f5fd890fed40e55380e2e9760f9ca5d99538b118ae1667b0f51c6ac5586d2",
+            "kind": "COMPARISON_REPORT_XLSX",
+            "expected_match": true
+          },
+          {
+            "unchanged": true,
+            "style_preserved": false,
+            "width": 390,
+            "profile": "COMPARISON",
+            "sha256": "e5abfb6264b22aefa09d863db767ef069555db15038234edbb5103c81e2b8133",
+            "kind": "COMPARISON_REPORT_XLSX",
+            "expected_match": true
+          }
+        ],
+        "status": "PASS",
+        "excel_build": 20326
+      },
+      "d08-comparison": {
+        "style_reference": {
+          "F12": "#,##0|False|0|14544639|14.29",
+          "B2": "#,##0|False|0|14544639|14.29",
+          "A2": "@|True|14492177|16777215|14.29",
+          "F2": "#,##0|False|0|14544639|14.29",
+          "B3": "#,##0|False|0|14544639|14.29",
+          "F4": "#,##0|False|0|14544639|14.29",
+          "F3": "#,##0|False|0|14544639|14.29"
+        },
+        "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+        "original_expected_match": true,
+        "kind": "D08_ACTUAL_HOLDOUT_DOWNLOADS_IN_INSTALLED_EXCEL",
+        "pdfs": [
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-comparison\\comparison-holdout-excel.pdf"
+        ],
+        "official_pg_verified": false,
+        "excel_version": "16.0",
+        "results": [
+          {
+            "unchanged": true,
+            "style_preserved": false,
+            "width": 1440,
+            "profile": "COMPARISON",
+            "sha256": "b5e2f65d70b63f9d26f6a5ab66344746866782bf02bf6090fb4628cbbd7412e2",
+            "kind": "COMPARISON_REPORT_XLSX",
+            "expected_match": true
+          },
+          {
+            "unchanged": true,
+            "style_preserved": false,
+            "width": 390,
+            "profile": "COMPARISON",
+            "sha256": "0cbc3cfd4cb84494496e7f2637f9031308a8595277cb250a5d586461524ee538",
+            "kind": "COMPARISON_REPORT_XLSX",
+            "expected_match": true
+          }
+        ],
+        "status": "PASS",
+        "excel_build": 20326
+      }
+    },
+    "actual_browser_paths": 16,
+    "actual_downloads": 20,
+    "same_hash_redownloads": 4,
+    "downloaded_xlsx_reopens": 12,
+    "compatibility_xlsx_reopens": 4,
+    "screenshots_saved": 51,
+    "screenshots_visually_inspected": 24,
+    "visuals": {
+      "artifacts/screenshots/d08/1440-RP01-holdout-expected-plan.png": "13ebf9066a2f7f033ee740cef1d8bde06d5708b8c872cc3f7126ee18131a1be8",
+      "artifacts/screenshots/d08/1440-RP02-holdout-expected-plan.png": "b1d277ec4ce452557f21a250fd86b1dd5457e64cf4746c3a026701d154f02d49",
+      "artifacts/screenshots/d08/390-RP01-holdout-expected-plan.png": "8b488623c34e60c77018c807c27787f5cba045769047204edfcb4f13daf5ada3",
+      "artifacts/screenshots/d08/390-RP02-holdout-expected-plan.png": "e4397f2c739242fbc4911111b56fe75c0242639fb154e58f2b8c0c773b4cb9a0",
+      "artifacts/screenshots/d08/390-RP01-holdout-ready.png": "f22f28be879733b0f93937a79d6945b7faa21a97b33e78cc31bc54074943be94",
+      "artifacts/screenshots/d08/390-RP02-holdout-receipt.png": "f25e51cca278dbc3dcab91d44c09257a3fdfe314ac0d5a6e2c44b89670628953",
+      "artifacts/screenshots/d08/390-negative-no-change.png": "8a0fe2c4d5120a4cfc0ab3a3438bf02e07c39441904cdfbf824869b79055288f",
+      "artifacts/screenshots/d08/390-negative-invalid-cell-order.png": "e21a565680d26d8053f6926b143e87206cc47dc500044c093e6fa2cfc58e4771",
+      "artifacts/screenshots/d08/1440-comparison-holdout-summary.png": "a477dca621e76301a12306e56f66cd07b209e6d58af3e169caa698b5ef01f341",
+      "artifacts/screenshots/d08/390-comparison-holdout-DIF.png": "371e21a8bb156aa6addad074f688cc47cbf9bc0dd32641d67904089d54aabae5",
+      "artifacts/screenshots/d08/390-comparison-holdout-DUP.png": "56b8efe88bb9efb5f5fae71f1143090b8c63e6941fd197ed6ca11d6e6d02e0bf",
+      "artifacts/screenshots/d08/390-comparison-holdout-ERR.png": "6a35532a981f01f97e8d62241e2d02535ec900d57b3e536ef828ec91227fc5eb",
+      "artifacts/screenshots/d08/RP01-holdout-excel.png": "b1613deb78fe0edef064605c1bfd6ed62936cfcb197a9341a871d741b79ef796",
+      "artifacts/screenshots/d08/RP02-holdout-excel.png": "18e99c5683af4e2cf14228427414b28d7e19707d1daa846d67bec67d28851160",
+      "artifacts/screenshots/d08/comparison-holdout-excel.png": "a7a55ff7bc39436f70db4074411632557bdbdfbef5c3ece45cf32d9af984afc6",
+      "artifacts/screenshots/d08/390-RP01-holdout-html.png": "8431a9222e4cbba19026ccce9330a686394fc6f94a7bd07aa10f61355f2fb425",
+      "artifacts/screenshots/d08/390-RP02-holdout-html.png": "8516ddd4c5bf63d1e6abcaada81b747c829e802785859c2c71d0912ac21cb81b",
+      "artifacts/screenshots/d08-ux/390-negative-no-change.png": "f2aa7fb1fc8314cf1164bd001671329ba8a93c8d65481a0dd42c19c3042d415a",
+      "artifacts/screenshots/d08-ux/390-negative-identifier.png": "93e6af29f8de416c5f3f335d682291e75acc2ac66f197bb1a135ad53996b8681",
+      "artifacts/screenshots/d08-ux/390-negative-nonblank.png": "b1c33ab48995df4d3e0bd2835fb1284040be606447a7839ccc2e5e6e8abf7f39",
+      "artifacts/screenshots/d08-ux/390-negative-invalid-cell-order.png": "81fe1ccc6efa9a862cf74198b9ec82d0308de4ad9c7a4d17b1ce8bf30b8f584b",
+      "artifacts/screenshots/d08-comparison/1440-comparison-holdout-summary.png": "a477dca621e76301a12306e56f66cd07b209e6d58af3e169caa698b5ef01f341",
+      "artifacts/screenshots/d08-comparison/390-comparison-holdout-summary.png": "902e32b469cc873fe89a50ce8b7bf3958da77ee39f3cd3c2cec7905581daa3f9",
+      "artifacts/screenshots/d08-comparison/390-comparison-holdout-ERR.png": "87fa144561f3a4f12991325e1508bc3404dc603f70ab49a4e60a532ae00075b2"
+    },
+    "preservation": [
+      {
+        "width": 1440,
+        "profile": "RP01",
+        "changed_members": [
+          "xl/workbook.xml",
+          "xl/worksheets/sheet1.xml"
+        ],
+        "style_part_unchanged": true,
+        "all_other_members_byte_identical": true
+      },
+      {
+        "width": 1440,
+        "profile": "RP02",
+        "changed_members": [
+          "xl/workbook.xml",
+          "xl/worksheets/sheet1.xml"
+        ],
+        "style_part_unchanged": true,
+        "all_other_members_byte_identical": true
+      },
+      {
+        "width": 390,
+        "profile": "RP01",
+        "changed_members": [
+          "xl/workbook.xml",
+          "xl/worksheets/sheet1.xml"
+        ],
+        "style_part_unchanged": true,
+        "all_other_members_byte_identical": true
+      },
+      {
+        "width": 390,
+        "profile": "RP02",
+        "changed_members": [
+          "xl/workbook.xml",
+          "xl/worksheets/sheet1.xml"
+        ],
+        "style_part_unchanged": true,
+        "all_other_members_byte_identical": true
+      }
+    ],
+    "owner_package_files_unchanged": 83,
+    "original_samples_unchanged": 68,
+    "reference": {
+      "status": "PASS",
+      "case_count": 20,
+      "excel_version": "16.0",
+      "reference_digest": "b745516a9844401a05276476f1d07376c51dc675d10f7488cfaed962dbcc6eab"
+    },
+    "compatibility": {
+      "status": "PASS",
+      "excel_version": "16.0",
+      "profiles": [
+        "RP01",
+        "RP02"
+      ],
+      "evidence_digest": "50632dfbd30f018ffbd1ab97da0de370e7c0b5ac6f15b4475e83926bfa6c6c03"
+    }
+  },
+  "commands": [
+    {
+      "command": "pytest tests/test_delivery_receipts.py -q (before v2 follow-up)",
+      "exit_code": 0,
+      "tests": 7
+    },
+    {
+      "command": "pytest tests/test_delivery_execution.py tests/test_payment_delivery.py -q",
+      "exit_code": 0,
+      "tests": 27
+    },
+    {
+      "command": "pytest tests/test_comparison_engine.py tests/test_comparison_service.py tests/test_delivery_receipts.py -q",
+      "exit_code": 0,
+      "tests": 38
+    },
+    {
+      "command": "python scripts/measure_delivery_capacity.py (before and after supported row cap)",
+      "exit_code": 0,
+      "note": "Measurement success does not turn rejected workload into PASS."
+    },
+    {
+      "command": "python scripts/generate_delivery_holdout_v2.py; read-only installed Excel input-open-probe",
+      "exit_code": 0,
+      "note": "V1 failed to open; baseline and ordered V2 opened. No expected business value changed."
+    },
+    {
+      "command": "python scripts/verify_delivery_patch_compatibility.py --stage d08",
+      "exit_code": 0
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_delivery_output_excel.ps1 -Stage d08",
+      "exit_code": 0,
+      "actual_xlsx_reopens": 4
+    },
+    {
+      "command": "python scripts/register_delivery_patch_reference.py --stage d08",
+      "exit_code": 0
+    },
+    {
+      "command": "python scripts/verify_delivery_local.py --stage d08 --script verify-delivery-holdout.mjs",
+      "exit_code": 0,
+      "cases": 10
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_delivery_holdout_excel.ps1",
+      "exit_code": 0,
+      "actual_xlsx_reopens": 10
+    },
+    {
+      "command": "node scripts/render_holdout_excel.mjs",
+      "exit_code": 0,
+      "actual_excel_pdfs": 3
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+      "exit_code": 0,
+      "web": 75,
+      "worker": 16,
+      "api": 216,
+      "m4_exact": 36
+    },
+    {
+      "command": "python scripts/verify_delivery_local.py --stage d08-ux --script verify-delivery-holdout.mjs",
+      "exit_code": 0,
+      "cases": 4
+    },
+    {
+      "command": "python scripts/verify_delivery_local.py --stage d08-comparison --script verify-delivery-holdout.mjs",
+      "exit_code": 0,
+      "cases": 2
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_delivery_holdout_excel.ps1 -Stage d08-comparison",
+      "exit_code": 0,
+      "actual_xlsx_reopens": 2
+    },
+    {
+      "command": "npm.cmd run verify:web (after final copy/layout)",
+      "exit_code": 0,
+      "tests": 75,
+      "typecheck_and_build": true
+    },
+    {
+      "command": "pytest tests/test_delivery_inputs.py::test_actual_api_owner_cookie_preflight_and_negative_version tests/test_delivery_receipts.py -q; ruff check --no-cache .",
+      "exit_code": 0,
+      "tests": 9
+    },
+    {
+      "command": "Read-only docker version --format server-version, 12s bounded probe",
+      "exit_code": null,
+      "status": "TIMEOUT",
+      "restart": false
+    }
+  ],
+  "failures_and_retests": [
+    {
+      "status": "FIXED",
+      "exit_code": 1,
+      "cause": "Initial receipt guard classified empty approval as invalid; restored existing CURRENT_APPROVAL_REQUIRED behavior before receipt validation; execution/payment27 tests passed."
+    },
+    {
+      "status": "FIXED",
+      "exit_code": 1,
+      "cause": "Draft target command named nonexistent comparison_artifacts test and one Ruff long line; corrected real comparison_service path/format, related38 tests and Ruff passed."
+    },
+    {
+      "status": "FIXED_TEST_HARNESS",
+      "exit_code": 1,
+      "cause": "Browser assertion expected source_hash on delivery summary; actual public contract is job.source_hash and approval_receipt.payload.plan_digest. Corrected assertion, retained independent frozen oracle."
+    },
+    {
+      "status": "CAP_REDUCED",
+      "cause": "5000-row report hit30s and20000-row child failed; completed1000 rows/500500 per side7.221s. Server and UI now1000 rows; larger input rejected before planning/order. Maximum2MiB/50col/4096char combinations and hosted concurrent capacity NOT_RUN."
+    },
+    {
+      "status": "FIXED_ACTUAL_PRODUCT_GAP",
+      "exit_code": 1,
+      "cause": "V1 synthetic source used F3 before E3. App accepted it but Excel Open failed. Isolated ordering-only V2 opens with same expected values; input preflight now excludes UNSUPPORTED_CELL_ORDER. V1/original oracle/failed attempt files retained, successful UI alone was not counted as E2E success."
+    },
+    {
+      "status": "FIXED_SCREEN_REVIEW",
+      "cause": "Unsupported preflight advertised a nonexistent next calculation step; replaced with explicit stop guidance. Comparison raw bad value touched help text; separated help to another line. Actual affected4negative+2comparison screens rerun and comparison2XLSX reopened."
+    }
+  ],
+  "not_run": [
+    "Official PG sandbox authorization/SDK checkout/provider return/webhook/cancel not connected or run; test account selection unanswered. LOCAL_CONTRACT is only a private receipt state simulation.",
+    "D02-D08 existing protected beta deployment and hosted screen verification NOT_RUN: Docker daemon still times out after12s; restart question unanswered because other containers may be affected.",
+    "JDK17/POI Linux image packaging, Linux resource enforcement, source OOXML patch/static-scan hard OS deadline, maximum concurrent/combined workload need deployment-readiness work.",
+    "Durable commerce ledger, legal retention/refund/price/tax/support wording and owner release decision PENDING; current15min input/result and24h synthetic ledger are not approved commercial retention.",
+    "M3 real user observations and M3.5 purchase evidence PENDING/DEFERRED; synthetic success is not all-file accuracy or market evidence.",
+    "Remote push, production/anonymous release, invitations, real customer files/payment/refund, new paid resources and remaining H2/H3 checks NOT_RUN as out of scope."
+  ],
+  "next": "Existing Access-protected beta delivery deployment and its screen verification, after local Docker recovery/packaging; recommend only, no automatic next unit."
+}

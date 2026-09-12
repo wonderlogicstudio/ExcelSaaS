@@ -23,6 +23,11 @@
       "format": "csv",
       "A": "fe0448e7099f4fe8ec55a4dddb5fb30f7db4051c4cf129f7eebf5cf2917718a8",
       "B": "723a04090740ab411821e25554667c4fcf4c65dc741953a9c602caca1c749764"
+    },
+    {
+      "A": "3062b1408ed6e82e51972c9006253f13fba2a3e96b01e1e29ee67b09de1d34a6",
+      "B": "874a54705a803e027d4967ebdebc5d8d0cbb309890029506f8cb8904ad48f054",
+      "case": "d08-independent-holdout"
     }
   ]
 }

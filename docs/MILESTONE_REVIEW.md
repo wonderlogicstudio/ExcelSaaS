@@ -1,4 +1,21 @@
-# Current review — V3.2 D01
+# Current review — V3.2 D01–D08
+
+## D08 최종 수용시험과 제품별 판정 — 2026-09-13
+
+판정 **PARTIAL · 로컬 구현 검증 완료 / 사용자 확인 대기**. D01–D08 개발 범위의 실제 UI·API·계산·사본 납품을 구현하고 검증했다. 공식 PG, D02 이후 hosted/Linux, 상용 운영 승인은 미완료다. 이 기록 아래의 이전 단계 기록은 당시 이력이며, 현재 판정은 [release_manifest](delivery-v3_2/release_manifest.json)가 기준이다. D08에서 정지하며 다음 묶음은 실행하지 않는다.
+
+승인 기록에 원본·정확한 계획·소유자·상품·권리·만료를 결합한 서버 HMAC 검증을 추가했다. 결제/기준 확인과 변경 승인, 수정 상품과 비교 상품을 분리한다. HMAC는 내부 서버 인증 기록이며 외부 PKI/결제사 증명이 아니다.
+
+새 독립 예상 값은 RP01 B2=-1,250/B3=7,200/H2=5,950, RP02 F3=2,800/F12=16,890이다. 비교는7그룹·A7/B5행·알려진 합250/190원·DIF20원·중복3행·ERR양쪽2행이다. 화면10경로와 최종 안내/레이아웃 재시험6경로에서 대조했다. 실제 다운로드20개·같은hash 재수령4개, 다운로드 XLSX12개와 호환성 XLSX4개를 설치 Excel16.0에서 재개봉했다. 원본/ID·비대상 값·수식·스타일과 비대상ZIP member를 확인했다. 스크린샷51개 저장, 대표24개(실제 Excel 출력3개 포함)를 시각 검토했다.
+
+실제 Excel은 최초 새 샘플의 F3→E3 비정상 순서를 거부했다. 앱이 이를 통과시키던 결함을 수정하여 `UNSUPPORTED_CELL_ORDER`를 사전 차단한다. 실패 V1와 예상 값은 보존하고 셀 순서만 수정한 V2로 재시험했다. 숫자 예상 값을 실행 결과에 맞춰 바꾸지 않았다. 비교5000행 보고서 시간초과/20000행 프로세스 실패를 성공 처리하지 않고, 실제 납품을 확인한1000행으로 서버·표시를 맞췄다. 모든 최대 크기 조합·hosted 동시 부하는 미검증이다.
+
+전체 회귀 **웹75 / Worker16 / API216 / M4 exact36, exit0**. 마지막 화면 문구·여백 변경 후 웹75·타입·build, 새 receipt 접근/변조9개·Ruff, 해당 실제 화면/Excel을 다시 통과했다. 상세 명령·exit·실패/원인수정/재시험·재사용·산출물은 [D08 증거](delivery-v3_2/reviews/evidence/D08-local.json), [negative matrix](delivery-v3_2/reviews/evidence/D08-negative-matrix.json), [Excel](delivery-v3_2/reviews/evidence/D08-excel-reopen.json)에 기록했다. 기존 owner 패키지83개·샘플68개 hash와 진행 기록을 보존했다.
+
+베타는 **D01 Worker91c06632 / API00004-hhk 그대로**다. Docker 읽기 전용12초 확인도 timeout이며, 다른 컨테이너 영향이 있는 재시작 질문에는 응답이 없어 실행하지 않았다. 기존 API 컨테이너의 JDK/POI 포장·Linux 한도와 원본 patch/정적 검사 별도 OS deadline도 후속 배포 단위에 남긴다. “작업당 총3회 시도”는 동시 처리3개 보장이 아니다.
+
+공식 PG sandbox/SDK/외부 webhook, 영속 상용 원장, 가격·세무·법률·지원 결정은 NOT_RUN/PENDING. LOCAL_CONTRACT 계약 모형을 PG 시험으로 보고하지 않았다. M3 관찰/M3.5 구매 증거도 PENDING/DEFERRED다. 원격 push·공개 배포·실고객·실결제·새유료자원은 수행하지 않았다.
+
 
 ## D07 화면·만료·복구·운영 경계 — 2026-09-13
 

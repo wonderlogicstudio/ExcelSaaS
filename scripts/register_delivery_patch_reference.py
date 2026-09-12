@@ -4,7 +4,9 @@ import hashlib,json,sys
 R=Path(__file__).resolve().parents[1];sys.path.insert(0,str(R/'apps/api'))
 from app.delivery_execution import patch_fingerprint
 from app.delivery_plan import reference_status
-root=R/'artifacts/verification/d04/compatibility'
+import argparse
+parser=argparse.ArgumentParser();parser.add_argument('--stage',choices=['d04','d08'],default='d04');stage=parser.parse_args().stage
+root=R/f'artifacts/verification/{stage}/compatibility'
 data=json.loads((root/'excel-reopen.json').read_text(encoding='utf-8-sig'))
 inputs=json.loads((root/'inputs.json').read_text(encoding='utf-8'))
 assert reference_status()['status']=='PASS'

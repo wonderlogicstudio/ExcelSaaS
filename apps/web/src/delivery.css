@@ -39,3 +39,5 @@
 .delivery-execution.delivery-step{margin:18px 0;padding:20px 0;border-left:0;border-right:0;border-bottom:0;border-radius:0}
 .delivery-criteria .delivery-step{margin-top:8px}.comparison-all-matched{padding:16px;background:#eef7f1;border-radius:10px;font-weight:650}
 @media(max-width:650px){.delivery-workspace{margin-inline:8px;padding:14px}.delivery-plan .delivery-patch{padding:12px}.delivery-ready{padding:14px}.order-state-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.order-state-grid>div{padding:10px 8px}.order-state-grid dd{font-size:14px;line-height:1.5}.order-state-grid dt{font-size:12px}.order-panel{padding:12px}.delivery-downloads button{width:100%}}
+
+.comparison-table td small {display:block;margin-top:4px;color:#526a62;line-height:1.5}
