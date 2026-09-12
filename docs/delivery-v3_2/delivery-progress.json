@@ -18,10 +18,11 @@
         "counts_and_completeness": "VERIFIED",
         "handling_is_not_change_approval": "VERIFIED",
         "keyboard_desktop_mobile": "VERIFIED",
-        "prior_records_and_security_boundaries_preserved": "VERIFIED"
+        "prior_records_and_security_boundaries_preserved": "VERIFIED",
+        "unified_hosted_diagnosis_ux": "VERIFIED"
       },
       "verification": {
-        "web_tests": 69,
+        "web_tests": 73,
         "worker_tests": 14,
         "api_tests": 77,
         "m4c_exact_candidates": 72,
@@ -29,12 +30,15 @@
           1440,
           390
         ],
-        "evidence_type": "ACTUAL_SYNTHETIC_LOCAL_CONTAINER_AND_AUTHENTICATED_HOSTED_PRODUCT_INTEGRATION",
+        "local_desktop_uploads": 20,
+        "local_mobile_uploads": 4,
+        "hosted_representative_uploads": 5,
+        "hosted_m4_exact_candidates": 12,
+        "prior_hosted_all20_exact72_reused": true,
+        "evidence_type": "ACTUAL_SYNTHETIC_LOCAL_AND_AUTHENTICATED_HOSTED_PRODUCT_UI",
         "package_examples_are_product_evidence": false,
-        "hosted_unique_uploads": 20,
-        "hosted_m4_exact_candidates": 72,
-        "strict_evaluator": "BLOCKED_TWO_EXISTING_LABEL_CONFLICTS",
-        "accepted_evaluator": "PASS_WITH_PRODUCT_OWNER_WAIVER"
+        "strict_evaluator_reused": "BLOCKED_TWO_EXISTING_LABEL_CONFLICTS",
+        "accepted_evaluator_reused": "PASS_WITH_PRODUCT_OWNER_WAIVER"
       },
       "reused": [
         "M2.5 scanner/guidance/catalog",
@@ -61,23 +65,41 @@
         "saved authenticated Chrome screenshot artifact (screen capture inspected in session; local PNGs saved separately)"
       ],
       "beta_deployment": {
-        "status": "WEB_WORKER_API_GATEWAY_DEPLOYED_ACCESS_PROTECTED",
-        "version": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+        "version_id": "f9be71f3-d035-48cb-b9a9-7fcaa1e7469a",
+        "deployed_at_utc": "2026-09-12T14:57:33.503085Z",
         "percentage": 100,
-        "source_commit": "0ae6c63c06a7",
+        "rollback_version_id": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+        "binding_count": 13,
+        "all_bindings_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          }
+        ],
+        "cloud_run_deployed": false,
+        "gateway_deployed": false,
+        "source_commit": "d64c45178cf1",
+        "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
         "cloud_run_revision": "workbookcare-api-beta-00004-hhk",
-        "cloud_run_revision_changed": true,
-        "api_projection_deployed": true,
         "gateway_config": "workbookcare-beta-m4-0ae6c63c06a7",
-        "rollback_version": "673f2895-2142-4215-8024-9acb14fa53ae",
-        "rollback_cloud_run_revision": "workbookcare-api-beta-00003-bsp",
-        "rollback_gateway_config": "workbookcare-beta-config-20260909203335",
-        "existing_binding_metadata_unchanged": true,
-        "added_formula_audit_binding": true,
-        "authenticated_ui_check": "PASS_AGENT_20_ACTUAL_UPLOADS_72_EXACT_M4",
-        "hosted_synthetic_upload": "20/20 free baseline + 72/72 exact M4",
-        "evidence": "reviews/evidence/D01-m4-hosted.json",
-        "authenticated_evidence": "reviews/evidence/D01-m4-hosted-browser.json"
+        "authenticated_ui_check": "PASS_AGENT_REPRESENTATIVE5_12_EXACT_UNIFIED",
+        "evidence": "reviews/evidence/D01-unified-diagnosis.json",
+        "version": "f9be71f3-d035-48cb-b9a9-7fcaa1e7469a",
+        "rollback_version": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+        "cloud_run_revision_changed": false,
+        "existing_binding_metadata_unchanged": true
       },
       "initial_engineering_review_not_run": [
         "repair_engine/delivery",
@@ -140,6 +162,25 @@
           "hosted_synthetic_upload": "PASS_AGENT_21_ACTUAL_FREE_UPLOADS",
           "evidence": "reviews/evidence/D01-grouped-findings.json",
           "authenticated_evidence": "reviews/evidence/D01-hosted-browser.json"
+        },
+        {
+          "status": "WEB_WORKER_API_GATEWAY_DEPLOYED_ACCESS_PROTECTED",
+          "version": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+          "percentage": 100,
+          "source_commit": "0ae6c63c06a7",
+          "cloud_run_revision": "workbookcare-api-beta-00004-hhk",
+          "cloud_run_revision_changed": true,
+          "api_projection_deployed": true,
+          "gateway_config": "workbookcare-beta-m4-0ae6c63c06a7",
+          "rollback_version": "673f2895-2142-4215-8024-9acb14fa53ae",
+          "rollback_cloud_run_revision": "workbookcare-api-beta-00003-bsp",
+          "rollback_gateway_config": "workbookcare-beta-config-20260909203335",
+          "existing_binding_metadata_unchanged": true,
+          "added_formula_audit_binding": true,
+          "authenticated_ui_check": "PASS_AGENT_20_ACTUAL_UPLOADS_72_EXACT_M4",
+          "hosted_synthetic_upload": "20/20 free baseline + 72/72 exact M4",
+          "evidence": "reviews/evidence/D01-m4-hosted.json",
+          "authenticated_evidence": "reviews/evidence/D01-m4-hosted-browser.json"
         }
       ],
       "owner_feedback_followups": [
@@ -199,6 +240,14 @@
           "exact_m4_candidates": 72,
           "source_files_and_owner_records_preserved": true,
           "evidence": "reviews/evidence/D01-m4-hosted.json"
+        },
+        {
+          "report": "Owner approved unified structure and formula diagnosis UX",
+          "status": "IMPLEMENTED_VERIFIED_DEPLOYED_AWAITING_FINAL_OWNER_ACCEPTANCE",
+          "source_commit": "d64c45178cf1",
+          "actual_hosted_uploads": 5,
+          "local_exact_candidates": 72,
+          "evidence": "reviews/evidence/D01-unified-diagnosis.json"
         }
       ],
       "not_run_before_m4_followup": [
@@ -226,7 +275,42 @@
         ],
         "evidence_type": "LOCAL_SYNTHETIC_PRODUCT_INTEGRATION",
         "package_examples_are_product_evidence": false
-      }
+      },
+      "verification_history": [
+        {
+          "reason": "before unified diagnosis UX",
+          "verification": {
+            "web_tests": 69,
+            "worker_tests": 14,
+            "api_tests": 77,
+            "m4c_exact_candidates": 72,
+            "browser_widths": [
+              1440,
+              390
+            ],
+            "evidence_type": "ACTUAL_SYNTHETIC_LOCAL_CONTAINER_AND_AUTHENTICATED_HOSTED_PRODUCT_INTEGRATION",
+            "package_examples_are_product_evidence": false,
+            "hosted_unique_uploads": 20,
+            "hosted_m4_exact_candidates": 72,
+            "strict_evaluator": "BLOCKED_TWO_EXISTING_LABEL_CONFLICTS",
+            "accepted_evaluator": "PASS_WITH_PRODUCT_OWNER_WAIVER"
+          }
+        }
+      ],
+      "not_run_unified_ux_followup": [
+        "Excel application/recalculation/reference engine",
+        "PG sandbox/live, real payment/refund",
+        "repair/change approval/delivery execution",
+        "real customer files",
+        "price decisions or new paid resources",
+        "Git remote push",
+        "anonymous or production release",
+        "H2/H3 remaining readiness gates",
+        "D02 or later bundles",
+        "new Cloud Run/Gateway rollout in this follow-up",
+        "strict/waiver evaluator rerun in this UX follow-up (existing evidence reused)",
+        "saved hosted screenshot artifact; CUA screen inspected in session, local PNGs saved separately"
+      ]
     }
   },
   "readiness": {

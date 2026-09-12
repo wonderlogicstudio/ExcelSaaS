@@ -1,0 +1,131 @@
+{
+  "status": "PASS",
+  "evidence_kind": "ACTUAL_AUTHENTICATED_CHROME_BETA_UPLOAD_AND_DOM",
+  "origin": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+  "worker_version": "f9be71f3-d035-48cb-b9a9-7fcaa1e7469a",
+  "method": "Visible file chooser uploaded actual synthetic XLSX; completed DOM compared with original expected sheet/cell/rule/subtype. No mock/sample-result button, direct API bypass or credentials read.",
+  "rows": [
+    {
+      "case": "03",
+      "headline": "확인할 항목 53건",
+      "breakdown": "구조 위험 49건 · 수식 검토 후보 4건",
+      "coverage": "전체 발견 53건 · 반환 상세 53건 · 상세 생략 0건 · 필터 표시 53건",
+      "completed": 1,
+      "lists": 1,
+      "groups": 3,
+      "open_locations": 0,
+      "separate_m4_panels": 0,
+      "tuples": [
+        "매출채권|F17|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "매출채권|G29|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "매출채권|H41|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE",
+        "매출채권|I36|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT"
+      ],
+      "free": 49,
+      "exact_candidates": 4,
+      "total": 53,
+      "observed_at": "2026-09-12T14:59:24.412Z"
+    },
+    {
+      "case": "01",
+      "headline": "확인할 항목 4건",
+      "breakdown": "구조 위험 0건 · 수식 검토 후보 4건",
+      "coverage": "전체 발견 4건 · 반환 상세 4건 · 상세 생략 0건 · 필터 표시 4건",
+      "completed": 1,
+      "lists": 1,
+      "groups": 2,
+      "open_locations": 0,
+      "separate_m4_panels": 0,
+      "tuples": [
+        "판매내역|G23|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "판매내역|G52|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "판매내역|H37|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+        "판매내역|I48|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+      ],
+      "free": 0,
+      "exact_candidates": 4,
+      "total": 4,
+      "observed_at": "2026-09-12T15:02:05.464Z"
+    },
+    {
+      "case": "11",
+      "headline": "확인할 항목 63건",
+      "breakdown": "구조 위험 59건 · 수식 검토 후보 4건",
+      "coverage": "전체 발견 63건 · 반환 상세 63건 · 상세 생략 0건 · 필터 표시 63건",
+      "completed": 1,
+      "lists": 1,
+      "groups": 3,
+      "open_locations": 0,
+      "separate_m4_panels": 0,
+      "tuples": [
+        "발주내역|G19|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+        "발주내역|G54|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE",
+        "발주내역|I31|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+        "발주내역|J43|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE"
+      ],
+      "free": 59,
+      "exact_candidates": 4,
+      "total": 63,
+      "observed_at": "2026-09-12T15:02:24.579Z"
+    },
+    {
+      "case": "10",
+      "headline": "검사 범위에서 발견된 항목이 없습니다",
+      "breakdown": "구조 위험 0건 · 수식 검토 후보 0건",
+      "coverage": "전체 발견 0건 · 반환 상세 0건 · 상세 생략 0건 · 필터 표시 0건",
+      "completed": 1,
+      "lists": 1,
+      "groups": 0,
+      "open_locations": 0,
+      "separate_m4_panels": 0,
+      "tuples": [],
+      "free": 0,
+      "exact_candidates": 0,
+      "total": 0,
+      "observed_at": "2026-09-12T15:03:03.210Z"
+    },
+    {
+      "case": "20",
+      "headline": "검사 범위에서 발견된 항목이 없습니다",
+      "breakdown": "구조 위험 0건 · 수식 검토 후보 0건",
+      "coverage": "전체 발견 0건 · 반환 상세 0건 · 상세 생략 0건 · 필터 표시 0건",
+      "completed": 1,
+      "lists": 1,
+      "groups": 0,
+      "open_locations": 0,
+      "separate_m4_panels": 0,
+      "tuples": [],
+      "free": 0,
+      "exact_candidates": 0,
+      "total": 0,
+      "observed_at": "2026-09-12T15:03:59.521Z"
+    }
+  ],
+  "checks": {
+    "03_group_and_leaf_evidence_opened": true,
+    "03_formula_filter_table_rows": 4,
+    "03_m4_reviewed_count": 2,
+    "03_filter_reset_table_rows": 53,
+    "03_structure_statuses_unchanged": true,
+    "03_structure_csv_scope_visible": true,
+    "hosted_csv_bytes_compared": false,
+    "csv_byte_invariance_verified_in_actual_local_browser": true,
+    "completed_zero_vs_calculation_accuracy_note_visible": true,
+    "planned_comparison_and_repair_buttons_disabled_on_actual_site": true,
+    "screenshots_visually_inspected_in_session": [
+      "03 expanded evidence",
+      "11 summary",
+      "20 completed zero"
+    ],
+    "saved_hosted_png": false,
+    "rate_limit_unchanged_and_observed": true
+  },
+  "tool_failures": [
+    {
+      "action": "compound locator.evaluate on #results",
+      "outcome": "3000ms selector timeout",
+      "process_exit_code": null,
+      "resolution": "No repeat upload; read smaller existing DOM locators and evaluateAll, then all assertions passed"
+    }
+  ]
+}

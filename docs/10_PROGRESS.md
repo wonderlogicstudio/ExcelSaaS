@@ -1,5 +1,18 @@
 # Current progress
 
+## Unified diagnosis UX completed — 2026-09-13 (KST)
+
+Owner-approved D01 single upload/progress/list implemented and deployed to protected beta.
+Combined UI: case03=53 (49 structure+4 formula),11=63,01=4,controls10/20=0.
+Source categories, groups/full table/filters/keyboard/mobile/handling preserved; base score/quote/CSV/revalidation unchanged.
+Final verify.ps1 exit0: web73/Worker14/API77, TypeScript/build/Ruff/main pack36.
+Actual local desktop20/mobile4:72 exact,6 screenshots visually reviewed; actual authenticated hosted representative5:12 exact.
+Prior all20 hosted/container72 evidence reused, not claimed rerun. Existing strict2 label conflicts/waiver unchanged.
+Source `d64c45178cf1`; Worker `f9be71f3-d035-48cb-b9a9-7fcaa1e7469a`100%; all13 bindings/Access unchanged; no API/Gateway rollout.
+Owner83/sample68 hashes unchanged. No Excel/PG/repair delivery,paid resource,remote push,H2/H3 completion or D02 execution.
+D01 ENGINEERING_VERIFIED_AWAITING_OWNER: engineering acceptance done, final owner acceptance pending. Stop after D01.
+See `delivery-v3_2/reviews/D01.md` and `delivery-v3_2/reviews/evidence/D01-unified-diagnosis.json`. Prior records preserved below.
+
 ## Protected beta M4 follow-up completed — 2026-09-12
 
 The approved expected-results connection is deployed and agent-verified on the actual authenticated beta:

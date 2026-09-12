@@ -1,0 +1,642 @@
+{
+  "evidence_kind": "ACTUAL_SYNTHETIC_UNIFIED_PRODUCT_UI_AND_PROTECTED_BETA_FOLLOWUP",
+  "created_at_utc": "2026-09-12T15:05:04.318667+00:00",
+  "source_commit": "d64c45178cf1",
+  "scope": "Owner approved single upload/progress/result list; standing existing protected beta deployment authorization",
+  "documents_read": [
+    "AGENTS.md",
+    "docs/00_CONTEXT_INDEX.md",
+    "docs/09_CURRENT_MILESTONE.md",
+    "docs/10_PROGRESS.md",
+    "docs/11_DECISIONS.md",
+    "docs/MILESTONE_REVIEW.md",
+    "docs/50_BETA_RELEASE_WORKFLOW.md",
+    "docs/delivery-v3_2/reviews/D01.md",
+    "docs/delivery-v3_2/08_CODEX_WORKING_RULES.md",
+    "docs/delivery-v3_2/bundles/D01.md",
+    "docs/delivery-v3_2/01_PRODUCT_AND_SCOPE.md",
+    "docs/delivery-v3_2/contracts/UX_AND_MENU.md"
+  ],
+  "implemented": [
+    "Hosted single result section/progress and per-source completion",
+    "Combined display counts/source filters/grouped locations/full table",
+    "Reuse M4 leaf evidence/status copy; presentation-only namespaced keys",
+    "Preserve original free score/quote/CSV/revalidation and separate handling keys",
+    "Failure/pending/skipped states distinct from completed zero; retry failed audit",
+    "Keyboard/mobile/filter label and desktop table readability"
+  ],
+  "reused": [
+    "Existing D01 product/output/capability/approval boundaries and tests",
+    "M2.5 scanner, M4 engine/rules/limits/expected/waiver unchanged",
+    "P1 filters, findingCounts, FindingViews, CSV safety, P2 revalidation",
+    "Existing protected beta API/Worker/Gateway and H3 privacy gates"
+  ],
+  "commands": [
+    {
+      "command": "git status --short",
+      "exit_code": 0,
+      "kind": "READ_ONLY_BASELINE",
+      "head": "bc018fb"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0,
+      "stage": "before changes",
+      "web": 69,
+      "worker": 14,
+      "api": 77
+    },
+    {
+      "command": "npm run test --workspace @workbookcare/web -- src/components/UnifiedDiagnosis.test.tsx",
+      "exit_code": 1,
+      "stage": "RED",
+      "failed": 4
+    },
+    {
+      "command": "npm run test --workspace @workbookcare/web -- src/components/UnifiedDiagnosis.test.tsx",
+      "exit_code": 1,
+      "stage": "implemented",
+      "passed": 3,
+      "failed": 1,
+      "cause": "New mock summary.issue_count=1 contradicted intended authoritative count=3; fixed mock, not production counting contract"
+    },
+    {
+      "command": "npm run test --workspace @workbookcare/web -- src/components/UnifiedDiagnosis.test.tsx src/App.hosted-beta.test.tsx src/components/D01Results.test.tsx src/components/FormulaAuditPanel.test.tsx src/App.internal-beta.test.tsx",
+      "exit_code": 0,
+      "passed": 18
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0,
+      "stage": "after initial integration",
+      "web": 73,
+      "worker": 14,
+      "api": 77
+    },
+    {
+      "command": "node scripts/verify-unified-diagnosis.mjs",
+      "exit_code": 1,
+      "cause": "Harness incorrectly asserted #results absent; corrected to retired #formula-audit"
+    },
+    {
+      "command": "node scripts/verify-unified-diagnosis.mjs",
+      "exit_code": 1,
+      "cause": "Exact accessible filter label missing; added explicit aria-labels to four filters"
+    },
+    {
+      "command": "node scripts/verify-unified-diagnosis.mjs",
+      "exit_code": 0,
+      "stage": "after filter fix; visual review then found cramped desktop table title"
+    },
+    {
+      "command": "node scripts/verify-unified-diagnosis.mjs",
+      "exit_code": 1,
+      "cause": "Added table title width assertion; single-column grid title remained intrinsic width; stretched title across its table content track"
+    },
+    {
+      "command": "node scripts/verify-unified-diagnosis.mjs",
+      "exit_code": 0,
+      "stage": "final actual local API/browser",
+      "desktop_uploads": 20,
+      "mobile_uploads": 4,
+      "exact_candidates": 72,
+      "screenshots": 6
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0,
+      "stage": "final after table CSS",
+      "web": 73,
+      "worker": 14,
+      "api": 77,
+      "checks": [
+        "TypeScript",
+        "Vite build",
+        "Ruff",
+        "main M4 supplied pack 36 exact"
+      ],
+      "existing_nonfailure_warning": "Starlette TestClient deprecation"
+    },
+    {
+      "command": "git diff --check; selective git add (18 source/test/screenshot/scope files); git commit",
+      "exit_code": 0,
+      "commit": "d64c45178cf1"
+    },
+    {
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler versions view c222ac45-36ab-48c0-a0b1-e0d66f4755d8 --json",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run build --workspace @workbookcare/web -- --mode hosted_beta",
+      "exit_code": 0
+    },
+    {
+      "command": "git rev-parse HEAD",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --tag d01-unified-d64c45178cf1 --message D01 unified diagnosis UI; existing API and security preserved",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler versions view f9be71f3-d035-48cb-b9a9-7fcaa1e7469a --json",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler versions deploy f9be71f3-d035-48cb-b9a9-7fcaa1e7469a@100 --yes --message Owner-approved integrated structure and formula result list",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "command": "wrangler versions view f9be71f3-d035-48cb-b9a9-7fcaa1e7469a --json",
+      "exit_code": 0
+    }
+  ],
+  "local_browser": {
+    "evidence_kind": "ACTUAL_LOCAL_BROWSER_UNIFIED_DIAGNOSIS",
+    "rows": [
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "01",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "02",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 53,
+        "case": "03",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 49
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "04",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "05",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "06",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "07",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "08",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "09",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 0,
+        "case": "10",
+        "expected": 0,
+        "actual": 0,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 63,
+        "case": "11",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 59
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "12",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "13",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "14",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "15",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "16",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "17",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "18",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 4,
+        "case": "19",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 1440,
+        "total": 0,
+        "case": "20",
+        "expected": 0,
+        "actual": 0,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 390,
+        "total": 4,
+        "case": "01",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      },
+      {
+        "width": 390,
+        "total": 53,
+        "case": "03",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 49
+      },
+      {
+        "width": 390,
+        "total": 63,
+        "case": "11",
+        "expected": 4,
+        "actual": 4,
+        "exact_location_rule_subtype": true,
+        "free_findings": 59
+      },
+      {
+        "width": 390,
+        "total": 0,
+        "case": "20",
+        "expected": 0,
+        "actual": 0,
+        "exact_location_rule_subtype": true,
+        "free_findings": 0
+      }
+    ],
+    "screenshots": [
+      "artifacts/screenshots/d01-unified/collapsed-1440.png",
+      "artifacts/screenshots/d01-unified/expanded-1440.png",
+      "artifacts/screenshots/d01-unified/table-1440.png",
+      "artifacts/screenshots/d01-unified/collapsed-390.png",
+      "artifacts/screenshots/d01-unified/expanded-390.png",
+      "artifacts/screenshots/d01-unified/table-390.png"
+    ],
+    "checks": [
+      {
+        "width": 1440,
+        "keyboard_disclosure": true,
+        "leaf_evidence": true,
+        "m4_review_free_csv_unchanged": true,
+        "review_network_calls": 0
+      },
+      {
+        "width": 1440,
+        "formula_table_title_readable": true
+      },
+      {
+        "width": 1440,
+        "source_filter_table_full_locations": true,
+        "combined_filter_empty": true,
+        "csv_before_after_filters_identical": true,
+        "status_preserved_after_filter_reset": true
+      },
+      {
+        "width": 390,
+        "candidate_summary_contained_without_overlap": true
+      },
+      {
+        "width": 390,
+        "keyboard_disclosure": true,
+        "leaf_evidence": true,
+        "m4_review_free_csv_unchanged": true,
+        "review_network_calls": 0
+      },
+      {
+        "width": 390,
+        "formula_table_title_readable": true
+      },
+      {
+        "width": 390,
+        "source_filter_table_full_locations": true,
+        "combined_filter_empty": true,
+        "csv_before_after_filters_identical": true,
+        "status_preserved_after_filter_reset": true
+      }
+    ],
+    "status": "PASS",
+    "total_unique_expected_candidates": 72
+  },
+  "authenticated_hosted": {
+    "status": "PASS",
+    "evidence_kind": "ACTUAL_AUTHENTICATED_CHROME_BETA_UPLOAD_AND_DOM",
+    "origin": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+    "worker_version": "f9be71f3-d035-48cb-b9a9-7fcaa1e7469a",
+    "method": "Visible file chooser uploaded actual synthetic XLSX; completed DOM compared with original expected sheet/cell/rule/subtype. No mock/sample-result button, direct API bypass or credentials read.",
+    "rows": [
+      {
+        "case": "03",
+        "headline": "확인할 항목 53건",
+        "breakdown": "구조 위험 49건 · 수식 검토 후보 4건",
+        "coverage": "전체 발견 53건 · 반환 상세 53건 · 상세 생략 0건 · 필터 표시 53건",
+        "completed": 1,
+        "lists": 1,
+        "groups": 3,
+        "open_locations": 0,
+        "separate_m4_panels": 0,
+        "tuples": [
+          "매출채권|F17|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+          "매출채권|G29|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+          "매출채권|H41|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE",
+          "매출채권|I36|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT"
+        ],
+        "free": 49,
+        "exact_candidates": 4,
+        "total": 53,
+        "observed_at": "2026-09-12T14:59:24.412Z"
+      },
+      {
+        "case": "01",
+        "headline": "확인할 항목 4건",
+        "breakdown": "구조 위험 0건 · 수식 검토 후보 4건",
+        "coverage": "전체 발견 4건 · 반환 상세 4건 · 상세 생략 0건 · 필터 표시 4건",
+        "completed": 1,
+        "lists": 1,
+        "groups": 2,
+        "open_locations": 0,
+        "separate_m4_panels": 0,
+        "tuples": [
+          "판매내역|G23|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+          "판매내역|G52|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+          "판매내역|H37|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE",
+          "판매내역|I48|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE"
+        ],
+        "free": 0,
+        "exact_candidates": 4,
+        "total": 4,
+        "observed_at": "2026-09-12T15:02:05.464Z"
+      },
+      {
+        "case": "11",
+        "headline": "확인할 항목 63건",
+        "breakdown": "구조 위험 59건 · 수식 검토 후보 4건",
+        "coverage": "전체 발견 63건 · 반환 상세 63건 · 상세 생략 0건 · 필터 표시 63건",
+        "completed": 1,
+        "lists": 1,
+        "groups": 3,
+        "open_locations": 0,
+        "separate_m4_panels": 0,
+        "tuples": [
+          "발주내역|G19|FORMULA_PATTERN_OUTLIER|FUNCTION_PATTERN_DRIFT",
+          "발주내역|G54|FORMULA_PATTERN_GAP|BLANK_GAP_CANDIDATE",
+          "발주내역|I31|FORMULA_PATTERN_OUTLIER|RELATIVE_REFERENCE_DRIFT",
+          "발주내역|J43|FORMULA_PATTERN_GAP|CONSTANT_OVERRIDE_CANDIDATE"
+        ],
+        "free": 59,
+        "exact_candidates": 4,
+        "total": 63,
+        "observed_at": "2026-09-12T15:02:24.579Z"
+      },
+      {
+        "case": "10",
+        "headline": "검사 범위에서 발견된 항목이 없습니다",
+        "breakdown": "구조 위험 0건 · 수식 검토 후보 0건",
+        "coverage": "전체 발견 0건 · 반환 상세 0건 · 상세 생략 0건 · 필터 표시 0건",
+        "completed": 1,
+        "lists": 1,
+        "groups": 0,
+        "open_locations": 0,
+        "separate_m4_panels": 0,
+        "tuples": [],
+        "free": 0,
+        "exact_candidates": 0,
+        "total": 0,
+        "observed_at": "2026-09-12T15:03:03.210Z"
+      },
+      {
+        "case": "20",
+        "headline": "검사 범위에서 발견된 항목이 없습니다",
+        "breakdown": "구조 위험 0건 · 수식 검토 후보 0건",
+        "coverage": "전체 발견 0건 · 반환 상세 0건 · 상세 생략 0건 · 필터 표시 0건",
+        "completed": 1,
+        "lists": 1,
+        "groups": 0,
+        "open_locations": 0,
+        "separate_m4_panels": 0,
+        "tuples": [],
+        "free": 0,
+        "exact_candidates": 0,
+        "total": 0,
+        "observed_at": "2026-09-12T15:03:59.521Z"
+      }
+    ],
+    "checks": {
+      "03_group_and_leaf_evidence_opened": true,
+      "03_formula_filter_table_rows": 4,
+      "03_m4_reviewed_count": 2,
+      "03_filter_reset_table_rows": 53,
+      "03_structure_statuses_unchanged": true,
+      "03_structure_csv_scope_visible": true,
+      "hosted_csv_bytes_compared": false,
+      "csv_byte_invariance_verified_in_actual_local_browser": true,
+      "completed_zero_vs_calculation_accuracy_note_visible": true,
+      "planned_comparison_and_repair_buttons_disabled_on_actual_site": true,
+      "screenshots_visually_inspected_in_session": [
+        "03 expanded evidence",
+        "11 summary",
+        "20 completed zero"
+      ],
+      "saved_hosted_png": false,
+      "rate_limit_unchanged_and_observed": true
+    },
+    "tool_failures": [
+      {
+        "action": "compound locator.evaluate on #results",
+        "outcome": "3000ms selector timeout",
+        "process_exit_code": null,
+        "resolution": "No repeat upload; read smaller existing DOM locators and evaluateAll, then all assertions passed"
+      }
+    ]
+  },
+  "deployment": {
+    "version_id": "f9be71f3-d035-48cb-b9a9-7fcaa1e7469a",
+    "deployed_at_utc": "2026-09-12T14:57:33.503085Z",
+    "percentage": 100,
+    "rollback_version_id": "c222ac45-36ab-48c0-a0b1-e0d66f4755d8",
+    "binding_count": 13,
+    "all_bindings_unchanged": true,
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      }
+    ],
+    "cloud_run_deployed": false,
+    "gateway_deployed": false,
+    "source_commit": "d64c45178cf1"
+  },
+  "prior_evidence_reused": {
+    "hosted_all20_exact72": "D01-m4-hosted-browser.json",
+    "container_and_gate_verification": "D01-m4-hosted.json",
+    "strict_evaluator": "BLOCKED_TWO_EXISTING_CASE18_LABEL_CONFLICTS",
+    "accepted_evaluator": "PASS_WITH_PRODUCT_OWNER_WAIVER",
+    "conflict_cells": [
+      "배부계산!E13",
+      "배부계산!F22"
+    ],
+    "new_hosted_all20_claim": false
+  },
+  "preservation": {
+    "owner_package_hashes": 83,
+    "sample_pack_hashes": 68,
+    "unchanged": true,
+    "untracked_owner_files": 80,
+    "ignored_owner_example_xlsx": 3,
+    "secrets_or_customer_data_recorded": false
+  },
+  "not_run": [
+    "Excel application/recalculation/reference engine",
+    "PG sandbox/live, real payment/refund",
+    "repair/change approval/delivery execution",
+    "real customer files",
+    "price decisions or new paid resources",
+    "Git remote push",
+    "anonymous or production release",
+    "H2/H3 remaining readiness gates",
+    "D02 or later bundles",
+    "new Cloud Run/Gateway rollout in this follow-up",
+    "strict/waiver evaluator rerun in this UX follow-up (existing evidence reused)",
+    "saved hosted screenshot artifact; CUA screen inspected in session, local PNGs saved separately"
+  ],
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "owner_acceptance": "PENDING",
+  "next_bundle_executed": false
+}
