@@ -86,6 +86,7 @@ def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
     parts: dict[str, str] = {}
     sheet_parts: dict[str, str] = {}
     formula_count = 0
+    dimensions = {}
     with ZipFile(BytesIO(payload)) as archive:
         if len(archive.namelist()) != len(set(archive.namelist())):
             reject("UNSUPPORTED_FILE", "중복 내부 항목이 있는 파일은 수정하지 않습니다.")
@@ -96,7 +97,12 @@ def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
                 rels = ET.fromstring(raw)
                 if any(r.get("TargetMode") == "External" for r in rels):
                     issues.add("EXTERNAL_RELATIONSHIP")
+        from .delivery_package import validate_package
+
+        validate_package(archive)
         workbook = ET.fromstring(archive.read("xl/workbook.xml"))
+        if workbook.find(NS + "extLst") is not None:
+            issues.add("UNSUPPORTED_WORKBOOK_STRUCTURE")
         if workbook.find(NS + "workbookProtection") is not None:
             issues.add("PROTECTED_WORKBOOK")
         calc = workbook.find(NS + "calcPr")
@@ -117,8 +123,10 @@ def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
                 for si in ET.fromstring(archive.read("xl/sharedStrings.xml"))
             ]
         date_styles: set[int] = set()
+        style_count = 1
         if "xl/styles.xml" in envelope.names:
             styles = ET.fromstring(archive.read("xl/styles.xml"))
+            style_count = len(styles.findall(NS + "cellXfs/" + NS + "xf"))
             custom = {
                 int(n.get("numFmtId")): n.get("formatCode", "")
                 for n in styles.findall(NS + "numFmts/" + NS + "numFmt")
@@ -154,16 +162,33 @@ def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
                     "extLst",
                     "drawing",
                     "legacyDrawing",
+                    "conditionalFormatting",
+                    "dataValidations",
                 ]
             ):
                 issues.add("UNSUPPORTED_SHEET_STRUCTURE")
             if any(n.get("hidden") in {"1", "true"} for n in tree.iter()):
                 issues.add("HIDDEN_STRUCTURE")
+            row_numbers = [
+                int(row.get("r", "0")) for row in tree.findall(NS + "sheetData/" + NS + "row")
+            ]
+            if row_numbers != sorted(set(row_numbers)) or any(n < 1 for n in row_numbers):
+                issues.add("UNSUPPORTED_ROW_STRUCTURE")
+            for row in tree.findall(NS + "sheetData/" + NS + "row"):
+                if any(
+                    re.sub("[A-Z]+", "", valid_cell(c.get("r"))) != row.get("r")
+                    for c in row.findall(NS + "c")
+                ):
+                    issues.add("UNSUPPORTED_ROW_STRUCTURE")
             current: dict[str, dict] = {}
             for c in tree.findall(NS + "sheetData/" + NS + "row/" + NS + "c"):
                 address = valid_cell(c.get("r"))
                 if address in current:
                     reject("UNSUPPORTED_FILE", "중복 셀 위치가 있습니다.")
+                if any(child.tag not in {NS + "v", NS + "f", NS + "is"} for child in c):
+                    issues.add("UNSUPPORTED_CELL_STRUCTURE")
+                if any(len(c.findall(NS + tag)) > 1 for tag in ["v", "f", "is"]):
+                    issues.add("UNSUPPORTED_CELL_STRUCTURE")
                 t = c.get("t", "n")
                 v = c.find(NS + "v")
                 f = c.find(NS + "f")
@@ -207,11 +232,22 @@ def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
                         record.update(type="number", value=v.text)
                     else:
                         issues.add("UNSUPPORTED_CELL_TYPE")
+                if not 0 <= int(record["style"]) < style_count:
+                    issues.add("UNSUPPORTED_CELL_STYLE")
                 if int(record["style"]) in date_styles:
                     record["special_format"] = True
                 current[address] = record
                 if len(current) + sum(len(c) for c in cells.values()) > MAX_CELLS:
                     reject("LIMIT_EXCEEDED", "사전 수정 검사 셀 한도를 초과했습니다.", 413)
+            from openpyxl.utils.cell import coordinate_to_tuple
+
+            if current:
+                coordinates = [coordinate_to_tuple(a) for a in current]
+                if max(r for r, c in coordinates) * max(c for r, c in coordinates) > MAX_CELLS:
+                    issues.add("UNSUPPORTED_SPARSE_RANGE")
+            dimension = tree.find(NS + "dimension")
+            if dimension is not None:
+                dimensions[name] = dimension.get("ref")
             cells[name] = current
             sheet_parts[name] = path
             if sum(len(c) for c in cells.values()) > MAX_CELLS or formula_count > MAX_FORMULAS:
@@ -223,6 +259,7 @@ def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
         "inventory_hash": digest(parts),
         "parts": parts,
         "sheet_parts": sheet_parts,
+        "dimensions": dimensions,
         "cells": cells,
         "formula_count": formula_count,
         "issues": sorted(issues),

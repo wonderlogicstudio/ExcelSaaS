@@ -1,5 +1,18 @@
 # Current review — V3.2 D01
 
+## D04 승인한 사본·세 파일 납품 검증 — 2026-09-13
+
+원본 bytes를 그대로 두고 승인한 셀과 계획된 계산 캐시·설정만 별도 OOXML 사본에 적용한다. 비대상 member hash, 셀·서식·XML 의미, 정확한 patch set, 실제 후계산과 계획 결과를 대조한다. 실제 변경내역 XLSX·재검증 HTML과 수정본을 원본/plan/output hash로 결합한다.
+
+현재 계획·소유자·수정 SKU·내부 합성 권리를 별도로 확인한 뒤 명시 승인을 받는다. 확인함/결제만으로 실행하지 않는다. 세 파일과 READY는 SQLite에서 원자적으로 게시하며, 누락·검증 실패는 격리한다. 중복 실행은 같은 논리 납품을 재사용하고 취소는 publication fence와 실제 child kill/cleanup 후 완료된다.
+
+전체 웹75·Worker15·API151·M4 exact36, Ruff/build exit0. 마지막 보고서 표시/열 폭 보완 뒤 관련22개 시험과 실제 UI4개를 다시 통과했다. RP01 H2=15,500, RP02 F3=6,000/F12=18,200을 데스크톱1440·모바일390 화면에서 확인하고 세 파일씩12개를 실제 다운로드했다. 그중 XLSX8개를 설치된 Excel에서 읽기 전용 재개봉해 값/수식·식별자 보존을 확인했다. 화면12장과 Excel-rendered 보고서1장 검토.
+
+판정: 로컬 `ENGINEERING_VERIFIED_AWAITING_OWNER`. **D02–D04 hosted 배포/화면과 Linux 컨테이너 검증은 Docker 복구 대기**. 실제 PG·고객 권리·상용 납품 가능 판정이 아니다. 내부 합성 검증권은 hosted/production에서 인정하지 않는다.
+실제 변경·재사용·실패 수정·명령/exit·산출물·미실행은 [D04 증거](delivery-v3_2/reviews/evidence/D04-local.json), [Excel 대조](delivery-v3_2/reviews/evidence/D04-excel-reopen.json).
+최신 D08까지 승인에 따라 다음 D05로 진행한다.
+
+
 ## D03 실제 계산·불변 계획·화면 검증 — 2026-09-13
 
 Apache POI 5.5.1 계산 adapter를 제한된 JDK17 프로세스에서 실행한다. 원본 XLSX 대신 검증한 typed snapshot을 전달하며 원본 저장/캐시 사용은 하지 않는다.

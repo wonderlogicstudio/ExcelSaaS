@@ -16,6 +16,7 @@ from openpyxl.formula import Tokenizer
 from openpyxl.formula.translate import Translator, TranslatorError
 from openpyxl.utils.cell import get_column_letter, range_boundaries
 
+from .delivery_execution_control import check_cancelled, controlled_process
 from .delivery_inputs import MAX_CELLS, digest, reject, valid_cell
 from .delivery_process import process_limits
 
@@ -138,6 +139,7 @@ def engine_fingerprint() -> str:
         ENGINE_DIR / "dependencies.lock.json",
         Path(__file__),
         Path(__file__).with_name("delivery_process.py"),
+        Path(__file__).with_name("delivery_execution_control.py"),
         ENGINE_DIR / "classes/DeliveryCalc.class",
     ]
     dependencies = json.loads((ENGINE_DIR / "dependencies.lock.json").read_text(encoding="utf-8"))
@@ -179,6 +181,7 @@ permission java.lang.management.ManagementPermission "monitor";
 
 
 def calculate(cells: dict, *, timeout_seconds: float = 10.0) -> dict:
+    check_cancelled()
     cover = coverage(cells)
     engine_fingerprint()  # Verify executable dependencies before sending any input.
     java = shutil.which("java")
@@ -232,7 +235,7 @@ def calculate(cells: dict, *, timeout_seconds: float = 10.0) -> dict:
                 creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
             )
             try:
-                with process_limits(process):
+                with controlled_process(process), process_limits(process):
                     output, _ = process.communicate(payload, timeout=timeout_seconds)
             except OSError:
                 reject(
@@ -252,6 +255,7 @@ def calculate(cells: dict, *, timeout_seconds: float = 10.0) -> dict:
                 if process.poll() is None:
                     process.kill()
                     process.wait()
+            check_cancelled()
             if process.returncode != 0:
                 reject(
                     "ENGINE_RESOURCE_FAILURE" if process.returncode == 22 else "ENGINE_UNSUPPORTED",

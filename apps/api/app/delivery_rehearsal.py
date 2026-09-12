@@ -15,6 +15,7 @@ def entitled(job: dict, app_env: str) -> bool:
     grant = job["state"].get("internal_grant", {})
     return (
         app_env == "internal_beta"
+        and job["product"] == "APPROVED_REPAIR"
         and grant.get("kind") == "INTERNAL_SYNTHETIC"
         and grant.get("job_id") == job["id"]
         and grant.get("source_hash") == job["snapshot"]["source_hash"]

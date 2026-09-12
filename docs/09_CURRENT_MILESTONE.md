@@ -1,5 +1,12 @@
 # Current milestone
 
+## ACTIVE APPROVED — D05 (2026-09-13)
+
+D04 local exact approval, real separate repair + three artifacts, desktop/mobile UI and installed Excel reopens verified. Hosted D02–D04 and Linux container remain pending Docker recovery; no commerce release.
+Read contracts/COMPARISON_AND_BUSINESS.md and reference/v31_contracts/INPUT_ENGINE.md. Reuse existing comparison behavior; implement missing exact text-key / integer KRW report path. B remains another observation, never automatic truth or overwrite. Comparison entitlement must not allow repair.
+Latest D01–D08 authorization applies; final owner review after D08. Preserve prior records and pending deployment.
+
+
 ## ACTIVE APPROVED — D04 (2026-09-13)
 
 D03 local actual POI/Excel/desktop/mobile expectations and full regression pass. Hosted D02/D03 release remains pending Docker recovery. No commercial readiness inferred.

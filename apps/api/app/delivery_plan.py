@@ -74,6 +74,12 @@ def build_plan(job: dict, policy: dict) -> dict:
             "PREVIEW_VALIDATION_FAILED", "선택한 전체 범위가 사전 검사 조건을 충족해야 합니다.", 422
         )
     before = calculate(snapshot["cells"])
+    if any(v["type"] == "error" for rows in before["values"].values() for v in rows.values()):
+        reject(
+            "EXISTING_CALCULATION_ERROR",
+            "기존 계산 오류가 있어 이 수정 범위로 진행할 수 없습니다.",
+            422,
+        )
     after_cells = copy.deepcopy(snapshot["cells"])
     patches = []
     for target in gate["targets"]:
@@ -136,6 +142,27 @@ def build_plan(job: dict, policy: dict) -> dict:
                 )
             if prior["type"] != future["type"] or prior["value"] != future["value"]:
                 impact.append({"sheet": sheet, "cell": address, "before": prior, "after": future})
+    from openpyxl.utils.cell import coordinate_to_tuple, get_column_letter
+
+    for sheet, rows in after_cells.items():
+        if not rows:
+            continue
+        coordinates = [coordinate_to_tuple(a) for a in rows]
+        bottom, right = max(r for r, c in coordinates), max(c for r, c in coordinates)
+        if bottom * right > 10_000:
+            reject("UNSUPPORTED_SPARSE_RANGE", "변경 후 사용 범위가 수정 한도를 초과합니다.", 422)
+        if sheet in snapshot.get("dimensions", {}):
+            top, left = min(r for r, c in coordinates), min(c for r, c in coordinates)
+            dimension = f"{get_column_letter(left)}{top}:{get_column_letter(right)}{bottom}"
+            if snapshot["dimensions"][sheet] != dimension:
+                auxiliary.append(
+                    {
+                        "kind": "SHEET_DIMENSION",
+                        "part": snapshot["sheet_parts"][sheet],
+                        "before": snapshot["dimensions"][sheet],
+                        "after": dimension,
+                    }
+                )
     auxiliary.append(
         {
             "kind": "RECALCULATION_FLAGS",

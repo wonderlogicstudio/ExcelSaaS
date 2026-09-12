@@ -2,7 +2,7 @@
   "schema_version": 1,
   "copy_over_existing_progress": false,
   "prior_progress_path": "../10_PROGRESS.md",
-  "active_bundle": "D04",
+  "active_bundle": "D05",
   "bundles": {
     "D01": {
       "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
@@ -393,6 +393,21 @@
       "commerce_ready": false
     },
     "D04": {
+      "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+      "development_approved": true,
+      "owner_acceptance": "PENDING",
+      "history": [
+        {
+          "status": "IN_PROGRESS",
+          "reason": "before actual approval/patch/delivery UI and Excel verification"
+        }
+      ],
+      "review": "reviews/D04.md",
+      "evidence": "reviews/evidence/D04-local.json",
+      "beta_deployment": "PENDING_DOCKER_ENGINE_RECOVERY",
+      "commerce_ready": false
+    },
+    "D05": {
       "status": "IN_PROGRESS",
       "development_approved": true,
       "owner_acceptance": "PENDING"
@@ -403,14 +418,14 @@
       "RP01": "NOT_EVALUATED",
       "RP02": "NOT_EVALUATED"
     },
-    "repair_delivery": "NOT_EVALUATED",
+    "repair_delivery": "LOCAL_ENGINEERING_VERIFIED_HOSTED_AND_COMMERCE_PENDING",
     "comparison_delivery": "NOT_EVALUATED",
     "operations": "HOSTED_BETA_NOT_READY_PRESERVED",
     "owner_release_approved": false,
     "commercial_signal": "NOT_OBSERVED"
   },
-  "customer_change_approval": "NOT_IMPLEMENTED_BY_D01",
-  "next_recommended_bundle": "D04",
+  "customer_change_approval": "IMPLEMENTED_LOCAL_SYNTHETIC_ONLY_D04",
+  "next_recommended_bundle": "D05",
   "next_bundle_approved": true,
   "execution_stopped_after": null,
   "deployment_authorization": {
@@ -439,5 +454,8 @@
     "D07",
     "D08"
   ],
-  "owner_review_timing": "AFTER_D08_AS_REQUESTED_2026_09_13"
+  "owner_review_timing": "AFTER_D08_AS_REQUESTED_2026_09_13",
+  "customer_change_approval_history": [
+    "NOT_IMPLEMENTED_BY_D01"
+  ]
 }

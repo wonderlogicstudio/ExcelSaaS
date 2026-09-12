@@ -31,6 +31,12 @@ class DeliveryStore:
                 "CREATE TABLE IF NOT EXISTS request_limits (owner TEXT PRIMARY KEY, window "
                 "INTEGER NOT NULL, count INTEGER NOT NULL)"
             )
+            db.execute(
+                "CREATE TABLE IF NOT EXISTS delivery_artifacts (job_id TEXT NOT NULL "
+                "REFERENCES jobs(id) ON DELETE CASCADE, kind TEXT NOT NULL, "
+                "delivery_id TEXT NOT NULL, data BLOB NOT NULL, manifest TEXT NOT "
+                "NULL, PRIMARY KEY(job_id,kind))"
+            )
         if os.name != "nt":
             self.path.chmod(0o600)
 
@@ -39,6 +45,7 @@ class DeliveryStore:
         db = sqlite3.connect(self.path, timeout=5)
         db.row_factory = sqlite3.Row
         db.execute("PRAGMA secure_delete=ON")
+        db.execute("PRAGMA foreign_keys=ON")
         try:
             with db:
                 yield db

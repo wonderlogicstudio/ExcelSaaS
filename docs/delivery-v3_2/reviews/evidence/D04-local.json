@@ -1,0 +1,348 @@
+{
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "scope": "D04 actual separate XLSX patch, exact approval, atomic private three-file delivery; local synthetic-only",
+  "base_commit": "e605657f47024097f0b26fd7576b3232c1555af5",
+  "reused": [
+    "D02 immutable source/owner/SQLite revision/CSRF/HMAC v2 boundary",
+    "D03 real POI whole-workbook calculation, exact plans and fixed-synthetic CLI grant",
+    "Existing read-only free structural scanner; original free/M4 results untouched"
+  ],
+  "implemented": [
+    "lxml 6.1.3 minimal OOXML member edits, strict relationships/content types, planned cache/calc settings/dimensions",
+    "Independent exact business patch and non-target XML/cell/style/uncompressed member verification",
+    "Actual output recalculation vs planned typed values; source errors and new structural findings fail closed",
+    "Styled changes XLSX and escaped standalone verification HTML with consistent source/plan/output hashes",
+    "Separate explicit current plan approval, owner/SKU/source/grant/expiry binding",
+    "Private SQLite all-three-blob + READY atomic commit, CAS attempt and cancellation publication fence",
+    "Owned child process kill and cleanup-before-cancelled, quarantine and no partial downloads, idempotent same delivery/re-download"
+  ],
+  "verification": {
+    "full_regression": {
+      "web": 75,
+      "worker": 15,
+      "api": 151,
+      "m4_exact": 36,
+      "exit_code": 0,
+      "before_last_report_only_layout_delta": true
+    },
+    "final_report_delta_target_tests": 22,
+    "final_target_exit": 0,
+    "ruff_exit": 0,
+    "typecheck_and_build_exit": 0,
+    "actual_ui": {
+      "kind": "ACTUAL_PRODUCT_SCREEN_APPROVAL_API_ENGINE_AND_THREE_DOWNLOADED_FILES",
+      "rows": [
+        {
+          "width": 1440,
+          "profile": "RP01",
+          "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+          "plan_digest": "a39ea3b1947b2ef284d79c3e19c80d8e4db9ff5dc2cc27945dc1c54e72b1ce8e",
+          "separate_approval_required": true,
+          "all_three_downloaded": true,
+          "screen_expected_match": true,
+          "ready": true,
+          "files": {
+            "REPAIRED_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\1440\\RP01-REPAIRED_XLSX.xlsx",
+              "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+              "bytes": 2046
+            },
+            "CHANGES_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\1440\\RP01-CHANGES_XLSX.xlsx",
+              "sha256": "b5bbe4553a931db76ddd06e7c916b606f972071664d4430809d4e248efd064b9",
+              "bytes": 9044
+            },
+            "VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\1440\\RP01-VERIFICATION_HTML.html",
+              "sha256": "f7345869e7e1ec4c60f586074a5acb86a82fb6d56d1107c708067b12ba88d80d",
+              "bytes": 4132
+            }
+          }
+        },
+        {
+          "width": 1440,
+          "profile": "RP02",
+          "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+          "plan_digest": "4e51e75fce82b428728d9e2c1718a9c0cd4d79cc248b4a9df1f7cde43b5eca61",
+          "separate_approval_required": true,
+          "all_three_downloaded": true,
+          "screen_expected_match": true,
+          "ready": true,
+          "files": {
+            "REPAIRED_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\1440\\RP02-REPAIRED_XLSX.xlsx",
+              "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+              "bytes": 2067
+            },
+            "CHANGES_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\1440\\RP02-CHANGES_XLSX.xlsx",
+              "sha256": "e8b750d1dc594ae54c0b66b0e52b6a7b72fc682c22951521cebc42093e48a18c",
+              "bytes": 9008
+            },
+            "VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\1440\\RP02-VERIFICATION_HTML.html",
+              "sha256": "226d980b19b609d1524ba71d45c7ccb99c215c4a02b9bc1a4eab2681a8bdfca8",
+              "bytes": 4071
+            }
+          }
+        },
+        {
+          "width": 390,
+          "profile": "RP01",
+          "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+          "plan_digest": "35fb88aefc510f9c72b824fdc4c2509548d09cadd7db8b1a2225b8bb51b04037",
+          "separate_approval_required": true,
+          "all_three_downloaded": true,
+          "screen_expected_match": true,
+          "ready": true,
+          "files": {
+            "REPAIRED_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\390\\RP01-REPAIRED_XLSX.xlsx",
+              "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+              "bytes": 2046
+            },
+            "CHANGES_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\390\\RP01-CHANGES_XLSX.xlsx",
+              "sha256": "c8dc45e0d65deff2d04046a7d6a608dfa357db3e636aee88816648b28852efbf",
+              "bytes": 9044
+            },
+            "VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\390\\RP01-VERIFICATION_HTML.html",
+              "sha256": "ba5dc8d2c89ea750854496c3fb1f40544888c70e6f2c9ba9bc3401b8c78ef111",
+              "bytes": 4132
+            }
+          }
+        },
+        {
+          "width": 390,
+          "profile": "RP02",
+          "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+          "plan_digest": "9dd42009870559c0a7a74e9316be5dbddb2fe7ea39c190cb942a980ad73aed5b",
+          "separate_approval_required": true,
+          "all_three_downloaded": true,
+          "screen_expected_match": true,
+          "ready": true,
+          "files": {
+            "REPAIRED_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\390\\RP02-REPAIRED_XLSX.xlsx",
+              "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+              "bytes": 2067
+            },
+            "CHANGES_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\390\\RP02-CHANGES_XLSX.xlsx",
+              "sha256": "931232d9a2145305735c6dd05d4fb78cb39e36da00dff3028d40007a40e3e080",
+              "bytes": 9008
+            },
+            "VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d04\\browser-downloads\\390\\RP02-VERIFICATION_HTML.html",
+              "sha256": "d52239c8b496b693bd46dd430f1cf479494558ccb2aca88b13e6e4135608e937",
+              "bytes": 4071
+            }
+          }
+        }
+      ],
+      "screenshots": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\1440-RP01-approval.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\1440-RP01-ready.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\1440-RP01-verification.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\1440-RP02-approval.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\1440-RP02-ready.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\1440-RP02-verification.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\390-RP01-approval.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\390-RP01-ready.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\390-RP01-verification.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\390-RP02-approval.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\390-RP02-ready.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d04\\390-RP02-verification.png"
+      ]
+    },
+    "actual_excel_download_reopen": {
+      "1440": {
+        "excel_build": 20326,
+        "excel_version": "16.0",
+        "profiles": [
+          "RP01",
+          "RP02"
+        ],
+        "kind": "ACTUAL_PRODUCT_PATCH_AND_INSTALLED_EXCEL_REOPEN",
+        "results": [
+          {
+            "repaired_opened": true,
+            "read_only_hash_unchanged": true,
+            "profile": "RP01",
+            "actual_values_match": true,
+            "literal_report_formulas": true,
+            "output_hash": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+            "changes_opened": true
+          },
+          {
+            "repaired_opened": true,
+            "read_only_hash_unchanged": true,
+            "profile": "RP02",
+            "actual_values_match": true,
+            "literal_report_formulas": true,
+            "output_hash": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+            "changes_opened": true
+          }
+        ],
+        "status": "PASS",
+        "patch_fingerprint": "2db478501d7140a2ccdc7d8b841b058c8140af0c566cba8e8d3126ce07143dfa"
+      },
+      "390": {
+        "excel_build": 20326,
+        "excel_version": "16.0",
+        "profiles": [
+          "RP01",
+          "RP02"
+        ],
+        "kind": "ACTUAL_PRODUCT_PATCH_AND_INSTALLED_EXCEL_REOPEN",
+        "results": [
+          {
+            "repaired_opened": true,
+            "read_only_hash_unchanged": true,
+            "profile": "RP01",
+            "actual_values_match": true,
+            "literal_report_formulas": true,
+            "output_hash": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+            "changes_opened": true
+          },
+          {
+            "repaired_opened": true,
+            "read_only_hash_unchanged": true,
+            "profile": "RP02",
+            "actual_values_match": true,
+            "literal_report_formulas": true,
+            "output_hash": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+            "changes_opened": true
+          }
+        ],
+        "status": "PASS",
+        "patch_fingerprint": "2db478501d7140a2ccdc7d8b841b058c8140af0c566cba8e8d3126ce07143dfa"
+      }
+    },
+    "reference": {
+      "status": "PASS",
+      "case_count": 20,
+      "excel_version": "16.0",
+      "reference_digest": "b745516a9844401a05276476f1d07376c51dc675d10f7488cfaed962dbcc6eab"
+    },
+    "file_compatibility": {
+      "status": "PASS",
+      "excel_version": "16.0",
+      "profiles": [
+        "RP01",
+        "RP02"
+      ],
+      "evidence_digest": "ea268506921f994240b229c525bb6cf46b3fef04acb54ab812dd519063f373c1"
+    },
+    "screenshots_inspected": 13,
+    "excel_rendered_report_visual_qa": true,
+    "prior_owner_files_preserved": 83,
+    "git_lf_normalization": {
+      "source_rule": "text eol=lf",
+      "engine_reference_reexecuted": 20,
+      "actual_patch_and_excel_profiles_reexecuted": 2,
+      "ui_evidence_reused_after_line_endings_only": true
+    }
+  },
+  "commands": [
+    {
+      "command": "pip install lxml==6.1.3",
+      "exit_code": 0
+    },
+    {
+      "command": "pytest tests/test_delivery_patch.py tests/test_delivery_execution.py -q --tb=short",
+      "exit_code": 0,
+      "tests": 22
+    },
+    {
+      "command": "python scripts/verify_delivery_reference.py",
+      "exit_code": 0,
+      "typed_results": 25,
+      "cases": 20
+    },
+    {
+      "command": "python scripts/verify_delivery_patch_compatibility.py",
+      "exit_code": 0
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_delivery_output_excel.ps1",
+      "exit_code": 0
+    },
+    {
+      "command": "python scripts/register_delivery_patch_reference.py",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/verify-delivery-output.mjs (owned local API/Vite with explicit internal synthetic beta flags)",
+      "exit_code": 0,
+      "cases": 4
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_delivery_output_excel.ps1 -Directory browser-downloads/1440",
+      "exit_code": 0
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_delivery_output_excel.ps1 -Directory browser-downloads/390",
+      "exit_code": 0
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0
+    },
+    {
+      "command": "ruff check app/delivery*.py tests/test_delivery*.py",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "recovered_failures": [
+    {
+      "command": "pytest tests/test_delivery_patch.py",
+      "exit_code": 1,
+      "cause": "New shared-string test fixture omitted content-type/relationship declarations; corrected the synthetic fixture, strict validation retained."
+    },
+    {
+      "command": "pytest tests/test_delivery_execution.py",
+      "exit_code": 1,
+      "cause": "Production-negative test omitted mandatory HTTPS CORS and synthetic HMAC settings; supplied valid settings then entitlement denial passed."
+    },
+    {
+      "command": "PowerShell Excel reopen staged script",
+      "exit_code": 1,
+      "cause": "Windows PowerShell decoded UTF-8 Korean sheet label as ANSI; explicit UTF-8 and portable UTF-8-BOM script fixed lookup."
+    },
+    {
+      "command": "ruff check initial drafts",
+      "exit_code": 1,
+      "cause": "Long inline HTML/SQL and formatting; extracted HTML template and formatted source; final Ruff PASS."
+    }
+  ],
+  "ui_refinements": [
+    "Exact plan approval is a separate unchecked control; acknowledged field role never starts repair",
+    "Scope-limited completion with three independent downloads, no whole-workbook correctness claim",
+    "Common reason once; direct cell/formula result once; downstream effects separate; Korean type labels and readable integer formatting",
+    "Desktop/mobile disclosure and download flow; actual Excel render led to narrower report columns and shorter per-cell reason"
+  ],
+  "evidence_limits": [
+    "Internal fixed synthetic entitlement is not PG or a real customer paid right",
+    "Source/output static finding comparison uses the existing free structural scanner; POI checks all supported formulas independently",
+    "Excel compatibility applies to two strict synthetic profiles and measured installed version; not every possible Excel workbook",
+    "Local SQLite is an ephemeral beta adapter, not durable hosted commerce storage"
+  ],
+  "not_run": [
+    "D02-D04 authenticated hosted deployment/screen: Docker daemon unavailable, restart answer pending",
+    "Docker/Linux process/resource/container packaging validation",
+    "Real PG sandbox/live payment/refund, prices, real customer files",
+    "D05-D08 (next approved work), commerce readiness and owner final acceptance",
+    "New paid resources, Git remote push, public or production release, H2/H3 remaining readiness"
+  ],
+  "sources": [
+    "https://lxml.de/parsing.html",
+    "https://pypi.org/project/lxml/"
+  ],
+  "next": "D05 separate exact-key comparison report branch; already approved through D08"
+}

@@ -16,6 +16,7 @@ from fastapi.responses import JSONResponse
 from starlette.concurrency import run_in_threadpool
 
 from .config import get_settings
+from .delivery_execution import ACTIVE, approve, cancel, compatibility_status, download, execute
 from .delivery_inputs import (
     MAX_BYTES,
     MAX_CELLS,
@@ -64,7 +65,11 @@ def projection(job: dict) -> dict:
         "preflight": state["preflight"],
         "payment_status": state["payment"],
         "purchase_enabled": False,
-        "repair_execution_available": False,
+        "repair_execution_available": entitled(job, get_settings().app_env)
+        and compatibility_status()["status"] == "PASS",
+        "approval_status": "APPROVED" if state.get("approval") else "NOT_APPROVED",
+        "delivery": state.get("delivery"),
+        "failure_code": state.get("failure_code"),
         "storage_mode": "BETA_EPHEMERAL_LOCAL_ADAPTER",
         "source_unchanged": True,
         "plan_summary": plan_summary(state["plan"]) if state.get("plan") else None,
@@ -156,11 +161,24 @@ async def delivery(request: Request):
         if action == "get":
             output = projection(job)
         elif action == "delete":
+            if job["state"]["status"] in ACTIVE:
+                output = projection(cancel(store, job))
+                return JSONResponse(output, headers={"Cache-Control": "no-store"})
             store.delete(owner, job_id)
             output = {"status": "DELETED"}
+        elif action == "approve_plan":
+            output = projection(approve(store, job, body, settings))
+        elif action == "execute":
+            output = projection(await run_in_threadpool(execute, store, job, settings))
+        elif action == "cancel":
+            output = projection(cancel(store, job))
+        elif action == "download":
+            output = download(store, job, body.get("kind"), settings)
         elif action == "plan_details":
             output = customer_plan(job, entitled=entitled(job, settings.app_env))
         elif action == "prepare_plan":
+            if job["state"]["status"] in ACTIVE | {"READY"}:
+                reject("EXECUTION_IN_PROGRESS", "현재 실행을 마치거나 새 작업으로 시작하세요.", 409)
             if body.get("source_hash") != job["snapshot"]["source_hash"]:
                 reject("STALE_INPUT", "고정된 원본이 일치하지 않습니다.", 409)
             if type(body.get("revision")) is not int or body["revision"] != job["revision"]:
@@ -177,6 +195,8 @@ async def delivery(request: Request):
             }
             output = projection(store.update(job, job["revision"], state))
         elif action == "preflight":
+            if job["state"]["status"] in ACTIVE | {"READY"}:
+                reject("EXECUTION_IN_PROGRESS", "현재 실행을 마치거나 새 작업으로 시작하세요.", 409)
             if body.get("source_hash") != job["snapshot"]["source_hash"]:
                 reject("STALE_INPUT", "고정된 원본과 요청한 원본이 다릅니다.", 409)
             if type(body.get("revision")) is not int:

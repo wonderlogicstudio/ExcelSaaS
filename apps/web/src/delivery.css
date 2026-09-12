@@ -25,3 +25,5 @@
 .delivery-patch {min-width:0;padding:16px;border:1px solid #d8e2e9;border-radius:10px}
 .delivery-patch h5 {margin:0 0 12px;font-size:16px}
 .delivery-patch dl {margin:0;display:grid;gap:6px}.delivery-patch dt {font-size:13px;color:#566c7e}.delivery-patch dd {margin:0 0 10px;overflow-wrap:anywhere;font-weight:600;line-height:1.5}
+
+.delivery-execution {border-top:2px solid #b8d2c5;padding-top:1.5rem}.delivery-technical {margin:1rem 0;padding:1rem;border:1px solid #d1dfd8;border-radius:12px}.delivery-technical summary {cursor:pointer;font-weight:650}.delivery-downloads{display:flex;flex-wrap:wrap;gap:.75rem;margin:1rem 0}.delivery-ready{padding:1.25rem;background:#eef7f1;border-radius:16px}.delivery-ready h4{margin-top:0}@media(max-width:600px){.delivery-downloads{flex-direction:column}.delivery-downloads button{width:100%}}
