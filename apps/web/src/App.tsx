@@ -3,7 +3,7 @@ import { ArrowRight, Check, FileSearch, ShieldCheck, Sparkles } from 'lucide-rea
 import { Header } from './components/Header';
 import { UploadPanel, type ScanStage } from './components/UploadPanel';
 import { M25ResultsPanel as ResultsPanel } from './components/M25ResultsPanel';
-import { FormulaAuditPanel } from './components/FormulaAuditPanel';
+import { FormulaAuditPanel, formulaAuditBlockedReason } from './components/FormulaAuditPanel';
 import { StaticSections } from './components/StaticSections';
 import { Footer } from './components/Footer';
 import { LegalPage } from './components/LegalPage';
@@ -20,6 +20,10 @@ import type { FindingUserStatus, FormulaAuditResult, ScanResult } from './types'
 
 const formulaAuditInternalBetaEnabled =
   import.meta.env.VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED === 'true';
+const formulaAuditHostedBetaEnabled =
+  import.meta.env.VITE_PRODUCT_ENV === 'hosted_beta'
+  && import.meta.env.VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED === 'true';
+const formulaAuditEnabled = formulaAuditInternalBetaEnabled || formulaAuditHostedBetaEnabled;
 
 const stages: ScanStage[] = [
   '파일 형식 확인',
@@ -40,6 +44,9 @@ export default function App() {
     return <LegalPage kind="terms" />;
   }
   const uploadRef = useRef<HTMLDivElement>(null);
+  const activeRequest = useRef(0);
+  const activeController = useRef<AbortController | null>(null);
+  useEffect(() => () => { activeController.current?.abort(); }, []);
   const [busy, setBusy] = useState(false);
   const [stageIndex, setStageIndex] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -57,7 +64,7 @@ export default function App() {
     feedbackCaptureEnabled ? new LocalFeedbackRepository() : null
   ));
   const [formulaAuditFeedbackRepository] = useState(() => (
-    formulaAuditInternalBetaEnabled
+    !formulaAuditHostedBetaEnabled && formulaAuditInternalBetaEnabled
       ? hostedFormulaAuditFeedbackEnabled
         ? new HostedFormulaAuditFeedbackRepository()
         : new LocalFeedbackRepository()
@@ -75,7 +82,7 @@ export default function App() {
   useEffect(() => {
     if (result) {
       window.requestAnimationFrame(() => {
-        const resultAnchor = formulaAuditInternalBetaEnabled && sourceFile
+        const resultAnchor = formulaAuditEnabled && sourceFile
           ? '#formula-audit'
           : '#results';
         document.querySelector(resultAnchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -83,11 +90,41 @@ export default function App() {
     }
   }, [result, sourceFile]);
 
+  const cancelActiveRequest = () => {
+    activeRequest.current += 1;
+    activeController.current?.abort();
+    activeController.current = null;
+    setBusy(false);
+    setFormulaAuditBusy(false);
+  };
+
+  const executeFormulaAudit = async (file: File, requestId: number) => {
+    if (requestId !== activeRequest.current) return;
+    setFormulaAuditBusy(true);
+    setFormulaAuditError(null);
+    setFormulaAuditResult(null);
+    setFormulaAuditStatuses({});
+    try {
+      const audit = await runFormulaAudit(file, activeController.current?.signal);
+      if (requestId === activeRequest.current) setFormulaAuditResult(audit);
+    } catch (auditError) {
+      if (requestId !== activeRequest.current) return;
+      const message = auditError instanceof ScanApiError
+        ? auditError.message
+        : '수식 패턴 정밀검사를 완료하지 못했습니다. 기본 무료 진단 결과는 유지됩니다.';
+      setFormulaAuditError(message);
+    } finally {
+      if (requestId === activeRequest.current) setFormulaAuditBusy(false);
+    }
+  };
+
   const startUpload = () => {
     uploadRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   const runDemo = async () => {
+    cancelActiveRequest();
+    const requestId = activeRequest.current;
     setError(null);
     setResult(null);
     setIsDemo(true);
@@ -98,6 +135,7 @@ export default function App() {
     setStageIndex(0);
     setBusy(true);
     await wait(2100);
+    if (requestId !== activeRequest.current) return;
     const scan = { ...demoResult, scanned_at: new Date().toISOString() };
     setResult(scan);
     setRevalidationComparison(previousResult ? compareScanResults(previousResult, scan) : null);
@@ -106,6 +144,10 @@ export default function App() {
   };
 
   const runFileScan = async (file: File) => {
+    cancelActiveRequest();
+    const requestId = activeRequest.current;
+    activeController.current = new AbortController();
+    setFindingStatuses({});
     setError(null);
     setResult(null);
     setIsDemo(false);
@@ -117,24 +159,31 @@ export default function App() {
     setBusy(true);
 
     try {
-      const scan = await scanWorkbook(file);
+      const scan = await scanWorkbook(file, activeController.current.signal);
+      if (requestId !== activeRequest.current) return;
       setStageIndex(stages.length - 1);
       setResult(scan);
       setSourceFile(file);
       setRevalidationComparison(previousResult ? compareScanResults(previousResult, scan) : null);
       setPreviousResult(null);
+      setBusy(false);
+      if (formulaAuditHostedBetaEnabled && !formulaAuditBlockedReason(scan, file)) {
+        await executeFormulaAudit(file, requestId);
+      }
     } catch (scanError) {
+      if (requestId !== activeRequest.current) return;
       const message =
         scanError instanceof ScanApiError
           ? scanError.message
           : '파일을 분석하지 못했습니다. 잠시 후 다시 시도해 주세요.';
       setError(message);
     } finally {
-      setBusy(false);
+      if (requestId === activeRequest.current) setBusy(false);
     }
   };
 
   const reset = () => {
+    cancelActiveRequest();
     setResult(null);
     setError(null);
     setIsDemo(false);
@@ -150,6 +199,7 @@ export default function App() {
 
   const prepareRevalidation = () => {
     if (!result) return;
+    cancelActiveRequest();
     setPreviousResult(result);
     setResult(null);
     setError(null);
@@ -166,20 +216,11 @@ export default function App() {
   };
 
   const runCurrentFormulaAudit = async () => {
-    if (!sourceFile || !result || formulaAuditBusy) return;
-    setFormulaAuditBusy(true);
-    setFormulaAuditError(null);
-    try {
-      setFormulaAuditResult(await runFormulaAudit(sourceFile));
-    } catch (auditError) {
-      const message = auditError instanceof ScanApiError
-        ? auditError.message
-        : '수식 패턴 정밀검사를 완료하지 못했습니다. 기본 무료 진단 결과는 유지됩니다.';
-      setFormulaAuditError(message);
-      setFormulaAuditResult(null);
-    } finally {
-      setFormulaAuditBusy(false);
-    }
+    if (!sourceFile || !result || formulaAuditBusy || formulaAuditBlockedReason(result, sourceFile)) return;
+    activeController.current?.abort();
+    activeController.current = new AbortController();
+    const requestId = ++activeRequest.current;
+    await executeFormulaAudit(sourceFile, requestId);
   };
 
   const updateFormulaAuditStatus = (findingKey: string, status: FindingUserStatus) => {
@@ -222,7 +263,9 @@ export default function App() {
                 </button>
               </div>
               <p className="hero__fineprint">
-                현재는 파일 구조를 정적으로 분석합니다. 수식 패턴 이탈·누락 검사는 무료 진단에 포함되지 않습니다.
+                {formulaAuditHostedBetaEnabled
+                  ? '파일을 올리면 무료 구조 검사와 별도 수식 패턴·누락 검사를 차례로 실행합니다. 두 검사 결과는 구분해 보여드립니다.'
+                  : '현재는 파일 구조를 정적으로 분석합니다. 수식 패턴 이탈·누락 검사는 무료 진단에 포함되지 않습니다.'}
                 VBA, 외부 연결, 수식 계산은 실행하지 않으며 원본 파일도 바꾸지 않습니다.
               </p>
               <p className="hero__beta-notice">
@@ -245,8 +288,9 @@ export default function App() {
 
         {result && (
           <>
-            {formulaAuditInternalBetaEnabled && (
+            {formulaAuditEnabled && (
               <FormulaAuditPanel
+                automatic={formulaAuditHostedBetaEnabled}
                 baseResult={result}
                 sourceFile={sourceFile}
                 auditResult={formulaAuditResult}

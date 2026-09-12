@@ -29,6 +29,7 @@ class Settings(BaseSettings):
     finding_limit: int = 120
     ai_explanations_enabled: bool = False
     formula_pattern_audit_enabled: bool = False
+    hosted_beta_formula_audit_enabled: bool = False
     formula_audit_max_formula_cells: int = Field(default=30_000, ge=1)
     formula_audit_max_sheet_count: int = Field(default=200, ge=1)
     formula_audit_max_candidate_count: int = Field(default=120, ge=1)
@@ -115,11 +116,15 @@ FORMULA_AUDIT_INTERNAL_ENVS = frozenset({"development", "internal_beta"})
 
 
 def formula_audit_is_available(settings: Settings) -> bool:
-    """Fail closed outside the isolated internal-beta environments."""
+    """Require explicit beta opt-in; production stays unavailable."""
 
-    return (
-        settings.formula_pattern_audit_enabled
-        and settings.app_env.strip().casefold() in FORMULA_AUDIT_INTERNAL_ENVS
+    return settings.formula_pattern_audit_enabled and (
+        settings.app_env in FORMULA_AUDIT_INTERNAL_ENVS
+        or (
+            settings.app_env == "hosted_beta"
+            and settings.hosted_beta_formula_audit_enabled
+            and settings.control_plane_hmac_is_required
+        )
     )
 
 

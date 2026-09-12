@@ -6,6 +6,7 @@ interface Props {
   findings: Finding[];
   allFindings: Finding[];
   mode: 'groups' | 'table';
+  groupTitle?: (finding: Finding) => string;
   statuses: Record<string, FindingUserStatus>;
   renderFinding: (finding: Finding, sharedGuidance: boolean) => ReactNode;
   renderGuidance: (finding: Finding) => ReactNode;
@@ -14,7 +15,7 @@ interface Props {
 
 const severityLabels: Record<Severity, string> = { critical: '중요', warning: '주의', info: '참고' };
 
-export function FindingViews({ findings, allFindings, mode, statuses, renderFinding, renderGuidance, onReviewGroup }: Props) {
+export function FindingViews({ findings, allFindings, mode, statuses, renderFinding, renderGuidance, onReviewGroup, groupTitle }: Props) {
   if (mode === 'table') {
     return (
       <table className="finding-table">
@@ -42,7 +43,7 @@ export function FindingViews({ findings, allFindings, mode, statuses, renderFind
     return (
     <section className="finding-group" key={rule} aria-label={`${rule} 유형`}>
       <div className="finding-group__heading">
-        <div><span className={`severity severity--${severity}`}>{severityLabels[severity]}</span><h4>{leaves[0].title}</h4><code>{rule}</code><p>필터 표시 {leaves.length}건 / 이 유형의 반환 상세 {allFindings.filter((finding) => finding.rule_code === rule).length}건</p></div>
+        <div><span className={`severity severity--${severity}`}>{severityLabels[severity]}</span><h4>{groupTitle ? groupTitle(leaves[0]) : leaves[0].title}</h4><code>{rule}</code><p>필터 표시 {leaves.length}건 / 이 유형의 반환 상세 {allFindings.filter((finding) => finding.rule_code === rule).length}건</p></div>
         <button className="button button--outline button--small" type="button"
           disabled={leaves.every((finding) => statuses[findingIdentity(finding)] === 'REVIEWED')}
           onClick={() => onReviewGroup(leaves)}>표시된 {leaves.length}개 확인함</button>

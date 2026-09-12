@@ -442,3 +442,50 @@ for (const failure of ["backend-404", "network-error"]) {
     }
   });
 }
+
+
+test("protected beta formula audit uses the existing upload guards and its own signed path", async () => {
+  const { token, jwk } = await signedAccessToken();
+  const storage = createR2();
+  const originalFetch = globalThis.fetch;
+  let outgoing;
+  globalThis.fetch = async (input, init) => {
+    if (String(input).endsWith("/cdn-cgi/access/certs")) return Response.json({ keys: [jwk] });
+    outgoing = new Request(input, init);
+    return Response.json({ status: "COMPLETED", candidates: [] });
+  };
+  const env = {
+    APP_ENV: "hosted_beta", FORMULA_AUDIT_ENABLED: "true",
+    UPLOADS: storage.r2, API_GATEWAY_URL: "https://gateway.example.test/v1/scans",
+    CLOUDFLARE_ACCESS_TEAM_DOMAIN: TEAM_DOMAIN, CLOUDFLARE_ACCESS_AUD: AUDIENCE,
+    WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET: HMAC_SECRET, UPLOAD_RATE_LIMITER: rateLimiter(),
+  };
+  const request = () => {
+    const form = new FormData();
+    form.set("file", new File(["synthetic workbook"], "synthetic.xlsx"));
+    return new Request("https://workbookcare-beta.example.test/api/v1/formula-audits", {
+      method: "POST", headers: { "cf-access-jwt-assertion": token }, body: form,
+    });
+  };
+  try {
+    assert.equal((await worker.fetch(request(), { ...env, FORMULA_AUDIT_ENABLED: "false" })).status, 404);
+    assert.equal((await worker.fetch(request(), { ...env, APP_ENV: "production" })).status, 404);
+    assert.equal((await worker.fetch(request(), env)).status, 200);
+    assert.equal(outgoing.url, "https://gateway.example.test/v1/formula-audits");
+    const body = await outgoing.clone().arrayBuffer();
+    assert.equal(outgoing.headers.get("x-workbookcare-signature"), await createControlPlaneSignature(
+      HMAC_SECRET, Number(outgoing.headers.get("x-workbookcare-timestamp")), "POST", "/v1/formula-audits", body,
+    ));
+    assert.equal((await outgoing.formData()).get("file").name, "workbook.xlsx");
+    assert.equal(storage.size, 0);
+    assert.equal(storage.deletes, 1);
+    const unsigned = new Request("https://workbookcare-beta.example.test/api/v1/formula-audits", { method: "POST" });
+    assert.equal((await worker.fetch(unsigned, env)).status, 401);
+    assert.equal((await worker.fetch(request(), { ...env, UPLOAD_RATE_LIMITER: rateLimiter(false) })).status, 429);
+    assert.equal(storage.deletes, 1);
+    globalThis.fetch = async () => { throw new Error("synthetic network failure"); };
+    assert.equal((await worker.fetch(request(), env)).status, 502);
+    assert.equal(storage.size, 0);
+    assert.equal(storage.deletes, 2);
+  } finally { globalThis.fetch = originalFetch; }
+});

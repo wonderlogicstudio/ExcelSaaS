@@ -1,5 +1,6 @@
 import { CheckCircle2, CircleHelp, FileSearch, LoaderCircle, ShieldAlert } from 'lucide-react';
 import { useState } from 'react';
+import { FindingViews } from './FindingViews';
 import type {
   Finding,
   FindingUserStatus,
@@ -11,6 +12,7 @@ import { userStatusLabel } from '../lib/diagnosisCsv';
 import type { FeedbackCategory, FeedbackRepository } from '../lib/feedback';
 
 interface FormulaAuditPanelProps {
+  automatic?: boolean;
   baseResult: ScanResult;
   sourceFile: File | null;
   auditResult: FormulaAuditResult | null;
@@ -69,7 +71,7 @@ function candidateIdentity(candidate: Finding): string {
   return candidate.finding_key ?? candidate.id;
 }
 
-function eligibleMessage(baseResult: ScanResult, sourceFile: File | null): string | null {
+export function formulaAuditBlockedReason(baseResult: ScanResult, sourceFile: File | null): string | null {
   if (!sourceFile) {
     return '샘플 결과에는 실행하지 않습니다. 같은 브라우저에서 선택한 테스트용 파일로만 실행할 수 있습니다.';
   }
@@ -129,6 +131,7 @@ function FormulaAuditFindingCard({
       </summary>
       <div className="formula-audit-finding__details">
         <dl className="formula-audit-finding__evidence">
+          <div><dt>세부 탐지 유형</dt><dd>{evidence?.pattern_subtype ?? '패턴 비교 후보'}</dd></div>
           <div><dt>발견된 사실</dt><dd>{evidence?.evidence_summary ?? candidate.description}</dd></div>
           <div><dt>주변 패턴과 현재 패턴의 차이</dt><dd>{evidence?.current_pattern_summary ?? '현재 패턴을 주변 반복 수식과 비교했습니다.'}</dd></div>
           <div><dt>비교에 사용한 주변 위치</dt><dd>{(evidence?.comparison_locations ?? evidence?.evidence_locations ?? []).join(' · ') || '비교 위치 정보가 없습니다.'}</dd></div>
@@ -172,6 +175,7 @@ function FormulaAuditFindingCard({
 }
 
 export function FormulaAuditPanel({
+  automatic = false,
   baseResult,
   sourceFile,
   auditResult,
@@ -182,7 +186,7 @@ export function FormulaAuditPanel({
   onRun,
   onStatusChange,
 }: FormulaAuditPanelProps) {
-  const blockedReason = eligibleMessage(baseResult, sourceFile);
+  const blockedReason = formulaAuditBlockedReason(baseResult, sourceFile);
   const resultStatus = auditResult ? statusCopy[auditResult.status] : null;
   const candidateLabel = auditResult?.status === 'COMPLETED'
     ? auditResult.candidates.length > 0 ? '후보 있음' : '후보 없음'
@@ -194,7 +198,7 @@ export function FormulaAuditPanel({
         <div className="formula-audit-panel">
           <div className="formula-audit-panel__header">
             <div>
-              <span className="card-label"><FileSearch size={15} />내부 베타 · 선택형 검사</span>
+              <span className="card-label"><FileSearch size={15} />{automatic ? '베타 · 업로드 후 자동 검사' : '내부 베타 · 선택형 검사'}</span>
               <h2 id="formula-audit-title">수식 패턴 정밀검사</h2>
               <p>기본 무료 진단과 분리된 검사입니다. 주변 수식과 다른 패턴 후보만 보여 주며, 수식이 잘못됐는지나 계산 결과의 정답은 판단하지 않습니다.</p>
             </div>
@@ -225,6 +229,7 @@ export function FormulaAuditPanel({
           {auditResult && (
             <>
               <div className="formula-audit-panel__metrics">
+                {auditResult.status === 'COMPLETED' && <span><strong>{auditResult.candidates.length}</strong> 수식 패턴 후보</span>}
                 <span><strong>{auditResult.formula_cell_count.toLocaleString('ko-KR')}</strong> 수식 셀</span>
                 <span><strong>{auditResult.audited_sheet_count}</strong> 검사 시트</span>
                 <span><strong>{auditResult.audited_formula_region_count}</strong> 후보 수식 영역</span>
@@ -234,16 +239,27 @@ export function FormulaAuditPanel({
               {auditResult.status === 'COMPLETED' && auditResult.candidates.length > 0 && (
                 <div className="formula-audit-finding-list">
                   <div className="panel-heading"><div><span className="card-label">수식 패턴 이상 후보</span><h3>사용자 확인 필요 항목</h3></div><span>{auditResult.candidates.length}개 · 클릭해 자세히 보기</span></div>
-                  {auditResult.candidates.map((candidate) => (
-                    <FormulaAuditFindingCard
-                      key={candidateIdentity(candidate)}
-                      candidate={candidate}
-                      status={statuses[candidateIdentity(candidate)] ?? 'UNREVIEWED'}
-                      scannerVersion={auditResult.scanner_version}
-                      feedbackRepository={feedbackRepository}
-                      onStatusChange={(status) => onStatusChange(candidateIdentity(candidate), status)}
-                    />
-                  ))}
+                  <FindingViews
+                    findings={auditResult.candidates}
+                    allFindings={auditResult.candidates}
+                    mode="groups"
+                    statuses={statuses}
+                    groupTitle={(candidate) => candidate.rule_code === 'FORMULA_PATTERN_GAP'
+                      ? '반복 수식의 누락·상수 대체 후보' : '주변 수식과 다른 패턴 후보'}
+                    renderGuidance={(candidate) => <p>{candidate.rule_code === 'FORMULA_PATTERN_GAP'
+                      ? '반복 수식 영역의 빈 셀 또는 상수 입력을 주변 수식과 비교한 후보입니다.'
+                      : '주변 반복 수식과 함수·참조 구조가 다른 후보입니다.'} 개별 위치의 차이와 정상일 수 있는 조건을 함께 확인하세요.</p>}
+                    renderFinding={(candidate) => (
+                      <FormulaAuditFindingCard
+                        key={candidateIdentity(candidate)} candidate={candidate}
+                        status={statuses[candidateIdentity(candidate)] ?? 'UNREVIEWED'}
+                        scannerVersion={auditResult.scanner_version}
+                        feedbackRepository={feedbackRepository}
+                        onStatusChange={(status) => onStatusChange(candidateIdentity(candidate), status)}
+                      />
+                    )}
+                    onReviewGroup={(candidates) => candidates.forEach((candidate) => onStatusChange(candidateIdentity(candidate), 'REVIEWED'))}
+                  />
                 </div>
               )}
 

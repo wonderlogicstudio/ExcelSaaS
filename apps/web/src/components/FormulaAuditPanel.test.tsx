@@ -109,7 +109,11 @@ describe('FormulaAuditPanel', () => {
     expect(screen.getByText('후보 있음')).toBeInTheDocument();
     const finding = document.querySelector('details.formula-audit-finding');
     expect(finding).not.toHaveAttribute('open');
-    fireEvent.click(screen.getByText('주변 수식과 다른 패턴 후보'));
+    const group = document.querySelector('.finding-group__locations');
+    expect(group).not.toHaveAttribute('open');
+    fireEvent.click(screen.getByText('개별 위치 1개 보기'));
+    expect(group).toHaveAttribute('open');
+    fireEvent.click(screen.getByText('주변 수식과 다른 패턴 후보', { selector: 'strong' }));
     expect(finding).toHaveAttribute('open');
     expect(screen.getByText('비교에 사용한 주변 위치')).toBeInTheDocument();
     expect(screen.getByText('C2 · C3 · C5 · C6')).toBeInTheDocument();

@@ -3015,18 +3015,24 @@ p {
     width: 100%;
   }
 
+  .formula-audit-finding-list .panel-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .formula-audit-finding__summary {
-    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: start;
   }
 
-  .formula-audit-finding__summary code,
-  .formula-audit-finding__location {
-    grid-column: 2;
+  .formula-audit-finding__summary > * {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
-  .formula-audit-finding__hint {
-    grid-column: 3;
-    grid-row: 1;
+  .formula-audit-finding__evidence dd {
+    overflow-wrap: anywhere;
   }
 }
 

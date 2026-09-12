@@ -217,3 +217,26 @@ def test_formula_audit_endpoint_matches_the_supplied_m4c_sample_pack(monkeypatch
             )
 
     assert actual == expected
+
+
+def test_hosted_m4_requires_both_flags_and_excludes_production() -> None:
+    from app.config import formula_audit_is_available
+
+    common = {
+        "cors_origins": "https://beta.example.test",
+        "control_plane_hmac_secret": "synthetic-hosted-m4-secret-at-least-32-characters",
+    }
+    assert not formula_audit_is_available(Settings(
+        app_env="hosted_beta", formula_pattern_audit_enabled=True, **common,
+    ))
+    assert formula_audit_is_available(Settings(
+        app_env="hosted_beta", formula_pattern_audit_enabled=True,
+        hosted_beta_formula_audit_enabled=True, **common,
+    ))
+    assert not formula_audit_is_available(Settings(
+        app_env="production", formula_pattern_audit_enabled=True,
+        hosted_beta_formula_audit_enabled=True, **common,
+    ))
+    assert not formula_audit_is_available(Settings(
+        app_env="hosted_beta", hosted_beta_formula_audit_enabled=True, **common,
+    ))

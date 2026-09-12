@@ -1,5 +1,20 @@
 # Current milestone
 
+## Approved follow-up — M4 expected results on protected beta (2026-09-12)
+
+The owner explicitly requested that uploading the supplied Workbook samples
+produce their expected findings on the existing beta, after the missing M4
+connection was explained. This approves the bounded existing M4 connection and
+automatic audit after a supported synthetic upload. Supersedes prior hosted M4
+disabled/pending-approval statements only for this Access-protected beta.
+Reuse the existing M4 engine, preserve free result/score/CSV and separate M4 output.
+Connect the current Worker, Gateway and private Cloud Run service; deploy only
+verified components under the standing beta authorization. Production/anonymous
+M4 stays off; Access, HMAC, IAM, private R2 cleanup, limits and feedback gates stay.
+Do not alter expected labels or the existing two-conflict waiver. Verify all20
+unique fixtures against expected locations/rules/subtypes through the actual site.
+D02, payments, repair execution, new paid services and Git push remain unapproved.
+
 ## D01 authenticated hosted sample verification — 2026-09-12
 
 The connected, logged-in Chrome beta was exercised by the agent using actual

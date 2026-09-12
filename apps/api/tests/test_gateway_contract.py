@@ -32,7 +32,14 @@ def gateway_spec() -> dict:
 
 def test_gateway_keeps_exact_access_and_backend_identity_contract() -> None:
     spec = gateway_spec()
-    assert set(spec["paths"]) == {SCAN_PATH}
+    assert set(spec["paths"]) == {SCAN_PATH, "/v1/formula-audits"}
+    for path in spec["paths"]:
+        operation = spec["paths"][path]["post"]
+        assert operation["security"] == [{"cloudflare_access": []}]
+        backend = operation["x-google-backend"]
+        assert backend["address"] == backend["jwt_audience"] == "${CLOUD_RUN_URL}"
+        assert backend["path_translation"] == "APPEND_PATH_TO_ADDRESS"
+        assert not backend.get("disable_auth", False)
     operation = spec["paths"][SCAN_PATH]["post"]
     assert operation["security"] == [{"cloudflare_access": []}]
     backend = operation["x-google-backend"]
@@ -83,3 +90,34 @@ def test_gateway_translated_route_reaches_signed_scan_and_rejects_unsigned_bypas
     unsigned = client.post(backend_path, content=body)
     assert unsigned.status_code == 401
     assert unsigned.json()["error"]["code"] == "CONTROL_PLANE_SIGNATURE_REQUIRED"
+
+
+def test_hosted_formula_audit_accepts_only_its_own_signed_path(monkeypatch, risky_workbook_bytes):
+    import app.main as main
+
+    audit_path = "/v1/formula-audits"
+    settings = Settings(
+        app_env="hosted_beta", cors_origins="https://synthetic-worker.example.test",
+        control_plane_hmac_secret=SECRET, formula_pattern_audit_enabled=True,
+        hosted_beta_formula_audit_enabled=True,
+    )
+    monkeypatch.setattr(main, "settings", settings)
+    client = TestClient(ControlPlaneHmacMiddleware(app, settings=settings))
+    request = httpx.Request(
+        "POST", BACKEND_ORIGIN + audit_path,
+        files={"file": ("workbook.xlsx", risky_workbook_bytes)},
+    )
+    body = request.read()
+    timestamp = int(time.time())
+    headers = {"Content-Type": request.headers["content-type"], TIMESTAMP_HEADER: str(timestamp)}
+    assert client.post(audit_path, content=body, headers=headers).status_code == 401
+    headers[SIGNATURE_HEADER] = build_control_plane_signature(
+        SECRET, timestamp, "POST", SCAN_PATH, body
+    )
+    assert client.post(audit_path, content=body, headers=headers).status_code == 403
+    headers[SIGNATURE_HEADER] = build_control_plane_signature(
+        SECRET, timestamp, "POST", audit_path, body
+    )
+    response = client.post(audit_path, content=body, headers=headers)
+    assert response.status_code == 200
+    assert "candidates" in response.json() and "summary" not in response.json()

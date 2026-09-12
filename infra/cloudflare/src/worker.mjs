@@ -1,4 +1,6 @@
 const SCAN_ROUTE = "/api/v1/scans";
+const AUDIT_ROUTE = "/api/v1/formula-audits";
+const BACKEND_AUDIT_PATH = "/v1/formula-audits";
 const FEEDBACK_ROUTE = "/api/v1/feedback";
 const BACKEND_SCAN_PATH = "/v1/scans";
 const ACCESS_ASSERTION_HEADER = "cf-access-jwt-assertion";
@@ -38,6 +40,12 @@ export default {
     if (url.pathname === SCAN_ROUTE) {
       return handleScan(request, env);
     }
+    if (url.pathname === AUDIT_ROUTE) {
+      if (env.APP_ENV !== "hosted_beta" || env.FORMULA_AUDIT_ENABLED !== "true") {
+        return errorResponse(404, "FORMULA_AUDIT_NOT_AVAILABLE");
+      }
+      return handleWorkbook(request, env, BACKEND_AUDIT_PATH);
+    }
     if (url.pathname === FEEDBACK_ROUTE) {
       return handleFeedback(request, env);
     }
@@ -49,6 +57,10 @@ export default {
 };
 
 export async function handleScan(request, env) {
+  return handleWorkbook(request, env, BACKEND_SCAN_PATH);
+}
+
+async function handleWorkbook(request, env, backendPath) {
   if (request.method !== "POST") {
     return errorResponse(405, "METHOD_NOT_ALLOWED", { Allow: "POST" });
   }
@@ -103,7 +115,7 @@ export async function handleScan(request, env) {
       return errorResponse(502, "TEMPORARY_UPLOAD_UNAVAILABLE");
     }
     const storedBytes = await storedObject.arrayBuffer();
-    const backendResponse = await callGateway(assertion, storedBytes, env);
+    const backendResponse = await callGateway(assertion, storedBytes, env, backendPath);
     return toSafeBackendResponse(backendResponse);
   } catch {
     return errorResponse(502, "ANALYSIS_CONTROL_PLANE_UNAVAILABLE");
@@ -283,7 +295,13 @@ function isSupportedWorkbook(file) {
   );
 }
 
-async function callGateway(accessAssertion, workbookBytes, env) {
+async function callGateway(accessAssertion, workbookBytes, env, backendPath) {
+  // Derive only an allowlisted route on the configured Gateway origin.
+  // Browser URLs/query parameters cannot choose an upstream or HMAC path.
+  const gatewayUrl = new URL(env.API_GATEWAY_URL);
+  gatewayUrl.pathname = backendPath;
+  gatewayUrl.search = "";
+  gatewayUrl.hash = "";
   const outboundForm = new FormData();
   // Scanner validation remains authoritative. This generic name prevents the
   // browser supplied filename from entering the gateway/backend path.
@@ -295,7 +313,7 @@ async function callGateway(accessAssertion, workbookBytes, env) {
       { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" },
     ),
   );
-  const unsignedRequest = new Request(env.API_GATEWAY_URL, {
+  const unsignedRequest = new Request(gatewayUrl, {
     method: "POST",
     body: outboundForm,
   });
@@ -305,10 +323,10 @@ async function callGateway(accessAssertion, workbookBytes, env) {
     env.WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET,
     timestamp,
     "POST",
-    BACKEND_SCAN_PATH,
+    backendPath,
     body,
   );
-  return fetch(env.API_GATEWAY_URL, {
+  return fetch(gatewayUrl, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${accessAssertion}`,
