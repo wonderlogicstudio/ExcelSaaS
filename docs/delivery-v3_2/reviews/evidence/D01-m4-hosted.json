@@ -56,7 +56,11 @@
   "preservation": {
     "owner_package_files": 83,
     "sample_pack_files": 68,
-    "all_hashes_unchanged": true
+    "all_hashes_unchanged": true,
+    "git_untracked_owner_files": 80,
+    "git_ignored_owner_xlsx_files": 3,
+    "ignored_rule": ".gitignore:39 *.xlsx",
+    "all83_original_files_still_present_unchanged": true
   },
   "commands": [
     {
@@ -167,6 +171,31 @@
         "first path accidentally duplicated samples; zero-byte guard rejected; corrected existing directory variable",
         "CUA waitFor returned ~3-second deadline before completion; subsequent DOM read confirmed completed audit; no duplicate API retry"
       ]
+    },
+    {
+      "command": "commit_source.py",
+      "exit_code": 0,
+      "result": "21 verified source/test/screenshot paths selectively committed; owner83/sample68 hashes preserved"
+    },
+    {
+      "command": "expand_hosted.py; record.py",
+      "exit_code": 0,
+      "result": "lossless actual DOM export checked against original manifests; records prepended, JSON prior histories retained"
+    },
+    {
+      "command": "commit_records.py",
+      "exit_code": 1,
+      "result": "records validated and git commit185139d succeeded; post-commit assertion incorrectly expected83 untracked instead of80 untracked plus3 pre-existing ignored example XLSX"
+    },
+    {
+      "command": "git check-ignore -v -- <three existing delivery example XLSX paths>; git diff --check; git status --porcelain --untracked-files=no",
+      "exit_code": 0,
+      "result": "all three match existing .gitignore:39 *.xlsx; tracked worktree clean"
+    },
+    {
+      "command": "finish.py",
+      "exit_code": 0,
+      "result": "corrected preservation check:80 untracked +3 ignored; all83 hashes unchanged; selective evidence-only commit; no remote push"
     }
   ],
   "provider_commands": [
@@ -867,5 +896,9 @@
     "D02 or later bundles",
     "saved authenticated Chrome screenshot artifact (screen capture inspected in session; local PNGs saved separately)"
   ],
-  "stop": "D01 follow-up complete; owner acceptance pending; D02 not approved"
+  "stop": "D01 follow-up complete; owner acceptance pending; D02 not approved",
+  "local_commits": {
+    "implementation": "0ae6c63c06a7",
+    "review_and_hosted_evidence": "185139d"
+  }
 }
