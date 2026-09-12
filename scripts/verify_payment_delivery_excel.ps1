@@ -1,12 +1,14 @@
-﻿$ErrorActionPreference='Stop'
+﻿param([ValidateSet('d06','d07','d07-operations')][string]$Stage='d06')
+$ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
-$dir=Join-Path $root 'artifacts/verification/d06'
+$dir=Join-Path $root ('artifacts/verification/'+$Stage)
 $evidence=Get-Content -LiteralPath (Join-Path $dir 'browser.json') -Raw -Encoding UTF8|ConvertFrom-Json
 $excel=$null;$results=@()
 try{
  $excel=New-Object -ComObject Excel.Application
  $excel.Visible=$false;$excel.DisplayAlerts=$false;$excel.AutomationSecurity=3;$excel.AskToUpdateLinks=$false;$excel.EnableEvents=$false
  foreach($case in $evidence.rows){
+  if($case.retry_file){$case.files|Add-Member -NotePropertyName RETRY_REPAIRED_XLSX -NotePropertyValue $case.retry_file}
   foreach($file in $case.files.PSObject.Properties){
    if(-not $file.Name.EndsWith('XLSX')){continue}
    $path=$file.Value.path
@@ -15,7 +17,7 @@ try{
    if($hash -ne $file.Value.sha256){throw 'Browser receipt mismatch'}
    $book=$excel.Workbooks.Open($path,0,$true)
    try{
-    if($file.Name -eq 'REPAIRED_XLSX'){
+    if($file.Name -like '*REPAIRED_XLSX'){
      $sheet=$book.Worksheets.Item('검증');$excel.CalculateFullRebuild()
      foreach($value in $case.expected.PSObject.Properties){
       $cell=$sheet.Range($value.Name)
@@ -23,12 +25,12 @@ try{
       [void][Runtime.InteropServices.Marshal]::ReleaseComObject($cell)
      }
      if($sheet.Range('A2').Value2 -cne '00123'){throw 'Identifier changed'}
-     if($case.profile -eq 'RP01' -and $sheet.Range('B3').Value2 -cne '3,500'){throw 'Unapproved B3 changed'}
+     if($case.profile -eq 'RP01' -and $Stage -ne 'd07-operations' -and $sheet.Range('B3').Value2 -cne '3,500'){throw 'Unapproved B3 changed'}
      if($case.profile -eq 'RP02' -and $sheet.Range('F3').Formula -cne '=ROUND(C3*D3*(1-E3),0)'){throw 'Approved formula differs'}
      [void][Runtime.InteropServices.Marshal]::ReleaseComObject($sheet)
     }elseif($file.Name -eq 'CHANGES_XLSX'){
      $sheet=$book.Worksheets.Item('변경 셀')
-     if($sheet.UsedRange.Rows.Count -ne 2){throw 'Exact single approved patch count differs'}
+     $expectedRows=if($Stage -eq 'd07-operations'){3}else{2};if($sheet.UsedRange.Rows.Count -ne $expectedRows){throw 'Exact approved patch count differs'}
      foreach($cell in $sheet.UsedRange.Cells){if($cell.HasFormula){throw 'Executable report formula'};[void][Runtime.InteropServices.Marshal]::ReleaseComObject($cell)}
      [void][Runtime.InteropServices.Marshal]::ReleaseComObject($sheet)
     }else{
@@ -49,5 +51,5 @@ try{
   }
  }
  @{status='PASS';kind='ACTUAL_PRODUCT_DOWNLOADS_REOPENED_IN_INSTALLED_EXCEL';official_pg_verified=$false;excel_version=$excel.Version;excel_build=$excel.Build;results=$results}|ConvertTo-Json -Depth 10|Set-Content -LiteralPath (Join-Path $dir 'excel-reopen.json') -Encoding UTF8
- Write-Output 'Five actual D06 XLSX downloads reopened in Excel; exact approved subset and comparison totals PASS. PG not verified.'
+ Write-Output 'Actual synthetic product XLSX downloads reopened in Excel; exact approved subset and comparison totals PASS. PG not verified.'
 }finally{if($excel){$excel.Quit();[void][Runtime.InteropServices.Marshal]::ReleaseComObject($excel)};[GC]::Collect();[GC]::WaitForPendingFinalizers()}

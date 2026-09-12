@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, FileSearch, ShieldCheck, Sparkles } from 'lucide-react';
+import {DeliveryOperations} from './components/DeliveryOperations';
 import { OrderHistory } from './components/OrderHistory';
 import { ComparisonWorkspace } from './components/ComparisonWorkspace';
 import './comparison.css';
@@ -330,7 +331,7 @@ export default function App() {
           </>
         )}
         {deliveryBetaEnabled && <ComparisonWorkspace open={comparisonOpen} onOpen={() => setComparisonOpen(true)} />}
-        {deliveryBetaEnabled && <OrderHistory/>}
+        {deliveryBetaEnabled && <><OrderHistory/><DeliveryOperations onNewInput={startUpload}/></>}
         <StaticSections products={result?.products} onStart={startUpload} onDemo={runDemo} onCompare={deliveryBetaEnabled ? () => setComparisonOpen(true) : undefined} />
       </main>
       <Footer />

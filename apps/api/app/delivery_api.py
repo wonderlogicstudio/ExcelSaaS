@@ -1,4 +1,4 @@
-"""D02 input/preflight API. Never issues payment, approval, or repair entitlement."""
+"""Private beta delivery API with separate owner, payment and exact approval gates."""
 
 from __future__ import annotations
 
@@ -36,6 +36,7 @@ from .delivery_inputs import (
     preflight,
     reject,
 )
+from .delivery_operations import bounded_body, claim_attempt
 from .delivery_plan import build_plan, customer_plan, plan_summary
 from .delivery_rehearsal import entitled
 from .delivery_store import INPUT_TTL_SECONDS, DeliveryStore
@@ -112,9 +113,7 @@ async def delivery(request: Request):
             token = secrets.token_hex(32)
             cookie = token
         owner = hashlib.sha256(token.encode()).hexdigest()
-    raw = await request.body()
-    if len(raw) > MAX_BYTES * 8 // 3 + 64 * 1024:
-        reject("LIMIT_EXCEEDED", "사전 검사 요청 한도를 초과했습니다.", 413)
+    raw = await bounded_body(request)
     try:
         body = json.loads(raw)
     except (ValueError, UnicodeError):
@@ -139,6 +138,7 @@ async def delivery(request: Request):
         reject("INVALID_REQUEST", "서버가 관리하는 작업 정보를 지정할 수 없습니다.")
     store = get_store()
     store.rate_limit(owner)
+    store.cleanup()
     action = body.get("action")
     if action == "capabilities":
         output = {
@@ -151,6 +151,11 @@ async def delivery(request: Request):
             "calculation_status": "NOT_RUN",
             "purchase_enabled": False,
             "durable_commerce_storage": False,
+            "order_ttl_seconds": 86400,
+            "cleanup_interval_seconds": 30,
+            "max_execution_attempts": 3,
+            "support_intake_enabled": False,
+            "automation_mode": "MANUAL_NEW_INPUT_ONLY",
             "payment_mode": settings.payment_mode,
             "official_pg_test_configured": bool(
                 settings.toss_test_secret and settings.payment_mode == "TOSS_TEST"
@@ -287,6 +292,7 @@ async def delivery(request: Request):
                 reject("STALE_JOB", "최신 작업 상태를 확인하세요.", 409)
             if not job["state"].get("policy"):
                 reject("PREFLIGHT_REQUIRED", "업무 기준과 대상의 사전 검사를 먼저 완료하세요.")
+            claim_attempt(store, job, "PLAN")
             plan = await run_in_threadpool(build_plan, job, job["state"]["policy"])
             validate_paid_scope(store, job, plan)
             state = {

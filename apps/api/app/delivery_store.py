@@ -45,6 +45,9 @@ class DeliveryStore:
             from .payment_service import install
 
             install(db)
+            from .delivery_operations import install as install_operations
+
+            install_operations(db)
         if os.name != "nt":
             self.path.chmod(0o600)
 
@@ -74,10 +77,9 @@ class DeliveryStore:
             db.execute("DELETE FROM request_limits WHERE window < ?", (window - 2,))
 
     def cleanup(self, now: float | None = None) -> int:
-        with self.connection() as db:
-            return db.execute(
-                "DELETE FROM jobs WHERE expires<=?", (time.time() if now is None else now,)
-            ).rowcount
+        from .delivery_operations import maintain
+
+        return maintain(self, now)
 
     def create(
         self,
@@ -178,7 +180,9 @@ class DeliveryStore:
             )
         if job["product"] == "TWO_FILE_COMPARISON":
             self.load_secondary(job)
-        return job
+        from .delivery_storage_validation import quarantine_broken_delivery
+
+        return quarantine_broken_delivery(self, job)
 
     def update(self, job: dict, revision: int, state: dict) -> dict:
         with self.connection() as db:

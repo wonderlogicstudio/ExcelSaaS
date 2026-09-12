@@ -1,0 +1,719 @@
+{
+  "status": "PARTIAL",
+  "local_engineering": "VERIFIED_AWAITING_OWNER",
+  "base_commit": "b56ef1723b4b4904c5f61a6bb762d52dc6d3be28",
+  "reused": [
+    "Existing free/M4 diagnosis hierarchy and expected sample pack",
+    "D02 ownership/input snapshot/CSRF and private Worker transport",
+    "D04/D06 approval, cancellation fence and recoverable atomic delivery",
+    "D05 bounded process runner and exact comparison oracles",
+    "H3 content-free logging and feedback OFF; no provider/binding changes"
+  ],
+  "implemented": [
+    "Completed criteria/plan collapse; actual results and files first; reduced mobile nesting and compact independent order axes",
+    "Empty comparison shows all-matched state with existing exact totals, hides empty issue groups; paid comparison resume and return keyboard focus",
+    "Input expiry clears private screen details; plan expiry requires new calculation and new approval",
+    "15min source/plan/result maximum with 10min waiting plan; 24h synthetic ledger; startup and real 30s background sweep; FK cleanup and SQLite secure_delete",
+    "Lost execution leases revoke publication and cancel owned worker; max3 attempts including initial, max20 test orders and128 event hints/order",
+    "Streaming request size bound; no-store/private and no-referrer on success/error; new order blocked with <120s source lifetime",
+    "Actual report creation/semantic verification moved to 30s cancellable child using existing Windows512MiB process boundary; network/new process audit hook denied",
+    "Whole stored package integrity on revisit/download; companion corruption prevents any successful package download",
+    "Actual UI for missing-file retry, input/plan expiry, same-source/order restoration, new unchecked approval and keyboard flow"
+  ],
+  "verification": {
+    "full_regression": {
+      "web": 75,
+      "worker": 16,
+      "api": 206,
+      "m4_exact": 36,
+      "exit_code": 0
+    },
+    "operations_tests": 11,
+    "target_with_payment_tests": 25,
+    "target_exit_code": 0,
+    "additional_real_background_sweeper_test": {
+      "tests": 1,
+      "exit_code": 0,
+      "period_seconds": 30,
+      "no_followup_request_required": true
+    },
+    "build_exit_code": 0,
+    "ruff_exit_code": 0,
+    "browsers": {
+      "d07": {
+        "kind": "LOCAL_CONTRACT_RECEIPT_WITH_ACTUAL_PRODUCT_UI_API_REPAIR_AND_COMPARISON",
+        "official_pg_verified": false,
+        "rows": [
+          {
+            "width": 1440,
+            "profile": "RP02",
+            "action": "deliver",
+            "order_id": "wc_8cd187677ba5459eb57b59e3a1b578fc",
+            "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+            "separate_approval": true,
+            "expected": {
+              "F3": 6000,
+              "F12": 18200,
+              "H2": 0
+            },
+            "screen_expected_match": true,
+            "revisit_redownload_same_hash": true,
+            "files": {
+              "REPAIRED_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07\\browser-downloads\\1440-RP02-deliver\\REPAIRED_XLSX.xlsx",
+                "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+                "bytes": 2067
+              },
+              "CHANGES_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07\\browser-downloads\\1440-RP02-deliver\\CHANGES_XLSX.xlsx",
+                "sha256": "7b69fb083452ede58aa41eeb37c72ffac87f291a3d6eb935221f96ccd2a29aad",
+                "bytes": 9007
+              },
+              "VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07\\browser-downloads\\1440-RP02-deliver\\VERIFICATION_HTML.html",
+                "sha256": "2211dbe7c9083f61651263e1c681c8e6f4b150d6462cd77655d34d12e7498f2f",
+                "bytes": 4071
+              }
+            }
+          },
+          {
+            "width": 390,
+            "profile": "RP01",
+            "action": "subset",
+            "order_id": "wc_5da742725a8642ce9e532ec363ee8321",
+            "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+            "separate_approval": true,
+            "expected": {
+              "B2": 12000,
+              "H2": 12000,
+              "F12": 12200
+            },
+            "screen_expected_match": true,
+            "revisit_redownload_same_hash": true,
+            "files": {
+              "REPAIRED_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07\\browser-downloads\\390-RP01-subset\\REPAIRED_XLSX.xlsx",
+                "sha256": "564ae2d937158ca2eedcf06bd6212439df04e12bf9a287df0799f50d034b1056",
+                "bytes": 2049
+              },
+              "CHANGES_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07\\browser-downloads\\390-RP01-subset\\CHANGES_XLSX.xlsx",
+                "sha256": "538121390e8518e75319e3e2e1beff93961d46d5431abdbcb26e467ce83157ae",
+                "bytes": 8954
+              },
+              "VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07\\browser-downloads\\390-RP01-subset\\VERIFICATION_HTML.html",
+                "sha256": "152becc40c95395184ec2fcb0dedfdb412baf78fb634d72e3f7290dbd8bdbfb7",
+                "bytes": 4032
+              }
+            }
+          },
+          {
+            "width": 390,
+            "profile": "RP01",
+            "action": "reject",
+            "order_id": "wc_fd0a0f9306ba4946b058b294865d739d",
+            "payment_cancelled": true,
+            "patch_not_run": true,
+            "files": {}
+          },
+          {
+            "width": 1440,
+            "profile": "COMPARISON",
+            "action": "deliver",
+            "order_id": "wc_f451a54f1f7c4a99864a7da7b2b279a7",
+            "screen_expected_match": true,
+            "expected": {
+              "source_rows": 14,
+              "A": "47900",
+              "B": "51000"
+            },
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07\\browser-downloads\\1440-comparison\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "d4fe1e0e22c08c25f7c13c923b3309aa01b19250034c5fea0c2e3a4e06d231c4",
+                "bytes": 14737
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07\\browser-downloads\\1440-comparison\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "1083ca23cb62a98fd23627b1b985c2f7efafc015391440bc1f41aaad8bf43e6b",
+                "bytes": 6837
+              }
+            }
+          }
+        ],
+        "screenshots": [
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\1440-RP02-deliver-paid-awaiting.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\1440-RP02-deliver-ready.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\1440-RP02-deliver-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\1440-RP02-deliver-revisit.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\390-RP01-subset-paid-awaiting.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\390-RP01-subset-ready.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\390-RP01-subset-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\390-RP01-subset-revisit.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\390-RP01-reject-paid-awaiting.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\390-RP01-rejected.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07\\1440-comparison-ready.png"
+        ]
+      },
+      "d07-comparison": {
+        "kind": "ACTUAL_PRODUCT_COMPARISON_UI_API_CHILD_AND_DOWNLOADED_REPORTS",
+        "rows": [
+          {
+            "width": 1440,
+            "kind": "csv",
+            "caseName": "baseline",
+            "expected": {
+              "counts": {
+                "MATCHED": 2,
+                "AMOUNT_DIFF": 1,
+                "ONLY_A": 1,
+                "ONLY_B": 1,
+                "AMBIGUOUS": 1,
+                "INPUT_ERROR": 2
+              },
+              "groups": 8,
+              "rows": 14,
+              "A": "47,900원",
+              "B": "51,000원",
+              "key": "0002",
+              "delta": "-2,000원"
+            },
+            "source_pair_hash": "22db60c79509558b8707fddd9e1392c363bbc3eaf446c5edf5b0702e4840ff3d",
+            "spec_hash": "28bcc3cc6ae91508d6f4a869f7ea7538a9de1e53bb498de51c8a8c9d0442e329",
+            "screen_expected_match": true,
+            "reconnect": true,
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\1440-csv-baseline\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "3f7949d98098bd5085eea107ebe5debcd9c1a41a23eb2e1b4e7bc0ffe0341080",
+                "bytes": 14730
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\1440-csv-baseline\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "24df500cb2ab61a4d9fea7e20670b1e7c4459ddeeeee952c87e695e70c29eb15",
+                "bytes": 6817
+              }
+            }
+          },
+          {
+            "width": 390,
+            "kind": "csv",
+            "caseName": "baseline",
+            "expected": {
+              "counts": {
+                "MATCHED": 2,
+                "AMOUNT_DIFF": 1,
+                "ONLY_A": 1,
+                "ONLY_B": 1,
+                "AMBIGUOUS": 1,
+                "INPUT_ERROR": 2
+              },
+              "groups": 8,
+              "rows": 14,
+              "A": "47,900원",
+              "B": "51,000원",
+              "key": "0002",
+              "delta": "-2,000원"
+            },
+            "source_pair_hash": "22db60c79509558b8707fddd9e1392c363bbc3eaf446c5edf5b0702e4840ff3d",
+            "spec_hash": "28bcc3cc6ae91508d6f4a869f7ea7538a9de1e53bb498de51c8a8c9d0442e329",
+            "screen_expected_match": true,
+            "reconnect": true,
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\390-csv-baseline\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "3354537073a9aeaf0a910c18f87fb332966ff97a9753e99bbc7733c3dbf0595b",
+                "bytes": 14731
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\390-csv-baseline\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "24df500cb2ab61a4d9fea7e20670b1e7c4459ddeeeee952c87e695e70c29eb15",
+                "bytes": 6817
+              }
+            }
+          },
+          {
+            "width": 1440,
+            "kind": "xlsx",
+            "caseName": "baseline",
+            "expected": {
+              "counts": {
+                "MATCHED": 2,
+                "AMOUNT_DIFF": 1,
+                "ONLY_A": 1,
+                "ONLY_B": 1,
+                "AMBIGUOUS": 1,
+                "INPUT_ERROR": 2
+              },
+              "groups": 8,
+              "rows": 14,
+              "A": "47,900원",
+              "B": "51,000원",
+              "key": "0002",
+              "delta": "-2,000원"
+            },
+            "source_pair_hash": "f9858c7ceedc2de1b2ac2172afa8579065da21442a807e9c233892b7387c8570",
+            "spec_hash": "de8f23930600d55c65a8e9b6f8c6d3449db02abfbffd50721b20d1819ebf254b",
+            "screen_expected_match": true,
+            "reconnect": true,
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\1440-xlsx-baseline\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "8b38f31ae60d207a47e75d3074b797dd2c102716482e6a60c8dc0ba83be3d357",
+                "bytes": 14764
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\1440-xlsx-baseline\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "7018b9c765368514fc3a712e8ab8d14b85aa7f76f650b9ddb57740fd7e96b551",
+                "bytes": 6859
+              }
+            }
+          },
+          {
+            "width": 390,
+            "kind": "xlsx",
+            "caseName": "baseline",
+            "expected": {
+              "counts": {
+                "MATCHED": 2,
+                "AMOUNT_DIFF": 1,
+                "ONLY_A": 1,
+                "ONLY_B": 1,
+                "AMBIGUOUS": 1,
+                "INPUT_ERROR": 2
+              },
+              "groups": 8,
+              "rows": 14,
+              "A": "47,900원",
+              "B": "51,000원",
+              "key": "0002",
+              "delta": "-2,000원"
+            },
+            "source_pair_hash": "f9858c7ceedc2de1b2ac2172afa8579065da21442a807e9c233892b7387c8570",
+            "spec_hash": "de8f23930600d55c65a8e9b6f8c6d3449db02abfbffd50721b20d1819ebf254b",
+            "screen_expected_match": true,
+            "reconnect": true,
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\390-xlsx-baseline\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "18abfb011687e9f265f815baf469a4f5c9d2854a5e9f751a666c0a3d360a8155",
+                "bytes": 14763
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\390-xlsx-baseline\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "7018b9c765368514fc3a712e8ab8d14b85aa7f76f650b9ddb57740fd7e96b551",
+                "bytes": 6859
+              }
+            }
+          },
+          {
+            "width": 390,
+            "kind": "csv",
+            "caseName": "equal",
+            "expected": {
+              "counts": {
+                "MATCHED": 2,
+                "AMOUNT_DIFF": 0,
+                "ONLY_A": 0,
+                "ONLY_B": 0,
+                "AMBIGUOUS": 0,
+                "INPUT_ERROR": 0
+              },
+              "groups": 2,
+              "rows": 4,
+              "A": "100원",
+              "B": "100원"
+            },
+            "source_pair_hash": "1a878c23f97404cf7ff51beb208c1b5d654099d999e2d66756f5976445f26185",
+            "spec_hash": "2adbc98344fae8616ded2a84af6a3b49727fc3aa040462922308cf50ae7fd6df",
+            "screen_expected_match": true,
+            "reconnect": true,
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\390-csv-equal\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "55d1915aa3d78f24ceca32dab06605a5882e17291af192f44fb39e6834d3857f",
+                "bytes": 13830
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\390-csv-equal\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "a7864b79ab52872d4c6c9cd6321839d1e3ba3266674e0e362eb7c25bcc67b7bf",
+                "bytes": 4831
+              }
+            }
+          },
+          {
+            "width": 1440,
+            "kind": "csv",
+            "caseName": "large",
+            "expected": {
+              "counts": {
+                "MATCHED": 0,
+                "AMOUNT_DIFF": 1,
+                "ONLY_A": 0,
+                "ONLY_B": 0,
+                "AMBIGUOUS": 0,
+                "INPUT_ERROR": 0
+              },
+              "groups": 1,
+              "rows": 2,
+              "A": "10,000,000,000,000,001원",
+              "B": "10,000,000,000,000,000원",
+              "key": "K",
+              "delta": "1원"
+            },
+            "source_pair_hash": "384e07812867cc8668789dfda3076d3f67a28d4cf1e063f2a5cd6043f9cde62f",
+            "spec_hash": "b3a337af9e413a39794ac0134f31d2865728c20c395ca55a2584b73cf92201d5",
+            "screen_expected_match": true,
+            "reconnect": true,
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\1440-csv-large\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "3d8773db144e932c2788d45555bac1df7ea822940e07836b379e1278e0536cb7",
+                "bytes": 13728
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-comparison\\browser-downloads\\1440-csv-large\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "f99f2f0a3b00063a9ebb8d787dec8b3eed832d8d113e03c4bb0de5a8569f6bc7",
+                "bytes": 4559
+              }
+            }
+          }
+        ],
+        "screenshots": [
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\1440-csv-baseline-summary.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\1440-csv-baseline-detail.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\1440-csv-baseline-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\390-csv-baseline-summary.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\390-csv-baseline-detail.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\390-csv-baseline-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\1440-xlsx-baseline-summary.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\1440-xlsx-baseline-detail.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\1440-xlsx-baseline-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\390-xlsx-baseline-summary.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\390-xlsx-baseline-detail.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\390-xlsx-baseline-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\390-csv-equal-summary.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\390-csv-equal-html.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\1440-csv-large-summary.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\1440-csv-large-detail.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-comparison\\1440-csv-large-html.png"
+        ]
+      },
+      "d07-operations": {
+        "kind": "LOCAL_CONTRACT_RECEIPT_WITH_ACTUAL_PRODUCT_UI_API_REPAIR_AND_COMPARISON",
+        "official_pg_verified": false,
+        "rows": [
+          {
+            "width": 390,
+            "profile": "RP01",
+            "action": "expiry-missing-file-restore-keyboard",
+            "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+            "expected": {
+              "B2": 12000,
+              "B3": 3500,
+              "H2": 15500,
+              "F12": 12200
+            },
+            "screen_expected_match": true,
+            "expired_plan_removed": true,
+            "missing_package_blocked": true,
+            "same_order_retry": true,
+            "same_input_restored": true,
+            "new_approval_unchecked": true,
+            "order_create_count": 1,
+            "files": {
+              "REPAIRED_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-operations\\browser-downloads\\390-keyboard-repair\\REPAIRED_XLSX.xlsx",
+                "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+                "bytes": 2046
+              },
+              "CHANGES_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-operations\\browser-downloads\\390-keyboard-repair\\CHANGES_XLSX.xlsx",
+                "sha256": "1c4d7dcc4198b28522382a2f77961da0beacfb5a9bfae1f07ea6bf5e5c1470dc",
+                "bytes": 9043
+              },
+              "VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-operations\\browser-downloads\\390-keyboard-repair\\VERIFICATION_HTML.html",
+                "sha256": "81e2ca6c1aa11e1c9da55d69150270cae0abd0d723199fbbee44f76b201a4300",
+                "bytes": 4132
+              }
+            },
+            "retry_file": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-operations\\browser-downloads\\retry-repaired.xlsx",
+              "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8"
+            }
+          },
+          {
+            "width": 390,
+            "profile": "COMPARISON",
+            "action": "revisit-keyboard-focus",
+            "order_id": "wc_a7a697ed877447cfb1971bd7ebc9943f",
+            "screen_expected_match": true,
+            "return_focus_restored": true,
+            "expected": {
+              "source_rows": 14,
+              "A": "47900",
+              "B": "51000"
+            },
+            "files": {
+              "COMPARISON_REPORT_XLSX": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-operations\\browser-downloads\\390-comparison-resume\\COMPARISON_REPORT_XLSX.xlsx",
+                "sha256": "68f0301cfb67872bd67b94541a50a6e7c087181520873c05991bbb9aecb4fe7e",
+                "bytes": 14705
+              },
+              "COMPARISON_VERIFICATION_HTML": {
+                "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d07-operations\\browser-downloads\\390-comparison-resume\\COMPARISON_VERIFICATION_HTML.html",
+                "sha256": "95c38ccfa5ef9f5813d1e2b27a180677817df4878b538fb4b1a27737265c6f0f",
+                "bytes": 6795
+              }
+            }
+          }
+        ],
+        "screenshots": [
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-operations\\390-plan-expired.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-operations\\390-keyboard-repair-ready.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-operations\\390-missing-package-blocked.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-operations\\390-same-order-recovered.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-operations\\390-input-expired.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-operations\\390-restored-new-approval-required.png",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d07-operations\\390-comparison-resume-exact.png"
+        ]
+      }
+    },
+    "excel": {
+      "d07": {
+        "excel_build": 20326,
+        "official_pg_verified": false,
+        "excel_version": "16.0",
+        "kind": "ACTUAL_PRODUCT_DOWNLOADS_REOPENED_IN_INSTALLED_EXCEL",
+        "results": [
+          {
+            "profile": "RP02",
+            "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+            "unchanged": true,
+            "expected_match": true,
+            "kind": "REPAIRED_XLSX"
+          },
+          {
+            "profile": "RP02",
+            "sha256": "7b69fb083452ede58aa41eeb37c72ffac87f291a3d6eb935221f96ccd2a29aad",
+            "unchanged": true,
+            "expected_match": true,
+            "kind": "CHANGES_XLSX"
+          },
+          {
+            "profile": "RP01",
+            "sha256": "564ae2d937158ca2eedcf06bd6212439df04e12bf9a287df0799f50d034b1056",
+            "unchanged": true,
+            "expected_match": true,
+            "kind": "REPAIRED_XLSX"
+          },
+          {
+            "profile": "RP01",
+            "sha256": "538121390e8518e75319e3e2e1beff93961d46d5431abdbcb26e467ce83157ae",
+            "unchanged": true,
+            "expected_match": true,
+            "kind": "CHANGES_XLSX"
+          },
+          {
+            "profile": "COMPARISON",
+            "sha256": "d4fe1e0e22c08c25f7c13c923b3309aa01b19250034c5fea0c2e3a4e06d231c4",
+            "unchanged": true,
+            "expected_match": true,
+            "kind": "COMPARISON_REPORT_XLSX"
+          }
+        ],
+        "status": "PASS"
+      },
+      "d07-comparison": {
+        "status": "PASS",
+        "excel_version": "16.0",
+        "excel_build": 20326,
+        "results": [
+          {
+            "sha256": "3f7949d98098bd5085eea107ebe5debcd9c1a41a23eb2e1b4e7bc0ffe0341080",
+            "width": 1440,
+            "case": "baseline",
+            "expected_matched": true,
+            "kind": "csv",
+            "no_formulas": true,
+            "source_rows": 14
+          },
+          {
+            "sha256": "3354537073a9aeaf0a910c18f87fb332966ff97a9753e99bbc7733c3dbf0595b",
+            "width": 390,
+            "case": "baseline",
+            "expected_matched": true,
+            "kind": "csv",
+            "no_formulas": true,
+            "source_rows": 14
+          },
+          {
+            "sha256": "8b38f31ae60d207a47e75d3074b797dd2c102716482e6a60c8dc0ba83be3d357",
+            "width": 1440,
+            "case": "baseline",
+            "expected_matched": true,
+            "kind": "xlsx",
+            "no_formulas": true,
+            "source_rows": 14
+          },
+          {
+            "sha256": "18abfb011687e9f265f815baf469a4f5c9d2854a5e9f751a666c0a3d360a8155",
+            "width": 390,
+            "case": "baseline",
+            "expected_matched": true,
+            "kind": "xlsx",
+            "no_formulas": true,
+            "source_rows": 14
+          },
+          {
+            "sha256": "55d1915aa3d78f24ceca32dab06605a5882e17291af192f44fb39e6834d3857f",
+            "width": 390,
+            "case": "equal",
+            "expected_matched": true,
+            "kind": "csv",
+            "no_formulas": true,
+            "source_rows": 4
+          },
+          {
+            "sha256": "3d8773db144e932c2788d45555bac1df7ea822940e07836b379e1278e0536cb7",
+            "width": 1440,
+            "case": "large",
+            "expected_matched": true,
+            "kind": "csv",
+            "no_formulas": true,
+            "source_rows": 2
+          }
+        ],
+        "kind": "ACTUAL_DOWNLOADED_COMPARISON_REPORTS_REOPENED_IN_INSTALLED_EXCEL"
+      },
+      "d07-operations": {
+        "excel_build": 20326,
+        "official_pg_verified": false,
+        "excel_version": "16.0",
+        "kind": "ACTUAL_PRODUCT_DOWNLOADS_REOPENED_IN_INSTALLED_EXCEL",
+        "results": [
+          {
+            "profile": "RP01",
+            "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+            "unchanged": true,
+            "expected_match": true,
+            "kind": "REPAIRED_XLSX"
+          },
+          {
+            "profile": "RP01",
+            "sha256": "1c4d7dcc4198b28522382a2f77961da0beacfb5a9bfae1f07ea6bf5e5c1470dc",
+            "unchanged": true,
+            "expected_match": true,
+            "kind": "CHANGES_XLSX"
+          },
+          {
+            "profile": "RP01",
+            "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+            "unchanged": true,
+            "expected_match": true,
+            "kind": "RETRY_REPAIRED_XLSX"
+          },
+          {
+            "profile": "COMPARISON",
+            "sha256": "68f0301cfb67872bd67b94541a50a6e7c087181520873c05991bbb9aecb4fe7e",
+            "unchanged": true,
+            "expected_match": true,
+            "kind": "COMPARISON_REPORT_XLSX"
+          }
+        ],
+        "status": "PASS"
+      }
+    },
+    "actual_browser_paths": 12,
+    "saved_screenshots": 35,
+    "representative_screens_visually_inspected": 14,
+    "actual_xlsx_excel_reopens": 15,
+    "owner_files_unchanged": 83,
+    "original_samples_unchanged": 68,
+    "repair_reference": {
+      "status": "PASS",
+      "case_count": 20,
+      "excel_version": "16.0",
+      "reference_digest": "b745516a9844401a05276476f1d07376c51dc675d10f7488cfaed962dbcc6eab"
+    },
+    "repair_compatibility": {
+      "status": "PASS",
+      "excel_version": "16.0",
+      "profiles": [
+        "RP01",
+        "RP02"
+      ],
+      "evidence_digest": "ea268506921f994240b229c525bb6cf46b3fef04acb54ab812dd519063f373c1"
+    }
+  },
+  "commands": [
+    {
+      "command": "pytest comparison_service delivery_execution payment_delivery -q",
+      "exit_code": 0,
+      "tests": 36
+    },
+    {
+      "command": "pytest delivery_operations payment_delivery -q",
+      "exit_code": 0,
+      "tests": 25
+    },
+    {
+      "command": "pytest tests/test_delivery_operations.py -k actual_lifespan -q",
+      "exit_code": 0,
+      "tests": 1
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+      "exit_code": 0
+    },
+    {
+      "command": "python scripts/verify_delivery_local.py --stage d07 --script verify-payment-delivery.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "python scripts/verify_delivery_local.py --stage d07-comparison --script verify-comparison-output.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "python scripts/verify_delivery_local.py --stage d07-operations --script verify-delivery-operations.mjs",
+      "exit_code": 0,
+      "final_guard_rerun": true
+    },
+    {
+      "command": "powershell scripts/verify_payment_delivery_excel.ps1 -Stage d07 / d07-operations",
+      "exit_code": 0,
+      "actual_reopens": 9
+    },
+    {
+      "command": "powershell scripts/verify_comparison_excel.ps1 -Stage d07-comparison",
+      "exit_code": 0,
+      "actual_reopens": 6
+    },
+    {
+      "command": "npm run build --workspace @workbookcare/web; ruff check apps/api",
+      "exit_code": 0
+    }
+  ],
+  "recovered_failures": [
+    {
+      "exit_code": 1,
+      "cause": "Draft Ruff import order/line lengths; corrected before target/full verification."
+    }
+  ],
+  "not_run": [
+    "Hosted deployment/Access screen of D02-D07 and Linux runtime: Docker daemon unavailable, restart permission unanswered",
+    "Official PG sandbox/checkout SDK/external provider callback and durable commerce ledger",
+    "Production legal/price/tax/retention/refund/support owner decisions and real user observations",
+    "Max-sized/concurrent combined workload capacity proof (D08 measurement pending)",
+    "Hard OS deadline for parent-side OOXML patch/static scan itself; file/cell caps bound input, calculation/report child deadlines are verified separately",
+    "Git remote push, production/anonymous release, real customer files, new paid resources, H2/H3 remaining gates"
+  ],
+  "readiness_limits": [
+    "Local test receipts are not official PG proof; engineering verification does not establish market accuracy or commerce readiness",
+    "Current 24h ledger is synthetic-only ephemeral storage, not legally approved accounting retention",
+    "Windows process limits were actually exercised; Linux and target cloud packaging are not inferred from local results"
+  ],
+  "next": "D08 approved final holdout E2E/negative matrix/release manifest; stop after D08"
+}

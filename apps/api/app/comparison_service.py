@@ -10,12 +10,14 @@ import time
 import uuid
 from pathlib import Path
 
-from .comparison_artifacts import REQUIRED, make_comparison_artifacts, validate_comparison_artifacts
+from .comparison_artifacts import REQUIRED
 from .comparison_engine import engine_fingerprint
 from .comparison_process import run_comparison
+from .delivery_artifact_process import make_comparison_artifacts, validate_package
 from .delivery_execution import ACTIVE, CONTROLS, CONTROLS_LOCK
 from .delivery_execution_control import ExecutionControl, execution_scope
 from .delivery_inputs import MAX_BYTES, digest, reject
+from .delivery_operations import claim_attempt
 from .errors import WorkbookCareError
 
 PRODUCT = "TWO_FILE_COMPARISON"
@@ -162,6 +164,7 @@ def prepare_comparison(store, job, body, settings):
     spec = body.get("spec")
     if not isinstance(spec, dict) or len(json.dumps(spec)) > 100_000:
         reject("COMPARISON_SPEC_INVALID", "비교 기준과 제외 범위를 확인하세요.")
+    claim_attempt(store, job, "COMPARISON_PLAN")
     result = run_comparison(process_message(store, job, spec))
     raw_issues = []
     duplicates = []
@@ -255,6 +258,7 @@ def execute_comparison(store, job, body, settings):
         and body.get("acknowledge_limitations") is not True
     ):
         reject("COMPARISON_LIMITATIONS_REQUIRED", "중복·자료오류는 보류된다는 제한을 확인하세요.")
+    claim_attempt(store, job, "EXECUTION")
     control = ExecutionControl()
     key = (str(store.path), job["id"])
     with CONTROLS_LOCK:
@@ -282,7 +286,7 @@ def execute_comparison(store, job, body, settings):
                 reject("COMPARISON_RECHECK_FAILED", "실행 결과가 고정된 비교 기준과 다릅니다.", 422)
             control.check()
             package = make_comparison_artifacts(actual, job)
-            validate_comparison_artifacts(package, actual)
+            validate_package(package, REQUIRED)
             control.check()
             current = store.load(job["owner"], job["id"])
             require_right(current, settings)

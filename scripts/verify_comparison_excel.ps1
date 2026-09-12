@@ -1,6 +1,7 @@
-﻿$ErrorActionPreference='Stop'
+﻿param([ValidateSet('d05','d07-comparison','d08-comparison')][string]$Stage='d05')
+$ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
-$dir=Join-Path $root 'artifacts/verification/d05'
+$dir=Join-Path $root ('artifacts/verification/'+$Stage)
 $evidence=Get-Content -LiteralPath (Join-Path $dir 'browser.json') -Raw -Encoding UTF8|ConvertFrom-Json
 $excel=$null;$results=@()
 try{

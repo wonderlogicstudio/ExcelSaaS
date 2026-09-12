@@ -2,7 +2,7 @@
   "schema_version": 1,
   "copy_over_existing_progress": false,
   "prior_progress_path": "../10_PROGRESS.md",
-  "active_bundle": "D07",
+  "active_bundle": "D08",
   "bundles": {
     "D01": {
       "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
@@ -438,9 +438,26 @@
       "commerce_ready": false,
       "pg_sandbox": "NOT_RUN",
       "checkout_sdk": "NOT_CONNECTED",
-      "beta_deployment": "PENDING_DOCKER_ENGINE_RECOVERY"
+      "beta_deployment": "PENDING_DOCKER_ENGINE_RECOVERY",
+      "implementation_commit": "b56ef1723b4b4904c5f61a6bb762d52dc6d3be28"
     },
     "D07": {
+      "status": "PARTIAL",
+      "development_approved": true,
+      "owner_acceptance": "PENDING",
+      "history": [
+        {
+          "status": "IN_PROGRESS",
+          "reason": "before D07 runtime/browser/Excel evidence"
+        }
+      ],
+      "local_engineering": "VERIFIED_AWAITING_OWNER",
+      "review": "reviews/D07.md",
+      "evidence": "reviews/evidence/D07-local.json",
+      "commerce_ready": false,
+      "beta_deployment": "PENDING_DOCKER_ENGINE_RECOVERY"
+    },
+    "D08": {
       "status": "IN_PROGRESS",
       "development_approved": true,
       "owner_acceptance": "PENDING"
@@ -453,12 +470,12 @@
     },
     "repair_delivery": "LOCAL_ENGINEERING_VERIFIED_HOSTED_AND_COMMERCE_PENDING",
     "comparison_delivery": "LOCAL_ENGINEERING_VERIFIED_HOSTED_AND_COMMERCE_PENDING",
-    "operations": "HOSTED_BETA_NOT_READY_PRESERVED",
+    "operations": "LOCAL_GUARDS_VERIFIED_HOSTED_AND_POLICY_PENDING",
     "owner_release_approved": false,
     "commercial_signal": "NOT_OBSERVED"
   },
   "customer_change_approval": "IMPLEMENTED_LOCAL_SYNTHETIC_ONLY_D04",
-  "next_recommended_bundle": "D07",
+  "next_recommended_bundle": "D08",
   "next_bundle_approved": true,
   "execution_stopped_after": null,
   "deployment_authorization": {

@@ -1,5 +1,10 @@
 # Current milestone
 
+## ACTIVE APPROVED — D08 (2026-09-13)
+
+D07 local UI/TTL/private access/child reports/recovery verified. Hosted/Linux/PG and commercial policy remain PARTIAL. Read 07_ACCEPTANCE_AND_RELEASE.md and 02_CUSTOMER_OUTPUTS.md. Run new immutable synthetic holdouts through actual UI/API/engine/artifacts, inspect expected on-screen values and installed Excel, add missing negative acceptance, and produce SKU-specific release_manifest. Do not convert NOT_RUN to PASS. Final owner review and stop after D08; no new milestone, remote push, real payment, prices, paid resources or anonymous release.
+
+
 ## ACTIVE APPROVED — D07 (2026-09-13)
 
 D06 local order/separate approval/recovery and actual UI/download/Excel verified; official PG sandbox/SDK and hosted/Linux remain PARTIAL. Read SECURITY_OPERATIONS.md and UX_AND_MENU.md. Reuse existing gates and strengthen UX, TTL, private access, cancellation, resource limits and operating evidence. Latest D01–D08 authorization applies; final owner review after D08. No live payment, remote push, prices, new paid resources or anonymous release.

@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import {OrderStatus} from './OrderStatus';
 import {RepairPlanPreview} from './RepairPlanPreview';
 import { resolveApiBaseUrl } from '../lib/api';
 
@@ -26,10 +25,11 @@ const reasons:Record<string,string>={
 };
 const cellTypes:Record<string,string>={text:'문자',number:'숫자',formula:'수식',blank:'빈 셀',boolean:'논리값',error:'오류',date:'날짜'};
 const apiBase=resolveApiBaseUrl(import.meta.env.VITE_API_BASE_URL,import.meta.env.PROD);
+export class DeliveryRequestError extends Error{constructor(message:string,public code:string){super(message)}}
 export async function deliveryRequest<T>(body:object,signal?:AbortSignal):Promise<T>{
   const response=await fetch(`${apiBase}/v1/delivery`,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json','X-WorkbookCare-CSRF':'1'},body:JSON.stringify(body),signal});
   const result=await response.json();
-  if(!response.ok)throw new Error(result.error?.message??'작업을 처리하지 못했습니다. 최신 상태를 다시 확인하세요.');
+  if(!response.ok)throw new DeliveryRequestError(result.error?.message??'작업을 처리하지 못했습니다. 최신 상태를 다시 확인하세요.',result.error?.code??'REQUEST_FAILED');
   return result as T;
 }
 function fileBase64(file:File):Promise<string>{return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error('파일을 읽지 못했습니다.'));reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.readAsDataURL(file);});}
@@ -41,11 +41,13 @@ export function DeliveryWorkspace({file,initialJob}:{file?:File;initialJob?:Deli
   const [role,setRole]=useState('');const [anchor,setAnchor]=useState('');const [formula,setFormula]=useState('');const [confirmed,setConfirmed]=useState(false);
   const [dirty,setDirty]=useState(false);const [maxBytes,setMaxBytes]=useState<number|null>(null);const abort=useRef<AbortController|null>(null);
   const heading=useRef<HTMLHeadingElement>(null);
+  const expire=()=>{setJob(null);setConsent(false);setConfirmed(false);setError('원본 보관이 만료되었습니다. 기존 주문에서 복구 또는 취소를 선택하고 같은 원본을 새로 업로드하세요.');};
+  useEffect(()=>{if(!job)return;const timer=setTimeout(expire,Math.max(0,job.expires_at*1000-Date.now()));return()=>clearTimeout(timer)},[job?.job_id,job?.expires_at]);
   useEffect(()=>()=>abort.current?.abort(),[]);
   useEffect(()=>{const p=initialJob?.policy;if(p){setProfile(p.profile);setSheet(p.sheet);setTargets(p.targets.join(', '));setRole(p.role??'');setAnchor(p.anchor??'');setFormula(p.anchor_formula??'');setConfirmed(p.confirmed)}},[initialJob]);
   const run=async(work:(signal:AbortSignal)=>Promise<void>)=>{
     abort.current?.abort();const controller=new AbortController();abort.current=controller;setBusy(true);setError(null);
-    try{await work(controller.signal);}catch(e){if(!controller.signal.aborted)setError(e instanceof Error?e.message:'작업을 처리하지 못했습니다.');}
+    try{await work(controller.signal);}catch(e){if(!controller.signal.aborted){if(e instanceof DeliveryRequestError&&['INPUT_EXPIRED','JOB_NOT_FOUND'].includes(e.code))expire();else setError(e instanceof Error?e.message:'작업을 처리하지 못했습니다.');}}
     finally{if(!controller.signal.aborted)setBusy(false);}
   };
   const edit=(change:()=>void)=>{change();setConfirmed(false);setDirty(true);};
@@ -63,16 +65,17 @@ export function DeliveryWorkspace({file,initialJob}:{file?:File;initialJob?:Deli
       policy:{profile,sheet,targets:targets.split(/[\s,]+/).filter(Boolean).map(x=>x.toUpperCase()),role,anchor:anchor.toUpperCase(),anchor_formula:formula,confirmed}},signal);
     setJob(next);setDirty(false);
   });
-  if(!open)return <section className="delivery-entry shell"><h3>수정할 범위를 먼저 확인하세요</h3><p>지원하는 변경 종류와 원본 조건을 확인하는 사전 검사입니다. 현재 결제와 파일 수정은 제공하지 않습니다.</p>
+  if(!open)return <section className="delivery-entry shell"><h3>수정할 범위를 먼저 확인하세요</h3><p>지원하는 변경 종류와 원본 조건을 확인하는 사전 검사입니다. 일반 구매는 준비 중이며, 합성 시험에서만 별도 승인 후 사본을 만듭니다.</p>
     <button className="button button--outline" type="button" disabled={busy} onClick={start}>수정 범위 사전 확인</button>{error&&<p role="alert">{error}</p>}</section>;
   return <section id="repair-preflight" className="delivery-workspace shell" aria-label="수정 범위 사전 확인">
     <h2 ref={heading} tabIndex={-1}>수정 범위 사전 확인</h2><p>원본을 고정하고, 직접 지정한 업무 기준과 셀만 확인합니다. 이 확인은 변경 승인이 아닙니다.</p>
-    <p className="delivery-beta-note">합성 파일용 사전 검사 베타 · 실제 결제 없음. 별도 내부 검증권이 있는 합성 작업만 승인 후 사본을 만들 수 있습니다. 작업은 15분 뒤 만료되며 서버 재시작 시 사라질 수 있습니다.</p>
+    <p className="delivery-beta-note">합성 파일 시험 · 일반 구매 준비 중 · 원본과 결과 15분 보관</p>
+    {job&&<p className="delivery-current-step" role="status">{job.status==='READY'?'현재 단계: 검증 완료 · 세 파일 받기':job.status==='PLAN_EXPIRED'?'변경계획이 만료되었습니다. 다시 계산하고 새로 승인하세요.':job.status==='CANCELLED'?'현재 단계: 취소 완료':job.approval_status==='APPROVED'?'현재 단계: 승인 완료 · 사본 생성':job.entitlement_active?'현재 단계: 정확한 변경 검토·별도 승인':job.plan_summary?'현재 단계: 범위 확인 완료 · 테스트 주문':'현재 단계: 수정 기준·지원 범위 확인'}</p>}
     {!job ? <div className="delivery-step"><h3>1. 원본 고정</h3><p>{file?.name??'고정된 합성 원본'} · {maxBytes===null?'지원 한도 확인 중':`최대 ${maxBytes/1024/1024}MiB`}</p>
       <label className="delivery-check"><input type="checkbox" checked={consent} onChange={e=>setConsent(e.target.checked)}/>업로드 권한이 있는 합성 파일이며 사전 검사와 임시 보관에 동의합니다.</label>
       <button className="button button--primary" type="button" disabled={busy||!consent} onClick={upload}>원본 고정하고 계속</button></div>
       : <><p className="delivery-source-status">원본 고정 완료 · 변경하지 않음 · {job.sheets.length}개 시트</p>
-        <fieldset className="delivery-step" disabled={busy||['APPROVED','RUNNING','CANCEL_REQUESTED','READY'].includes(job.status)}><legend>2. 수정 기준 확인</legend>
+        <details className="delivery-criteria" open={!job.preflight||dirty}><summary>선택한 수정 기준과 대상 확인</summary><fieldset className="delivery-step" disabled={busy||['APPROVED','RUNNING','CANCEL_REQUESTED','READY'].includes(job.status)}><legend>2. 수정 기준 확인</legend>
           <div className="delivery-form-grid"><label>수정 종류<select aria-label="수정 종류" value={profile} onChange={e=>edit(()=>setProfile(e.target.value))}><option value={RP01}>숫자 텍스트의 타입 정리</option><option value={RP02}>승인할 기준 수식으로 빈 셀 복원</option></select></label>
             <label>대상 시트<select aria-label="대상 시트" value={sheet} onChange={e=>edit(()=>setSheet(e.target.value))}>{job.sheets.map(s=><option key={s.name}>{s.name}</option>)}</select></label>
             <label>대상 셀<input aria-label="대상 셀" value={targets} onChange={e=>edit(()=>setTargets(e.target.value))} placeholder="예: B2, B3"/><small>각 셀을 쉼표로 구분하세요. 범위를 자동 확대하지 않습니다.</small></label>
@@ -81,16 +84,15 @@ export function DeliveryWorkspace({file,initialJob}:{file?:File;initialJob?:Deli
           </div>
           <label className="delivery-check"><input type="checkbox" checked={confirmed} onChange={e=>{setConfirmed(e.target.checked);setDirty(true);}}/>{profile===RP01?'선택한 셀은 ID가 아닌 금액·수량 필드이며 지정한 숫자 해석을 적용합니다.':'기준 수식을 확인했으며 선택한 빈 셀에도 같은 업무 규칙을 적용합니다.'}</label>
           <button className="button button--primary" type="button" disabled={busy||!targets||!confirmed} onClick={check}>선택한 범위 사전 검사</button>
-        </fieldset>
+        </fieldset></details>
         {dirty&&job.preflight&&<p role="status">기준이 바뀌었습니다. 새 기준으로 다시 검사해야 합니다.</p>}
-        {job.preflight&&!dirty&&<section className="delivery-preflight-result" aria-label="사전 검사 결과"><h3>3. 사전 검사 결과</h3>
+        {job.preflight&&!dirty&&!job.plan_summary&&<section className="delivery-preflight-result" aria-label="사전 검사 결과"><h3>3. 사전 검사 결과</h3>
           <strong>{job.preflight.status==='PRELIMINARY_ONLY'?'대상 형식 확인 · 추가 검증 필요':'선택한 범위의 수정 조건 미충족'}</strong>
           <p>형식 조건 충족 {job.preflight.eligible_count}건</p><p>{job.plan_summary?'아래에서 변경계획과 승인 단계를 확인하세요. 현재 일반 구매는 제공하지 않습니다.':'다음 단계에서 계산 영향을 확인할 수 있습니다. 아직 수정 가능 또는 견적 가능 상태가 아닙니다.'}</p>
           <ul>{[...new Set([...job.preflight.reason_codes,...job.preflight.targets.flatMap(t=>t.reason_codes)])].map(code=><li key={code}>{reasons[code]??'지원 범위를 충족하지 않습니다. 현재는 수동 확인이 필요합니다.'}</li>)}</ul>
           <table className="delivery-targets"><caption>선택한 셀의 실제 사전 검사</caption><thead><tr><th>위치</th><th>현재 타입</th><th>확인 결과</th></tr></thead><tbody>{job.preflight.targets.map(t=><tr key={t.sheet+t.cell}><td>{t.sheet} · {t.cell}</td><td>{cellTypes[t.current_type]??t.current_type}</td><td>{t.eligible?'형식 조건 충족':'지원 제외'}</td></tr>)}</tbody></table>
-          <button className="button button--primary" type="button" disabled>견적·수정 실행 준비 중</button>
+
         </section>}
-        {job.plan_summary&&!dirty&&<OrderStatus job={job} onRefresh={async()=>setJob(await deliveryRequest<DeliveryJob>({action:'get',job_id:job.job_id}))}/>}
         {job.preflight?.status==='PRELIMINARY_ONLY'&&!dirty&&<RepairPlanPreview job={job} onJob={setJob}/>}
         <div className="delivery-actions"><button className="button button--outline" type="button" disabled={busy} onClick={()=>run(async signal=>{setJob(await deliveryRequest<DeliveryJob>({action:'get',job_id:job.job_id},signal));})}>최신 작업 상태 확인</button>
           <button className="button button--ghost" type="button" disabled={busy} onClick={()=>run(async signal=>{const next=await deliveryRequest<DeliveryJob|{status:'DELETED'}>({action:'delete',job_id:job.job_id},signal);if(next.status==='DELETED'){setJob(null);setConsent(false);setConfirmed(false);}else{setJob(next as DeliveryJob);}})}>사전 검사 원본 삭제</button></div>

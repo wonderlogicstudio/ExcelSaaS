@@ -144,15 +144,11 @@ def project_order(store, order):
     delivery = state.get("delivery") if state else None
     broken = False
     if delivery:
-        with store.connection() as db:
-            kinds = {
-                r["kind"]
-                for r in db.execute(
-                    "SELECT kind FROM delivery_artifacts WHERE job_id=? AND delivery_id=?",
-                    (order["job_id"], delivery["delivery_id"]),
-                )
-            }
-        broken = kinds != set(order["artifact_kinds"])
+        from .delivery_storage_validation import stored_delivery_valid
+
+        broken = not stored_delivery_valid(
+            store, order["job_id"], delivery, order["artifact_kinds"]
+        )
         if broken:
             delivery = None
     return {
@@ -241,6 +237,19 @@ def create_order(store, job, body, settings):
                         409,
                     )
                 return order
+        if job["expires"] - now < 120:
+            reject(
+                "INPUT_TOO_CLOSE_TO_EXPIRY",
+                "원본 보관 시간이 부족합니다. 새 입력으로 다시 확인하세요.",
+                409,
+            )
+        if (
+            db.execute(
+                "SELECT COUNT(*) FROM payment_orders WHERE owner=?", (job["owner"],)
+            ).fetchone()[0]
+            >= 20
+        ):
+            reject("ORDER_LIMIT", "합성 주문 보관 한도에 도달했습니다.", 429)
         order = {
             "id": "wc_" + uuid.uuid4().hex,
             "owner": job["owner"],
@@ -512,6 +521,12 @@ def event_hint(store, owner, order_id, event_id, settings):
         db.execute(
             "INSERT OR IGNORE INTO payment_events VALUES (?,?,?)",
             (order_id, digest(event_id), time.time()),
+        )
+        db.execute(
+            "DELETE FROM payment_events WHERE order_id=? AND event_hash NOT IN "
+            "(SELECT event_hash FROM payment_events WHERE order_id=? "
+            "ORDER BY created DESC LIMIT 128)",
+            (order_id, order_id),
         )
     # Payload status/amount are never evidence. Always query the fixed provider order.
     return perform(store, owner, order["id"], "query", settings)

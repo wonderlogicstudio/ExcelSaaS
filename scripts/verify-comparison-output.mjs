@@ -7,7 +7,7 @@ import {pathToFileURL} from 'node:url';
 import {createHash} from 'node:crypto';
 const root=resolve('.');const require=createRequire(import.meta.url);
 const {chromium}=require(join(root,'artifacts/verification/d01/browser-runtime/node_modules/playwright'));
-const output=join(root,'artifacts/verification/d05');const pictures=join(root,'artifacts/screenshots/d05');
+const stage=process.env.DELIVERY_VERIFICATION_STAGE??'d05';const output=join(root,'artifacts/verification',stage);const pictures=join(root,'artifacts/screenshots',stage);
 await mkdir(output,{recursive:true});await mkdir(pictures,{recursive:true});
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const evidence={kind:'ACTUAL_PRODUCT_COMPARISON_UI_API_CHILD_AND_DOWNLOADED_REPORTS',rows:[],screenshots:[]};
@@ -38,7 +38,7 @@ try{
   assert.deepEqual(complete.result.summary.counts,expected.counts);
   assert.ok((await results.locator('[data-comparison-summary]').innerText()).includes(`전체 ${expected.groups}그룹`));
   assert.equal(await results.locator('[data-comparison-total=A]').innerText(),expected.A);assert.equal(await results.locator('[data-comparison-total=B]').innerText(),expected.B);
-  for(const [status,count] of Object.entries(expected.counts))assert.ok((await results.locator(`[data-comparison-status=${status}]>summary`).innerText()).includes(`${count}그룹`));
+  for(const [status,count] of Object.entries(expected.counts)){const group=results.locator(`[data-comparison-status=${status}]>summary`);if(count===0)assert.equal(await group.count(),0);else assert.ok((await group.innerText()).includes(`${count}그룹`));}if(caseName==='equal')await results.getByText(/선택한 범위에서 금액 차이가 없습니다/).waitFor();
   let shot=join(pictures,`${width}-${kind}-${caseName}-summary.png`);await page.screenshot({path:shot});evidence.screenshots.push(shot);
   if(expected.key){const group=results.locator('[data-comparison-status=AMOUNT_DIFF]');await group.locator(':scope>summary').click();const record=group.locator(`[data-comparison-key="${expected.key}"]`);await record.locator(':scope>summary').click();assert.equal(await record.locator('[data-comparison-delta]').innerText(),expected.delta);await record.scrollIntoViewIfNeeded();shot=join(pictures,`${width}-${kind}-${caseName}-detail.png`);await page.screenshot({path:shot});evidence.screenshots.push(shot);}
   if(caseName==='baseline'){

@@ -25,6 +25,8 @@ export function ComparisonResults({model}:{model:ComparisonModel}){
   <dl className="comparison-observation"><div><dt>A 알려진 금액 합</dt><dd data-comparison-total="A">{amount(summary.known_amount_totals.A)}원</dd></div><div><dt>B 알려진 금액 합</dt><dd data-comparison-total="B">{amount(summary.known_amount_totals.B)}원</dd></div></dl>
   <p>원천 행과 알려진 금액의 보존식을 확인했습니다. 미상 금액을 0으로 바꾸지 않았으며, 알려진 금액 합은 전체 장부합이나 손실액이 아닙니다.</p>
   <div className="comparison-toolbar"><label>거래번호로 결과 찾기<input value={query} onChange={e=>setQuery(e.target.value)} /></label><button type="button" className="button button--outline" onClick={()=>setTable(!table)}>{table?'분류별 묶음 보기':'전체 원천 행 표 보기'}</button></div><p>현재 표시 {filtered.length}그룹 / 전체 {summary.group_count}그룹 · 내려받는 보고서는 전체 확정 범위입니다.</p>
-  {table?<RowTable rows={filtered.flatMap(r=>[...r.A,...r.B])}/>:['AMOUNT_DIFF','ONLY_A','ONLY_B','AMBIGUOUS','INPUT_ERROR','MATCHED'].map(status=><Group key={status+query} status={status} records={filtered.filter(r=>r.status===status)}/>)}
+  {!query&&model.records.every(r=>r.status==='MATCHED')&&<p className="comparison-all-matched" role="status">선택한 범위에서 금액 차이가 없습니다. 일치한 {summary.group_count}그룹의 위치와 원값을 아래에서 확인할 수 있습니다.</p>}
+  {query&&filtered.length===0&&<p role="status">검색 조건에 맞는 거래가 없습니다. 전체 결과는 유지됩니다.</p>}
+  {table?<RowTable rows={filtered.flatMap(r=>[...r.A,...r.B])}/>:['AMOUNT_DIFF','ONLY_A','ONLY_B','AMBIGUOUS','INPUT_ERROR','MATCHED'].filter(status=>filtered.some(r=>r.status===status)).map(status=><Group key={status+query} status={status} records={filtered.filter(r=>r.status===status)}/>)}
  </section>;
 }

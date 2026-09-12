@@ -62,6 +62,9 @@ def reselect(store, job, body, settings):
     policy = copy.deepcopy(job["state"]["policy"])
     policy["targets"] = [p["cell"] for p in old["patches"] if p["candidate_id"] in ids]
     candidate = {**job, "state": {**job["state"], "policy": policy}}
+    from .delivery_operations import claim_attempt
+
+    claim_attempt(store, job, "PLAN")
     plan = build_plan(candidate, policy)
     validate_paid_scope(store, candidate, plan)
     return store.update(

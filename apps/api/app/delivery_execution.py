@@ -11,7 +11,8 @@ import time
 import uuid
 from pathlib import Path
 
-from .delivery_artifacts import make_artifacts, validate_artifacts
+from .delivery_artifact_process import make_repair_artifacts as make_artifacts
+from .delivery_artifact_process import validate_package
 from .delivery_execution_control import ExecutionControl, execution_scope
 from .delivery_inputs import digest, reject
 from .delivery_patch import patch_workbook, verify_output
@@ -141,6 +142,9 @@ def execute(store, job, settings):
     plan = validate_approval(job, settings)
     if job["state"]["status"] not in {"APPROVED", "QUARANTINED"}:
         reject("EXECUTION_NOT_AVAILABLE", "새 변경계획 승인이 필요합니다.", 409)
+    from .delivery_operations import claim_attempt
+
+    claim_attempt(store, job, "EXECUTION")
     control = ExecutionControl()
     key = (str(store.path), job["id"])
     with CONTROLS_LOCK:
@@ -185,7 +189,7 @@ def execute(store, job, settings):
             for k, v in package["artifacts"].items():
                 (scratch / k).write_bytes(v["data"])
             control.check()
-            validate_artifacts(package, plan)
+            validate_package(package, REQUIRED_ARTIFACTS)
             current = store.load(job["owner"], job["id"])
             validate_approval(current, settings)
             if (

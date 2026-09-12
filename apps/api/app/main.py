@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse
 from .config import formula_audit_is_available, get_settings
 from .control_plane import ControlPlaneHmacMiddleware
 from .delivery_api import router as delivery_router
+from .delivery_operations import DeliveryPrivacyMiddleware, lifespan
 from .errors import WorkbookCareError
 from .m4_release import M4_FORMULA_AUDIT_RELEASE_CANDIDATE_VERSION
 from .models import ErrorBody, ErrorResponse, FormulaAuditResult, ScanResult
@@ -31,6 +32,7 @@ settings = get_settings()
 
 app = FastAPI(
     title="WorkbookCare API",
+    lifespan=lifespan,
     version="0.1.0",
     description=(
         "Static OOXML workbook diagnosis. Macros, formulas, and external links are never executed."
@@ -45,6 +47,7 @@ app.add_middleware(
     allow_headers=["Content-Type", "X-WorkbookCare-CSRF"],
 )
 app.add_middleware(ControlPlaneHmacMiddleware, settings=settings)
+app.add_middleware(DeliveryPrivacyMiddleware)
 app.include_router(delivery_router)
 
 
@@ -59,7 +62,11 @@ async def workbookcare_error_handler(
         safe_error_code=exc.code,
     )
     payload = ErrorResponse(error=ErrorBody(code=exc.code, message=exc.message))
-    return JSONResponse(status_code=exc.status_code, content=payload.model_dump())
+    return JSONResponse(
+        status_code=exc.status_code,
+        content=payload.model_dump(),
+        headers={"Cache-Control": "no-store"},
+    )
 
 
 @app.exception_handler(Exception)
@@ -77,7 +84,9 @@ async def unexpected_error_handler(_request: Request, _exc: Exception) -> JSONRe
             message="요청을 처리하지 못했습니다. 잠시 후 다시 시도해 주세요.",
         )
     )
-    return JSONResponse(status_code=500, content=payload.model_dump())
+    return JSONResponse(
+        status_code=500, content=payload.model_dump(), headers={"Cache-Control": "no-store"}
+    )
 
 
 @app.get("/health")

@@ -7,7 +7,7 @@ import {createHash} from 'node:crypto';
 import {pathToFileURL} from 'node:url';
 const root=resolve('.');const require=createRequire(import.meta.url);
 const {chromium}=require(join(root,'artifacts/verification/d01/browser-runtime/node_modules/playwright'));
-const output=join(root,'artifacts/verification/d06');const pictures=join(root,'artifacts/screenshots/d06');
+const stage=process.env.DELIVERY_VERIFICATION_STAGE??'d06';const output=join(root,'artifacts/verification',stage);const pictures=join(root,'artifacts/screenshots',stage);
 await mkdir(output,{recursive:true});await mkdir(pictures,{recursive:true});
 const browser=await chromium.launch({channel:'chrome',headless:true});
 const evidence={kind:'LOCAL_CONTRACT_RECEIPT_WITH_ACTUAL_PRODUCT_UI_API_REPAIR_AND_COMPARISON',official_pg_verified:false,rows:[],screenshots:[]};
