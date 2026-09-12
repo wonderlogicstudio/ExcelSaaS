@@ -23,12 +23,12 @@ export function integratedAuditState(audit: IntegratedFormulaAudit) {
   return { label: '대기', detail: '구조 검사에 이어 수식 패턴을 확인합니다.', complete: false };
 }
 
-export function UnifiedDiagnosisStatus({ audit, truncated }: { audit: IntegratedFormulaAudit; truncated: boolean }) {
+export function UnifiedDiagnosisStatus({ audit, truncated, compact = false }: { audit: IntegratedFormulaAudit; truncated: boolean; compact?: boolean }) {
   const state = integratedAuditState(audit);
   return <section className="diagnosis-status" aria-label="검사 진행과 범위">
     <div className="diagnosis-status__checks" aria-live="polite">
       <p><strong>구조 위험 검사</strong><span>{truncated ? '부분 완료' : '완료'}</span></p>
-      <p><strong>수식 패턴 검사</strong><span data-audit-status={state.complete ? 'COMPLETED' : audit.busy ? 'PENDING' : 'INCOMPLETE'}>{state.label}</span></p>
+      <p><strong>수식 패턴 검사</strong><span data-audit-status={state.complete ? 'COMPLETED' : audit.busy ? 'PENDING' : 'INCOMPLETE'}>{compact && state.complete ? '완료' : state.label}</span></p>
     </div>
     <p className="diagnosis-status__detail">{state.detail}</p>
     {audit.error && <p role="alert">수식 패턴 검사를 완료하지 못했습니다. 구조 검사 결과는 유지됩니다. {audit.error}</p>}

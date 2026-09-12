@@ -3136,3 +3136,51 @@ p {
   .diagnosis-status__checks { flex-direction: column; }
   .diagnosis-status__checks p { justify-content: space-between; }
 }
+
+/* D01: summary, type explanation once, then cell-specific evidence. */
+.diagnosis-progressive .shell { max-width: 1100px; }
+.diagnosis-progressive .results-header { margin-bottom: 0; }
+.diagnosis-progressive .findings-panel { padding: 22px; margin-top: 24px; }
+.diagnosis-progressive .diagnosis-status { margin: 12px 0; }
+.diagnosis-summary-details, .diagnosis-filters, .diagnosis-result-tools > details, .diagnosis-table-guides { padding: 12px 0; color: #3b5965; }
+.diagnosis-progressive summary { cursor: pointer; min-height: 44px; }
+.diagnosis-summary-details > summary, .diagnosis-filters > summary, .diagnosis-result-tools > details > summary, .diagnosis-table-guides > summary { padding: 12px 0; font-weight: 700; }
+.diagnosis-progressive summary:focus-visible { outline: 3px solid var(--aqua-dark); outline-offset: 3px; }
+.diagnosis-summary-details p, .diagnosis-summary-details li, .diagnosis-reading-guide, .diagnosis-csv p { font-size: .85rem; line-height: 1.65; color: #55717c; }
+.diagnosis-type { padding: 0; overflow: hidden; }
+.diagnosis-type__summary { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 10px 14px; align-items: center; padding: 18px; }
+.diagnosis-type__summary h4 { margin: 0; color: var(--navy); font-size: 1rem; }
+.diagnosis-type__summary .diagnosis-source { grid-column: 2; width: fit-content; margin: 0; padding: 0; background: none; border: 0; font-weight: 500; }
+.diagnosis-type__count { font-weight: 750; color: var(--aqua-dark); }
+.diagnosis-type__summary::after { content: '펼치기'; grid-column: 3; grid-row: 2; font-size: .76rem; color: var(--aqua-dark); }
+.diagnosis-type__disclosure[open] > summary::after { content: '접기'; }
+.diagnosis-type__body { padding: 18px; border-top: 1px solid #d0dfe5; }
+.diagnosis-type__body > code { font-size: .74rem; color: #55717c; }
+.diagnosis-evidence { display: grid; gap: 13px; margin: 16px 0 22px; }
+.diagnosis-evidence dt { font-size: .8rem; font-weight: 750; color: #355865; }
+.diagnosis-evidence dd { margin: 5px 0 0; font-size: .85rem; line-height: 1.65; color: #49616f; overflow-wrap: anywhere; }
+.diagnosis-type__locations-heading { display: flex; align-items: center; justify-content: space-between; margin: 12px 0; }
+.diagnosis-type__locations-heading h5 { font-size: .92rem; margin: 0; }
+.diagnosis-cell { padding: 0; margin: 8px 0; border: 1px solid #d0dfe5; border-radius: 8px; overflow: hidden; }
+.diagnosis-cell__summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px; font-size: .8rem; }
+.diagnosis-cell__summary strong { color: var(--navy); overflow-wrap: anywhere; line-height: 1.5; }
+.diagnosis-cell__summary > span { color: #55717c; }
+.diagnosis-cell__details { border-top: 1px solid #d0dfe5; padding: 14px; }
+.diagnosis-result-tools { border-top: 1px solid #d0dfe5; padding: 22px 0; margin-top: 22px; }
+.diagnosis-next .quote-panel { position: static; max-width: 750px; }
+@media(max-width:760px) {
+ .diagnosis-progressive .findings-panel { padding: 14px; }
+ .diagnosis-type__summary { grid-template-columns: minmax(0,1fr) auto; padding: 15px; }
+ .diagnosis-type__summary .severity { grid-column: 1; width: fit-content; }
+ .diagnosis-type__summary h4 { grid-column: 1 / -1; grid-row: 2; line-height: 1.5; }
+ .diagnosis-type__summary .diagnosis-type__count { grid-column: 2; grid-row: 1; }
+ .diagnosis-type__summary .diagnosis-source { grid-column: 1; grid-row: 3; }
+ .diagnosis-type__summary::after { grid-column: 2; grid-row: 3; }
+ .diagnosis-type__body { padding: 13px; }
+ .diagnosis-cell__summary { flex-wrap: wrap; }
+ .diagnosis-cell__summary strong { flex-basis: 100%; }
+ .diagnosis-type__locations-heading { flex-wrap: wrap; gap: 10px; }
+}
+
+.diagnosis-common-evidence > details > summary { padding: 10px 0; font-size: .82rem; color: var(--aqua-dark); }
+.diagnosis-progressive .diagnosis-status__scope summary { min-height: 0; }

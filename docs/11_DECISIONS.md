@@ -1,5 +1,19 @@
 # Accepted decisions
 
+## APPROVED — D01 hierarchy refinement and D02–D08 execution (2026-09-13)
+
+Latest owner instruction approves summary → type groups → cell evidence, then development through D08.
+Proceed sequentially only after the current unit's implementation, targeted/regression tests and actual UI checks.
+Compare available synthetic expected values on the real screen; record mismatches and repair them before advancing.
+Owner review is deferred until the requested sequence is finished. This latest instruction supersedes prior D01-only/
+per-bundle stop instructions for development, not customer change approval or commercial/production readiness.
+Use existing code/evidence and preserve owner work, history, original fixtures/waivers, free CSV/score and security.
+Deploy verified units to the existing Access-protected beta under standing authorization; no remote Git push,
+real customer data/payment/refund, price decisions, new paid resources, anonymous release or user invitations.
+Unavailable Excel-reference/official PG sandbox evidence remains NOT_RUN and gates live repair/payment readiness;
+finish independent authorized engineering instead of replacing actual evidence with package mocks.
+Work order: D01 UX, D02, D03, D04, D05, D06, D07, D08; stop after D08. Do not claim market leadership as verified.
+
 ## APPROVED — D01 unified diagnosis UX follow-up (2026-09-12)
 
 The owner explicitly approved one upload/progress/result list for structure and M4 findings.

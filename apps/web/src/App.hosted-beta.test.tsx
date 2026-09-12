@@ -52,7 +52,7 @@ describe('approved protected-beta M4 upload flow', () => {
     expect(screen.getByText('구조 위험 0건 · 수식 검토 후보 4건')).toBeInTheDocument();
     expect(document.querySelectorAll('#results .findings-panel')).toHaveLength(1);
     expect(document.querySelector('#formula-audit')).toBeNull();
-    expect(document.querySelector('#results .finding-group__locations')).not.toHaveAttribute('open');
+    expect(document.querySelector('#results .diagnosis-type__disclosure')).not.toHaveAttribute('open');
     expect(screen.queryByRole('button', { name: '도움이 됨' })).not.toBeInTheDocument();
   });
 

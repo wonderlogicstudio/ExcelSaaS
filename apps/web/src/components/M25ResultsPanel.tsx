@@ -29,7 +29,7 @@ import type { FeedbackRepository } from '../lib/feedback';
 import { FindingFeedbackControl, ResultFeedbackPanel } from './FeedbackCapture';
 import { RevalidationPanel } from './RevalidationPanel';
 import { FindingViews } from './FindingViews';
-import { FormulaAuditFindingCard } from './FormulaAuditPanel';
+import { ProgressiveFindingViews } from './ProgressiveFindingViews';
 import { UnifiedDiagnosisStatus, integratedAuditState, type IntegratedFormulaAudit } from './UnifiedDiagnosisStatus';
 import { findingCounts } from '../lib/findingCounts';
 import { diagnosisCsvArtifact, displayedProducts } from '../lib/products';
@@ -434,11 +434,102 @@ function ResultsContent({
     ['정보 제공 · 즉시 수정 불필요', informationOnlyCount, '즉시 수정하지 않아도 되는 구조·성능 참고 항목입니다.'],
   ] as const;
 
+  if (formulaAudit) return (
+    <section className="results-section diagnosis-progressive" id="results" aria-labelledby="results-title">
+      <div className="shell">
+        <div className="results-header"><div>
+          <span className="section-kicker">{formulaAudit.busy ? '검사 진행 중' : auditState?.complete && counts.scan_complete ? '검사 완료' : '일부 검사 완료'}</span>
+          <h2 id="results-title">{resultHeadline}</h2>
+          <p className="diagnosis-breakdown">구조 위험 {structureCounts.total_detected}건 · 수식 검토 후보 {auditState?.complete ? `${candidates.length}건` : '확인 미완료'}</p>
+        </div><button className="button button--ghost" type="button" onClick={onReset}><RotateCcw size={17}/>다른 파일 검사</button></div>
+        <UnifiedDiagnosisStatus audit={formulaAudit} truncated={workbook.scan_truncated} compact />
+        {counts.total_detected===0 && !formulaAudit.busy && <aside className="zero-findings-note" role="note" aria-label="발견 0건 해석">
+          <strong>계산 결과와 업무적 정확성을 보장하지 않습니다.</strong>
+          <p>{auditState?.complete && counts.scan_complete ? '완료한 검사 범위에서 확인할 항목을 찾지 못했습니다.' : '완료하지 못한 검사나 읽지 못한 범위가 남아 있습니다. 검사 진행과 범위를 확인하세요.'}</p>
+        </aside>}
+        <details className="diagnosis-summary-details"><summary>규칙 기반 우선순위 점수 {summary.risk_score} / 100</summary>
+          <p>구조 위험의 우선순위 점수입니다. 수식 검토 후보는 포함하지 않으며 계산·업무 정확도를 뜻하지 않습니다.</p>
+          <p>{result.filename} · {formatFileSize(result.file_size_bytes)} · 시트 {workbook.sheet_count}개 · 내용이 있는 셀 {workbook.scanned_cell_count}개 · 수식 문자열 {workbook.formula_count}개</p>
+          <ul>{result.limitations.map(item=><li key={item}>{item}</li>)}</ul>
+        </details>
+        <div className="findings-panel" ref={findingsHeadingRef} tabIndex={-1}>
+          <div className="panel-heading"><h3 id="all-findings-title">문제 유형별 확인</h3><span>{new Set(allFindings.map(f=>f.rule_code)).size}개 유형</span></div>
+          <p className="diagnosis-reading-guide">유형을 펼쳐 공통 설명을 읽고, 필요한 위치를 선택해 해당 셀의 근거를 확인하세요.</p>
+          <p className="finding-coverage">전체 발견 {counts.total_detected}건 · 반환 상세 {counts.returned_details}건 · 상세 생략 {counts.omitted_details}건 · 필터 표시 {visibleFindings.length}건</p>
+          <details className="diagnosis-filters"><summary>필터 및 전체 항목 표{filtersActive ? ' · 필터 적용 중' : ''}</summary>
+            <fieldset className="finding-view-switch"><legend>결과 보기 방식</legend>
+              <label><input type="radio" name="finding-view" checked={viewMode==='groups'} onChange={()=>setViewMode('groups')}/>유형별 보기</label>
+              <label><input type="radio" name="finding-view" checked={viewMode==='table'} onChange={()=>setViewMode('table')}/>전체 항목 표</label>
+            </fieldset>
+            <fieldset className="finding-filters"><legend>찾아볼 항목 선택</legend><div className="finding-filters__controls">
+              <label><span>검사 종류</span><select aria-label="검사 종류" value={sourceFilter} onChange={event=>setSourceFilter(event.target.value as typeof sourceFilter)}>
+                <option value="all">모든 검사 항목</option><option value="structure">구조 위험</option><option value="formula">수식 검토 후보</option></select></label>
+              <label><span>중요도</span><select aria-label="중요도" value={severityFilter} onChange={event=>setSeverityFilter(event.target.value as SeverityFilter)}>
+                <option value="all">모든 중요도</option><option value="priority">중요·주의 우선 확인</option>
+                {(['critical','warning','info'] as const).map(s=><option key={s} value={s}>{severityLabel[s]}</option>)}</select></label>
+              <label><span>시트</span><select aria-label="시트" value={sheetFilter} onChange={event=>setSheetFilter(event.target.value)}>
+                <option value="all">모든 위치</option>{sheetOptions.map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label>
+              <label><span>처리 상태로 보기</span><select aria-label="처리 상태로 보기" ref={statusFilterRef} value={statusFilter} onChange={event=>setStatusFilter(event.target.value as FindingUserStatus|'all')}>
+                <option value="all">모든 처리 상태</option>{userStatusOptions.map(s=><option key={s} value={s}>{userStatusLabel[s]}</option>)}</select></label>
+            </div><div className="finding-filters__footer"><p>필터는 표시만 바꿉니다. 확인함은 개인 처리 상태이며 변경 승인이 아닙니다.</p>
+              <button className="button button--outline button--small" type="button" disabled={!filtersActive} onClick={resetFilters}>필터 초기화</button></div></fieldset>
+          </details>
+          {visibleFindings.length>0 ? <ProgressiveFindingViews findings={visibleFindings} allFindings={allFindings} mode={viewMode} statuses={viewStatuses}
+            categoryLabel={finding=>formulaEntry(finding)?'수식 검토 후보':'구조 위험'}
+            onStatusChange={(finding,status)=>{updateStatus(finding,status);if(statusFilter!=='all'&&statusFilter!==status)statusFilterRef.current?.focus();}}
+            onReviewGroup={findings=>{if(statusFilter!=='all'&&statusFilter!=='REVIEWED')statusFilterRef.current?.focus();for(const f of findings)updateStatus(f,'REVIEWED');}}/>
+            : allFindings.length>0 ? <p className="empty-result-note">선택한 조건에 맞는 항목이 없습니다. 필터를 초기화하면 전체 발견 항목을 볼 수 있습니다. 이 표시는 파일에 문제가 없다는 뜻이 아닙니다.</p>
+            : counts.total_detected>0 ? <p className="empty-result-note">발견된 항목의 반환 상세가 없습니다. 상세 생략 수와 검사 한계를 확인하세요.</p>
+            : <p className="empty-result-note">완료한 검사에서 반환된 항목이 없습니다. 위의 검사 진행과 범위를 확인하세요.</p>}
+        </div>
+        <div className="diagnosis-result-tools">
+          <div className="diagnosis-csv"><button className="button button--outline" type="button" onClick={()=>downloadDiagnosisCsv(result,statuses)}><Download size={17}/>진단 결과 CSV 다운로드</button>
+            <p>CSV 범위: 구조 검사 결과만 포함 · 수식 검토 후보 제외. 필터 적용 전 반환 상세와 개인 처리 상태를 내보냅니다.</p></div>
+          <details className="diagnosis-handling"><summary>개인 처리 상태 요약</summary><p>확인함·정상으로 판단은 변경 승인이 아닙니다. 이 화면을 열어 둔 동안만 유지됩니다.</p>
+            <div className="user-status-summary">{userStatusOptions.map(s=><span key={s}><strong>{userStatusCounts[s]}</strong>{userStatusLabel[s]}</span>)}</div></details>
+          <details className="diagnosis-revalidation" open={revalidationComparison ? true : undefined}><summary>직접 수정한 파일 다시 검사</summary>
+            <p>직접 재검사 비교는 구조 검사 결과 기준입니다. 수식 후보는 매번 새로 검사합니다.</p>
+            <RevalidationPanel comparison={revalidationComparison} onPrepareRevalidation={onPrepareRevalidation}/></details>
+          <details className="diagnosis-next"><summary>향후 수정 범위와 참고 견적 · 준비 중</summary>
+            <p>미구현 수정 기능은 구매하거나 실행할 수 없습니다. 아래 내용은 현재 구조 검사 결과에 따른 참고 범위입니다.</p>
+                      <aside className="quote-panel" aria-label="정밀검증 예상 범위와 베타 가격 가설">
+            <div className="quote-panel__eyebrow"><Sparkles size={17} />정밀 검증 · 준비 중</div>
+            <h3>{quote.headline}</h3>
+            <div className="quote-price">
+              <strong>{formatPriceRange(quote.amount_min, quote.amount_max, quote.amount)}</strong>
+              <span>{quote.tier} · 베타 예상 가격 범위</span>
+            </div>
+            {quote.pricing_note && <p className="pricing-note">{quote.pricing_note}</p>}
+            <div className="quote-factors">{quote.factors.map((factor) => <span key={factor}>{factor}</span>)}</div>
+            <div className="planned-deliverables">
+              <h4>승인 기반 수정 패키지의 향후 필수 파일 · 준비 중</h4>
+              <ul>{repairProduct.deliverables.map((item) => <li key={item.kind}><FileClock size={16} />{item.label}</li>)}</ul>
+              <p>정밀검증은 패키지에 포함할 검증 활동입니다. 위 참고 금액은 구매권이나 변경 승인이 아닙니다.</p>
+            </div>
+            <div className="scope-list">
+              <h4>예상 범위에 포함</h4>
+              {quote.included.map((item) => <p key={item}><Check size={16} />{item}</p>)}
+            </div>
+            <div className="scope-list scope-list--excluded">
+              <h4>예상 범위에서 제외</h4>
+              {quote.excluded.map((item) => <p key={item}><ChevronRight size={16} />{item}</p>)}
+            </div>
+            <button className="button button--primary button--wide" type="button" disabled>
+              정밀 검증·수정 기능 준비 중<FileClock size={18} />
+            </button>
+            <p className="prototype-note">현재 베타에서는 신청, 결제, 전문가 견적 요청, 실제 파일 수정 기능을 제공하지 않습니다.</p>
+          </aside>
+          </details>
+        </div>
+      </div>
+    </section>
+  );
+
   return (
     <section className="results-section" id="results" aria-labelledby="results-title">
       <div className="shell">
-        <div className="section-kicker"><CheckCircle2 size={17} />{isDemo ? '샘플 진단 결과' : formulaAudit ? formulaAudit.busy ? '검사 진행 중' : auditState?.complete && counts.scan_complete ? '검사 완료' : '일부 검사 완료' : '정적 진단 완료'}</div>
-        {!formulaAudit && <ScanScopeCard truncated={workbook.scan_truncated} />}
+        <div className="section-kicker"><CheckCircle2 size={17} />{isDemo ? '샘플 진단 완료' : '정적 진단 완료'}</div>
+        <ScanScopeCard truncated={workbook.scan_truncated} />
         <div className="results-header">
           <div>
             <h2 id="results-title">{resultHeadline}</h2>
@@ -448,15 +539,7 @@ function ResultsContent({
           <button className="button button--ghost" type="button" onClick={onReset}><RotateCcw size={17} />다른 파일 검사</button>
         </div>
 
-        {formulaAudit && <UnifiedDiagnosisStatus audit={formulaAudit} truncated={workbook.scan_truncated} />}
-        {formulaAudit && <p className="diagnosis-breakdown">구조 위험 {structureCounts.total_detected}건 · 수식 검토 후보 {auditState?.complete ? `${candidates.length}건` : '확인 미완료'}</p>}
-        {formulaAudit && counts.total_detected === 0 && !formulaAudit.busy && (
-          <aside className="zero-findings-note" role="note" aria-label="발견 0건 해석">
-            <strong>계산 결과와 업무적 정확성을 보장하지 않습니다.</strong>
-            <p>{auditState?.complete && counts.scan_complete ? '완료한 검사 범위에서 확인할 항목을 찾지 못했습니다.' : '완료하지 못한 검사나 읽지 못한 범위가 남아 있습니다. 검사 진행과 범위를 확인하세요.'}</p>
-          </aside>
-        )}
-        {!formulaAudit && summary.issue_count === 0 && (
+        {summary.issue_count === 0 && (
           <aside className="zero-findings-note" role="note" aria-label="발견 0건 해석">
             <strong>수식 검증을 통과했다는 뜻은 아닙니다.</strong>
             <p>발견 0건은 이번 무료 구조 검사 규칙에서 항목을 찾지 못했다는 뜻입니다. 수식 패턴 이탈·누락 시험 파일의 오류는 별도 수식 검사 대상이며, 이 무료 결과에 포함되지 않습니다.</p>
@@ -471,26 +554,25 @@ function ResultsContent({
             <div>
               <span className="card-label">탐지된 구조 위험 점수</span>
               <h3>규칙 기반 우선순위 점수 {summary.risk_score} / 100</h3>
-              <p>이 점수는 발견된 구조 위험 신호의 우선순위를 요약한 값입니다. 파일 전체 계산의 정확도, 업무적 정확성, 금전 손실 가능성을 뜻하지 않습니다.{formulaAudit && ' 수식 검토 후보는 이 점수에 포함되지 않습니다.'}</p>
+              <p>이 점수는 발견된 구조 위험 신호의 우선순위를 요약한 값입니다. 파일 전체 계산의 정확도, 업무적 정확성, 금전 손실 가능성을 뜻하지 않습니다.</p>
             </div>
           </article>
           <article className="metric-card">
-            <span className="card-label">{formulaAudit ? '전체 확인 항목' : '발견 항목'}</span><strong>{counts.total_detected}</strong>
+            <span className="card-label">발견 항목</span><strong>{summary.issue_count}</strong>
             <div className="metric-breakdown">
-              {formulaAudit && <span>구조 위험 기준:</span>}
               <span className="metric-dot metric-dot--critical" /> 중요 {summary.critical_count}
               <span className="metric-dot metric-dot--warning" /> 주의 {summary.warning_count}
               <span className="metric-dot metric-dot--info" /> 참고 {summary.info_count}
             </div>
           </article>
           <article className="metric-card">
-            <span className="card-label">{formulaAudit ? '구조 항목의 해결 경로 검토' : '해결 경로 검토 대상'}</span><strong>{repairReviewCandidateCount}</strong>
+            <span className="card-label">해결 경로 검토 대상</span><strong>{repairReviewCandidateCount}</strong>
             <p>수정 후보·사용자 확인·전문가 검토 분류를 합친 수치이며, 현재 수정 가능을 뜻하지 않습니다.</p>
           </article>
           <article className="metric-card">
             <span className="card-label">검사 상태</span>
-            <strong className="metric-card__word">{formulaAudit ? formulaAudit.busy ? '검사 중' : auditState?.complete && counts.scan_complete ? '범위 내 완료' : '일부 검사' : workbook.scan_truncated ? '일부 검사' : '범위 내 완료'}</strong>
-            <p>{formulaAudit ? '각 검사의 완료 여부와 미수행 범위는 위에서 확인하세요.' : workbook.scan_truncated ? '안전 제한으로 일부 셀만 검사했습니다.' : '정의된 무료 검사 범위를 완료했습니다.'}</p>
+            <strong className="metric-card__word">{workbook.scan_truncated ? '일부 검사' : '범위 내 완료'}</strong>
+            <p>{workbook.scan_truncated ? '안전 제한으로 일부 셀만 검사했습니다.' : '정의된 무료 검사 범위를 완료했습니다.'}</p>
           </article>
         </div>
 
@@ -511,7 +593,7 @@ function ResultsContent({
           </div>
           {nextActions.length > 0 ? (
             <ol>{nextActions.map((action) => <li key={action}><ListChecks size={17} />{action}</li>)}</ol>
-          ) : <p>{candidates.length > 0 ? '수식 검토 후보의 셀과 주변 위치를 펼쳐 Excel에서 의도된 차이인지 확인하세요.' : '현재 발견 항목이 없어 특정한 다음 행동을 제안하지 않습니다.'}</p>}
+          ) : <p>현재 발견 항목이 없어 특정한 다음 행동을 제안하지 않습니다.</p>}
           <div className="next-actions-panel__buttons">
             <button
               className="button button--outline button--small"
@@ -530,14 +612,14 @@ function ResultsContent({
         <div className="result-columns">
           <div className="findings-panel">
             <div className="panel-heading" id="priority-findings" ref={findingsHeadingRef} tabIndex={-1}>
-              <div><span className="card-label">근거가 있는 진단 결과</span><h3 id="all-findings-title">{formulaAudit ? '전체 검사 항목' : '전체 Finding 목록'}</h3></div>
+              <div><span className="card-label">근거가 있는 무료 결과</span><h3 id="all-findings-title">전체 Finding 목록</h3></div>
               <span role="status" aria-live="polite" aria-atomic="true">
                 {filtersActive
-                  ? `총 ${allFindings.length}개 중 ${visibleFindings.length}개 표시`
-                  : counts.omitted_details > 0 ? `반환 상세 ${allFindings.length}개 표시 · 전체 발견 ${counts.total_detected}건`
+                  ? `총 ${result.findings.length}개 중 ${visibleFindings.length}개 표시`
+                  : counts.omitted_details > 0 ? `반환 상세 ${result.findings.length}개 표시 · 전체 발견 ${counts.total_detected}건`
                     : viewMode === 'groups'
                       ? `${new Set(visibleFindings.map((finding) => finding.rule_code)).size}개 유형으로 묶음 · 위치 ${visibleFindings.length}건`
-                      : `${allFindings.length}개 전체 표시 · 클릭해 자세히 보기`}
+                      : `${result.findings.length}개 전체 표시 · 클릭해 자세히 보기`}
               </span>
             </div>
             <p className="finding-coverage" id="finding-coverage">전체 발견 {counts.total_detected}건 · 반환 상세 {counts.returned_details}건 · 상세 생략 {counts.omitted_details}건 · 필터 표시 {visibleFindings.length}건</p>
@@ -548,16 +630,13 @@ function ResultsContent({
               <label><input type="radio" name="finding-view" value="groups" checked={viewMode === 'groups'} onChange={() => setViewMode('groups')} />유형별 보기</label>
               <label><input type="radio" name="finding-view" value="table" checked={viewMode === 'table'} onChange={() => setViewMode('table')} />전체 항목 표</label>
             </fieldset>
-            {allFindings.length > 0 && (
+            {result.findings.length > 0 && (
               <fieldset className="finding-filters" aria-describedby="finding-filter-note">
                 <legend>찾아볼 항목 선택</legend>
                 <div className="finding-filters__controls">
-                  {formulaAudit && <label><span>검사 종류</span><select aria-label="검사 종류" value={sourceFilter} onChange={(event) => setSourceFilter(event.target.value as typeof sourceFilter)}>
-                    <option value="all">모든 검사 항목</option><option value="structure">구조 위험</option><option value="formula">수식 검토 후보</option>
-                  </select></label>}
                   <label>
                     <span>중요도</span>
-                    <select aria-label="중요도" value={severityFilter} onChange={(event) => setSeverityFilter(event.target.value as SeverityFilter)}>
+                    <select value={severityFilter} onChange={(event) => setSeverityFilter(event.target.value as SeverityFilter)}>
                       <option value="all">모든 중요도</option>
                       <option value="priority">중요·주의 우선 확인</option>
                       {(['critical', 'warning', 'info'] as const).map((severity) => (
@@ -567,58 +646,49 @@ function ResultsContent({
                   </label>
                   <label>
                     <span>시트</span>
-                    <select aria-label="시트" value={sheetFilter} onChange={(event) => setSheetFilter(event.target.value)}>
+                    <select value={sheetFilter} onChange={(event) => setSheetFilter(event.target.value)}>
                       <option value="all">모든 위치</option>
                       {sheetOptions.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                     </select>
                   </label>
                   <label>
                     <span>처리 상태로 보기</span>
-                    <select aria-label="처리 상태로 보기" ref={statusFilterRef} value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as FindingUserStatus | 'all')}>
+                    <select ref={statusFilterRef} value={statusFilter} onChange={(event) => setStatusFilter(event.target.value as FindingUserStatus | 'all')}>
                       <option value="all">모든 처리 상태</option>
                       {userStatusOptions.map((status) => <option key={status} value={status}>{userStatusLabel[status]}</option>)}
                     </select>
                   </label>
                 </div>
                 <div className="finding-filters__footer">
-                  <p id="finding-filter-note">{formulaAudit && 'CSV에는 구조 검사 항목만 포함됩니다. '}필터는 목록에만 적용됩니다. 진단 요약은 전체 발견, CSV는 필터 적용 전 반환 상세를 기준으로 합니다. 유형별 확인은 표시된 항목의 개인 처리 상태만 바꿉니다.</p>
+                  <p id="finding-filter-note">필터는 목록에만 적용됩니다. 진단 요약은 전체 발견, CSV는 필터 적용 전 반환 상세를 기준으로 합니다. 유형별 확인은 표시된 항목의 개인 처리 상태만 바꿉니다.</p>
                   <button className="button button--outline button--small" type="button" onClick={resetFilters} disabled={!filtersActive}>필터 초기화</button>
                 </div>
               </fieldset>
             )}
             {visibleFindings.length > 0 ? (
-              <FindingViews findings={visibleFindings} allFindings={allFindings} mode={viewMode} statuses={viewStatuses}
-                categoryLabel={formulaAudit ? (finding) => formulaEntry(finding) ? '수식 검토 후보' : '구조 위험' : undefined}
-                groupTitle={formulaAudit ? (finding) => formulaEntry(finding) ? finding.rule_code === 'FORMULA_PATTERN_GAP' ? '반복 수식의 누락·상수 대체 후보' : '주변 수식과 다른 패턴 후보' : finding.title : undefined}
+              <FindingViews findings={visibleFindings} allFindings={result.findings} mode={viewMode} statuses={statuses}
                 renderGuidance={(finding) => finding.guidance ? <FindingExplanation finding={finding} /> : <p>아래 개별 위치의 근거를 확인하세요.</p>}
                 onReviewGroup={(findings) => {
                   if (statusFilter !== 'all' && statusFilter !== 'REVIEWED') statusFilterRef.current?.focus();
-                  for (const finding of findings) updateStatus(finding, 'REVIEWED');
+                  for (const finding of findings) onStatusChange(findingIdentity(finding), 'REVIEWED');
                 }}
-                renderFinding={(finding, sharedGuidance) => formulaEntry(finding) ? (
-                  <FormulaAuditFindingCard key={findingIdentity(finding)} candidate={entriesByKey.get(findingIdentity(finding))!.finding}
-                    status={viewStatuses[findingIdentity(finding)] ?? 'UNREVIEWED'} scannerVersion={formulaAudit!.result!.scanner_version}
-                    feedbackRepository={null} onStatusChange={(status) => {
-                      updateStatus(finding, status);
-                      if (statusFilter !== 'all' && statusFilter !== status) statusFilterRef.current?.focus();
-                    }} />
-                ) : (
+                renderFinding={(finding, sharedGuidance) => (
                   <FindingCard key={findingIdentity(finding)} finding={finding} sharedGuidance={sharedGuidance}
-                    status={viewStatuses[findingIdentity(finding)] ?? 'UNREVIEWED'}
+                    status={statuses[findingIdentity(finding)] ?? 'UNREVIEWED'}
                     onStatusChange={(status) => {
-                      updateStatus(finding, status);
+                      onStatusChange(findingIdentity(finding), status);
                       if (statusFilter !== 'all' && statusFilter !== status) statusFilterRef.current?.focus();
                     }}
                     feedbackRepository={feedbackRepository} scannerVersion={result.scanner_version}
                   />
                 )}
               />
-            ) : allFindings.length > 0 ? (
+            ) : result.findings.length > 0 ? (
               <p className="empty-result-note">선택한 조건에 맞는 항목이 없습니다. 필터를 초기화하면 전체 발견 항목을 볼 수 있습니다. 이 표시는 파일에 문제가 없다는 뜻이 아닙니다.</p>
             ) : counts.total_detected > 0 ? (
               <p className="empty-result-note">발견된 항목의 반환 상세가 없습니다. 상세 생략 수와 검사 한계를 확인하세요. 문제가 없다는 뜻이 아닙니다.</p>
             ) : (
-              <p className="empty-result-note">{formulaAudit ? '완료한 검사에서 반환된 항목이 없습니다. 위의 검사 진행과 범위를 확인하세요.' : '반환된 무료 구조 검사 항목이 없습니다. 위의 검사 범위와 미수행 항목을 확인하세요. 수식 패턴·누락이나 계산 정확성의 검증 결과가 아닙니다.'}</p>
+              <p className="empty-result-note">반환된 무료 구조 검사 항목이 없습니다. 위의 검사 범위와 미수행 항목을 확인하세요. 수식 패턴·누락이나 계산 정확성의 검증 결과가 아닙니다.</p>
             )}
 
             <div className="finding-types" aria-label="문제 유형별 개수">
@@ -648,14 +718,13 @@ function ResultsContent({
               <p>상태는 이 화면을 열어 둔 동안만 관리됩니다. 파일 내용이나 셀 값은 저장하지 않습니다.</p>
             </section>
 
-            {formulaAudit && <p className="empty-result-note">직접 재검사 비교는 구조 검사 결과를 기준으로 합니다. 수식 후보는 매번 새로 검사해 위 목록에 표시합니다.</p>}
             <RevalidationPanel comparison={revalidationComparison} onPrepareRevalidation={onPrepareRevalidation} />
 
             <section className="download-panel" aria-labelledby="download-title">
               <div>
                 <span className="card-label">현재 결과를 내보내기</span>
                 <h3 id="download-title">{diagnosisCsvArtifact.label} 다운로드</h3>
-                <p>{formulaAudit && 'CSV 범위: 구조 검사 결과만 포함 · 수식 검토 후보 제외. '}UTF-8 BOM CSV로 필터 적용 전 반환 상세의 위치, 근거, 가이드, 처리 상태를 다운로드합니다. 상세 생략 항목과 수정본은 포함하지 않습니다. 수식으로 해석될 수 있는 텍스트는 안전하게 내보냅니다.</p>
+                <p>UTF-8 BOM CSV로 필터 적용 전 반환 상세의 위치, 근거, 가이드, 처리 상태를 다운로드합니다. 상세 생략 항목과 수정본은 포함하지 않습니다. 수식으로 해석될 수 있는 텍스트는 안전하게 내보냅니다.</p>
               </div>
               <button className="button button--outline" type="button" onClick={() => downloadDiagnosisCsv(result, statuses)}><Download size={17} />{diagnosisCsvArtifact.label} 다운로드</button>
             </section>
@@ -669,7 +738,7 @@ function ResultsContent({
 
             <section className="repairability-section" aria-labelledby="repairability-title">
               <div className="panel-heading">
-                <div><span className="card-label">현재 발견 결과 기준</span><h3 id="repairability-title">{formulaAudit ? '구조 검사 기준 수정 가능성' : '이 파일의 수정 가능성'}</h3></div>
+                <div><span className="card-label">현재 발견 결과 기준</span><h3 id="repairability-title">이 파일의 수정 가능성</h3></div>
                 <span>수정 기능은 아직 제공하지 않습니다.</span>
               </div>
               <div className="repairability-grid">

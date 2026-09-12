@@ -326,8 +326,8 @@
   },
   "customer_change_approval": "NOT_IMPLEMENTED_BY_D01",
   "next_recommended_bundle": "D02",
-  "next_bundle_approved": false,
-  "execution_stopped_after": "D01",
+  "next_bundle_approved": true,
+  "execution_stopped_after": null,
   "deployment_authorization": {
     "target": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
     "approved": true,
@@ -336,5 +336,23 @@
     "repeat_confirmation_required": false,
     "next_development_bundle_approved": false,
     "remote_git_push_approved": false
-  }
+  },
+  "authorization_history": [
+    {
+      "active_bundle": "D01",
+      "next_bundle_approved": false,
+      "execution_stopped_after": "D01"
+    }
+  ],
+  "approved_development_bundles": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08"
+  ],
+  "owner_review_timing": "AFTER_D08_AS_REQUESTED_2026_09_13"
 }

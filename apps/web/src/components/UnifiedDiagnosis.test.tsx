@@ -77,7 +77,7 @@ describe('D01 integrated structure and pattern diagnosis', () => {
     const zero = { ...base, findings: [], finding_counts: null, summary: { ...base.summary, issue_count: 0 } };
     render(<M25ResultsPanel result={zero} isDemo={false} formulaAudit={{ ...audit, result: { ...auditResult, candidates: [] } }} onReset={vi.fn()} />);
     expect(screen.getByRole('heading', { name: '검사 범위에서 발견된 항목이 없습니다' })).toBeInTheDocument();
-    expect(screen.getByText('완료 · 검토 후보 0건')).toBeInTheDocument();
+    expect(document.querySelector('[data-audit-status=COMPLETED]')).toHaveTextContent('완료');
     expect(screen.queryByText('수식 패턴 이탈·누락 검사')).not.toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: '수식 패턴 정밀검사' })).not.toBeInTheDocument();
   });
