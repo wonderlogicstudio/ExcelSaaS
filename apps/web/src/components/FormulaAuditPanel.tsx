@@ -32,7 +32,7 @@ const userStatusOptions: FindingUserStatus[] = [
   'MARKED_NORMAL',
 ];
 
-const statusCopy: Record<FormulaAuditStatus, { label: string; description: string }> = {
+export const formulaAuditStatusCopy: Record<FormulaAuditStatus, { label: string; description: string }> = {
   COMPLETED: {
     label: '분석 완료',
     description: '후보가 없더라도 파일의 수식이나 계산 결과가 정확하다는 뜻은 아닙니다.',
@@ -87,7 +87,7 @@ export function formulaAuditBlockedReason(baseResult: ScanResult, sourceFile: Fi
   return null;
 }
 
-function FormulaAuditFindingCard({
+export function FormulaAuditFindingCard({
   candidate,
   status,
   scannerVersion,
@@ -187,7 +187,7 @@ export function FormulaAuditPanel({
   onStatusChange,
 }: FormulaAuditPanelProps) {
   const blockedReason = formulaAuditBlockedReason(baseResult, sourceFile);
-  const resultStatus = auditResult ? statusCopy[auditResult.status] : null;
+  const resultStatus = auditResult ? formulaAuditStatusCopy[auditResult.status] : null;
   const candidateLabel = auditResult?.status === 'COMPLETED'
     ? auditResult.candidates.length > 0 ? '후보 있음' : '후보 없음'
     : resultStatus?.label;

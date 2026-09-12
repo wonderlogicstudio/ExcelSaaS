@@ -39,7 +39,7 @@ async function start(fetcher: typeof fetch, productEnv = 'hosted_beta') {
 describe('approved protected-beta M4 upload flow', () => {
   afterEach(() => { cleanup(); vi.unstubAllEnvs(); vi.unstubAllGlobals(); vi.resetModules(); });
 
-  it('automatically checks the same uploaded file and keeps four M4 candidates separate from free zero', async () => {
+  it('automatically checks the same file and shows four pattern candidates in one results list', async () => {
     const fetcher = vi.fn(async (url) => ok(String(url).endsWith('/formula-audits') ? audit('C4', 4) : base));
     await start(fetcher);
     const file = upload();
@@ -48,9 +48,11 @@ describe('approved protected-beta M4 upload flow', () => {
     for (const [, init] of fetcher.mock.calls as unknown as [string, RequestInit][]) {
       expect((init.body as FormData).get('file')).toBe(file);
     }
-    expect(screen.getByRole('heading', { name: '무료 구조 검사: 발견 0건' })).toBeInTheDocument();
-    expect(screen.getByText('기본 위험 점수·견적·CSV에 반영하지 않음')).toBeInTheDocument();
-    expect(document.querySelector('.formula-audit-finding-list .finding-group__locations')).not.toHaveAttribute('open');
+    expect(screen.getByRole('heading', { name: '확인할 항목 4건' })).toBeInTheDocument();
+    expect(screen.getByText('구조 위험 0건 · 수식 검토 후보 4건')).toBeInTheDocument();
+    expect(document.querySelectorAll('#results .findings-panel')).toHaveLength(1);
+    expect(document.querySelector('#formula-audit')).toBeNull();
+    expect(document.querySelector('#results .finding-group__locations')).not.toHaveAttribute('open');
     expect(screen.queryByRole('button', { name: '도움이 됨' })).not.toBeInTheDocument();
   });
 
@@ -60,7 +62,7 @@ describe('approved protected-beta M4 upload flow', () => {
       : ok(base)));
     upload();
     await waitFor(() => expect(screen.getByRole('alert')).toHaveTextContent('검사 연결 실패'));
-    expect(screen.getByRole('heading', { name: '무료 구조 검사: 발견 0건' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: '완료한 검사 범위에서 발견 0건' })).toBeInTheDocument();
     expect(screen.queryByText('후보 없음')).not.toBeInTheDocument();
   });
 
@@ -75,6 +77,10 @@ describe('approved protected-beta M4 upload flow', () => {
     }));
     upload('first-synthetic.xlsx');
     await waitFor(() => expect(audits).toBe(1));
+    expect(screen.getByLabelText('엑셀 파일 선택')).toBeDisabled();
+    expect(screen.getByText('수식 패턴 확인')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: '수식 패턴을 확인하고 있습니다' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: '다른 파일 검사' }));
     upload('second-synthetic.xlsx');
     await waitFor(() => expect(screen.getByText('Pattern · F8')).toBeInTheDocument());
     finishOld(ok(audit('C4')));

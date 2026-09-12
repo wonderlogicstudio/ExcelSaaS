@@ -6,6 +6,7 @@ interface Props {
   findings: Finding[];
   allFindings: Finding[];
   mode: 'groups' | 'table';
+  categoryLabel?: (finding: Finding) => string;
   groupTitle?: (finding: Finding) => string;
   statuses: Record<string, FindingUserStatus>;
   renderFinding: (finding: Finding, sharedGuidance: boolean) => ReactNode;
@@ -15,14 +16,15 @@ interface Props {
 
 const severityLabels: Record<Severity, string> = { critical: '중요', warning: '주의', info: '참고' };
 
-export function FindingViews({ findings, allFindings, mode, statuses, renderFinding, renderGuidance, onReviewGroup, groupTitle }: Props) {
+export function FindingViews({ findings, allFindings, mode, statuses, renderFinding, renderGuidance, onReviewGroup, groupTitle, categoryLabel }: Props) {
   if (mode === 'table') {
     return (
       <table className="finding-table">
         <caption>필터에 맞는 반환 상세 전체 표 · 위치별 근거와 처리 상태</caption>
-        <thead><tr><th scope="col">규칙</th><th scope="col">시트 · 셀</th><th scope="col">근거 · 사용자 처리 상태</th></tr></thead>
+        <thead><tr>{categoryLabel && <th scope="col">검사 종류</th>}<th scope="col">규칙</th><th scope="col">시트 · 셀</th><th scope="col">근거 · 사용자 처리 상태</th></tr></thead>
         <tbody>{findings.map((finding) => (
           <tr key={findingIdentity(finding)}>
+            {categoryLabel && <td data-label="검사 종류">{categoryLabel(finding)}</td>}
             <td data-label="규칙">{finding.rule_code}</td>
             <td data-label="시트 · 셀">{finding.sheet || '시트 지정 없음'} · {finding.cell || '셀 지정 없음'}</td>
             <td data-label="근거 · 사용자 처리 상태">{renderFinding(finding, false)}</td>
@@ -43,7 +45,7 @@ export function FindingViews({ findings, allFindings, mode, statuses, renderFind
     return (
     <section className="finding-group" key={rule} aria-label={`${rule} 유형`}>
       <div className="finding-group__heading">
-        <div><span className={`severity severity--${severity}`}>{severityLabels[severity]}</span><h4>{groupTitle ? groupTitle(leaves[0]) : leaves[0].title}</h4><code>{rule}</code><p>필터 표시 {leaves.length}건 / 이 유형의 반환 상세 {allFindings.filter((finding) => finding.rule_code === rule).length}건</p></div>
+        <div>{categoryLabel && <span className="diagnosis-source">{categoryLabel(leaves[0])}</span>}<span className={`severity severity--${severity}`}>{severityLabels[severity]}</span><h4>{groupTitle ? groupTitle(leaves[0]) : leaves[0].title}</h4><code>{rule}</code><p>필터 표시 {leaves.length}건 / 이 유형의 반환 상세 {allFindings.filter((finding) => finding.rule_code === rule).length}건</p></div>
         <button className="button button--outline button--small" type="button"
           disabled={leaves.every((finding) => statuses[findingIdentity(finding)] === 'REVIEWED')}
           onClick={() => onReviewGroup(leaves)}>표시된 {leaves.length}개 확인함</button>

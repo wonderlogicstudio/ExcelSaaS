@@ -23,7 +23,6 @@ const formulaAuditInternalBetaEnabled =
 const formulaAuditHostedBetaEnabled =
   import.meta.env.VITE_PRODUCT_ENV === 'hosted_beta'
   && import.meta.env.VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED === 'true';
-const formulaAuditEnabled = formulaAuditInternalBetaEnabled || formulaAuditHostedBetaEnabled;
 
 const stages: ScanStage[] = [
   '파일 형식 확인',
@@ -82,7 +81,7 @@ export default function App() {
   useEffect(() => {
     if (result) {
       window.requestAnimationFrame(() => {
-        const resultAnchor = formulaAuditEnabled && sourceFile
+        const resultAnchor = formulaAuditInternalBetaEnabled && !formulaAuditHostedBetaEnabled && sourceFile
           ? '#formula-audit'
           : '#results';
         document.querySelector(resultAnchor)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -264,7 +263,7 @@ export default function App() {
               </div>
               <p className="hero__fineprint">
                 {formulaAuditHostedBetaEnabled
-                  ? '파일을 올리면 무료 구조 검사와 별도 수식 패턴·누락 검사를 차례로 실행합니다. 두 검사 결과는 구분해 보여드립니다.'
+                  ? '파일을 한 번 올리면 구조 위험과 수식 패턴을 검사하고, 확인할 항목을 한 목록으로 보여드립니다. '
                   : '현재는 파일 구조를 정적으로 분석합니다. 수식 패턴 이탈·누락 검사는 무료 진단에 포함되지 않습니다.'}
                 VBA, 외부 연결, 수식 계산은 실행하지 않으며 원본 파일도 바꾸지 않습니다.
               </p>
@@ -275,8 +274,8 @@ export default function App() {
             </div>
             <div ref={uploadRef} className="hero__upload">
               <UploadPanel
-                busy={busy}
-                stage={busy ? stages[stageIndex] : null}
+                busy={busy || (formulaAuditHostedBetaEnabled && formulaAuditBusy)}
+                stage={formulaAuditHostedBetaEnabled && formulaAuditBusy ? '수식 패턴 확인' : busy ? stages[stageIndex] : null}
                 error={error}
                 revalidationPending={previousResult !== null}
                 onFile={runFileScan}
@@ -288,7 +287,7 @@ export default function App() {
 
         {result && (
           <>
-            {formulaAuditEnabled && (
+            {formulaAuditInternalBetaEnabled && !formulaAuditHostedBetaEnabled && (
               <FormulaAuditPanel
                 automatic={formulaAuditHostedBetaEnabled}
                 baseResult={result}
@@ -304,6 +303,12 @@ export default function App() {
             )}
             <ResultsPanel
               result={result}
+              formulaAudit={formulaAuditHostedBetaEnabled ? {
+                result: formulaAuditResult, busy: formulaAuditBusy, error: formulaAuditError,
+                blockedReason: formulaAuditBlockedReason(result, sourceFile),
+                statuses: formulaAuditStatuses, onRetry: runCurrentFormulaAudit,
+                onStatusChange: updateFormulaAuditStatus,
+              } : undefined}
               isDemo={isDemo}
               statuses={findingStatuses}
               revalidationComparison={revalidationComparison}

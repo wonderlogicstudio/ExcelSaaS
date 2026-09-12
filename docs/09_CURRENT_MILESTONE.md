@@ -1,5 +1,17 @@
 # Current milestone
 
+## APPROVED — D01 unified diagnosis UX follow-up (2026-09-12)
+
+The owner explicitly approved one upload/progress/result list for structure and M4 findings.
+Integrate the existing hosted beta results and filters/table/handling; label each finding source.
+Keep underlying API envelopes, original keys, free score/quote/CSV/revalidation semantics,
+M4 uncertainty, limits, security/feedback gates, source fixtures and prior records intact.
+No engine/new rule/payment/repair/infrastructure redesign. Deploy the verified web to the same
+protected beta under standing authorization; verify actual synthetic desktop/mobile flows.
+The prior D01 acceptance has engineering evidence. This is its remaining known UX correction;
+after passing checks, record ENGINEERING_VERIFIED_AWAITING_OWNER, not owner acceptance.
+No D02, remote push, H2/H3 completion, new paid resources or real customer data.
+
 ## Protected beta M4 follow-up completed — 2026-09-12
 
 The approved expected-results connection is deployed and agent-verified on the actual authenticated beta:
