@@ -1,5 +1,12 @@
 # Current milestone
 
+## ACTIVE APPROVED — D03 (2026-09-13)
+
+D02 input/preflight actual local desktop/mobile expected values and full regression pass. D02 hosted deployment is explicitly pending local Docker recovery, not reported as verified.
+D03: isolated bounded formula evaluator, RP01/RP02 exact proposals, Excel reference and canonical immutable plans. Read CALCULATION_AND_PLAN + REPAIR_ELIGIBILITY. No purchase/execution based on business confirmation; no outputs until D04.
+Latest owner D01–D08 authorization applies; preserve all prior records and pending beta release work.
+
+
 ## ACTIVE APPROVED — D02 (2026-09-13)
 
 D01 hierarchy implementation/regression and local/hosted screen expectations passed; see D01-hierarchy.json.

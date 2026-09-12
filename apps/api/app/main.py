@@ -8,6 +8,7 @@ from fastapi.responses import JSONResponse
 
 from .config import formula_audit_is_available, get_settings
 from .control_plane import ControlPlaneHmacMiddleware
+from .delivery_api import router as delivery_router
 from .errors import WorkbookCareError
 from .m4_release import M4_FORMULA_AUDIT_RELEASE_CANDIDATE_VERSION
 from .models import ErrorBody, ErrorResponse, FormulaAuditResult, ScanResult
@@ -32,19 +33,19 @@ app = FastAPI(
     title="WorkbookCare API",
     version="0.1.0",
     description=(
-        "Static OOXML workbook diagnosis. "
-        "Macros, formulas, and external links are never executed."
+        "Static OOXML workbook diagnosis. Macros, formulas, and external links are never executed."
     ),
 )
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origins,
-    allow_credentials=False,
+    allow_credentials=True,
     allow_methods=["GET", "POST"],
-    allow_headers=["Content-Type"],
+    allow_headers=["Content-Type", "X-WorkbookCare-CSRF"],
 )
 app.add_middleware(ControlPlaneHmacMiddleware, settings=settings)
+app.include_router(delivery_router)
 
 
 @app.exception_handler(WorkbookCareError)

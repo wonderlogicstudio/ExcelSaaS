@@ -25,7 +25,7 @@ ASGIApp = Callable[
 Receive = Callable[[], Awaitable[dict]]
 Send = Callable[[dict], Awaitable[None]]
 
-PROTECTED_PATHS: Final = frozenset({"/v1/scans", "/v1/formula-audits"})
+PROTECTED_PATHS: Final = frozenset({"/v1/scans", "/v1/formula-audits", "/v1/delivery"})
 SIGNATURE_HEADER: Final = "x-workbookcare-signature"
 TIMESTAMP_HEADER: Final = "x-workbookcare-timestamp"
 SIGNATURE_PREFIX: Final = "v1="
@@ -42,6 +42,7 @@ def build_control_plane_signature(
     method: str,
     path: str,
     body: bytes,
+    owner: str | None = None,
 ) -> str:
     """Return the versioned HMAC shared with the Cloudflare Worker.
 
@@ -50,9 +51,15 @@ def build_control_plane_signature(
     """
 
     body_sha256 = hashlib.sha256(body).hexdigest()
-    canonical = f"v1\n{timestamp}\n{method.upper()}\n{path}\n{body_sha256}".encode("ascii")
+    version = "v2" if owner is not None else "v1"
+    owner_line = f"{owner}\n" if owner is not None else ""
+    canonical = (
+        f"{version}\n{timestamp}\n{method.upper()}\n{path}\n{owner_line}{body_sha256}".encode(
+            "ascii"
+        )
+    )
     digest = hmac.new(secret.encode("utf-8"), canonical, hashlib.sha256).hexdigest()
-    return f"{SIGNATURE_PREFIX}{digest}"
+    return f"{version}={digest}"
 
 
 def verify_control_plane_signature(
@@ -65,6 +72,7 @@ def verify_control_plane_signature(
     timestamp_value: str | None,
     signature_value: str | None,
     now: int | None = None,
+    owner: str | None = None,
 ) -> str | None:
     """Return a stable, content-free rejection code or ``None`` when valid."""
 
@@ -79,13 +87,14 @@ def verify_control_plane_signature(
     if abs(current_time - timestamp) > max_age_seconds:
         return "CONTROL_PLANE_SIGNATURE_EXPIRED"
 
-    if not signature_value.startswith(SIGNATURE_PREFIX):
+    prefix = "v2=" if owner is not None else SIGNATURE_PREFIX
+    if not signature_value.startswith(prefix):
         return "CONTROL_PLANE_SIGNATURE_INVALID"
-    received = signature_value.removeprefix(SIGNATURE_PREFIX)
+    received = signature_value.removeprefix(prefix)
     if not SIGNATURE_PATTERN.fullmatch(received):
         return "CONTROL_PLANE_SIGNATURE_INVALID"
 
-    expected = build_control_plane_signature(secret, timestamp, method, path, body)
+    expected = build_control_plane_signature(secret, timestamp, method, path, body, owner)
     if not hmac.compare_digest(expected, signature_value):
         return "CONTROL_PLANE_SIGNATURE_INVALID"
     return None
@@ -125,6 +134,12 @@ class ControlPlaneHmacMiddleware:
             for key, value in scope.get("headers", [])
         }
         assert self.secret is not None  # Settings rejects a missing hosted secret.
+        owner = None
+        if scope.get("path") == "/v1/delivery":
+            owner = headers.get("x-workbookcare-owner", "")
+            if not SIGNATURE_PATTERN.fullmatch(owner):
+                await self._reject(send, 401, "DELIVERY_OWNER_REQUIRED")
+                return
         rejection_code = verify_control_plane_signature(
             secret=self.secret,
             max_age_seconds=self.max_age_seconds,
@@ -133,11 +148,14 @@ class ControlPlaneHmacMiddleware:
             body=body,
             timestamp_value=headers.get(TIMESTAMP_HEADER),
             signature_value=headers.get(SIGNATURE_HEADER),
+            owner=owner,
         )
         if rejection_code is not None:
             status_code = 401 if rejection_code != "CONTROL_PLANE_SIGNATURE_INVALID" else 403
             await self._reject(send, status_code, rejection_code)
             return
+        if owner is not None:
+            scope["delivery_owner_verified"] = True
 
         delivered = False
 

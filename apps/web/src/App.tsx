@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, FileSearch, ShieldCheck, Sparkles } from 'lucide-react';
+import { DeliveryWorkspace } from './components/DeliveryWorkspace';
+import './delivery.css';
 import { Header } from './components/Header';
 import { UploadPanel, type ScanStage } from './components/UploadPanel';
 import { M25ResultsPanel as ResultsPanel } from './components/M25ResultsPanel';
@@ -23,6 +25,9 @@ const formulaAuditInternalBetaEnabled =
 const formulaAuditHostedBetaEnabled =
   import.meta.env.VITE_PRODUCT_ENV === 'hosted_beta'
   && import.meta.env.VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED === 'true';
+
+const deliveryBetaEnabled = ['internal_beta', 'hosted_beta'].includes(import.meta.env.VITE_PRODUCT_ENV)
+  && import.meta.env.VITE_DELIVERY_BETA_ENABLED === 'true';
 
 const stages: ScanStage[] = [
   '파일 형식 확인',
@@ -317,6 +322,7 @@ export default function App() {
               onPrepareRevalidation={prepareRevalidation}
               onReset={reset}
             />
+            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={result.analysis_id} file={sourceFile} />}
           </>
         )}
         <StaticSections products={result?.products} onStart={startUpload} onDemo={runDemo} />

@@ -32,7 +32,7 @@ def gateway_spec() -> dict:
 
 def test_gateway_keeps_exact_access_and_backend_identity_contract() -> None:
     spec = gateway_spec()
-    assert set(spec["paths"]) == {SCAN_PATH, "/v1/formula-audits"}
+    assert set(spec["paths"]) == {SCAN_PATH, "/v1/formula-audits", "/v1/delivery"}
     for path in spec["paths"]:
         operation = spec["paths"][path]["post"]
         assert operation["security"] == [{"cloudflare_access": []}]

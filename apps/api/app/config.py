@@ -33,6 +33,8 @@ class Settings(BaseSettings):
     formula_audit_max_formula_cells: int = Field(default=30_000, ge=1)
     formula_audit_max_sheet_count: int = Field(default=200, ge=1)
     formula_audit_max_candidate_count: int = Field(default=120, ge=1)
+    delivery_beta_enabled: bool = False
+    delivery_data_dir: str | None = None
     file_retention_hours: int = 24
     # This is deliberately a provider-store-only secret. It is required only
     # for the hosted control plane and is never emitted in API responses/logs.
@@ -86,9 +88,7 @@ class Settings(BaseSettings):
                     "hosted_beta and production require exact https:// CORS_ORIGINS entries"
                 )
             if any("localhost" in origin or "127.0.0.1" in origin for origin in self.cors_origins):
-                raise ValueError(
-                    "hosted_beta and production must not allow localhost CORS origins"
-                )
+                raise ValueError("hosted_beta and production must not allow localhost CORS origins")
             if self.control_plane_hmac_secret is None:
                 raise ValueError(
                     "hosted_beta and production require WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET"

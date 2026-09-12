@@ -1,0 +1,45 @@
+{
+  "kind": "NEW_SYNTHETIC_PRODUCT_INPUT_HAND_CALCULATED_EXPECTATIONS",
+  "excel_reference_verified": false,
+  "rp01": {
+    "targets": [
+      "B2",
+      "B3"
+    ],
+    "eligible_count": 2,
+    "before_H2": 0,
+    "after_H2": 15500,
+    "type_values": {
+      "B2": 12000,
+      "B3": 3500
+    },
+    "unchanged_id_A2": "00123"
+  },
+  "rp02": {
+    "anchor": "F2",
+    "target": "F3",
+    "formula_after": "=ROUND(C3*D3*(1-E3),0)",
+    "after_F3": 6000,
+    "before_F12": 12200,
+    "after_F12": 18200
+  },
+  "rejected_rp01": [
+    "A2",
+    "B4",
+    "B5",
+    "B6",
+    "B7",
+    "B8",
+    "B9",
+    "B10",
+    "B11",
+    "B12"
+  ],
+  "rejected_rp02": [
+    "G3",
+    "H3",
+    "I3",
+    "J3"
+  ],
+  "unsupported": "UNSUPPORTED_FORMULA"
+}

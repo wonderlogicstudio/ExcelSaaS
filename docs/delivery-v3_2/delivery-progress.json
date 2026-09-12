@@ -2,7 +2,7 @@
   "schema_version": 1,
   "copy_over_existing_progress": false,
   "prior_progress_path": "../10_PROGRESS.md",
-  "active_bundle": "D02",
+  "active_bundle": "D03",
   "bundles": {
     "D01": {
       "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
@@ -363,6 +363,21 @@
       ]
     },
     "D02": {
+      "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+      "development_approved": true,
+      "owner_acceptance": "PENDING",
+      "history": [
+        {
+          "status": "IN_PROGRESS",
+          "reason": "before implemented D02 local verification"
+        }
+      ],
+      "review": "reviews/D02.md",
+      "evidence": "reviews/evidence/D02-local.json",
+      "beta_deployment": "PENDING_DOCKER_ENGINE_RECOVERY",
+      "commerce_ready": false
+    },
+    "D03": {
       "status": "IN_PROGRESS",
       "development_approved": true,
       "owner_acceptance": "PENDING"
@@ -380,7 +395,7 @@
     "commercial_signal": "NOT_OBSERVED"
   },
   "customer_change_approval": "NOT_IMPLEMENTED_BY_D01",
-  "next_recommended_bundle": "D02",
+  "next_recommended_bundle": "D03",
   "next_bundle_approved": true,
   "execution_stopped_after": null,
   "deployment_authorization": {

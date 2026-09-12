@@ -28,6 +28,7 @@ async function signedAccessToken() {
   const payload = toBase64Url(JSON.stringify({
     iss: TEAM_DOMAIN,
     aud: AUDIENCE,
+    sub: "synthetic-owner-only",
     exp: Math.floor(Date.now() / 1000) + 300,
   }));
   const signature = await crypto.subtle.sign(
@@ -488,4 +489,34 @@ test("protected beta formula audit uses the existing upload guards and its own s
     assert.equal(storage.size, 0);
     assert.equal(storage.deletes, 2);
   } finally { globalThis.fetch = originalFetch; }
+});
+
+
+test("delivery uses verified Access owner in v2 proof and rejects forged origin / production", async () => {
+  const {token,jwk} = await signedAccessToken();
+  const storage = createR2();
+  const env = {APP_ENV:"hosted_beta",DELIVERY_BETA_ENABLED:"true",UPLOADS:storage.r2,
+    API_GATEWAY_URL:"https://gateway.example.test/v1/scans",CLOUDFLARE_ACCESS_TEAM_DOMAIN:TEAM_DOMAIN,
+    CLOUDFLARE_ACCESS_AUD:AUDIENCE,WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET:HMAC_SECRET,UPLOAD_RATE_LIMITER:rateLimiter()};
+  const originalFetch=globalThis.fetch;let forwarded;
+  globalThis.fetch=async(input,init)=>{
+    if(String(input).endsWith("/cdn-cgi/access/certs"))return Response.json({keys:[jwk]});
+    forwarded=new Request(input,init);return Response.json({purchase_enabled:false});
+  };
+  const make=(origin="https://workbookcare-beta.example.test",action="capabilities")=>new Request("https://workbookcare-beta.example.test/api/v1/delivery",{
+    method:"POST",headers:{Origin:origin,"Content-Type":"application/json","X-WorkbookCare-CSRF":"1",
+    "cf-access-jwt-assertion":token,"X-WorkbookCare-Owner":"forged-browser-owner"},
+    body:JSON.stringify({action,filename:"private-synthetic-name.xlsx",file_base64:btoa("synthetic bytes")})});
+  try {
+    assert.equal((await worker.fetch(make("https://evil.example"),env)).status,403);
+    assert.equal((await worker.fetch(make(),{...env,APP_ENV:"production"})).status,404);
+    assert.equal((await worker.fetch(make(),env)).status,200);
+    const owner=forwarded.headers.get("X-WorkbookCare-Owner");assert.match(owner,/^[0-9a-f]{64}$/);
+    assert.equal(new URL(forwarded.url).pathname,"/v1/delivery");
+    const body=await forwarded.clone().arrayBuffer();
+    assert.equal(forwarded.headers.get("X-WorkbookCare-Signature"),await createControlPlaneSignature(HMAC_SECRET,Number(forwarded.headers.get("X-WorkbookCare-Timestamp")),"POST","/v1/delivery",body,owner));
+    assert.notEqual(forwarded.headers.get("X-WorkbookCare-Signature"),await createControlPlaneSignature(HMAC_SECRET,Number(forwarded.headers.get("X-WorkbookCare-Timestamp")),"POST","/v1/delivery",body,"b".repeat(64)));
+    assert.equal((await worker.fetch(make(undefined,"create_input"),env)).status,200);
+    assert.equal((await forwarded.json()).filename,"workbook.xlsx");assert.equal(storage.size,0);assert.equal(storage.deletes,1);
+  } finally {globalThis.fetch=originalFetch;}
 });

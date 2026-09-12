@@ -6,7 +6,6 @@ const BACKEND_SCAN_PATH = "/v1/scans";
 const ACCESS_ASSERTION_HEADER = "cf-access-jwt-assertion";
 const SIGNATURE_HEADER = "x-workbookcare-signature";
 const TIMESTAMP_HEADER = "x-workbookcare-timestamp";
-const SIGNATURE_PREFIX = "v1=";
 const DEFAULT_MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
 const MAX_FEEDBACK_BYTES = 512;
 const FEEDBACK_RETENTION_SECONDS = 30 * 24 * 60 * 60;
@@ -37,6 +36,12 @@ let cachedJwks;
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname === "/api/v1/delivery") {
+      if (env.APP_ENV !== "hosted_beta" || env.DELIVERY_BETA_ENABLED !== "true") {
+        return errorResponse(404, "DELIVERY_NOT_AVAILABLE");
+      }
+      return handleDelivery(request, env);
+    }
     if (url.pathname === SCAN_ROUTE) {
       return handleScan(request, env);
     }
@@ -362,9 +367,11 @@ function errorResponse(status, code, extraHeaders = {}) {
   );
 }
 
-export async function createControlPlaneSignature(secret, timestamp, method, path, body) {
+export async function createControlPlaneSignature(secret, timestamp, method, path, body, owner) {
   const bodyHash = await sha256Hex(body);
-  const canonical = `v1\n${timestamp}\n${method.toUpperCase()}\n${path}\n${bodyHash}`;
+  const version = owner === undefined ? "v1" : "v2";
+  const ownerLine = owner === undefined ? "" : `${owner}\n`;
+  const canonical = `${version}\n${timestamp}\n${method.toUpperCase()}\n${path}\n${ownerLine}${bodyHash}`;
   const key = await crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(secret),
@@ -373,7 +380,7 @@ export async function createControlPlaneSignature(secret, timestamp, method, pat
     ["sign"],
   );
   const signature = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(canonical));
-  return `${SIGNATURE_PREFIX}${toHex(signature)}`;
+  return `${version}=${toHex(signature)}`;
 }
 
 export async function verifyAccessAssertion(token, env, fetchImplementation = fetch) {
@@ -417,6 +424,7 @@ export async function verifyAccessAssertion(token, env, fetchImplementation = fe
   if (!verified) {
     throw new Error("invalid token signature");
   }
+  return payload;
 }
 
 function claimsAreValid(payload, env) {
@@ -465,4 +473,66 @@ function fromBase64Url(value) {
 
 function toHex(value) {
   return [...new Uint8Array(value)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+}
+
+
+/** Owner-bound delivery bridge; Access identity is never returned or logged. */
+export async function handleDelivery(request, env) {
+  if (request.method !== "POST") return errorResponse(405, "METHOD_NOT_ALLOWED");
+  if (!requiredEnvironmentIsPresent(env)) return errorResponse(503, "CONTROL_PLANE_NOT_CONFIGURED");
+  const origin = new URL(request.url).origin;
+  if (request.headers.get("origin") !== origin || request.headers.get("x-workbookcare-csrf") !== "1") {
+    return errorResponse(403, "DELIVERY_ORIGIN_REJECTED");
+  }
+  if (!request.headers.get("content-type")?.toLowerCase().startsWith("application/json")) {
+    return errorResponse(415, "INVALID_CONTENT_TYPE");
+  }
+  const assertion = request.headers.get(ACCESS_ASSERTION_HEADER);
+  let claims;
+  try {
+    claims = await verifyAccessAssertion(assertion || "", env);
+    if (typeof claims.sub !== "string" || !claims.sub || claims.sub.length > 512) throw new Error();
+  } catch { return errorResponse(401, "ACCESS_ASSERTION_INVALID"); }
+  const raw = await readRequestTextWithinLimit(request, Math.floor(2 * 1024 * 1024 * 4 / 3) + 65536);
+  if (raw === null) return errorResponse(413, "LIMIT_EXCEEDED");
+  let payload;
+  try { payload = JSON.parse(raw); } catch { return errorResponse(400, "INVALID_REQUEST"); }
+  if (!payload || Array.isArray(payload) || typeof payload !== "object") return errorResponse(400, "INVALID_REQUEST");
+  let objectKey;
+  try {
+    if (payload.action === "create_input") {
+      if (!await uploadRateLimitAllows(assertion, env)) return errorResponse(429, "UPLOAD_RATE_LIMITED", {"Retry-After":"60"});
+      if (typeof payload.filename !== "string" || !/\.xlsx$/i.test(payload.filename)) return errorResponse(415, "UNSUPPORTED_FILE_TYPE");
+      if (typeof payload.file_base64 !== "string") return errorResponse(400, "INVALID_FILE");
+      const bytes = Uint8Array.from(atob(payload.file_base64), x => x.charCodeAt(0));
+      if (bytes.byteLength > 2 * 1024 * 1024) return errorResponse(413, "LIMIT_EXCEEDED");
+      objectKey = `uploads/${crypto.randomUUID()}`;
+      await env.UPLOADS.put(objectKey, bytes);
+      const stored = await env.UPLOADS.get(objectKey);
+      if (!stored) return errorResponse(502, "TEMPORARY_UPLOAD_UNAVAILABLE");
+      const storedBytes = new Uint8Array(await stored.arrayBuffer());
+      let encoded = "";
+      for (let i = 0; i < storedBytes.length; i += 8192) encoded += String.fromCharCode(...storedBytes.subarray(i, i + 8192));
+      payload.file_base64 = btoa(encoded);
+      payload.filename = "workbook.xlsx";
+    }
+    const secret = env.WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET;
+    const identityProof = await createControlPlaneSignature(secret, 0, "OWNER", "/delivery-owner-v1", new TextEncoder().encode(claims.sub));
+    const owner = identityProof.slice(3);
+    const body = new TextEncoder().encode(JSON.stringify(payload));
+    const timestamp = Math.floor(Date.now() / 1000);
+    const signature = await createControlPlaneSignature(secret, timestamp, "POST", "/v1/delivery", body, owner);
+    const url = new URL(env.API_GATEWAY_URL);url.pathname = "/v1/delivery";url.search = "";url.hash = "";
+    return toSafeBackendResponse(await fetch(url, {method:"POST",headers:{
+      Authorization:`Bearer ${assertion}`,"Content-Type":"application/json",Origin:origin,
+      "X-WorkbookCare-CSRF":"1","X-WorkbookCare-Owner":owner,
+      [TIMESTAMP_HEADER]:String(timestamp),[SIGNATURE_HEADER]:signature,
+    },body}));
+  } catch { return errorResponse(502, "DELIVERY_CONTROL_PLANE_UNAVAILABLE"); }
+  finally {
+    if (objectKey) {
+      try { await env.UPLOADS.delete(objectKey); }
+      catch { console.warn('{"event":"temporary_upload_cleanup_failed"}'); }
+    }
+  }
 }

@@ -40,6 +40,7 @@
   "vars": {
     "APP_ENV": "hosted_beta",
     "FORMULA_AUDIT_ENABLED": "false",
+    "DELIVERY_BETA_ENABLED": "false",
     "MAX_UPLOAD_BYTES": "10485760",
     "CLOUDFLARE_ACCESS_TEAM_DOMAIN": "https://old-breeze-11c7.cloudflareaccess.com",
     "FEEDBACK_SCANNER_VERSION": "0.1.3",

@@ -80,6 +80,26 @@ paths:
           description: Unsupported workbook
         "500":
           description: Safe internal failure
+  /v1/delivery:
+    post:
+      operationId: deliveryAction
+      consumes:
+        - application/json
+      security:
+        - cloudflare_access: []
+      x-google-backend:
+        address: "${CLOUD_RUN_URL}"
+        jwt_audience: "${CLOUD_RUN_URL}"
+        path_translation: APPEND_PATH_TO_ADDRESS
+      responses:
+        "200":
+          description: Owner-bound delivery action result
+        "400":
+          description: Safe validation failure
+        "401":
+          description: Invalid authenticated owner proof
+        "403":
+          description: Origin or owner proof rejected
 securityDefinitions:
   cloudflare_access:
     type: oauth2

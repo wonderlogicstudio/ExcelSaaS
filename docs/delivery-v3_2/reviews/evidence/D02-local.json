@@ -1,0 +1,185 @@
+{
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "scope": "D02 input/preflight, local adapter; beta deployment pending Docker recovery",
+  "implemented": [
+    "Immutable SHA256 input/inventory + owner-bound SQLite adapter, optimistic revisions, TTL and delete",
+    "Strict RP01 integer-text intent and RP02 actual blank + exact anchor intent",
+    "Package/formula/precision/selection limits; calculation absent keeps quote/purchase false",
+    "Existing Access identity to opaque HMAC-v2 owner proof; same-origin CSRF and Gateway authenticated route",
+    "Real same-upload UI, explicit consent, summary/reason once and per-cell actual type"
+  ],
+  "reused": [
+    "OOXML ZIP/XML envelope protection",
+    "Cloudflare Access/JWKS, upload limiter, temporary private R2, existing HMAC",
+    "Existing free scan, M4, CSV, hierarchy"
+  ],
+  "verification": {
+    "full_regression": {
+      "web": 75,
+      "worker": 15,
+      "api": 98,
+      "m4_exact": 36,
+      "exit_code": 0
+    },
+    "actual_browser": {
+      "kind": "ACTUAL_PRODUCT_UI_AND_API",
+      "rows": [
+        {
+          "width": 1440,
+          "targets": "B2, B3",
+          "profile": "RP01_NUMERIC_TEXT_FIELD_V1",
+          "role": "AMOUNT",
+          "expected_count": 2,
+          "actual_count": 2,
+          "rows": "검증 · B2\t문자\t형식 조건 충족\n검증 · B3\t문자\t형식 조건 충족"
+        },
+        {
+          "width": 1440,
+          "targets": "A2",
+          "profile": "RP01_NUMERIC_TEXT_FIELD_V1",
+          "role": "ID",
+          "expected_count": 0,
+          "actual_count": 0,
+          "rows": "검증 · A2\t문자\t지원 제외"
+        },
+        {
+          "width": 1440,
+          "targets": "B4, B5, B6, B7, B8, B9, B10, B11, B12",
+          "profile": "RP01_NUMERIC_TEXT_FIELD_V1",
+          "role": "AMOUNT",
+          "expected_count": 0,
+          "actual_count": 0,
+          "rows": "검증 · B10\t문자\t지원 제외\n검증 · B11\t빈 셀\t지원 제외\n검증 · B12\t문자\t지원 제외\n검증 · B4\t문자\t지원 제외\n검증 · B5\t문자\t지원 제외\n검증 · B6\t문자\t지원 제외\n검증 · B7\t문자\t지원 제외\n검증 · B8\t문자\t지원 제외\n검증 · B9\t문자\t지원 제외"
+        },
+        {
+          "width": 1440,
+          "targets": "F3",
+          "profile": "RP02_APPROVED_FORMULA_RESTORE_V1",
+          "role": "AMOUNT",
+          "expected_count": 1,
+          "actual_count": 1,
+          "rows": "검증 · F3\t빈 셀\t형식 조건 충족"
+        },
+        {
+          "width": 1440,
+          "targets": "G3, H3, I3, J3",
+          "profile": "RP02_APPROVED_FORMULA_RESTORE_V1",
+          "role": "AMOUNT",
+          "expected_count": 0,
+          "actual_count": 0,
+          "rows": "검증 · G3\t문자\t지원 제외\n검증 · H3\t수식\t지원 제외\n검증 · I3\t숫자\t지원 제외\n검증 · J3\t문자\t지원 제외"
+        },
+        {
+          "width": 390,
+          "targets": "B2, B3",
+          "profile": "RP01_NUMERIC_TEXT_FIELD_V1",
+          "role": "AMOUNT",
+          "expected_count": 2,
+          "actual_count": 2,
+          "rows": "검증 · B2\t문자\t형식 조건 충족\n검증 · B3\t문자\t형식 조건 충족"
+        },
+        {
+          "width": 390,
+          "targets": "A2",
+          "profile": "RP01_NUMERIC_TEXT_FIELD_V1",
+          "role": "ID",
+          "expected_count": 0,
+          "actual_count": 0,
+          "rows": "검증 · A2\t문자\t지원 제외"
+        },
+        {
+          "width": 390,
+          "targets": "B4, B5, B6, B7, B8, B9, B10, B11, B12",
+          "profile": "RP01_NUMERIC_TEXT_FIELD_V1",
+          "role": "AMOUNT",
+          "expected_count": 0,
+          "actual_count": 0,
+          "rows": "검증 · B10\t문자\t지원 제외\n검증 · B11\t빈 셀\t지원 제외\n검증 · B12\t문자\t지원 제외\n검증 · B4\t문자\t지원 제외\n검증 · B5\t문자\t지원 제외\n검증 · B6\t문자\t지원 제외\n검증 · B7\t문자\t지원 제외\n검증 · B8\t문자\t지원 제외\n검증 · B9\t문자\t지원 제외"
+        },
+        {
+          "width": 390,
+          "targets": "F3",
+          "profile": "RP02_APPROVED_FORMULA_RESTORE_V1",
+          "role": "AMOUNT",
+          "expected_count": 1,
+          "actual_count": 1,
+          "rows": "검증 · F3\t빈 셀\t형식 조건 충족"
+        },
+        {
+          "width": 390,
+          "targets": "G3, H3, I3, J3",
+          "profile": "RP02_APPROVED_FORMULA_RESTORE_V1",
+          "role": "AMOUNT",
+          "expected_count": 0,
+          "actual_count": 0,
+          "rows": "검증 · G3\t문자\t지원 제외\n검증 · H3\t수식\t지원 제외\n검증 · I3\t숫자\t지원 제외\n검증 · J3\t문자\t지원 제외"
+        }
+      ],
+      "screenshots": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d02\\d02-1440-numeric.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d02\\d02-1440-blank-exclusions.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d02\\d02-390-numeric.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d02\\d02-390-blank-exclusions.png"
+      ]
+    },
+    "owner_package_hashes_preserved": 83
+  },
+  "commands": [
+    {
+      "command": "python scripts/generate_delivery_fixtures.py",
+      "exit_code": 0
+    },
+    {
+      "command": "pytest tests/test_delivery_inputs.py tests/test_control_plane.py -q -p no:cacheprovider",
+      "exit_code": 0,
+      "initial_target_tests": 21
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/verify-delivery-inputs.mjs",
+      "exit_code": 0,
+      "cases": 10,
+      "screenshots": 4
+    }
+  ],
+  "recovered_failures": [
+    {
+      "command": "ruff check new D02 files",
+      "exit_code": 1,
+      "cause": "Long lines/imports/semicolon formatting; corrected, final Ruff PASS"
+    },
+    {
+      "command": "pytest D02/control-plane/Gateway targets",
+      "exit_code": 1,
+      "cause": "Test used production settings model_copy without required HMAC secret; route gate isolated. Existing exact route contract updated for authorized delivery path."
+    },
+    {
+      "command": "node scripts/verify-delivery-inputs.mjs",
+      "exit_code": 1,
+      "cause": "Wrapped select accessible name included option text; explicit accessible labels added, rerun 10 PASS"
+    }
+  ],
+  "pending_release": [
+    {
+      "command": "docker build --tag workbookcare-api:d02-20260913 --file infra/cloudrun/Dockerfile apps/api",
+      "exit_code": 1,
+      "cause": "Incorrect Dockerfile path and unresponsive engine; interrupted without image. Correct path is apps/api/Dockerfile."
+    },
+    {
+      "command": "docker version --format {{json .Server.Version}} (25s bounded probe)",
+      "exit_code": 1,
+      "cause": "Docker engine timeout; restart approval requested because other containers might be affected"
+    }
+  ],
+  "not_run": [
+    "Hosted D02 UI / API revision pending Docker recovery",
+    "D03 calculation / Excel reference / approved plan",
+    "Repair output / comparison / PG sandbox or live transactions",
+    "Durable commercial store and active TTL sweeper",
+    "New resources, prices, real data, remote Git push, anonymous deployment"
+  ],
+  "next": "D03 engineering authorized by latest owner; D02 actual local UI and required regression pass; hosted D02 remains explicitly pending"
+}
