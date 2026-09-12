@@ -50,3 +50,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Reproducible delivery evaluator dependencies / compiled classes
+apps/api/engine/lib/
+apps/api/engine/classes/

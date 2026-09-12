@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
+import {RepairPlanPreview} from './RepairPlanPreview';
 import { resolveApiBaseUrl } from '../lib/api';
 
 type Preflight = { status: string; eligible_count: number; reason_codes: string[]; purchase_enabled: boolean;
   targets: {sheet:string;cell:string;eligible:boolean;current_type:string;reason_codes:string[]}[] };
 export type DeliveryJob = {job_id:string;revision:number;source_hash:string;status:string;expires_at:number;
+  internal_rehearsal?:boolean;plan_summary?:{digest:string;status:string;patch_count:number;impact_count:number;formula_impact_count:number;coverage:{formula_count:number};reference:{status:string;case_count?:number}}|null;
   sheets:{name:string;cell_count:number}[];preflight:Preflight|null;purchase_enabled:boolean;source_unchanged:boolean};
 const RP01='RP01_NUMERIC_TEXT_FIELD_V1';const RP02='RP02_APPROVED_FORMULA_RESTORE_V1';
 const reasons:Record<string,string>={
@@ -79,11 +81,12 @@ export function DeliveryWorkspace({file}:{file:File}){
         {dirty&&job.preflight&&<p role="status">기준이 바뀌었습니다. 새 기준으로 다시 검사해야 합니다.</p>}
         {job.preflight&&!dirty&&<section className="delivery-preflight-result" aria-label="사전 검사 결과"><h3>3. 사전 검사 결과</h3>
           <strong>{job.preflight.status==='PRELIMINARY_ONLY'?'대상 형식 확인 · 추가 검증 필요':'선택한 범위의 수정 조건 미충족'}</strong>
-          <p>형식 조건 충족 {job.preflight.eligible_count}건</p><p>계산·보존 검증이 남아 있어 아직 수정 가능 또는 견적 가능 상태가 아닙니다.</p>
+          <p>형식 조건 충족 {job.preflight.eligible_count}건</p><p>{job.plan_summary?'아래에서 계산한 변경계획을 확인하세요. 아직 구매·수정 실행은 제공하지 않습니다.':'다음 단계에서 계산 영향을 확인할 수 있습니다. 아직 수정 가능 또는 견적 가능 상태가 아닙니다.'}</p>
           <ul>{[...new Set([...job.preflight.reason_codes,...job.preflight.targets.flatMap(t=>t.reason_codes)])].map(code=><li key={code}>{reasons[code]??'지원 범위를 충족하지 않습니다. 현재는 수동 확인이 필요합니다.'}</li>)}</ul>
           <table className="delivery-targets"><caption>선택한 셀의 실제 사전 검사</caption><thead><tr><th>위치</th><th>현재 타입</th><th>확인 결과</th></tr></thead><tbody>{job.preflight.targets.map(t=><tr key={t.sheet+t.cell}><td>{t.sheet} · {t.cell}</td><td>{cellTypes[t.current_type]??t.current_type}</td><td>{t.eligible?'형식 조건 충족':'지원 제외'}</td></tr>)}</tbody></table>
           <button className="button button--primary" type="button" disabled>견적·수정 실행 준비 중</button>
         </section>}
+        {job.preflight?.status==='PRELIMINARY_ONLY'&&!dirty&&<RepairPlanPreview job={job} onJob={setJob}/>}
         <div className="delivery-actions"><button className="button button--outline" type="button" disabled={busy} onClick={()=>run(async signal=>{setJob(await deliveryRequest<DeliveryJob>({action:'get',job_id:job.job_id},signal));})}>최신 작업 상태 확인</button>
           <button className="button button--ghost" type="button" disabled={busy} onClick={()=>run(async signal=>{await deliveryRequest({action:'delete',job_id:job.job_id},signal);setJob(null);setConsent(false);setConfirmed(false);})}>사전 검사 원본 삭제</button></div>
       </>}

@@ -1,5 +1,23 @@
 # Current progress
 
+## D03 실제 계산·불변 계획·화면 검증 — 2026-09-13
+
+Apache POI 5.5.1 계산 adapter를 제한된 JDK17 프로세스에서 실행한다. 원본 XLSX 대신 검증한 typed snapshot을 전달하며 원본 저장/캐시 사용은 하지 않는다.
+지원 수식 조합/참조/깊이/전체 coverage, RP01 타입변환, RP02 절대·상대·혼합/불연속 정확 번역을 구현했다.
+원본·소유자·정책·엔진/템플릿·exact patch·계산 영향·캐시/계산 설정 보조 변경·만료를 plan digest로 고정한다.
+무료 projection은 범위 요약이다. 정확 상세는 권리 검사를 요구하며 내부 합성 fixture 권리는 local CLI만 발급하고 hosted/production에서는 인정하지 않는다.
+
+고정 수학/정책 oracle 20개 사례 25개 typed 결과를 설치된 Excel과 실제 POI 실행으로 대조: 일치.
+표적31개, 전체 웹75·Worker15·API129·M4 exact36, Ruff/build exit0. 강제 timeout 뒤 프로세스 종료/임시 경로 삭제, Windows 512MiB 메모리 제한, 네트워크/외부파일/실행/쓰기 거부를 실제 확인했다.
+실제 local desktop/mobile 7개 UI 시나리오: RP01 0→15,500, subset 0→12,000, RP02 F3=6,000/F12 12,200→18,200, 미검증 조합은 성공 0으로 표시하지 않는다.
+직접 변경값은 한 번, 복원 수식과 계산 결과는 같은 셀에, downstream 영향은 별도 표시한다. 스크린샷5장 검토.
+
+로컬 개발 판정 `ENGINEERING_VERIFIED_AWAITING_OWNER`. **hosted D02/D03 배포, Linux 컨테이너 실행은 Docker 엔진 무응답으로 미실행**.
+계산 프로필 검증은 상용 판매·납품·PG 검증이 아니다. 현재 구매/실행 false, D04 산출물은 아직 만들지 않았다.
+실패 수정·명령·exit·화면·미실행은 [D03 증거](delivery-v3_2/reviews/evidence/D03-local.json), 실제 Excel 결과는 [reference](delivery-v3_2/reviews/evidence/D03-excel-reference.json).
+최신 D08까지 승인에 따라 다음 D04로 진행하고 배포 대기는 계속 보존한다.
+
+
 ## D02 구현·로컬 화면 검증 — 2026-09-13
 
 실제 원본 고정/소유자/버전 API와 사전 검사 UI를 구현했다. 기존 OOXML 보호·Access/HMAC·R2·무료/M4를 재사용한다.

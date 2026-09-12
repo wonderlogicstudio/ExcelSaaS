@@ -1,0 +1,83 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
+import {execFileSync} from 'node:child_process';
+import {join,resolve} from 'node:path';
+const root=resolve('.');const require=createRequire(import.meta.url);
+const {chromium}=require(join(root,'artifacts/verification/d01/browser-runtime/node_modules/playwright'));
+const output=join(root,'artifacts/verification/d03');const pictures=join(root,'artifacts/screenshots/d03');
+await mkdir(output,{recursive:true});await mkdir(pictures,{recursive:true});
+const expected=JSON.parse(await readFile(join(root,'samples/delivery-v3_2/expected.json'),'utf8'));
+const browser=await chromium.launch({channel:'chrome',headless:true});const evidence={kind:'ACTUAL_PRODUCT_UI_API_POI_WITH_INTERNAL_SYNTHETIC_ENTITLEMENT',rows:[],screenshots:[]};
+const fmt=n=>n.toLocaleString('ko-KR');
+try {
+ for(const width of [1440,390]){
+  const page=await browser.newPage({viewport:{width,height:1000},reducedMotion:'reduce'});const errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('http://127.0.0.1:5189');
+  await page.getByLabel('엑셀 파일 선택',{exact:true}).setInputFiles(join(root,'samples/delivery-v3_2/delivery-rp01-rp02.xlsx'));
+  await page.locator('[data-audit-status=COMPLETED]').waitFor();
+  await page.getByRole('button',{name:'수정 범위 사전 확인',exact:true}).click();
+  await page.getByLabel('업로드 권한이 있는 합성 파일이며 사전 검사와 임시 보관에 동의합니다.').check();
+  const created=page.waitForResponse(r=>r.url().endsWith('/v1/delivery')&&r.request().postDataJSON()?.action==='create_input');
+  await page.getByRole('button',{name:'원본 고정하고 계속',exact:true}).click();
+  const job=await (await created).json();
+  await page.getByText('원본 고정 완료 · 변경하지 않음 · 1개 시트',{exact:true}).waitFor();
+  // Operator CLI is local only, hash-bound to this fixed synthetic input. No HTTP grant bypass.
+  execFileSync(join(root,'apps/api/.venv/Scripts/python.exe'),['-m','app.delivery_rehearsal','--job-id',job.job_id],{cwd:join(root,'apps/api'),env:process.env,stdio:'pipe'});
+  const box=page.locator('#repair-preflight');
+  await box.getByRole('button',{name:'최신 작업 상태 확인'}).click();
+  const check=async(targets,profile='RP01_NUMERIC_TEXT_FIELD_V1')=>{
+   await box.getByLabel('수정 종류',{exact:true}).selectOption(profile);
+   await box.getByLabel('대상 셀',{exact:true}).fill(targets);
+   if(profile.startsWith('RP01'))await box.getByLabel('필드 역할',{exact:true}).selectOption('AMOUNT');
+   else {await box.getByLabel('기준 셀',{exact:true}).fill('F2');await box.getByLabel('기준 셀의 현재 수식',{exact:true}).fill('=ROUND(C2*D2*(1-E2),0)');}
+   await box.getByRole('checkbox').check();
+   await box.getByRole('button',{name:'선택한 범위 사전 검사',exact:true}).click();
+   await box.getByRole('region',{name:'사전 검사 결과'}).waitFor();
+   const planned=page.waitForResponse(r=>r.url().endsWith('/v1/delivery')&&r.request().postDataJSON()?.action==='prepare_plan');
+   await box.getByRole('button',{name:'선택한 변경계획 계산',exact:true}).click();
+   const response=await planned;assert.equal(response.status(),200);const state=await response.json();assert.equal(state.plan_summary.reference.status,'PASS');
+   await box.getByText('변경계획 계산 검증 완료',{exact:true}).waitFor();
+   await box.getByRole('button',{name:'정확한 변경계획 보기'}).click();
+   await box.getByRole('region',{name:'정확한 변경계획'}).waitFor();
+   return state.plan_summary.digest;
+  };
+  const digest=await check('B2, B3');
+  for(const [cell,value] of Object.entries(expected.rp01.type_values))assert.ok((await box.locator(`[data-plan-cell=${cell}]`).innerText()).includes('숫자 '+fmt(value)));
+  assert.ok((await box.locator('[data-impact-cell=H2]').innerText()).includes('숫자 '+fmt(expected.rp01.after_H2)));
+  await box.locator('[data-impact-cell=H2]').scrollIntoViewIfNeeded();
+  let shot=join(pictures,`d03-${width}-numeric-impact.png`);await page.screenshot({path:shot});evidence.screenshots.push(shot);
+  evidence.rows.push({width,profile:'RP01',targets:['B2','B3'],screen_H2:expected.rp01.after_H2,exact_patch_count:await box.locator('[data-plan-cell]').count()});
+  const subset=await check('B2');assert.notEqual(subset,digest);assert.equal(await box.locator('[data-plan-cell]').count(),1);
+  assert.ok((await box.locator('[data-impact-cell=H2]').innerText()).includes('숫자 12,000'));
+  evidence.rows.push({width,profile:'RP01_SUBSET',targets:['B2'],screen_H2:12000,digest_changed:true});
+  await check('F3','RP02_APPROVED_FORMULA_RESTORE_V1');
+  assert.ok((await box.locator('[data-plan-cell=F3]').innerText()).includes(expected.rp02.formula_after));
+  assert.ok((await box.locator('[data-impact-cell=F3]').innerText()).includes('숫자 '+fmt(expected.rp02.after_F3)));
+  assert.ok((await box.locator('[data-impact-cell=F12]').innerText()).includes('숫자 '+fmt(expected.rp02.after_F12)));
+  await box.locator('[data-plan-cell=F3]').scrollIntoViewIfNeeded();
+  shot=join(pictures,`d03-${width}-formula-plan.png`);await page.screenshot({path:shot});evidence.screenshots.push(shot);
+  evidence.rows.push({width,profile:'RP02',exact_formula:expected.rp02.formula_after,screen_F3:expected.rp02.after_F3,screen_F12:expected.rp02.after_F12});
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
+  assert.equal(await box.getByRole('button',{name:'견적·수정 실행 준비 중'}).isDisabled(),true);
+  assert.deepEqual(errors,[]);await page.close();
+ }
+ const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
+ await page.goto('http://127.0.0.1:5189');
+ await page.getByLabel('엑셀 파일 선택',{exact:true}).setInputFiles(join(root,'samples/delivery-v3_2/delivery-unverified-combination.xlsx'));
+ await page.locator('[data-audit-status=COMPLETED]').waitFor();
+ await page.getByRole('button',{name:'수정 범위 사전 확인',exact:true}).click();
+ await page.getByLabel('업로드 권한이 있는 합성 파일이며 사전 검사와 임시 보관에 동의합니다.').check();
+ await page.getByRole('button',{name:'원본 고정하고 계속',exact:true}).click();
+ const box=page.locator('#repair-preflight');
+ await box.getByLabel('대상 셀',{exact:true}).fill('B2');await box.getByLabel('필드 역할',{exact:true}).selectOption('AMOUNT');
+ await box.getByRole('checkbox').check();await box.getByRole('button',{name:'선택한 범위 사전 검사',exact:true}).click();
+ await box.getByRole('button',{name:'선택한 변경계획 계산',exact:true}).click();
+ await box.getByRole('alert').waitFor();assert.ok((await box.getByRole('alert').innerText()).includes('검증하지 않았습니다'));
+ assert.equal(await box.locator('.delivery-plan-summary').count(),0);
+ await box.getByRole('alert').scrollIntoViewIfNeeded();const negative=join(pictures,'d03-unsupported-combination.png');await page.screenshot({path:negative});evidence.screenshots.push(negative);
+ evidence.rows.push({width:1440,scenario:'UNVERIFIED_COMBINATION',engine_failure_not_zero:true,no_success_plan:true});await page.close();
+ await writeFile(join(output,'browser.json'),JSON.stringify(evidence,null,2)+'\n');
+ console.log(JSON.stringify({cases:evidence.rows.length,screenshots:evidence.screenshots.length,actual_engine:true,expected_values_on_screen:true,live_payment:false,exit_code:0}));
+} finally {await browser.close();}

@@ -18,3 +18,10 @@
 .delivery-actions {display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
 .delivery-workspace button:disabled {opacity:.55;cursor:not-allowed}
 @media(max-width:640px){.delivery-entry,.delivery-workspace {margin:20px 12px;padding:16px}.delivery-step,.delivery-preflight-result{padding:12px}.delivery-form-grid{grid-template-columns:1fr}.delivery-targets{font-size:13px}.delivery-workspace .button{white-space:normal;min-height:44px}}
+
+.delivery-plan h4 {margin:22px 0 8px;font-size:17px}
+.delivery-plan-summary {margin-top:20px;padding:16px;background:#f1f7f6;border-radius:10px}
+.delivery-plan-patches {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin:16px 0}
+.delivery-patch {min-width:0;padding:16px;border:1px solid #d8e2e9;border-radius:10px}
+.delivery-patch h5 {margin:0 0 12px;font-size:16px}
+.delivery-patch dl {margin:0;display:grid;gap:6px}.delivery-patch dt {font-size:13px;color:#566c7e}.delivery-patch dd {margin:0 0 10px;overflow-wrap:anywhere;font-weight:600;line-height:1.5}

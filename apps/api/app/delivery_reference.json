@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "engine_fingerprint": "748cdbe4e4d3a5fa7f04f6cc1bba4db068ee2459a0faebeb49ae56b695962203",
+  "case_count": 20,
+  "typed_result_count": 25,
+  "excel_version": "16.0",
+  "excel_build": 20326,
+  "oracle_sha256": "49cde2bbaf9c4752b730e4b03b83209e6eaad7dc6f1e728ad030341d68175303",
+  "reference_sha256": "64ee0542a3dbeceec9cb63fd63a55111a78e501064d07c5b52bb76b1c558788c",
+  "rows": [
+    {
+      "id": "sum_typed_text",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "sum_numeric",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "round_amount",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "mixed_absolute",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "round_positive_tie",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "round_negative_tie",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "if_and_true",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "if_and_text",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "if_and_missing",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "if_or_zero",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "if_or_empty",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "if_or_nonzero",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "iferror_semantic_div0",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "division_error",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "division_text_error",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "division_normal",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "arithmetic",
+      "typed_result_count": 4,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "round_product",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "empty_and_reference",
+      "typed_result_count": 3,
+      "excel_and_poi_match_policy": true
+    },
+    {
+      "id": "boolean_sum",
+      "typed_result_count": 1,
+      "excel_and_poi_match_policy": true
+    }
+  ]
+}

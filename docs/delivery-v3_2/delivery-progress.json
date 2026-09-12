@@ -2,7 +2,7 @@
   "schema_version": 1,
   "copy_over_existing_progress": false,
   "prior_progress_path": "../10_PROGRESS.md",
-  "active_bundle": "D03",
+  "active_bundle": "D04",
   "bundles": {
     "D01": {
       "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
@@ -378,6 +378,21 @@
       "commerce_ready": false
     },
     "D03": {
+      "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+      "development_approved": true,
+      "owner_acceptance": "PENDING",
+      "history": [
+        {
+          "status": "IN_PROGRESS",
+          "reason": "before actual calculation and UI verification"
+        }
+      ],
+      "review": "reviews/D03.md",
+      "evidence": "reviews/evidence/D03-local.json",
+      "beta_deployment": "PENDING_DOCKER_ENGINE_RECOVERY",
+      "commerce_ready": false
+    },
+    "D04": {
       "status": "IN_PROGRESS",
       "development_approved": true,
       "owner_acceptance": "PENDING"
@@ -395,7 +410,7 @@
     "commercial_signal": "NOT_OBSERVED"
   },
   "customer_change_approval": "NOT_IMPLEMENTED_BY_D01",
-  "next_recommended_bundle": "D03",
+  "next_recommended_bundle": "D04",
   "next_bundle_approved": true,
   "execution_stopped_after": null,
   "deployment_authorization": {

@@ -1,5 +1,12 @@
 # Current milestone
 
+## ACTIVE APPROVED — D04 (2026-09-13)
+
+D03 local actual POI/Excel/desktop/mobile expectations and full regression pass. Hosted D02/D03 release remains pending Docker recovery. No commercial readiness inferred.
+Read PATCH_AND_VALIDATION.md and 02_CUSTOMER_OUTPUTS.md. Implement minimal OOXML patch to a separate copy, actual post-calculation/preservation verification, atomic three-file delivery and cancellation/retry fence. Use internal synthetic grants only; no public test bypass.
+Latest D01–D08 authorization applies. Preserve prior evidence and pending release work.
+
+
 ## ACTIVE APPROVED — D03 (2026-09-13)
 
 D02 input/preflight actual local desktop/mobile expected values and full regression pass. D02 hosted deployment is explicitly pending local Docker recovery, not reported as verified.

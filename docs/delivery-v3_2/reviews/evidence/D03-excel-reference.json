@@ -1,0 +1,208 @@
+{
+  "source_sha256": "49cde2bbaf9c4752b730e4b03b83209e6eaad7dc6f1e728ad030341d68175303",
+  "build": 20326,
+  "version": "16.0",
+  "results": [
+    {
+      "id": "sum_typed_text",
+      "values": {
+        "B1": {
+          "value": 7,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "sum_numeric",
+      "values": {
+        "B1": {
+          "value": 15507,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "round_amount",
+      "values": {
+        "D1": {
+          "value": 2700,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "mixed_absolute",
+      "values": {
+        "D1": {
+          "value": 6000,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "round_positive_tie",
+      "values": {
+        "B1": {
+          "value": 3,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "round_negative_tie",
+      "values": {
+        "B1": {
+          "value": -3,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "if_and_true",
+      "values": {
+        "D1": {
+          "value": 2700,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "if_and_text",
+      "values": {
+        "D1": {
+          "value": 0,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "if_and_missing",
+      "values": {
+        "D1": {
+          "value": 0,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "if_or_zero",
+      "values": {
+        "D1": {
+          "value": 0,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "if_or_empty",
+      "values": {
+        "D1": {
+          "value": 0,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "if_or_nonzero",
+      "values": {
+        "D1": {
+          "value": 3000,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "iferror_semantic_div0",
+      "values": {
+        "D1": {
+          "value": 0,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "division_error",
+      "values": {
+        "D1": {
+          "value": "#DIV/0!",
+          "type": "error"
+        }
+      }
+    },
+    {
+      "id": "division_text_error",
+      "values": {
+        "D1": {
+          "value": "#VALUE!",
+          "type": "error"
+        }
+      }
+    },
+    {
+      "id": "division_normal",
+      "values": {
+        "D1": {
+          "value": 4.5,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "arithmetic",
+      "values": {
+        "E1": {
+          "value": 21,
+          "type": "number"
+        },
+        "D1": {
+          "value": 4,
+          "type": "number"
+        },
+        "F1": {
+          "value": 2.3333333333333335,
+          "type": "number"
+        },
+        "C1": {
+          "value": 10,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "round_product",
+      "values": {
+        "C1": {
+          "value": 8,
+          "type": "number"
+        }
+      }
+    },
+    {
+      "id": "empty_and_reference",
+      "values": {
+        "D1": {
+          "value": 0,
+          "type": "number"
+        },
+        "B1": {
+          "value": "",
+          "type": "text"
+        },
+        "C1": {
+          "value": "abc",
+          "type": "text"
+        }
+      }
+    },
+    {
+      "id": "boolean_sum",
+      "values": {
+        "B1": {
+          "value": 2,
+          "type": "number"
+        }
+      }
+    }
+  ],
+  "kind": "ACTUAL_INSTALLED_EXCEL_REFERENCE"
+}

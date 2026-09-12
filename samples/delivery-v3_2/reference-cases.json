@@ -1,0 +1,353 @@
+{
+  "kind": "INDEPENDENT_HAND_CALCULATED_POLICY_ORACLE_V1",
+  "cases": [
+    {
+      "id": "sum_typed_text",
+      "values": {
+        "A1": "12000",
+        "A2": "3,500",
+        "A3": 7
+      },
+      "formulas": {
+        "B1": "=SUM(A1:A3)"
+      },
+      "expected": {
+        "B1": {
+          "type": "number",
+          "value": 7
+        }
+      }
+    },
+    {
+      "id": "sum_numeric",
+      "values": {
+        "A1": 12000,
+        "A2": 3500,
+        "A3": 7
+      },
+      "formulas": {
+        "B1": "=SUM(A1:A3)"
+      },
+      "expected": {
+        "B1": {
+          "type": "number",
+          "value": 15507
+        }
+      }
+    },
+    {
+      "id": "round_amount",
+      "values": {
+        "A1": 2,
+        "B1": 1500,
+        "C1": 0.1
+      },
+      "formulas": {
+        "D1": "=ROUND(A1*B1*(1-C1),0)"
+      },
+      "expected": {
+        "D1": {
+          "type": "number",
+          "value": 2700
+        }
+      }
+    },
+    {
+      "id": "mixed_absolute",
+      "values": {
+        "A1": 3,
+        "B1": 2000,
+        "C1": 0
+      },
+      "formulas": {
+        "D1": "=ROUND($A1*B$1*(1-$C$1),0)"
+      },
+      "expected": {
+        "D1": {
+          "type": "number",
+          "value": 6000
+        }
+      }
+    },
+    {
+      "id": "round_positive_tie",
+      "values": {
+        "A1": 2.5
+      },
+      "formulas": {
+        "B1": "=ROUND(A1,0)"
+      },
+      "expected": {
+        "B1": {
+          "type": "number",
+          "value": 3
+        }
+      }
+    },
+    {
+      "id": "round_negative_tie",
+      "values": {
+        "A1": -2.5
+      },
+      "formulas": {
+        "B1": "=ROUND(A1,0)"
+      },
+      "expected": {
+        "B1": {
+          "type": "number",
+          "value": -3
+        }
+      }
+    },
+    {
+      "id": "if_and_true",
+      "values": {
+        "A1": 2,
+        "B1": 1500,
+        "C1": 0.1
+      },
+      "formulas": {
+        "D1": "=IF(AND(ISNUMBER(A1),ISNUMBER(B1),ISNUMBER(C1)),ROUND(A1*B1*(1-C1),0),0)"
+      },
+      "expected": {
+        "D1": {
+          "type": "number",
+          "value": 2700
+        }
+      }
+    },
+    {
+      "id": "if_and_text",
+      "values": {
+        "A1": "2",
+        "B1": 1500,
+        "C1": 0.1
+      },
+      "formulas": {
+        "D1": "=IF(AND(ISNUMBER(A1),ISNUMBER(B1),ISNUMBER(C1)),ROUND(A1*B1*(1-C1),0),0)"
+      },
+      "expected": {
+        "D1": {
+          "type": "number",
+          "value": 0
+        }
+      }
+    },
+    {
+      "id": "if_and_missing",
+      "values": {
+        "B1": 1500,
+        "C1": 0.1
+      },
+      "formulas": {
+        "D1": "=IF(AND(ISNUMBER(A1),ISNUMBER(B1),ISNUMBER(C1)),ROUND(A1*B1*(1-C1),0),0)"
+      },
+      "expected": {
+        "D1": {
+          "type": "number",
+          "value": 0
+        }
+      }
+    },
+    {
+      "id": "if_or_zero",
+      "values": {
+        "A1": 0,
+        "B1": 1500
+      },
+      "formulas": {
+        "D1": "=IF(OR(A1=0,A1=\"\"),0,ROUND(A1*B1,0))"
+      },
+      "expected": {
+        "D1": {
+          "type": "number",
+          "value": 0
+        }
+      }
+    },
+    {
+      "id": "if_or_empty",
+      "values": {
+        "A1": "",
+        "B1": 1500
+      },
+      "formulas": {
+        "D1": "=IF(OR(A1=0,A1=\"\"),0,ROUND(A1*B1,0))"
+      },
+      "expected": {
+        "D1": {
+          "type": "number",
+          "value": 0
+        }
+      }
+    },
+    {
+      "id": "if_or_nonzero",
+      "values": {
+        "A1": 2,
+        "B1": 1500
+      },
+      "formulas": {
+        "D1": "=IF(OR(A1=0,A1=\"\"),0,ROUND(A1*B1,0))"
+      },
+      "expected": {
+        "D1": {
+          "type": "number",
+          "value": 3000
+        }
+      }
+    },
+    {
+      "id": "iferror_semantic_div0",
+      "values": {
+        "A1": 2,
+        "B1": 0
+      },
+      "formulas": {
+        "D1": "=IFERROR(A1/B1,0)"
+      },
+      "expected": {
+        "D1": {
+          "type": "number",
+          "value": 0
+        }
+      }
+    },
+    {
+      "id": "division_error",
+      "values": {
+        "A1": 2,
+        "B1": 0
+      },
+      "formulas": {
+        "D1": "=A1/B1"
+      },
+      "expected": {
+        "D1": {
+          "type": "error",
+          "value": "#DIV/0!"
+        }
+      }
+    },
+    {
+      "id": "division_text_error",
+      "values": {
+        "A1": "not-number",
+        "B1": 2
+      },
+      "formulas": {
+        "D1": "=A1/B1"
+      },
+      "expected": {
+        "D1": {
+          "type": "error",
+          "value": "#VALUE!"
+        }
+      }
+    },
+    {
+      "id": "division_normal",
+      "values": {
+        "A1": 9,
+        "B1": 2
+      },
+      "formulas": {
+        "D1": "=IFERROR(A1/B1,0)"
+      },
+      "expected": {
+        "D1": {
+          "type": "number",
+          "value": 4.5
+        }
+      }
+    },
+    {
+      "id": "arithmetic",
+      "values": {
+        "A1": 7,
+        "B1": 3
+      },
+      "formulas": {
+        "C1": "=A1+B1",
+        "D1": "=A1-B1",
+        "E1": "=A1*B1",
+        "F1": "=A1/B1"
+      },
+      "expected": {
+        "C1": {
+          "type": "number",
+          "value": 10
+        },
+        "D1": {
+          "type": "number",
+          "value": 4
+        },
+        "E1": {
+          "type": "number",
+          "value": 21
+        },
+        "F1": {
+          "type": "number",
+          "value": 2.3333333333333335
+        }
+      }
+    },
+    {
+      "id": "round_product",
+      "values": {
+        "A1": 2.5,
+        "B1": 3
+      },
+      "formulas": {
+        "C1": "=ROUND(A1*B1,0)"
+      },
+      "expected": {
+        "C1": {
+          "type": "number",
+          "value": 8
+        }
+      }
+    },
+    {
+      "id": "empty_and_reference",
+      "values": {
+        "A1": "abc"
+      },
+      "formulas": {
+        "B1": "=\"\"",
+        "C1": "=A1",
+        "D1": "=A2"
+      },
+      "expected": {
+        "B1": {
+          "type": "text",
+          "value": ""
+        },
+        "C1": {
+          "type": "text",
+          "value": "abc"
+        },
+        "D1": {
+          "type": "number",
+          "value": 0
+        }
+      }
+    },
+    {
+      "id": "boolean_sum",
+      "values": {
+        "A1": true,
+        "A2": 2
+      },
+      "formulas": {
+        "B1": "=SUM(A1:A3)"
+      },
+      "expected": {
+        "B1": {
+          "type": "number",
+          "value": 2
+        }
+      }
+    }
+  ]
+}

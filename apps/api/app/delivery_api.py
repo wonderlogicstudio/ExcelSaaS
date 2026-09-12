@@ -13,6 +13,7 @@ from pathlib import Path
 
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
+from starlette.concurrency import run_in_threadpool
 
 from .config import get_settings
 from .delivery_inputs import (
@@ -26,6 +27,8 @@ from .delivery_inputs import (
     preflight,
     reject,
 )
+from .delivery_plan import build_plan, customer_plan, plan_summary
+from .delivery_rehearsal import entitled
 from .delivery_store import INPUT_TTL_SECONDS, DeliveryStore
 
 router = APIRouter()
@@ -64,6 +67,8 @@ def projection(job: dict) -> dict:
         "repair_execution_available": False,
         "storage_mode": "BETA_EPHEMERAL_LOCAL_ADAPTER",
         "source_unchanged": True,
+        "plan_summary": plan_summary(state["plan"]) if state.get("plan") else None,
+        "internal_rehearsal": entitled(job, get_settings().app_env),
     }
 
 
@@ -96,7 +101,18 @@ async def delivery(request: Request):
     except (ValueError, UnicodeError):
         reject("INVALID_REQUEST", "요청 형식을 확인하세요.")
     if not isinstance(body, dict) or any(
-        k in body for k in ["owner", "owner_id", "state", "payment", "approval", "artifacts"]
+        k in body
+        for k in [
+            "owner",
+            "owner_id",
+            "state",
+            "payment",
+            "approval",
+            "artifacts",
+            "internal_grant",
+            "plan",
+            "entitlement",
+        ]
     ):
         reject("INVALID_REQUEST", "서버가 관리하는 작업 정보를 지정할 수 없습니다.")
     store = get_store()
@@ -142,6 +158,24 @@ async def delivery(request: Request):
         elif action == "delete":
             store.delete(owner, job_id)
             output = {"status": "DELETED"}
+        elif action == "plan_details":
+            output = customer_plan(job, entitled=entitled(job, settings.app_env))
+        elif action == "prepare_plan":
+            if body.get("source_hash") != job["snapshot"]["source_hash"]:
+                reject("STALE_INPUT", "고정된 원본이 일치하지 않습니다.", 409)
+            if type(body.get("revision")) is not int or body["revision"] != job["revision"]:
+                reject("STALE_JOB", "최신 작업 상태를 확인하세요.", 409)
+            if not job["state"].get("policy"):
+                reject("PREFLIGHT_REQUIRED", "업무 기준과 대상의 사전 검사를 먼저 완료하세요.")
+            plan = await run_in_threadpool(build_plan, job, job["state"]["policy"])
+            state = {
+                **job["state"],
+                "status": plan_summary(plan)["status"],
+                "plan": plan,
+                "approval": None,
+                "artifacts": None,
+            }
+            output = projection(store.update(job, job["revision"], state))
         elif action == "preflight":
             if body.get("source_hash") != job["snapshot"]["source_hash"]:
                 reject("STALE_INPUT", "고정된 원본과 요청한 원본이 다릅니다.", 409)
@@ -160,6 +194,7 @@ async def delivery(request: Request):
                 "preflight": result,
                 "approval": None,
                 "artifacts": None,
+                "plan": None,
             }
             output = projection(store.update(job, body["revision"], state))
         else:

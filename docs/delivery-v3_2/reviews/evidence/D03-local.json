@@ -1,0 +1,302 @@
+{
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "scope": "D03 real bounded calculation, immutable plan and actual local product UI",
+  "reused": [
+    "D02 immutable source/owner/revision/preflight",
+    "M4-used openpyxl Tokenizer for lexical reference boundaries; separate Translator + POI IR validation",
+    "Existing free/M4 upload and UI"
+  ],
+  "implemented": [
+    "Apache POI 5.5.1 pinned dependencies + SHA512 runtime integrity + JDK17 read-only typed IPC",
+    "Exact supported expression combinations, whole-workbook dependency coverage, cycle/depth/size exclusion",
+    "RP01 typed patches and RP02 absolute/relative/mixed exact reference translation",
+    "Canonical source/owner/policy/engine/template/patch/impact/auxiliary changes/expiry plan digest",
+    "Unpaid summary and separately entitled exact cell preview; local CLI fixed-synthetic grant only, no HTTP grant endpoint",
+    "JDK no network/external file/process/write policy, Windows 512MiB Job Object and hard timeout/kill/scratch cleanup"
+  ],
+  "verification": {
+    "full_regression": {
+      "web": 75,
+      "worker": 15,
+      "api": 129,
+      "m4_exact": 36,
+      "exit_code": 0
+    },
+    "target_plan_tests": 31,
+    "post_ui_target_api_exit": 0,
+    "post_ui_beta_build_exit": 0,
+    "reference": {
+      "status": "PASS",
+      "engine_fingerprint": "748cdbe4e4d3a5fa7f04f6cc1bba4db068ee2459a0faebeb49ae56b695962203",
+      "case_count": 20,
+      "typed_result_count": 25,
+      "excel_version": "16.0",
+      "excel_build": 20326,
+      "oracle_sha256": "49cde2bbaf9c4752b730e4b03b83209e6eaad7dc6f1e728ad030341d68175303",
+      "reference_sha256": "64ee0542a3dbeceec9cb63fd63a55111a78e501064d07c5b52bb76b1c558788c",
+      "rows": [
+        {
+          "id": "sum_typed_text",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "sum_numeric",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "round_amount",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "mixed_absolute",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "round_positive_tie",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "round_negative_tie",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "if_and_true",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "if_and_text",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "if_and_missing",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "if_or_zero",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "if_or_empty",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "if_or_nonzero",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "iferror_semantic_div0",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "division_error",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "division_text_error",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "division_normal",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "arithmetic",
+          "typed_result_count": 4,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "round_product",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "empty_and_reference",
+          "typed_result_count": 3,
+          "excel_and_poi_match_policy": true
+        },
+        {
+          "id": "boolean_sum",
+          "typed_result_count": 1,
+          "excel_and_poi_match_policy": true
+        }
+      ]
+    },
+    "sandbox": {
+      "kind": "ACTUAL_JAVA_SECURITY_MANAGER_AND_OS_PROCESS_LIMIT",
+      "status": "PASS",
+      "denied_operations": [
+        "network:DENIED",
+        "external_file:DENIED",
+        "process_execution:DENIED",
+        "file_write:DENIED"
+      ],
+      "java_major": 17,
+      "platform": "nt",
+      "customer_workbooks_used": false
+    },
+    "actual_ui": {
+      "kind": "ACTUAL_PRODUCT_UI_API_POI_WITH_INTERNAL_SYNTHETIC_ENTITLEMENT",
+      "rows": [
+        {
+          "width": 1440,
+          "profile": "RP01",
+          "targets": [
+            "B2",
+            "B3"
+          ],
+          "screen_H2": 15500,
+          "exact_patch_count": 2
+        },
+        {
+          "width": 1440,
+          "profile": "RP01_SUBSET",
+          "targets": [
+            "B2"
+          ],
+          "screen_H2": 12000,
+          "digest_changed": true
+        },
+        {
+          "width": 1440,
+          "profile": "RP02",
+          "exact_formula": "=ROUND(C3*D3*(1-E3),0)",
+          "screen_F3": 6000,
+          "screen_F12": 18200
+        },
+        {
+          "width": 390,
+          "profile": "RP01",
+          "targets": [
+            "B2",
+            "B3"
+          ],
+          "screen_H2": 15500,
+          "exact_patch_count": 2
+        },
+        {
+          "width": 390,
+          "profile": "RP01_SUBSET",
+          "targets": [
+            "B2"
+          ],
+          "screen_H2": 12000,
+          "digest_changed": true
+        },
+        {
+          "width": 390,
+          "profile": "RP02",
+          "exact_formula": "=ROUND(C3*D3*(1-E3),0)",
+          "screen_F3": 6000,
+          "screen_F12": 18200
+        },
+        {
+          "width": 1440,
+          "scenario": "UNVERIFIED_COMBINATION",
+          "engine_failure_not_zero": true,
+          "no_success_plan": true
+        }
+      ],
+      "screenshots": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d03\\d03-1440-numeric-impact.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d03\\d03-1440-formula-plan.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d03\\d03-390-numeric-impact.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d03\\d03-390-formula-plan.png",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\screenshots\\d03\\d03-unsupported-combination.png"
+      ]
+    },
+    "screenshots_inspected": 5
+  },
+  "commands": [
+    {
+      "command": "python apps/api/engine/setup.py",
+      "exit_code": 0
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_delivery_excel.ps1",
+      "exit_code": 0,
+      "executed_equivalent_staged_recipe": true
+    },
+    {
+      "command": "python scripts/verify_delivery_reference.py",
+      "exit_code": 0,
+      "executed_equivalent_staged_recipe": true
+    },
+    {
+      "command": "python scripts/verify_delivery_sandbox.py",
+      "exit_code": 0,
+      "executed_equivalent_staged_recipe": true
+    },
+    {
+      "command": "pytest tests/test_delivery_plan.py -q -p no:cacheprovider",
+      "exit_code": 0
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0
+    },
+    {
+      "command": "node scripts/verify-delivery-plans.mjs",
+      "exit_code": 0
+    },
+    {
+      "command": "npm run build --workspace @workbookcare/web -- --mode hosted_beta (explicit delivery flag)",
+      "exit_code": 0
+    }
+  ],
+  "recovered_failures": [
+    {
+      "command": "POI dependency bootstrap",
+      "exit_code": 1,
+      "cause": "Some Maven artifacts publish SHA1 rather than SHA512 sidecars; verify available publisher checksum over TLS, pin own SHA512. POI core/OOXML publisher SHA512 verified."
+    },
+    {
+      "command": "independent POI reference matrix",
+      "exit_code": 1,
+      "cause": "POI encodes built-in IFERROR as an internal name + external-function token pair; narrowly allow only that exact local IFERROR pair, keep other UDF/external references denied. Re-run 20 cases PASS."
+    },
+    {
+      "command": "JDK sandbox probe",
+      "exit_code": 1,
+      "cause": "Probe omitted product heap flags and hit the actual OS memory limit; rerun with product JVM bounds, all 4 operations denied."
+    },
+    {
+      "command": "node scripts/verify-delivery-plans.mjs first run",
+      "exit_code": 1,
+      "cause": "Engine fingerprint changed while hardening; reference gate correctly became STALE. Re-ran actual reference calculation then all UI scenarios."
+    }
+  ],
+  "ui_refinement": "Original patch values repeated under impact; now direct cell change once, restored result inline, downstream calculated effects separately.",
+  "evidence_limits": [
+    "20 synthetic cases / 25 typed outputs are a limited profile reference, not all Excel correctness",
+    "Internal fixed-synthetic entitlement is not PG or a paid customer entitlement",
+    "No output workbook delivery yet; POI never saves a source workbook"
+  ],
+  "not_run": [
+    "D02/D03 authenticated hosted deployment and screen; Docker unresponsive, restart approval pending",
+    "Linux container runtime/memory boundary and Docker packaging of JDK/engine",
+    "PG sandbox/live, actual payments/refunds/prices, real files",
+    "D04 output engine and D05-D08 still ahead",
+    "New paid resources, remote push, public/production release"
+  ],
+  "sources": [
+    "https://poi.apache.org/download.cgi",
+    "https://poi.apache.org/components/spreadsheet/eval.html"
+  ],
+  "next": "D04 approved; implement separate minimal OOXML patch + real three-file delivery, then actual UI/artifact verification"
+}
