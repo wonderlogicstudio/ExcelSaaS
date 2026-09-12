@@ -88,6 +88,22 @@ describe('WorkbookCare landing page', () => {
     expect(screen.getByText('이전 검사 결과와 같은 정적 규칙으로 비교합니다. 이전 원본 파일은 보관하지 않습니다.')).toBeInTheDocument();
   });
 
+  it('completes a same-session sample re-validation and exposes continuing finding locations', async () => {
+    vi.useFakeTimers();
+    render(<App />);
+    fireEvent.click(screen.getAllByRole('button', { name: /샘플 결과 보기/i })[0]);
+    await act(async () => { await vi.advanceTimersByTimeAsync(2200); });
+    fireEvent.click(screen.getByRole('button', { name: '수정 후 다시 검사' }));
+    fireEvent.click(screen.getAllByRole('button', { name: /샘플 결과 보기/i })[0]);
+    await act(async () => { await vi.advanceTimersByTimeAsync(2200); });
+    const group = screen.getByRole('article', { name: '계속 탐지됨' });
+    fireEvent.click(group.querySelector('summary')!);
+    expect(group.querySelector('details')).toHaveAttribute('open');
+    expect(group).toHaveTextContent('현재 위치 —');
+    expect(screen.getByRole('article', { name: '이번 재검사에서 더 이상 탐지되지 않음' })).toHaveTextContent('해당 항목이 없습니다.');
+    expect(screen.getByRole('article', { name: '새롭게 탐지됨' })).toHaveTextContent('해당 항목이 없습니다.');
+  });
+
   it('rejects unsupported files before calling the API', () => {
     render(<App />);
     const input = screen.getByLabelText('엑셀 파일 선택');

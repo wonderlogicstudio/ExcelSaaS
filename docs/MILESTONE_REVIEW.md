@@ -1,63 +1,71 @@
-# Milestone review — Product P1 free-result navigation
+# Milestone review — Product P2 re-validation location details
 
-**2026-09-10: IMPLEMENTED / AUTOMATED CHECKS PASSED / VISUAL REVIEW PENDING.**
+**2026-09-12: IMPLEMENTED / AUTOMATED CHECKS PASSED / VISUAL REVIEW PENDING.**
 
-The free result list previously required scanning every row to find the next
-item to check. Users can now combine severity, sheet, and local handling-status
-filters, see matching/total counts, and reset to all findings. The priority
-shortcut shows existing critical/warning findings across all locations and
-statuses. No-match text explicitly avoids a clean-workbook claim.
+Re-validation previously displayed comma-separated rule codes, making repeated
+rules at different cells indistinguishable. Each of the three groups now shows
+its full count and an expandable title/rule/sheet/cell list. Removed findings
+describe previous locations; continuing/new findings describe current locations.
+Workbook-level and missing-sheet/cell scope are explicit. Comparison semantics
+are unchanged, and disappearance is not a repair or correctness verdict.
 
-This product slice was selected under the owner's instruction to continue
-bounded product development and synchronize GitHub. It neither resumes nor
-completes H2/H3. Operational evidence below remains historical and unchanged.
+This bounded product slice follows the owner's renewed instruction to implement,
+verify, commit and synchronize GitHub. It does not resume or complete H2/H3.
 
 ## Changes and boundaries
 
-- `M25ResultsPanel.tsx`: memory-only filters; separately selectable workbook-level
-  locations; reset per analysis ID/timestamp; native controls, live counts, and
-  focus recovery when a status edit removes a row from the current filter.
-- `styles.css`: scoped filter layout, visible focus, 44px selects, and a single
-  column below 761px. Priority scrolling uses the existing CSS motion policy.
-- Six new behavioral regressions cover filter combinations, zero matches,
-  location distinction, priority, status retention/focus, new-scan reset, and
-  complete CSV/scan invariance.
-- Existing full summary, risk, quote, type/status totals, re-validation, and CSV
-  remain based on all findings. Original finding order is preserved. Filtering
-  does not send requests or write browser storage, URLs, logs, or feedback.
-- No API, scanner, Worker, cloud configuration, dependencies, feature gates,
-  privacy/retention policy, public Formula Audit/feedback, or deployment change.
-  Real files, invitations, repair, payment, accounts, calculation, AI, and M5 are
-  excluded. H2/H3 readiness remains unresolved in its own operational workflow.
+- `RevalidationPanel.tsx` extracts the existing panel, adds native disclosures
+  and location details, and preserves version/truncation warnings plus explicit
+  rename/move/calculation limitations. No additional description, formula evidence,
+  filename, raw cell value or finding key is rendered.
+- `styles.css` adds focus styling, long-label wrapping and a mobile single column.
+  The mobile rule follows the base grid rule so the cascade does not override it.
+- `M25ResultsPanel.tsx` supplies the existing unfiltered comparison. P1 filters,
+  current summary/risk/quote, CSV and local handling statuses are unchanged. A new
+  result's existing key also resets the disclosures.
+- No API/scanner/comparison algorithm/Worker/infra/dependency/feature flag,
+  storage/retention/telemetry/feedback or deployment change. Formula Audit and H3
+  feedback remain private/default-off as before. Real files, external invitations,
+  M3/M3.5/M5, repair, payment, accounts, recalculation and AI remain out of scope.
+- The untracked `docs/delivery-v3_2/` is untouched and excluded from the commit.
 
 ## Verification
 
-- Startup: clean local `main`, local and remote `4faae1b`.
-- Before change: `scripts/verify.ps1` passed with web 30 / Worker 13 / API 72.
-- After change: the same full command passed with web 36 / Worker 13 / API 72,
-  TypeScript and production build, Ruff, and M4-C supplied-pack verification
-  (36 exact candidates, no extras).
-- Existing synthetic sample-flow, same-session re-validation, internal-only
-  Formula Audit, API security, and Worker boundary regressions pass.
-- A pre-existing Starlette/httpx deprecation warning remains; dependencies were
-  not changed for this frontend scope.
-- Actual desktop/mobile visual checks could not run: the connected UI runtime
-  returned no available browser and an empty app/browser inventory. No screenshot
-  or real-browser completion is claimed. P1 visual acceptance remains pending.
+- Read-only startup: local and remote `main` were `47e5e54`, one commit after the
+  user's supplied `4faae1b`. No tracked modifications existed.
+- Before: `scripts/verify.ps1` passed (web 36 / Worker 13 / API 72).
+- After: the same full command passed (web 43 / Worker 13 / API 72), TypeScript,
+  production build, Ruff and M4-C supplied-pack verification (36 exact candidates,
+  no extras). Existing synthetic security and internal-only audit tests passed.
+- Seven new behavior tests cover group locations and old/current metadata,
+  complete lists/missing scope/excluded fields, warnings and interpretation limits,
+  empty/no-comparison states, P1 filter/CSV invariance and disclosure reset, and
+  the App's complete same-session synthetic sample re-validation flow.
+- A pre-existing Starlette/httpx deprecation warning remains; no dependency change.
+- `git diff --check` passed. Changes contain only source/tests and product docs.
 
 ## Remaining local visual review
 
-With a connected local browser and synthetic sample only, open the development
-app and choose `샘플 결과 보기`. At 1440px and 390px, check labelled selects,
-visible focus, absence of horizontal overflow, priority navigation, combined
-filters, no-match recovery, and expanded evidence. Verify keyboard selection and
-reduced-motion behavior. Use `수정 후 다시 검사` with synthetic data to check the
-new result starts with all findings. Both CSV buttons must still export the
-complete current result. This checklist is not permission to deploy or resume
-live H2/H3 checks.
+Actual browser rendering and screenshots remain pending. The browser connector
+reported Chrome unavailable. The native Windows helper first encountered an app
+approval timeout and a closed window; a fresh window selection was then stopped
+because it could not determine the current browser URL with enough confidence
+to enforce policy. Computer-use was stopped without a fallback or bypass.
 
-Stop after the authorized Git commit and GitHub synchronization. Any next product
-slice and final P1 acceptance remain a product-owner review decision.
+With a connected local browser, run the normal local web app and use synthetic
+samples only. At 1440px and 390px, choose `샘플 결과 보기`, then `수정 후 다시 검사`,
+then the sample again. Open continuing locations with keyboard Enter/Space,
+verify focus and wrapped labels, single-column mobile layout and no horizontal
+overflow. With synthetic before/after inputs, inspect previous/current locations
+in all groups. Change P1 filters and confirm comparison details stay complete.
+Both CSV buttons must still export the full current result. Start another scan
+and verify disclosures reset. P1's original visual checklist in `docs/48` remains
+open; this P2 work does not imply its acceptance.
+
+Stop after the authorized Git commit/GitHub synchronization. Final visual/product
+acceptance and any further milestone remain a product-owner decision. Hosted Beta
+stays NOT READY under its separate operational gates. This local checklist does
+not authorize cloud access, deployment, H2/H3 checks or real workbooks.
 
 ## Historical review — H2 upload routing correction
 

@@ -1,6 +1,26 @@
 # Current milestone
 
-> **Current product scope (2026-09-10): Product P1 — Free-result navigation is APPROVED; implementation and automated verification passed, visual review is pending.**
+> **Current product scope (2026-09-12): Product P2 — Re-validation location details is APPROVED; implementation and automated verification passed, visual review is pending.**
+> The owner's new instruction authorizes a bounded next product improvement,
+> full local regression verification, commit, and GitHub synchronization. This
+> supersedes P1's instruction to stop before a next product slice only for P2.
+> P2 presents existing comparison findings by title, rule, sheet, and cell in
+> three expandable groups, with previous/current location labels and explicit
+> comparison limits. It does not change comparison semantics or analysis.
+> Contract: `49_PRODUCT_P2_REVALIDATION_LOCATIONS.md`. Required checks:
+> `scripts/verify.ps1` and local synthetic desktop/mobile interaction review.
+> Full local verification passed: web 43, Worker 13, API 72, TypeScript/build,
+> Ruff, and 36 exact M4-C supplied-pack candidates with no extras. Seven new
+> behavior tests cover the details, warnings, filter/CSV invariance and sample loop.
+> Windows computer-use stopped because it could not determine the current browser
+> URL confidently enough to enforce policy. No real-browser verification or
+> screenshots are claimed; follow-up is recorded in `MILESTONE_REVIEW.md`.
+> P1's visual acceptance is still pending and is not inferred from P2 approval.
+> H2/H3 operational checks, cloud access/deployment, public Formula Audit or
+> feedback, real files, M3/M3.5/M5, repair, payment, accounts, calculation, and
+> AI remain outside this task. Stop after the P2 review/commit/GitHub sync.
+
+> **Previous product scope (2026-09-10): Product P1 — Free-result navigation is APPROVED; implementation and automated verification passed, visual review is pending.**
 > The owner's current instruction authorizes a bounded next product improvement,
 > local regression verification, commit, and GitHub synchronization. P1 adds only
 > in-memory severity/sheet/handling-status filters to the existing free Finding

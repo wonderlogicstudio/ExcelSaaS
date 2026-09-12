@@ -4,6 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { demoResult } from '../data/demo';
 import type { FindingUserStatus, ScanResult } from '../types';
 import * as diagnosisCsv from '../lib/diagnosisCsv';
+import { compareScanResults } from '../lib/revalidation';
 import { M25ResultsPanel } from './M25ResultsPanel';
 
 function renderResult(
@@ -51,6 +52,25 @@ function withFindings(findings: ScanResult['findings'], summary: Partial<ScanRes
 }
 
 describe('M2.5 results panel', () => {
+  it('keeps comparison details and full CSV independent of P1 filters and resets disclosures on a new scan', () => {
+    const download = vi.spyOn(diagnosisCsv, 'downloadDiagnosisCsv').mockImplementation(() => undefined);
+    const comparison = compareScanResults(demoResult, demoResult);
+    const { container, rerender } = renderResult(demoResult, { revalidationComparison: comparison });
+    fireEvent.click(screen.getByText(`항목 위치 보기 · ${comparison.stillDetected.length}건`));
+    const disclosure = container.querySelector('.revalidation-details')!;
+    expect(disclosure).toHaveAttribute('open');
+    fireEvent.change(screen.getByLabelText('처리 상태로 보기'), { target: { value: 'REVIEWED' } });
+    expect(container.querySelectorAll('details.finding')).toHaveLength(0);
+    expect(disclosure.querySelectorAll('li')).toHaveLength(comparison.stillDetected.length);
+    expect(disclosure).toHaveAttribute('open');
+    for (const button of screen.getAllByRole('button', { name: /CSV/ })) fireEvent.click(button);
+    expect(download).toHaveBeenCalledTimes(2);
+    expect(download).toHaveBeenCalledWith(demoResult, {});
+    rerender(<M25ResultsPanel result={{ ...demoResult, analysis_id: 'synthetic-next-scan' }} isDemo={false} revalidationComparison={comparison} onReset={() => undefined} />);
+    expect(container.querySelector('.revalidation-details')).not.toHaveAttribute('open');
+    expect(container.querySelectorAll('details.finding')).toHaveLength(demoResult.findings.length);
+  });
+
   afterEach(() => {
     cleanup();
     vi.restoreAllMocks();

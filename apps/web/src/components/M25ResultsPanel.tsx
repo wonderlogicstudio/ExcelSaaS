@@ -27,6 +27,7 @@ import { findingIdentity, type RevalidationComparison } from '../lib/revalidatio
 import { formatFileSize, formatPriceRange } from '../lib/format';
 import type { FeedbackRepository } from '../lib/feedback';
 import { FindingFeedbackControl, ResultFeedbackPanel } from './FeedbackCapture';
+import { RevalidationPanel } from './RevalidationPanel';
 
 interface ResultsPanelProps {
   result: ScanResult;
@@ -537,26 +538,7 @@ function ResultsContent({
               <p>상태는 이 화면을 열어 둔 동안만 관리됩니다. 파일 내용이나 셀 값은 저장하지 않습니다.</p>
             </section>
 
-            <section className="revalidation-panel" aria-labelledby="revalidation-title">
-              <div className="panel-heading">
-                <div><span className="card-label">직접 수정한 파일의 동일 규칙 재검사</span><h3 id="revalidation-title">수정 후 다시 검사</h3></div>
-                <button className="button button--outline button--small" type="button" onClick={onPrepareRevalidation}>수정 후 파일 선택</button>
-              </div>
-              {revalidationComparison ? (
-                <>
-                  {revalidationComparison.versionMismatch && <p className="revalidation-panel__warning">scanner 또는 규칙 세트 버전이 달라 비교 결과가 근사치일 수 있습니다.</p>}
-                  {(revalidationComparison.previousWasTruncated || revalidationComparison.currentWasTruncated) && <p className="revalidation-panel__warning">두 검사 중 하나 이상이 일부 셀만 검사했습니다. 비교 범위가 완전하지 않을 수 있습니다.</p>}
-                  <div className="revalidation-grid">
-                    <article><strong>{revalidationComparison.noLongerDetected.length}</strong><h4>이번 재검사에서 더 이상 탐지되지 않음</h4><p>{revalidationComparison.noLongerDetected.map((finding) => finding.rule_code).join(', ') || '해당 항목이 없습니다.'}</p></article>
-                    <article><strong>{revalidationComparison.stillDetected.length}</strong><h4>계속 탐지됨</h4><p>{revalidationComparison.stillDetected.map((finding) => finding.rule_code).join(', ') || '해당 항목이 없습니다.'}</p></article>
-                    <article><strong>{revalidationComparison.newlyDetected.length}</strong><h4>새롭게 탐지됨</h4><p>{revalidationComparison.newlyDetected.map((finding) => finding.rule_code).join(', ') || '해당 항목이 없습니다.'}</p></article>
-                  </div>
-                  <p>‘더 이상 탐지되지 않음’은 같은 정적 규칙이 이번 위치에서 신호를 찾지 못했다는 뜻일 뿐, 업무적 해결이나 계산 결과의 정확성을 보장하지 않습니다.</p>
-                </>
-              ) : (
-                <p>결과를 확인한 뒤 Excel에서 직접 수정하고, 수정한 파일을 선택하세요. 이전 원본 파일은 보관하지 않으며 같은 브라우저 화면에서 이전 결과와 현재 결과만 비교합니다.</p>
-              )}
-            </section>
+            <RevalidationPanel comparison={revalidationComparison} onPrepareRevalidation={onPrepareRevalidation} />
 
             <section className="download-panel" aria-labelledby="download-title">
               <div>

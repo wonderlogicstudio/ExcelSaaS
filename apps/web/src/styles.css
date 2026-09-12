@@ -2609,6 +2609,64 @@ p {
 
 .revalidation-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+}
+
+.revalidation-grid article {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.revalidation-details summary {
+  min-height: 44px;
+  padding: 10px 0;
+  color: var(--aqua-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.revalidation-details summary:focus-visible {
+  outline: 3px solid var(--aqua-dark);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.revalidation-details ul {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.revalidation-details li {
+  display: grid;
+  gap: 5px;
+  padding-top: 10px;
+  border-top: 1px solid #dbe8eb;
+  color: #627985;
+  font-size: 0.78rem;
+  line-height: 1.58;
+}
+
+.revalidation-details__title {
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.revalidation-details__rule {
+  font-size: 0.7rem;
+}
+
+.revalidation-panel > .revalidation-panel__limits {
+  margin-top: 8px;
+}
+
+@media (max-width: 760px) {
+  .revalidation-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .revalidation-grid h4 {

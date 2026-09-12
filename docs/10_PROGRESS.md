@@ -1,6 +1,34 @@
 # Current progress
 
-## Current product work — 2026-09-10
+## Current product work — 2026-09-12
+
+**Product P2 — Re-validation location details: IMPLEMENTED / VISUAL REVIEW PENDING.**
+The owner's renewed product-only instruction selected the existing comparison
+workflow. Startup confirmed local/remote `main` at `47e5e54` (after the supplied
+`4faae1b`). Untracked `docs/delivery-v3_2/` was left untouched and excluded.
+
+Each comparison group now offers an expandable complete title/rule/location
+list. Removed entries use previous locations; continuing/new entries use current
+locations. Missing location scope, empty groups, version/truncation warnings and
+rename/move/calculation limits are explicit. P1 filters and full CSV remain
+independent; no comparison algorithm, scanner/API/Worker/infra/feature gate,
+storage, feedback, dependency or cloud change. Scope: `docs/49`.
+
+Baseline `scripts/verify.ps1`: web 36, Worker 13, API 72. After implementation:
+web 43, Worker 13, API 72, TypeScript/production build, Ruff and 36 exact M4-C
+supplied-pack candidates with no extras. Seven additional behavior tests include
+the same-session sample loop, all groups/location scope, warnings, P1 filter/CSV
+independence and disclosure reset. The existing Starlette/httpx warning remains.
+
+Real desktop/mobile verification is pending: the browser connector was
+unavailable; Windows computer-use then stopped because it could not determine
+the current browser URL with enough confidence to enforce policy. No fallback
+UI automation, screenshot, or visual acceptance is claimed. P1's visual review
+also remains pending. See `MILESTONE_REVIEW.md` for the local synthetic checklist.
+H2/H3 operations and Hosted Beta NOT READY remain unchanged. No cloud resources
+were inspected and no deployment, real workbook or external session was run.
+
+## Previous product work — 2026-09-10
 
 **Product P1 — Free-result navigation: IMPLEMENTED / VISUAL REVIEW PENDING.** The owner requested product
 development only, followed by full regression verification, commit, and GitHub

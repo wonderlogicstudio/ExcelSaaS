@@ -134,9 +134,23 @@ CSV, scanner rules, and API contracts stay intact. Details and acceptance gates:
 `48_PRODUCT_P1_RESULT_NAVIGATION.md`.
 
 This does not complete H2/H3, begin external M3/M3.5 validation, or approve M5.
-Later candidates are clearer location-level re-validation comparisons, then a
-separately scoped M5 user-declared rule contract. No candidate is automatically
-approved by being listed here.
+The subsequent owner instruction selected location-level re-validation details
+as Product P2 below. A separately scoped M5 user-declared rule contract remains
+a later candidate, not automatically approved by being listed here.
+
+## Product P2 — Re-validation location details — IMPLEMENTED / VISUAL REVIEW PENDING (2026-09-12)
+
+Under the owner's renewed bounded product-development instruction, the existing
+same-session comparison now presents title/rule/sheet/cell details in three
+expandable groups with previous/current location labels. Counts, comparison
+semantics, full-result filters/summary/quote/CSV and all security boundaries are
+preserved. Rename/move and calculation limits remain explicit. Scope and checks:
+`49_PRODUCT_P2_REVALIDATION_LOCATIONS.md`.
+
+Full local verification passed; native browser automation was stopped by its URL
+policy-confidence check, so desktop/mobile visual acceptance remains pending.
+This does not complete P1 visual review, H2/H3, or external M3/M3.5 validation,
+and does not approve M5 or deployment. Stop after the authorized P2 GitHub sync.
 
 ## M5 — Business-rule validation
 
