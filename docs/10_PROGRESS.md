@@ -1,5 +1,27 @@
 # Current progress
 
+## D01 protected beta deployment — 2026-09-12
+
+The owner subsequently approved this deployment and continued deployment of
+verified, separately approved work to the existing beta. D01 web assets from
+source `40e2e89` are now deployed at
+https://workbookcare-beta.wonderlogic-studio.workers.dev/ .
+Active Worker version: `9748b413-0acd-4a57-a0fd-9a5e3324f3db` (100%).
+Prior rollback version: `762582e4-2d79-4e8b-be38-b5add1add5c2`.
+Web 59 / Worker 13 and hosted-beta TypeScript/build passed (exit 0); the unchanged
+API's prior D01 local 75 tests/M4-C evidence is reused, not claimed rerun here.
+Version upload dry-run, upload, deployment and provider recheck exited 0.
+All 12 binding descriptors/values fingerprints remained identical. Root, scan
+and Formula Audit paths returned the existing Access 302 before and after.
+No Access/route/IAM/R2/KV policy, Cloud Run/Gateway revision, feature gate, or
+remote Git change. D01's additive API product/count projection remains local;
+the deployed frontend uses its generated catalog and existing summary fields
+with older API responses. No cloud scan upload or authenticated UI result is claimed.
+The URL-scoped browser tool reported no browser available. Owner checks now use
+the beta URL; local D01 product/browser evidence remains separately recorded.
+Actual commands/exit codes and asset hashes: `delivery-v3_2/reviews/evidence/D01-beta-release.json`.
+D01 owner acceptance and H2/H3 readiness remain unchanged. Stop; do not start D02.
+
 ## V3.2 D01 — 2026-09-12
 
 **ENGINEERING_VERIFIED_AWAITING_OWNER.** Product/deliverable boundaries are connected

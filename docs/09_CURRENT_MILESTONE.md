@@ -1,5 +1,20 @@
 # Current milestone
 
+> **Latest owner authorization — 2026-09-12: continuing deployment to the existing protected beta is APPROVED.**
+> Target: `https://workbookcare-beta.wonderlogic-studio.workers.dev/`.
+> After verification of each separately approved development unit, deploy its
+> completed changes to this same beta through project completion without asking
+> for the same beta deployment approval again. Keep Access, private storage,
+> authenticated API, M4/feedback gates and synthetic-only testing boundaries.
+> This supersedes earlier beta deployment prohibitions below, but does not start
+> D02 or authorize remote Git push, anonymous release, new paid resources, real
+> data/payments/refunds, pricing approval, or closure of H2/H3 outstanding gates.
+> D01 WEB DEPLOYED: version `9748b413-0acd-4a57-a0fd-9a5e3324f3db`, 100%,
+> 2026-09-12 11:40:40 UTC. Cloud Run API revision was not changed; the web build
+> supports its older additive response shape. Login-session UI review remains pending.
+> Standing workflow: `50_BETA_RELEASE_WORKFLOW.md`. D01 engineering acceptance
+> remains awaiting owner review; the next development bundle is not authorized.
+
 > **Current authorization (2026-09-12): V3.2 D01 ONLY — APPROVED / ENGINEERING_VERIFIED_AWAITING_OWNER.**
 > The owner selected `docs/delivery-v3_2/bundles/D01.md`: product/deliverable
 > boundaries and integration with existing free diagnosis. Follow its working

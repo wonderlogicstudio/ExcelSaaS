@@ -1,0 +1,259 @@
+{
+  "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
+  "source_commit": "40e2e8998beef87cb844c1fc400f1e75eced2fa1",
+  "source_tree_at_release": "aed9490",
+  "deployed_at_utc": "2026-09-12T11:40:40.040495Z",
+  "target": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+  "version": "9748b413-0acd-4a57-a0fd-9a5e3324f3db",
+  "rollback_version": "762582e4-2d79-4e8b-be38-b5add1add5c2",
+  "build_environment": {
+    "VITE_PRODUCT_ENV": "hosted_beta",
+    "VITE_API_BASE_URL": "/api",
+    "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+    "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+    "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false"
+  },
+  "wrangler_version": "4.130.0",
+  "commands": [
+    {
+      "command": "npm.cmd run test:web",
+      "exit_code": 0,
+      "result": "59 passed"
+    },
+    {
+      "command": "npm.cmd run test:edge",
+      "exit_code": 0,
+      "result": "13 passed"
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web -- --mode hosted_beta",
+      "exit_code": 0,
+      "result": "TypeScript and hosted production build passed"
+    },
+    {
+      "argv": [
+        "npx.cmd",
+        "--offline",
+        "--no-install",
+        "wrangler",
+        "deployments",
+        "list",
+        "--json",
+        "--config",
+        "infra/cloudflare/wrangler.jsonc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "npx.cmd",
+        "--offline",
+        "--no-install",
+        "wrangler",
+        "versions",
+        "view",
+        "762582e4-2d79-4e8b-be38-b5add1add5c2",
+        "--json",
+        "--config",
+        "infra/cloudflare/wrangler.jsonc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "npx.cmd",
+        "--offline",
+        "--no-install",
+        "wrangler",
+        "versions",
+        "upload",
+        "--dry-run",
+        "--keep-vars",
+        "--strict",
+        "--outdir",
+        "artifacts/verification/d01-beta/worker-bundle",
+        "--config",
+        "infra/cloudflare/wrangler.jsonc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "npx.cmd",
+        "--offline",
+        "--no-install",
+        "wrangler",
+        "versions",
+        "upload",
+        "--keep-vars",
+        "--strict",
+        "--tag",
+        "d01-40e2e89",
+        "--message",
+        "D01 verified web assets; preserve Access and API boundaries",
+        "--config",
+        "infra/cloudflare/wrangler.jsonc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "npx.cmd",
+        "--offline",
+        "--no-install",
+        "wrangler",
+        "versions",
+        "view",
+        "9748b413-0acd-4a57-a0fd-9a5e3324f3db",
+        "--json",
+        "--config",
+        "infra/cloudflare/wrangler.jsonc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "npx.cmd",
+        "--offline",
+        "--no-install",
+        "wrangler",
+        "versions",
+        "deploy",
+        "9748b413-0acd-4a57-a0fd-9a5e3324f3db@100",
+        "--yes",
+        "--message",
+        "Owner-approved D01 beta web update",
+        "--config",
+        "infra/cloudflare/wrangler.jsonc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "npx.cmd",
+        "--offline",
+        "--no-install",
+        "wrangler",
+        "deployments",
+        "list",
+        "--json",
+        "--config",
+        "infra/cloudflare/wrangler.jsonc"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "npx.cmd",
+        "--offline",
+        "--no-install",
+        "wrangler",
+        "versions",
+        "view",
+        "9748b413-0acd-4a57-a0fd-9a5e3324f3db",
+        "--json",
+        "--config",
+        "infra/cloudflare/wrangler.jsonc"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "assets": [
+    {
+      "path": "apps/web/dist/assets/index-Cos3aWlf.js",
+      "bytes": 309850,
+      "sha256": "ed0b85e86bb77a1cbf15bb2ca30e2e8ebce8a00d3233910783e3d1039c52d939"
+    },
+    {
+      "path": "apps/web/dist/assets/index-E7Gohnwi.css",
+      "bytes": 44020,
+      "sha256": "222f6bf242f15053a11138b63add4dab826c7328e918ec6f64668e08df9b04d4"
+    },
+    {
+      "path": "apps/web/dist/index.html",
+      "bytes": 1073,
+      "sha256": "1a640ceed86189efe9926643faf7259bd8ca580fbb617aaa67bc9ec30ab0f0b4"
+    }
+  ],
+  "failures_and_limits": [
+    {
+      "stage": "first_read_only_helper",
+      "exit_code": 1,
+      "reason": "requests unavailable; reused installed httpx; retry exit 0"
+    },
+    {
+      "stage": "browser_inventory",
+      "status": "AUTO_REVIEW_REJECTED",
+      "reason": "All-browser enumeration could expose unrelated private session metadata; no inventory obtained"
+    },
+    {
+      "stage": "safer_url_scoped_browser",
+      "status": "UNAVAILABLE",
+      "reason": "No browser is available"
+    }
+  ],
+  "binding_metadata_sha256_before": "4be60bd368f41301d66960dbeb695025a68dad759f69300c9429e07d85e89443",
+  "binding_metadata_sha256_after": "4be60bd368f41301d66960dbeb695025a68dad759f69300c9429e07d85e89443",
+  "access_checks_before": [
+    {
+      "path": "/",
+      "status": 302,
+      "redirect_to_existing_access": true
+    },
+    {
+      "path": "/api/v1/scans",
+      "status": 302,
+      "redirect_to_existing_access": true
+    },
+    {
+      "path": "/api/v1/formula-audits",
+      "status": 302,
+      "redirect_to_existing_access": true
+    }
+  ],
+  "access_checks_after": [
+    {
+      "path": "/",
+      "status": 302,
+      "redirect_to_existing_access": true
+    },
+    {
+      "path": "/api/v1/scans",
+      "status": 302,
+      "redirect_to_existing_access": true
+    },
+    {
+      "path": "/api/v1/formula-audits",
+      "status": 302,
+      "redirect_to_existing_access": true
+    }
+  ],
+  "unchanged": [
+    "Worker source/config",
+    "Cloud Run/Gateway",
+    "Access/route/IAM/R2/KV policies",
+    "M4/feedback visibility",
+    "user execution-package originals"
+  ],
+  "not_run": [
+    "authenticated hosted UI",
+    "hosted synthetic upload",
+    "Cloud Run API rollout",
+    "H2/H3 remaining gates",
+    "real data/payment/refund",
+    "Git push",
+    "D02"
+  ],
+  "provider_raw_output_stored": false,
+  "credentials_printed_or_stored": false,
+  "reference": "https://developers.cloudflare.com/workers/wrangler/commands/workers/",
+  "record_preservation_audit": {
+    "status": "PASS",
+    "owner_package_originals_unchanged": 83,
+    "existing_progress_and_reviews_preserved": true,
+    "decisions_extended_by_explicit_owner_beta_authorization": true,
+    "product_source_infra_samples_scripts_unchanged_since_40e2e89": true,
+    "prior_readiness_and_engineering_acceptance_preserved": true,
+    "build_asset_hashes_match": true
+  }
+}

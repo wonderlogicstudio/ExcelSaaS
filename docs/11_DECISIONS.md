@@ -1,5 +1,21 @@
 # Accepted decisions
 
+## Standing beta deployment authorization — 2026-09-12
+
+The owner explicitly instructed deployment to
+`https://workbookcare-beta.wonderlogic-studio.workers.dev/` and continued beta
+deployment until project completion. After each separately approved development
+unit passes its required checks, use this existing protected beta for review
+without repeating a deployment permission question. Deploy only the validated
+components needed for that unit; preserve existing Access, IAM, private storage,
+feature gates and synthetic-data limits. Existing API revisions may be updated
+when an approved unit needs them, with their own validation and rollback evidence.
+This does not approve further development bundles, remote Git push, new paid
+resources, real customer files, live payment/refund, price changes, anonymous
+publication or invitations. H2/H3 readiness is unchanged. See
+`50_BETA_RELEASE_WORKFLOW.md`. Earlier restricted deployment statements are
+historical where they conflict with this explicit standing beta approval.
+
 ## Active H2 update — 2026-09-09
 
 **D-069 — Tokyo Gateway location.** API Gateway does not provide

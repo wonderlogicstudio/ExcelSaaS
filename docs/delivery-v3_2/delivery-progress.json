@@ -50,6 +50,36 @@
         "payment/refund",
         "real customer data",
         "pricing approval",
+        "remote push",
+        "package oracle/examples as product verification",
+        "D02-D08",
+        "Cloud Run/Gateway rollout",
+        "H2/H3 remaining operational gates",
+        "authenticated hosted UI and hosted synthetic upload"
+      ],
+      "beta_deployment": {
+        "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
+        "version": "9748b413-0acd-4a57-a0fd-9a5e3324f3db",
+        "deployed_at_utc": "2026-09-12T11:40:40.040495Z",
+        "percentage": 100,
+        "rollback_version": "762582e4-2d79-4e8b-be38-b5add1add5c2",
+        "source_commit": "40e2e8998beef87cb844c1fc400f1e75eced2fa1",
+        "cloud_run_revision_changed": false,
+        "api_projection_deployed": false,
+        "legacy_api_compatible_frontend": true,
+        "binding_metadata_unchanged": true,
+        "anonymous_access_check": "PASS_302_TO_EXISTING_ACCESS",
+        "authenticated_ui_check": "NOT_RUN_NO_CONNECTED_BROWSER",
+        "hosted_synthetic_upload": "NOT_RUN",
+        "evidence": "reviews/evidence/D01-beta-release.json"
+      },
+      "initial_engineering_review_not_run": [
+        "repair_engine/delivery",
+        "calculation/Excel reference",
+        "PG sandbox/live",
+        "payment/refund",
+        "real customer data",
+        "pricing approval",
         "cloud operations/deploy",
         "remote push",
         "package oracle/examples as product verification",
@@ -71,5 +101,14 @@
   "customer_change_approval": "NOT_IMPLEMENTED_BY_D01",
   "next_recommended_bundle": "D02",
   "next_bundle_approved": false,
-  "execution_stopped_after": "D01"
+  "execution_stopped_after": "D01",
+  "deployment_authorization": {
+    "target": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+    "approved": true,
+    "scope": "VERIFIED_SEPARATELY_APPROVED_UNITS_TO_EXISTING_PROTECTED_BETA",
+    "duration": "UNTIL_PROJECT_COMPLETION_OR_OWNER_REVOCATION",
+    "repeat_confirmation_required": false,
+    "next_development_bundle_approved": false,
+    "remote_git_push_approved": false
+  }
 }

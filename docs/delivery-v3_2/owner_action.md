@@ -1,5 +1,16 @@
 # D01 사용자 확인
 
+## 현재 확인 주소 — 후속 베타 배포 완료
+
+**https://workbookcare-beta.wonderlogic-studio.workers.dev/** 에서 기존 Cloudflare Access 로그인 후
+새로고침한다. D01 웹 버전 `9748b413-0acd-4a57-a0fd-9a5e3324f3db`가 100% 적용됐다.
+아래 네 가지 확인 행동은 이제 이 베타 주소에서 수행한다. 합성 샘플만 사용한다.
+연결된 브라우저가 없어 로그인 후 화면 확인은 사용자 확인 항목으로 남아 있다.
+배포 자체와 Access 302는 확인했고, Cloud Run API 변경/실제 hosted 업로드 검증은 수행하지 않았다.
+새 베타 배포 승인은 프로젝트 완료까지 지속된다. 다음 개발 단위 D02 승인은 아직 없다.
+
+아래는 배포 전 로컬 검토 기록과 재현 방법이다.
+
 현재 승인: **D01만**. 판정: **ENGINEERING_VERIFIED_AWAITING_OWNER**.
 로컬 구현 커밋: `40e2e8998beef87cb844c1fc400f1e75eced2fa1`. 원격 push·공개 배포 없음.
 
