@@ -1,3 +1,16 @@
+# Current review — V3.2 D01
+
+**ENGINEERING_VERIFIED_AWAITING_OWNER (2026-09-12)**. The selected D01 implementation
+and relevant local product checks passed. Review, actual commands/exit codes,
+preservation evidence and limitations: [D01 review](delivery-v3_2/reviews/D01.md).
+[Four owner checks](delivery-v3_2/owner_action.md). Local source commit:
+`40e2e8998beef87cb844c1fc400f1e75eced2fa1`. No push, deployment or next bundle execution.
+
+This adds a review delta and does not rewrite earlier P1/P2/M4/H3 verdicts.
+The prior review is preserved below.
+
+---
+
 # Milestone review — Product P2 re-validation location details
 
 **2026-09-12: IMPLEMENTED / AUTOMATED CHECKS PASSED / VISUAL REVIEW PENDING.**

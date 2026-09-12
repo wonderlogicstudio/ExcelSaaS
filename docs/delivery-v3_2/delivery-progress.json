@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "copy_over_existing_progress": false,
+  "prior_progress_path": "../10_PROGRESS.md",
+  "active_bundle": "D01",
+  "bundles": {
+    "D01": {
+      "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+      "development_approved": true,
+      "owner_acceptance": "PENDING",
+      "implementation_commit": "40e2e8998beef87cb844c1fc400f1e75eced2fa1",
+      "base_commit": "554c0de",
+      "review": "reviews/D01.md",
+      "acceptance": {
+        "product_deliverable_contract": "VERIFIED",
+        "unimplemented_purchase_blocked": "VERIFIED",
+        "leaf_score_csv_invariance": "VERIFIED",
+        "counts_and_completeness": "VERIFIED",
+        "handling_is_not_change_approval": "VERIFIED",
+        "keyboard_desktop_mobile": "VERIFIED",
+        "prior_records_and_security_boundaries_preserved": "VERIFIED"
+      },
+      "verification": {
+        "web_tests": 59,
+        "worker_tests": 13,
+        "api_tests": 75,
+        "m4c_exact_candidates": 36,
+        "browser_widths": [
+          1440,
+          390
+        ],
+        "evidence_type": "LOCAL_SYNTHETIC_PRODUCT_INTEGRATION",
+        "package_examples_are_product_evidence": false
+      },
+      "reused": [
+        "M2.5 scanner/guidance/catalog",
+        "P1 filters",
+        "P2 location comparison",
+        "M4 separation",
+        "H3 guards"
+      ],
+      "not_found_in_current_checkout": [
+        "L01-L08 completion code/reviews",
+        "CF/UXR completion code/reviews"
+      ],
+      "not_run": [
+        "repair_engine/delivery",
+        "calculation/Excel reference",
+        "PG sandbox/live",
+        "payment/refund",
+        "real customer data",
+        "pricing approval",
+        "cloud operations/deploy",
+        "remote push",
+        "package oracle/examples as product verification",
+        "D02-D08"
+      ]
+    }
+  },
+  "readiness": {
+    "repair_profiles": {
+      "RP01": "NOT_EVALUATED",
+      "RP02": "NOT_EVALUATED"
+    },
+    "repair_delivery": "NOT_EVALUATED",
+    "comparison_delivery": "NOT_EVALUATED",
+    "operations": "HOSTED_BETA_NOT_READY_PRESERVED",
+    "owner_release_approved": false,
+    "commercial_signal": "NOT_OBSERVED"
+  },
+  "customer_change_approval": "NOT_IMPLEMENTED_BY_D01",
+  "next_recommended_bundle": "D02",
+  "next_bundle_approved": false,
+  "execution_stopped_after": "D01"
+}

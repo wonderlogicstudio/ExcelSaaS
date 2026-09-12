@@ -1,0 +1,66 @@
+{
+  "evidence_type": "LOCAL_PRODUCT_BROWSER_AND_API_SYNTHETIC",
+  "package_examples_used": false,
+  "excel_reference_verified": false,
+  "pg_verified": false,
+  "source_hashes_before": {
+    "sample": "3981d0f898c7db0bf500f7635cb4f0f740cfcbb579ef94e162f6f5ecd585773f",
+    "capped": "7c881a350cdc88653b4a896b8007379c7c4d2fde46b4b962cc088c70b39e0676"
+  },
+  "checks": [
+    {
+      "width": 1440,
+      "passed": true,
+      "initial_leaf_count": 12,
+      "capped_counts": {
+        "total_detected": 150,
+        "returned_details": 120,
+        "omitted_details": 30,
+        "scan_complete": true
+      },
+      "csv_group_table_equal": true,
+      "keyboard_focus_and_native_disclosure": true,
+      "group_review_has_no_approval_requests": true,
+      "paid_actions_disabled": true,
+      "m4_not_exposed": true,
+      "horizontal_overflow": false,
+      "synthetic_uploads": 2,
+      "page_errors": 0
+    },
+    {
+      "width": 390,
+      "passed": true,
+      "initial_leaf_count": 12,
+      "capped_counts": {
+        "total_detected": 150,
+        "returned_details": 120,
+        "omitted_details": 30,
+        "scan_complete": true
+      },
+      "csv_group_table_equal": true,
+      "keyboard_focus_and_native_disclosure": true,
+      "group_review_has_no_approval_requests": true,
+      "paid_actions_disabled": true,
+      "m4_not_exposed": true,
+      "horizontal_overflow": false,
+      "synthetic_uploads": 2,
+      "page_errors": 0
+    }
+  ],
+  "screenshots": [
+    "artifacts/screenshots/d01/products-1440.png",
+    "artifacts/screenshots/d01/table-1440.png",
+    "artifacts/screenshots/d01/group-1440.png",
+    "artifacts/screenshots/d01/counts-1440.png",
+    "artifacts/screenshots/d01/products-390.png",
+    "artifacts/screenshots/d01/table-390.png",
+    "artifacts/screenshots/d01/group-390.png",
+    "artifacts/screenshots/d01/counts-390.png"
+  ],
+  "status": "PASS",
+  "browser_version": "152.0.7977.83",
+  "source_hashes_after": {
+    "sample": "3981d0f898c7db0bf500f7635cb4f0f740cfcbb579ef94e162f6f5ecd585773f",
+    "capped": "7c881a350cdc88653b4a896b8007379c7c4d2fde46b4b962cc088c70b39e0676"
+  }
+}

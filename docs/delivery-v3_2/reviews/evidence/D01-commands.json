@@ -1,0 +1,198 @@
+[
+  {
+    "stage": "baseline_web",
+    "command": "npm.cmd run test --workspace @workbookcare/web -- src/components/M25ResultsPanel.test.tsx src/components/RevalidationPanel.test.tsx src/lib/revalidation.test.ts src/lib/diagnosisCsv.test.ts src/App.test.tsx",
+    "exit_code": 0,
+    "result": "30 passed",
+    "working_directory": "."
+  },
+  {
+    "stage": "baseline_api",
+    "command": ".venv/Scripts/python.exe -m pytest -p no:cacheprovider tests/test_api.py tests/test_m25_result_guidance.py",
+    "exit_code": 0,
+    "result": "12 passed",
+    "working_directory": "apps/api"
+  },
+  {
+    "stage": "red_csv_completeness",
+    "command": "npm.cmd run test --workspace @workbookcare/web -- src/lib/delivery-boundaries.test.ts",
+    "exit_code": 1,
+    "result": "9 failed: 8 CSV prefix cases and missing comparison coverage",
+    "working_directory": "."
+  },
+  {
+    "stage": "red_catalog",
+    "command": ".venv/Scripts/python.exe -m pytest -p no:cacheprovider tests/test_delivery_catalog.py",
+    "exit_code": 1,
+    "result": "1 failed: products absent from actual scan response",
+    "working_directory": "apps/api"
+  },
+  {
+    "stage": "first_ui_integration",
+    "command": "npm.cmd run test --workspace @workbookcare/web -- src/lib/delivery-boundaries.test.ts src/components/M25ResultsPanel.test.tsx src/components/RevalidationPanel.test.tsx src/App.test.tsx",
+    "exit_code": 1,
+    "result": "31 passed / 4 failed: old output/status labels and inconsistent synthetic totals",
+    "working_directory": "."
+  },
+  {
+    "stage": "api_projection_retry",
+    "command": ".venv/Scripts/python.exe -m pytest -p no:cacheprovider --tb=short tests/test_delivery_catalog.py tests/test_m25_result_guidance.py",
+    "exit_code": 1,
+    "result": "6 passed / 1 failed: stale demo planned activity wording; import/line lint also corrected",
+    "working_directory": "apps/api"
+  },
+  {
+    "stage": "targeted_ui_after_fixes",
+    "command": "npm.cmd run test --workspace @workbookcare/web -- src/lib/delivery-boundaries.test.ts src/components/ProductCards.test.tsx src/components/D01Results.test.tsx src/components/M25ResultsPanel.test.tsx src/components/RevalidationPanel.test.tsx src/App.test.tsx",
+    "exit_code": 0,
+    "result": "42 passed",
+    "working_directory": "."
+  },
+  {
+    "stage": "targeted_api_after_fixes",
+    "command": ".venv/Scripts/python.exe -m pytest -p no:cacheprovider --tb=short tests/test_delivery_catalog.py tests/test_m25_result_guidance.py tests/test_api.py",
+    "exit_code": 0,
+    "result": "15 passed; Ruff check . also exit 0",
+    "working_directory": "apps/api"
+  },
+  {
+    "stage": "build_type_failure",
+    "command": "npm.cmd run build:web",
+    "exit_code": 1,
+    "result": "Test mock required explicit HTMLAnchorElement this annotation",
+    "working_directory": "."
+  },
+  {
+    "stage": "build_after_type_fix",
+    "command": "npm.cmd run build:web",
+    "exit_code": 0,
+    "result": "TypeScript and production build passed",
+    "working_directory": "."
+  },
+  {
+    "stage": "browser_tool_bootstrap",
+    "command": "npm.cmd install --prefix artifacts/verification/d01/browser-runtime --no-save --package-lock=false --ignore-scripts playwright@1.63.0",
+    "exit_code": 0,
+    "result": "2 tooling packages in ignored directory; application dependencies unchanged",
+    "working_directory": "."
+  },
+  {
+    "stage": "synthetic_input",
+    "command": "apps/api/.venv/Scripts/python.exe scripts/generate_d01_ui_fixture.py",
+    "exit_code": 0,
+    "result": "Generated local synthetic 150-finding workbook; no formulas executed",
+    "working_directory": "."
+  },
+  {
+    "stage": "first_browser",
+    "command": "node.exe scripts/verify-d01-browser.mjs",
+    "exit_code": 1,
+    "result": "Exact nested label locator timed out; changed to accessible combobox role",
+    "working_directory": "."
+  },
+  {
+    "stage": "browser_then_visual_review",
+    "command": "node.exe scripts/verify-d01-browser.mjs",
+    "exit_code": 0,
+    "result": "Automation passed; direct screenshot inspection found narrow mobile table caption; not accepted at this point",
+    "working_directory": "."
+  },
+  {
+    "stage": "mobile_caption_retest",
+    "command": "node.exe scripts/verify-d01-browser.mjs",
+    "exit_code": 0,
+    "result": "1440/390 passed with caption width/height assertion and reviewed captures",
+    "working_directory": "."
+  },
+  {
+    "stage": "per_leaf_classification_retest",
+    "command": "npm.cmd run test --workspace @workbookcare/web -- src/components/D01Results.test.tsx src/components/M25ResultsPanel.test.tsx src/components/ProductCards.test.tsx",
+    "exit_code": 0,
+    "result": "20 passed",
+    "working_directory": "."
+  },
+  {
+    "stage": "first_full_regression",
+    "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+    "exit_code": 1,
+    "result": "Web 59 and Worker 13 passed; API 73 passed / 2 failed due to old M3 catalog wording",
+    "working_directory": "."
+  },
+  {
+    "stage": "m3_projection_retest",
+    "command": ".venv/Scripts/python.exe -m pytest -p no:cacheprovider --tb=short tests/test_m3_scenario_fixtures.py",
+    "exit_code": 0,
+    "result": "2 passed after changing only planned activity wording",
+    "working_directory": "apps/api"
+  },
+  {
+    "stage": "final_full_regression",
+    "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+    "exit_code": 0,
+    "result": "Web 59 / Worker 13 / API 75, TypeScript/build, Ruff, supplied M4-C 36 exact candidates / no extras",
+    "working_directory": "."
+  },
+  {
+    "stage": "catalog_sync",
+    "command": "apps/api/.venv/Scripts/python.exe scripts/generate_product_catalog.py --check",
+    "exit_code": 0,
+    "result": "API service catalog and UI fallback artifact names identical",
+    "working_directory": "."
+  },
+  {
+    "stage": "script_lint_initial_config",
+    "command": "apps/api/.venv/Scripts/python.exe -m ruff check --no-cache scripts/generate_product_catalog.py scripts/generate_d01_ui_fixture.py",
+    "exit_code": 1,
+    "result": "Root-discovered Ruff configuration reported E402 noqa as unused; no product code defect",
+    "working_directory": "."
+  },
+  {
+    "stage": "script_lint_repository_config",
+    "command": "apps/api/.venv/Scripts/python.exe -m ruff check --no-cache --config apps/api/pyproject.toml scripts/generate_product_catalog.py scripts/generate_d01_ui_fixture.py",
+    "exit_code": 0,
+    "result": "Pass under explicit repository lint policy",
+    "working_directory": "."
+  },
+  {
+    "stage": "browser_script_syntax",
+    "command": "node.exe --check scripts/verify-d01-browser.mjs",
+    "exit_code": 0,
+    "result": "Passed",
+    "working_directory": "."
+  },
+  {
+    "stage": "diff_whitespace",
+    "command": "git diff --check",
+    "exit_code": 0,
+    "result": "Passed",
+    "working_directory": "."
+  },
+  {
+    "stage": "preservation_audit",
+    "working_directory": ".",
+    "command": "apps/api/.venv/Scripts/python.exe scripts/verify_d01_preservation.py --base-ref 554c0de --snapshot docs/delivery-v3_2/reviews/evidence/D01-startup-hashes.json --output docs/delivery-v3_2/reviews/evidence/D01-preservation.json",
+    "exit_code": 0,
+    "result": "84 owner package/decision files and 56 original synthetic workbooks unchanged; prior records, scanner/M4/H3 and all fixture detection/risk/price evidence preserved"
+  },
+  {
+    "stage": "final_script_lint",
+    "working_directory": ".",
+    "command": "apps/api/.venv/Scripts/python.exe -m ruff check --no-cache --config apps/api/pyproject.toml scripts/generate_product_catalog.py scripts/generate_d01_ui_fixture.py scripts/verify_d01_preservation.py",
+    "exit_code": 0,
+    "result": "All three Python scripts passed"
+  },
+  {
+    "stage": "selective_staging_check",
+    "working_directory": ".",
+    "command": "git diff --cached --check",
+    "exit_code": 0,
+    "result": "39 explicitly selected implementation/test/script/synthetic screenshot files; no owner package originals staged"
+  },
+  {
+    "stage": "implementation_local_commit",
+    "working_directory": ".",
+    "command": "git commit -m \"feat: integrate D01 product delivery boundaries\"",
+    "exit_code": 0,
+    "result": "40e2e8998beef87cb844c1fc400f1e75eced2fa1"
+  }
+]

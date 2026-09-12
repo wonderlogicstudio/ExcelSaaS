@@ -1,5 +1,23 @@
 # Current milestone
 
+> **Current authorization (2026-09-12): V3.2 D01 ONLY — APPROVED / ENGINEERING_VERIFIED_AWAITING_OWNER.**
+> The owner selected `docs/delivery-v3_2/bundles/D01.md`: product/deliverable
+> boundaries and integration with existing free diagnosis. Follow its working
+> rules, product scope and UX contract. Reuse current code and actual evidence;
+> missing L01–L08/CF/UXR implementations must not be assumed complete.
+> Preserve prior progress/reviews below. Implement only missing D01 acceptance,
+> run targeted and relevant integration checks, record review/owner actions and
+> a delivery-progress delta, selectively commit locally, then STOP.
+> No remote push, deployment, cloud changes, real data/payments/refunds, price
+> approval, actual repair/calculation/PG or next bundle is authorized. Diagnosis
+> handling, purchase entitlement and exact change approval remain separate.
+> Final verification: web 59 / Worker 13 / API 75, build/Ruff/M4-C 36 exact,
+> actual local synthetic browser/API at 1440/390 and reviewed screenshots passed.
+> Review: `delivery-v3_2/reviews/D01.md`. Owner actions and delivery-progress are
+> in that folder. Source commit: `40e2e8998beef87cb844c1fc400f1e75eced2fa1`.
+> D02 is recommendation only. Stop after selective LOCAL commits.
+> Earlier milestone push/deployment permissions below do not apply to this task.
+
 > **Current product scope (2026-09-12): Product P2 — Re-validation location details is APPROVED; implementation and automated verification passed, visual review is pending.**
 > The owner's new instruction authorizes a bounded next product improvement,
 > full local regression verification, commit, and GitHub synchronization. This

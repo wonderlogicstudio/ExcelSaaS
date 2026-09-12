@@ -1,5 +1,26 @@
 # Current progress
 
+## V3.2 D01 — 2026-09-12
+
+**ENGINEERING_VERIFIED_AWAITING_OWNER.** Product/deliverable boundaries are connected
+to the existing catalog/API/UI; absent comparison/repair engines stay PLANNED and
+non-purchasable. Reused free diagnosis, P1 filters and P2 comparisons now have
+group/table views, complete count distinctions, CSV formula interpretation defense,
+and incomplete-comparison wording. Group review remains personal handling only.
+M4/H3 guards, old records and source workbook bytes are preserved; no live ops.
+
+Final verification: web 59 / Worker 13 / API 75, TypeScript/build, Ruff, M4-C supplied
+pack 36 exact/no extras. Actual local Chrome + API, synthetic 150/120/30 result,
+1440/390 keyboard/mobile and final screenshots passed. A mobile caption layout
+defect was found in visual review and fixed. Existing M3 fixture planned activity
+wording was synchronized without changing detection/IDs/time/risk/prices.
+
+Local source commit: `40e2e8998beef87cb844c1fc400f1e75eced2fa1`. Full delta and owner actions:
+`delivery-v3_2/reviews/D01.md`, `delivery-v3_2/owner_action.md`, `delivery-v3_2/delivery-progress.json`.
+No actual repair/delivery, Excel reference/calculation, PG/payment/refund, real
+customers, pricing approval, cloud changes, push or deployment was performed.
+D01 only; D02 recommendation does not authorize execution. Prior records follow.
+
 ## Current product work — 2026-09-12
 
 **Product P2 — Re-validation location details: IMPLEMENTED / VISUAL REVIEW PENDING.**

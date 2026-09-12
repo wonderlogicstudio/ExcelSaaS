@@ -1,0 +1,28 @@
+{
+  "status": "PASS",
+  "base_ref": "554c0de",
+  "owner_package_and_decision_files_unchanged": 84,
+  "prior_milestone_progress_review_preserved": true,
+  "immutable_scanner_m4_feedback_infra_h3_paths": [
+    "apps/api/app/scanner.py",
+    "apps/api/app/formula_patterns.py",
+    "apps/api/app/main.py",
+    "apps/api/app/config.py",
+    "apps/api/app/control_plane.py",
+    "apps/web/src/lib/feedback.ts",
+    "apps/web/src/components/FormulaAuditPanel.tsx",
+    "infra",
+    "docs/44_HOSTED_BETA_H3_OPERATIONAL_HARDENING.md",
+    "docs/45_H3_PROCESSING_INVENTORY_AND_NOTICE_DRAFT.md",
+    "docs/46_H3_SAFE_ERROR_TAXONOMY.md",
+    "docs/47_H3_SYNTHETIC_E2E_AND_ROLLBACK_CHECKLIST.md"
+  ],
+  "original_synthetic_workbooks_unchanged": 56,
+  "fixture_changes_limited_to_product_projection": [
+    "apps/web/src/data/demo-result.fixture.json",
+    "samples/m3/fixtures/low-or-zero-findings.scan-result.json",
+    "samples/m3/fixtures/revalidation-before.scan-result.json",
+    "samples/m3/fixtures/revalidation-after.scan-result.json"
+  ],
+  "detection_labels_ids_timestamps_risk_prices_unchanged": true
+}
