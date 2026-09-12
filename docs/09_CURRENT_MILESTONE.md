@@ -1,5 +1,15 @@
 # Current milestone
 
+> **D01 owner-feedback grouping fix — deployed 2026-09-12.**
+> Owner confirms beta case03 free49; local actual API agrees. Same-rule results
+> now start as one collapsed group; all locations/evidence/status/CSV retained.
+> Source `5828aca`, beta `673f2895-2142-4215-8024-9acb14fa53ae` 100%.
+> Full web63/Worker13/API75, actual browser1440/390, synthetic pack M4 72/72
+> with existing two-label waiver passed. Post-fix hosted UI awaits owner review.
+> Access/storage/API/M4 gates unchanged. See latest D01 review/evidence.
+> D01 only; no D02 activation, remote push or further milestone. Prior records
+> and standing beta deployment approval below remain preserved.
+
 > **D01 owner-feedback follow-up — 2026-09-12: zero-result scope clarification deployed.**
 > Owner identified M4 test files. Free scan and unperformed separate formula
 > validation are now explicit; partial/empty zero states are differentiated.

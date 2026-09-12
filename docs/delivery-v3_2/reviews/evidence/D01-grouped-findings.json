@@ -1,0 +1,479 @@
+{
+  "recorded_at_utc": "2026-09-12T12:38:18.344535+00:00",
+  "base_commit": "65e081c",
+  "source_commit": "5828aca1292e07a653292a68acbad07ec3f49fc0",
+  "changed_source_files": [
+    "apps/web/src/components/FindingGroups.test.tsx",
+    "apps/web/src/components/FindingViews.tsx",
+    "apps/web/src/components/M25ResultsPanel.test.tsx",
+    "apps/web/src/components/M25ResultsPanel.tsx",
+    "apps/web/src/styles.css",
+    "scripts/verify-finding-groups.mjs"
+  ],
+  "root_cause": "Grouping shared the heading/guidance but rendered every location card immediately and repeated each common title.",
+  "fix": "One summary per rule; initially collapsed location disclosure; common title once; per-location evidence/status and full table/CSV retained.",
+  "owner_observations": {
+    "demo_risky_works_on_beta": true,
+    "case03_beta_free_findings": 49,
+    "agent_authenticated_hosted_observation": false
+  },
+  "commands": [
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- src/components/FindingGroups.test.tsx",
+      "exit_code": 1,
+      "result": "RED: no collapsed location group; 50 repeated titles instead of one"
+    },
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- src/components/FindingGroups.test.tsx src/components/D01Results.test.tsx src/components/M25ResultsPanel.test.tsx",
+      "exit_code": 1,
+      "result": "New 2 + existing D01 4 pass; three legacy count-display expectations require update"
+    },
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- src/components/FindingGroups.test.tsx src/components/D01Results.test.tsx src/components/M25ResultsPanel.test.tsx",
+      "exit_code": 0,
+      "result": "19 passed after updating count wording assertions"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0,
+      "result": "web63 / Worker13 / API75; TS/build/Ruff; M4 sample36 exact"
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\d01-workbook-packs\\run_browser.py",
+      "exit_code": 0,
+      "result": "Starts isolated loopback services, runs node.exe scripts/verify-finding-groups.mjs (exit0), then stops owned test processes"
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web -- --mode hosted_beta",
+      "exit_code": 0,
+      "environment": {
+        "VITE_PRODUCT_ENV": "hosted_beta",
+        "VITE_API_BASE_URL": "/api",
+        "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+        "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+        "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false"
+      }
+    },
+    {
+      "command": "git diff --check; git diff --cached --check",
+      "exit_code": 0
+    },
+    {
+      "command": "git commit -m \"fix: collapse repeated findings into one summary per rule\"",
+      "exit_code": 0,
+      "result": "5828aca1292e07a653292a68acbad07ec3f49fc0"
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\d01-workbook-packs\\release.py before",
+      "exit_code": 0
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\d01-workbook-packs\\release.py dry-run",
+      "exit_code": 0
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\d01-workbook-packs\\release.py upload",
+      "exit_code": 0
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\d01-workbook-packs\\release.py deploy",
+      "exit_code": 0
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\d01-workbook-packs\\release.py after",
+      "exit_code": 0
+    }
+  ],
+  "browser": {
+    "kind": "ACTUAL_LOCAL_BROWSER_API_SYNTHETIC",
+    "authenticated_beta_ui_verified": false,
+    "excel_calculation_or_pg_verified": false,
+    "input_hashes": {
+      "case03": "5f1625e7721528321d8ce9cbc8ba7061064d35cf107acdb47721277860b78323",
+      "case11": "538ac7601a8b2d38e7799806bf431ed1a73766adf60d523c8460d8001c05cf2d",
+      "zero": "2cb0633dab2dff6514ab2ab97182df530b778d712a22c7cf34b54895bd631c4e",
+      "demo": "3981d0f898c7db0bf500f7635cb4f0f740cfcbb579ef94e162f6f5ecd585773f"
+    },
+    "checks": [
+      {
+        "width": 1440,
+        "case03_findings": 49,
+        "case03_groups": 1,
+        "case11_findings": 59,
+        "case11_groups": 1,
+        "default_locations_hidden": true,
+        "all_49_locations_preserved": true,
+        "common_title_occurrences": 1,
+        "keyboard_expand_collapse_focus": "PASS",
+        "csv_bytes_unchanged_across_views_and_filters": true,
+        "individual_evidence_and_status_accessible": true,
+        "new_scan_disclosures_reset": true,
+        "positive_control_findings": 12,
+        "zero_control_findings": 0,
+        "formula_audit_requests": 0,
+        "browser_errors": 0,
+        "horizontal_overflow": false,
+        "screenshots": [
+          "artifacts/screenshots/d01-groups/collapsed-1440.png",
+          "artifacts/screenshots/d01-groups/expanded-1440.png"
+        ]
+      },
+      {
+        "width": 390,
+        "case03_findings": 49,
+        "case03_groups": 1,
+        "case11_findings": 59,
+        "case11_groups": 1,
+        "default_locations_hidden": true,
+        "all_49_locations_preserved": true,
+        "common_title_occurrences": 1,
+        "keyboard_expand_collapse_focus": "PASS",
+        "csv_bytes_unchanged_across_views_and_filters": true,
+        "individual_evidence_and_status_accessible": true,
+        "new_scan_disclosures_reset": true,
+        "positive_control_findings": 12,
+        "zero_control_findings": 0,
+        "formula_audit_requests": 0,
+        "browser_errors": 0,
+        "horizontal_overflow": false,
+        "screenshots": [
+          "artifacts/screenshots/d01-groups/collapsed-390.png",
+          "artifacts/screenshots/d01-groups/expanded-390.png"
+        ]
+      }
+    ],
+    "status": "PASS"
+  },
+  "screenshots_visually_reviewed": [
+    "artifacts/screenshots/d01-groups/collapsed-1440.png",
+    "artifacts/screenshots/d01-groups/collapsed-390.png",
+    "artifacts/screenshots/d01-groups/expanded-1440.png",
+    "artifacts/screenshots/d01-groups/expanded-390.png"
+  ],
+  "screenshot_sha256": {
+    "artifacts/screenshots/d01-groups/collapsed-1440.png": "8526614f5fd26afd77e24f2c384b291c51d02b953aa45d0ee3eefbb42efaf17e",
+    "artifacts/screenshots/d01-groups/collapsed-390.png": "abe0337007a28bc870efd76cdee46543376913a2396f3a0930675bb0080585b6",
+    "artifacts/screenshots/d01-groups/expanded-1440.png": "d0af4794ff1516126d24a0353bdad1603711a1397e1f058a5225d498f592d3b1",
+    "artifacts/screenshots/d01-groups/expanded-390.png": "0688d93bdf68e5d9a3d70a812db4499c65c9fd49765bc5ee9db8e3715b2f0fa2"
+  },
+  "built_asset_sha256": {
+    "apps/web/dist/assets/index-CoRiOm3F.js": "421672beff362a050d3b6637d451a9568861c4158b7de73524ecddc0fde15988",
+    "apps/web/dist/assets/index-DDY6XLDX.css": "3091f0f8154559b9390d2a858ae45f8d9e60f10386853cb46424eeeb7c1990c9",
+    "apps/web/dist/index.html": "82bebbe0c190094b0a0ef0d40f9b33b161b44642773f17ce6a0b2ce2f92d8b17"
+  },
+  "beta_deployment": {
+    "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
+    "version": "673f2895-2142-4215-8024-9acb14fa53ae",
+    "deployed_at_utc": "2026-09-12T12:34:31.774566Z",
+    "percentage": 100,
+    "rollback_version": "dc94d91a-e969-479e-9087-f1f9758ec2ef",
+    "source_commit": "5828aca1292e07a653292a68acbad07ec3f49fc0",
+    "cloud_run_revision_changed": false,
+    "api_projection_deployed": false,
+    "legacy_api_compatible_frontend": true,
+    "binding_metadata_unchanged": true,
+    "anonymous_access_check": "PASS_302_TO_EXISTING_ACCESS",
+    "authenticated_ui_check": "NOT_RUN_NO_CONNECTED_BROWSER",
+    "hosted_synthetic_upload": "OWNER_CONFIRMED_CASE03_FREE49_BEFORE_GROUP_FIX",
+    "evidence": "reviews/evidence/D01-grouped-findings.json"
+  },
+  "provider_before": {
+    "id": "50bcf154-7f13-42f2-a85f-30101b70109b",
+    "created_on": "2026-09-12T12:03:50.16917Z",
+    "versions": [
+      {
+        "version_id": "dc94d91a-e969-479e-9087-f1f9758ec2ef",
+        "percentage": 100
+      }
+    ],
+    "version_id": "dc94d91a-e969-479e-9087-f1f9758ec2ef",
+    "binding_shape": [
+      {
+        "name": "API_GATEWAY_URL",
+        "type": "secret_text",
+        "keys": [
+          "name",
+          "type"
+        ]
+      },
+      {
+        "name": "APP_ENV",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "CLOUDFLARE_ACCESS_AUD",
+        "type": "secret_text",
+        "keys": [
+          "name",
+          "type"
+        ]
+      },
+      {
+        "name": "CLOUDFLARE_ACCESS_TEAM_DOMAIN",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "FEEDBACK",
+        "type": "kv_namespace",
+        "keys": [
+          "name",
+          "namespace_id",
+          "type"
+        ]
+      },
+      {
+        "name": "FEEDBACK_FORMULA_AUDIT_RULE_SET_VERSION",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "FEEDBACK_RELEASE_CANDIDATE_VERSION",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "FEEDBACK_SCANNER_VERSION",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "MAX_UPLOAD_BYTES",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "UPLOAD_RATE_LIMITER",
+        "type": "ratelimit",
+        "keys": [
+          "name",
+          "namespace_id",
+          "simple",
+          "type"
+        ]
+      },
+      {
+        "name": "UPLOADS",
+        "type": "r2_bucket",
+        "keys": [
+          "bucket_name",
+          "name",
+          "type"
+        ]
+      },
+      {
+        "name": "WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET",
+        "type": "secret_text",
+        "keys": [
+          "name",
+          "type"
+        ]
+      }
+    ],
+    "bindings_sha256": "4be60bd368f41301d66960dbeb695025a68dad759f69300c9429e07d85e89443",
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "redirect_to_existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "redirect_to_existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "redirect_to_existing_access": true
+      }
+    ]
+  },
+  "provider_after": {
+    "id": "f1d944d9-f71e-43e8-9b1d-6ef482f024f8",
+    "created_on": "2026-09-12T12:34:31.774566Z",
+    "versions": [
+      {
+        "version_id": "673f2895-2142-4215-8024-9acb14fa53ae",
+        "percentage": 100
+      }
+    ],
+    "version_id": "673f2895-2142-4215-8024-9acb14fa53ae",
+    "binding_shape": [
+      {
+        "name": "API_GATEWAY_URL",
+        "type": "secret_text",
+        "keys": [
+          "name",
+          "type"
+        ]
+      },
+      {
+        "name": "APP_ENV",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "CLOUDFLARE_ACCESS_AUD",
+        "type": "secret_text",
+        "keys": [
+          "name",
+          "type"
+        ]
+      },
+      {
+        "name": "CLOUDFLARE_ACCESS_TEAM_DOMAIN",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "FEEDBACK",
+        "type": "kv_namespace",
+        "keys": [
+          "name",
+          "namespace_id",
+          "type"
+        ]
+      },
+      {
+        "name": "FEEDBACK_FORMULA_AUDIT_RULE_SET_VERSION",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "FEEDBACK_RELEASE_CANDIDATE_VERSION",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "FEEDBACK_SCANNER_VERSION",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "MAX_UPLOAD_BYTES",
+        "type": "plain_text",
+        "keys": [
+          "name",
+          "text",
+          "type"
+        ]
+      },
+      {
+        "name": "UPLOAD_RATE_LIMITER",
+        "type": "ratelimit",
+        "keys": [
+          "name",
+          "namespace_id",
+          "simple",
+          "type"
+        ]
+      },
+      {
+        "name": "UPLOADS",
+        "type": "r2_bucket",
+        "keys": [
+          "bucket_name",
+          "name",
+          "type"
+        ]
+      },
+      {
+        "name": "WORKBOOKCARE_CONTROL_PLANE_HMAC_SECRET",
+        "type": "secret_text",
+        "keys": [
+          "name",
+          "type"
+        ]
+      }
+    ],
+    "bindings_sha256": "4be60bd368f41301d66960dbeb695025a68dad759f69300c9429e07d85e89443",
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "redirect_to_existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "redirect_to_existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "redirect_to_existing_access": true
+      }
+    ]
+  },
+  "prior_owner_package_files_unchanged": 83,
+  "reused_unchanged": [
+    "rule grouping identity",
+    "leaf findings and keys",
+    "filters/status handlers",
+    "CSV generator",
+    "risk/scanner/quote",
+    "M4/H3/Access/R2/KV/Gateway/IAM boundaries"
+  ],
+  "minor_local_inspection_corrections": [
+    "README_KO.md/worker.mjs/app.models paths corrected after missing-path probes",
+    "Release helper prep initially used relative venv under DigitalTwin (exit1), then absolute venv path succeeded (exit0)"
+  ],
+  "not_run": [
+    "Agent authenticated hosted UI/upload after release",
+    "Cloud Run/Gateway rollout",
+    "M4/feedback activation",
+    "H2/H3 remaining operations",
+    "Excel calculation/reference",
+    "PG/payment/refund/pricing",
+    "real customer data",
+    "remote push",
+    "D02 or any further bundle"
+  ],
+  "next_unit": "D02 recommendation only; approval not granted"
+}

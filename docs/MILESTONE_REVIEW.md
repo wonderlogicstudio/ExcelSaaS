@@ -1,5 +1,25 @@
 # Current review — V3.2 D01
 
+## D01 owner-feedback grouping fix — 2026-09-12
+
+Owner confirmed beta case03 free count 49, matching local API. Same-rule grouping
+was incomplete: all leaf cards were always shown and titles repeated. Now each
+rule has one summary and a collapsed location disclosure; individual evidence,
+handling, filters, full table/CSV and risk remain intact. Source `5828aca`.
+RED2 -> corrected implementation/legacy expectations -> targeted19 -> full
+web63/Worker13/API75, build/Ruff/M4 sample36 (exit0). Actual local API/Chrome
+1440/390: case03 49/one group, case11 59/one group, controls12/0, all locations,
+CSV invariance, keyboard/focus and no overflow verified; four captures reviewed.
+All Workbook packs also rerun: 20 unique files, M4 72/72 exact, same accepted
+two-label-conflict waiver; 61 local API requests passed. Source fixtures intact.
+Beta version `673f2895-2142-4215-8024-9acb14fa53ae` at 100%; rollback
+`dc94d91a-e969-479e-9087-f1f9758ec2ef`. All12 bindings/Access preserved.
+No Cloud Run/Gateway change, M4 activation, remote push or next bundle. Post-fix
+authenticated hosted UI remains owner review, distinct from local/browser and
+deployed-version evidence. Original owner package83 files and prior records
+preserved. Evidence: `delivery-v3_2/reviews/evidence/D01-grouped-findings.json` and
+`D01-workbook-packs.json`. D01 acceptance pending; stop, D02 recommendation only.
+
 ## D01 feedback follow-up — 2026-09-12
 
 The owner used existing M4 formula-pattern test files. Current beta free scanning

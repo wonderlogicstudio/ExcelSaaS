@@ -59,19 +59,19 @@
       ],
       "beta_deployment": {
         "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
-        "version": "dc94d91a-e969-479e-9087-f1f9758ec2ef",
-        "deployed_at_utc": "2026-09-12T12:03:50.16917Z",
+        "version": "673f2895-2142-4215-8024-9acb14fa53ae",
+        "deployed_at_utc": "2026-09-12T12:34:31.774566Z",
         "percentage": 100,
-        "rollback_version": "9748b413-0acd-4a57-a0fd-9a5e3324f3db",
-        "source_commit": "207e09c8d1905eae679b5caffec196a6a4f2dafc",
+        "rollback_version": "dc94d91a-e969-479e-9087-f1f9758ec2ef",
+        "source_commit": "5828aca1292e07a653292a68acbad07ec3f49fc0",
         "cloud_run_revision_changed": false,
         "api_projection_deployed": false,
         "legacy_api_compatible_frontend": true,
         "binding_metadata_unchanged": true,
         "anonymous_access_check": "PASS_302_TO_EXISTING_ACCESS",
         "authenticated_ui_check": "NOT_RUN_NO_CONNECTED_BROWSER",
-        "hosted_synthetic_upload": "NOT_RUN",
-        "evidence": "reviews/evidence/D01-zero-findings.json"
+        "hosted_synthetic_upload": "OWNER_CONFIRMED_CASE03_FREE49_BEFORE_GROUP_FIX",
+        "evidence": "reviews/evidence/D01-grouped-findings.json"
       },
       "initial_engineering_review_not_run": [
         "repair_engine/delivery",
@@ -101,6 +101,22 @@
           "authenticated_ui_check": "NOT_RUN_NO_CONNECTED_BROWSER",
           "hosted_synthetic_upload": "NOT_RUN",
           "evidence": "reviews/evidence/D01-beta-release.json"
+        },
+        {
+          "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
+          "version": "dc94d91a-e969-479e-9087-f1f9758ec2ef",
+          "deployed_at_utc": "2026-09-12T12:03:50.16917Z",
+          "percentage": 100,
+          "rollback_version": "9748b413-0acd-4a57-a0fd-9a5e3324f3db",
+          "source_commit": "207e09c8d1905eae679b5caffec196a6a4f2dafc",
+          "cloud_run_revision_changed": false,
+          "api_projection_deployed": false,
+          "legacy_api_compatible_frontend": true,
+          "binding_metadata_unchanged": true,
+          "anonymous_access_check": "PASS_302_TO_EXISTING_ACCESS",
+          "authenticated_ui_check": "NOT_RUN_NO_CONNECTED_BROWSER",
+          "hosted_synthetic_upload": "NOT_RUN",
+          "evidence": "reviews/evidence/D01-zero-findings.json"
         }
       ],
       "owner_feedback_followups": [
@@ -117,6 +133,22 @@
           "hosted_m4_enabled": false,
           "review": "reviews/D01.md",
           "evidence": "reviews/evidence/D01-zero-findings.json"
+        },
+        {
+          "report": "Beta case03 free49 confirmed; repeated errors should be grouped",
+          "status": "GROUP_DISCLOSURE_FIXED_AND_BETA_DEPLOYED",
+          "source_commit": "5828aca1292e07a653292a68acbad07ec3f49fc0",
+          "web_tests": 63,
+          "worker_tests": 13,
+          "api_tests": 75,
+          "local_m4_exact_candidates": 72,
+          "existing_waiver_preserved": true,
+          "source_files_and_owner_records_preserved": true,
+          "hosted_m4_enabled": false,
+          "owner_observed_beta_case03_free_findings": 49,
+          "post_release_authenticated_hosted_ui": "PENDING_OWNER_REVIEW",
+          "evidence": "reviews/evidence/D01-grouped-findings.json",
+          "pack_evidence": "reviews/evidence/D01-workbook-packs.json"
         }
       ]
     }
