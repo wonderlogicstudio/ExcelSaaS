@@ -98,7 +98,7 @@ const completedScope = [
 ];
 
 const uncheckedScope = [
-  '주변 수식 일관성 검사',
+  '수식 패턴 이탈·누락 검사',
   'Excel 계산 결과 검증',
   '업무 규칙 검증',
   '회귀·통계 모델 검증',
@@ -257,7 +257,7 @@ function ScanScopeCard({ truncated }: { truncated: boolean }) {
       </div>
       <div className="scan-scope-card__lists">
         <div>
-          <strong>완료</strong>
+          <strong>{truncated ? '부분 수행' : '완료'}</strong>
           <ul>{completedScope.map((item) => <li key={item}><Check size={15} />{item}</li>)}</ul>
         </div>
         <div>
@@ -329,7 +329,11 @@ function ResultsContent({
         ? '높음 · 우선 확인 필요'
         : '높음';
   const resultHeadline = summary.issue_count === 0
-    ? '현재 무료 검사 범위에서는 구조적 위험 신호를 발견하지 못했습니다.'
+    ? workbook.scan_truncated
+      ? '무료 구조 검사: 일부 범위에서 발견 0건'
+      : workbook.scanned_cell_count === 0
+        ? '무료 구조 검사: 읽은 셀 0개'
+        : '무료 구조 검사: 발견 0건'
     : summary.critical_count > 0
       ? '중요한 구조적 문제가 발견됐습니다.'
       : summary.warning_count > 0
@@ -400,11 +404,19 @@ function ResultsContent({
         <div className="results-header">
           <div>
             <h2 id="results-title">{resultHeadline}</h2>
+            <p>파일에서 읽은 범위: 시트 {workbook.sheet_count.toLocaleString('ko-KR')}개 · 내용이 있는 셀 {workbook.scanned_cell_count.toLocaleString('ko-KR')}개 · 수식 문자열 {workbook.formula_count.toLocaleString('ko-KR')}개</p>
             <p><strong>{result.filename}</strong> · {formatFileSize(result.file_size_bytes)} · 규칙 세트 {result.rule_set_version}</p>
           </div>
           <button className="button button--ghost" type="button" onClick={onReset}><RotateCcw size={17} />다른 파일 검사</button>
         </div>
 
+        {summary.issue_count === 0 && (
+          <aside className="zero-findings-note" role="note" aria-label="발견 0건 해석">
+            <strong>수식 검증을 통과했다는 뜻은 아닙니다.</strong>
+            <p>발견 0건은 이번 무료 구조 검사 규칙에서 항목을 찾지 못했다는 뜻입니다. 수식 패턴 이탈·누락 시험 파일의 오류는 별도 수식 검사 대상이며, 이 무료 결과에 포함되지 않습니다.</p>
+            <p>수식 패턴·누락, Excel 재계산, 업무적 정확성은 이 검사에서 확인하지 않았습니다.{workbook.scan_truncated ? ' 안전 제한으로 읽지 못한 범위도 남아 있습니다.' : workbook.scanned_cell_count === 0 ? ' 파일에 읽을 수 있는 셀 내용이 있는지도 확인하세요.' : ''}</p>
+          </aside>
+        )}
         <div className="result-grid result-grid--summary">
           <article className="risk-card">
             <div className={`risk-ring risk-ring--${summary.risk_band}`} aria-label={`구조 위험 상태 ${riskLabel}`}>
@@ -545,7 +557,7 @@ function ResultsContent({
             ) : counts.total_detected > 0 ? (
               <p className="empty-result-note">발견된 항목의 반환 상세가 없습니다. 상세 생략 수와 검사 한계를 확인하세요. 문제가 없다는 뜻이 아닙니다.</p>
             ) : (
-              <p className="empty-result-note">현재 무료 검사 범위에서는 구조적 위험 신호를 발견하지 못했습니다. 수식의 업무적 정확성, 계산 결과, 업무 규칙 및 통계 모델은 검증하지 않았습니다.</p>
+              <p className="empty-result-note">반환된 무료 구조 검사 항목이 없습니다. 위의 검사 범위와 미수행 항목을 확인하세요. 수식 패턴·누락이나 계산 정확성의 검증 결과가 아닙니다.</p>
             )}
 
             <div className="finding-types" aria-label="문제 유형별 개수">

@@ -3093,3 +3093,16 @@ p {
 @media (max-width: 760px) {
   .finding-table caption { display: block; width: 100%; }
 }
+
+/* Keep a zero structural count distinct from unperformed formula validation. */
+.zero-findings-note {
+  margin: 0 0 22px;
+  padding: 18px 22px;
+  border: 1px solid #e0c47c;
+  border-radius: 12px;
+  background: #fff9e8;
+  color: #644916;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.zero-findings-note p { margin: 8px 0 0; font-size: 14px; }

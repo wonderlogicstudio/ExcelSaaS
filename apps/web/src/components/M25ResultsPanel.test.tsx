@@ -122,8 +122,8 @@ describe('M2.5 results panel', () => {
     });
     const { rerender } = renderResult(zeroResult);
 
-    expect(screen.getAllByText('현재 무료 검사 범위에서는 구조적 위험 신호를 발견하지 못했습니다.').length).toBeGreaterThan(0);
-    expect(screen.getByText('현재 무료 검사 범위에서는 구조적 위험 신호를 발견하지 못했습니다. 수식의 업무적 정확성, 계산 결과, 업무 규칙 및 통계 모델은 검증하지 않았습니다.')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: '무료 구조 검사: 발견 0건' })).toBeInTheDocument();
+    expect(screen.getByText('반환된 무료 구조 검사 항목이 없습니다. 위의 검사 범위와 미수행 항목을 확인하세요. 수식 패턴·누락이나 계산 정확성의 검증 결과가 아닙니다.')).toBeInTheDocument();
     expect(screen.getByText('0개 전체 표시 · 클릭해 자세히 보기')).toBeInTheDocument();
     expect(screen.getByText('현재 발견 결과 기준으로는 수정 검토 대상을 제안하지 않습니다. 정밀 검증과 승인 기반 수정은 아직 제공하지 않습니다.')).toBeInTheDocument();
 
@@ -198,7 +198,7 @@ describe('M2.5 results panel', () => {
     fireEvent.change(screen.getByLabelText('처리 상태로 보기'), { target: { value: 'UNREVIEWED' } });
     expect(document.querySelectorAll('details.finding')).toHaveLength(0);
     expect(screen.getByText(/선택한 조건에 맞는 항목이 없습니다/)).toHaveTextContent('파일에 문제가 없다는 뜻이 아닙니다');
-    expect(screen.queryByText('현재 무료 검사 범위에서는 구조적 위험 신호를 발견하지 못했습니다.')).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: '무료 구조 검사: 발견 0건' })).not.toBeInTheDocument();
     for (const button of screen.getAllByRole('button', { name: '진단 결과 CSV 다운로드' })) fireEvent.click(button);
     expect(download).toHaveBeenCalledTimes(2);
     expect(download).toHaveBeenNthCalledWith(1, filterResult, statuses);

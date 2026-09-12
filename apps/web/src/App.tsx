@@ -24,7 +24,7 @@ const formulaAuditInternalBetaEnabled =
 const stages: ScanStage[] = [
   '파일 형식 확인',
   '워크북 구조 분석',
-  '수식과 참조 검사',
+  '수식 문자열·참조 검사',
   '위험도와 수정 가능 여부 계산',
 ];
 
@@ -222,8 +222,8 @@ export default function App() {
                 </button>
               </div>
               <p className="hero__fineprint">
-                현재는 파일 구조를 정적으로 분석합니다. VBA, 외부 연결, 수식 계산은 실행하지 않으며 원본 파일도
-                바꾸지 않습니다.
+                현재는 파일 구조를 정적으로 분석합니다. 수식 패턴 이탈·누락 검사는 무료 진단에 포함되지 않습니다.
+                VBA, 외부 연결, 수식 계산은 실행하지 않으며 원본 파일도 바꾸지 않습니다.
               </p>
               <p className="hero__beta-notice">
                 Beta 안내: 결과는 참고 정보이며 원본 파일은 수정하지 않습니다.{' '}

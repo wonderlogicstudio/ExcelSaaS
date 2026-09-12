@@ -73,7 +73,7 @@ describe('D01 free diagnosis integration', () => {
     expect(screen.getByText(/검사하지 않은 셀의 위험 신호는 포함하지 않습니다/)).toBeInTheDocument();
     rerender(<M25ResultsPanel result={{ ...partial, analysis_id: 'synthetic-empty-details', findings: [] }} isDemo onReset={() => undefined} />);
     expect(screen.getByText(/발견된 항목의 반환 상세가 없습니다/)).toBeInTheDocument();
-    expect(screen.queryByText(/현재 무료 검사 범위에서는 구조적 위험 신호를 발견하지 못했습니다/)).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: '무료 구조 검사: 발견 0건' })).not.toBeInTheDocument();
   });
 
   it('does not certify disappearance or novelty when either scan omits details', () => {

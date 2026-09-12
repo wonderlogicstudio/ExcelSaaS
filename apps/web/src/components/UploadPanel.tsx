@@ -11,7 +11,7 @@ import {
 export type ScanStage =
   | '파일 형식 확인'
   | '워크북 구조 분석'
-  | '수식과 참조 검사'
+  | '수식 문자열·참조 검사'
   | '위험도와 수정 가능 여부 계산';
 
 interface UploadPanelProps {
