@@ -1,5 +1,22 @@
 # Current milestone
 
+## D01 authenticated hosted sample verification — 2026-09-12
+
+The connected, logged-in Chrome beta was exercised by the agent using actual
+synthetic uploads: all 20 unique Workbook samples plus demo, 21/21 free results
+matching local counts and scanned-cell/formula metadata. Case03: 49 deep-nesting
+findings, one collapsed group; case11: 59 volatile-function findings, one collapsed
+group. All 49/59 locations are retained; case11 full table retains 59 rows. The other
+18 samples return free0; demo returns12. Zero screens clearly show M4 not performed.
+The supplied M4 expected72 are NOT verified on the hosted site: hosted M4 remains
+unavailable/disabled. This is a product-scope/connection gap, not evidence that the
+M4 expected findings passed. Browser setup does not approve M4 activation.
+No source/deployment/gate changes; prior full regression web63/Worker13/API75 is
+reused, not rerun. Owner83 hashes and tracked samples preserved. Actual browser
+actions, results, recovered chooser failure and limits are recorded in
+`delivery-v3_2/reviews/evidence/D01-hosted-browser.json`. Earlier pending-browser
+notes below are historical. D01 owner acceptance, H2/H3 readiness and D02 gate stay unchanged.
+
 > **D01 owner-feedback grouping fix — deployed 2026-09-12.**
 > Owner confirms beta case03 free49; local actual API agrees. Same-rule results
 > now start as one collapsed group; all locations/evidence/status/CSV retained.

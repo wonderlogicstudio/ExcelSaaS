@@ -55,7 +55,7 @@
         "D02-D08",
         "Cloud Run/Gateway rollout",
         "H2/H3 remaining operational gates",
-        "authenticated hosted UI and hosted synthetic upload"
+        "authenticated hosted M4 audit (disabled/unavailable)"
       ],
       "beta_deployment": {
         "status": "WEB_DEPLOYED_ACCESS_PROTECTED",
@@ -69,9 +69,10 @@
         "legacy_api_compatible_frontend": true,
         "binding_metadata_unchanged": true,
         "anonymous_access_check": "PASS_302_TO_EXISTING_ACCESS",
-        "authenticated_ui_check": "NOT_RUN_NO_CONNECTED_BROWSER",
-        "hosted_synthetic_upload": "OWNER_CONFIRMED_CASE03_FREE49_BEFORE_GROUP_FIX",
-        "evidence": "reviews/evidence/D01-grouped-findings.json"
+        "authenticated_ui_check": "PASS_AGENT_AUTHENTICATED_FREE_UI_AND_GROUPS",
+        "hosted_synthetic_upload": "PASS_AGENT_21_ACTUAL_FREE_UPLOADS",
+        "evidence": "reviews/evidence/D01-grouped-findings.json",
+        "authenticated_evidence": "reviews/evidence/D01-hosted-browser.json"
       },
       "initial_engineering_review_not_run": [
         "repair_engine/delivery",
@@ -149,6 +150,22 @@
           "post_release_authenticated_hosted_ui": "PENDING_OWNER_REVIEW",
           "evidence": "reviews/evidence/D01-grouped-findings.json",
           "pack_evidence": "reviews/evidence/D01-workbook-packs.json"
+        },
+        {
+          "report": "Owner connected Chrome; agent to verify Workbook sample expectations on actual beta",
+          "status": "FREE_HOSTED_21_VERIFIED_M4_CONNECTION_UNRESOLVED",
+          "actual_hosted_uploads": 21,
+          "hosted_free_local_matches": 21,
+          "hosted_m4_executed": false,
+          "m4_expected_candidates_not_hosted_verified": 72,
+          "groups": {
+            "03": 49,
+            "11": 59
+          },
+          "product_source_changed": false,
+          "new_deployment": false,
+          "next_scope_approval": "M4_BETA_CONNECTION_NOT_RECEIVED",
+          "evidence": "reviews/evidence/D01-hosted-browser.json"
         }
       ]
     }
