@@ -1,3 +1,7 @@
+import { useProductNavigation, routeTitles } from './lib/navigation';
+import { reviewKey, type RepairDraft } from './lib/repairReview';
+import { RepairReview } from './components/RepairReview';
+import { CoreJourney, ServiceIntro } from './components/ProductPages';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, FileSearch, ShieldCheck, Sparkles } from 'lucide-react';
 import {DeliveryOperations} from './components/DeliveryOperations';
@@ -22,7 +26,7 @@ import {
   hostedFormulaAuditFeedbackEnabled,
   LocalFeedbackRepository,
 } from './lib/feedback';
-import type { FindingUserStatus, FormulaAuditResult, ScanResult } from './types';
+import type { Finding, FindingUserStatus, FormulaAuditResult, ScanResult } from './types';
 
 const formulaAuditInternalBetaEnabled =
   import.meta.env.VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED === 'true';
@@ -45,12 +49,18 @@ function wait(milliseconds: number) {
 }
 
 export default function App() {
-  if (window.location.pathname === '/privacy') {
-    return <LegalPage kind="privacy" />;
-  }
-  if (window.location.pathname === '/terms') {
-    return <LegalPage kind="terms" />;
-  }
+  const { path, navigate, onLink } = useProductNavigation();
+  const diagnosisPage = path === '/' || path === '/diagnosis';
+  const visited = useRef(new Set<string>());
+  visited.current.add(path);
+  const [reviewFindings, setReviewFindings] = useState<Finding[]>([]);
+  const [reviewLocked, setReviewLocked] = useState(false);
+  const [reviewDraft, setReviewDraft] = useState<RepairDraft>();
+  const reviewSelection = { findings: reviewFindings, locked: reviewLocked, toggle: (finding: Finding) => {
+    if (!reviewLocked) { setReviewDraft(undefined); setReviewFindings(current => current.some(f => reviewKey(f) === reviewKey(finding))
+      ? current.filter(f => reviewKey(f) !== reviewKey(finding)) : [...current, finding]); }
+  }};
+  const clearReview = () => { setReviewFindings([]); setReviewLocked(false); setReviewDraft(undefined); };
   const uploadRef = useRef<HTMLDivElement>(null);
   const activeRequest = useRef(0);
   const activeController = useRef<AbortController | null>(null);
@@ -89,7 +99,7 @@ export default function App() {
   }, [busy]);
 
   useEffect(() => {
-    if (result) {
+    if (result && diagnosisPage) {
       window.requestAnimationFrame(() => {
         const resultAnchor = formulaAuditInternalBetaEnabled && !formulaAuditHostedBetaEnabled && sourceFile
           ? '#formula-audit'
@@ -128,10 +138,17 @@ export default function App() {
   };
 
   const startUpload = () => {
-    uploadRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (!diagnosisPage) navigate('/');
+    const reveal = () => {
+      uploadRef.current?.scrollIntoView({ behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' });
+      uploadRef.current?.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
+    };
+    if (diagnosisPage) reveal(); else requestAnimationFrame(reveal);
   };
 
   const runDemo = async () => {
+    if (!diagnosisPage) navigate('/');
+    clearReview();
     cancelActiveRequest();
     const requestId = activeRequest.current;
     setError(null);
@@ -153,6 +170,7 @@ export default function App() {
   };
 
   const runFileScan = async (file: File) => {
+    clearReview();
     cancelActiveRequest();
     const requestId = activeRequest.current;
     activeController.current = new AbortController();
@@ -192,6 +210,7 @@ export default function App() {
   };
 
   const reset = () => {
+    clearReview();
     cancelActiveRequest();
     setResult(null);
     setError(null);
@@ -208,6 +227,7 @@ export default function App() {
 
   const prepareRevalidation = () => {
     if (!result) return;
+    clearReview();
     cancelActiveRequest();
     setPreviousResult(result);
     setResult(null);
@@ -237,9 +257,10 @@ export default function App() {
   };
 
   return (
-    <div id="top">
-      <Header onStart={startUpload} />
-      <main>
+    <div id="top" onClick={onLink}>
+      <Header onStart={startUpload} path={path}/>
+      <main id="main-content" tabIndex={-1}>
+        <div data-product-page="diagnosis" hidden={!diagnosisPage}>
         <section className="hero" id="free-diagnosis" aria-labelledby="hero-title">
           <div className="hero__glow hero__glow--one" aria-hidden="true" />
           <div className="hero__glow hero__glow--two" aria-hidden="true" />
@@ -247,19 +268,19 @@ export default function App() {
             <div className="hero__copy">
               <div className="hero__eyebrow">
                 <Sparkles size={16} />
-                중요한 Excel 사용·공유 전 점검 · 현재 베타
+                Excel 진단에서 승인 기반 수정까지
               </div>
-              <h1 id="hero-title">
-                문제를 찾고,
+              <h1 id="hero-title" tabIndex={-1}>
+                Excel 문제를 확인하고,
                 <br />
-                <span>수정 방향을 정리하세요.</span>
+                <span>승인한 변경만 반영하세요.</span>
               </h1>
               <p className="hero__lead">
-                무료 진단은 깨진 수식 표기, 외부 통합문서 참조, 숨김 시트 같은 구조 위험 신호를 찾습니다.
-                중요한 파일을 사용하거나 공유하기 전에, 고칠 방법을 더 확인해야 하는 항목과 수정 여부를 판단할 근거를 먼저 보여드립니다.
+                파일을 올려 위치와 근거를 확인하고, 수정 검토할 항목을 선택하세요.
+                {deliveryBetaEnabled ? ' 지원 범위와 정확한 변경계획을 별도로 승인하면 원본과 분리된 수정본·변경내역·재검증 보고서를 받습니다.' : ' 승인 기반 수정과 세 파일 납품은 준비 중입니다.'}
               </p>
               <div className="hero__trust" aria-label="서비스 핵심 원칙">
-                <span><Check size={16} /> 가입 없이 시작</span>
+                <span><Check size={16} /> 무료 진단</span>
                 <span><ShieldCheck size={16} /> 원본 파일 변경 없음</span>
                 <span><FileSearch size={16} /> 규칙 기반 무료 진단</span>
               </div>
@@ -278,8 +299,8 @@ export default function App() {
                 VBA, 외부 연결, 수식 계산은 실행하지 않으며 원본 파일도 바꾸지 않습니다.
               </p>
               <p className="hero__beta-notice">
-                Beta 안내: 결과는 참고 정보이며 원본 파일은 수정하지 않습니다.{' '}
-                <a href="/privacy">파일 처리 안내</a> · <a href="/terms">이용 안내</a>
+                {deliveryBetaEnabled ? '보호 베타 · 등록된 합성 파일의 수정 시험만 제공 · 일반 구매·실제 결제 준비 중. ' : '테스트용 파일만 사용하세요. '}
+                <a href="/help#file-handling-principles">파일 처리 원칙</a>
               </p>
             </div>
             <div ref={uploadRef} className="hero__upload">
@@ -295,6 +316,7 @@ export default function App() {
           </div>
         </section>
 
+        <CoreJourney/>
         {result && (
           <>
             {formulaAuditInternalBetaEnabled && !formulaAuditHostedBetaEnabled && (
@@ -313,6 +335,7 @@ export default function App() {
             )}
             <ResultsPanel
               result={result}
+              reviewSelection={reviewSelection}
               formulaAudit={formulaAuditHostedBetaEnabled ? {
                 result: formulaAuditResult, busy: formulaAuditBusy, error: formulaAuditError,
                 blockedReason: formulaAuditBlockedReason(result, sourceFile),
@@ -327,12 +350,26 @@ export default function App() {
               onPrepareRevalidation={prepareRevalidation}
               onReset={reset}
             />
-            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={result.analysis_id} file={sourceFile} />}
+            <RepairReview selection={reviewSelection} available={deliveryBetaEnabled} hasFile={Boolean(sourceFile)} onPrepare={draft => setReviewDraft(draft)}/>
+            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={`${result.analysis_id}:${reviewDraft ? JSON.stringify(reviewDraft) : 'manual'}`} file={sourceFile} compactEntry reviewDraft={reviewDraft} onSourceFixed={setReviewLocked}/> }
           </>
         )}
-        {deliveryBetaEnabled && <ComparisonWorkspace open={comparisonOpen} onOpen={() => setComparisonOpen(true)} />}
-        {deliveryBetaEnabled && <><OrderHistory/><DeliveryOperations onNewInput={startUpload}/></>}
-        <StaticSections products={result?.products} onStart={startUpload} onDemo={runDemo} onCompare={deliveryBetaEnabled ? () => setComparisonOpen(true) : undefined} />
+        {!result && <div className="core-next shell"><p>먼저 무료 진단으로 확인할 항목을 찾으세요. 두 자료 비교와 추가 검증은 별도 서비스에서 확인할 수 있습니다.</p><a href="/help">검사 범위와 이용 방법</a></div>}
+        </div>
+        <div data-product-page="precision" hidden={path !== '/precision-verification'}>{path === '/precision-verification' && <ServiceIntro kind="precision" patterns={formulaAuditHostedBetaEnabled} delivery={deliveryBetaEnabled} onStart={startUpload}/>}</div>
+        <div data-product-page="compare" hidden={path !== '/compare'}>{path === '/compare' && <ServiceIntro kind="compare" patterns={formulaAuditHostedBetaEnabled} delivery={deliveryBetaEnabled} onStart={startUpload}/>}
+          {deliveryBetaEnabled && visited.current.has('/compare') && <ComparisonWorkspace open={comparisonOpen} onOpen={() => setComparisonOpen(true)} />}
+        </div>
+        <div data-product-page="automation" hidden={path !== '/automation'}>{path === '/automation' && <ServiceIntro kind="automation" patterns={formulaAuditHostedBetaEnabled} delivery={deliveryBetaEnabled} onStart={startUpload}/>}</div>
+        <div data-product-page="repair" hidden={path !== '/repair'}>{path === '/repair' && <ServiceIntro kind="repair" patterns={formulaAuditHostedBetaEnabled} delivery={deliveryBetaEnabled} onStart={startUpload}/>}</div>
+        <div data-product-page="help" hidden={path !== '/help'}>{path === '/help' && <><div className="service-intro shell"><span className="section-kicker">도움말</span><h1 tabIndex={-1}>검사 범위와 이용 방법</h1><p>무료 결과를 이해하고, 수정·비교의 제공 범위와 파일 처리 원칙을 확인하세요.</p><div className="help-links"><a href="/help#service-scope">서비스 범위</a><a href="/help#file-handling-principles">파일 처리 원칙</a><a href="/help#faq">자주 묻는 질문</a>{deliveryBetaEnabled && <a href="/orders">베타 주문 확인</a>}</div></div>
+          <StaticSections products={result?.products} onStart={startUpload} onDemo={runDemo} onCompare={deliveryBetaEnabled ? () => navigate('/compare') : undefined}/>
+          {deliveryBetaEnabled && <DeliveryOperations onNewInput={startUpload}/>}</>}
+        </div>
+        <div data-product-page="orders" hidden={path !== '/orders'}><div className="service-intro shell"><h1 tabIndex={-1}>베타 주문 확인</h1><p>이 브라우저 소유자로 확인되는 기존 시험 주문만 조회합니다. 파일·계획·결과는 임시 보관이며, 현재 일반 구매나 영속적인 내 작업 보관함은 제공하지 않습니다.</p></div>{deliveryBetaEnabled && visited.current.has('/orders') ? <OrderHistory/> : <p className="shell">주문 기능 준비 중</p>}</div>
+        <div data-product-page="privacy" hidden={path !== '/privacy'}>{path === '/privacy' && <LegalPage kind="privacy" embedded/>}</div>
+        <div data-product-page="terms" hidden={path !== '/terms'}>{path === '/terms' && <LegalPage kind="terms" embedded/>}</div>
+        {!routeTitles[path] && <div data-product-page="missing" className="service-intro shell"><h1 tabIndex={-1}>페이지를 찾을 수 없습니다</h1><p>주소를 확인하거나 무료 진단으로 돌아가세요.</p><a href="/" className="button button--primary">무료 진단으로 돌아가기</a></div>}
       </main>
       <Footer deliveryEnabled={deliveryBetaEnabled} />
     </div>

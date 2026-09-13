@@ -3,9 +3,7 @@ import {
   BadgeCheck,
   Bot,
   Check,
-  ClipboardCheck,
   FileDiff,
-  FileSearch,
   Fingerprint,
   LockKeyhole,
   MousePointerClick,
@@ -27,40 +25,7 @@ interface StaticSectionsProps {
 export function StaticSections({ onStart, onDemo, products, onCompare }: StaticSectionsProps) {
   return (
     <>
-      <section className="section section--viewport" id="how" aria-labelledby="how-title">
-        <div className="shell">
-          <div className="section-heading section-heading--center">
-            <span className="section-kicker">문제 발견부터 수정 결정까지</span>
-            <h2 id="how-title">문제를 찾고, 수정 여부를 결정하세요.</h2>
-            <p>
-              현재 검사로 확인한 사실, 아직 확인하지 않은 내용, 다음에 살펴볼 항목과 베타 예상 가격 범위를
-              차례로 보여드립니다.
-            </p>
-          </div>
-          <div className="steps-grid">
-            <article className="step-card">
-              <span className="step-card__number">01</span>
-              <FileSearch size={27} />
-              <h3>문제 찾기</h3>
-              <p>깨진 수식, 외부 참조, 숨은 시트, 숫자가 텍스트로 저장된 항목 등을 정적 규칙으로 확인합니다.</p>
-            </article>
-            <article className="step-card">
-              <span className="step-card__number">02</span>
-              <ClipboardCheck size={27} />
-              <h3>수정 방향 확인</h3>
-              <p>문제가 있는 시트와 셀, 탐지 근거, 가능한 영향, 검사 한계와 정밀 검증 항목을 확인합니다.</p>
-            </article>
-            <article className="step-card">
-              <span className="step-card__number">03</span>
-              <FileDiff size={27} />
-              <h3>수정 여부 결정</h3>
-              <p>{onCompare?'지원 범위와 정확한 변경계획을 확인하고 별도로 승인합니다. 등록된 합성 샘플은 수정본·변경내역·재검증 파일을 받으며, 일반 구매는 준비 중입니다.':'예상 포함·제외 범위와 베타 가격 가설을 본 뒤 정밀 검증 필요 여부를 판단합니다. 현재는 결제와 실제 수정 기능을 제공하지 않습니다.'}</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="section section--tinted section--viewport" id="service-scope" aria-labelledby="service-scope-title">
+      <section className="section section--tinted " id="service-scope" aria-labelledby="service-scope-title">
         <div className="shell">
           <div className="section-heading section-heading--center">
             <span className="section-kicker">서비스 범위와 현재 상태</span>
@@ -71,53 +36,7 @@ export function StaticSections({ onStart, onDemo, products, onCompare }: StaticS
         </div>
       </section>
 
-      <section className="section section--planned section--viewport" id="precision-verification" aria-labelledby="precision-verification-title">
-        <div className="shell planned-layout">
-          <div className="planned-copy">
-            <span className="section-kicker">예정 서비스</span>
-            <h2 id="precision-verification-title">정밀 검증</h2>
-            <p>
-              무료 진단에서 확인한 구조 위험 신호를 바탕으로, 수식 일관성·계산 영향·업무 규칙을 더 깊게 확인하는 다음 단계입니다.
-              현재는 신청, 결제, 실제 검증을 제공하지 않습니다.
-            </p>
-            <ul className="planned-points">
-              <li>무료 진단의 발견 사실과 검사 한계를 다시 확인</li>
-              <li>수정 전에 확인해야 할 기술적·업무적 항목 정리</li>
-              <li>향후 수정이 필요한지 판단할 근거 제공</li>
-            </ul>
-          </div>
-          <aside className="planned-status-card" aria-label="정밀 검증 서비스 상태">
-            <span>현재 제공 상태</span>
-            <strong>준비 중</strong>
-            <p>무료 진단 결과에서는 추천 항목만 안내합니다. 향후 판매 패키지에 포함할 검증 활동이며 별도 유료 보고서 상품은 아닙니다. 현재 실행하거나 구매할 수 없습니다.</p>
-          </aside>
-        </div>
-      </section>
-
-      <section className="section section--tinted section--planned section--viewport" id="automation-consultation" aria-labelledby="automation-consultation-title">
-        <div className="shell planned-layout planned-layout--reversed">
-          <div className="planned-copy">
-            <span className="section-kicker">예정 서비스</span>
-            <h2 id="automation-consultation-title">자동화 의뢰</h2>
-            <p>
-              반복적인 Excel 작업을 줄일 수 있는지 검토하고, 자동화할 업무 범위와 필요한 검증을 정리하는 향후 서비스입니다.
-              현재는 의뢰 접수나 자동화 기능을 제공하지 않습니다.
-            </p>
-            <ul className="planned-points">
-              <li>반복 작업과 파일 구조를 함께 검토</li>
-              <li>자동화 전 필요한 데이터·업무 규칙 확인</li>
-              <li>위험을 확인한 뒤에만 구현 범위 판단</li>
-            </ul>
-          </div>
-          <aside className="planned-status-card" aria-label="자동화 의뢰 서비스 상태">
-            <span>현재 제공 상태</span>
-            <strong>준비 중</strong>
-            <p>이 화면은 향후 제공 방향을 설명합니다. 문의 폼, 결제, 자동화 실행은 아직 없습니다.</p>
-          </aside>
-        </div>
-      </section>
-
-      <section className="section section--tinted section--viewport" aria-labelledby="difference-title">
+      <section className="section section--tinted " aria-labelledby="difference-title">
         <div className="shell comparison-layout">
           <div className="comparison-copy">
             <span className="section-kicker">일반 AI와 다른 점</span>
@@ -159,7 +78,7 @@ export function StaticSections({ onStart, onDemo, products, onCompare }: StaticS
         </div>
       </section>
 
-      <section className="section section--viewport" id="file-handling-principles" aria-labelledby="trust-title">
+      <section className="section " id="file-handling-principles" aria-labelledby="trust-title">
         <div className="shell trust-layout">
           <div className="trust-visual" aria-hidden="true">
             <div className="trust-visual__orbit trust-visual__orbit--one" />
@@ -188,7 +107,7 @@ export function StaticSections({ onStart, onDemo, products, onCompare }: StaticS
         </div>
       </section>
 
-      <section className="section section--faq section--viewport" id="faq" aria-labelledby="faq-title">
+      <section className="section section--faq " id="faq" aria-labelledby="faq-title">
         <div className="shell faq-layout">
           <div className="section-heading">
             <span className="section-kicker">FAQ</span>
@@ -205,7 +124,7 @@ export function StaticSections({ onStart, onDemo, products, onCompare }: StaticS
             </details>
             <details>
               <summary>원본 파일이 바뀌나요?</summary>
-              <p>아닙니다. 현재 진단은 원본 파일을 수정하거나 다시 저장하지 않습니다. 실제 수정 기능은 아직 제공하지 않습니다.</p>
+              <p>{onCompare ? '무료 진단은 원본을 변경하지 않습니다. 등록된 합성 파일의 수정 시험은 별도 변경 승인 후 원본과 분리된 사본만 생성합니다.' : '진단은 원본 파일을 수정하거나 다시 저장하지 않습니다. 승인 기반 수정은 준비 중입니다.'}</p>
             </details>
             <details>
               <summary>VBA나 Power Query도 수정하나요?</summary>

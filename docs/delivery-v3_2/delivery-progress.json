@@ -472,7 +472,7 @@
       "review": "reviews/D08.md",
       "evidence": "reviews/evidence/D08-local.json",
       "commerce_ready": false,
-      "beta_deployment": "VERIFIED_PRIVATE_API00014_UNCHANGED_WORKER521_SYNTHETIC_ONLY",
+      "beta_deployment": "VERIFIED_CORE_FLOW_WORKER5A857656_PRIVATE_API00014_SYNTHETIC_ONLY",
       "pg_sandbox": "NOT_RUN",
       "implementation_commit": "8880d179aca80e4fff9f5bb44ebf50a45a5e7037",
       "hosted_followup": {
@@ -588,8 +588,47 @@
         "verified_committed_files": 61
       },
       "beta_deployment_history": [
-        "NOT_DEPLOYED_DOCKER_AND_LINUX_RUNTIME_PENDING"
-      ]
+        "NOT_DEPLOYED_DOCKER_AND_LINUX_RUNTIME_PENDING",
+        "VERIFIED_PRIVATE_API00014_UNCHANGED_WORKER521_SYNTHETIC_ONLY"
+      ],
+      "core_flow_followup": {
+        "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+        "date": "2026-09-13",
+        "base_commit": "297c57a55561d5ca7fdc62566280c3d3882d6a0d",
+        "review": "reviews/CORE_FLOW.md",
+        "evidence": "reviews/evidence/CORE_FLOW.json",
+        "worker": "5a857656-3807-4fb5-84a5-70b6b49517ee",
+        "api": "workbookcare-api-beta-00014-nah",
+        "full_regression": {
+          "web": 91,
+          "worker": 16,
+          "api": 231,
+          "ruff": "PASS",
+          "m4_exact": 36,
+          "exit_code": 0,
+          "quality_decision": "CONDITIONAL_GO_EXISTING_WAIVER_UNCHANGED"
+        },
+        "final_web": {
+          "tests": 95,
+          "files": 22,
+          "typecheck": "PASS",
+          "build": "PASS",
+          "exit_code": 0
+        },
+        "actual_downloads": 8,
+        "actual_downloaded_xlsx_opened_in_excel": 5,
+        "viewport_widths": [
+          1440,
+          1024,
+          390,
+          412
+        ],
+        "payment_mode": "OFF",
+        "commerce_ready": false,
+        "owner_acceptance": "PENDING",
+        "next_unit_approved": false,
+        "execution_state": "STOPPED_AWAITING_OWNER"
+      }
     }
   },
   "readiness": {
@@ -639,7 +678,7 @@
     "NOT_IMPLEMENTED_BY_D01",
     "IMPLEMENTED_LOCAL_SYNTHETIC_ONLY_D04"
   ],
-  "next_recommended_unit": "D08_COMPLEX_CONCURRENT_REQUEST_CANCELLATION_RETRY_ACCEPTANCE",
+  "next_recommended_unit": "GENERAL_CUSTOMER_ELIGIBILITY_SCOPE_AND_QUOTE_CONNECTION",
   "current_status": "PARTIAL_AWAITING_OWNER",
   "execution_state": "STOPPED_AWAITING_OWNER",
   "readiness_history": [
@@ -660,6 +699,45 @@
     }
   ],
   "next_recommended_unit_history": [
-    "EXISTING_PROTECTED_BETA_DELIVERY_DEPLOYMENT_AND_SCREEN_VERIFICATION"
-  ]
+    "EXISTING_PROTECTED_BETA_DELIVERY_DEPLOYMENT_AND_SCREEN_VERIFICATION",
+    "D08_COMPLEX_CONCURRENT_REQUEST_CANCELLATION_RETRY_ACCEPTANCE"
+  ],
+  "core_flow_followup": {
+    "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+    "date": "2026-09-13",
+    "base_commit": "297c57a55561d5ca7fdc62566280c3d3882d6a0d",
+    "review": "reviews/CORE_FLOW.md",
+    "evidence": "reviews/evidence/CORE_FLOW.json",
+    "worker": "5a857656-3807-4fb5-84a5-70b6b49517ee",
+    "api": "workbookcare-api-beta-00014-nah",
+    "full_regression": {
+      "web": 91,
+      "worker": 16,
+      "api": 231,
+      "ruff": "PASS",
+      "m4_exact": 36,
+      "exit_code": 0,
+      "quality_decision": "CONDITIONAL_GO_EXISTING_WAIVER_UNCHANGED"
+    },
+    "final_web": {
+      "tests": 95,
+      "files": 22,
+      "typecheck": "PASS",
+      "build": "PASS",
+      "exit_code": 0
+    },
+    "actual_downloads": 8,
+    "actual_downloaded_xlsx_opened_in_excel": 5,
+    "viewport_widths": [
+      1440,
+      1024,
+      390,
+      412
+    ],
+    "payment_mode": "OFF",
+    "commerce_ready": false,
+    "owner_acceptance": "PENDING",
+    "next_unit_approved": false,
+    "execution_state": "STOPPED_AWAITING_OWNER"
+  }
 }

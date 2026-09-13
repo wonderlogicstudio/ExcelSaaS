@@ -1,3 +1,13 @@
+# Current core product flow / IA release — 2026-09-13
+
+Current Worker `5a857656-3807-4fb5-84a5-70b6b49517ee` at100%; previous single-step rollback `09e3e200-f7d0-4d00-9faf-dae30da47eef`. Full pre-IA Worker baseline `521ad0aa-55f9-4606-b481-fc4861d8a60f`. Private API remains `workbookcare-api-beta-00014-nah`; Gateway remains `workbookcare-beta-d08-e6132fcdf496`. No API deployment, Docker or resource changes in this unit.
+
+Five bounded frontend iterations used the existing explicit hosted flags and Wrangler keep-vars/strict upload workflow below. Every version passed all binding metadata hashes before traffic, unchanged API spec/traffic/IAM and9 anonymous302 Access routes after deployment. Final web95/type/build; actual beta desktop1440/1024/mobile390/412, frozen expected UI and8downloads/5installed-Excel checks. Last change only widened Header Escape handling; its focused-toggle/link behavior was reproduced and rechecked on final v5. Earlier functional checks are version-scoped in [CORE_FLOW evidence](delivery-v3_2/reviews/evidence/CORE_FLOW.json), not all claimed rerun on v5.
+
+Exact commands and stage records: `artifacts/verification/ia-main-flow/release[-v2..-v5]/commands.jsonl`; executed helpers are preserved under `artifacts/verification/ia-main-flow/executed-helpers/`. Build defaults/internal M4/feedback/HMAC/R2/KV/Access/paymentOFF unchanged. Rollback only if separately needed after fresh drift checks; no rollback executed merely as a test. IA engineering verified; stopped awaiting owner. Standing beta authorization does not authorize an unapproved next development unit. Historical release records follow.
+
+---
+
 # Current D08 complex synthetic follow-up — 2026-09-13
 
 Current private API: `workbookcare-api-beta-00014-nah`,100% in asia-northeast3. Immutable image `sha256:12edb4bea80533d20ddd59fe6cb71fb0749320422ee3f04b78de5ed182acecc2` in the same existing private repository. Worker `521ad0aa-55f9-4606-b481-fc4861d8a60f` and Gateway `workbookcare-beta-d08-e6132fcdf496` are unchanged. Only registered synthetic hashes changed:1repair input and2comparison pairs. Access/IAM/HMAC/R2/KV/flags/payment OFF are unchanged.

@@ -1,3 +1,4 @@
+import type { RepairDraft } from '../lib/repairReview';
 import { useEffect, useRef, useState } from 'react';
 import {RepairPlanPreview} from './RepairPlanPreview';
 import { resolveApiBaseUrl } from '../lib/api';
@@ -35,14 +36,14 @@ export async function deliveryRequest<T>(body:object,signal?:AbortSignal):Promis
 }
 function fileBase64(file:File):Promise<string>{return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error('파일을 읽지 못했습니다.'));reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.readAsDataURL(file);});}
 
-export function DeliveryWorkspace({file,initialJob}:{file?:File;initialJob?:DeliveryJob}){
+export function DeliveryWorkspace({file,initialJob,reviewDraft,onSourceFixed,compactEntry=false}:{compactEntry?:boolean;file?:File;initialJob?:DeliveryJob;reviewDraft?:RepairDraft;onSourceFixed?:(fixed:boolean)=>void}){
   const [open,setOpen]=useState(Boolean(initialJob));const [consent,setConsent]=useState(false);const [job,setJob]=useState<DeliveryJob|null>(initialJob??null);
   const [busy,setBusy]=useState(false);const [error,setError]=useState<string|null>(null);
   const [profile,setProfile]=useState(RP01);const [sheet,setSheet]=useState('');const [targets,setTargets]=useState('');
   const [role,setRole]=useState('');const [anchor,setAnchor]=useState('');const [formula,setFormula]=useState('');const [confirmed,setConfirmed]=useState(false);
   const [dirty,setDirty]=useState(false);const [maxBytes,setMaxBytes]=useState<number|null>(null);const abort=useRef<AbortController|null>(null);
   const heading=useRef<HTMLHeadingElement>(null);
-  const expire=()=>{setJob(null);setConsent(false);setConfirmed(false);setError('원본 보관이 만료되었습니다. 기존 주문에서 복구 또는 취소를 선택하고 같은 원본을 새로 업로드하세요.');};
+  const expire=()=>{onSourceFixed?.(false);setJob(null);setConsent(false);setConfirmed(false);setError('원본 보관이 만료되었습니다. 기존 주문에서 복구 또는 취소를 선택하고 같은 원본을 새로 업로드하세요.');};
   useEffect(()=>{if(!job)return;const timer=setTimeout(expire,Math.max(0,job.expires_at*1000-Date.now()));return()=>clearTimeout(timer)},[job?.job_id,job?.expires_at]);
   useEffect(()=>()=>abort.current?.abort(),[]);
   useEffect(()=>{const p=initialJob?.policy;if(p){setProfile(p.profile);setSheet(p.sheet);setTargets(p.targets.join(', '));setRole(p.role??'');setAnchor(p.anchor??'');setFormula(p.anchor_formula??'');setConfirmed(p.confirmed)}},[initialJob]);
@@ -53,12 +54,13 @@ export function DeliveryWorkspace({file,initialJob}:{file?:File;initialJob?:Deli
   };
   const edit=(change:()=>void)=>{change();setConfirmed(false);setDirty(true);};
   const start=()=>run(async signal=>{const limits=await deliveryRequest<{max_bytes:number}>({action:'capabilities'},signal);setMaxBytes(limits.max_bytes);setOpen(true);requestAnimationFrame(()=>heading.current?.focus());});
+  useEffect(()=>{if(reviewDraft && !job){setProfile(reviewDraft.profile);setSheet(reviewDraft.sheet);setTargets(reviewDraft.targets.join(', '));setConfirmed(false);setRole('');setAnchor('');setFormula('');void start();}},[reviewDraft]);
   const upload=()=>run(async signal=>{
     if(!file)throw new Error('새 원본 파일을 선택하세요.');
     if(!consent)throw new Error('업로드 권한과 검사 동의를 확인하세요.');
     if(maxBytes!==null&&file.size>maxBytes)throw new Error(`사전 검사는 ${maxBytes/1024/1024}MiB 이하 파일만 지원합니다.`);
     const next=await deliveryRequest<DeliveryJob>({action:'create_input',filename:file.name,file_base64:await fileBase64(file),consent:true,request_key:crypto.randomUUID()},signal);
-    setJob(next);setSheet(next.sheets[0]?.name??'');setDirty(false);
+    setJob(next);setSheet(reviewDraft?.sheet??next.sheets[0]?.name??'');setDirty(false);onSourceFixed?.(true);
   });
   const check=()=>run(async signal=>{
     if(!job)return;
@@ -66,6 +68,7 @@ export function DeliveryWorkspace({file,initialJob}:{file?:File;initialJob?:Deli
       policy:{profile,sheet,targets:targets.split(/[\s,]+/).filter(Boolean).map(x=>x.toUpperCase()),role,anchor:anchor.toUpperCase(),anchor_formula:formula,confirmed}},signal);
     setJob(next);setDirty(false);
   });
+  if(!open&&compactEntry)return <details className="delivery-manual shell"><summary>목록에 없는 셀을 직접 지정</summary><p>숫자 텍스트 정리 또는 실제 빈 셀 복원을 확인할 시트·셀을 직접 지정할 수 있습니다. 지원 여부는 사전 검사에서 확인합니다.</p><button className="button button--outline" type="button" disabled={busy} onClick={start}>수정 범위 사전 확인</button>{error&&<p role="alert">{error}</p>}</details>;
   if(!open)return <section className="delivery-entry shell"><h3>수정할 범위를 먼저 확인하세요</h3><p>지원하는 변경 종류와 원본 조건을 확인하는 사전 검사입니다. 일반 구매는 준비 중이며, 합성 시험에서만 별도 승인 후 사본을 만듭니다.</p>
     <button className="button button--outline" type="button" disabled={busy} onClick={start}>수정 범위 사전 확인</button>{error&&<p role="alert">{error}</p>}</section>;
   return <section id="repair-preflight" className="delivery-workspace shell" aria-label="수정 범위 사전 확인">
@@ -96,7 +99,7 @@ export function DeliveryWorkspace({file,initialJob}:{file?:File;initialJob?:Deli
         </section>}
         {job.preflight?.status==='PRELIMINARY_ONLY'&&!dirty&&<RepairPlanPreview job={job} onJob={setJob}/>}
         <div className="delivery-actions"><button className="button button--outline" type="button" disabled={busy} onClick={()=>run(async signal=>{setJob(await deliveryRequest<DeliveryJob>({action:'get',job_id:job.job_id},signal));})}>최신 작업 상태 확인</button>
-          <button className="button button--ghost" type="button" disabled={busy} onClick={()=>run(async signal=>{const next=await deliveryRequest<DeliveryJob|{status:'DELETED'}>({action:'delete',job_id:job.job_id},signal);if(next.status==='DELETED'){setJob(null);setConsent(false);setConfirmed(false);}else{setJob(next as DeliveryJob);}})}>사전 검사 원본 삭제</button></div>
+          <button className="button button--ghost" type="button" disabled={busy} onClick={()=>run(async signal=>{const next=await deliveryRequest<DeliveryJob|{status:'DELETED'}>({action:'delete',job_id:job.job_id},signal);if(next.status==='DELETED'){onSourceFixed?.(false);setJob(null);setConsent(false);setConfirmed(false);}else{setJob(next as DeliveryJob);}})}>사전 검사 원본 삭제</button></div>
       </>}
     {busy&&<p role="status">처리 중입니다…</p>}{error&&<p role="alert">{error}</p>}
   </section>;

@@ -1,3 +1,11 @@
+## 2026-09-13 — Main Flow / IA 구현·보호 베타 검증 완료
+
+무료 진단 → 유형/셀 근거 → 수정 검토 선택 → 기존 사전 검사·별도 승인·세 파일 납품으로 연결하고 정밀 검증·비교·자동화를 독립 페이지로 분리했다. 기존 기능·진행·예상 값은 보존했다. 실제 복합16건/3유형·정상0건·RP01 일부 합2,029,526·RP02 합937,923·비교464그룹/큰 정수 차액1원을 대조했다. 실제 다운로드8개·설치 Excel XLSX5개 PASS. full 회귀 웹91/Worker16/API231/M4exact36 exit0, 이후 프런트 최종95·타입·빌드와 모바일 Esc 재시험 PASS.
+
+Worker `5a857656-3807-4fb5-84a5-70b6b49517ee`만 배포; private API00014-nah·모든 기존 바인딩·Access·결제OFF 유지. 이번 IA 단위 ENGINEERING_VERIFIED_AWAITING_OWNER, D08 전체 PARTIAL. 일반 고객 범위·견적/공식 PG/영속 상용 운영은 미완료. 상세17항목·실패수정·명령·미실행은 [CORE_FLOW review](delivery-v3_2/reviews/CORE_FLOW.md). 검증 파일만 로컬 커밋하고 정지. 다음 제안 한 단위는 일반 사용자용 지원 범위 → 의뢰 범위·견적 연결이며 자동 실행하지 않는다.
+
+---
+
 ## D08 복합 합성 수용시험 — 사용자 확인 대기
 
 2026-09-13 추가 단위 완료. [D08 review](delivery-v3_2/reviews/D08.md), [5가지 확인 행동](delivery-v3_2/owner_action.md), [독립 예상 값/신규 샘플](../samples/WorkbookCare_Complex_Validation_2026-09-13/README.md). 실제베타13화면검증·13다운로드·8XLSX 설치Excel 대조와 전체회귀78/16/231/36 PASS. API00014-nah만 업데이트, 기존Worker/보안/결제OFF 유지. D08 전체PARTIAL; 다음 묶음 자동 진행 없이 정지.

@@ -28,7 +28,7 @@
     "apps/api/app/comparison_process.py": "99231013e20efa3d143779a768f42fc0878112358028a2972ef0c730de6ebda7",
     "apps/api/app/payment_adapter.py": "474f8ad4e3c28b6a7d9669e0376c95f8e4620366d4f161e48c67c5b9178316bf",
     "apps/api/app/payment_service.py": "31375877c6288f138e0a516b7d8f5a4c5e3380d74fc157a4666de0941d852d94",
-    "apps/web/src/components/DeliveryWorkspace.tsx": "d7b6a08beb6ce3a5c019d55c0598a3185cc83de6b8ca20e814649240cdb3cda3",
+    "apps/web/src/components/DeliveryWorkspace.tsx": "d88b9417adff96d5360d3ed6d558b1e9777974b4300c261fbd6ef96f193bd529",
     "apps/web/src/components/RepairPlanPreview.tsx": "adb28c9d4f7c5c1cd8b9cca882975af1cd6425a63f0bb69545302ff01e1994cd",
     "apps/web/src/components/RepairDelivery.tsx": "91a2e7fa420c1ed7090db05dc13554a31797557c1119e19dbd1772255b20a806",
     "apps/web/src/components/ComparisonWorkspace.tsx": "8a00d458cff5d17b15ac50d58544eb7f6e1598cc87d34433dc7c25ca28172230",
@@ -38,14 +38,14 @@
     "apps/api/app/comparison_service.py": "a97f0c91c248957fd1bd2243fb7d1712ae46dbf7079d54c360bd3c7458d4fb8a",
     "apps/api/app/config.py": "2c51d8404addf68e1d47b6b01099fdd2ee3919396cb241184e2df462b6d77d30",
     "apps/api/app/runtime.py": "9a0205982ca31de4eebf227f0b34a536272af80f7d7c347cd0a793f718ca70df",
-    "apps/web/src/App.tsx": "c50d3562a81e1cbf26518347cae7ff85f56435d4337a2d6cf3e5c1cb5017c761",
+    "apps/web/src/App.tsx": "98114e15e76a7360d1eb2676d1a910c274d0a4eff5076632cacf395d734d9d3c",
     "apps/web/src/components/DeliveryOperations.tsx": "f0df6858889af73945f6728a9688a5b4594a3a4117a8d9da168600b2059264fb",
-    "apps/web/src/components/Footer.tsx": "6b52ed6e3aa249e2c28eb320a1dce7c2299cba4e4b610dbbf9d1dd8b0ba34b83",
-    "apps/web/src/components/LegalPage.tsx": "167914eb0e2e6d8fbea21bed7fba967eb18c3de0c07eecc73b9fad78522fcd0e",
-    "apps/web/src/components/M25ResultsPanel.tsx": "2583154b12a80f2b05628bc70376ba43faac9797e59b625bd1b6b80ca4d9c201",
+    "apps/web/src/components/Footer.tsx": "af1f9088b2a805a046d77fd4012c783355c943736285a1b5101e3479dc50b2c8",
+    "apps/web/src/components/LegalPage.tsx": "df6780ead07877b509b3841326810fd356f4790c0b5e30ee826f9163666c12b4",
+    "apps/web/src/components/M25ResultsPanel.tsx": "3a43a4393e21464737d7d2a43dc7b7692a533665442c9664a0ccfca8e1140f22",
     "apps/web/src/components/ProductCards.test.tsx": "88ddbdd8ac1359347581174826b7768b720742719bdb5526ca0bd91d88dd8e30",
     "apps/web/src/components/ProductCards.tsx": "719eb5fc87fdeef7f3fe37f7f6a3f96feb306c72a1e59d1ea5369e7b31294017",
-    "apps/web/src/components/StaticSections.tsx": "2cf092911b6a4abc8feea2c993cf92f59ce7bb6db2ab30e511b1f0dcaec3d044",
+    "apps/web/src/components/StaticSections.tsx": "253c9488a95b177453ebfd07d0711fd255e8c5f48d0bd1f63332129e5362f4d7",
     "scripts/verify_delivery_holdout_excel.ps1": "847c66ec4ce0659faa110ed3e3d901946b5b9fd3c647a87b61a76a41e424bc8a",
     "apps/api/app/delivery_hosted_rehearsal.py": "b92023705e7d0f8a9ba01998bb32e303802fd91dad585c588a6b37cabd0a0205",
     "apps/api/app/delivery_runtime_check.py": "3a5a0dc47b238fed5e14dea30a04383d98fff931b0b2283091599ab702631e51",
@@ -80,7 +80,19 @@
     "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/ORACLE_LOCK.sha256": "9ac2803b5c03deab9a679a6f45b2c2663ab4f984562280024f2edcaef156567b",
     "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/source-hashes.json": "c22055024f92ba1ac615df42da944400c882b4b1819161fe5dfd5d5705ea7e65",
     "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/source-spec.json": "ad76228cdcdb5921dbda5a836c49f3d7a1b5ee53ad38d1453abeb18f371648f2",
-    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/예상결과.xlsx": "52982289237f0e04ffc6891ac23dd32445d6e143543d6f8eb4888122c8fa4025"
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/예상결과.xlsx": "52982289237f0e04ffc6891ac23dd32445d6e143543d6f8eb4888122c8fa4025",
+    "apps/web/src/App.test.tsx": "7a506b23eae435538ba69abe5e37214243074989694fdcc9e05c94f012c250de",
+    "apps/web/src/App.navigation.test.tsx": "d842fcb7cb77738b37f2df94fdb6ff1952972b851b20a0dd7dc3d141cb74be35",
+    "apps/web/src/main.tsx": "bbb84ab5dcbc64c2f66afbe70c89bb21c594b5251a816f9978660f9bb988489e",
+    "apps/web/src/product-flow.css": "63f7b3ea9675911dab1e7fc7024fa3c073eca835ef8aab26074d3317a7168341",
+    "apps/web/src/components/Header.tsx": "b4b4d299084c449ddcab00f6d4048174ae30fcef1e2b0fb030f6e449b98bfe97",
+    "apps/web/src/components/Brand.tsx": "fc72fdc81ed5298829bcbe650b62bb3a9fbb038e4f3e846a7825eda8e3830935",
+    "apps/web/src/components/ProductPages.tsx": "5a16e6d4ffbc09279813ce5ba5b485e52a7c9fd50e262dc026fcb9803943398e",
+    "apps/web/src/components/ProgressiveFindingViews.tsx": "09b87c64d15ab6b2625b4cef9c0d83e9788212f36e40ead4d3de6df08b3f292c",
+    "apps/web/src/components/RepairReview.tsx": "b12f55ee5fbcf022d6e22b9b12b229230c645ac41ed0643cc05ea3d7e05398ff",
+    "apps/web/src/components/RepairReview.test.tsx": "3b264faa8253b43d4b80178d519ba2f4de89d4f572429bf4912cd9a9876e25e2",
+    "apps/web/src/lib/navigation.ts": "02da93e563c33dd301fcf5671f2d304e5b65edea317905847632d6ef490208c1",
+    "apps/web/src/lib/repairReview.ts": "e2364113865b9cea77b9d64f3240bbda433e72fee65aefe1ba399b7f18402b94"
   },
   "repair_patch_fingerprint": "e5b02ed401a0caab858301a2353b22f7373d4389b898fe6c15c45dca00ffe1bd",
   "evidence": {
@@ -202,7 +214,7 @@
   "current_beta": {
     "url": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
     "deployed_bundle": "D08",
-    "worker_version": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+    "worker_version": "5a857656-3807-4fb5-84a5-70b6b49517ee",
     "cloud_run_revision": "workbookcare-api-beta-00014-nah",
     "D02_D08_deployed": true,
     "Access_required": true,
@@ -212,7 +224,8 @@
     "delivery_flag_hosted_beta": true,
     "bindings_changed_in_complex_followup": false,
     "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:12edb4bea80533d20ddd59fe6cb71fb0749320422ee3f04b78de5ed182acecc2",
-    "evidence": "reviews/evidence/D08-complex-release.json"
+    "evidence": "reviews/evidence/CORE_FLOW.json",
+    "bindings_changed_in_core_flow": false
   },
   "all_commerce_enabled": false,
   "anonymous_release_enabled": false,
@@ -221,12 +234,12 @@
   "stopped_after": "D08",
   "next_bundle_approved": false,
   "limitations": [
-    "Official PG sandbox authorization/SDK checkout/provider return/webhook/cancel not connected or run; test account selection unanswered. LOCAL_CONTRACT is only a private receipt state simulation.",
-    "D02-D08 existing protected beta deployment and hosted screen verification NOT_RUN: Docker daemon still times out after12s; restart question unanswered because other containers may be affected.",
-    "JDK17/POI Linux image packaging, Linux resource enforcement, source OOXML patch/static-scan hard OS deadline, maximum concurrent/combined workload need deployment-readiness work.",
-    "Durable commerce ledger, legal retention/refund/price/tax/support wording and owner release decision PENDING; current15min input/result and24h synthetic ledger are not approved commercial retention.",
-    "M3 real user observations and M3.5 purchase evidence PENDING/DEFERRED; synthetic success is not all-file accuracy or market evidence.",
-    "Remote push, production/anonymous release, invitations, real customer files/payment/refund, new paid resources and remaining H2/H3 checks NOT_RUN as out of scope."
+    "Official Toss PG/checkout SDK/provider authorization/query/cancel/webhook NOT_RUN; owner account not ready. PAYMENT_MODE OFF.",
+    "General customer final eligibility/scope/quote and approved price/purchase connection NOT_READY; current registered synthetic grants are not payments.",
+    "Durable commerce, combined/concurrent capacity, parent patch/static scan hard OS deadline and commercial price/tax/legal/support gates remain pending.",
+    "Full screen-reader/WCAG audit NOT_RUN; browser-rendered downloaded HTML NOT_RUN (actual files parsed against frozen oracle).",
+    "Not every failure or 120+ finding boundary was repeated in beta UI this unit; existing automated regression retained. Comparison all888 source rows verified in actual downloads/Excel, not every UI page repeated this unit.",
+    "New rules/engine/resources, Docker restart, real customer files/payment/refund, remote Git push, anonymous release and D09 NOT_RUN."
   ],
   "implementation_commit": "8880d179aca80e4fff9f5bb44ebf50a45a5e7037",
   "prior_local_assessment": {
@@ -539,5 +552,77 @@
     "D08-complex-ui.json": "3dce56bf8ad55d37998b8d6ad4bc343b01dfb3894e243df87a24f624866f477e",
     "D08-complex.json": "1d068480559662b2f2a4a9557e277d9ed5b6f319ffa8fd95231c88365681f5cd",
     "D08-complex-commit.json": "26e01eca00ce139c4311e1bfae91887aefa1ee481e58f6bf8503305e204b6032"
+  },
+  "prior_beta_before_core_flow": {
+    "url": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+    "deployed_bundle": "D08",
+    "worker_version": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+    "cloud_run_revision": "workbookcare-api-beta-00014-nah",
+    "D02_D08_deployed": true,
+    "Access_required": true,
+    "delivery_flag_default": false,
+    "bindings_changed_in_D08": true,
+    "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+    "delivery_flag_hosted_beta": true,
+    "bindings_changed_in_complex_followup": false,
+    "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:12edb4bea80533d20ddd59fe6cb71fb0749320422ee3f04b78de5ed182acecc2",
+    "evidence": "reviews/evidence/D08-complex-release.json"
+  },
+  "core_flow_followup": {
+    "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+    "date": "2026-09-13",
+    "base_commit": "297c57a55561d5ca7fdc62566280c3d3882d6a0d",
+    "review": "reviews/CORE_FLOW.md",
+    "evidence": "reviews/evidence/CORE_FLOW.json",
+    "worker": "5a857656-3807-4fb5-84a5-70b6b49517ee",
+    "api": "workbookcare-api-beta-00014-nah",
+    "full_regression": {
+      "web": 91,
+      "worker": 16,
+      "api": 231,
+      "ruff": "PASS",
+      "m4_exact": 36,
+      "exit_code": 0,
+      "quality_decision": "CONDITIONAL_GO_EXISTING_WAIVER_UNCHANGED"
+    },
+    "final_web": {
+      "tests": 95,
+      "files": 22,
+      "typecheck": "PASS",
+      "build": "PASS",
+      "exit_code": 0
+    },
+    "actual_downloads": 8,
+    "actual_downloaded_xlsx_opened_in_excel": 5,
+    "viewport_widths": [
+      1440,
+      1024,
+      390,
+      412
+    ],
+    "payment_mode": "OFF",
+    "commerce_ready": false,
+    "owner_acceptance": "PENDING",
+    "next_unit_approved": false,
+    "execution_state": "STOPPED_AWAITING_OWNER"
+  },
+  "source_hashes_before_core_flow": {
+    "apps/web/src/App.tsx": "c50d3562a81e1cbf26518347cae7ff85f56435d4337a2d6cf3e5c1cb5017c761",
+    "apps/web/src/components/Footer.tsx": "6b52ed6e3aa249e2c28eb320a1dce7c2299cba4e4b610dbbf9d1dd8b0ba34b83",
+    "apps/web/src/components/StaticSections.tsx": "2cf092911b6a4abc8feea2c993cf92f59ce7bb6db2ab30e511b1f0dcaec3d044",
+    "apps/web/src/components/LegalPage.tsx": "167914eb0e2e6d8fbea21bed7fba967eb18c3de0c07eecc73b9fad78522fcd0e",
+    "apps/web/src/components/M25ResultsPanel.tsx": "2583154b12a80f2b05628bc70376ba43faac9797e59b625bd1b6b80ca4d9c201",
+    "apps/web/src/components/DeliveryWorkspace.tsx": "d7b6a08beb6ce3a5c019d55c0598a3185cc83de6b8ca20e814649240cdb3cda3"
+  },
+  "limitations_before_core_flow": [
+    "Official PG sandbox authorization/SDK checkout/provider return/webhook/cancel not connected or run; test account selection unanswered. LOCAL_CONTRACT is only a private receipt state simulation.",
+    "D02-D08 existing protected beta deployment and hosted screen verification NOT_RUN: Docker daemon still times out after12s; restart question unanswered because other containers may be affected.",
+    "JDK17/POI Linux image packaging, Linux resource enforcement, source OOXML patch/static-scan hard OS deadline, maximum concurrent/combined workload need deployment-readiness work.",
+    "Durable commerce ledger, legal retention/refund/price/tax/support wording and owner release decision PENDING; current15min input/result and24h synthetic ledger are not approved commercial retention.",
+    "M3 real user observations and M3.5 purchase evidence PENDING/DEFERRED; synthetic success is not all-file accuracy or market evidence.",
+    "Remote push, production/anonymous release, invitations, real customer files/payment/refund, new paid resources and remaining H2/H3 checks NOT_RUN as out of scope."
+  ],
+  "core_flow_evidence": {
+    "CORE_FLOW.json": "5381d2581ee206abfb86a2f5b42fa6de8bb8670c53a1a09f6f8077014fcef8f9"
   }
 }

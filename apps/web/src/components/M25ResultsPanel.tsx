@@ -1,3 +1,5 @@
+import type { ReviewSelection } from '../lib/repairReview';
+import { ReviewChoice } from './RepairReview';
 import { useRef, useState } from 'react';
 import {
   AlertOctagon,
@@ -35,6 +37,7 @@ import { findingCounts } from '../lib/findingCounts';
 import { diagnosisCsvArtifact, displayedProducts } from '../lib/products';
 
 interface ResultsPanelProps {
+  reviewSelection?: ReviewSelection;
   result: ScanResult;
   formulaAudit?: IntegratedFormulaAudit;
   isDemo: boolean;
@@ -286,6 +289,7 @@ export function M25ResultsPanel(props: ResultsPanelProps) {
 
 function ResultsContent({
   result,
+  reviewSelection,
   formulaAudit,
   isDemo,
   statuses = {},
@@ -442,6 +446,8 @@ function ResultsContent({
           <h2 id="results-title">{resultHeadline}</h2>
           <p className="diagnosis-breakdown">구조 위험 {structureCounts.total_detected}건 · 수식 검토 후보 {auditState?.complete ? `${candidates.length}건` : '확인 미완료'}</p>
         </div><button className="button button--ghost" type="button" onClick={onReset}><RotateCcw size={17}/>다른 파일 검사</button></div>
+        <p className="diagnosis-main-summary">{findingTypes.length}개 문제 유형 · {counts.total_detected}개 확인 위치 · 우선 확인 {allFindings.filter(f => f.severity !== 'info').length}개 반환 상세</p>
+        {reviewSelection && <a className="button button--primary" href="#repair-review">수정 검토 선택 {reviewSelection.findings.length}개 · 다음 단계</a>}
         <UnifiedDiagnosisStatus audit={formulaAudit} truncated={workbook.scan_truncated} compact />
         {counts.total_detected===0 && !formulaAudit.busy && <aside className="zero-findings-note" role="note" aria-label="발견 0건 해석">
           <strong>계산 결과와 업무적 정확성을 보장하지 않습니다.</strong>
@@ -456,11 +462,11 @@ function ResultsContent({
           <div className="panel-heading"><h3 id="all-findings-title">문제 유형별 확인</h3><span>{new Set(allFindings.map(f=>f.rule_code)).size}개 유형</span></div>
           <p className="diagnosis-reading-guide">유형을 펼쳐 공통 설명을 읽고, 필요한 위치를 선택해 해당 셀의 근거를 확인하세요.</p>
           <p className="finding-coverage">전체 발견 {counts.total_detected}건 · 반환 상세 {counts.returned_details}건 · 상세 생략 {counts.omitted_details}건 · 필터 표시 {visibleFindings.length}건</p>
-          <details className="diagnosis-filters"><summary>필터 및 전체 항목 표{filtersActive ? ' · 필터 적용 중' : ''}</summary>
-            <fieldset className="finding-view-switch"><legend>결과 보기 방식</legend>
+          <fieldset className="finding-view-switch"><legend>결과 보기 방식</legend>
               <label><input type="radio" name="finding-view" checked={viewMode==='groups'} onChange={()=>setViewMode('groups')}/>유형별 보기</label>
               <label><input type="radio" name="finding-view" checked={viewMode==='table'} onChange={()=>setViewMode('table')}/>전체 항목 표</label>
             </fieldset>
+          <details className="diagnosis-filters"><summary>필터 및 전체 항목 표{filtersActive ? ' · 필터 적용 중' : ''}</summary>
             <fieldset className="finding-filters"><legend>찾아볼 항목 선택</legend><div className="finding-filters__controls">
               <label><span>검사 종류</span><select aria-label="검사 종류" value={sourceFilter} onChange={event=>setSourceFilter(event.target.value as typeof sourceFilter)}>
                 <option value="all">모든 검사 항목</option><option value="structure">구조 위험</option><option value="formula">수식 검토 후보</option></select></label>
@@ -474,7 +480,7 @@ function ResultsContent({
             </div><div className="finding-filters__footer"><p>필터는 표시만 바꿉니다. 확인함은 개인 처리 상태이며 변경 승인이 아닙니다.</p>
               <button className="button button--outline button--small" type="button" disabled={!filtersActive} onClick={resetFilters}>필터 초기화</button></div></fieldset>
           </details>
-          {visibleFindings.length>0 ? <ProgressiveFindingViews findings={visibleFindings} allFindings={allFindings} mode={viewMode} statuses={viewStatuses}
+          {visibleFindings.length>0 ? <ProgressiveFindingViews findings={visibleFindings} allFindings={allFindings} mode={viewMode} statuses={viewStatuses} reviewSelection={reviewSelection}
             categoryLabel={finding=>formulaEntry(finding)?'수식 검토 후보':'구조 위험'}
             onStatusChange={(finding,status)=>{updateStatus(finding,status);if(statusFilter!=='all'&&statusFilter!==status)statusFilterRef.current?.focus();}}
             onReviewGroup={findings=>{if(statusFilter!=='all'&&statusFilter!=='REVIEWED')statusFilterRef.current?.focus();for(const f of findings)updateStatus(f,'REVIEWED');}}/>
@@ -673,14 +679,14 @@ function ResultsContent({
                   for (const finding of findings) onStatusChange(findingIdentity(finding), 'REVIEWED');
                 }}
                 renderFinding={(finding, sharedGuidance) => (
-                  <FindingCard key={findingIdentity(finding)} finding={finding} sharedGuidance={sharedGuidance}
+                  <div key={findingIdentity(finding)}><FindingCard finding={finding} sharedGuidance={sharedGuidance}
                     status={statuses[findingIdentity(finding)] ?? 'UNREVIEWED'}
                     onStatusChange={(status) => {
                       onStatusChange(findingIdentity(finding), status);
                       if (statusFilter !== 'all' && statusFilter !== status) statusFilterRef.current?.focus();
                     }}
                     feedbackRepository={feedbackRepository} scannerVersion={result.scanner_version}
-                  />
+                  />{reviewSelection && <ReviewChoice finding={finding} selection={reviewSelection}/>}</div>
                 )}
               />
             ) : result.findings.length > 0 ? (

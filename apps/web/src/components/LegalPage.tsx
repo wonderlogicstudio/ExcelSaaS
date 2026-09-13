@@ -3,6 +3,7 @@ import { ArrowLeft, FileSearch, ShieldCheck } from 'lucide-react';
 type LegalPageKind = 'privacy' | 'terms';
 
 interface LegalPageProps {
+  embedded?: boolean;
   kind: LegalPageKind;
 }
 
@@ -129,10 +130,11 @@ function BetaNotice() {
   );
 }
 
-export function LegalPage({ kind }: LegalPageProps) {
+export function LegalPage({ kind, embedded = false }: LegalPageProps) {
+  const Container = embedded ? 'div' : 'main';
   const title = kind === 'privacy' ? '개인정보 처리 안내' : '이용 안내 및 Beta Notice';
   return (
-    <main className="legal-page">
+    <Container className="legal-page">
       <div className="shell legal-page__inner">
         <a className="legal-page__back" href="/">
           <ArrowLeft size={17} /> 서비스로 돌아가기
@@ -146,6 +148,6 @@ export function LegalPage({ kind }: LegalPageProps) {
           {kind === 'privacy' ? <PrivacyDraft /> : <BetaNotice />}
         </article>
       </div>
-    </main>
+    </Container>
   );
 }

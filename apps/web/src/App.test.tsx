@@ -9,23 +9,13 @@ describe('WorkbookCare landing page', () => {
     vi.useRealTimers();
   });
 
-  it('explains the concrete scan scope and exposes the primary CTA', () => {
+  it('centers the home on free diagnosis and the approved separate-copy journey', () => {
     render(<App />);
-
-    expect(
-      screen.getByRole('heading', { name: /문제를 찾고, 수정 방향을 정리하세요/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: /문제를 찾고, 수정 여부를 결정하세요/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: /답변보다, 수정 판단의 근거를 확인하세요/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole('heading', { name: /파일은 건드리지 않고 확인합니다/i }),
-    ).toBeInTheDocument();
-    expect(screen.getAllByRole('button', { name: /무료.*진단/i }).length).toBeGreaterThan(0);
-    expect(screen.getByText('원본 파일 변경 없음')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Excel 문제를 확인하고, 승인한 변경만 반영하세요/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '테스트용 파일 무료 진단' })).toBeInTheDocument();
+    expect(screen.getByText('원본 파일 변경 없음')).toBeVisible();
+    expect(screen.queryByRole('heading', { name: '서비스 범위와 현재 상태' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: '두 자료의 차이를 확인하세요.' })).not.toBeInTheDocument();
   });
 
   it('moves the free-diagnosis CTA to the visible upload card', () => {
@@ -38,22 +28,13 @@ describe('WorkbookCare landing page', () => {
     scrollIntoView.mockRestore();
   });
 
-  it('maps each header menu item to its matching titled section', () => {
+  it('maps the five primary menus to distinct service pages', () => {
     render(<App />);
     const navigation = screen.getByRole('navigation', { name: '주요 메뉴' });
-    const menuDestinations = [
-      ['무료 진단', '#free-diagnosis'],
-      ['정밀 검증', '#precision-verification'],
-      ['자동화 의뢰', '#automation-consultation'],
-      ['파일 처리 원칙', '#file-handling-principles'],
-      ['FAQ', '#faq'],
-    ];
-
-    for (const [label, href] of menuDestinations) {
-      const link = navigation.querySelector(`a[href="${href}"]`);
-      expect(link).toHaveTextContent(label);
-      expect(document.querySelector(href)?.querySelector('h1, h2')).not.toBeNull();
+    for (const [label, href] of [['무료 진단', '/'], ['정밀 검증', '/precision-verification'], ['비교·대사', '/compare'], ['업무 자동화', '/automation'], ['도움말', '/help']]) {
+      expect(navigation.querySelector(`a[href="${href}"]`)).toHaveTextContent(label);
     }
+    expect(navigation.querySelectorAll('a')).toHaveLength(5);
   });
 
   it('runs the sample flow and displays the beta price range and planned verification status', async () => {

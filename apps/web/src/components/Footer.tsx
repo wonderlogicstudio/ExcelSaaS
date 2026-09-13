@@ -9,8 +9,9 @@ export function Footer({deliveryEnabled=false}:{deliveryEnabled?:boolean}) {
           <p>{deliveryEnabled?'WorkbookCare 보호 베타 · 무료 진단과 등록된 합성 샘플의 비교·승인 납품을 시험합니다. 일반 구매와 실제 결제는 제공하지 않습니다.':'WorkbookCare는 무료 정적 진단과 정밀 검증 안내를 검증하는 베타 프로토타입입니다. 결제와 실제 수정은 제공하지 않습니다.'}</p>
         </div>
         <div className="site-footer__links">
-          <a href="#file-handling-principles">파일 처리 원칙</a>
-          <a href="#faq">FAQ</a>
+          <a href="/help#file-handling-principles">파일 처리 원칙</a>
+          <a href="/help#faq">FAQ</a>
+          {deliveryEnabled && <a href="/orders">베타 주문 확인</a>}
           <a href="/privacy">개인정보 처리 안내</a>
           <a href="/terms">Beta Notice</a>
           <span>© 2026 WorkbookCare</span>

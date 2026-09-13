@@ -1,3 +1,15 @@
+# STOPPED — Core product flow / IA owner review
+
+2026-09-13 승인된 IA 후속 구현·전체 회귀·실제 보호 베타 화면/예상 값·다운로드/Excel 검증 완료. [17항목 review](delivery-v3_2/reviews/CORE_FLOW.md), [사용자 확인 행동](delivery-v3_2/owner_action.md). IA ENGINEERING_VERIFIED_AWAITING_OWNER, D08 전체 PARTIAL. 다음 한 단위는 일반 사용자용 지원 범위 → 의뢰 범위·견적 연결 제안만; D09/다음 단위 자동 실행 금지. 아래 ACTIVE/STOPPED 항목은 역사 기록이다.
+
+---
+
+# ACTIVE APPROVED — Core product flow / IA follow-up
+
+Latest owner attachment approves implementation of the main diagnosis-to-approval delivery flow and separate precision/comparison/automation pages. Scope and acceptance: [51_CORE_PRODUCT_FLOW.md](51_CORE_PRODUCT_FLOW.md). Existing beta deployment authorization applies; no remote push, new commerce, engine, rules or resources. Preserve all prior records and fixed expected inputs. Complete actual beta UI + full regression, selective local commit and stop. Historical milestones below are preserved.
+
+---
+
 # STOPPED AFTER D08 — complex synthetic acceptance verified
 
 2026-09-13 owner-requested complex synthetic follow-up complete: seven XLSX inputs/two CSVs/frozen independent expected workbook+JSON; local12 regression cases and actual Access-beta13 screen checks,13 downloads,8 downloaded XLSX reopened in installed Excel. Full web78/Worker16/API231/M4exact36 exit0. Only fixed synthetic allowlists changed; private API00014-nah, unchanged Worker521ad0aa/Gateway. See delivery-v3_2/reviews/D08.md and owner_action.md. D08 overall PARTIAL: PG/durable commerce/concurrency/all combined limits/commercial gates remain. No D09, remote push or automatic next unit. Next proposed single unit: bounded concurrent-request/cancellation/retry verification with these fixed inputs. Older ACTIVE/STOPPED headings below are historical.

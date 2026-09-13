@@ -1,3 +1,5 @@
+import { reviewKey, type ReviewSelection } from '../lib/repairReview';
+import { ReviewChoice } from './RepairReview';
 import type { Finding, FindingUserStatus } from '../types';
 import { findingIdentity } from '../lib/revalidation';
 import { userStatusLabel } from '../lib/diagnosisCsv';
@@ -45,6 +47,7 @@ function EvidenceList({ items }: { items: Evidence[] }) {
 }
 
 interface Props {
+  reviewSelection?: ReviewSelection;
   findings: Finding[]; allFindings: Finding[]; mode: 'groups' | 'table';
   statuses: Record<string, FindingUserStatus>;
   categoryLabel: (finding: Finding) => string;
@@ -56,7 +59,7 @@ const severityLabels = { critical: '중요', warning: '주의', info: '참고' }
 const groupTitle = (f: Finding) => f.rule_code === 'FORMULA_PATTERN_GAP' ? '반복 수식의 누락·상수 대체 후보'
   : f.rule_code === 'FORMULA_PATTERN_OUTLIER' ? '주변 수식과 다른 패턴 후보' : f.title;
 
-export function ProgressiveFindingViews({ findings, allFindings, mode, statuses, categoryLabel, onStatusChange, onReviewGroup }: Props) {
+export function ProgressiveFindingViews({ findings, allFindings, mode, statuses, categoryLabel, onStatusChange, onReviewGroup, reviewSelection }: Props) {
   const groups = new Map<string, Finding[]>();
   for (const f of findings) groups.set(f.rule_code, [...(groups.get(f.rule_code) ?? []), f]);
   const commonByRule = new Map([...groups.keys()].map(rule => [rule, commonEvidence(allFindings.filter(f=>f.rule_code===rule))]));
@@ -70,8 +73,10 @@ export function ProgressiveFindingViews({ findings, allFindings, mode, statuses,
         <span>{userStatusLabel[status]}</span><span aria-hidden="true">위치 근거 보기</span>
       </summary>
       <div className="diagnosis-cell__details">
-        <EvidenceList items={specific} />
+        <EvidenceList items={specific.filter(item => !item.specific)} />
+        <details className="diagnosis-technical"><summary>기술 상세</summary><p>규칙 {finding.rule_code} · {finding.guidance?.evidence_grade ?? '탐지 근거 참고'}</p><EvidenceList items={specific.filter(item => item.specific)}/></details>
         {!specific.length && <p>이 위치에 위의 유형 설명이 적용됩니다.</p>}
+        {reviewSelection && <ReviewChoice finding={finding} selection={reviewSelection}/>}
         <label className="finding__status-control"><span>사용자 처리 상태</span>
           <select aria-label={`${finding.rule_code} ${finding.sheet ?? ''} ${finding.cell ?? ''} 사용자 처리 상태`} value={status}
             onChange={event => onStatusChange(finding, event.target.value as FindingUserStatus)}>
@@ -102,12 +107,13 @@ export function ProgressiveFindingViews({ findings, allFindings, mode, statuses,
           <span className="diagnosis-source">{categoryLabel(leaves[0])}</span>
         </summary>
         <div className="diagnosis-type__body">
-          <code>{rule}</code><SharedEvidence items={common} />
+          <SharedEvidence items={common} />
           <div className="diagnosis-type__locations-heading"><h5>위치별 근거</h5>
+            {reviewSelection && <button type="button" className="button button--outline button--small" disabled={reviewSelection.locked || leaves.every(f => reviewSelection.findings.some(selected => reviewKey(selected) === reviewKey(f)))} onClick={() => { for (const f of leaves) if (!reviewSelection.findings.some(selected => reviewKey(selected) === reviewKey(f))) reviewSelection.toggle(f); }}>표시된 {leaves.length}개 수정 검토 선택</button>}
             <button className="button button--outline button--small" type="button" disabled={leaves.every(f=>statuses[findingIdentity(f)]==='REVIEWED')}
               onClick={()=>onReviewGroup(leaves)}>표시된 {leaves.length}개 확인함</button>
           </div>
-          <div className="diagnosis-cell-list">{leaves.map(f => cell(f,common))}</div>
+          <div className="diagnosis-cell-list">{[...new Set(leaves.map(f => f.sheet ?? '통합문서'))].map(sheet => <section className="diagnosis-sheet" key={sheet} aria-label={`${sheet} 위치`}><h5>{sheet} · {leaves.filter(f => (f.sheet ?? '통합문서') === sheet).length}개 위치</h5>{leaves.filter(f => (f.sheet ?? '통합문서') === sheet).map(f => cell(f,common))}</section>)}</div>
         </div>
       </details>
     </section>;

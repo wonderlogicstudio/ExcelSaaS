@@ -1,0 +1,2143 @@
+{
+  "kind": "CORE_PRODUCT_FLOW_ACTUAL_IMPLEMENTATION_AND_BETA_ACCEPTANCE",
+  "date": "2026-09-13",
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "base_commit": "297c57a55561d5ca7fdc62566280c3d3882d6a0d",
+  "source_sha256": {
+    "apps/web/src/App.tsx": "98114e15e76a7360d1eb2676d1a910c274d0a4eff5076632cacf395d734d9d3c",
+    "apps/web/src/App.test.tsx": "7a506b23eae435538ba69abe5e37214243074989694fdcc9e05c94f012c250de",
+    "apps/web/src/App.navigation.test.tsx": "d842fcb7cb77738b37f2df94fdb6ff1952972b851b20a0dd7dc3d141cb74be35",
+    "apps/web/src/main.tsx": "bbb84ab5dcbc64c2f66afbe70c89bb21c594b5251a816f9978660f9bb988489e",
+    "apps/web/src/product-flow.css": "63f7b3ea9675911dab1e7fc7024fa3c073eca835ef8aab26074d3317a7168341",
+    "apps/web/src/components/Header.tsx": "b4b4d299084c449ddcab00f6d4048174ae30fcef1e2b0fb030f6e449b98bfe97",
+    "apps/web/src/components/Brand.tsx": "fc72fdc81ed5298829bcbe650b62bb3a9fbb038e4f3e846a7825eda8e3830935",
+    "apps/web/src/components/Footer.tsx": "af1f9088b2a805a046d77fd4012c783355c943736285a1b5101e3479dc50b2c8",
+    "apps/web/src/components/ProductPages.tsx": "5a16e6d4ffbc09279813ce5ba5b485e52a7c9fd50e262dc026fcb9803943398e",
+    "apps/web/src/components/StaticSections.tsx": "253c9488a95b177453ebfd07d0711fd255e8c5f48d0bd1f63332129e5362f4d7",
+    "apps/web/src/components/LegalPage.tsx": "df6780ead07877b509b3841326810fd356f4790c0b5e30ee826f9163666c12b4",
+    "apps/web/src/components/M25ResultsPanel.tsx": "3a43a4393e21464737d7d2a43dc7b7692a533665442c9664a0ccfca8e1140f22",
+    "apps/web/src/components/ProgressiveFindingViews.tsx": "09b87c64d15ab6b2625b4cef9c0d83e9788212f36e40ead4d3de6df08b3f292c",
+    "apps/web/src/components/RepairReview.tsx": "b12f55ee5fbcf022d6e22b9b12b229230c645ac41ed0643cc05ea3d7e05398ff",
+    "apps/web/src/components/RepairReview.test.tsx": "3b264faa8253b43d4b80178d519ba2f4de89d4f572429bf4912cd9a9876e25e2",
+    "apps/web/src/components/DeliveryWorkspace.tsx": "d88b9417adff96d5360d3ed6d558b1e9777974b4300c261fbd6ef96f193bd529",
+    "apps/web/src/lib/navigation.ts": "02da93e563c33dd301fcf5671f2d304e5b65edea317905847632d6ef490208c1",
+    "apps/web/src/lib/repairReview.ts": "e2364113865b9cea77b9d64f3240bbda433e72fee65aefe1ba399b7f18402b94"
+  },
+  "changed_source_files": [
+    "apps/web/src/App.tsx",
+    "apps/web/src/App.test.tsx",
+    "apps/web/src/App.navigation.test.tsx",
+    "apps/web/src/main.tsx",
+    "apps/web/src/product-flow.css",
+    "apps/web/src/components/Header.tsx",
+    "apps/web/src/components/Brand.tsx",
+    "apps/web/src/components/Footer.tsx",
+    "apps/web/src/components/ProductPages.tsx",
+    "apps/web/src/components/StaticSections.tsx",
+    "apps/web/src/components/LegalPage.tsx",
+    "apps/web/src/components/M25ResultsPanel.tsx",
+    "apps/web/src/components/ProgressiveFindingViews.tsx",
+    "apps/web/src/components/RepairReview.tsx",
+    "apps/web/src/components/RepairReview.test.tsx",
+    "apps/web/src/components/DeliveryWorkspace.tsx",
+    "apps/web/src/lib/navigation.ts",
+    "apps/web/src/lib/repairReview.ts"
+  ],
+  "review_document": "docs/delivery-v3_2/reviews/CORE_FLOW.md",
+  "reused": [
+    "unified free structure/M4 findings, score, filters, status, CSV and manual revalidation",
+    "existing RP01/RP02 server preflight/plan/exact approval/patch/revalidation/3artifacts",
+    "existing independent comparison/2reports and owner checked temporary recovery",
+    "H3 private/default off feedback, Access/IAM/private R2/KV/HMAC"
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web",
+      "phase": "baseline",
+      "exit_code": 0,
+      "tests_passed": 78,
+      "evidence": "tool result; no separate baseline log"
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web",
+      "phase": "initial implementation",
+      "exit_code": 1,
+      "reason": "missing MousePointerClick import; fixed before regression"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/ia-main-flow-escape-after.log",
+      "sha256": "fd567fa786f0534052bef129fd58dbbfecd288f552a0008dbf6746329020bf14",
+      "exit_code": 0,
+      "summaries": [
+        "Test Files  22 passed (22)",
+        "Tests  95 passed (95)"
+      ]
+    },
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- src/App.navigation.test.tsx",
+      "log": "artifacts/verification/ia-main-flow-escape-before.log",
+      "sha256": "f3437ffcc7ccb6a4fbe28a9b1fd5d3428d328f06f6d0c3efc8fc70e68395ae31",
+      "exit_code": 1,
+      "summaries": [
+        "Test Files  1 failed (1)",
+        "Tests  1 failed | 13 passed (14)"
+      ]
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify-m4-release.ps1 -AcceptProductOwnerFixtureWaiver",
+      "log": "artifacts/verification/ia-main-flow-full.log",
+      "sha256": "e6f0b5650547262acea1684b4b1d72449739c331378c799a0a27e425920fdc9c",
+      "exit_code": 0,
+      "summaries": [
+        "CONDITIONAL_GO",
+        "Test Files  21 passed (21)",
+        "Tests  91 passed (91)",
+        "231 passed, 1 warning"
+      ]
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/ia-main-flow-web-accessibility.log",
+      "sha256": "71550e30738a1de35d115117e2b75ad8a548d7cdb3f7076ff874c1a0fe177c0e",
+      "exit_code": 0,
+      "summaries": [
+        "Test Files  22 passed (22)",
+        "Tests  93 passed (93)"
+      ]
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/ia-main-flow-web-bulk.log",
+      "sha256": "3bf1d24181fb10fbbe6944e0dc1889da634cea2ef71a325fb8f63069038fe274",
+      "exit_code": 0,
+      "summaries": [
+        "Test Files  22 passed (22)",
+        "Tests  93 passed (93)"
+      ]
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/ia-main-flow-web-entry.log",
+      "sha256": "80b235ce2cfa7ace82cf8f9c680f9a4b9f3f2075ed9e79f6b0508e4a569ecc1e",
+      "exit_code": 0,
+      "summaries": [
+        "Test Files  22 passed (22)",
+        "Tests  93 passed (93)"
+      ]
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/ia-main-flow-web-final.log",
+      "sha256": "32ea747ec96420564074b2bfb04d3a8a373273413e018615c9799dda53cafa6d",
+      "exit_code": 0,
+      "summaries": [
+        "Test Files  22 passed (22)",
+        "Tests  93 passed (93)"
+      ]
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/ia-main-flow-web-first.log",
+      "sha256": "a7086f1e08e2e32623be6ed2893ba6853f6f976ce2ea43a92145b2d710c979b1",
+      "exit_code": 1,
+      "summaries": [
+        "Test Files  1 failed | 20 passed (21)",
+        "Tests  1 failed | 90 passed (91)"
+      ]
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/ia-main-flow-web-mobile.log",
+      "sha256": "de652549fde9499674819520b32f6e3ab71d8061a0faf0215a3ea084aeb3ea24",
+      "exit_code": 0,
+      "summaries": [
+        "Test Files  22 passed (22)",
+        "Tests  93 passed (93)"
+      ]
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/ia-main-flow-web-release.log",
+      "sha256": "4823040f17db6fef2935ee716056bcc6d5ef7601c4e4657501f013942570d5d9",
+      "exit_code": 0,
+      "summaries": [
+        "Test Files  22 passed (22)",
+        "Tests  94 passed (94)"
+      ]
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/ia-main-flow-web-second.log",
+      "sha256": "36aba52fb24654d0ca1941e2207fbeda6de5320aac10049f452517b9d1a1283f",
+      "exit_code": 0,
+      "summaries": [
+        "Test Files  21 passed (21)",
+        "Tests  91 passed (91)"
+      ]
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/ia-main-flow-web-visual.log",
+      "sha256": "b50f5f5d272be4eb1a79878803cd38585b42075b506ad93ca807ea440e00eaf1",
+      "exit_code": 0,
+      "summaries": [
+        "Test Files  22 passed (22)",
+        "Tests  93 passed (93)"
+      ]
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\collect_complex_downloads.py begin RP01_SUBSET",
+      "exit_code": 0,
+      "kind": "actual_browser_download_collection"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\collect_complex_downloads.py collect RP01_SUBSET",
+      "exit_code": 0,
+      "kind": "actual_browser_download_collection"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\collect_complex_downloads.py begin RP02_ALL",
+      "exit_code": 0,
+      "kind": "actual_browser_download_collection"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\collect_complex_downloads.py collect RP02_ALL",
+      "exit_code": 0,
+      "kind": "actual_browser_download_collection"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\collect_complex_downloads.py begin comparison",
+      "exit_code": 0,
+      "kind": "actual_browser_download_collection"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\collect_complex_downloads.py collect comparison",
+      "exit_code": 0,
+      "kind": "actual_browser_download_collection"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\verify_complex_downloads.py",
+      "exit_code": 0,
+      "artifact": "artifacts/verification/ia-main-flow/download-validation.json"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\verify_complex_download_excel.ps1 -Mode repair",
+      "exit_code": 0,
+      "log": "artifacts/verification/ia-main-flow/native-repair.log"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\verify_complex_download_excel.ps1 -Mode comparison",
+      "exit_code": 0,
+      "log": "artifacts/verification/ia-main-flow/native-comparison.log"
+    },
+    {
+      "command": "python -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\preservation.py",
+      "exit_code": 0,
+      "artifact": "artifacts/verification/ia-main-flow/preservation.json"
+    },
+    {
+      "command": "python -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v5.py baseline",
+      "exit_code": 1,
+      "reason": "global Python lacks httpx; no deployment action occurred; retried with existing project venv"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release.py baseline",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release.py build",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release.py upload",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release.py deploy",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v2.py baseline",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v2.py build",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v2.py upload",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v2.py deploy",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v3.py baseline",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v3.py build",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v3.py upload",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v3.py deploy",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v4.py baseline",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v4.py build",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v4.py upload",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v4.py deploy",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v5.py baseline",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v5.py build",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v5.py upload",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    },
+    {
+      "command": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v5.py deploy",
+      "exit_code": 0,
+      "provider_commands": "release stage commands recorded separately"
+    }
+  ],
+  "full_regression": {
+    "web": 91,
+    "worker": 16,
+    "api": 231,
+    "ruff": "PASS",
+    "m4_exact": 36,
+    "exit_code": 0,
+    "quality_decision": "CONDITIONAL_GO_EXISTING_WAIVER_UNCHANGED"
+  },
+  "final_web": {
+    "tests": 95,
+    "files": 22,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "exit_code": 0
+  },
+  "ui_checks": [
+    {
+      "id": "complex-mixed-16-exact-locations",
+      "status": "PASS",
+      "width": 390,
+      "count": 16
+    },
+    {
+      "id": "back-retains-cell-status-selection-disclosure",
+      "status": "PASS",
+      "selected": 1,
+      "reviewed": "온라인 F22",
+      "rows": 16
+    },
+    {
+      "id": "sheet-filter",
+      "status": "PASS",
+      "filtered": 5,
+      "total": 16
+    },
+    {
+      "id": "csv-filter-independent",
+      "status": "PASS",
+      "structureOnly": true
+    },
+    {
+      "id": "precision-refresh",
+      "status": "PASS"
+    },
+    {
+      "id": "normal-exceptions-zero-and-manual-revalidation",
+      "status": "PASS",
+      "expectedStructure": 0,
+      "expectedM4": 0
+    },
+    {
+      "id": "bulk-selection-and-exclude-invalidates-unfixed-draft",
+      "status": "PASS",
+      "selectedBefore": 8,
+      "selectedAfter": 4,
+      "targets": [
+        "B12",
+        "B24",
+        "B78",
+        "B111"
+      ],
+      "implicitConsent": false
+    },
+    {
+      "id": "preflight-selection-and-navigation-state",
+      "status": "PASS",
+      "targets": [
+        "B12",
+        "B24",
+        "B78",
+        "B111"
+      ],
+      "formulaCount": 602,
+      "indirectImpacts": 20,
+      "selectionDoesNotApprove": true
+    },
+    {
+      "id": "RP01_SUBSET-exact-plan",
+      "status": "PASS",
+      "patches": 4,
+      "indirectImpacts": 20,
+      "J130": 2029526,
+      "approvalInitiallyDisabled": true
+    },
+    {
+      "id": "RP01_SUBSET-three-files-ready",
+      "status": "PASS",
+      "width": 390,
+      "patches": 4,
+      "downloads": 3
+    },
+    {
+      "id": "RP02_ALL-exact-plan",
+      "status": "PASS",
+      "targets": [
+        "F31",
+        "F64",
+        "F107"
+      ],
+      "values": [
+        5232,
+        3551,
+        7800
+      ],
+      "J130": 937923,
+      "uniqueImpacts": 16,
+      "approvalInitiallyDisabled": true,
+      "helperCorrection": "Read direct dd as well as indirect article; no oracle/product change"
+    },
+    {
+      "id": "RP02_ALL-three-files-ready",
+      "status": "PASS",
+      "width": 1024,
+      "patches": 3,
+      "downloadsRequested": 3
+    },
+    {
+      "id": "comparison-oracle",
+      "status": "PASS",
+      "groups": 464,
+      "rowsA": 448,
+      "rowsB": 440,
+      "counts": {
+        "MATCHED": 350,
+        "AMOUNT_DIFF": 41,
+        "ONLY_A": 23,
+        "ONLY_B": 23,
+        "AMBIGUOUS": 14,
+        "INPUT_ERROR": 13
+      },
+      "knownA": "9007199260823885",
+      "knownB": "9007199260814989",
+      "bigIntegerDelta": "1",
+      "width": 412
+    },
+    {
+      "id": "automation-412",
+      "status": "PASS",
+      "noPurchase": true,
+      "height": 915,
+      "overflow": false,
+      "width": 412
+    },
+    {
+      "id": "comparison-refresh-recovery",
+      "status": "PASS",
+      "entryActionRequired": true,
+      "recoveredGroups": 464
+    },
+    {
+      "id": "home-1024",
+      "status": "PASS",
+      "width": 1024,
+      "overflow": false
+    },
+    {
+      "id": "home-and-precision-1440",
+      "status": "PASS",
+      "width": 1440,
+      "overflow": false
+    },
+    {
+      "id": "final-v4-complex-mixed-all16-visible-locations",
+      "status": "PASS",
+      "worker": "09e3e200-f7d0-4d00-9faf-dae30da47eef",
+      "count": 16,
+      "types": 3,
+      "exact": [
+        {
+          "location": "채널요약 · B10",
+          "rule": "FORMULA_REF_ERROR"
+        },
+        {
+          "location": "온라인 · F22",
+          "rule": "FORMULA_PATTERN_OUTLIER"
+        },
+        {
+          "location": "온라인 · G76",
+          "rule": "FORMULA_PATTERN_OUTLIER"
+        },
+        {
+          "location": "온라인 · H118",
+          "rule": "FORMULA_PATTERN_OUTLIER"
+        },
+        {
+          "location": "매장 · F22",
+          "rule": "FORMULA_PATTERN_OUTLIER"
+        },
+        {
+          "location": "매장 · G76",
+          "rule": "FORMULA_PATTERN_OUTLIER"
+        },
+        {
+          "location": "매장 · H118",
+          "rule": "FORMULA_PATTERN_OUTLIER"
+        },
+        {
+          "location": "반품 · F22",
+          "rule": "FORMULA_PATTERN_OUTLIER"
+        },
+        {
+          "location": "반품 · G76",
+          "rule": "FORMULA_PATTERN_OUTLIER"
+        },
+        {
+          "location": "반품 · H118",
+          "rule": "FORMULA_PATTERN_OUTLIER"
+        },
+        {
+          "location": "온라인 · I95",
+          "rule": "FORMULA_PATTERN_GAP"
+        },
+        {
+          "location": "온라인 · I145",
+          "rule": "FORMULA_PATTERN_GAP"
+        },
+        {
+          "location": "매장 · I95",
+          "rule": "FORMULA_PATTERN_GAP"
+        },
+        {
+          "location": "매장 · I145",
+          "rule": "FORMULA_PATTERN_GAP"
+        },
+        {
+          "location": "반품 · I95",
+          "rule": "FORMULA_PATTERN_GAP"
+        },
+        {
+          "location": "반품 · I145",
+          "rule": "FORMULA_PATTERN_GAP"
+        }
+      ]
+    },
+    {
+      "id": "final-v4-mobile-detail",
+      "status": "PASS",
+      "width": 412,
+      "overflow": false,
+      "cell": "온라인 F22",
+      "reviewAndStatusSeparate": true
+    },
+    {
+      "id": "final-v5-menu-escape-toggle",
+      "status": "PASS",
+      "width": 390,
+      "expanded": "false",
+      "focus": "메뉴 열기"
+    },
+    {
+      "id": "final-v5-menu-escape-link",
+      "status": "PASS",
+      "width": 390,
+      "expanded": "false",
+      "focus": "메뉴 열기"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "artifacts/screenshots/core-flow/before-1440.jpg",
+      "sha256": "b3be4e220a4b15018fed4779b6b5e036ec844a9b62697b8170d864a56be63c08",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "before"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/attempt1-home-1440.jpg",
+      "sha256": "222c2a84af3e0c849a1ae86bb65d5d755aadaf5c4a301af48aadb8189d764235",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "failure_preserved"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/attempt2-automation-390.jpg",
+      "sha256": "ee4e3f4ceb9d52877081d1f9712bc3760c2492fe41cfe41b8957c830f502d038",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "failure_preserved"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/final-home-1440.jpg",
+      "sha256": "f5135af1ded05cad1fb1fd30710e2e24089598a0e7ce54849f54ee2c8b77f80a",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/final-home-1024.jpg",
+      "sha256": "4dbe722454968a5e24fbfe5365abe5c8b5df7f8dca7c4e12d66dc75ed7abccc8",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/final-precision-1440.jpg",
+      "sha256": "3493eb97da05b8a3b92e03755d95a5f745e7e119ab3acefe6dd59b9eac76dbb5",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/final-v5-home-390.jpg",
+      "sha256": "560fc3e8d3b598c332141189fce60ad59dfdcbb473d570e50b683ec95bc25a28",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v5"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/final-automation-412.jpg",
+      "sha256": "81b556c8b2b97f2210a60df8b2a0195ba6b6427ccec4d10b8cf70a4aefe1a8ce",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/finding-detail-390.jpg",
+      "sha256": "dc0ec166090ad8f3c2a4ab0106e5ebccf79ffab19b6f4986df868fb5b0b38604",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v2"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/all-items-390.jpg",
+      "sha256": "97b42adb7e2ae0c0340749580ba679645276779b48b6371c64528ea261f44fbf",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v2"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/normal-revalidation-390.jpg",
+      "sha256": "5856d881da1bccca49f5790a05916e65253d596db22ab1d234445d263482d9c8",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v2"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/review-selection-390.jpg",
+      "sha256": "11df63124832dac857cbf08b9990f31eda8d819b3ceafbcd10db12779f41f8e6",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/rp01-ready-390.jpg",
+      "sha256": "d188f272a7695c8233dec9e81182f201a8157eb33814c9699df35eddd2440b8e",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/rp02-ready-1024.jpg",
+      "sha256": "2099ced01d771370dd5444d5449e8563745d85edab60e1867ad42e34120ec8cd",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/compare-summary-1440.jpg",
+      "sha256": "259017a517973c3a4672656b2e4a6d4555c078090acfb0976e3508ef46a568a9",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/compare-big-detail-412.jpg",
+      "sha256": "0d8e6aeef9b4eb97f21897b51f01eb27761ab9638c944418c9b1e5e03a503f2c",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/final-detail-412.jpg",
+      "sha256": "7ee897b91471c9d30952fd31bd3ccf7b326e1008e5539227a958c43ef4550523",
+      "reviewed_visually": true,
+      "kind": "actual_beta_browser",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/native-RP01_SUBSET.png",
+      "sha256": "aec09be5869ed79de0f2b1768fe5f34552da56106eb946e16f27dcdb95f7eb58",
+      "reviewed_visually": true,
+      "kind": "installed_excel_export",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/native-RP02_ALL.png",
+      "sha256": "ffe190c9c83c6697e05f7630ad5fbb1515acf1972d6384901f35159f4d48f47e",
+      "reviewed_visually": true,
+      "kind": "installed_excel_export",
+      "stage": "v4"
+    },
+    {
+      "path": "artifacts/screenshots/core-flow/native-comparison.png",
+      "sha256": "382cddd5660650b441ecba02de192a0ef4fd2c520af9e8d5c93d177f6eecb694",
+      "reviewed_visually": true,
+      "kind": "installed_excel_export",
+      "stage": "v4"
+    }
+  ],
+  "actual_downloads": {
+    "RP01_SUBSET": {
+      "case": "RP01_SUBSET",
+      "actual_browser_downloads": [
+        {
+          "file": "RP01_SUBSET/changes_2b457d39-ec09-4a97-8f62-496921fab452.xlsx",
+          "sha256": "980af9f83dc356e9254b05f893ca80c7ad02e22392d493f26f0f13fbfa44edd8",
+          "bytes": 9818
+        },
+        {
+          "file": "RP01_SUBSET/verification_2b457d39-ec09-4a97-8f62-496921fab452.html",
+          "sha256": "7fa01134001be41d4352a9c23a06a91a21b4ae7e9fc07f5e30ea7016dc103e3d",
+          "bytes": 5881
+        },
+        {
+          "file": "RP01_SUBSET/workbookcare_repaired_2b457d39-ec09-4a97-8f62-496921fab452.xlsx",
+          "sha256": "4d2a7c0fd325c3b8dc69c3a04c179c8f6b2fe154672591f3cf2c677d947fa089",
+          "bytes": 18751
+        }
+      ]
+    },
+    "RP02_ALL": {
+      "case": "RP02_ALL",
+      "actual_browser_downloads": [
+        {
+          "file": "RP02_ALL/changes_37791835-7ea3-45a4-be0c-62b4c0a8427c.xlsx",
+          "sha256": "9dce4fb3030812ac4fbaa819b286b256c5afec968ddbef708526b9bcfcdb5fd0",
+          "bytes": 9575
+        },
+        {
+          "file": "RP02_ALL/verification_37791835-7ea3-45a4-be0c-62b4c0a8427c.html",
+          "sha256": "75107d63ec3c251237c0b8e6a9c85ecc322a0202e65a48ce0d353795d49350b5",
+          "bytes": 5315
+        },
+        {
+          "file": "RP02_ALL/workbookcare_repaired_37791835-7ea3-45a4-be0c-62b4c0a8427c.xlsx",
+          "sha256": "dd7384aa85f9eb7444a6040e8efee4c16c1a147f1f97bafb290fe0333b860d08",
+          "bytes": 18800
+        }
+      ]
+    },
+    "comparison": {
+      "case": "comparison",
+      "actual_browser_downloads": [
+        {
+          "file": "comparison/comparison_report_eca48ba3-78e7-483c-aff3-3c4fbd8844fe.xlsx",
+          "sha256": "ccf1daaa7d565b5576233ac97c4e9df88b41dd5c0c22c241fb5b2159566ea9be",
+          "bytes": 82565
+        },
+        {
+          "file": "comparison/comparison_verification_eca48ba3-78e7-483c-aff3-3c4fbd8844fe.html",
+          "sha256": "0e6b2fec2c08278b9197fd745787896984dcd41f0495800339134baed42ebac9",
+          "bytes": 250250
+        }
+      ]
+    }
+  },
+  "download_validation": {
+    "kind": "ACTUAL_BETA_DOWNLOADED_FILES_VS_FROZEN_ORACLE",
+    "status": "PASS",
+    "results": [
+      {
+        "case": "RP01_SUBSET",
+        "status": "PASS",
+        "cached_expected_values": 725,
+        "change_rows": 4,
+        "exact_html_impacts": 20,
+        "html_checks": 9,
+        "unchanged_zip_members": 7,
+        "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+      },
+      {
+        "case": "RP02_ALL",
+        "status": "PASS",
+        "cached_expected_values": 725,
+        "change_rows": 3,
+        "exact_html_impacts": 13,
+        "html_checks": 9,
+        "unchanged_zip_members": 7,
+        "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+      },
+      {
+        "case": "comparison",
+        "status": "PASS",
+        "all_source_rows": 888,
+        "report_is_literal_no_formulas_or_hyperlinks": true,
+        "html_no_executable_content": true,
+        "exact_html_source_classes_totals_and_hashes": true
+      }
+    ],
+    "all_frozen_inputs_unchanged": true,
+    "official_pg_verified": false
+  },
+  "installed_excel": [
+    {
+      "excel_build": 20326,
+      "official_pg_verified": false,
+      "excel_version": "16.0",
+      "kind": "ACTUAL_BETA_DOWNLOADS_REOPENED_IN_INSTALLED_EXCEL",
+      "results": [
+        {
+          "case": "RP01_SUBSET",
+          "sum_after": 2029526,
+          "download_unchanged": true,
+          "preserved_source_values": 854,
+          "native_calculated_cells": 725,
+          "status": "PASS",
+          "formula_checks": 602,
+          "sha256": "4d2a7c0fd325c3b8dc69c3a04c179c8f6b2fe154672591f3cf2c677d947fa089"
+        },
+        {
+          "patch_count": 4,
+          "status": "PASS",
+          "case": "RP01_SUBSET-changes",
+          "native_open": true
+        },
+        {
+          "case": "RP02_ALL",
+          "sum_after": 937923,
+          "download_unchanged": true,
+          "preserved_source_values": 858,
+          "native_calculated_cells": 725,
+          "status": "PASS",
+          "formula_checks": 605,
+          "sha256": "dd7384aa85f9eb7444a6040e8efee4c16c1a147f1f97bafb290fe0333b860d08"
+        },
+        {
+          "patch_count": 3,
+          "status": "PASS",
+          "case": "RP02_ALL-changes",
+          "native_open": true
+        }
+      ],
+      "status": "PASS"
+    },
+    {
+      "excel_build": 20326,
+      "official_pg_verified": false,
+      "excel_version": "16.0",
+      "kind": "ACTUAL_BETA_DOWNLOADS_REOPENED_IN_INSTALLED_EXCEL",
+      "results": [
+        {
+          "exact_big_delta": true,
+          "all_source_rows": 888,
+          "known_totals_checked": true,
+          "native_open": true,
+          "case": "comparison",
+          "all_classes_checked": true,
+          "status": "PASS"
+        }
+      ],
+      "status": "PASS"
+    }
+  ],
+  "preservation": {
+    "status": "PASS",
+    "owner_original_files": 83,
+    "previous_sample_files": 68,
+    "frozen_complex_files": 13
+  },
+  "release_stages": [
+    {
+      "stage": "release",
+      "baseline": {
+        "worker": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+        "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+        "api": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "spec_hash": "a8ae10eb87adfa08ad9163e442d7425e18e4ae298f2d4cb018ae46a43540c1bd",
+          "traffic_hash": "34174e4fb80de9a0e8a678ab0dc589fe295cc91917e4f1fc66baa1214c1357ff",
+          "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+        },
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "web": {
+        "flags": {
+          "VITE_PRODUCT_ENV": "hosted_beta",
+          "VITE_API_BASE_URL": "/api",
+          "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+          "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+          "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+          "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+          "VITE_DELIVERY_BETA_ENABLED": "true"
+        },
+        "assets": {
+          "apps/web/dist/index.html": "4ca3b77491da5b96677aae9cd303c43a2ce6791c7ead101962c46193762df14b",
+          "apps/web/dist/assets/index-BpNUwW2d.css": "2c8efac97d293a2bba3e24a889e604318a308e1db6570f9c6c47eede7718896b",
+          "apps/web/dist/assets/index-Ce8_A0aP.js": "d5c2269a04a1893ed012079a13c259776d6af6fd6e2be4c851d951b08736a16f"
+        }
+      },
+      "upload": {
+        "worker": "55e1fb56-93eb-4401-948b-fa62ca896ea4",
+        "all_bindings_equal": true
+      },
+      "live": {
+        "worker": "55e1fb56-93eb-4401-948b-fa62ca896ea4",
+        "rollback_worker": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+        "all_bindings_equal": true,
+        "api_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "commands": [
+        {
+          "phase": "baseline",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "wrangler versions view 521ad0aa-55f9-4606-b481-fc4861d8a60f --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag core-flow-ia --message Approved main flow and separate service pages; existing security boundaries",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions view 55e1fb56-93eb-4401-948b-fa62ca896ea4 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions view 55e1fb56-93eb-4401-948b-fa62ca896ea4 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions deploy 55e1fb56-93eb-4401-948b-fa62ca896ea4@100 --yes --message Approved core product flow IA",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "stage": "release-v2",
+      "baseline": {
+        "worker": "55e1fb56-93eb-4401-948b-fa62ca896ea4",
+        "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+        "api": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "spec_hash": "a8ae10eb87adfa08ad9163e442d7425e18e4ae298f2d4cb018ae46a43540c1bd",
+          "traffic_hash": "34174e4fb80de9a0e8a678ab0dc589fe295cc91917e4f1fc66baa1214c1357ff",
+          "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+        },
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "web": {
+        "flags": {
+          "VITE_PRODUCT_ENV": "hosted_beta",
+          "VITE_API_BASE_URL": "/api",
+          "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+          "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+          "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+          "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+          "VITE_DELIVERY_BETA_ENABLED": "true"
+        },
+        "assets": {
+          "apps/web/dist/index.html": "cfe59aaf0c6e71093bf8d0212ac2bf95450929d1b5bc940fc4f7d5c6d1b120c8",
+          "apps/web/dist/assets/index-c8gQ9o5G.css": "bbb3970e67ef33f99114a9978df2fb949d7901c0e4f4cd0d61f64a24085a3cd4",
+          "apps/web/dist/assets/index-PS3CJ_WA.js": "ad19b7e7133727abcaad518fabe9103d710ae2a489b6d118535ef59dda7331d7"
+        }
+      },
+      "upload": {
+        "worker": "cf430cd9-8175-4496-9c81-79878436dd08",
+        "all_bindings_equal": true
+      },
+      "live": {
+        "worker": "cf430cd9-8175-4496-9c81-79878436dd08",
+        "rollback_worker": "55e1fb56-93eb-4401-948b-fa62ca896ea4",
+        "all_bindings_equal": true,
+        "api_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "commands": [
+        {
+          "phase": "baseline",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "wrangler versions view 55e1fb56-93eb-4401-948b-fa62ca896ea4 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag core-flow-ia --message Approved main flow and separate service pages; existing security boundaries",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions view cf430cd9-8175-4496-9c81-79878436dd08 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions view cf430cd9-8175-4496-9c81-79878436dd08 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions deploy cf430cd9-8175-4496-9c81-79878436dd08@100 --yes --message Approved core product flow IA",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "stage": "release-v3",
+      "baseline": {
+        "worker": "cf430cd9-8175-4496-9c81-79878436dd08",
+        "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+        "api": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "spec_hash": "a8ae10eb87adfa08ad9163e442d7425e18e4ae298f2d4cb018ae46a43540c1bd",
+          "traffic_hash": "34174e4fb80de9a0e8a678ab0dc589fe295cc91917e4f1fc66baa1214c1357ff",
+          "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+        },
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "web": {
+        "flags": {
+          "VITE_PRODUCT_ENV": "hosted_beta",
+          "VITE_API_BASE_URL": "/api",
+          "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+          "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+          "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+          "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+          "VITE_DELIVERY_BETA_ENABLED": "true"
+        },
+        "assets": {
+          "apps/web/dist/index.html": "eea805f4f418b99eae1f365c15f5b81d7677eec4e2ce9afd31100a4fa5dbf230",
+          "apps/web/dist/assets/index-Dl3Jj3Ny.js": "de2ea941aa2a8f512cc656a136b705dc484771ef72870dec580129b893070698",
+          "apps/web/dist/assets/index-EJYzdMew.css": "f555e4e30232682ecaf8dd77c46ae8afa00b751a4801d68bdeafe5e0cef90072"
+        }
+      },
+      "upload": {
+        "worker": "8ba4f724-102e-4708-b6e4-aa49ce7ddc22",
+        "all_bindings_equal": true
+      },
+      "live": {
+        "worker": "8ba4f724-102e-4708-b6e4-aa49ce7ddc22",
+        "rollback_worker": "cf430cd9-8175-4496-9c81-79878436dd08",
+        "all_bindings_equal": true,
+        "api_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "commands": [
+        {
+          "phase": "baseline",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "wrangler versions view cf430cd9-8175-4496-9c81-79878436dd08 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag core-flow-ia --message Approved main flow and separate service pages; existing security boundaries",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions view 8ba4f724-102e-4708-b6e4-aa49ce7ddc22 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions view 8ba4f724-102e-4708-b6e4-aa49ce7ddc22 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions deploy 8ba4f724-102e-4708-b6e4-aa49ce7ddc22@100 --yes --message Approved core product flow IA",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "stage": "release-v4",
+      "baseline": {
+        "worker": "8ba4f724-102e-4708-b6e4-aa49ce7ddc22",
+        "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+        "api": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "spec_hash": "a8ae10eb87adfa08ad9163e442d7425e18e4ae298f2d4cb018ae46a43540c1bd",
+          "traffic_hash": "34174e4fb80de9a0e8a678ab0dc589fe295cc91917e4f1fc66baa1214c1357ff",
+          "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+        },
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "web": {
+        "flags": {
+          "VITE_PRODUCT_ENV": "hosted_beta",
+          "VITE_API_BASE_URL": "/api",
+          "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+          "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+          "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+          "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+          "VITE_DELIVERY_BETA_ENABLED": "true"
+        },
+        "assets": {
+          "apps/web/dist/index.html": "645b285bc322b6b966be322c46aea25b126a4b3e610b1c443bc77c4806b7fb39",
+          "apps/web/dist/assets/index-CdwbYYfr.js": "6e040d0d22ab1dc5ebcafe5f2ccb7edf47914310e3d373a4df6d3b1eddfbcfec",
+          "apps/web/dist/assets/index-Cjq8kp3N.css": "37e5fc3d5365a090e78221455cd8bd4de336e66ca916aa7eeffe7bea8af4d234"
+        }
+      },
+      "upload": {
+        "worker": "09e3e200-f7d0-4d00-9faf-dae30da47eef",
+        "all_bindings_equal": true
+      },
+      "live": {
+        "worker": "09e3e200-f7d0-4d00-9faf-dae30da47eef",
+        "rollback_worker": "8ba4f724-102e-4708-b6e4-aa49ce7ddc22",
+        "all_bindings_equal": true,
+        "api_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "commands": [
+        {
+          "phase": "baseline",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "wrangler versions view 8ba4f724-102e-4708-b6e4-aa49ce7ddc22 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag core-flow-ia --message Approved main flow and separate service pages; existing security boundaries",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions view 09e3e200-f7d0-4d00-9faf-dae30da47eef --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions view 09e3e200-f7d0-4d00-9faf-dae30da47eef --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions deploy 09e3e200-f7d0-4d00-9faf-dae30da47eef@100 --yes --message Approved core product flow IA",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "stage": "release-v5",
+      "baseline": {
+        "worker": "09e3e200-f7d0-4d00-9faf-dae30da47eef",
+        "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+        "api": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "spec_hash": "a8ae10eb87adfa08ad9163e442d7425e18e4ae298f2d4cb018ae46a43540c1bd",
+          "traffic_hash": "34174e4fb80de9a0e8a678ab0dc589fe295cc91917e4f1fc66baa1214c1357ff",
+          "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+        },
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "web": {
+        "flags": {
+          "VITE_PRODUCT_ENV": "hosted_beta",
+          "VITE_API_BASE_URL": "/api",
+          "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+          "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+          "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+          "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+          "VITE_DELIVERY_BETA_ENABLED": "true"
+        },
+        "assets": {
+          "apps/web/dist/index.html": "2a4212402877802d03ba78eb542962a887e684c78d0f3cd5d950e3b5eefde9b1",
+          "apps/web/dist/assets/index-Cjq8kp3N.css": "37e5fc3d5365a090e78221455cd8bd4de336e66ca916aa7eeffe7bea8af4d234",
+          "apps/web/dist/assets/index-COZ1zmGB.js": "e4377d36bfb1918c1f90eb0a578bd627d5fd9ad5cfe6a27a5142934d18d48407"
+        }
+      },
+      "upload": {
+        "worker": "5a857656-3807-4fb5-84a5-70b6b49517ee",
+        "all_bindings_equal": true
+      },
+      "live": {
+        "worker": "5a857656-3807-4fb5-84a5-70b6b49517ee",
+        "rollback_worker": "09e3e200-f7d0-4d00-9faf-dae30da47eef",
+        "all_bindings_equal": true,
+        "api_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "commands": [
+        {
+          "phase": "baseline",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "wrangler versions view 09e3e200-f7d0-4d00-9faf-dae30da47eef --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag core-flow-ia --message Approved main flow and separate service pages; existing security boundaries",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions view 5a857656-3807-4fb5-84a5-70b6b49517ee --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions view 5a857656-3807-4fb5-84a5-70b6b49517ee --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions deploy 5a857656-3807-4fb5-84a5-70b6b49517ee@100 --yes --message Approved core product flow IA",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        }
+      ]
+    }
+  ],
+  "final_worker": "5a857656-3807-4fb5-84a5-70b6b49517ee",
+  "api_revision_unchanged": "workbookcare-api-beta-00014-nah",
+  "helpers": [
+    {
+      "path": "artifacts/verification/ia-main-flow/executed-helpers/collect_complex_downloads.py",
+      "sha256": "f5e5d022937e9505d2ab4ec1bda91c643823a39a24fe5fcd36ba1ff07e010e51",
+      "original": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\collect_complex_downloads.py"
+    },
+    {
+      "path": "artifacts/verification/ia-main-flow/executed-helpers/verify_complex_downloads.py",
+      "sha256": "bd0e6f8b61b9de30adce88c0f18d6b86e6c911574a706bc916feae147df1fe06",
+      "original": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\verify_complex_downloads.py"
+    },
+    {
+      "path": "artifacts/verification/ia-main-flow/executed-helpers/verify_complex_download_excel.ps1",
+      "sha256": "4bf0ac8d6d1dec4f1da6e3f8cb5d01f00d546a0018bb524475b61a19c0ecdd9f",
+      "original": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\verify_complex_download_excel.ps1"
+    },
+    {
+      "path": "artifacts/verification/ia-main-flow/executed-helpers/preservation.py",
+      "sha256": "5d9076547bdfb1584c66fd2ddce2e911a61d43e4ce0313cca8a07fa5a4395355",
+      "original": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\preservation.py"
+    },
+    {
+      "path": "artifacts/verification/ia-main-flow/executed-helpers/render_native.py",
+      "sha256": "3aef440c8749bff6f7169e9f98d783029116416b002fad6b7174528bbde57f6f",
+      "original": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\render_native.py"
+    },
+    {
+      "path": "artifacts/verification/ia-main-flow/executed-helpers/release.py",
+      "sha256": "8d0449d1cf3c6bd3ca76562f5d8a2643800d4f7dbafd29be606843aa017d5138",
+      "original": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release.py"
+    },
+    {
+      "path": "artifacts/verification/ia-main-flow/executed-helpers/release_v2.py",
+      "sha256": "80bb1beb70470073ce7a9da44c51a437a986c689b5027d30a126054d85bda4cc",
+      "original": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v2.py"
+    },
+    {
+      "path": "artifacts/verification/ia-main-flow/executed-helpers/release_v3.py",
+      "sha256": "777e844478d0343f0aeca2c0e302945c5f1c3521bb64ce02170ace8811c9a753",
+      "original": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v3.py"
+    },
+    {
+      "path": "artifacts/verification/ia-main-flow/executed-helpers/release_v4.py",
+      "sha256": "8d2d5ab95ccf3f2d93c53f7059e9ab93c2470265da88cc9f63f2c6c6f94631ce",
+      "original": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v4.py"
+    },
+    {
+      "path": "artifacts/verification/ia-main-flow/executed-helpers/release_v5.py",
+      "sha256": "485ce78d5328c0a52a9b119a65af2efc7e9b86426b21572bf9ca903c919ec54b",
+      "original": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\ia-main-flow\\release_v5.py"
+    }
+  ],
+  "version_scope": "normal/CSV/status/revalidation v2; repair/comparison/download v4; all16 locations rechecked v4; only Header Escape changed v5, actual toggle/link Escape and focus plus whole web95 retested",
+  "failures_and_fixes": [
+    "missing icon import fixed",
+    "hidden static precision page duplicated accessible text: mount static page only when active",
+    "CSS cascade/hero wrapping/mobile hidden CTA/grid conflict/duplicate repair entry corrected and retested",
+    "Escape at focused toggle did not reach nav handler: reproduced 1fail/13pass, moved handler to Header,95pass and actual beta toggle/link pass",
+    "RP02 DOM proof reads direct DD and indirect article; expected values unchanged",
+    "UTF8/audit helper/global Python missing httpx/selector or filechooser timeout corrected without oracle changes"
+  ],
+  "warnings": [
+    "existing StarletteDeprecationWarning",
+    "jsdom modified-link native navigation warning; modified links intentionally not intercepted"
+  ],
+  "not_run_or_pending": [
+    "Official Toss PG/checkout SDK/provider authorization/query/cancel/webhook NOT_RUN; owner account not ready. PAYMENT_MODE OFF.",
+    "General customer final eligibility/scope/quote and approved price/purchase connection NOT_READY; current registered synthetic grants are not payments.",
+    "Durable commerce, combined/concurrent capacity, parent patch/static scan hard OS deadline and commercial price/tax/legal/support gates remain pending.",
+    "Full screen-reader/WCAG audit NOT_RUN; browser-rendered downloaded HTML NOT_RUN (actual files parsed against frozen oracle).",
+    "Not every failure or 120+ finding boundary was repeated in beta UI this unit; existing automated regression retained. Comparison all888 source rows verified in actual downloads/Excel, not every UI page repeated this unit.",
+    "New rules/engine/resources, Docker restart, real customer files/payment/refund, remote Git push, anonymous release and D09 NOT_RUN."
+  ],
+  "payment_mode": "OFF",
+  "commerce_ready": false,
+  "owner_acceptance": "PENDING",
+  "remote_push": false,
+  "next_unit_approved": false,
+  "execution_state": "STOPPED_AWAITING_OWNER"
+}
