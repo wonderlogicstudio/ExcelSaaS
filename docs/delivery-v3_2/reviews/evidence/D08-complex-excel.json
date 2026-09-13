@@ -1,0 +1,227 @@
+{
+  "inputs": {
+    "excel_build": 20326,
+    "excel_version": "16.0",
+    "visuals": [
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\1-1.pdf",
+        "sheet": "채널요약",
+        "file": "01_다채널정산_혼합오류.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\1-2.pdf",
+        "sheet": "온라인",
+        "file": "01_다채널정산_혼합오류.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\1-3.pdf",
+        "sheet": "매장",
+        "file": "01_다채널정산_혼합오류.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\1-4.pdf",
+        "sheet": "반품",
+        "file": "01_다채널정산_혼합오류.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\2-1.pdf",
+        "sheet": "채널요약",
+        "file": "02_다채널정산_정상예외.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\2-2.pdf",
+        "sheet": "온라인",
+        "file": "02_다채널정산_정상예외.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\2-3.pdf",
+        "sheet": "매장",
+        "file": "02_다채널정산_정상예외.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\2-4.pdf",
+        "sheet": "반품",
+        "file": "02_다채널정산_정상예외.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\3-1.pdf",
+        "sheet": "정산",
+        "file": "03_정산수정_연쇄계산.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\3-2.pdf",
+        "sheet": "보존정보",
+        "file": "03_정산수정_연쇄계산.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\4-1.pdf",
+        "sheet": "월별보고",
+        "file": "04_실무서식_지원경계.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\4-2.pdf",
+        "sheet": "거래원장",
+        "file": "04_실무서식_지원경계.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\5-1.pdf",
+        "sheet": "거래",
+        "file": "05_복합키비교_A.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\6-1.pdf",
+        "sheet": "거래",
+        "file": "05_복합키비교_B.xlsx"
+      },
+      {
+        "pdf": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-complex\\input-pdfs\\7-1.pdf",
+        "sheet": "수식한도",
+        "file": "06_수식1001개_차단.xlsx"
+      }
+    ],
+    "results": [
+      {
+        "formula_presence_checks": 2401,
+        "native_open": "PASS",
+        "sha256": "588c17c96fc9d6cc01ab0faadb6ab72a32a2c99896be095d7447e18bf05baaf7",
+        "original_unchanged": true,
+        "source_value_checks": 2458,
+        "file": "01_다채널정산_혼합오류.xlsx"
+      },
+      {
+        "formula_presence_checks": 2406,
+        "native_open": "PASS",
+        "sha256": "6ae56cfcfca078e1e0cdc234a7936ba9167bb7670e3e51aeff78aca9b367511e",
+        "original_unchanged": true,
+        "source_value_checks": 2454,
+        "file": "02_다채널정산_정상예외.xlsx"
+      },
+      {
+        "formula_presence_checks": 602,
+        "native_open": "PASS",
+        "sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
+        "original_unchanged": true,
+        "source_value_checks": 1583,
+        "file": "03_정산수정_연쇄계산.xlsx"
+      },
+      {
+        "formula_presence_checks": 12,
+        "native_open": "PASS",
+        "sha256": "f4f20028d3831e2b63e5f2b3ecb2379c66c941ad94af2860e0aadca702bf7f26",
+        "original_unchanged": true,
+        "source_value_checks": 738,
+        "file": "04_실무서식_지원경계.xlsx"
+      },
+      {
+        "formula_presence_checks": 0,
+        "native_open": "PASS",
+        "sha256": "8cc5a7e87a15d3b1574353f4a2f63aa597d1eb9dcd62c085b015d7e34113f38e",
+        "original_unchanged": true,
+        "source_value_checks": 2239,
+        "file": "05_복합키비교_A.xlsx"
+      },
+      {
+        "formula_presence_checks": 0,
+        "native_open": "PASS",
+        "sha256": "88ee61b4d82733ede47debf7b72bec4fc8533c2fd82f363a060e6b2157353095",
+        "original_unchanged": true,
+        "source_value_checks": 2202,
+        "file": "05_복합키비교_B.xlsx"
+      },
+      {
+        "formula_presence_checks": 1001,
+        "native_open": "PASS",
+        "sha256": "a108606489c0d7a6a0e82669b149c02658a8875df55dd1c2eb051a2e1bc3a9c6",
+        "original_unchanged": true,
+        "source_value_checks": 1003,
+        "file": "06_수식1001개_차단.xlsx"
+      }
+    ],
+    "status": "PASS",
+    "product_or_pg_verified": false
+  },
+  "repair_downloads": {
+    "excel_build": 20326,
+    "official_pg_verified": false,
+    "excel_version": "16.0",
+    "kind": "ACTUAL_BETA_DOWNLOADS_REOPENED_IN_INSTALLED_EXCEL",
+    "results": [
+      {
+        "case": "RP01_ALL",
+        "sum_after": 2159436,
+        "download_unchanged": true,
+        "preserved_source_values": 850,
+        "native_calculated_cells": 725,
+        "status": "PASS",
+        "formula_checks": 602,
+        "sha256": "c6959118c364b675615283b9548378d8f707a01c4c7c604ab9404ffd97141a25"
+      },
+      {
+        "patch_count": 8,
+        "status": "PASS",
+        "case": "RP01_ALL-changes",
+        "native_open": true
+      },
+      {
+        "case": "RP01_SUBSET",
+        "sum_after": 2029526,
+        "download_unchanged": true,
+        "preserved_source_values": 854,
+        "native_calculated_cells": 725,
+        "status": "PASS",
+        "formula_checks": 602,
+        "sha256": "4d2a7c0fd325c3b8dc69c3a04c179c8f6b2fe154672591f3cf2c677d947fa089"
+      },
+      {
+        "patch_count": 4,
+        "status": "PASS",
+        "case": "RP01_SUBSET-changes",
+        "native_open": true
+      },
+      {
+        "case": "RP02_ALL",
+        "sum_after": 937923,
+        "download_unchanged": true,
+        "preserved_source_values": 858,
+        "native_calculated_cells": 725,
+        "status": "PASS",
+        "formula_checks": 605,
+        "sha256": "dd7384aa85f9eb7444a6040e8efee4c16c1a147f1f97bafb290fe0333b860d08"
+      },
+      {
+        "patch_count": 3,
+        "status": "PASS",
+        "case": "RP02_ALL-changes",
+        "native_open": true
+      }
+    ],
+    "status": "PASS"
+  },
+  "comparison_downloads": {
+    "excel_build": 20326,
+    "official_pg_verified": false,
+    "excel_version": "16.0",
+    "kind": "ACTUAL_BETA_DOWNLOADS_REOPENED_IN_INSTALLED_EXCEL",
+    "results": [
+      {
+        "exact_big_delta": true,
+        "all_source_rows": 888,
+        "known_totals_checked": true,
+        "native_open": true,
+        "case": "comparison",
+        "all_classes_checked": true,
+        "status": "PASS"
+      },
+      {
+        "exact_big_delta": false,
+        "all_source_rows": 2000,
+        "known_totals_checked": true,
+        "native_open": true,
+        "case": "comparison-capacity",
+        "all_classes_checked": true,
+        "status": "PASS"
+      }
+    ],
+    "status": "PASS"
+  }
+}

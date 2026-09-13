@@ -1,0 +1,345 @@
+{
+  "unit": "D08 complex synthetic acceptance follow-up",
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "D08_overall": "PARTIAL",
+  "date": "2026-09-13",
+  "base_commit": "51d437703c9252a40fb85e213586444f61e18479",
+  "owner_request": "More complex synthetic files, independent expected results and actual beta/output verification before commercialization",
+  "actual_changes": [
+    "7 synthetic input XLSX +2 boundary CSV + human expected XLSX, locked independent JSON/oracle/source hashes, README",
+    "12 permanent frozen regression tests; executable authoring/product/service/native/download verification helpers",
+    "Exactly one repair hash and two comparison pairs added to existing synthetic allowlists",
+    "2297-byte two-file OCI registry overlay; only existing private API deployed; Worker/Gateway/security/payment gates unchanged"
+  ],
+  "reused": [
+    "Existing free scanner, M4, summary/type/cell UI, CSV/risk semantics",
+    "D02 input/preflight, D03 POI/canonical plan, D04 minimal patch/approval/three artifacts",
+    "D05 comparison engine/report, D06-D08 owner/grant/receipt/private download and protected beta routing",
+    "Existing Java/wheels/20-reference runtime, private IAM/Access/R2/H3 KV"
+  ],
+  "product_defects_reproduced": 0,
+  "oracle_changed_to_fit_actual": false,
+  "commands": [
+    {
+      "command": "git status --short; git log -3 --format=%h %s",
+      "exit_code": 0,
+      "scope": "read-only current main51d4377 baseline; no fetch/push"
+    },
+    {
+      "command": "pytest -q -p no:cacheprovider tests/test_delivery_hosted_rehearsal.py",
+      "exit_code": 0,
+      "result": "3 baseline tests"
+    },
+    {
+      "command": "generate_complex_validation_inputs.py --output samples/WorkbookCare_Complex_Validation_2026-09-13",
+      "exit_code": 0,
+      "result": "independent Decimal oracle/source specification/CSV frozen before product execution"
+    },
+    {
+      "command": "artifact skill mark_artifact_operation_started.mjs --operation-kind create --expected-output-count 8 --output-format xlsx",
+      "exit_code": 0,
+      "result": "one authoring operation marker"
+    },
+    {
+      "command": "build_complex_workbooks.mjs <pack> <previews> (repository copy generate_complex_validation_workbooks.mjs)",
+      "exit_code": 0,
+      "result": "v1/v2 artifact-tool authoring; 7 input XLSX + expected XLSX; previews"
+    },
+    {
+      "command": "finalize_complex_sources.py (repository copy finalize_complex_validation_inputs.py)",
+      "exit_code": 0,
+      "result": "one file whitespace serialization corrected; 13 frozen input/expected files"
+    },
+    {
+      "command": "verify_complex_input_excel.ps1",
+      "exit_code": 0,
+      "result": "7 original inputs reopened in installed Excel; all typed values; native chart/table/SUMIF; 15 exported sheet pages"
+    },
+    {
+      "command": "pytest -q -p no:cacheprovider apps/api/tests/test_complex_validation.py",
+      "exit_code": 0,
+      "result": "12 frozen complex regressions"
+    },
+    {
+      "command": "verify_complex_validation.py --evidence artifacts/verification/d08-complex/product-final.json",
+      "exit_code": 0,
+      "result": "11 product/oracle cases"
+    },
+    {
+      "command": "verify_complex_delivery.py --out artifacts/verification/d08-complex/local-delivery-final",
+      "exit_code": 0,
+      "result": "5 real service/engine/delivery flows;13 artifacts; no official PG"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0,
+      "result": "web78, Worker16, API231, Ruff, M4exact36; regression-final.log"
+    },
+    {
+      "command": "build_complex_beta_oci.py --push; deploy_complex_beta.py baseline/stage/proof/live/after (sequential phases)",
+      "exit_code": 0,
+      "result": "existing private image registry; Linux20refs/2repairs/6artifacts; candidate00013 then live00014; see release command records"
+    },
+    {
+      "command": "Authenticated CUA synthetic upload/criteria/plan/separate approval/execute/download interactions",
+      "exit_code": null,
+      "result": "13 actual screen checks; complex888 rows across18 pages and capacity2000 rows across40 pages; never substitute tool call exit for UI result"
+    },
+    {
+      "command": "collect_complex_downloads.py begin/collect <case>",
+      "exit_code": 0,
+      "result": "13 actual browser files across5 cases; all original names/hashes retained"
+    },
+    {
+      "command": "verify_complex_downloads.py",
+      "exit_code": 0,
+      "result": "all13 actual files, 725cached cells per repair, exact changes/HTML/ZIP/source preservation and comparison classes/totals/hashes"
+    },
+    {
+      "command": "verify_complex_download_excel.ps1 -Mode repair; -Mode comparison",
+      "exit_code": 0,
+      "result": "installed Excel16.0 build20326:8 actual downloaded XLSX, independent725cells/repair, formulas602/602/605 and full source888/2000 classes/totals;5 exported pages"
+    },
+    {
+      "command": "check_preservation.py; generate_complex_validation_inputs.py --output artifacts/verification/d08-complex/reproduced-oracle",
+      "exit_code": 0,
+      "result": "owner83/previous samples68/new frozen13 unchanged;5 oracle/spec/CSV outputs byte-identical"
+    },
+    {
+      "command": "py_compile new Python helpers; node --check generate_complex_validation_workbooks.mjs; PowerShell Parser.ParseFile",
+      "exit_code": 0,
+      "result": "repository helper copies syntactically checked; executed counterparts described above"
+    },
+    {
+      "command": "render_native.py; render_downloads.py; view_image",
+      "exit_code": 0,
+      "result": "20 actual Excel-exported pages visually inspected, plus expected workbook artifact preview; rendering is not a product or PG test"
+    }
+  ],
+  "failures_and_corrections": [
+    {
+      "area": "authoring v1",
+      "finding": "Styling the 1001-formula limit fixture across A:J created unnecessary cells; Korean cross-sheet preview required quoted sheet names.",
+      "fix": "Use actual sheet width and quote the known sheet name; archive v1.",
+      "oracle_changed": false
+    },
+    {
+      "area": "native source verification",
+      "command": "verify_complex_input_excel.ps1",
+      "exit_codes": [
+        1,
+        1,
+        0
+      ],
+      "finding": "Initial PowerShell UTF-8 parsing failed; then installed Excel trimmed the generated A D440 whitespace string.",
+      "fix": "Use UTF-8 BOM/CRLF; serialize only non-formula whitespace strings as inlineStr/xml:space=preserve, retaining previous bytes.",
+      "oracle_changed": false
+    },
+    {
+      "area": "local artifact verifier",
+      "command": "verify_complex_delivery.py",
+      "exit_codes": [
+        1,
+        0
+      ],
+      "finding": "Comparison verifier used incorrect report column indexes.",
+      "fix": "Compare source-id column3 and physical-row column6; all888 classes and BIG delta1 verified.",
+      "product_changed": false
+    },
+    {
+      "area": "lint",
+      "command": "scripts/verify.ps1",
+      "exit_codes": [
+        1,
+        0
+      ],
+      "finding": "API231 passed, then new registry comment exceeded100 columns.",
+      "fix": "Move comment to its own line; full web78/Worker16/API231/M4exact36 rerun passed."
+    },
+    {
+      "area": "release helper environment",
+      "exit_codes": [
+        1,
+        0
+      ],
+      "finding": "System Python lacked httpx before any provider action.",
+      "fix": "Use existing API virtualenv; no dependency installed."
+    },
+    {
+      "area": "browser assertions",
+      "finding": "Initial selector targeted summary as button; scope assertions initially counted nested RP02 result nodes twice and included direct targets in RP01 indirect impacts.",
+      "fix": "Use observed summary selectors and compare unique target/impact union with the frozen oracle. All13 screen checks passed.",
+      "product_changed": false
+    },
+    {
+      "area": "native comparison verifier",
+      "command": "verify_complex_download_excel.ps1 -Mode comparison",
+      "exit_codes": [
+        1,
+        0,
+        0
+      ],
+      "finding": "PowerShell5 Select-Object ExpandProperty did not enumerate hashtable keys.",
+      "fix": "Explicitly enumerate row IDs; rerun actual Excel with all classes, row amounts and totals.",
+      "product_changed": false
+    },
+    {
+      "area": "review evidence reader",
+      "exit_codes": [
+        1,
+        0
+      ],
+      "finding": "PowerShell redirected log was UTF-16; UTF-8 reader assertion stopped before writing reviews.",
+      "fix": "Detect BOM before checking recorded full-suite result; source/test outcomes unchanged."
+    },
+    {
+      "area": "precommit evidence audit",
+      "finding": "Protected-original selection check initially included baseline working docs; image signature check then found CUA JPEG bytes under PNG filenames. Both guards stopped before staging.",
+      "fix": "Limit owner package guard to its83 known files; preserve screenshot bytes and use matching .jpg extensions for9 UI captures. Native rendered PNGs unchanged.",
+      "product_or_oracle_changed": false
+    }
+  ],
+  "summary": {
+    "input_xlsx": 7,
+    "input_csv": 2,
+    "expected_xlsx": 1,
+    "frozen_file_count": 13,
+    "diagnosis_mixed": {
+      "structure": 1,
+      "m4": 15,
+      "total": 16,
+      "groups": 3
+    },
+    "diagnosis_normal": {
+      "structure": 0,
+      "m4": 0
+    },
+    "repair_sums": {
+      "RP01_ALL": 2159436,
+      "RP01_SUBSET": 2029526,
+      "RP02_ALL": 937923
+    },
+    "complex_comparison": {
+      "groups": 464,
+      "A_rows": 448,
+      "B_rows": 440,
+      "counts": {
+        "MATCHED": 350,
+        "AMOUNT_DIFF": 41,
+        "ONLY_A": 23,
+        "ONLY_B": 23,
+        "AMBIGUOUS": 14,
+        "INPUT_ERROR": 13
+      },
+      "big_delta": "1"
+    },
+    "capacity": {
+      "A_rows": 1000,
+      "B_rows": 1000,
+      "matched": 1000,
+      "total_each": "3503500",
+      "rows1001_blocked": true
+    },
+    "actual_beta_downloads": 13,
+    "actual_downloaded_xlsx_reopened_in_excel": 8,
+    "actual_screen_checks": 13,
+    "new_api_tests": 12,
+    "full_regression": {
+      "web": 78,
+      "worker": 16,
+      "api": 231,
+      "m4_exact": 36,
+      "exit_code": 0
+    }
+  },
+  "preservation": {
+    "owner_files_unchanged": 83,
+    "previous_samples_unchanged": 68,
+    "new_frozen_files_unchanged": 13,
+    "independent_oracle_and_csv_reproduced_exactly": 5,
+    "status": "PASS"
+  },
+  "current_beta": {
+    "revision": "workbookcare-api-beta-00014-nah",
+    "worker_version": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+    "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+    "security_invariants_preserved": true,
+    "private_iam": true,
+    "max_instances": 1,
+    "payment_mode": "OFF",
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "source_sha256": {
+    "apps/api/app/delivery_rehearsal.py": "a4c5426c3e91d0c7efc8ec4edc6852b44115232e01b906bd983d6f40d797d138",
+    "apps/api/app/comparison_synthetic_sources.json": "bec9c0495b658df59c3719d84328dac3acd324df64a984d16f2c8ab054598489",
+    "apps/api/tests/test_complex_validation.py": "debb64c15db85800735fe7b5f9cd885c11ca072213380ee49197b566e3735e08",
+    "scripts/build_complex_beta_oci.py": "59ab3117be582314c0b48e7f5a9f02837a024429029feb996f0a949c3de0d642",
+    "scripts/collect_complex_downloads.py": "720fbfdfef6e845aa820eadb113c1c9f564f8c1c92086359edb9a35ae0585c0d",
+    "scripts/deploy_complex_beta.py": "f4f51b3c95f30d16b32708587c42e8cb640f7f77db768cd978e2ce882104fe60",
+    "scripts/finalize_complex_validation_inputs.py": "93dde3bac466d502cdbae6b5edab3f69be8bf4a3110369e6af876c475ccf3045",
+    "scripts/generate_complex_validation_inputs.py": "7941a39131a994f9c2d0d719ffba838d2a1cafee58da4d1ac3d6bb4509d1873c",
+    "scripts/generate_complex_validation_workbooks.mjs": "903128169257d8850e427415d7ec19740c7ace17e1f53af0a45f01fd72fbf7a9",
+    "scripts/verify_complex_delivery.py": "4a2e310f53ea4e94ab65526c354205383112e9b6943685f3d304cfb7eb30b683",
+    "scripts/verify_complex_downloads.py": "aa3248b4853d78aa764db0df02d4d6a4c40ca54c2161afc71ffeca7db8ed2cb6",
+    "scripts/verify_complex_download_excel.ps1": "13172eb9a729f2c64f1b99483b6a46fc01dbe778b0f0e6974a5c5e98d3a29d3b",
+    "scripts/verify_complex_input_excel.ps1": "0776f48786c9b3747b700cd61e00cda0ef22345f2386279fe0a3f5862849985b",
+    "scripts/verify_complex_validation.py": "6ce8512349a62a0093fd58f4ebb693f0ed92bf64633d363b7952c587011425c3",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/01_다채널정산_혼합오류.xlsx": "588c17c96fc9d6cc01ab0faadb6ab72a32a2c99896be095d7447e18bf05baaf7",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/02_다채널정산_정상예외.xlsx": "6ae56cfcfca078e1e0cdc234a7936ba9167bb7670e3e51aeff78aca9b367511e",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/03_정산수정_연쇄계산.xlsx": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/04_실무서식_지원경계.xlsx": "f4f20028d3831e2b63e5f2b3ecb2379c66c941ad94af2860e0aadca702bf7f26",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/05_복합키비교_A.xlsx": "8cc5a7e87a15d3b1574353f4a2f63aa597d1eb9dcd62c085b015d7e34113f38e",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/05_복합키비교_B.xlsx": "88ee61b4d82733ede47debf7b72bec4fc8533c2fd82f363a060e6b2157353095",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/06_수식1001개_차단.xlsx": "a108606489c0d7a6a0e82669b149c02658a8875df55dd1c2eb051a2e1bc3a9c6",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/07_비교1000행.csv": "030125a3511d4d7a2ae294e927cb56c67dabe50fe1f42de0cfd1cbaca584098c",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/07_비교1001행.csv": "4358e23460bab660852c7bc44e63d39c60961bdf7654144ab49c97a50d761c69",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/README.md": "976758b3858e476f04b5f572a0aa34ada31acd36f1396493cbe5d7bed45df43c",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/expected.json": "74e4d6502de2adc3bab3cc201b54334c4685301d36ce995376db92121f92b337",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/ORACLE_LOCK.sha256": "9ac2803b5c03deab9a679a6f45b2c2663ab4f984562280024f2edcaef156567b",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/source-hashes.json": "c22055024f92ba1ac615df42da944400c882b4b1819161fe5dfd5d5705ea7e65",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/source-spec.json": "ad76228cdcdb5921dbda5a836c49f3d7a1b5ee53ad38d1453abeb18f371648f2",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/예상결과.xlsx": "52982289237f0e04ffc6891ac23dd32445d6e143543d6f8eb4888122c8fa4025"
+  },
+  "evidence_files": {
+    "D08-complex-downloads.json": "8a4fcc95f0a0b656e675075d7189218a3cd8901edbef208e3772c30305116ba8",
+    "D08-complex-excel.json": "b4be2c294436486fff13ca3136173929db74c412bd0ccb77d6c7f6348499aa49",
+    "D08-complex-image.json": "20c3e7bbb819b940cfcbc01f274510d210d91e346902e3a82b6cca77313a12e3",
+    "D08-complex-product.json": "09e68d42613f76f030ce557fb248794c3f249837ccccc880a3963f2ff691010c",
+    "D08-complex-release.json": "4da12d19ab2b3b9acee766147bfb56cac5fa280471d2eeae3aa7b1fcb42d0188",
+    "D08-complex-ui.json": "3dce56bf8ad55d37998b8d6ad4bc343b01dfb3894e243df87a24f624866f477e"
+  },
+  "not_run": [
+    "Official Toss sandbox/SDK/auth/approve/query/cancel/webhook: owner account and keys not prepared",
+    "Real customer files, live payments/refunds, price/tax/legal/support decisions, customer launch",
+    "Concurrent load, restart/recovery under load, every combined byte/cell/formula limit, parent patch/static scan hard OS deadline",
+    "New complex cases at mobile width: NOT_RUN; unchanged UI previous D08 mobile coverage is not new complex mobile evidence",
+    "General cross-sheet/table/chart/merged/date-format repair remains unsupported; no feature expansion",
+    "Remote Git push, anonymous/public deployment, paid resource creation, Docker/Desktop/WSL restart, D09"
+  ],
+  "next_single_unit": "D08 bounded concurrent-request/cancellation/retry acceptance with the fixed complex pack; separate owner approval, no new paid resource",
+  "stopped_after": "D08",
+  "remote_push": false,
+  "commercial_ready": false,
+  "commit_record": "D08-complex-commit.json after selective local commit"
+}

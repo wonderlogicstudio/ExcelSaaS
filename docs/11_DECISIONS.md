@@ -1,3 +1,9 @@
+## 2026-09-13 — 복합 합성 예상 값과 제품·Excel 증거 분리
+
+사용자 요청으로 D08 안에서 규모·의존·복합키·정상 예외·미지원 경계를 강화했다. 예상 값은 제품 import 없는 Decimal/지정 오류 위치로 먼저 고정한다. 샘플 직렬화나 검증 코드가 잘못됐으면 실패를 보존하고 수정하며, 실제 결과에 맞춰 정답을 바꾸지 않는다. 등록한 합성hash만 기존베타에서 시험하며 결제·별도 변경승인·비교 상품 분리를 유지한다. 1000행 단일 순차 성공을 동시 처리·모든 최대 한도·상용 완성으로 확대 해석하지 않는다. 기존 결정은 아래에 보존한다.
+
+---
+
 ## D08 protected synthetic beta decision — 2026-09-13
 
 Owner explicitly requested existing beta deployment and answered that Toss test credentials are not ready. Reuse actual local D01–D08 evidence; verify real hosted UI and downloaded Excel before reporting. Enable default-off hosted synthetic grants only for registered sources, owner/plan/expiry, with payment OFF and separate exact approval. Preserve Access/IAM/HMAC/private storage. Dockerless OCI uses existing registry; no Docker/WSL restart or new paid service. One ephemeral instance is a beta constraint, not durable commerce. Final beta engineering verified; D08 overall PARTIAL and stop. No remote push or next bundle.

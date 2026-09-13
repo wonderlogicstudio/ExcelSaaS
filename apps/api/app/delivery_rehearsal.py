@@ -9,6 +9,8 @@ from .config import get_settings
 from .delivery_inputs import reject
 
 SYNTHETIC_SOURCE_HASHES = {
+    # Frozen D08 complex synthetic acceptance input.
+    "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
     "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
     "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
 }

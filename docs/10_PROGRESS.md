@@ -1,3 +1,9 @@
+## 2026-09-13 — D08 복합 합성 수용시험 완료 / 정지
+
+입력XLSX7·CSV2·독립 예상XLSX/JSON을 추가했다. 베타에서 혼합16건/정상0건, 수정3경로의725셀씩, 비교464그룹·888행, 경계1000그룹·2000행 및 미지원 차단을 실제 확인했다. 다운로드13개·설치Excel8개·출력시각 검토 PASS. 전체회귀78웹/16Worker/231API/36M4 exit0. 고정 합성 등록만 private API00014-nah에 배포; Worker/Access/IAM/결제OFF 보존. 기존83문서/68샘플 hash 보존. 상세 변경·명령·실패·exit·미실행은 [D08 복합 증거](delivery-v3_2/reviews/evidence/D08-complex.json). 이번 단위 ENGINEERING_VERIFIED_AWAITING_OWNER, D08전체 PARTIAL. 다음 부하·중단·재시도 시험은 제안만 하며 자동 실행하지 않는다.
+
+---
+
 ## D08 보호 베타 구현·실제 화면 검증 완료 — 2026-09-13
 
 기존 Access 베타에 D02–D08 납품 경로를 반영했다. 이번 후속은 **ENGINEERING_VERIFIED_AWAITING_OWNER**, D08 전체는 **PARTIAL**이다. 공식 PG 계정·키가 준비되지 않았다는 사용자 답변에 따라 실제 결제·일반 구매는 OFF다. 다음 묶음은 실행하지 않고 D08에서 정지한다.

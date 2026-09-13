@@ -28,6 +28,16 @@
       "A": "3062b1408ed6e82e51972c9006253f13fba2a3e96b01e1e29ee67b09de1d34a6",
       "B": "874a54705a803e027d4967ebdebc5d8d0cbb309890029506f8cb8904ad48f054",
       "case": "d08-independent-holdout"
+    },
+    {
+      "case": "d08-complex",
+      "A": "8cc5a7e87a15d3b1574353f4a2f63aa597d1eb9dcd62c085b015d7e34113f38e",
+      "B": "88ee61b4d82733ede47debf7b72bec4fc8533c2fd82f363a060e6b2157353095"
+    },
+    {
+      "case": "d08-complex-1000",
+      "A": "030125a3511d4d7a2ae294e927cb56c67dabe50fe1f42de0cfd1cbaca584098c",
+      "B": "030125a3511d4d7a2ae294e927cb56c67dabe50fe1f42de0cfd1cbaca584098c"
     }
   ]
 }

@@ -1,3 +1,9 @@
+## D08 복합 합성 수용시험 — 사용자 확인 대기
+
+2026-09-13 추가 단위 완료. [D08 review](delivery-v3_2/reviews/D08.md), [5가지 확인 행동](delivery-v3_2/owner_action.md), [독립 예상 값/신규 샘플](../samples/WorkbookCare_Complex_Validation_2026-09-13/README.md). 실제베타13화면검증·13다운로드·8XLSX 설치Excel 대조와 전체회귀78/16/231/36 PASS. API00014-nah만 업데이트, 기존Worker/보안/결제OFF 유지. D08 전체PARTIAL; 다음 묶음 자동 진행 없이 정지.
+
+---
+
 ## D08 보호 베타 구현·실제 화면 검증 완료 — 2026-09-13
 
 기존 Access 베타에 D02–D08 납품 경로를 반영했다. 이번 후속은 **ENGINEERING_VERIFIED_AWAITING_OWNER**, D08 전체는 **PARTIAL**이다. 공식 PG 계정·키가 준비되지 않았다는 사용자 답변에 따라 실제 결제·일반 구매는 OFF다. 다음 묶음은 실행하지 않고 D08에서 정지한다.

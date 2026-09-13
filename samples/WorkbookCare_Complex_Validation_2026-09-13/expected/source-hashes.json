@@ -1,0 +1,15 @@
+{
+  "01_다채널정산_혼합오류.xlsx": "588c17c96fc9d6cc01ab0faadb6ab72a32a2c99896be095d7447e18bf05baaf7",
+  "02_다채널정산_정상예외.xlsx": "6ae56cfcfca078e1e0cdc234a7936ba9167bb7670e3e51aeff78aca9b367511e",
+  "03_정산수정_연쇄계산.xlsx": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
+  "04_실무서식_지원경계.xlsx": "f4f20028d3831e2b63e5f2b3ecb2379c66c941ad94af2860e0aadca702bf7f26",
+  "05_복합키비교_A.xlsx": "8cc5a7e87a15d3b1574353f4a2f63aa597d1eb9dcd62c085b015d7e34113f38e",
+  "05_복합키비교_B.xlsx": "88ee61b4d82733ede47debf7b72bec4fc8533c2fd82f363a060e6b2157353095",
+  "06_수식1001개_차단.xlsx": "a108606489c0d7a6a0e82669b149c02658a8875df55dd1c2eb051a2e1bc3a9c6",
+  "07_비교1000행.csv": "030125a3511d4d7a2ae294e927cb56c67dabe50fe1f42de0cfd1cbaca584098c",
+  "07_비교1001행.csv": "4358e23460bab660852c7bc44e63d39c60961bdf7654144ab49c97a50d761c69",
+  "expected/expected.json": "74e4d6502de2adc3bab3cc201b54334c4685301d36ce995376db92121f92b337",
+  "expected/ORACLE_LOCK.sha256": "9ac2803b5c03deab9a679a6f45b2c2663ab4f984562280024f2edcaef156567b",
+  "expected/source-spec.json": "ad76228cdcdb5921dbda5a836c49f3d7a1b5ee53ad38d1453abeb18f371648f2",
+  "expected/예상결과.xlsx": "52982289237f0e04ffc6891ac23dd32445d6e143543d6f8eb4888122c8fa4025"
+}

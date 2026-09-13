@@ -1,3 +1,17 @@
+# STOPPED AFTER D08 — complex synthetic acceptance verified
+
+2026-09-13 owner-requested complex synthetic follow-up complete: seven XLSX inputs/two CSVs/frozen independent expected workbook+JSON; local12 regression cases and actual Access-beta13 screen checks,13 downloads,8 downloaded XLSX reopened in installed Excel. Full web78/Worker16/API231/M4exact36 exit0. Only fixed synthetic allowlists changed; private API00014-nah, unchanged Worker521ad0aa/Gateway. See delivery-v3_2/reviews/D08.md and owner_action.md. D08 overall PARTIAL: PG/durable commerce/concurrency/all combined limits/commercial gates remain. No D09, remote push or automatic next unit. Next proposed single unit: bounded concurrent-request/cancellation/retry verification with these fixed inputs. Older ACTIVE/STOPPED headings below are historical.
+
+---
+
+# ACTIVE APPROVED — D08 complex synthetic acceptance follow-up
+
+2026-09-13 latest owner request: create substantially more complex synthetic workbooks and independent expected results, then test before commercialization. This is an additional bounded D08 validation unit, not D09 or a feature-scope expansion. Freeze cases/oracles before product execution; include supported dependency chains and partial approval, normal exceptions, realistic unsupported structures and comparison boundaries. Test actual protected beta UI and downloaded XLSX in installed Excel. Fix demonstrated defects within existing capabilities, preserve exclusions, baseline evidence, customer approval and payment OFF. Existing beta deployment authorization applies to verified fixes/registered synthetic hashes only. No remote push, real data/payment/refund, pricing or new paid resource. Record actual commands/exits/failures/limits in D08 review, owner actions and progress; select local commit and stop after this unit.
+
+Baseline: main51d4377, existing full API219/Worker16/M4exact36 and latest web78 pass evidence preserved; rerun relevant baseline and affected tests. Previous stopped/active headings below are historical.
+
+---
+
 # STOPPED AFTER D08 — protected beta verified / owner review pending
 
 2026-09-13: Approved D02–D08 beta deployment and actual hosted synthetic acceptance completed. Worker521ad0aa / private API00011-bav. D08 overall PARTIAL: official PG, durable commerce, combined capacity/deadlines and commercial/owner release gates remain. PAYMENT_MODE OFF; no D09, push or anonymous release. Existing lower ACTIVE headings are historical only. See reviews/D08.md, release_manifest.json and owner_action.md. Next proposed single unit: official PG sandbox verification after owner prepares test account/keys.

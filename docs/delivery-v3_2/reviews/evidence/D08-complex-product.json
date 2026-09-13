@@ -1,0 +1,404 @@
+{
+  "product": {
+    "kind": "ACTUAL_LOCAL_PRODUCT_VS_FROZEN_COMPLEX_ORACLES",
+    "rows": [
+      {
+        "case": "diagnosis:01_다채널정산_혼합오류.xlsx",
+        "status": "PASS",
+        "result": {
+          "m4_candidates": 15,
+          "structure_findings": 1,
+          "expected_exact": true,
+          "manual_exceptions_not_flagged": true
+        },
+        "seconds": 0.271
+      },
+      {
+        "case": "diagnosis:02_다채널정산_정상예외.xlsx",
+        "status": "PASS",
+        "result": {
+          "m4_candidates": 0,
+          "structure_findings": 0,
+          "expected_exact": true,
+          "manual_exceptions_not_flagged": true
+        },
+        "seconds": 0.265
+      },
+      {
+        "case": "RP01_ALL",
+        "status": "PASS",
+        "result": {
+          "patches": 8,
+          "exact_values": 725,
+          "impact_cells": 40,
+          "formula_count": 602,
+          "sum_after": 2159436,
+          "expected_exact": true
+        },
+        "seconds": 3.444
+      },
+      {
+        "case": "RP01_SUBSET",
+        "status": "PASS",
+        "result": {
+          "patches": 4,
+          "exact_values": 725,
+          "impact_cells": 24,
+          "formula_count": 602,
+          "sum_after": 2029526,
+          "expected_exact": true
+        },
+        "seconds": 3.327
+      },
+      {
+        "case": "RP02_ALL",
+        "status": "PASS",
+        "result": {
+          "patches": 3,
+          "exact_values": 725,
+          "impact_cells": 16,
+          "formula_count": 605,
+          "sum_after": 937923,
+          "expected_exact": true
+        },
+        "seconds": 3.277
+      },
+      {
+        "case": "comparison",
+        "status": "PASS",
+        "result": {
+          "summary": {
+            "counts": {
+              "MATCHED": 350,
+              "AMOUNT_DIFF": 41,
+              "ONLY_A": 23,
+              "ONLY_B": 23,
+              "AMBIGUOUS": 14,
+              "INPUT_ERROR": 13
+            },
+            "group_count": 464,
+            "input_rows": {
+              "A": 448,
+              "B": 440
+            },
+            "assigned_rows": {
+              "A": 448,
+              "B": 440
+            },
+            "excluded_rows": {
+              "A": 0,
+              "B": 0
+            },
+            "known_amount_totals": {
+              "A": "9007199260823885",
+              "B": "9007199260814989"
+            },
+            "uncompared_known_amounts": {
+              "A": "5891",
+              "B": "6273"
+            },
+            "excluded_known_amount_totals": {
+              "A": "0",
+              "B": "0"
+            },
+            "unknown_amount_row_counts": {
+              "A": 5,
+              "B": 0
+            },
+            "rows_preserved": true,
+            "known_amount_conservation": true,
+            "whole_ledger_correctness_verified": false
+          },
+          "all_source_row_classes_match": true,
+          "big_integer_delta": "1",
+          "B_is_truth": false
+        },
+        "seconds": 0.183
+      },
+      {
+        "case": "negative:0",
+        "status": "PASS",
+        "result": {
+          "expected_block": true,
+          "reasons": [
+            "INELIGIBLE_TARGETS",
+            "NOT_UNAMBIGUOUS_INTEGER_TEXT",
+            "NO_ELIGIBLE_CHANGES",
+            "UNSUPPORTED_FORMULA",
+            "UNSUPPORTED_PACKAGE_PART",
+            "UNSUPPORTED_SHEET_STRUCTURE"
+          ]
+        },
+        "seconds": 0.03
+      },
+      {
+        "case": "negative:1",
+        "status": "PASS",
+        "result": {
+          "expected_block": true,
+          "reasons": [
+            "INELIGIBLE_TARGETS",
+            "NOT_UNAMBIGUOUS_INTEGER_TEXT",
+            "NO_ELIGIBLE_CHANGES"
+          ]
+        },
+        "seconds": 0.052
+      },
+      {
+        "case": "negative:2",
+        "status": "PASS",
+        "result": {
+          "expected_block": true,
+          "reasons": [
+            "INELIGIBLE_TARGETS",
+            "NO_ELIGIBLE_CHANGES",
+            "TARGET_NOT_TRUE_BLANK"
+          ]
+        },
+        "seconds": 0.05
+      },
+      {
+        "case": "negative:3",
+        "status": "PASS",
+        "result": {
+          "error_code": "LIMIT_EXCEEDED",
+          "expected_block": true
+        },
+        "seconds": 0.053
+      },
+      {
+        "case": "capacity",
+        "status": "PASS",
+        "result": {
+          "supported_rows": 1000,
+          "known_amount": "3503500",
+          "rejected_rows": 1001,
+          "expected_block": true,
+          "report_generated": false
+        },
+        "seconds": 0.038
+      }
+    ],
+    "official_pg_verified": false
+  },
+  "actual_local_services": {
+    "kind": "ACTUAL_LOCAL_SERVICES_ENGINE_ARTIFACTS",
+    "official_pg_verified": false,
+    "results": [
+      {
+        "case": "RP01_ALL",
+        "status": "PASS",
+        "exact_cells": 725,
+        "sum_after": 2159436,
+        "patches": 8,
+        "approval_required": true,
+        "source_unchanged": true,
+        "artifacts": [
+          {
+            "kind": "REPAIRED_XLSX",
+            "filename": "workbookcare_repaired_f768fe0b-0502-4587-95d4-3cb2b6eca0ba.xlsx",
+            "sha256": "c6959118c364b675615283b9548378d8f707a01c4c7c604ab9404ffd97141a25",
+            "bytes": 18776
+          },
+          {
+            "kind": "CHANGES_XLSX",
+            "filename": "changes_f768fe0b-0502-4587-95d4-3cb2b6eca0ba.xlsx",
+            "sha256": "2ecba4cf387846e6c8f566138b6606450cfdff23cacd397b8931bda3e9e65627",
+            "bytes": 10449
+          },
+          {
+            "kind": "VERIFICATION_HTML",
+            "filename": "verification_f768fe0b-0502-4587-95d4-3cb2b6eca0ba.html",
+            "sha256": "f49d8124b3123e46ed905a50c1badd12b460069c63e43647c9836dace301c5a8",
+            "bytes": 7215
+          }
+        ],
+        "seconds": 7.609
+      },
+      {
+        "case": "RP01_SUBSET",
+        "status": "PASS",
+        "exact_cells": 725,
+        "sum_after": 2029526,
+        "patches": 4,
+        "approval_required": true,
+        "source_unchanged": true,
+        "artifacts": [
+          {
+            "kind": "REPAIRED_XLSX",
+            "filename": "workbookcare_repaired_e083aec3-adc3-4642-9111-ed658cdd07e7.xlsx",
+            "sha256": "4d2a7c0fd325c3b8dc69c3a04c179c8f6b2fe154672591f3cf2c677d947fa089",
+            "bytes": 18751
+          },
+          {
+            "kind": "CHANGES_XLSX",
+            "filename": "changes_e083aec3-adc3-4642-9111-ed658cdd07e7.xlsx",
+            "sha256": "b2821df3b472281f2ebba2bd5c78105085499e098a7942b53a8e30f7fb4df0e0",
+            "bytes": 9818
+          },
+          {
+            "kind": "VERIFICATION_HTML",
+            "filename": "verification_e083aec3-adc3-4642-9111-ed658cdd07e7.html",
+            "sha256": "4f17346f85f3ec0db6a90a97bd00ad6936c8ef99f43a4d4c69cc74e3ef6c9b0d",
+            "bytes": 5881
+          }
+        ],
+        "seconds": 7.451
+      },
+      {
+        "case": "RP02_ALL",
+        "status": "PASS",
+        "exact_cells": 725,
+        "sum_after": 937923,
+        "patches": 3,
+        "approval_required": true,
+        "source_unchanged": true,
+        "artifacts": [
+          {
+            "kind": "REPAIRED_XLSX",
+            "filename": "workbookcare_repaired_5bba41ce-b98a-4f89-946b-48c1f31f18e3.xlsx",
+            "sha256": "dd7384aa85f9eb7444a6040e8efee4c16c1a147f1f97bafb290fe0333b860d08",
+            "bytes": 18800
+          },
+          {
+            "kind": "CHANGES_XLSX",
+            "filename": "changes_5bba41ce-b98a-4f89-946b-48c1f31f18e3.xlsx",
+            "sha256": "2e96546d612fb25741bf048cdeca1457284fd903f6b189f55efdcec5859b24f6",
+            "bytes": 9575
+          },
+          {
+            "kind": "VERIFICATION_HTML",
+            "filename": "verification_5bba41ce-b98a-4f89-946b-48c1f31f18e3.html",
+            "sha256": "fb6f14da805c3c0e0d34cbd173e935d24908aa5864bc4d1b8cc268cf36ef5887",
+            "bytes": 5315
+          }
+        ],
+        "seconds": 7.297
+      },
+      {
+        "case": "comparison",
+        "status": "PASS",
+        "summary": {
+          "counts": {
+            "MATCHED": 350,
+            "AMOUNT_DIFF": 41,
+            "ONLY_A": 23,
+            "ONLY_B": 23,
+            "AMBIGUOUS": 14,
+            "INPUT_ERROR": 13
+          },
+          "group_count": 464,
+          "input_rows": {
+            "A": 448,
+            "B": 440
+          },
+          "assigned_rows": {
+            "A": 448,
+            "B": 440
+          },
+          "excluded_rows": {
+            "A": 0,
+            "B": 0
+          },
+          "known_amount_totals": {
+            "A": "9007199260823885",
+            "B": "9007199260814989"
+          },
+          "uncompared_known_amounts": {
+            "A": "5891",
+            "B": "6273"
+          },
+          "excluded_known_amount_totals": {
+            "A": "0",
+            "B": "0"
+          },
+          "unknown_amount_row_counts": {
+            "A": 5,
+            "B": 0
+          },
+          "rows_preserved": true,
+          "known_amount_conservation": true,
+          "whole_ledger_correctness_verified": false
+        },
+        "all_physical_rows_verified": true,
+        "artifacts": [
+          {
+            "kind": "COMPARISON_REPORT_XLSX",
+            "filename": "comparison_report_c92a592e-6f9d-4219-a3f1-d4bf07ab2efe.xlsx",
+            "sha256": "4cdceb3abc4f5b4524cfccf7195ebf3bb1d313dc8f651fd422237c9e9abcd082",
+            "bytes": 82566
+          },
+          {
+            "kind": "COMPARISON_VERIFICATION_HTML",
+            "filename": "comparison_verification_c92a592e-6f9d-4219-a3f1-d4bf07ab2efe.html",
+            "sha256": "0e6b2fec2c08278b9197fd745787896984dcd41f0495800339134baed42ebac9",
+            "bytes": 250250
+          }
+        ],
+        "seconds": 8.293
+      },
+      {
+        "case": "comparison-capacity",
+        "status": "PASS",
+        "summary": {
+          "counts": {
+            "MATCHED": 1000,
+            "AMOUNT_DIFF": 0,
+            "ONLY_A": 0,
+            "ONLY_B": 0,
+            "AMBIGUOUS": 0,
+            "INPUT_ERROR": 0
+          },
+          "group_count": 1000,
+          "input_rows": {
+            "A": 1000,
+            "B": 1000
+          },
+          "assigned_rows": {
+            "A": 1000,
+            "B": 1000
+          },
+          "excluded_rows": {
+            "A": 0,
+            "B": 0
+          },
+          "known_amount_totals": {
+            "A": "3503500",
+            "B": "3503500"
+          },
+          "uncompared_known_amounts": {
+            "A": "0",
+            "B": "0"
+          },
+          "excluded_known_amount_totals": {
+            "A": "0",
+            "B": "0"
+          },
+          "unknown_amount_row_counts": {
+            "A": 0,
+            "B": 0
+          },
+          "rows_preserved": true,
+          "known_amount_conservation": true,
+          "whole_ledger_correctness_verified": false
+        },
+        "all_physical_rows_verified": true,
+        "artifacts": [
+          {
+            "kind": "COMPARISON_REPORT_XLSX",
+            "filename": "comparison_report_9376669d-c0e0-4c3c-8eb7-6345b8e5e1a0.xlsx",
+            "sha256": "51e439b4da94d2665a4abe19d240bf95b52f2d933d268f87daf95afff9068d25",
+            "bytes": 156931
+          },
+          {
+            "kind": "COMPARISON_VERIFICATION_HTML",
+            "filename": "comparison_verification_9376669d-c0e0-4c3c-8eb7-6345b8e5e1a0.html",
+            "sha256": "d29f1a83f97b4fc03c19dd24cf4e5151360c14a7893077ea95aa2b70f84c453a",
+            "bytes": 395058
+          }
+        ],
+        "seconds": 18.832
+      }
+    ]
+  }
+}

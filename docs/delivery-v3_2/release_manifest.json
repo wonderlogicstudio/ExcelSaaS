@@ -18,7 +18,7 @@
     "apps/api/app/delivery_plan.py": "369965cac8caaa0afbb758cab6bbf5d6e5cda5f53e4933c359edc8a07412fa8a",
     "apps/api/app/delivery_process.py": "fcc51b50ad06f7636dec8706d6dbec0981470d92ce51b05c9c29c7cf53eb1086",
     "apps/api/app/delivery_receipts.py": "e2361e79c999bed690eed6c45e194fc4b4262370fb7f0a3158b12a8160bc24ef",
-    "apps/api/app/delivery_rehearsal.py": "c9f0238f363d804b9902e700e12d70543e8e81688c2d7a0230d022c1fc7222a4",
+    "apps/api/app/delivery_rehearsal.py": "a4c5426c3e91d0c7efc8ec4edc6852b44115232e01b906bd983d6f40d797d138",
     "apps/api/app/delivery_rights.py": "cb3b6b517b8013b8e8a5ee786a70669f633aefda089162eecdd5cf7537cd9e72",
     "apps/api/app/delivery_storage_validation.py": "0734dcc8d61f471a7d8dc74ffc0559dda24a25847c3be2662a7faa0b41753163",
     "apps/api/app/delivery_store.py": "fc73635d99b3806c55ccafa17a02eabb5b84e20b6892deb98fed9a8eed3cff97",
@@ -52,7 +52,35 @@
     "apps/api/tests/test_delivery_hosted_rehearsal.py": "5fe869eb935e38fa5d1a0e26edb45a55963aeef45d46d7ee7f6960aea28f7927",
     "apps/web/src/lib/delivery-network.test.ts": "d713b1c39b72a76d545fd6804f15571fcb5c931f62ff4e462b69aa0ea01fb500",
     "scripts/build_delivery_oci.py": "a0bef98ad5f0435b1efc5c612450a9a90eaa1818e2464adb098c0d70570754a1",
-    "scripts/prepare_delivery_oci.py": "69cbfbdd1b87aa22c60f4f919c4cc7a9645a8cd5ad13a77e44a19f951c142b16"
+    "scripts/prepare_delivery_oci.py": "69cbfbdd1b87aa22c60f4f919c4cc7a9645a8cd5ad13a77e44a19f951c142b16",
+    "apps/api/app/comparison_synthetic_sources.json": "bec9c0495b658df59c3719d84328dac3acd324df64a984d16f2c8ab054598489",
+    "apps/api/tests/test_complex_validation.py": "debb64c15db85800735fe7b5f9cd885c11ca072213380ee49197b566e3735e08",
+    "scripts/build_complex_beta_oci.py": "59ab3117be582314c0b48e7f5a9f02837a024429029feb996f0a949c3de0d642",
+    "scripts/collect_complex_downloads.py": "720fbfdfef6e845aa820eadb113c1c9f564f8c1c92086359edb9a35ae0585c0d",
+    "scripts/deploy_complex_beta.py": "f4f51b3c95f30d16b32708587c42e8cb640f7f77db768cd978e2ce882104fe60",
+    "scripts/finalize_complex_validation_inputs.py": "93dde3bac466d502cdbae6b5edab3f69be8bf4a3110369e6af876c475ccf3045",
+    "scripts/generate_complex_validation_inputs.py": "7941a39131a994f9c2d0d719ffba838d2a1cafee58da4d1ac3d6bb4509d1873c",
+    "scripts/generate_complex_validation_workbooks.mjs": "903128169257d8850e427415d7ec19740c7ace17e1f53af0a45f01fd72fbf7a9",
+    "scripts/verify_complex_delivery.py": "4a2e310f53ea4e94ab65526c354205383112e9b6943685f3d304cfb7eb30b683",
+    "scripts/verify_complex_downloads.py": "aa3248b4853d78aa764db0df02d4d6a4c40ca54c2161afc71ffeca7db8ed2cb6",
+    "scripts/verify_complex_download_excel.ps1": "13172eb9a729f2c64f1b99483b6a46fc01dbe778b0f0e6974a5c5e98d3a29d3b",
+    "scripts/verify_complex_input_excel.ps1": "0776f48786c9b3747b700cd61e00cda0ef22345f2386279fe0a3f5862849985b",
+    "scripts/verify_complex_validation.py": "6ce8512349a62a0093fd58f4ebb693f0ed92bf64633d363b7952c587011425c3",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/01_다채널정산_혼합오류.xlsx": "588c17c96fc9d6cc01ab0faadb6ab72a32a2c99896be095d7447e18bf05baaf7",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/02_다채널정산_정상예외.xlsx": "6ae56cfcfca078e1e0cdc234a7936ba9167bb7670e3e51aeff78aca9b367511e",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/03_정산수정_연쇄계산.xlsx": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/04_실무서식_지원경계.xlsx": "f4f20028d3831e2b63e5f2b3ecb2379c66c941ad94af2860e0aadca702bf7f26",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/05_복합키비교_A.xlsx": "8cc5a7e87a15d3b1574353f4a2f63aa597d1eb9dcd62c085b015d7e34113f38e",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/05_복합키비교_B.xlsx": "88ee61b4d82733ede47debf7b72bec4fc8533c2fd82f363a060e6b2157353095",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/06_수식1001개_차단.xlsx": "a108606489c0d7a6a0e82669b149c02658a8875df55dd1c2eb051a2e1bc3a9c6",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/07_비교1000행.csv": "030125a3511d4d7a2ae294e927cb56c67dabe50fe1f42de0cfd1cbaca584098c",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/07_비교1001행.csv": "4358e23460bab660852c7bc44e63d39c60961bdf7654144ab49c97a50d761c69",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/README.md": "976758b3858e476f04b5f572a0aa34ada31acd36f1396493cbe5d7bed45df43c",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/expected.json": "74e4d6502de2adc3bab3cc201b54334c4685301d36ce995376db92121f92b337",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/ORACLE_LOCK.sha256": "9ac2803b5c03deab9a679a6f45b2c2663ab4f984562280024f2edcaef156567b",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/source-hashes.json": "c22055024f92ba1ac615df42da944400c882b4b1819161fe5dfd5d5705ea7e65",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/source-spec.json": "ad76228cdcdb5921dbda5a836c49f3d7a1b5ee53ad38d1453abeb18f371648f2",
+    "samples/WorkbookCare_Complex_Validation_2026-09-13/expected/예상결과.xlsx": "52982289237f0e04ffc6891ac23dd32445d6e143543d6f8eb4888122c8fa4025"
   },
   "repair_patch_fingerprint": "e5b02ed401a0caab858301a2353b22f7373d4389b898fe6c15c45dca00ffe1bd",
   "evidence": {
@@ -96,7 +124,8 @@
         "owner_release_approved"
       ],
       "hosted_delivery_api_and_ui": "VERIFIED_WITH_FIXED_SYNTHETIC_INPUTS",
-      "linux_runtime": "VERIFIED"
+      "linux_runtime": "VERIFIED",
+      "complex_acceptance_evidence": "reviews/evidence/D08-complex.json"
     },
     "RP02": {
       "profile": "RP02_APPROVED_FORMULA_RESTORE_V1",
@@ -124,7 +153,8 @@
         "owner_release_approved"
       ],
       "hosted_delivery_api_and_ui": "VERIFIED_WITH_FIXED_SYNTHETIC_INPUTS",
-      "linux_runtime": "VERIFIED"
+      "linux_runtime": "VERIFIED",
+      "complex_acceptance_evidence": "reviews/evidence/D08-complex.json"
     },
     "TWO_FILE_COMPARISON": {
       "profile": "TWO_LEDGER_EXACT_KEY_KRW_V1",
@@ -151,31 +181,38 @@
         "owner_release_approved"
       ],
       "hosted_delivery_api_and_ui": "VERIFIED_WITH_FIXED_SYNTHETIC_INPUTS",
-      "linux_runtime": "VERIFIED"
+      "linux_runtime": "VERIFIED",
+      "complex_acceptance_evidence": "reviews/evidence/D08-complex.json"
     }
   },
   "global_gates": {
     "official_pg_sandbox": "NOT_RUN",
     "checkout_sdk": "NOT_CONNECTED",
     "durable_commerce_storage": "NOT_READY",
-    "hosted_delivery_api_and_ui": "NOT_DEPLOYED",
-    "linux_runtime": "NOT_RUN",
+    "hosted_delivery_api_and_ui": "VERIFIED_FIXED_SYNTHETIC_CASES",
+    "linux_runtime": "VERIFIED_REFERENCE_AND_ACTUAL_COMPLEX_DELIVERY",
     "full_combined_capacity": "NOT_RUN",
     "parent_patch_static_scan_hard_deadline": "NOT_IMPLEMENTED",
     "legal_price_tax_support_owner_approval": "PENDING",
     "M3_real_user_observed": "PENDING",
     "M3_5_purchase_evidence": "DEFERRED",
-    "owner_release_approved": false
+    "owner_release_approved": false,
+    "sequential_complex_acceptance": "VERIFIED_DECLARED_CASES_ONLY"
   },
   "current_beta": {
     "url": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
-    "deployed_bundle": "D01",
-    "worker_version": "91c06632-1302-4877-ae49-d4e44af3f3a2",
-    "cloud_run_revision": "workbookcare-api-beta-00004-hhk",
-    "D02_D08_deployed": false,
+    "deployed_bundle": "D08",
+    "worker_version": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+    "cloud_run_revision": "workbookcare-api-beta-00014-nah",
+    "D02_D08_deployed": true,
     "Access_required": true,
     "delivery_flag_default": false,
-    "bindings_changed_in_D08": false
+    "bindings_changed_in_D08": true,
+    "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+    "delivery_flag_hosted_beta": true,
+    "bindings_changed_in_complex_followup": false,
+    "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:12edb4bea80533d20ddd59fe6cb71fb0749320422ee3f04b78de5ed182acecc2",
+    "evidence": "reviews/evidence/D08-complex-release.json"
   },
   "all_commerce_enabled": false,
   "anonymous_release_enabled": false,
@@ -334,5 +371,169 @@
     "D08-hosted.json": "1b7c214edb44251fd1c13c46b38d4cee2656b899fb3dc9c2e3cd08ce063bb31a",
     "D08-hosted-commit.json": "dfd9233561cbab76b10f23434f70904cb9778e12a35830057700ebbb7c97e39c"
   },
-  "source_hash_basis": "Exact working-tree bytes used for verification. PowerShell scripts retain CRLF by .gitattributes; Git normalizes their blob to LF."
+  "source_hash_basis": "Exact working-tree bytes used for verification. PowerShell scripts retain CRLF by .gitattributes; Git normalizes their blob to LF.",
+  "complex_followup": {
+    "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+    "base_commit": "51d437703c9252a40fb85e213586444f61e18479",
+    "date": "2026-09-13",
+    "review": "reviews/D08.md",
+    "evidence": "reviews/evidence/D08-complex.json",
+    "beta": {
+      "revision": "workbookcare-api-beta-00014-nah",
+      "worker_version": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+      "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+      "security_invariants_preserved": true,
+      "private_iam": true,
+      "max_instances": 1,
+      "payment_mode": "OFF",
+      "access": [
+        {
+          "path": "/",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/scans",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/formula-audits",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/delivery",
+          "status": 302,
+          "existing_access": true
+        }
+      ]
+    },
+    "verification": {
+      "input_xlsx": 7,
+      "input_csv": 2,
+      "expected_xlsx": 1,
+      "frozen_file_count": 13,
+      "diagnosis_mixed": {
+        "structure": 1,
+        "m4": 15,
+        "total": 16,
+        "groups": 3
+      },
+      "diagnosis_normal": {
+        "structure": 0,
+        "m4": 0
+      },
+      "repair_sums": {
+        "RP01_ALL": 2159436,
+        "RP01_SUBSET": 2029526,
+        "RP02_ALL": 937923
+      },
+      "complex_comparison": {
+        "groups": 464,
+        "A_rows": 448,
+        "B_rows": 440,
+        "counts": {
+          "MATCHED": 350,
+          "AMOUNT_DIFF": 41,
+          "ONLY_A": 23,
+          "ONLY_B": 23,
+          "AMBIGUOUS": 14,
+          "INPUT_ERROR": 13
+        },
+        "big_delta": "1"
+      },
+      "capacity": {
+        "A_rows": 1000,
+        "B_rows": 1000,
+        "matched": 1000,
+        "total_each": "3503500",
+        "rows1001_blocked": true
+      },
+      "actual_beta_downloads": 13,
+      "actual_downloaded_xlsx_reopened_in_excel": 8,
+      "actual_screen_checks": 13,
+      "new_api_tests": 12,
+      "full_regression": {
+        "web": 78,
+        "worker": 16,
+        "api": 231,
+        "m4_exact": 36,
+        "exit_code": 0
+      }
+    },
+    "owner_acceptance": "PENDING",
+    "commerce_ready": false,
+    "next_unit_approved": false,
+    "commit_record": "reviews/evidence/D08-complex-commit.json"
+  },
+  "prior_beta_before_complex_followup": {
+    "url": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+    "deployed_bundle": "D01",
+    "worker_version": "91c06632-1302-4877-ae49-d4e44af3f3a2",
+    "cloud_run_revision": "workbookcare-api-beta-00004-hhk",
+    "D02_D08_deployed": false,
+    "Access_required": true,
+    "delivery_flag_default": false,
+    "bindings_changed_in_D08": false
+  },
+  "global_gates_before_complex_followup": {
+    "official_pg_sandbox": "NOT_RUN",
+    "checkout_sdk": "NOT_CONNECTED",
+    "durable_commerce_storage": "NOT_READY",
+    "hosted_delivery_api_and_ui": "NOT_DEPLOYED",
+    "linux_runtime": "NOT_RUN",
+    "full_combined_capacity": "NOT_RUN",
+    "parent_patch_static_scan_hard_deadline": "NOT_IMPLEMENTED",
+    "legal_price_tax_support_owner_approval": "PENDING",
+    "M3_real_user_observed": "PENDING",
+    "M3_5_purchase_evidence": "DEFERRED",
+    "owner_release_approved": false
+  },
+  "sku_missing_evidence_before_complex_followup": {
+    "RP01": [
+      "official_pg_sandbox",
+      "checkout_sdk",
+      "durable_commerce_storage",
+      "full_combined_capacity",
+      "parent_patch_static_scan_hard_deadline",
+      "legal_price_tax_support_owner_approval",
+      "M3_real_user_observed",
+      "M3_5_purchase_evidence",
+      "owner_release_approved"
+    ],
+    "RP02": [
+      "official_pg_sandbox",
+      "checkout_sdk",
+      "durable_commerce_storage",
+      "full_combined_capacity",
+      "parent_patch_static_scan_hard_deadline",
+      "legal_price_tax_support_owner_approval",
+      "M3_real_user_observed",
+      "M3_5_purchase_evidence",
+      "owner_release_approved"
+    ],
+    "TWO_FILE_COMPARISON": [
+      "official_pg_sandbox",
+      "checkout_sdk",
+      "durable_commerce_storage",
+      "full_combined_capacity",
+      "legal_price_tax_support_owner_approval",
+      "M3_real_user_observed",
+      "M3_5_purchase_evidence",
+      "owner_release_approved"
+    ]
+  },
+  "source_hashes_before_complex_followup": {
+    "apps/api/app/delivery_rehearsal.py": "c9f0238f363d804b9902e700e12d70543e8e81688c2d7a0230d022c1fc7222a4"
+  },
+  "complex_evidence": {
+    "D08-complex-downloads.json": "8a4fcc95f0a0b656e675075d7189218a3cd8901edbef208e3772c30305116ba8",
+    "D08-complex-excel.json": "b4be2c294436486fff13ca3136173929db74c412bd0ccb77d6c7f6348499aa49",
+    "D08-complex-image.json": "20c3e7bbb819b940cfcbc01f274510d210d91e346902e3a82b6cca77313a12e3",
+    "D08-complex-product.json": "09e68d42613f76f030ce557fb248794c3f249837ccccc880a3963f2ff691010c",
+    "D08-complex-release.json": "4da12d19ab2b3b9acee766147bfb56cac5fa280471d2eeae3aa7b1fcb42d0188",
+    "D08-complex-ui.json": "3dce56bf8ad55d37998b8d6ad4bc343b01dfb3894e243df87a24f624866f477e",
+    "D08-complex.json": "3b21314475a7f44983603dd980021239646deffcb4171a60f0b7c14f4fefcca6"
+  }
 }

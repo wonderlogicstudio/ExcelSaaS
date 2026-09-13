@@ -1,3 +1,13 @@
+# Current D08 complex synthetic follow-up — 2026-09-13
+
+Current private API: `workbookcare-api-beta-00014-nah`,100% in asia-northeast3. Immutable image `sha256:12edb4bea80533d20ddd59fe6cb71fb0749320422ee3f04b78de5ed182acecc2` in the same existing private repository. Worker `521ad0aa-55f9-4606-b481-fc4861d8a60f` and Gateway `workbookcare-beta-d08-e6132fcdf496` are unchanged. Only registered synthetic hashes changed:1repair input and2comparison pairs. Access/IAM/HMAC/R2/KV/flags/payment OFF are unchanged.
+
+`build_complex_beta_oci.py` overlays exactly two allowlist files on the previously verified e6132f image; Java/wheels/application logic are hash-checked unchanged. No Docker, Cloud Build or new paid resource. `deploy_complex_beta.py` is a bounded recorded one-shot release helper, not a general automatic deployment command. Baseline11-bav → staging13-zum (20refs/2actual repairs/6files under120s staging probe) → same image live14-nah under original9s probe →100%traffic/tag removed → invariant and anonymous302 checks. Command exits and rollback baseline are in `delivery-v3_2/reviews/evidence/D08-complex-release.json`; actual site/Excel proof is in `D08-complex.json`.
+
+Immediate API rollback is `workbookcare-api-beta-00011-bav` with imagee6132f. Worker/Gateway do not require changing for this two-file registry overlay. Recheck drift and compatibility before any separately needed rollback; do not perform it merely as a test. D08 is stopped awaiting owner; standing beta authorization does not start the proposed next test unit. Historical release records follow.
+
+---
+
 # Current D08 protected synthetic release — 2026-09-13
 
 This section supersedes the D01-only build flags below. The historical D01 workflow is preserved. Current release proof is `delivery-v3_2/reviews/evidence/D08-hosted-release.json`, image/source/dependency hashes are in `D08-hosted-image.json`, and actual site/Excel acceptance is in `D08-hosted.json`. Do not rerun deployment automatically after the D08 stop.

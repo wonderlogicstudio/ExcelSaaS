@@ -472,7 +472,7 @@
       "review": "reviews/D08.md",
       "evidence": "reviews/evidence/D08-local.json",
       "commerce_ready": false,
-      "beta_deployment": "NOT_DEPLOYED_DOCKER_AND_LINUX_RUNTIME_PENDING",
+      "beta_deployment": "VERIFIED_PRIVATE_API00014_UNCHANGED_WORKER521_SYNTHETIC_ONLY",
       "pg_sandbox": "NOT_RUN",
       "implementation_commit": "8880d179aca80e4fff9f5bb44ebf50a45a5e7037",
       "hosted_followup": {
@@ -488,22 +488,120 @@
         "implementation_commit": "42c88b40eec5319be75694eeb8e9434207a31bd1",
         "commit_exit_code": 0,
         "verified_files": 55
-      }
+      },
+      "complex_followup": {
+        "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+        "base_commit": "51d437703c9252a40fb85e213586444f61e18479",
+        "date": "2026-09-13",
+        "review": "reviews/D08.md",
+        "evidence": "reviews/evidence/D08-complex.json",
+        "beta": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "worker_version": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+          "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+          "security_invariants_preserved": true,
+          "private_iam": true,
+          "max_instances": 1,
+          "payment_mode": "OFF",
+          "access": [
+            {
+              "path": "/",
+              "status": 302,
+              "existing_access": true
+            },
+            {
+              "path": "/api/v1/scans",
+              "status": 302,
+              "existing_access": true
+            },
+            {
+              "path": "/api/v1/formula-audits",
+              "status": 302,
+              "existing_access": true
+            },
+            {
+              "path": "/api/v1/delivery",
+              "status": 302,
+              "existing_access": true
+            }
+          ]
+        },
+        "verification": {
+          "input_xlsx": 7,
+          "input_csv": 2,
+          "expected_xlsx": 1,
+          "frozen_file_count": 13,
+          "diagnosis_mixed": {
+            "structure": 1,
+            "m4": 15,
+            "total": 16,
+            "groups": 3
+          },
+          "diagnosis_normal": {
+            "structure": 0,
+            "m4": 0
+          },
+          "repair_sums": {
+            "RP01_ALL": 2159436,
+            "RP01_SUBSET": 2029526,
+            "RP02_ALL": 937923
+          },
+          "complex_comparison": {
+            "groups": 464,
+            "A_rows": 448,
+            "B_rows": 440,
+            "counts": {
+              "MATCHED": 350,
+              "AMOUNT_DIFF": 41,
+              "ONLY_A": 23,
+              "ONLY_B": 23,
+              "AMBIGUOUS": 14,
+              "INPUT_ERROR": 13
+            },
+            "big_delta": "1"
+          },
+          "capacity": {
+            "A_rows": 1000,
+            "B_rows": 1000,
+            "matched": 1000,
+            "total_each": "3503500",
+            "rows1001_blocked": true
+          },
+          "actual_beta_downloads": 13,
+          "actual_downloaded_xlsx_reopened_in_excel": 8,
+          "actual_screen_checks": 13,
+          "new_api_tests": 12,
+          "full_regression": {
+            "web": 78,
+            "worker": 16,
+            "api": 231,
+            "m4_exact": 36,
+            "exit_code": 0
+          }
+        },
+        "owner_acceptance": "PENDING",
+        "commerce_ready": false,
+        "next_unit_approved": false,
+        "commit_record": "reviews/evidence/D08-complex-commit.json"
+      },
+      "beta_deployment_history": [
+        "NOT_DEPLOYED_DOCKER_AND_LINUX_RUNTIME_PENDING"
+      ]
     }
   },
   "readiness": {
     "repair_profiles": {
-      "RP01": "LOCAL_ENGINEERING_VERIFIED_HOSTED_PG_COMMERCIAL_PENDING",
-      "RP02": "LOCAL_ENGINEERING_VERIFIED_HOSTED_PG_COMMERCIAL_PENDING"
+      "RP01": "HOSTED_SYNTHETIC_ENGINEERING_VERIFIED_COMMERCIAL_PENDING",
+      "RP02": "HOSTED_SYNTHETIC_ENGINEERING_VERIFIED_COMMERCIAL_PENDING"
     },
-    "repair_delivery": "LOCAL_ENGINEERING_VERIFIED_HOSTED_AND_COMMERCE_PENDING",
-    "comparison_delivery": "LOCAL_ENGINEERING_VERIFIED_HOSTED_AND_COMMERCE_PENDING",
-    "operations": "LOCAL_GUARDS_VERIFIED_HOSTED_AND_POLICY_PENDING",
+    "repair_delivery": "HOSTED_SYNTHETIC_ENGINEERING_VERIFIED_COMMERCIAL_PENDING",
+    "comparison_delivery": "HOSTED_SYNTHETIC_ENGINEERING_VERIFIED_COMMERCIAL_PENDING",
+    "operations": "EXISTING_HOSTED_GUARDS_VERIFIED_CONCURRENCY_DURABILITY_PENDING",
     "owner_release_approved": false,
     "commercial_signal": "NOT_OBSERVED",
     "release_manifest": "release_manifest.json"
   },
-  "customer_change_approval": "IMPLEMENTED_LOCAL_SYNTHETIC_ONLY_D04",
+  "customer_change_approval": "IMPLEMENTED_SEPARATE_HOSTED_SYNTHETIC_D08",
   "next_recommended_bundle": null,
   "next_bundle_approved": false,
   "execution_stopped_after": "D08",
@@ -535,9 +633,30 @@
   ],
   "owner_review_timing": "AFTER_D08_AS_REQUESTED_2026_09_13",
   "customer_change_approval_history": [
-    "NOT_IMPLEMENTED_BY_D01"
+    "NOT_IMPLEMENTED_BY_D01",
+    "IMPLEMENTED_LOCAL_SYNTHETIC_ONLY_D04"
   ],
-  "next_recommended_unit": "EXISTING_PROTECTED_BETA_DELIVERY_DEPLOYMENT_AND_SCREEN_VERIFICATION",
+  "next_recommended_unit": "D08_COMPLEX_CONCURRENT_REQUEST_CANCELLATION_RETRY_ACCEPTANCE",
   "current_status": "PARTIAL_AWAITING_OWNER",
-  "execution_state": "STOPPED_AWAITING_OWNER"
+  "execution_state": "STOPPED_AWAITING_OWNER",
+  "readiness_history": [
+    {
+      "before": "D08_COMPLEX_FOLLOWUP",
+      "value": {
+        "repair_profiles": {
+          "RP01": "LOCAL_ENGINEERING_VERIFIED_HOSTED_PG_COMMERCIAL_PENDING",
+          "RP02": "LOCAL_ENGINEERING_VERIFIED_HOSTED_PG_COMMERCIAL_PENDING"
+        },
+        "repair_delivery": "LOCAL_ENGINEERING_VERIFIED_HOSTED_AND_COMMERCE_PENDING",
+        "comparison_delivery": "LOCAL_ENGINEERING_VERIFIED_HOSTED_AND_COMMERCE_PENDING",
+        "operations": "LOCAL_GUARDS_VERIFIED_HOSTED_AND_POLICY_PENDING",
+        "owner_release_approved": false,
+        "commercial_signal": "NOT_OBSERVED",
+        "release_manifest": "release_manifest.json"
+      }
+    }
+  ],
+  "next_recommended_unit_history": [
+    "EXISTING_PROTECTED_BETA_DELIVERY_DEPLOYMENT_AND_SCREEN_VERIFICATION"
+  ]
 }

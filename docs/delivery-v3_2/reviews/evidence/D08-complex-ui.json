@@ -1,0 +1,157 @@
+{
+  "surface": "authenticated existing Access beta",
+  "viewport": {
+    "width": 1734,
+    "height": 1256,
+    "horizontal_overflow": false
+  },
+  "checks": [
+    {
+      "case": "diagnosis-mixed",
+      "total": 16,
+      "structure": 1,
+      "m4": 15,
+      "groups": 3,
+      "exact15CandidateLocations": true,
+      "cellEvidence": "RELATIVE_REFERENCE_DRIFT",
+      "status": "PASS"
+    },
+    {
+      "case": "diagnosis-normal",
+      "structure": 0,
+      "m4": 0,
+      "normalExceptions": 9,
+      "status": "PASS"
+    },
+    {
+      "case": "unsupported-structures",
+      "eligible": 0,
+      "purchaseBlocked": true,
+      "chartTableMergeCrossSheetReasonsVisible": true,
+      "status": "PASS"
+    },
+    {
+      "case": "repair-1001-formulas",
+      "inputBlocked": true,
+      "noJobCreated": true,
+      "status": "PASS"
+    },
+    {
+      "case": "RP01_ALL",
+      "status": "PASS",
+      "exactDisplayedChanges": 8,
+      "exactDisplayedImpacts": 32,
+      "sumAfter": 2159436,
+      "approvalInitiallyDisabled": true,
+      "separateApproval": true,
+      "readyThreeFiles": true
+    },
+    {
+      "case": "negative-leading-zero-ID",
+      "status": "PASS",
+      "eligible": 0,
+      "stillBlockedWhenRoleSaysAmount": true
+    },
+    {
+      "case": "RP01_SUBSET",
+      "status": "PASS",
+      "exactDisplayedChanges": 4,
+      "exactDisplayedImpacts": 20,
+      "sumAfter": 2029526,
+      "approvalInitiallyDisabled": true,
+      "separateApproval": true,
+      "readyThreeFiles": true
+    },
+    {
+      "case": "negative-nonblank-formula",
+      "status": "PASS",
+      "eligible": 0,
+      "noOverwrite": true
+    },
+    {
+      "case": "RP02_ALL",
+      "status": "PASS",
+      "exactDisplayedChanges": 3,
+      "uniqueCalculatedImpacts": 16,
+      "sumAfter": 937923,
+      "approvalInitiallyDisabled": true,
+      "separateApproval": true,
+      "readyThreeFiles": true
+    },
+    {
+      "case": "comparison",
+      "status": "PASS",
+      "groups": 464,
+      "counts": {
+        "MATCHED": 350,
+        "AMOUNT_DIFF": 41,
+        "ONLY_A": 23,
+        "ONLY_B": 23,
+        "AMBIGUOUS": 14,
+        "INPUT_ERROR": 13
+      },
+      "A": 448,
+      "B": 440,
+      "visibleLedgerPages": 18,
+      "exactSourceRows": 888,
+      "bigIntegerDelta": "1",
+      "unknownAmountA": 5,
+      "reportOnly": true
+    },
+    {
+      "case": "comparison-1001-rows",
+      "status": "PASS",
+      "inputBlocked": true
+    },
+    {
+      "case": "comparison-capacity",
+      "status": "PASS",
+      "groups": 1000,
+      "matched": 1000,
+      "knownAmountEach": "3503500",
+      "visibleLedgerPages": 40,
+      "exactSourceRows": 2000,
+      "concurrencyVerified": false
+    },
+    {
+      "case": "final-deployed-diagnosis-details",
+      "status": "PASS",
+      "total": 16,
+      "exactM4LocationsAndSubtypes": 15,
+      "structuralLocation": "채널요약!B10",
+      "newApiRevision": "00014-nah"
+    }
+  ],
+  "screenshots": {
+    "artifacts/screenshots/d08-complex/final-summary.jpg": "3e8b2427b26f6201b8a98490ce7a9228b6789ceee9798a94976868bdd24ed2b0",
+    "artifacts/screenshots/d08-complex/02-normal.jpg": "16cf1347db165d58eb7b7f4c6b75ffd5add4e7ddcfc0ff3f37d4e58065cec286",
+    "artifacts/screenshots/d08-complex/04-unsupported.jpg": "1eab339f0c8477b272443bd95c89a7829659188e228eca28bc2c13a3db0cc270",
+    "artifacts/screenshots/d08-complex/RP01_ALL-approval.jpg": "c7aa6280bed321ddcca448de52edfbfcfd97ba368b152bb56a45e8818b990bed",
+    "artifacts/screenshots/d08-complex/RP01_SUBSET-approval.jpg": "e6b1ca01afe74f9b03eb191677b394e7f32b995fc5edbea2ccd1393030b73307",
+    "artifacts/screenshots/d08-complex/RP02_ALL-approval.jpg": "df5e1d644673eb964a3cbe174174269a8e3eb4a14607a2f310a107e863f7db0b",
+    "artifacts/screenshots/d08-complex/comparison-summary.jpg": "18ad48f87fe4279406b08ae81867824a4db3d2a3c995b0b74f716062c59c2007",
+    "artifacts/screenshots/d08-complex/comparison-big-integer.jpg": "41af045cb5bb180106c4bf3ca207be2362e4d91aa767823e9c6bf1206e24c2ce",
+    "artifacts/screenshots/d08-complex/comparison-1000-summary.jpg": "e98437e4cfeb5b01d6bb3268c03a8c1d789c5841002ce4a82a451ac108702172",
+    "artifacts/screenshots/d08-complex/excel-inputs-1.png": "61ad870acd96c89e2cd8e75386c8ffd7cdaefb4486cc6889e162a480fb8d31cd",
+    "artifacts/screenshots/d08-complex/excel-inputs-2.png": "55dc3d11d354a0f325f56c311525bae2441d5a8bf3d4a2f21c2ebbd7ad95fce2",
+    "artifacts/screenshots/d08-complex/excel-inputs-3.png": "f9a911fe29e361c321db46cfa0bbfce83675a6d45da7868bb6a1ba468258e5ea",
+    "artifacts/screenshots/d08-complex/excel-inputs-4.png": "898d0fdae1128d40b1228ebaf1c3d03459f1fde06fa8a58d30abd377e0a7cbfc",
+    "artifacts/screenshots/d08-complex/excel-downloads-1.png": "43235a77511aab7f3df20c947330ad92a4802d009ca435c0e6054b3683e452b4",
+    "artifacts/screenshots/d08-complex/excel-downloads-2.png": "a8c5874c1b306f806b8c00dbaeb0cab26d8e55490ad43ce5cd448a623be7e276",
+    "artifacts/screenshots/d08-complex/excel-downloads-3.png": "2fa3a96638ae44da11e48f219a1de71e9194b8f1f87829096b4860d8d1f48267"
+  },
+  "raw_dom_evidence_sha256": {
+    "artifacts/verification/d08-complex/browser-proof/comparison-visible-ledger.json": "44deb8eebd7f9f006d2aa964a23907d7482990b232d6b46a1a21c51ee5e18dfb",
+    "artifacts/verification/d08-complex/browser-proof/RP01_ALL-cards.json": "012100ace01baf91aeddf9e5a46338e5c4f5220c61d9a1235d73ac261b927667",
+    "artifacts/verification/d08-complex/browser-proof/RP01_SUBSET-cards.json": "a246fe794a72729059a3e2ec534082f6d443afd2e777afbb2ebe85b7a28d8ded",
+    "artifacts/verification/d08-complex/browser-proof/RP02_ALL-cards.json": "4d454bfed6bc485780ca8726d7bcb18a7e68705f806aa111d203293e91a977aa",
+    "artifacts/verification/d08-complex/browser-proof/ui-proof.json": "80c335a1b49207f2717c5cf9b566e1695769cbc1e0ead2bd2aee09cbdf42f2e6"
+  },
+  "new_complex_mobile_run": "NOT_RUN; unchanged frontend, prior D08 mobile evidence reused only for unchanged UI behavior",
+  "visual_review": {
+    "native_input_sheet_pages": 15,
+    "native_download_sheet_pages": 5,
+    "expected_workbook_artifact_preview": true,
+    "selected_images_reviewed": 16
+  }
+}
