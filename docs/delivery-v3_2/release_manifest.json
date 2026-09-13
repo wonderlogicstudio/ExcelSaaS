@@ -604,7 +604,11 @@
     "commerce_ready": false,
     "owner_acceptance": "PENDING",
     "next_unit_approved": false,
-    "execution_state": "STOPPED_AWAITING_OWNER"
+    "execution_state": "STOPPED_AWAITING_OWNER",
+    "implementation_commit": "9c42a15453960eef044d6429f29ce4884f432c20",
+    "commit_exit_code": 0,
+    "verified_committed_files": 50,
+    "commit_record": "reviews/evidence/CORE_FLOW-commit.json"
   },
   "source_hashes_before_core_flow": {
     "apps/web/src/App.tsx": "c50d3562a81e1cbf26518347cae7ff85f56435d4337a2d6cf3e5c1cb5017c761",
@@ -623,6 +627,7 @@
     "Remote push, production/anonymous release, invitations, real customer files/payment/refund, new paid resources and remaining H2/H3 checks NOT_RUN as out of scope."
   ],
   "core_flow_evidence": {
-    "CORE_FLOW.json": "5381d2581ee206abfb86a2f5b42fa6de8bb8670c53a1a09f6f8077014fcef8f9"
+    "CORE_FLOW.json": "5381d2581ee206abfb86a2f5b42fa6de8bb8670c53a1a09f6f8077014fcef8f9",
+    "CORE_FLOW-commit.json": "c1601fd9a7bcf2346cb6301a7ed51a8ec78ae60ed42e0cd4fae8bfecf109e5f6"
   }
 }

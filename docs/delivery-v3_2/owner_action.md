@@ -1,3 +1,5 @@
+로컬 구현 커밋 `9c42a15453960eef044d6429f29ce4884f432c20` · 검증한50파일 · commit exit0 · 원격 push 없음.
+
 ## 현재 Main Flow / IA에서 확인할 다섯 행동 — 완료 후 정지
 
 [보호 베타](https://workbookcare-beta.wonderlogic-studio.workers.dev/)를 새로고침하세요. 메뉴 분리·수정 검토 연결을 배포하고 실제 예상 값까지 확인했습니다.

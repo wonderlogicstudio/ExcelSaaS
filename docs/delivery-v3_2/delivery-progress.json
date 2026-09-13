@@ -627,7 +627,11 @@
         "commerce_ready": false,
         "owner_acceptance": "PENDING",
         "next_unit_approved": false,
-        "execution_state": "STOPPED_AWAITING_OWNER"
+        "execution_state": "STOPPED_AWAITING_OWNER",
+        "implementation_commit": "9c42a15453960eef044d6429f29ce4884f432c20",
+        "commit_exit_code": 0,
+        "verified_committed_files": 50,
+        "commit_record": "reviews/evidence/CORE_FLOW-commit.json"
       }
     }
   },
@@ -738,6 +742,10 @@
     "commerce_ready": false,
     "owner_acceptance": "PENDING",
     "next_unit_approved": false,
-    "execution_state": "STOPPED_AWAITING_OWNER"
+    "execution_state": "STOPPED_AWAITING_OWNER",
+    "implementation_commit": "9c42a15453960eef044d6429f29ce4884f432c20",
+    "commit_exit_code": 0,
+    "verified_committed_files": 50,
+    "commit_record": "reviews/evidence/CORE_FLOW-commit.json"
   }
 }

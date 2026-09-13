@@ -1,3 +1,5 @@
+로컬 구현 커밋 `9c42a15453960eef044d6429f29ce4884f432c20` · 검증한50파일 · commit exit0 · 원격 push 없음.
+
 # Core Product Flow / IA — 구현·보호 베타 검증 완료
 
 2026-09-13 · **ENGINEERING_VERIFIED_AWAITING_OWNER**. 사용자 첨부 명세에 따른 D08 이후의 한정된 IA 후속이다. D08 전체 상용 판정은 **PARTIAL**이며 D09를 시작하지 않는다. 기존 진행·review·owner 문서와 예상 값을 보존했다. [기계 판독 증거](evidence/CORE_FLOW.json), [현재 베타](https://workbookcare-beta.wonderlogic-studio.workers.dev/).
