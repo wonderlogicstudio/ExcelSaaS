@@ -45,7 +45,9 @@ LOG_CONFIG = {
         "uvicorn.error": {"handlers": [], "level": "INFO", "propagate": True},
         "uvicorn.access": {"handlers": [], "propagate": False},
         "workbookcare.safe_events": {
-            "handlers": ["safe_event"], "level": "INFO", "propagate": False,
+            "handlers": ["safe_event"],
+            "level": "INFO",
+            "propagate": False,
         },
     },
 }
@@ -58,6 +60,26 @@ def main() -> None:
             raise ValueError
     except ValueError:
         raise SystemExit("PORT must be an integer between 1 and 65535") from None
+
+    if os.environ.get("DELIVERY_RUNTIME_VERIFY") == "true":
+        from pathlib import Path
+
+        from .delivery_runtime_check import verify
+
+        try:
+            print(json.dumps(verify(Path("/app/verification"))), flush=True)
+        except Exception as error:
+            print(
+                json.dumps(
+                    {
+                        "event": "delivery_runtime_failed",
+                        "error_type": type(error).__name__,
+                        "safe_code": getattr(error, "code", "STARTUP_CHECK_FAILED"),
+                    }
+                ),
+                flush=True,
+            )
+            raise SystemExit(1) from None
 
     # openpyxl warnings can contain workbook-defined names and formula text.
     logging.captureWarnings(True)

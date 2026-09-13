@@ -31,6 +31,17 @@ describe('D01 product and output boundaries', () => {
     expect(screen.getByText('결제 ≠ 변경승인 · 확인함 ≠ 변경승인')).toBeVisible();
   });
 
+  it('labels protected synthetic trials without offering general purchase',()=>{
+    const start=vi.fn();const compare=vi.fn();
+    render(<ProductCards onStart={start} onCompare={compare}/>);
+    expect(screen.getAllByText('합성 샘플 시험')).toHaveLength(2);
+    fireEvent.click(screen.getByRole('button',{name:'합성 파일 검사 후 수정 범위 확인'}));
+    expect(start).toHaveBeenCalledOnce();
+    fireEvent.click(screen.getByRole('button',{name:'비교 범위 사전 확인'}));
+    expect(compare).toHaveBeenCalledOnce();
+    expect(screen.queryByRole('button',{name:/구매|결제/})).not.toBeInTheDocument();
+  });
+
   it('fails closed even when a remote catalog marks absent repair and comparison engines purchasable', () => {
     render(<ProductCards products={productCatalog.map((item) => ({ ...item, capability_status: 'AVAILABLE', purchase_enabled: true }))} onStart={() => undefined} />);
     expect(screen.getByRole('button', { name: '수정 범위 확인 · 준비 중' })).toBeDisabled();

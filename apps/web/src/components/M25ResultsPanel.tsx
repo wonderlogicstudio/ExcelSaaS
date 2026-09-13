@@ -517,7 +517,7 @@ function ResultsContent({
             <button className="button button--primary button--wide" type="button" disabled>
               정밀 검증·수정 기능 준비 중<FileClock size={18} />
             </button>
-            <p className="prototype-note">현재 베타에서는 신청, 결제, 전문가 견적 요청, 실제 파일 수정 기능을 제공하지 않습니다.</p>
+            <p className="prototype-note">이 참고 견적은 구매권이나 변경 승인이 아닙니다. 일반 신청·결제·전문가 견적 요청은 준비 중입니다.</p>
           </aside>
           </details>
         </div>
@@ -806,7 +806,7 @@ function ResultsContent({
             <button className="button button--primary button--wide" type="button" disabled>
               정밀 검증·수정 기능 준비 중<FileClock size={18} />
             </button>
-            <p className="prototype-note">현재 베타에서는 신청, 결제, 전문가 견적 요청, 실제 파일 수정 기능을 제공하지 않습니다.</p>
+            <p className="prototype-note">이 참고 견적은 구매권이나 변경 승인이 아닙니다. 일반 신청·결제·전문가 견적 요청은 준비 중입니다.</p>
           </aside>
         </div>
 

@@ -38,9 +38,19 @@ def comparison_entitled(job, settings):
     if job["snapshot"].get("source_pair_hash") not in known:
         return False
     return (
-        settings.app_env == "internal_beta"
+        (
+            (
+                settings.app_env == "internal_beta"
+                and grant.get("kind") == "INTERNAL_SYNTHETIC_COMPARISON"
+            )
+            or (
+                settings.app_env == "hosted_beta"
+                and settings.hosted_synthetic_delivery_enabled
+                and grant.get("kind") == "HOSTED_SYNTHETIC_COMPARISON"
+                and grant.get("owner") == job["owner"]
+            )
+        )
         and job["product"] == PRODUCT
-        and grant.get("kind") == "INTERNAL_SYNTHETIC_COMPARISON"
         and grant.get("job_id") == job["id"]
         and grant.get("source_pair_hash") == job["snapshot"].get("source_pair_hash")
         and grant.get("spec_hash") == job["state"].get("spec_hash")
@@ -58,10 +68,13 @@ def require_right(job, settings):
 
 
 def project_comparison(job, settings):
+    from .delivery_hosted_rehearsal import available
+
     state = job["state"]
     authorized = comparison_entitled(job, settings)
     return {
         "job_id": job["id"],
+        "synthetic_rehearsal_available": available(job, settings),
         "product_id": PRODUCT,
         "revision": job["revision"],
         "expires_at": job["expires"],

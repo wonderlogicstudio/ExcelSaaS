@@ -8,26 +8,29 @@ const anchors = {
 };
 
 export function ProductCards({ products, onStart, onCompare }: { products?: ProductOffering[]; onStart: () => void; onCompare?: () => void }) {
+  const synthetic = (product:ProductOffering) => Boolean(onCompare) && product.product_id!=='FREE_DIAGNOSIS' && product.capability_status!=='UNSUPPORTED';
   return (
     <>
       <div className="product-cards">
         {displayedProducts(products).map((product) => (
           <article className="product-card" id={anchors[product.product_id]} key={product.product_id} aria-labelledby={`${product.product_id}-title`}>
-            <span className="card-label">{product.capability_status === 'AVAILABLE' ? '현재 제공' : product.capability_status === 'UNSUPPORTED' ? '지원 불가' : '준비 중'}</span>
+            <span className="card-label">{product.capability_status === 'AVAILABLE' ? '현재 제공' : product.capability_status === 'UNSUPPORTED' ? '지원 불가' : synthetic(product) ? '합성 샘플 시험' : '준비 중'}</span>
             <h3 id={`${product.product_id}-title`}>{product.title}</h3>
-            <strong className="product-card__boundary">{product.includes_repaired_workbook ? '수정본 포함 · 향후 지원 시' : product.product_id === 'TWO_FILE_COMPARISON' ? '비교 보고서 전용 · 수정본 미포함' : '진단 결과 전용 · 수정본 미포함'}</strong>
+            <strong className="product-card__boundary">{product.includes_repaired_workbook ? (synthetic(product)?'별도 승인 후 수정본 · 등록된 합성 샘플':'수정본 포함 · 향후 지원 시') : product.product_id === 'TWO_FILE_COMPARISON' ? '비교 보고서 전용 · 수정본 미포함' : '진단 결과 전용 · 수정본 미포함'}</strong>
             <p>{product.scope}</p>
-            <h4>{product.capability_status === 'AVAILABLE' ? '받는 파일' : '향후 받을 파일 · 현재 제공하지 않음'}</h4>
+            <h4>{synthetic(product)?'합성 시험에서 받는 파일':product.capability_status === 'AVAILABLE' ? '받는 파일' : '향후 받을 파일 · 현재 제공하지 않음'}</h4>
             <ul className="product-deliverables">{product.deliverables.map((item) => (
               <li key={item.kind}><strong>{item.label}</strong><code>{item.filename}</code></li>
             ))}</ul>
             <h4>포함하지 않는 범위</h4>
             <ul>{product.exclusions.map((item) => <li key={item}>{item}</li>)}</ul>
-            <p>{product.next_action}</p>
+            <p>{synthetic(product)?'등록된 합성 샘플로 시험할 수 있습니다. 일반 구매는 준비 중입니다.':product.next_action}</p>
             {product.product_id === 'FREE_DIAGNOSIS' ? (
               <button className="button button--primary" type="button" onClick={onStart} disabled={product.capability_status !== 'AVAILABLE'}>무료 진단 시작</button>
-            ) : product.product_id === 'TWO_FILE_COMPARISON' && onCompare ? (
+            ) : product.product_id === 'TWO_FILE_COMPARISON' && synthetic(product) ? (
               <button className="button button--outline" type="button" onClick={onCompare}>비교 범위 사전 확인</button>
+            ) : product.product_id === 'APPROVED_REPAIR' && synthetic(product) ? (
+              <button className="button button--outline" type="button" onClick={onStart}>합성 파일 검사 후 수정 범위 확인</button>
             ) : (
               <button className="button button--outline" type="button" disabled>{product.product_id === 'APPROVED_REPAIR' ? '수정 범위 확인' : '두 자료 비교 시작'} · {product.capability_status === 'UNSUPPORTED' ? '지원 불가' : '준비 중'}</button>
             )}

@@ -60,6 +60,8 @@ def get_store() -> DeliveryStore:
 def projection(job: dict) -> dict:
     if job["product"] == "TWO_FILE_COMPARISON":
         return project_comparison(job, get_settings())
+    from .delivery_hosted_rehearsal import available
+
     state = job["state"]
     snapshot = job["snapshot"]
     return {
@@ -77,7 +79,10 @@ def projection(job: dict) -> dict:
         "preflight": state["preflight"],
         "payment_status": state["payment"],
         "purchase_enabled": False,
-        "repair_execution_available": entitled(job, get_settings().app_env)
+        "synthetic_rehearsal_available": available(job, get_settings()),
+        "repair_execution_available": entitled(
+            job, get_settings().app_env, get_settings().hosted_synthetic_delivery_enabled
+        )
         and compatibility_status()["status"] == "PASS",
         "approval_status": "APPROVED" if state.get("approval") else "NOT_APPROVED",
         "approval_receipt": (state.get("approval") or {}).get("receipt"),
@@ -86,8 +91,13 @@ def projection(job: dict) -> dict:
         "storage_mode": "BETA_EPHEMERAL_LOCAL_ADAPTER",
         "source_unchanged": True,
         "plan_summary": plan_summary(state["plan"]) if state.get("plan") else None,
-        "internal_rehearsal": entitled(job, get_settings().app_env) and not state.get("order_id"),
-        "entitlement_active": entitled(job, get_settings().app_env),
+        "internal_rehearsal": entitled(
+            job, get_settings().app_env, get_settings().hosted_synthetic_delivery_enabled
+        )
+        and not state.get("order_id"),
+        "entitlement_active": entitled(
+            job, get_settings().app_env, get_settings().hosted_synthetic_delivery_enabled
+        ),
         "order_id": state.get("order_id"),
         "policy": state.get("policy"),
     }
@@ -162,6 +172,7 @@ async def delivery(request: Request):
             "durable_commerce_storage": False,
             "order_ttl_seconds": 86400,
             "cleanup_interval_seconds": 30,
+            "cleanup_requires_active_instance": settings.app_env == "hosted_beta",
             "max_execution_attempts": 3,
             "support_intake_enabled": False,
             "automation_mode": "MANUAL_NEW_INPUT_ONLY",
@@ -241,7 +252,11 @@ async def delivery(request: Request):
                 "비교 보고서 권리로 수정 작업을 실행하거나 받을 수 없습니다.",
                 403,
             )
-        if action == "order_create":
+        if action == "synthetic_rehearsal":
+            from .delivery_hosted_rehearsal import grant
+
+            output = projection(await run_in_threadpool(grant, store, job, body, settings))
+        elif action == "order_create":
             output = payments.project_order(
                 store, payments.create_order(store, job, body, settings)
             )
@@ -295,7 +310,12 @@ async def delivery(request: Request):
         elif action == "download":
             output = download(store, job, body.get("kind"), settings)
         elif action == "plan_details":
-            output = customer_plan(job, entitled=entitled(job, settings.app_env))
+            output = customer_plan(
+                job,
+                entitled=entitled(
+                    job, settings.app_env, settings.hosted_synthetic_delivery_enabled
+                ),
+            )
         elif action == "prepare_plan":
             if job["state"]["status"] in ACTIVE | {"READY"}:
                 reject("EXECUTION_IN_PROGRESS", "현재 실행을 마치거나 새 작업으로 시작하세요.", 409)

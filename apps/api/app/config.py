@@ -34,6 +34,7 @@ class Settings(BaseSettings):
     formula_audit_max_sheet_count: int = Field(default=200, ge=1)
     formula_audit_max_candidate_count: int = Field(default=120, ge=1)
     delivery_beta_enabled: bool = False
+    hosted_synthetic_delivery_enabled: bool = False
     delivery_data_dir: str | None = None
     payment_mode: str = "OFF"
     toss_test_secret: SecretStr | None = None

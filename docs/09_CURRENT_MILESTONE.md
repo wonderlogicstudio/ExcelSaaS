@@ -1,4 +1,17 @@
+# STOPPED AFTER D08 — protected beta verified / owner review pending
+
+2026-09-13: Approved D02–D08 beta deployment and actual hosted synthetic acceptance completed. Worker521ad0aa / private API00011-bav. D08 overall PARTIAL: official PG, durable commerce, combined capacity/deadlines and commercial/owner release gates remain. PAYMENT_MODE OFF; no D09, push or anonymous release. Existing lower ACTIVE headings are historical only. See reviews/D08.md, release_manifest.json and owner_action.md. Next proposed single unit: official PG sandbox verification after owner prepares test account/keys.
+
+---
+
+이하 이전 기록은 당시 상태로 보존합니다. 최신 판정은 위 기록입니다.
+
 # Current milestone
+
+## ACTIVE APPROVED — D02–D08 existing protected beta deployment (2026-09-13)
+
+Latest owner instruction: deploy to the existing Access beta and start actual site validation. This supersedes the previous deployment stop only for this unit; no D09 or remote Git push. Reuse local passing evidence, package the Linux Java/POI and report runtime, verify fixed synthetic expected values in the authenticated browser and downloaded Excel files. Official PG account/keys are not prepared (owner confirmed); keep PAYMENT_MODE=OFF and label fixed-synthetic rehearsal separately from payment. Keep default-off hosted rehearsal, exact approval, private owner/HMAC/IAM/R2/KV, no real customer input or new paid resources. Docker/Desktop/WSL restart is not authorized. Record failures, fixes, actual checks and unresolved release criteria; do not claim D08 commercial completion.
+
 
 ## STOPPED AFTER D08 — 사용자 확인 대기 (2026-09-13)
 

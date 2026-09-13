@@ -1,3 +1,11 @@
+## D08 protected synthetic beta decision — 2026-09-13
+
+Owner explicitly requested existing beta deployment and answered that Toss test credentials are not ready. Reuse actual local D01–D08 evidence; verify real hosted UI and downloaded Excel before reporting. Enable default-off hosted synthetic grants only for registered sources, owner/plan/expiry, with payment OFF and separate exact approval. Preserve Access/IAM/HMAC/private storage. Dockerless OCI uses existing registry; no Docker/WSL restart or new paid service. One ephemeral instance is a beta constraint, not durable commerce. Final beta engineering verified; D08 overall PARTIAL and stop. No remote push or next bundle.
+
+---
+
+이하 이전 기록은 당시 상태로 보존합니다. 최신 판정은 위 기록입니다.
+
 # Accepted decisions
 
 ## APPROVED — D01 hierarchy refinement and D02–D08 execution (2026-09-13)

@@ -14,7 +14,7 @@ SYNTHETIC_SOURCE_HASHES = {
 }
 
 
-def entitled(job: dict, app_env: str) -> bool:
+def entitled(job: dict, app_env: str, hosted_synthetic: bool = False) -> bool:
     if job["product"] != "APPROVED_REPAIR":
         return False
     if job["state"].get("order_id"):
@@ -23,9 +23,17 @@ def entitled(job: dict, app_env: str) -> bool:
         return bool(payment_grant(job, app_env))
     grant = job["state"].get("internal_grant") or {}
     return (
-        app_env == "internal_beta"
+        (
+            (app_env == "internal_beta" and grant.get("kind") == "INTERNAL_SYNTHETIC")
+            or (
+                app_env == "hosted_beta"
+                and hosted_synthetic
+                and grant.get("kind") == "HOSTED_SYNTHETIC"
+                and grant.get("owner") == job["owner"]
+                and grant.get("plan_digest") == (job["state"].get("plan") or {}).get("digest")
+            )
+        )
         and job["product"] == "APPROVED_REPAIR"
-        and grant.get("kind") == "INTERNAL_SYNTHETIC"
         and grant.get("job_id") == job["id"]
         and grant.get("source_hash") == job["snapshot"]["source_hash"]
         and grant.get("source_hash") in SYNTHETIC_SOURCE_HASHES

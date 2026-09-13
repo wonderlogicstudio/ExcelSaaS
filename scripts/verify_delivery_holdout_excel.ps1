@@ -1,4 +1,4 @@
-﻿param([ValidateSet('d08','d08-comparison')][string]$Stage='d08')
+﻿param([ValidateSet('d08','d08-comparison','d08-hosted')][string]$Stage='d08')
 $ErrorActionPreference='Stop'
 $root=Split-Path -Parent $PSScriptRoot
 $dir=Join-Path $root ('artifacts/verification/'+$Stage)
@@ -41,7 +41,7 @@ try{
       if($sheet.Range('F3').Formula -cne $oracle.repair.RP02.formula){throw 'Approved formula differs'}
       foreach($item in $oracle.repair.RP02.unchanged_text.PSObject.Properties){if($sheet.Range($item.Name).Value2 -cne $item.Value){throw 'Unapproved text changed'}}
      }elseif($null -ne $sheet.Range('F3').Value2){throw 'Unapproved blank changed'}
-     if($case.width -eq 1440){
+     if($case.width -eq 1440 -or $Stage -eq 'd08-hosted'){
       $sheet.PageSetup.PrintArea='$A$1:$J$12';$sheet.PageSetup.Orientation=2;$sheet.PageSetup.Zoom=$false;$sheet.PageSetup.FitToPagesWide=1;$sheet.PageSetup.FitToPagesTall=1
       $pdf=Join-Path $dir ($case.profile+'-holdout-excel.pdf');$sheet.ExportAsFixedFormat(0,$pdf);$pdfs+=$pdf
      }
@@ -54,7 +54,7 @@ try{
     }else{
      if($book.Worksheets.Count -ne 8){throw 'Comparison sheets missing'}
      $sheet=$book.Worksheets.Item('요약');if([string]$sheet.Range('C12').Value2 -cne '250' -or [string]$sheet.Range('D12').Value2 -cne '190'){throw 'Comparison known amounts differ'}
-     if($case.width -eq 1440){$pdf=Join-Path $dir 'comparison-holdout-excel.pdf';$sheet.ExportAsFixedFormat(0,$pdf);$pdfs+=$pdf}
+     if($case.width -eq 1440 -or $Stage -eq 'd08-hosted'){$pdf=Join-Path $dir 'comparison-holdout-excel.pdf';$sheet.ExportAsFixedFormat(0,$pdf);$pdfs+=$pdf}
      [void][Runtime.InteropServices.Marshal]::ReleaseComObject($sheet)
      $count=0
      foreach($name in @('금액차이','한쪽자료','중복모호','자료오류','일치')){

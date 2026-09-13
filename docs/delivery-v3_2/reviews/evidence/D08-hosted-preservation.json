@@ -1,0 +1,26 @@
+{
+  "owner_package_files": 83,
+  "original_samples": 68,
+  "all_original_hashes_match": true,
+  "zip_checks": [
+    {
+      "output_sha256": "ffb64f8ce5855dd27b617c9d7313dc9d209b78e413ab663920a53e1d713955e0",
+      "changed_members": [
+        "xl/workbook.xml",
+        "xl/worksheets/sheet1.xml"
+      ],
+      "all_other_members_byte_identical": true,
+      "styles_identical": true
+    },
+    {
+      "output_sha256": "de6b33c559c89f881d01a34a413197725e17ffafde948b80fa4673eae7b4a462",
+      "changed_members": [
+        "xl/workbook.xml",
+        "xl/worksheets/sheet1.xml"
+      ],
+      "all_other_members_byte_identical": true,
+      "styles_identical": true
+    }
+  ],
+  "exit_code": 0
+}

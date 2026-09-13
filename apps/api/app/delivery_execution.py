@@ -59,7 +59,9 @@ def compatibility_status():
 
 
 def require_right(job, settings):
-    if job["product"] != "APPROVED_REPAIR" or not entitled(job, settings.app_env):
+    if job["product"] != "APPROVED_REPAIR" or not entitled(
+        job, settings.app_env, settings.hosted_synthetic_delivery_enabled
+    ):
         reject("ENTITLEMENT_REQUIRED", "유효한 수정 패키지 권리가 필요합니다.", 403)
 
 

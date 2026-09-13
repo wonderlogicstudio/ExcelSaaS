@@ -474,7 +474,18 @@
       "commerce_ready": false,
       "beta_deployment": "NOT_DEPLOYED_DOCKER_AND_LINUX_RUNTIME_PENDING",
       "pg_sandbox": "NOT_RUN",
-      "implementation_commit": "8880d179aca80e4fff9f5bb44ebf50a45a5e7037"
+      "implementation_commit": "8880d179aca80e4fff9f5bb44ebf50a45a5e7037",
+      "hosted_followup": {
+        "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+        "review": "reviews/D08.md",
+        "evidence": "reviews/evidence/D08-hosted.json",
+        "worker": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+        "api": "workbookcare-api-beta-00011-bav",
+        "payment_mode": "OFF",
+        "official_pg": "NOT_RUN_OWNER_ACCOUNT_NOT_READY",
+        "screens_and_downloaded_excel": "VERIFIED",
+        "remote_push": false
+      }
     }
   },
   "readiness": {
@@ -524,5 +535,6 @@
     "NOT_IMPLEMENTED_BY_D01"
   ],
   "next_recommended_unit": "EXISTING_PROTECTED_BETA_DELIVERY_DEPLOYMENT_AND_SCREEN_VERIFICATION",
-  "current_status": "PARTIAL_AWAITING_OWNER"
+  "current_status": "PARTIAL_AWAITING_OWNER",
+  "execution_state": "STOPPED_AWAITING_OWNER"
 }

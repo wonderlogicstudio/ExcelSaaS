@@ -1,0 +1,1013 @@
+{
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "base_commit": "f022af7822d5f7ea6b0903b370356c8a7c392564",
+  "authorization": "Owner explicitly requested existing beta deployment and validation; PG keys not prepared, beta functions first.",
+  "reused": [
+    "D01 unified free findings hierarchy and M4 separation",
+    "D02-D08 original fixtures/oracles",
+    "Exact plan, receipt, isolated POI, preservation patch, report and owner HMAC boundaries",
+    "Existing Access, Worker, Gateway, private Cloud Run, R2/KV and Artifact Registry"
+  ],
+  "changed": [
+    "Default-off hosted grant bound to fixed synthetic input, owner, plan/spec and expiry; no payment or implicit approval",
+    "Explicit synthetic grant UI and accurate idle cleanup notice",
+    "Dockerless OCI build from existing pinned private base plus official Linux Java/Python packages",
+    "Linux image reference20 + repair2 + artifacts6 startup check, disabled for ordinary cold starts after same image verified",
+    "Ephemeral beta maximum one instance; original startup probe restored after staging suite",
+    "Hosted trial product cards and comparison-specific entitlement copy; free-only static scope notice",
+    "Readable Korean transport retry; underlying single transient upload cause remains unknown"
+  ],
+  "checks": {
+    "targeted_hosted_rehearsal": {
+      "passed": 3,
+      "exit_code": 0
+    },
+    "full_regression": {
+      "web": 75,
+      "worker": 16,
+      "api": 219,
+      "m4_exact": 36,
+      "exit_code": 0,
+      "log": "artifacts/verification/d08-hosted/regression.log"
+    },
+    "web_after_copy": {
+      "passed": 75,
+      "exit_code": 0
+    },
+    "linux": {
+      "revision": "workbookcare-api-beta-00008-zul",
+      "checks": [
+        {
+          "artifacts": 6,
+          "event": "delivery_runtime_verified",
+          "payment_tested": false,
+          "reference_cases": 20,
+          "repair_profiles": 2
+        }
+      ],
+      "payment_tested": false
+    },
+    "source_originals_preserved": 83,
+    "final_web": {
+      "passed": 78,
+      "typecheck": true,
+      "build": true,
+      "exit_code": 0,
+      "log": "artifacts/verification/d08-hosted/web-trust-final.log"
+    },
+    "original_samples_preserved": 68,
+    "actual_hosted_ui": {
+      "free": [
+        {
+          "sample": "M4C-03",
+          "structure": 49,
+          "formula_candidates": 4,
+          "locations": [
+            "F17",
+            "I36",
+            "G29",
+            "H41"
+          ],
+          "visible_locations_match": true,
+          "worker": "91c06632-1302-4877-ae49-d4e44af3f3a2",
+          "api": "workbookcare-api-beta-00011-bav"
+        },
+        {
+          "sample": "M4C-01",
+          "structure": 0,
+          "formula_candidates": 4,
+          "locations": [
+            "G23",
+            "G52",
+            "H37",
+            "I48"
+          ],
+          "visible_locations_match": true,
+          "worker": "91c06632-1302-4877-ae49-d4e44af3f3a2",
+          "api": "workbookcare-api-beta-00011-bav"
+        },
+        {
+          "sample": "M4C-01-final",
+          "structure": 0,
+          "formula_candidates": 4,
+          "locations": [
+            "G23",
+            "G52",
+            "H37",
+            "I48"
+          ],
+          "visible_locations_match": true,
+          "worker": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+          "api": "workbookcare-api-beta-00011-bav"
+        },
+        {
+          "sample": "M4C-10-normal-final",
+          "structure": 0,
+          "formula_candidates": 0,
+          "locations": [],
+          "visible_locations_match": true,
+          "both_scans_complete": true,
+          "worker": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+          "api": "workbookcare-api-beta-00011-bav"
+        }
+      ],
+      "repair": [
+        {
+          "profile": "RP01",
+          "plan_visible": "승인 전 확인할 정확한 변경\n\n이 미리보기는 변경 승인이 아닙니다. 선택을 바꾸면 전체 영향을 다시 계산합니다.\n\n검증 · B2\n현재\n문자 “-1,250”\n계획\n숫자 -1,250\n검증 · B3\n현재\n문자 “7,200”\n계획\n숫자 7,200\n연결된 수식의 결과 변화\n\n직접 바꾸는 셀은 위에서 확인하고, 그 변경의 영향을 받는 수식은 아래에서 확인하세요.\n\n검증 · H2\n현재 계산\n숫자 0\n계획 적용 후 계산\n숫자 5,950",
+          "expected_match": true,
+          "approval_initially_unchecked": true,
+          "downloaded_files": [
+            "changes_0f8bba80-b91d-4d71-ab97-89264a496cfd.xlsx",
+            "verification_0f8bba80-b91d-4d71-ab97-89264a496cfd.html",
+            "workbookcare_repaired_0f8bba80-b91d-4d71-ab97-89264a496cfd.xlsx"
+          ],
+          "ready": true,
+          "receipt_screen": "수정 범위 사전 확인\n\n원본을 고정하고, 직접 지정한 업무 기준과 셀만 확인합니다. 이 확인은 변경 승인이 아닙니다.\n\n합성 파일 시험 · 일반 구매 준비 중 · 원본과 결과 15분 보관\n\n현재 단계: 검증 완료 · 세 파일 받기\n\n원본 고정 완료 · 변경하지 않음 · 1개 시트\n\n선택한 수정 기준과 대상 확인\n수정 패키지 수령\n승인한 2개 변경의 세 파일이 준비되었습니다\n\n원본 보존·승인 범위·실제 재계산·파일 일치를 확인했습니다. 남은 위험과 검증 범위는 재검증 HTML에서 확인하세요.\n\n수정본 XLSX 받기\n변경내역 XLSX 받기\n재검증 HTML 받기\n\n보관 만료: 2026. 9. 13. 오전 10:16:28 · 이 작업의 파일은 다시 결제하지 않고 받을 수 있습니다.\n\n승인 기록과 원본 연결 확인\n\n원본 SHA-256: 7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83\n\n변경계획 SHA-256: 461604ad8e8448b649498edb0d477b3f7131399f746608497f7fc9718b5d6639\n\n승인 기록 서버 검증\n\n서버 서명이 원본·변경계획과 일치합니다. 이 기록은 새 자료의 실행 권리가 아닙니다.\n\n승인한 변경과 계산 근거 다시 보기\n최신 작업 상태 확인\n사전 검사 원본 삭제"
+        },
+        {
+          "profile": "RP02",
+          "width": 390,
+          "plan_visible": "승인 전 확인할 정확한 변경\n\n이 미리보기는 변경 승인이 아닙니다. 선택을 바꾸면 전체 영향을 다시 계산합니다.\n\n검증 · F3\n현재\n빈 셀\n계획\n=ROUND(C3*D3*(1-E3),0)\n계획 적용 후 계산 결과\n숫자 2,800\n연결된 수식의 결과 변화\n\n직접 바꾸는 셀은 위에서 확인하고, 그 변경의 영향을 받는 수식은 아래에서 확인하세요.\n\n검증 · F12\n현재 계산\n숫자 14,090\n계획 적용 후 계산\n숫자 16,890",
+          "expected_match": true,
+          "approval_initially_unchecked": true,
+          "upload_transport_retry_succeeded": true,
+          "downloaded_files": [
+            "changes_105218f0-30a4-414c-a042-9ff65900eafc.xlsx",
+            "verification_105218f0-30a4-414c-a042-9ff65900eafc.html",
+            "workbookcare_repaired_105218f0-30a4-414c-a042-9ff65900eafc.xlsx"
+          ],
+          "ready": true,
+          "no_horizontal_overflow": true
+        }
+      ],
+      "comparison": [
+        {
+          "counts": {
+            "AMBIGUOUS": 1,
+            "AMOUNT_DIFF": 1,
+            "INPUT_ERROR": 2,
+            "MATCHED": 1,
+            "ONLY_A": 1,
+            "ONLY_B": 1
+          },
+          "expected_counts_match": true,
+          "total_A": "250원",
+          "total_B": "190원",
+          "summary": "전체 7그룹 · A 7원천행 · B 5원천행",
+          "width": 390,
+          "detail_checks": [
+            {
+              "status": "AMOUNT_DIFF",
+              "key": "DIF",
+              "rows": 2,
+              "expected_match": true,
+              "text": "DIF\nA 1행 · B 1행 · 차액 20원\nA 금액\n200\nB 금액\n180\n차액 A−B\n20원\nA/B 원천 위치와 실제 관측 값\n원천 · 위치\t키 원값\t금액 원값\t해석한 금액\nA · CSV 3행\n문자: DIF\n200\n200원\nB · CSV 3행\n문자: DIF\n180\n180원"
+            },
+            {
+              "status": "AMBIGUOUS",
+              "key": "DUP",
+              "rows": 3,
+              "expected_match": true,
+              "text": "DUP\nA 2행 · B 1행\nA 금액\n중복 · 합산하지 않음\nB 금액\n30\n차액 A−B\n—\nA/B 원천 위치와 실제 관측 값\n원천 · 위치\t키 원값\t금액 원값\t해석한 금액\nA · CSV 6행\n문자: DUP\n10\n10원\nA · CSV 7행\n문자: DUP\n15\n15원\nB · CSV 5행\n문자: DUP\n30\n30원"
+            },
+            {
+              "status": "INPUT_ERROR",
+              "key": "ERR",
+              "rows": 2,
+              "expected_match": true,
+              "text": "ERR\nA 1행 · B 1행\nA 금액\n확인 불가\nB 금액\n20\n차액 A−B\n—\nA/B 원천 위치와 실제 관측 값\n원천 · 위치\t키 원값\t금액 원값\t해석한 금액\nA · CSV 8행\n문자: ERR\nbad\n금액 형식 확인 필요\n확인 불가\nB · CSV 6행\n문자: ERR\n20\n20원"
+            }
+          ],
+          "all_rows": 12,
+          "all_rows_match": true,
+          "downloaded_files": [
+            "comparison_report_080b5f37-0772-435b-8a0c-9f3ba841e623.xlsx",
+            "comparison_verification_080b5f37-0772-435b-8a0c-9f3ba841e623.html"
+          ],
+          "ready": true,
+          "desktop_checked": true
+        }
+      ],
+      "negative": [
+        {
+          "case": "leading-zero-A2",
+          "eligible_count": 0,
+          "no_plan_button": true,
+          "screen_expected_match": true
+        },
+        {
+          "case": "occupied-formula-F4",
+          "eligible_count": 0,
+          "no_plan_button": true,
+          "screen_expected_match": true
+        },
+        {
+          "case": "comparison-period-mismatch",
+          "screen_expected_match": true,
+          "no_report": true
+        }
+      ],
+      "final_copy": {
+        "worker": "6cee3405-5ee3-42be-9d99-d33c044f9bba",
+        "comparison_grant_text_verified": true,
+        "comparison_source_rows": [
+          7,
+          5
+        ],
+        "commercial_purchase_disabled": true,
+        "final_worker": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+        "free_only_no_calculation_notice": true,
+        "repair_card_starts_free_upload": true,
+        "desktop_width": 1734,
+        "desktop_no_overflow": true,
+        "mobile_delivery_evidence_reused_from_worker": "63d3dfdd-71e0-4d03-93bf-22b4b8d7d89f"
+      }
+    },
+    "actual_hosted_deliveries_worker": "63d3dfdd-71e0-4d03-93bf-22b4b8d7d89f",
+    "actual_hosted_api": "workbookcare-api-beta-00011-bav",
+    "actual_downloads": {
+      "kind": "ACTUAL_AUTHENTICATED_HOSTED_UI_DOWNLOADS",
+      "official_pg_verified": false,
+      "rows": [
+        {
+          "profile": "RP01",
+          "width": "desktop",
+          "expected": {
+            "B2": -1250,
+            "B3": 7200,
+            "H2": 5950,
+            "F2": 4590,
+            "F12": 14090
+          },
+          "files": {
+            "CHANGES_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\browser-downloads\\RP01\\CHANGES_XLSX.xlsx",
+              "sha256": "e414b319f09046b0a8c52971ed8b87df2502005d38b4a27f4374ea08aed60326",
+              "download_name": "changes_0f8bba80-b91d-4d71-ab97-89264a496cfd.xlsx"
+            },
+            "VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\browser-downloads\\RP01\\VERIFICATION_HTML.html",
+              "sha256": "91b93e031f27ab745c0e8c21c9a3ad7472629192994c93bd3fed69c738b54ff8",
+              "download_name": "verification_0f8bba80-b91d-4d71-ab97-89264a496cfd.html"
+            },
+            "REPAIRED_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\browser-downloads\\RP01\\REPAIRED_XLSX.xlsx",
+              "sha256": "ffb64f8ce5855dd27b617c9d7313dc9d209b78e413ab663920a53e1d713955e0",
+              "download_name": "workbookcare_repaired_0f8bba80-b91d-4d71-ab97-89264a496cfd.xlsx"
+            }
+          }
+        },
+        {
+          "profile": "RP02",
+          "width": 390,
+          "expected": {
+            "F2": 4590,
+            "F3": 2800,
+            "F12": 16890,
+            "H2": 0
+          },
+          "files": {
+            "CHANGES_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\browser-downloads\\RP02\\CHANGES_XLSX.xlsx",
+              "sha256": "c11df43eb5521e6833575dac5bc309af8a7e2ed3dc917203560e45653707d505",
+              "download_name": "changes_105218f0-30a4-414c-a042-9ff65900eafc.xlsx"
+            },
+            "VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\browser-downloads\\RP02\\VERIFICATION_HTML.html",
+              "sha256": "0d702a2dd947ab04fcd5c1532636516b5dded5dc72f6baefdb9db8d23afe9140",
+              "download_name": "verification_105218f0-30a4-414c-a042-9ff65900eafc.html"
+            },
+            "REPAIRED_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\browser-downloads\\RP02\\REPAIRED_XLSX.xlsx",
+              "sha256": "de6b33c559c89f881d01a34a413197725e17ffafde948b80fa4673eae7b4a462",
+              "download_name": "workbookcare_repaired_105218f0-30a4-414c-a042-9ff65900eafc.xlsx"
+            }
+          }
+        },
+        {
+          "profile": "COMPARISON",
+          "width": "desktop",
+          "expected": {},
+          "files": {
+            "COMPARISON_REPORT_XLSX": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\browser-downloads\\COMPARISON\\COMPARISON_REPORT_XLSX.xlsx",
+              "sha256": "67bfd6970a946e7d15773323851058476a7ae41ebcbfe79cd23d44a30070e839",
+              "download_name": "comparison_report_080b5f37-0772-435b-8a0c-9f3ba841e623.xlsx"
+            },
+            "COMPARISON_VERIFICATION_HTML": {
+              "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\browser-downloads\\COMPARISON\\COMPARISON_VERIFICATION_HTML.html",
+              "sha256": "3c626312a3295b11f220d66733d902e01fb7831dc5e927a1f6971e7a8183a273",
+              "download_name": "comparison_verification_080b5f37-0772-435b-8a0c-9f3ba841e623.html"
+            }
+          }
+        }
+      ]
+    },
+    "same_hash_redownload": {
+      "profile": "RP02",
+      "sha256": "de6b33c559c89f881d01a34a413197725e17ffafde948b80fa4673eae7b4a462",
+      "match": true
+    },
+    "installed_excel": {
+      "style_reference": {
+        "F12": "#,##0|False|0|14544639|14.29",
+        "B2": "#,##0|False|0|14544639|14.29",
+        "A2": "@|True|14492177|16777215|14.29",
+        "F2": "#,##0|False|0|14544639|14.29",
+        "B3": "#,##0|False|0|14544639|14.29",
+        "F4": "#,##0|False|0|14544639|14.29",
+        "F3": "#,##0|False|0|14544639|14.29"
+      },
+      "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+      "original_expected_match": true,
+      "kind": "D08_ACTUAL_HOLDOUT_DOWNLOADS_IN_INSTALLED_EXCEL",
+      "pdfs": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\RP01-holdout-excel.pdf",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\RP02-holdout-excel.pdf",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\comparison-holdout-excel.pdf"
+      ],
+      "official_pg_verified": false,
+      "excel_version": "16.0",
+      "results": [
+        {
+          "unchanged": true,
+          "style_preserved": false,
+          "width": "desktop",
+          "profile": "RP01",
+          "sha256": "e414b319f09046b0a8c52971ed8b87df2502005d38b4a27f4374ea08aed60326",
+          "kind": "CHANGES_XLSX",
+          "expected_match": true
+        },
+        {
+          "unchanged": true,
+          "style_preserved": true,
+          "width": "desktop",
+          "profile": "RP01",
+          "sha256": "ffb64f8ce5855dd27b617c9d7313dc9d209b78e413ab663920a53e1d713955e0",
+          "kind": "REPAIRED_XLSX",
+          "expected_match": true
+        },
+        {
+          "unchanged": true,
+          "style_preserved": false,
+          "width": 390,
+          "profile": "RP02",
+          "sha256": "c11df43eb5521e6833575dac5bc309af8a7e2ed3dc917203560e45653707d505",
+          "kind": "CHANGES_XLSX",
+          "expected_match": true
+        },
+        {
+          "unchanged": true,
+          "style_preserved": true,
+          "width": 390,
+          "profile": "RP02",
+          "sha256": "de6b33c559c89f881d01a34a413197725e17ffafde948b80fa4673eae7b4a462",
+          "kind": "REPAIRED_XLSX",
+          "expected_match": true
+        },
+        {
+          "unchanged": true,
+          "style_preserved": false,
+          "width": "desktop",
+          "profile": "COMPARISON",
+          "sha256": "67bfd6970a946e7d15773323851058476a7ae41ebcbfe79cd23d44a30070e839",
+          "kind": "COMPARISON_REPORT_XLSX",
+          "expected_match": true
+        }
+      ],
+      "status": "PASS",
+      "excel_build": 20326
+    },
+    "excel_style_flag_note": "style_preserved applies only to REPAIRED_XLSX. False for generated reports means not applicable, not a failed check.",
+    "zip_preservation": [
+      {
+        "output_sha256": "ffb64f8ce5855dd27b617c9d7313dc9d209b78e413ab663920a53e1d713955e0",
+        "changed_members": [
+          "xl/workbook.xml",
+          "xl/worksheets/sheet1.xml"
+        ],
+        "all_other_members_byte_identical": true,
+        "styles_identical": true
+      },
+      {
+        "output_sha256": "de6b33c559c89f881d01a34a413197725e17ffafde948b80fa4673eae7b4a462",
+        "changed_members": [
+          "xl/workbook.xml",
+          "xl/worksheets/sheet1.xml"
+        ],
+        "all_other_members_byte_identical": true,
+        "styles_identical": true
+      }
+    ],
+    "excel_pdf_visual_review": {
+      "pages": 3,
+      "renderer": "pypdfium2 5.13.0 / Pillow 12.3.0",
+      "exit_code": 0,
+      "all_pages_viewed": true
+    },
+    "final_ruff": {
+      "exit_code": 0
+    },
+    "repository_build_scripts_compile": {
+      "exit_code": 0,
+      "actual_image_built_with_equivalent_staging_helpers": true
+    },
+    "git_diff_check": {
+      "exit_code": 0
+    }
+  },
+  "failures_and_fixes": [
+    {
+      "failure": "Registry manifest request 404",
+      "cause": "Pinned digest is OCI index; media-type Accept omitted index",
+      "fix": "Accept index and select verified Linux amd64 manifest",
+      "retest": "Downloaded and hashed exact existing base"
+    },
+    {
+      "failure": "Registry config 302",
+      "cause": "Registry blob download redirect",
+      "fix": "Official host redirect followed with digest validation",
+      "retest": "Base config loaded"
+    },
+    {
+      "failure": "Targeted test settings invalid HTTPS origin",
+      "fix": "Synthetic test origin provided",
+      "retest": "Passed"
+    },
+    {
+      "failure": "Comparison execution projection NameError",
+      "fix": "Keep new availability field only in projection",
+      "retest": "All three new tests and full API219 passed"
+    },
+    {
+      "failure": "Java tar parent-relative symlink rejected",
+      "fix": "Normalize link target and require within official archive root",
+      "retest": "OCI image built, pushed and actual Linux verified"
+    },
+    {
+      "failure": "Initial no-traffic Ready was only image registration; no runtime proof",
+      "fix": "Private IAM-preserving revision tag triggers actual container health; no traffic advanced without proof"
+    },
+    {
+      "failure": "Revision 00005 startup health failed at original 9-second budget",
+      "fix": "120-second staging-only budget for actual full suite; same image then normal live mode and original 9-second budget",
+      "retest": "00008 full Linux suite PASS; 00011 normal mode ContainerHealthy True"
+    },
+    {
+      "failure": "One actual mobile create_input transport failure",
+      "cause": "Not established",
+      "fix": "Existing retry succeeded; generic transport message now Korean",
+      "retest": "Actual RP02 plan/approval/download/Excel passed; two transport unit tests passed",
+      "remaining": "No claim of underlying network cause fixed"
+    },
+    {
+      "failure": "Blob download event timeout in browser automation",
+      "cause": "Event observation did not track completed download",
+      "fix": "Checked actual downloaded files and hashes",
+      "retest": "8 files + one identical re-download, 5 real Excel opens"
+    },
+    {
+      "failure": "Browser file URL was blocked by browser policy",
+      "fix": "No browser workaround; independent local PDFium read-only rendering",
+      "retest": "Three actual Excel PDF pages visually inspected"
+    },
+    {
+      "failure": "PDF renderer lacked Pillow and sandbox could not read escalated installation",
+      "fix": "Temporary Pillow dependency and scoped filesystem execution",
+      "retest": "Renderer exit0"
+    },
+    {
+      "failure": "Final mobile viewport request left actual page at desktop width1734",
+      "fix": "Recorded measured desktop width; did not count this as mobile acceptance",
+      "retest": "Earlier actual390 RP02/comparison screen evidence remains applicable; final copy desktop verified"
+    }
+  ],
+  "not_run": [
+    "Official Toss PG authentication/approval/query/cancellation/webhook: owner account/keys not prepared",
+    "Durable commerce storage, live purchase/refund, actual price/tax/legal/support approval",
+    "Hosted maximum combined capacity and concurrency acceptance",
+    "Parent patch/static scan separate hard OS deadline",
+    "Idle physical deletion within 30 seconds guarantee"
+  ],
+  "not_performed": [
+    "Git remote push",
+    "Docker/Desktop/WSL restart",
+    "New paid cloud service",
+    "Public or anonymous release",
+    "Real customer files or live payments"
+  ],
+  "owner_original_hashes_preserved": true,
+  "overall_D08": "PARTIAL_COMMERCIAL_GATES_PENDING",
+  "stopped_after": "D08",
+  "screenshots": {
+    "artifacts/screenshots/d08-hosted/comparison-desktop-summary.png": "e3b91b79e968525905d4f3d978a466a40c1f064554145ae00099414af393dabb",
+    "artifacts/screenshots/d08-hosted/comparison-grant-copy.png": "09d875bf1f8a4cac78c34a5f52d93a3c0e3898a0ef6e7eff902d7e7422dba0df",
+    "artifacts/screenshots/d08-hosted/comparison-holdout-excel-page-1.png": "a5328798428d6c33fc29adab3caeac918102fc9bdf4007ec963c108af1e194a0",
+    "artifacts/screenshots/d08-hosted/comparison-mobile-error-rows.png": "b616419da349556fbbd55d04f22720c230ccbce4ffcd544d81e7f68eb7879631",
+    "artifacts/screenshots/d08-hosted/comparison-mobile-summary.png": "f0e02f68ab0f4c8d869c202f9a0f06956fb0bb5c9ef0d2c80768da73c4622fa5",
+    "artifacts/screenshots/d08-hosted/final-desktop-products.png": "8a4ae191e58eb8f819ee0805fb5c5e271e8bcb7401e7cf06d9e5877ecbefa7f1",
+    "artifacts/screenshots/d08-hosted/m4c-01-cell-evidence.png": "20450c6c60ba1327d77e7bd7795a0d3e6def9f919bc3c4422eed466067a7be83",
+    "artifacts/screenshots/d08-hosted/m4c-01-final-locations.png": "4e3154d30e20706bef58f6360dad92ef0cabfa3858728f0a46031e844ef210ba",
+    "artifacts/screenshots/d08-hosted/m4c-01-locations.png": "c7f460229153026c816a3f174e571092f3181a1b13604cbe1dbdf2ee7619cc5a",
+    "artifacts/screenshots/d08-hosted/m4c-03-summary.png": "4cee1a9423c9bd52cd4adfc9ea07a7df02950d42e47add9c25244a05396516ce",
+    "artifacts/screenshots/d08-hosted/m4c-10-final-normal.png": "16cf1347db165d58eb7b7f4c6b75ffd5add4e7ddcfc0ff3f37d4e58065cec286",
+    "artifacts/screenshots/d08-hosted/negative-leading-zero.png": "41e26995f510b5ff94f103895168a378ffe4bb780564878eae37464263b3ce24",
+    "artifacts/screenshots/d08-hosted/rp01-exact-plan.png": "87cd7deeb69194705fbee4f0cebfc7d72e902ca07b5d2d2b87762299a3dc562c",
+    "artifacts/screenshots/d08-hosted/RP01-holdout-excel-page-1.png": "6f27a8f5143e823e36d8a9188731599188ee204ad804fcfdae5c2fc3f20fd09d",
+    "artifacts/screenshots/d08-hosted/rp01-ready.png": "98ef2e65e64ec9479328f8085af680c778014f5d94945149a7053d73055d681d",
+    "artifacts/screenshots/d08-hosted/RP02-holdout-excel-page-1.png": "0a5b4d6089627aa538537013e390d323e3beab818492e011ac7e5b035f48ea24",
+    "artifacts/screenshots/d08-hosted/rp02-mobile-plan.png": "4a9fcadc89029d2f45a3c80a9a499337a2ea6a966af91a7b9773b1a5a185bee2",
+    "artifacts/screenshots/d08-hosted/rp02-mobile-ready.png": "75c561709fa2a1d8dbc9a9ae84876d66e9f55255704c1584c79a60be003531da"
+  },
+  "deployment": {
+    "cloud_run_revision": "workbookcare-api-beta-00011-bav",
+    "worker_version": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+    "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+    "security_invariants_preserved": true,
+    "private_iam": true,
+    "max_instances": 1,
+    "delivery_synthetic_enabled": true,
+    "payment_mode": "OFF",
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "rollback": {
+    "worker": {
+      "version_id": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+      "rollback_version_id": "6cee3405-5ee3-42be-9d99-d33c044f9bba",
+      "initial_rollback_version_id": "91c06632-1302-4877-ae49-d4e44af3f3a2",
+      "bindings_preserved": true,
+      "api_unchanged": true
+    },
+    "api": {
+      "revision": "workbookcare-api-beta-00011-bav",
+      "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:e6132fcdf49617331ffc9337c2903732999d6ce9facf4ee45558c1a9d782173b",
+      "verified_image_revision": "workbookcare-api-beta-00008-zul",
+      "conditions": {
+        "Ready": "True",
+        "Active": "True",
+        "ContainerHealthy": "True",
+        "ContainerReady": "True",
+        "ResourcesAvailable": "True"
+      },
+      "full_suite_on_each_cold_start": false,
+      "request_integrity_checks_unchanged": true,
+      "startup_budget_seconds": 9,
+      "rollback_revision": "workbookcare-api-beta-00004-hhk"
+    },
+    "gateway": {
+      "config": "workbookcare-beta-d08-e6132fcdf496",
+      "rollback_config": "workbookcare-beta-m4-0ae6c63c06a7",
+      "spec_sha256": "b35161426a5b6047bf99219accb7df33cc7d554552c907cfd1dce52d6e061825"
+    }
+  },
+  "commands": [
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+      "exit_code": 0
+    },
+    {
+      "command": "npm.cmd run verify:web (final scope copy)",
+      "exit_code": 0
+    },
+    {
+      "command": "python <DigitalTwin>/.tmp/delivery-v32/oci_inputs.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python <DigitalTwin>/.tmp/delivery-v32/oci_build.py --push",
+      "exit_code": 0
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_delivery_holdout_excel.ps1 -Stage d08-hosted",
+      "exit_code": 0
+    },
+    {
+      "command": "python <DigitalTwin>/.tmp/delivery-v32/render_hosted_pdf.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python <DigitalTwin>/.tmp/delivery-v32/ingest_downloads.py",
+      "exit_code": 0
+    }
+  ],
+  "provider_commands": [
+    {
+      "phase": "baseline",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud api-gateway api-configs describe workbookcare-beta-m4-0ae6c63c06a7",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "wrangler versions view 91c06632-1302-4877-ae49-d4e44af3f3a2",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run deploy workbookcare-api-beta --region",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run revisions describe workbookcare-api-beta-00005-9lw",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud logging read resource.type=\"cloud_run_revision\" AND resource.labels.revision_name=\"workbookcare-api-beta-00005-9lw\" AND jsonPayload.event=\"delivery_runtime_verified\" --limit",
+      "exit_code": 0
+    },
+    {
+      "phase": "web",
+      "command": "npm build hosted beta with delivery flag",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "web",
+      "command": "npm build hosted beta with delivery flag",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run deploy workbookcare-api-beta --region",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run revisions describe workbookcare-api-beta-00008-zul",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud logging read resource.type=\"cloud_run_revision\" AND resource.labels.revision_name=\"workbookcare-api-beta-00008-zul\" AND jsonPayload.event=\"delivery_runtime_verified\" --limit",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud run services update-traffic workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway api-configs describe workbookcare-beta-m4-0ae6c63c06a7",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-upload",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-upload",
+      "command": "wrangler versions upload --dry-run",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-upload",
+      "command": "wrangler versions upload --keep-vars",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway api-configs create workbookcare-beta-d08-e6132fcdf496",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run deploy workbookcare-api-beta --region",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run revisions describe workbookcare-api-beta-00011-bav",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run services update-traffic workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway gateways update workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-deploy",
+      "command": "wrangler versions view 63d3dfdd-71e0-4d03-93bf-22b4b8d7d89f",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-deploy",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-deploy",
+      "command": "wrangler versions deploy 63d3dfdd-71e0-4d03-93bf-22b4b8d7d89f@100",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway api-configs describe workbookcare-beta-d08-e6132fcdf496",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler versions view 63d3dfdd-71e0-4d03-93bf-22b4b8d7d89f",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler versions view 63d3dfdd-71e0-4d03-93bf-22b4b8d7d89f",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "npm build final hosted beta UX",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler versions upload --dry-run",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler versions upload --keep-vars",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler versions view 6cee3405-5ee3-42be-9d99-d33c044f9bba",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler versions deploy 6cee3405-5ee3-42be-9d99-d33c044f9bba@100",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway api-configs describe workbookcare-beta-d08-e6132fcdf496",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler versions view 6cee3405-5ee3-42be-9d99-d33c044f9bba",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler versions view 6cee3405-5ee3-42be-9d99-d33c044f9bba",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "npm build final hosted beta UX",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler versions upload --dry-run",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler versions upload --keep-vars",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler versions view 521ad0aa-55f9-4606-b481-fc4861d8a60f",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler versions deploy 521ad0aa-55f9-4606-b481-fc4861d8a60f@100",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway api-configs describe workbookcare-beta-d08-e6132fcdf496",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler versions view 521ad0aa-55f9-4606-b481-fc4861d8a60f",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    }
+  ],
+  "local_commit": {
+    "status": "SELECTED_VERIFIED_SNAPSHOT_IN_THIS_COMMIT",
+    "file_count": 55,
+    "remote_push": false,
+    "result_record": "D08-hosted-commit.json is added after Git returns the actual commit/exit"
+  }
+}

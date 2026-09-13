@@ -50,7 +50,7 @@ function PrivacyDraft() {
         </p>
       </section>
 
-      {['internal_beta','hosted_beta'].includes(import.meta.env.VITE_PRODUCT_ENV)&&import.meta.env.VITE_DELIVERY_BETA_ENABLED==='true'&&<section><h2>합성 승인 납품 시험의 별도 보관</h2><p>승인 납품 시험에서는 지원 수식을 격리 엔진으로 계산하고 별도 수정본·변경내역·재검증 보고서를 만듭니다. 두 자료 비교는 원본을 바꾸지 않는 별도 보고서입니다.</p><p>입력·계획·결과는 업로드 후 최대 15분, 합성 주문 기록은 24시간의 임시 보관입니다. 만료 접근은 즉시 차단하고 30초 주기로 정리합니다. 취소는 추가 다운로드와 실행 권리를 회수하며 원본·결과 삭제는 작업 화면에서 요청할 수 있습니다. 법정 결제기록 보존 정책은 확정되지 않았고 실제 결제는 제공하지 않습니다.</p></section>}
+      {['internal_beta','hosted_beta'].includes(import.meta.env.VITE_PRODUCT_ENV)&&import.meta.env.VITE_DELIVERY_BETA_ENABLED==='true'&&<section><h2>합성 승인 납품 시험의 별도 보관</h2><p>승인 납품 시험에서는 지원 수식을 격리 엔진으로 계산하고 별도 수정본·변경내역·재검증 보고서를 만듭니다. 두 자료 비교는 원본을 바꾸지 않는 별도 보고서입니다.</p><p>입력·계획·결과는 업로드 후 최대 15분, 합성 주문 기록은 24시간의 임시 보관입니다. 만료 접근은 즉시 차단합니다. 서버 실행 중에는 30초 주기로 정리하며, 유휴 중에는 삭제가 지연될 수 있습니다. 취소는 추가 다운로드와 실행 권리를 회수하며 원본·결과 삭제는 작업 화면에서 요청할 수 있습니다. 법정 결제기록 보존 정책은 확정되지 않았고 실제 결제는 제공하지 않습니다.</p></section>}
       <section>
         <h2>저장하지 않는 정보</h2>
         <p>

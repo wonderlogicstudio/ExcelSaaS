@@ -1,0 +1,70 @@
+{
+  "style_reference": {
+    "F12": "#,##0|False|0|14544639|14.29",
+    "B2": "#,##0|False|0|14544639|14.29",
+    "A2": "@|True|14492177|16777215|14.29",
+    "F2": "#,##0|False|0|14544639|14.29",
+    "B3": "#,##0|False|0|14544639|14.29",
+    "F4": "#,##0|False|0|14544639|14.29",
+    "F3": "#,##0|False|0|14544639|14.29"
+  },
+  "source_hash": "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
+  "original_expected_match": true,
+  "kind": "D08_ACTUAL_HOLDOUT_DOWNLOADS_IN_INSTALLED_EXCEL",
+  "pdfs": [
+    "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\RP01-holdout-excel.pdf",
+    "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\RP02-holdout-excel.pdf",
+    "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\verification\\d08-hosted\\comparison-holdout-excel.pdf"
+  ],
+  "official_pg_verified": false,
+  "excel_version": "16.0",
+  "results": [
+    {
+      "unchanged": true,
+      "style_preserved": false,
+      "width": "desktop",
+      "profile": "RP01",
+      "sha256": "e414b319f09046b0a8c52971ed8b87df2502005d38b4a27f4374ea08aed60326",
+      "kind": "CHANGES_XLSX",
+      "expected_match": true
+    },
+    {
+      "unchanged": true,
+      "style_preserved": true,
+      "width": "desktop",
+      "profile": "RP01",
+      "sha256": "ffb64f8ce5855dd27b617c9d7313dc9d209b78e413ab663920a53e1d713955e0",
+      "kind": "REPAIRED_XLSX",
+      "expected_match": true
+    },
+    {
+      "unchanged": true,
+      "style_preserved": false,
+      "width": 390,
+      "profile": "RP02",
+      "sha256": "c11df43eb5521e6833575dac5bc309af8a7e2ed3dc917203560e45653707d505",
+      "kind": "CHANGES_XLSX",
+      "expected_match": true
+    },
+    {
+      "unchanged": true,
+      "style_preserved": true,
+      "width": 390,
+      "profile": "RP02",
+      "sha256": "de6b33c559c89f881d01a34a413197725e17ffafde948b80fa4673eae7b4a462",
+      "kind": "REPAIRED_XLSX",
+      "expected_match": true
+    },
+    {
+      "unchanged": true,
+      "style_preserved": false,
+      "width": "desktop",
+      "profile": "COMPARISON",
+      "sha256": "67bfd6970a946e7d15773323851058476a7ae41ebcbfe79cd23d44a30070e839",
+      "kind": "COMPARISON_REPORT_XLSX",
+      "expected_match": true
+    }
+  ],
+  "status": "PASS",
+  "excel_build": 20326
+}

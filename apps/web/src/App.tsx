@@ -334,7 +334,7 @@ export default function App() {
         {deliveryBetaEnabled && <><OrderHistory/><DeliveryOperations onNewInput={startUpload}/></>}
         <StaticSections products={result?.products} onStart={startUpload} onDemo={runDemo} onCompare={deliveryBetaEnabled ? () => setComparisonOpen(true) : undefined} />
       </main>
-      <Footer />
+      <Footer deliveryEnabled={deliveryBetaEnabled} />
     </div>
   );
 }

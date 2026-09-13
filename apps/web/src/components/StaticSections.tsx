@@ -54,7 +54,7 @@ export function StaticSections({ onStart, onDemo, products, onCompare }: StaticS
               <span className="step-card__number">03</span>
               <FileDiff size={27} />
               <h3>수정 여부 결정</h3>
-              <p>예상 포함·제외 범위와 베타 가격 가설을 본 뒤 정밀 검증 필요 여부를 판단합니다. 현재는 결제와 실제 수정 기능을 제공하지 않습니다.</p>
+              <p>{onCompare?'지원 범위와 정확한 변경계획을 확인하고 별도로 승인합니다. 등록된 합성 샘플은 수정본·변경내역·재검증 파일을 받으며, 일반 구매는 준비 중입니다.':'예상 포함·제외 범위와 베타 가격 가설을 본 뒤 정밀 검증 필요 여부를 판단합니다. 현재는 결제와 실제 수정 기능을 제공하지 않습니다.'}</p>
             </article>
           </div>
         </div>
@@ -152,7 +152,7 @@ export function StaticSections({ onStart, onDemo, products, onCompare }: StaticS
                 <li><Check size={16} /> 파일 구조와 수식 참조를 같은 규칙으로 검사</li>
                 <li><Check size={16} /> 시트·셀·규칙 코드와 발견 이유를 함께 표시</li>
                 <li><Check size={16} /> 수정 가능성과 권장 정밀검증, 베타 가격 범위를 안내</li>
-                <li><Check size={16} /> 현재는 진단과 범위 미리보기만 제공</li>
+                <li><Check size={16} /> {onCompare?'등록된 합성 샘플의 승인·납품을 베타에서 시험':'현재는 진단과 범위 미리보기만 제공'}</li>
               </ul>
             </article>
           </div>
@@ -175,12 +175,12 @@ export function StaticSections({ onStart, onDemo, products, onCompare }: StaticS
             <span className="section-kicker">파일 처리 원칙</span>
             <h2 id="trust-title">파일은 건드리지 않고 확인합니다.</h2>
             <p>
-              현재 테스트 버전은 파일 구조를 읽어 진단하며, 수식·매크로·외부 연결을 실행하지 않습니다. 진단은
+              무료 진단은 파일 구조를 읽으며, 수식·매크로·외부 연결을 실행하지 않습니다. 진단은
               원본 파일을 변경하지 않으며, 무료 진단에는 AI API를 사용하지 않습니다.
             </p>
             <div className="trust-list">
               <p><ShieldCheck size={18} /><span><strong>원본 파일 미변경</strong> 진단은 원본 파일을 수정하거나 다시 저장하지 않습니다.</span></p>
-              <p><LockKeyhole size={18} /><span><strong>실행하지 않음</strong> VBA, 수식 계산, 외부 연결과 쿼리를 실행하지 않습니다.</span></p>
+              <p><LockKeyhole size={18} /><span><strong>무료 진단은 정적 검사</strong> 무료 진단에서 VBA, 수식 계산, 외부 연결과 쿼리를 실행하지 않습니다.</span></p>
               <p><Sparkles size={18} /><span><strong>무료 진단에서 AI API 미사용</strong> 무료 진단은 AI 호출 없이 규칙 기반으로 수행합니다.</span></p>
               <p><UserRoundCheck size={18} /><span><strong>정적 검사 범위</strong> 계산 결과와 업무 규칙은 현재 무료 진단에서 검증하지 않습니다.</span></p>
             </div>
@@ -237,7 +237,7 @@ export function StaticSections({ onStart, onDemo, products, onCompare }: StaticS
           <div>
             <span className="section-kicker">무료로 확인하는 첫 단계</span>
             <h2>문제를 찾고, 다음 단계를 결정하세요.</h2>
-            <p>현재는 샘플 결과와 테스트용 .xlsx 또는 .xlsm 파일로 진단 흐름을 확인할 수 있습니다. 결제와 실제 수정은 제공하지 않습니다.</p>
+            <p>{onCompare?'테스트용 .xlsx 또는 .xlsm 파일로 무료 진단을 시작하세요. 등록된 합성 XLSX는 지원 범위를 확인하고 별도 승인 후 수정본을 받을 수 있습니다. 일반 구매·실제 결제는 제공하지 않습니다.':'현재는 샘플 결과와 테스트용 .xlsx 또는 .xlsm 파일로 진단 흐름을 확인할 수 있습니다. 결제와 실제 수정은 제공하지 않습니다.'}</p>
           </div>
           <div className="final-cta__actions">
             <button className="button button--light" type="button" onClick={onStart}>

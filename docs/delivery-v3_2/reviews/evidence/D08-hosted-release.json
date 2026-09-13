@@ -1,0 +1,504 @@
+{
+  "current": {
+    "cloud_run_revision": "workbookcare-api-beta-00011-bav",
+    "worker_version": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+    "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+    "security_invariants_preserved": true,
+    "private_iam": true,
+    "max_instances": 1,
+    "delivery_synthetic_enabled": true,
+    "payment_mode": "OFF",
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "baseline": {
+    "revision": "workbookcare-api-beta-00004-hhk",
+    "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:e57d3782741461d315b55770b1c45e4ecff2d1981535831d9b50f0b1b40343db",
+    "invariant": "2d2489c7602c45fc2bda2c689e45d677432242ede7cc1516fd25191f92bdfa0e",
+    "iam": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342",
+    "max_instances": "2",
+    "gateway_config": "workbookcare-beta-m4-0ae6c63c06a7",
+    "gateway_spec": "2bcbe8c0e05c07974ba441593379028e95ec3490b755fdca7b110bf6ab5d4835",
+    "gateway_identity": "eb75142eb654af2bfef3317a6a0dc4b95cc02f43912ac5c2d0012c5db7c9f234",
+    "worker_version": "91c06632-1302-4877-ae49-d4e44af3f3a2",
+    "worker_bindings": "1a8e6249c4d5df48e9445488d9af63d999e86090b169bcd55c1a8af8de6215f7",
+    "bindings_without_delivery": "1a8e6249c4d5df48e9445488d9af63d999e86090b169bcd55c1a8af8de6215f7",
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "runtime": {
+    "revision": "workbookcare-api-beta-00008-zul",
+    "checks": [
+      {
+        "artifacts": 6,
+        "event": "delivery_runtime_verified",
+        "payment_tested": false,
+        "reference_cases": 20,
+        "repair_profiles": 2
+      }
+    ],
+    "payment_tested": false
+  },
+  "rollback": {
+    "worker": {
+      "version_id": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+      "rollback_version_id": "6cee3405-5ee3-42be-9d99-d33c044f9bba",
+      "initial_rollback_version_id": "91c06632-1302-4877-ae49-d4e44af3f3a2",
+      "bindings_preserved": true,
+      "api_unchanged": true
+    },
+    "api": {
+      "revision": "workbookcare-api-beta-00011-bav",
+      "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:e6132fcdf49617331ffc9337c2903732999d6ce9facf4ee45558c1a9d782173b",
+      "verified_image_revision": "workbookcare-api-beta-00008-zul",
+      "conditions": {
+        "Ready": "True",
+        "Active": "True",
+        "ContainerHealthy": "True",
+        "ContainerReady": "True",
+        "ResourcesAvailable": "True"
+      },
+      "full_suite_on_each_cold_start": false,
+      "request_integrity_checks_unchanged": true,
+      "startup_budget_seconds": 9,
+      "rollback_revision": "workbookcare-api-beta-00004-hhk"
+    },
+    "gateway": {
+      "config": "workbookcare-beta-d08-e6132fcdf496",
+      "rollback_config": "workbookcare-beta-m4-0ae6c63c06a7",
+      "spec_sha256": "b35161426a5b6047bf99219accb7df33cc7d554552c907cfd1dce52d6e061825"
+    }
+  },
+  "commands": [
+    {
+      "phase": "baseline",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud api-gateway api-configs describe workbookcare-beta-m4-0ae6c63c06a7",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "wrangler versions view 91c06632-1302-4877-ae49-d4e44af3f3a2",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run deploy workbookcare-api-beta --region",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run revisions describe workbookcare-api-beta-00005-9lw",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud logging read resource.type=\"cloud_run_revision\" AND resource.labels.revision_name=\"workbookcare-api-beta-00005-9lw\" AND jsonPayload.event=\"delivery_runtime_verified\" --limit",
+      "exit_code": 0
+    },
+    {
+      "phase": "web",
+      "command": "npm build hosted beta with delivery flag",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "web",
+      "command": "npm build hosted beta with delivery flag",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run deploy workbookcare-api-beta --region",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run revisions describe workbookcare-api-beta-00008-zul",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-stage",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud logging read resource.type=\"cloud_run_revision\" AND resource.labels.revision_name=\"workbookcare-api-beta-00008-zul\" AND jsonPayload.event=\"delivery_runtime_verified\" --limit",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-traffic",
+      "command": "gcloud run services update-traffic workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway api-configs describe workbookcare-beta-m4-0ae6c63c06a7",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-upload",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-upload",
+      "command": "wrangler versions upload --dry-run",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-upload",
+      "command": "wrangler versions upload --keep-vars",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway api-configs create workbookcare-beta-d08-e6132fcdf496",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run deploy workbookcare-api-beta --region",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run revisions describe workbookcare-api-beta-00011-bav",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "api-live",
+      "command": "gcloud run services update-traffic workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "gateway",
+      "command": "gcloud api-gateway gateways update workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-deploy",
+      "command": "wrangler versions view 63d3dfdd-71e0-4d03-93bf-22b4b8d7d89f",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-deploy",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "worker-deploy",
+      "command": "wrangler versions deploy 63d3dfdd-71e0-4d03-93bf-22b4b8d7d89f@100",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway api-configs describe workbookcare-beta-d08-e6132fcdf496",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler versions view 63d3dfdd-71e0-4d03-93bf-22b4b8d7d89f",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler versions view 63d3dfdd-71e0-4d03-93bf-22b4b8d7d89f",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "npm build final hosted beta UX",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler versions upload --dry-run",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler versions upload --keep-vars",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler versions view 6cee3405-5ee3-42be-9d99-d33c044f9bba",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "ux-followup",
+      "command": "wrangler versions deploy 6cee3405-5ee3-42be-9d99-d33c044f9bba@100",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway api-configs describe workbookcare-beta-d08-e6132fcdf496",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler versions view 6cee3405-5ee3-42be-9d99-d33c044f9bba",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler versions view 6cee3405-5ee3-42be-9d99-d33c044f9bba",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "npm build final hosted beta UX",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler versions upload --dry-run",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler versions upload --keep-vars",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler versions view 521ad0aa-55f9-4606-b481-fc4861d8a60f",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "trust-followup",
+      "command": "wrangler versions deploy 521ad0aa-55f9-4606-b481-fc4861d8a60f@100",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services describe workbookcare-api-beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud api-gateway api-configs describe workbookcare-beta-d08-e6132fcdf496",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "wrangler versions view 521ad0aa-55f9-4606-b481-fc4861d8a60f",
+      "exit_code": 0
+    },
+    {
+      "phase": "after",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta",
+      "exit_code": 0
+    }
+  ]
+}

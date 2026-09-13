@@ -4,7 +4,7 @@ import { resolveApiBaseUrl } from '../lib/api';
 
 type Preflight = { status: string; eligible_count: number; reason_codes: string[]; purchase_enabled: boolean;
   targets: {sheet:string;cell:string;eligible:boolean;current_type:string;reason_codes:string[]}[] };
-export type DeliveryJob = {approval_receipt?:{payload:{source_hash:string;plan_digest:string};signature:string}|null;order_id?:string|null;entitlement_active?:boolean;policy?:{profile:string;sheet:string;targets:string[];role?:string;anchor?:string;anchor_formula?:string;confirmed:boolean};job_id:string;revision:number;source_hash:string;status:string;expires_at:number;
+export type DeliveryJob = {synthetic_rehearsal_available?:boolean;approval_receipt?:{payload:{source_hash:string;plan_digest:string};signature:string}|null;order_id?:string|null;entitlement_active?:boolean;policy?:{profile:string;sheet:string;targets:string[];role?:string;anchor?:string;anchor_formula?:string;confirmed:boolean};job_id:string;revision:number;source_hash:string;status:string;expires_at:number;
   repair_execution_available?:boolean;approval_status?:string;delivery?:{delivery_id:string;patch_count:number;expires_at:number;files:Record<string,{bytes:number}>}|null;
   internal_rehearsal?:boolean;plan_summary?:{digest:string;status:string;patch_count:number;impact_count:number;formula_impact_count:number;coverage:{formula_count:number};reference:{status:string;case_count?:number}}|null;
   sheets:{name:string;cell_count:number}[];preflight:Preflight|null;purchase_enabled:boolean;source_unchanged:boolean};
@@ -28,7 +28,7 @@ const cellTypes:Record<string,string>={text:'문자',number:'숫자',formula:'�
 const apiBase=resolveApiBaseUrl(import.meta.env.VITE_API_BASE_URL,import.meta.env.PROD);
 export class DeliveryRequestError extends Error{constructor(message:string,public code:string){super(message)}}
 export async function deliveryRequest<T>(body:object,signal?:AbortSignal):Promise<T>{
-  const response=await fetch(`${apiBase}/v1/delivery`,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json','X-WorkbookCare-CSRF':'1'},body:JSON.stringify(body),signal});
+  const response=await fetch(`${apiBase}/v1/delivery`,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json','X-WorkbookCare-CSRF':'1'},body:JSON.stringify(body),signal}).catch(error=>{if(signal?.aborted)throw error;throw new DeliveryRequestError('서버에 연결하지 못했습니다. 연결을 확인한 뒤 다시 시도하세요.','NETWORK_UNAVAILABLE')});
   const result=await response.json();
   if(!response.ok)throw new DeliveryRequestError(result.error?.message??'작업을 처리하지 못했습니다. 최신 상태를 다시 확인하세요.',result.error?.code??'REQUEST_FAILED');
   return result as T;
@@ -71,7 +71,7 @@ export function DeliveryWorkspace({file,initialJob}:{file?:File;initialJob?:Deli
   return <section id="repair-preflight" className="delivery-workspace shell" aria-label="수정 범위 사전 확인">
     <h2 ref={heading} tabIndex={-1}>수정 범위 사전 확인</h2><p>원본을 고정하고, 직접 지정한 업무 기준과 셀만 확인합니다. 이 확인은 변경 승인이 아닙니다.</p>
     <p className="delivery-beta-note">합성 파일 시험 · 일반 구매 준비 중 · 원본과 결과 15분 보관</p>
-    {job&&<p className="delivery-current-step" role="status">{job.status==='READY'?'현재 단계: 검증 완료 · 세 파일 받기':job.status==='PLAN_EXPIRED'?'변경계획이 만료되었습니다. 다시 계산하고 새로 승인하세요.':job.status==='CANCELLED'?'현재 단계: 취소 완료':job.approval_status==='APPROVED'?'현재 단계: 승인 완료 · 사본 생성':job.entitlement_active?'현재 단계: 정확한 변경 검토·별도 승인':job.plan_summary?'현재 단계: 범위 확인 완료 · 테스트 주문':'현재 단계: 수정 기준·지원 범위 확인'}</p>}
+    {job&&<p className="delivery-current-step" role="status">{job.status==='READY'?'현재 단계: 검증 완료 · 세 파일 받기':job.status==='PLAN_EXPIRED'?'변경계획이 만료되었습니다. 다시 계산하고 새로 승인하세요.':job.status==='CANCELLED'?'현재 단계: 취소 완료':job.approval_status==='APPROVED'?'현재 단계: 승인 완료 · 사본 생성':job.entitlement_active?'현재 단계: 정확한 변경 검토·별도 승인':job.plan_summary?'현재 단계: 범위 확인 완료 · 이용 방법 확인':'현재 단계: 수정 기준·지원 범위 확인'}</p>}
     {!job ? <div className="delivery-step"><h3>1. 원본 고정</h3><p>{file?.name??'고정된 합성 원본'} · {maxBytes===null?'지원 한도 확인 중':`최대 ${maxBytes/1024/1024}MiB`}</p>
       <label className="delivery-check"><input type="checkbox" checked={consent} onChange={e=>setConsent(e.target.checked)}/>업로드 권한이 있는 합성 파일이며 사전 검사와 임시 보관에 동의합니다.</label>
       <button className="button button--primary" type="button" disabled={busy||!consent} onClick={upload}>원본 고정하고 계속</button></div>
