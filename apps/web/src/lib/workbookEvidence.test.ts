@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { deflateRawSync } from 'node:zlib';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { readFormulaContext } from './workbookEvidence';
+import { readFormulaContext, readSourceCells, readSourceSheets } from './workbookEvidence';
 import { demoResult } from '../data/demo';
 import type { Finding } from '../types';
 
@@ -81,5 +81,22 @@ describe('bounded original evidence, separate from static API and calculation',(
  it('honors cancellation and reports unsupported browsers without fabricating context',async()=>{
   const c=new AbortController();c.abort();await expect(readFormulaContext(file(zip(parts(''))),finding(),c.signal)).rejects.toThrow();
   vi.stubGlobal('DecompressionStream',undefined);await expect(readFormulaContext(file(zip(parts(''))),finding())).rejects.toThrow();
+ });
+});
+
+describe('reused evidence reader for selectable sheets and proposal cells',()=>{
+ it('lists every frozen source sheet and reads requested cells without changing the source',async()=>{
+  const bytes=readFileSync(resolve(process.cwd(),'../../samples/WorkbookCare_Complex_Validation_2026-09-13/03_정산수정_연쇄계산.xlsx'));
+  const source=file(bytes),network=vi.fn();vi.stubGlobal('fetch',network);
+  expect(await readSourceSheets(source)).toEqual(['정산','보존정보']);
+  const cells=await readSourceCells(source,'정산',['F8','F31']);
+  expect(cells).toEqual([{cell:'F8',type:'formula',text:'=ROUND(C8*D8*(1-E8),0)',cached:'1742'},{cell:'F31',type:'blank',text:'빈 셀'}]);
+  expect(network).not.toHaveBeenCalled();
+ });
+ it('fails closed on excessive requested cells and unknown or external sheet names',async()=>{
+  const source=file(zip(parts('')));
+  await expect(readSourceCells(source,'온라인',Array.from({length:65},(_,i)=>'A'+(i+1)))).rejects.toThrow();
+  for(const name of ['missing','https://example.invalid/sheet'])await expect(readSourceCells(source,name,['F22'])).rejects.toThrow();
+  await expect(readSourceCells(source,'온라인',['A0'])).rejects.toThrow();
  });
 });

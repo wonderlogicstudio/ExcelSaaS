@@ -1,6 +1,8 @@
 import { useProductNavigation, routeTitles } from './lib/navigation';
 import { reviewKey, type RepairDraft } from './lib/repairReview';
-import { RepairReview } from './components/RepairReview';
+import { RepairProposalPicker } from './components/RepairProposalPicker';
+import { RepairIntentEditor, useSourceSheets } from './components/RepairIntent';
+import { noRepairIntent, type RepairIntent } from './lib/repairProposals';
 import { CoreFlowTabs, initialDeliveryProgress, type CoreStep } from './components/CoreFlowTabs';
 import { ServiceIntro } from './components/ProductPages';
 import { useEffect, useRef, useState } from 'react';
@@ -59,11 +61,12 @@ export default function App() {
   const [reviewFindings, setReviewFindings] = useState<Finding[]>([]);
   const [reviewLocked, setReviewLocked] = useState(false);
   const [reviewDraft, setReviewDraft] = useState<RepairDraft>();
+  const [repairIntent, setRepairIntent] = useState<RepairIntent>(noRepairIntent);
   const reviewSelection = { findings: reviewFindings, locked: reviewLocked, toggle: (finding: Finding) => {
     if (!reviewLocked) { setDeliveryProgress(initialDeliveryProgress); setReviewDraft(undefined); setReviewFindings(current => current.some(f => reviewKey(f) === reviewKey(finding))
       ? current.filter(f => reviewKey(f) !== reviewKey(finding)) : [...current, finding]); }
   }};
-  const clearReview = () => { setActiveStep(1); setDeliveryProgress(initialDeliveryProgress); setReviewFindings([]); setReviewLocked(false); setReviewDraft(undefined); };
+  const clearReview = () => { setRepairIntent(noRepairIntent); setActiveStep(1); setDeliveryProgress(initialDeliveryProgress); setReviewFindings([]); setReviewLocked(false); setReviewDraft(undefined); };
   const uploadRef = useRef<HTMLDivElement>(null);
   const activeRequest = useRef(0);
   const activeController = useRef<AbortController | null>(null);
@@ -78,6 +81,7 @@ export default function App() {
   const [revalidationComparison, setRevalidationComparison] = useState<ReturnType<typeof compareScanResults> | null>(null);
   const [findingStatuses, setFindingStatuses] = useState<Record<string, FindingUserStatus>>({});
   const [sourceFile, setSourceFile] = useState<File | null>(null);
+  const { sheets: sourceSheets } = useSourceSheets(sourceFile);
   const [formulaAuditResult, setFormulaAuditResult] = useState<FormulaAuditResult | null>(null);
   const [formulaAuditBusy, setFormulaAuditBusy] = useState(false);
   const [formulaAuditError, setFormulaAuditError] = useState<string | null>(null);
@@ -260,6 +264,7 @@ export default function App() {
     setFormulaAuditStatuses((current) => ({ ...current, [findingKey]: status }));
   };
 
+  const proposalFindings = [...(result?.findings ?? []), ...(formulaAuditHostedBetaEnabled && formulaAuditResult?.status === 'COMPLETED' ? formulaAuditResult.candidates : [])];
   const diagnosisComplete = !!result && !!sourceFile && deliveryBetaEnabled && !busy && !(formulaAuditHostedBetaEnabled && formulaAuditBusy);
   const maxStep: CoreStep = !diagnosisComplete ? 1 : deliveryProgress.deliveryAvailable ? 4 : deliveryProgress.approvalAvailable ? 3 : 2;
   useEffect(() => { if (activeStep > maxStep) setActiveStep(maxStep); }, [activeStep, maxStep]);
@@ -346,6 +351,7 @@ export default function App() {
             )}
             <ResultsPanel
               result={result}
+              intentControl={sourceFile && <RepairIntentEditor value={repairIntent} onChange={v => { setRepairIntent(v); setReviewDraft(undefined); setDeliveryProgress(initialDeliveryProgress); }} findings={proposalFindings} sheets={sourceSheets} locked={reviewLocked}/>}
               guided sourceFile={sourceFile} reviewReady={diagnosisComplete} onContinueReview={() => continueToStep(2)}
               reviewSelection={reviewSelection}
               formulaAudit={formulaAuditHostedBetaEnabled ? {
@@ -369,8 +375,8 @@ export default function App() {
         </div>
         <div id="core-work-panel" role="tabpanel" tabIndex={-1} aria-labelledby={`core-tab-${activeStep === 1 ? 2 : activeStep}`} hidden={activeStep === 1}>
           {result && <>
-            <div hidden={activeStep !== 2 || reviewLocked}><RepairReview selection={reviewSelection} available={deliveryBetaEnabled} hasFile={Boolean(sourceFile)} onPrepare={draft => { setDeliveryProgress(initialDeliveryProgress); setReviewDraft(draft); }}/></div>
-            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={`${result.analysis_id}:${reviewDraft ? JSON.stringify(reviewDraft) : 'manual'}`} file={sourceFile} compactEntry reviewDraft={reviewDraft} onSourceFixed={setReviewLocked} guidedStep={activeStep} onProgress={setDeliveryProgress} onNextStep={continueToStep}/>}
+            <div hidden={activeStep !== 2 || reviewLocked}><RepairProposalPicker findings={proposalFindings} sheets={sourceSheets} file={sourceFile} selection={reviewSelection} intent={repairIntent} available={deliveryBetaEnabled} onPrepare={draft => { setDeliveryProgress(initialDeliveryProgress); setReviewDraft(draft); }}/></div>
+            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={`${result.analysis_id}:${reviewDraft ? JSON.stringify(reviewDraft) : 'manual'}`} file={sourceFile} compactEntry reviewDraft={reviewDraft} intent={repairIntent} onRestartProposal={() => { setReviewLocked(false); setReviewDraft(undefined); setDeliveryProgress(initialDeliveryProgress); }} onSourceFixed={setReviewLocked} guidedStep={activeStep} onProgress={setDeliveryProgress} onNextStep={continueToStep}/>}
           </>}
         </div>
         </div>

@@ -58,7 +58,7 @@ describe('core product navigation and review boundaries', () => {
     const choice = screen.getAllByRole('checkbox', { name: /2단계에 포함/ })[0];
     fireEvent.click(choice);
     const selected = document.querySelector('#repair-review')!;
-    expect(selected).toHaveTextContent('검토 선택 1건');
+    expect(selected).toHaveTextContent('1단계에서 고른 1개만 제안받기');
     const input = document.querySelector<HTMLSelectElement>('.finding__status-control select')!;
     fireEvent.change(input, { target: { value: 'REVIEWED' } });
     const findings = document.querySelector('#results')!;
@@ -69,7 +69,7 @@ describe('core product navigation and review boundaries', () => {
     expect(findings).not.toBeVisible();
     fireEvent.click(menu('무료 진단'));
     expect(findings).toBeVisible(); expect(select).toHaveValue('warning');
-    expect(selected).toHaveTextContent('검토 선택 1건'); expect(fetcher).not.toHaveBeenCalled();
+    expect(selected).toHaveTextContent('1단계에서 고른 1개만 제안받기'); expect(fetcher).not.toHaveBeenCalled();
     fireEvent.click(screen.getByRole('button', { name: '다른 파일 검사' }));
     expect(document.querySelector('#repair-review')).toBeNull();
   });

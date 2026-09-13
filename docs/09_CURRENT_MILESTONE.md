@@ -1,3 +1,15 @@
+# STOPPED — Proposal Flow owner review
+
+2026-09-13 승인된 [53_REPAIR_PROPOSAL_FLOW.md](53_REPAIR_PROPOSAL_FLOW.md) 구현·회귀·실제 베타·Excel 검증 완료. [리뷰](delivery-v3_2/reviews/PROPOSAL_FLOW.md), [확인5행동](delivery-v3_2/owner_action.md). UX ENGINEERING_VERIFIED_AWAITING_OWNER / D08 PARTIAL. 다음은 요청 조건을 서버 계획·재검증 보고서에 연결하는 한 단위 제안만이며 실행하지 않는다. 아래 ACTIVE는 당시 이력이다.
+
+---
+
+# ACTIVE APPROVED — Proposal-led repair and optional user intent
+
+2026-09-13 latest owner request approves sheet/candidate-based repair suggestions, plain business questions, representative verified outcomes and optional desired-value/reference-cell input. Scope: [53_REPAIR_PROPOSAL_FLOW.md](53_REPAIR_PROPOSAL_FLOW.md). Reuse existing rules/engine/rights/approval. Existing protected beta deployment authorization applies. No remote push, real customer data, real payment, pricing, new resources or external AI. Baseline web121/type/build exit0. Implement, verify frozen expectations in actual beta UI and downloaded Excel, selective local commit and stop. Historical entries remain below.
+
+---
+
 # STOPPED — Guided Flow owner review
 
 2026-09-13 승인된 [52_GUIDED_DIAGNOSIS_FLOW.md](52_GUIDED_DIAGNOSIS_FLOW.md)의 구현·전체 회귀·실제 보호 베타/Excel 검증 완료. [리뷰](delivery-v3_2/reviews/GUIDED_FLOW.md)와 [사용자5개 행동](delivery-v3_2/owner_action.md)을 남기고 정지한다. UX ENGINEERING_VERIFIED_AWAITING_OWNER / D08 PARTIAL. 다음 한 단위는 무료 진단 요약 보고서 제안만; 다음 묶음 자동 실행 금지. 아래 ACTIVE 항목은 완료 전 이력이다.

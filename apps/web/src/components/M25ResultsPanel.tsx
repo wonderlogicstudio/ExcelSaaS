@@ -1,7 +1,7 @@
 import { reviewNoteLabel } from '../lib/reviewNotes';
 import type { ReviewSelection } from '../lib/repairReview';
 import { ReviewChoice } from './RepairReview';
-import { useRef, useState } from 'react';
+import { useRef, useState, type ReactNode } from 'react';
 import {
   AlertOctagon,
   AlertTriangle,
@@ -38,6 +38,7 @@ import { findingCounts } from '../lib/findingCounts';
 import { diagnosisCsvArtifact, displayedProducts } from '../lib/products';
 
 interface ResultsPanelProps {
+  intentControl?: ReactNode;
   guided?: boolean; sourceFile?: File | null; reviewReady?: boolean; onContinueReview?: () => void;
   reviewSelection?: ReviewSelection;
   result: ScanResult;
@@ -290,7 +291,7 @@ export function M25ResultsPanel(props: ResultsPanelProps) {
 }
 
 function ResultsContent({
-  guided = false, sourceFile, reviewReady = false, onContinueReview,
+  intentControl, guided = false, sourceFile, reviewReady = false, onContinueReview,
   result,
   reviewSelection,
   formulaAudit,
@@ -460,6 +461,7 @@ function ResultsContent({
           <p>구조 위험의 우선순위 점수입니다. 수식 검토 후보는 포함하지 않으며 계산·업무 정확도를 뜻하지 않습니다.</p>
           <p>{result.filename} · {formatFileSize(result.file_size_bytes)} · 시트 {workbook.sheet_count}개 · 내용이 있는 셀 {workbook.scanned_cell_count}개 · 수식 문자열 {workbook.formula_count}개</p>
         </details>
+        {intentControl}
         <div className="findings-panel" ref={findingsHeadingRef} tabIndex={-1}>
           <div className="panel-heading"><h3 id="all-findings-title">문제 유형별 확인</h3><span>{new Set(allFindings.map(f=>f.rule_code)).size}개 유형</span></div>
           <p className="diagnosis-reading-guide">유형을 펼쳐 공통 설명을 읽고, 필요한 위치를 선택해 해당 셀의 근거를 확인하세요.</p>
@@ -490,7 +492,7 @@ function ResultsContent({
             : counts.total_detected>0 ? <p className="empty-result-note">발견된 항목의 반환 상세가 없습니다. 상세 생략 수와 검사 한계를 확인하세요.</p>
             : <p className="empty-result-note">완료한 검사에서 반환된 항목이 없습니다. 위의 검사 진행과 범위를 확인하세요.</p>}
         </div>
-        {reviewSelection && <section className="diagnosis-continue" aria-label="다음 단계로 이동"><div><h3>이 중 고칠 항목을 확인할까요?</h3><p>2단계에 포함한 항목 {reviewSelection.findings.length}개 · 선택만으로 변경하거나 승인하지 않습니다.</p><small>유형 전체 또는 필요한 셀만 포함할 수 있습니다. ‘읽어봄’은 선택과 관계없는 개인 메모입니다.</small></div><button className="button button--primary" type="button" disabled={!reviewReady || !reviewSelection.findings.length} onClick={onContinueReview}>선택한 {reviewSelection.findings.length}개로 수정 범위 확인</button>{reviewReady && <button className="button button--ghost" type="button" onClick={onContinueReview}>대상 셀 직접 지정</button>}</section>}
+        {reviewSelection && <section className="diagnosis-continue" aria-label="다음 단계로 이동"><div><h3>이 중 고칠 항목을 확인할까요?</h3><p>2단계에 포함한 항목 {reviewSelection.findings.length}개 · 선택만으로 변경하거나 승인하지 않습니다.</p><small>유형 전체 또는 필요한 셀만 포함할 수 있습니다. ‘읽어봄’은 선택과 관계없는 개인 메모입니다.</small></div><button className="button button--primary" type="button" disabled={!reviewReady} onClick={onContinueReview}>{reviewSelection.findings.length ? `선택한 ${reviewSelection.findings.length}개로 수정 범위 확인` : '시트별 수정 제안 보기'}</button></section>}
         <div className="diagnosis-result-tools">
           <div className="diagnosis-csv"><button className="button button--outline" type="button" onClick={()=>downloadDiagnosisCsv(result,statuses)}><Download size={17}/>진단 결과 CSV 다운로드</button>
             <p>CSV 범위: 구조 검사 결과만 포함 · 수식 검토 후보 제외. 필터 적용 전 반환 상세와 개인 처리 상태를 내보냅니다.</p></div>

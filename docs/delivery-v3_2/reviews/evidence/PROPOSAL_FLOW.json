@@ -1,0 +1,1747 @@
+{
+  "kind": "ACTUAL_PROPOSAL_UI_AND_PROTECTED_SYNTHETIC_BETA_VERIFICATION",
+  "date": "2026-09-13",
+  "base_commit": "087b5b5a1d5157979af67a86810136f7cd4cb1b2",
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "execution_state": "STOPPED_AWAITING_OWNER",
+  "source_sha256": {
+    "apps/web/src/App.hosted-beta.test.tsx": "8d1655c2e5484f45e1427a7850fe9f7ab52ed49a12b94d5fa2ef522315cf4304",
+    "apps/web/src/App.navigation.test.tsx": "4028ed46fdaf62db8bdc897baaaa425895865ead966b793e3e1ca2427fc7f12f",
+    "apps/web/src/App.tsx": "f0dea6f55be544b155a93f2a26d17c514076a5a4224412e56d6c09dec86fabc9",
+    "apps/web/src/components/DeliveryWorkspace.tsx": "4de5d3531a3d55ada9f5922c81e07fb6868da6502e5cabdfc04c350288bfc563",
+    "apps/web/src/components/GuidedFlow.test.tsx": "e54d71b6f48ecbe79aba501867c271e56d57cc287c8359cbff3a2527a9a4054b",
+    "apps/web/src/components/M25ResultsPanel.tsx": "6efe9edc5ffc9b904526569332e3660de284dea2e2566ee875d25df14f0b62a9",
+    "apps/web/src/components/OrderStatus.tsx": "11b0477b0eaf422547e2b4bb8ed3354cd8f59581573bf088f9915367fa1202e8",
+    "apps/web/src/components/ProductPages.tsx": "6076f84df49a08b34eb9836198a863cd726081f8ba5e9e3d2d16ee4559fa0c72",
+    "apps/web/src/components/ProposalExample.tsx": "ee6e2d39de2a1009200ed83806ba1b90fa57046f9a7ed105cd63067b1e1b61a3",
+    "apps/web/src/components/ProposalFlow.test.tsx": "9399050f24c3f4f1a58c02f2ff42eef69fcb910330043de98bcfff719881ae62",
+    "apps/web/src/components/RepairIntent.tsx": "189d1f326d1c8071b215ca52491c6bd28bb7cf42c86748b8975b3162bdc77d95",
+    "apps/web/src/components/RepairPlanPreview.tsx": "e182061f3d89ee954ac445a66865ea078c74b0c2713448f5d46558ca49f2a9f4",
+    "apps/web/src/components/RepairProposalPicker.tsx": "81958ba22a4d2a2dc32fcf85bf4b69b4d9ccfb92bf5831d0f14a621588be20cd",
+    "apps/web/src/lib/repairProposals.test.ts": "90bb05c1b5d3cb7655d32a0167d12c76c663102484e5e4c93842cbb2f9ae8c6c",
+    "apps/web/src/lib/repairProposals.ts": "ad1d42423bd57747601001083cd23585083ec0b4f010b794f2330fd40d4db1e4",
+    "apps/web/src/lib/repairReview.ts": "62008699c6d8e171b416bd26efb33ca0338659e551659f42f41352dd68fd040f",
+    "apps/web/src/lib/workbookEvidence.test.ts": "48c9ae5d390c3c1b46ca421f24d31638f6c31c86a54da858c2a575274db2344c",
+    "apps/web/src/lib/workbookEvidence.ts": "bc372a133e0a54d9f7bdff32b69d9b21ececec6a5406ae93572b8902cb08452f",
+    "apps/web/src/main.tsx": "c39a105a22e71f0fad5dc500d4ac3b0e2ee6d3f254536d5a3c0e10cfbed8e6bb",
+    "apps/web/src/proposal-flow.css": "72d752ac86932f1af5566bf6c772f03e0c1f8c2ab53c35d41c8978e9acfc9acd"
+  },
+  "startup": {
+    "base_commit": "087b5b5a1d5157979af67a86810136f7cd4cb1b2",
+    "prior_sha256": {
+      "docs/09_CURRENT_MILESTONE.md": "c54211388b41061cfeea521da7108acbb7271be2ac8bd1d8f16b3b8506ebcaae",
+      "docs/10_PROGRESS.md": "fe5499f107f4c2b5a1c54c7263685fafa51cb32c95fb6ff99f1e964786b9f12b",
+      "docs/11_DECISIONS.md": "b26b7beec9f048fed60c22327b9685cf27f318eccecff7724387a2af06e7a7f7",
+      "docs/delivery-v3_2/reviews/GUIDED_FLOW.md": "cf3c428b0e1ee32db77a27089b05fce430adcb23534319406f90a3f15ac094df",
+      "docs/delivery-v3_2/delivery-progress.json": "7a4221b6f3a112fb4257f8073c92f22b1d02e89b652d9f41a20f54f6c11711f4",
+      "docs/delivery-v3_2/release_manifest.json": "c669f345553b6ad21a977c8b278e46e1b4b56867199c0662bf8718a379358d5b",
+      "docs/delivery-v3_2/owner_action.md": "cf5f6396a8d60dbb2c0e853342e0a3c94466bbc1dd783de98e99eb3e696fc488"
+    },
+    "baseline_web": 121,
+    "baseline_type_build": "PASS",
+    "baseline_exit_code": 0
+  },
+  "final_worker": "1fa2992b-c75d-400b-8acc-14dd484c7a40",
+  "api": "workbookcare-api-beta-00014-nah",
+  "release_stages": [
+    {
+      "baseline": {
+        "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+        "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+        "api": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "spec_hash": "a8ae10eb87adfa08ad9163e442d7425e18e4ae298f2d4cb018ae46a43540c1bd",
+          "traffic_hash": "34174e4fb80de9a0e8a678ab0dc589fe295cc91917e4f1fc66baa1214c1357ff",
+          "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+        },
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "web": {
+        "flags": {
+          "VITE_PRODUCT_ENV": "hosted_beta",
+          "VITE_API_BASE_URL": "/api",
+          "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+          "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+          "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+          "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+          "VITE_DELIVERY_BETA_ENABLED": "true"
+        },
+        "assets": {
+          "apps/web/dist/index.html": "82f8026a7076a90a5358aca741045fed95a5966b22b5bd4242da5b1f6b2d06db",
+          "apps/web/dist/assets/index-BobRvWbW.js": "65858be2fbcfe056e80568c2cef7469945646441f159925dee1ff23c09f272d6",
+          "apps/web/dist/assets/index-DVyRWfpZ.css": "581db2a3a706137c858e49ff18f8924f8e616d8e08a68266bbcae5ce5d3a5bd5",
+          "apps/web/dist/assets/workbookEvidence-Dw_F_SwO.js": "68cc6e420024224cb246a1b0cb875574bc1e73442a0a1f2d9e2d7f380d12223e"
+        }
+      },
+      "upload": {
+        "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+        "all_bindings_equal": true
+      },
+      "live": {
+        "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+        "rollback_worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+        "all_bindings_equal": true,
+        "api_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "directory": "artifacts/verification/proposal-flow/release",
+      "commands": [
+        {
+          "phase": "baseline",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "wrangler versions view 4f756e00-dc3d-4c2c-ae5c-862e79b6422c --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag proposal-flow --message Approved proposal selection and representative results; same private boundaries",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions view 93719bc2-a601-4fc0-94fc-cf4c8d9b56e6 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions view 93719bc2-a601-4fc0-94fc-cf4c8d9b56e6 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions deploy 93719bc2-a601-4fc0-94fc-cf4c8d9b56e6@100 --yes --message Approved proposal-led repair UX",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "baseline": {
+        "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+        "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+        "api": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "spec_hash": "a8ae10eb87adfa08ad9163e442d7425e18e4ae298f2d4cb018ae46a43540c1bd",
+          "traffic_hash": "34174e4fb80de9a0e8a678ab0dc589fe295cc91917e4f1fc66baa1214c1357ff",
+          "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+        },
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "web": {
+        "flags": {
+          "VITE_PRODUCT_ENV": "hosted_beta",
+          "VITE_API_BASE_URL": "/api",
+          "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+          "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+          "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+          "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+          "VITE_DELIVERY_BETA_ENABLED": "true"
+        },
+        "assets": {
+          "apps/web/dist/index.html": "80a10bb176c987eefe33ad4684cc16282380ec9de2cf2de114529bb492275bb3",
+          "apps/web/dist/assets/index-Dmjp7SD-.js": "4bf0e811f173ba80fe633d93e7a003080632cf4c8905fd8ae00371c6a31a5c96",
+          "apps/web/dist/assets/index-DVyRWfpZ.css": "581db2a3a706137c858e49ff18f8924f8e616d8e08a68266bbcae5ce5d3a5bd5",
+          "apps/web/dist/assets/workbookEvidence-Dw_F_SwO.js": "68cc6e420024224cb246a1b0cb875574bc1e73442a0a1f2d9e2d7f380d12223e"
+        }
+      },
+      "upload": {
+        "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+        "all_bindings_equal": true
+      },
+      "live": {
+        "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+        "rollback_worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+        "all_bindings_equal": true,
+        "api_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "directory": "artifacts/verification/proposal-flow/release-final",
+      "commands": [
+        {
+          "phase": "baseline",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "wrangler versions view 93719bc2-a601-4fc0-94fc-cf4c8d9b56e6 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag proposal-flow --message Approved proposal selection and representative results; same private boundaries",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions view 6372fd95-9810-4cdd-8ebe-c8d01e35ad3d --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions view 6372fd95-9810-4cdd-8ebe-c8d01e35ad3d --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions deploy 6372fd95-9810-4cdd-8ebe-c8d01e35ad3d@100 --yes --message Approved proposal-led repair UX",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "baseline": {
+        "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+        "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+        "api": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "spec_hash": "a8ae10eb87adfa08ad9163e442d7425e18e4ae298f2d4cb018ae46a43540c1bd",
+          "traffic_hash": "34174e4fb80de9a0e8a678ab0dc589fe295cc91917e4f1fc66baa1214c1357ff",
+          "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+        },
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "web": {
+        "flags": {
+          "VITE_PRODUCT_ENV": "hosted_beta",
+          "VITE_API_BASE_URL": "/api",
+          "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+          "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+          "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+          "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+          "VITE_DELIVERY_BETA_ENABLED": "true"
+        },
+        "assets": {
+          "apps/web/dist/index.html": "e578479f4b2a993acdc2f9c4f3158a13989ff1d864bec0311eb7367c2bae6641",
+          "apps/web/dist/assets/index-DdcPGD-Y.js": "cbaf86b081acf0fc748ae46648515ebfcb092f46f3872a7c29b9ae5b3c93cfa4",
+          "apps/web/dist/assets/index-DVyRWfpZ.css": "581db2a3a706137c858e49ff18f8924f8e616d8e08a68266bbcae5ce5d3a5bd5",
+          "apps/web/dist/assets/workbookEvidence-Dw_F_SwO.js": "68cc6e420024224cb246a1b0cb875574bc1e73442a0a1f2d9e2d7f380d12223e"
+        }
+      },
+      "upload": {
+        "worker": "1fa2992b-c75d-400b-8acc-14dd484c7a40",
+        "all_bindings_equal": true
+      },
+      "live": {
+        "worker": "1fa2992b-c75d-400b-8acc-14dd484c7a40",
+        "rollback_worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+        "all_bindings_equal": true,
+        "api_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "directory": "artifacts/verification/proposal-flow/release-copy",
+      "commands": [
+        {
+          "phase": "baseline",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "wrangler versions view 6372fd95-9810-4cdd-8ebe-c8d01e35ad3d --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag proposal-flow --message Approved proposal selection and representative results; same private boundaries",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions view 1fa2992b-c75d-400b-8acc-14dd484c7a40 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions view 1fa2992b-c75d-400b-8acc-14dd484c7a40 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions deploy 1fa2992b-c75d-400b-8acc-14dd484c7a40@100 --yes --message Approved proposal-led repair UX",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/proposal-flow/baseline-web.log",
+      "exit_code": 0,
+      "passing_tests": 121,
+      "sha256": "dd3ee4ee677adb4326da2217f589df50c2ecfd30f30ede9cc8d171d10f49a2bd"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/proposal-flow/web-1.log",
+      "exit_code": 1,
+      "passing_tests": 125,
+      "sha256": "986b7090b76f21e7057c056e05d7ceda7118a9a9e507ea1e3a0bd5ab72115860"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/proposal-flow/web-2.log",
+      "exit_code": 1,
+      "passing_tests": 138,
+      "sha256": "6c943930d3b45e9e5011d8d177e9960ed455088bb5621a588a67aba8fd3ec92a"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/proposal-flow/web-3.log",
+      "exit_code": 0,
+      "passing_tests": 139,
+      "sha256": "d8245867e1c282eba555c515d3c56f48ed9ee7a0b0fca733318ab29a0a80e1b5"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/proposal-flow/web-final.log",
+      "exit_code": 0,
+      "passing_tests": 139,
+      "sha256": "0f43949c1a791a932e2255a86e73a78587e0dea9e6cd6bd1547b9a23b21e65a7"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "log": "artifacts/verification/proposal-flow/web-copy.log",
+      "exit_code": 0,
+      "passing_tests": 139,
+      "sha256": "d3fb815d74a2eb9517167f96d522a205f864821d693f9b81522256a12a1afe28"
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web",
+      "log": "artifacts/verification/proposal-flow/build-1.log",
+      "exit_code": 0
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify-m4-release.ps1 -AcceptProductOwnerFixtureWaiver",
+      "log": "artifacts/verification/proposal-flow/full-regression.log",
+      "exit_code": 0,
+      "web": 139,
+      "worker": 16,
+      "api": 231,
+      "ruff": "PASS",
+      "m4_exact": 36,
+      "quality_decision": "CONDITIONAL_GO_EXISTING_WAIVER_UNCHANGED"
+    },
+    {
+      "command": "<scratch>/verify_plan_ui.py RP01_SUBSET",
+      "exit_code": 0
+    },
+    {
+      "command": "<scratch>/collect_complex_downloads.py begin RP01_SUBSET",
+      "exit_code": 0
+    },
+    {
+      "command": "<scratch>/collect_complex_downloads.py collect RP01_SUBSET",
+      "exit_code": 0
+    },
+    {
+      "command": "<scratch>/verify_plan_ui.py RP02_ALL",
+      "exit_code": 0
+    },
+    {
+      "command": "<scratch>/collect_complex_downloads.py begin RP02_ALL",
+      "exit_code": 0
+    },
+    {
+      "command": "<scratch>/collect_complex_downloads.py collect RP02_ALL",
+      "exit_code": 0
+    },
+    {
+      "command": "<scratch>/verify_complex_downloads.py",
+      "exit_code": 0
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File <scratch>/verify_complex_download_excel.ps1 -Mode repair",
+      "exit_code": 0
+    },
+    {
+      "command": "<scratch>/render_native.py",
+      "exit_code": 0
+    },
+    {
+      "command": "<scratch>/preservation.py",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "verification": {
+    "RP01_SUBSET-ui-validation.json": {
+      "kind": "ACTUAL_BETA_RENDERED_PLAN_VS_FROZEN_ORACLE",
+      "status": "PASS",
+      "case": "RP01_SUBSET",
+      "exact_patches": 4,
+      "exact_calculated_impacts": 20,
+      "sum_after": 2029526,
+      "approval_not_granted": true,
+      "official_pg_verified": false
+    },
+    "RP02_ALL-ui-validation.json": {
+      "kind": "ACTUAL_BETA_RENDERED_PLAN_VS_FROZEN_ORACLE",
+      "status": "PASS",
+      "case": "RP02_ALL",
+      "exact_patches": 3,
+      "exact_calculated_impacts": 16,
+      "sum_after": 937923,
+      "approval_not_granted": true,
+      "official_pg_verified": false
+    },
+    "download-validation.json": {
+      "kind": "ACTUAL_BETA_DOWNLOADED_FILES_VS_FROZEN_ORACLE",
+      "status": "PASS",
+      "results": [
+        {
+          "case": "RP01_SUBSET",
+          "status": "PASS",
+          "cached_expected_values": 725,
+          "change_rows": 4,
+          "exact_html_impacts": 20,
+          "html_checks": 9,
+          "unchanged_zip_members": 7,
+          "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+        },
+        {
+          "case": "RP02_ALL",
+          "status": "PASS",
+          "cached_expected_values": 725,
+          "change_rows": 3,
+          "exact_html_impacts": 13,
+          "html_checks": 9,
+          "unchanged_zip_members": 7,
+          "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+        }
+      ],
+      "all_frozen_inputs_unchanged": true,
+      "official_pg_verified": false
+    },
+    "download-excel-repair.json": {
+      "excel_build": 20326,
+      "official_pg_verified": false,
+      "excel_version": "16.0",
+      "kind": "ACTUAL_BETA_DOWNLOADS_REOPENED_IN_INSTALLED_EXCEL",
+      "results": [
+        {
+          "case": "RP01_SUBSET",
+          "sum_after": 2029526,
+          "download_unchanged": true,
+          "preserved_source_values": 854,
+          "native_calculated_cells": 725,
+          "status": "PASS",
+          "formula_checks": 602,
+          "sha256": "4d2a7c0fd325c3b8dc69c3a04c179c8f6b2fe154672591f3cf2c677d947fa089"
+        },
+        {
+          "patch_count": 4,
+          "status": "PASS",
+          "case": "RP01_SUBSET-changes",
+          "native_open": true
+        },
+        {
+          "case": "RP02_ALL",
+          "sum_after": 937923,
+          "download_unchanged": true,
+          "preserved_source_values": 858,
+          "native_calculated_cells": 725,
+          "status": "PASS",
+          "formula_checks": 605,
+          "sha256": "dd7384aa85f9eb7444a6040e8efee4c16c1a147f1f97bafb290fe0333b860d08"
+        },
+        {
+          "patch_count": 3,
+          "status": "PASS",
+          "case": "RP02_ALL-changes",
+          "native_open": true
+        }
+      ],
+      "status": "PASS"
+    },
+    "preservation.json": {
+      "status": "PASS",
+      "owner_original_files": 83,
+      "previous_sample_files": 68,
+      "frozen_complex_files": 13
+    }
+  },
+  "actual_browser_ui": {
+    "boundary.json": {
+      "heading": "확인할 항목 1건",
+      "summary": "검사 완료확인할 항목 1건구조 위험 1건 · 수식 검토 후보 0건다른 파일 검사1개 문제 유형 · 1개 확인 위치 · 우선 확인 0개 반환 상세구조 위험 검사완료수식 패턴 검사완료패턴 차이는 검토 후보이며, 잘못된 수식이나 업무 정답을 확정하지 않습니다.검사 범위와 한계파일 구조·명시적 수식 오류·외부 참조·숨김 구조와 ",
+      "candidateCards": 0,
+      "options": [
+        "월별보고 · 발견된 수정 후보 없음",
+        "거래원장 · 발견된 수정 후보 없음",
+        "통합문서 · 현재 수정 제안 미지원"
+      ],
+      "step3Disabled": true,
+      "step4Disabled": true
+    },
+    "final-main.json": {
+      "assets": [
+        "https://workbookcare-beta.wonderlogic-studio.workers.dev/assets/index-DdcPGD-Y.js"
+      ],
+      "defaultNoOpinion": true,
+      "heading": "확인할 항목 11건",
+      "blocked": true,
+      "identifierSelected": true,
+      "message": "이 숫자는 어떤 용도인가요?계산에 쓸 숫자만 바꿉니다. 고객번호처럼 구분하는 번호는 문자로 남겨야 합니다.금액매출·비용·정산액처럼 더하거나 뺄 돈개수·수량상품 수·인원처럼 계산할 개수구분하는 번호고객번호·계좌·전화번호·우편번호구분하는 번호는 수정하지 않습니다. 앞자리0이나 원래 표기를 보존하세요.",
+      "options": [
+        "정산 · 수정 제안 후보 11곳",
+        "보존정보 · 발견된 수정 후보 없음"
+      ]
+    },
+    "final-reference-matched.json": {
+      "after": "5,232",
+      "assets": [
+        "https://workbookcare-beta.wonderlogic-studio.workers.dev/assets/index-Dmjp7SD-.js"
+      ],
+      "before": "비어 있는 칸",
+      "sequence": [
+        {
+          "tag": "SECTION",
+          "text": "검증한 제안 · 아직 원본 변경 없음예를 들면 이렇게 바뀝니다정산 · F31 · 선택한 3곳 중 한 가지 예시현재비어 있는 칸→이 방식으로 채우면5,232선택한 기준 수식을 해당 행으로 옮긴 후 지원 엔진에서 실제로 계산한 값입니다.수정할 위치 3곳 · 함께 달라지는 계산 결과 13곳. 이 예시 하나가 전체 변경 목록은 아닙니다.원하는 결과와 대조 완료정산 F31에 F8의 계산 방식을 적용한 제안입니다. 행에 맞게 참조를 옮겨 계산했습니다."
+        },
+        {
+          "tag": "BUTTON",
+          "text": "3단계 · 변경 내용과 예상 결과 확인"
+        }
+      ],
+      "step3Disabled": false,
+      "step4Disabled": true,
+      "verdict": "원하는 결과와 대조 완료정산 F31에 F8의 계산 방식을 적용한 제안입니다. 행에 맞게 참조를 옮겨 계산했습니다."
+    },
+    "mismatch.json": {
+      "after": "5,232",
+      "approvalVisible": false,
+      "before": "비어 있는 칸",
+      "step3Disabled": true,
+      "step4Disabled": true,
+      "verdict": "원하는 결과와 다릅니다요청한 10와 계산 결과 5232가 다릅니다. 요청을 맞추려고 값이나 수식을 임의로 바꾸지 않았습니다.현재 요청으로는 변경 승인에 진행할 수 없습니다. ‘다른 제안으로 다시 선택’에서 요청 또는 규칙을 다시 확인하세요."
+    },
+    "normal.json": {
+      "candidateCards": 0,
+      "sheetOptions": [
+        "채널요약 · 발견된 수정 후보 없음",
+        "온라인 · 발견된 수정 후보 없음",
+        "매장 · 발견된 수정 후보 없음",
+        "반품 · 발견된 수정 후보 없음"
+      ],
+      "step3Disabled": true
+    },
+    "numeric-matched.json": {
+      "after": "5,232",
+      "approvalVisible": false,
+      "step3Disabled": false,
+      "step4Disabled": true,
+      "verdict": "원하는 결과와 대조 완료요청한 정산 F31의 숫자와 이번 계산 결과가 일치합니다."
+    },
+    "RP01_SUBSET-plan.json": {
+      "approvalDisabled": true,
+      "deliveryTabDisabled": true,
+      "impacts": [
+        {
+          "cell": "G12",
+          "values": [
+            "숫자 0",
+            "숫자 -1,250"
+          ]
+        },
+        {
+          "cell": "H12",
+          "values": [
+            "숫자 5,615",
+            "숫자 4,365"
+          ]
+        },
+        {
+          "cell": "I12",
+          "values": [
+            "숫자 562",
+            "숫자 437"
+          ]
+        },
+        {
+          "cell": "J12",
+          "values": [
+            "숫자 6,177",
+            "숫자 4,802"
+          ]
+        },
+        {
+          "cell": "G24",
+          "values": [
+            "숫자 0",
+            "숫자 7,200"
+          ]
+        },
+        {
+          "cell": "H24",
+          "values": [
+            "숫자 4,518",
+            "숫자 11,718"
+          ]
+        },
+        {
+          "cell": "I24",
+          "values": [
+            "숫자 452",
+            "숫자 1,172"
+          ]
+        },
+        {
+          "cell": "J24",
+          "values": [
+            "숫자 4,970",
+            "숫자 12,890"
+          ]
+        },
+        {
+          "cell": "G78",
+          "values": [
+            "숫자 0",
+            "숫자 999,999"
+          ]
+        },
+        {
+          "cell": "H78",
+          "values": [
+            "숫자 3,582",
+            "숫자 1,003,581"
+          ]
+        },
+        {
+          "cell": "I78",
+          "values": [
+            "숫자 358",
+            "숫자 100,358"
+          ]
+        },
+        {
+          "cell": "J78",
+          "values": [
+            "숫자 3,940",
+            "숫자 1,103,939"
+          ]
+        },
+        {
+          "cell": "G111",
+          "values": [
+            "숫자 0",
+            "숫자 3,000"
+          ]
+        },
+        {
+          "cell": "H111",
+          "values": [
+            "숫자 18,676",
+            "숫자 21,676"
+          ]
+        },
+        {
+          "cell": "I111",
+          "values": [
+            "숫자 1,868",
+            "숫자 2,168"
+          ]
+        },
+        {
+          "cell": "J111",
+          "values": [
+            "숫자 20,544",
+            "숫자 23,844"
+          ]
+        },
+        {
+          "cell": "G130",
+          "values": [
+            "숫자 0",
+            "숫자 1,008,949"
+          ]
+        },
+        {
+          "cell": "H130",
+          "values": [
+            "숫자 836,071",
+            "숫자 1,845,020"
+          ]
+        },
+        {
+          "cell": "I130",
+          "values": [
+            "숫자 83,611",
+            "숫자 184,506"
+          ]
+        },
+        {
+          "cell": "J130",
+          "values": [
+            "숫자 919,682",
+            "숫자 2,029,526"
+          ]
+        }
+      ],
+      "patches": [
+        {
+          "cell": "B111",
+          "values": [
+            "문자 “3,000”",
+            "숫자 3,000"
+          ]
+        },
+        {
+          "cell": "B12",
+          "values": [
+            "문자 “-1,250”",
+            "숫자 -1,250"
+          ]
+        },
+        {
+          "cell": "B24",
+          "values": [
+            "문자 “7,200”",
+            "숫자 7,200"
+          ]
+        },
+        {
+          "cell": "B78",
+          "values": [
+            "문자 “999,999”",
+            "숫자 999,999"
+          ]
+        }
+      ]
+    },
+    "RP02_ALL-plan.json": {
+      "approvalDisabled": true,
+      "deliveryTabDisabled": true,
+      "impacts": [
+        {
+          "cell": "F107",
+          "values": [
+            "숫자 7,800"
+          ]
+        },
+        {
+          "cell": "F31",
+          "values": [
+            "숫자 5,232"
+          ]
+        },
+        {
+          "cell": "F64",
+          "values": [
+            "숫자 3,551"
+          ]
+        },
+        {
+          "cell": "H31",
+          "values": [
+            "숫자 -300",
+            "숫자 4,932"
+          ]
+        },
+        {
+          "cell": "I31",
+          "values": [
+            "숫자 -30",
+            "숫자 493"
+          ]
+        },
+        {
+          "cell": "J31",
+          "values": [
+            "숫자 -330",
+            "숫자 5,425"
+          ]
+        },
+        {
+          "cell": "H64",
+          "values": [
+            "숫자 -300",
+            "숫자 3,251"
+          ]
+        },
+        {
+          "cell": "I64",
+          "values": [
+            "숫자 -30",
+            "숫자 325"
+          ]
+        },
+        {
+          "cell": "J64",
+          "values": [
+            "숫자 -330",
+            "숫자 3,576"
+          ]
+        },
+        {
+          "cell": "H107",
+          "values": [
+            "숫자 -400",
+            "숫자 7,400"
+          ]
+        },
+        {
+          "cell": "I107",
+          "values": [
+            "숫자 -40",
+            "숫자 740"
+          ]
+        },
+        {
+          "cell": "J107",
+          "values": [
+            "숫자 -440",
+            "숫자 8,140"
+          ]
+        },
+        {
+          "cell": "F130",
+          "values": [
+            "숫자 836,071",
+            "숫자 852,654"
+          ]
+        },
+        {
+          "cell": "H130",
+          "values": [
+            "숫자 836,071",
+            "숫자 852,654"
+          ]
+        },
+        {
+          "cell": "I130",
+          "values": [
+            "숫자 83,611",
+            "숫자 85,269"
+          ]
+        },
+        {
+          "cell": "J130",
+          "values": [
+            "숫자 919,682",
+            "숫자 937,923"
+          ]
+        }
+      ],
+      "patches": [
+        {
+          "cell": "F107",
+          "values": [
+            "빈 셀",
+            "=ROUND(C107*D107*(1-E107),0)",
+            "숫자 7,800"
+          ]
+        },
+        {
+          "cell": "F31",
+          "values": [
+            "빈 셀",
+            "=ROUND(C31*D31*(1-E31),0)",
+            "숫자 5,232"
+          ]
+        },
+        {
+          "cell": "F64",
+          "values": [
+            "빈 셀",
+            "=ROUND(C64*D64*(1-E64),0)",
+            "숫자 3,551"
+          ]
+        }
+      ]
+    }
+  },
+  "screens": [
+    {
+      "name": "1440-initial",
+      "checks": {
+        "step1": true,
+        "laterTabsLocked": true
+      },
+      "time": "2026-09-13T12:55:18.724Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-sheet-proposals",
+      "checks": {
+        "freeFindings": 11,
+        "structure": 8,
+        "formula": 3,
+        "sheets": [
+          "정산",
+          "보존정보"
+        ],
+        "sourceB12": "-1,250",
+        "columnLabel": "추가금액",
+        "noCoordinatesTyped": true
+      },
+      "time": "2026-09-13T12:55:42.740Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-no-candidates",
+      "checks": {
+        "sheet": "보존정보",
+        "candidateCount": 0,
+        "noEligibleClaim": true
+      },
+      "time": "2026-09-13T12:55:43.102Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-subset-confirm",
+      "checks": {
+        "targets": [
+          "B12",
+          "B24",
+          "B78",
+          "B111"
+        ],
+        "amountConfirmed": true,
+        "noApproval": true
+      },
+      "time": "2026-09-13T12:56:10.907Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": false,
+      "exclusion_reason": "Captured before repaint; not used as checkbox/viewport success proof."
+    },
+    {
+      "name": "1440-RP01-example",
+      "checks": {
+        "case": "RP01_SUBSET",
+        "before": "문자 “-1,250”",
+        "after": -1250,
+        "patches": 4,
+        "indirect": 20,
+        "fullDetailsClosed": true
+      },
+      "time": "2026-09-13T12:57:05.178Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-RP01-ready",
+      "checks": {
+        "threeFilesReady": true,
+        "approvedPatches": 4,
+        "separateExecution": true
+      },
+      "time": "2026-09-13T12:58:39.994Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-intent-input",
+      "checks": {
+        "requestedCell": "F31",
+        "expected": "10",
+        "freeFindingsUnchanged": 11,
+        "selectedFromFindings": true
+      },
+      "time": "2026-09-13T12:59:27.074Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-intent-mismatch",
+      "checks": {
+        "after": "5,232",
+        "approvalVisible": false,
+        "before": "비어 있는 칸",
+        "step3Disabled": true,
+        "step4Disabled": true,
+        "verdict": "원하는 결과와 다릅니다요청한 10와 계산 결과 5232가 다릅니다. 요청을 맞추려고 값이나 수식을 임의로 바꾸지 않았습니다.현재 요청으로는 변경 승인에 진행할 수 없습니다. ‘다른 제안으로 다시 선택’에서 요청 또는 규칙을 다시 확인하세요."
+      },
+      "time": "2026-09-13T13:01:54.535Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "390-intent-mismatch",
+      "checks": {
+        "after": 5232,
+        "expected": 10,
+        "approvalBlocked": true
+      },
+      "time": "2026-09-13T13:02:05.057Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": false,
+      "exclusion_reason": "Captured before repaint; not used as checkbox/viewport success proof."
+    },
+    {
+      "name": "390-intent-edit",
+      "checks": {
+        "expected": "5232",
+        "oldJobDeleted": true,
+        "requestUnlocked": true
+      },
+      "time": "2026-09-13T13:03:03.834Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "390-numeric-match",
+      "checks": {
+        "after": "5,232",
+        "approvalVisible": false,
+        "step3Disabled": false,
+        "step4Disabled": true,
+        "verdict": "원하는 결과와 대조 완료요청한 정산 F31의 숫자와 이번 계산 결과가 일치합니다.",
+        "oldViewportArtifactExcluded": true
+      },
+      "time": "2026-09-13T13:04:57.404Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "390-RP02-ready",
+      "checks": {
+        "actualDownloads": 3,
+        "patches": 3,
+        "distinctApprovalExecution": true
+      },
+      "time": "2026-09-13T13:07:47.463Z",
+      "worker": "93719bc2-a601-4fc0-94fc-cf4c8d9b56e6",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-final-source-anchor",
+      "checks": {
+        "anchor": "F8",
+        "originalFormula": "=ROUND(C8*D8*(1-E8),0)",
+        "cached": 1742,
+        "businessConfirmationAutomatic": false
+      },
+      "time": "2026-09-13T13:09:15.351Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-final-reference-example",
+      "checks": {
+        "requested": "F31 like F8",
+        "actual": 5232,
+        "exampleBeforeNext": true,
+        "step4Locked": true
+      },
+      "time": "2026-09-13T13:10:50.314Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "412-final-approval-overview",
+      "checks": {
+        "representativeFirst": true,
+        "fullChangesClosed": true,
+        "approvalNotShown": true
+      },
+      "time": "2026-09-13T13:11:11.015Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "412-final-exact-disclosure",
+      "checks": {
+        "requestMatched": true,
+        "fullListRequired": true
+      },
+      "time": "2026-09-13T13:11:19.333Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1024-unsupported-types",
+      "checks": {
+        "heading": "확인할 항목 16건",
+        "intentDefault": true,
+        "summary": "검사 완료확인할 항목 16건구조 위험 1건 · 수식 검토 후보 15건다른 파일 검사3개 문제 유형 · 16개 확인 위치 · 우선 확인 16개 반환 상세구조 위험 검사완료수식 패턴 검사완료패턴 차이는 검토 후보이며, 잘못된 수식이나 업무 정답을 확정하지 않습니다.검사 범위와 한계파일 구조·명시적 수식 오류·외부 참조·숨김 구조와 지원하는 A1 수식의 주변 반복 패턴을 검사합니다. 같은 셀에 다른 규칙이 적용되면",
+        "constantOverwriteUnsupported": true,
+        "outlierRewriteUnsupported": true,
+        "blankCandidateNotEligibility": true
+      },
+      "time": "2026-09-13T13:13:19.275Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1024-unsupported-sheet",
+      "checks": {
+        "sheet": "채널요약",
+        "repairUnsupported": true,
+        "laterTabsLocked": true
+      },
+      "time": "2026-09-13T13:13:28.748Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1024-normal-no-proposals",
+      "checks": {
+        "free": 0,
+        "formula": 0,
+        "candidateCards": 0,
+        "sheetOptions": [
+          "채널요약 · 발견된 수정 후보 없음",
+          "온라인 · 발견된 수정 후보 없음",
+          "매장 · 발견된 수정 후보 없음",
+          "반품 · 발견된 수정 후보 없음"
+        ],
+        "step3Disabled": true
+      },
+      "time": "2026-09-13T13:14:48.346Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1024-boundary-no-proposal",
+      "checks": {
+        "heading": "확인할 항목 1건",
+        "summary": "검사 완료확인할 항목 1건구조 위험 1건 · 수식 검토 후보 0건다른 파일 검사1개 문제 유형 · 1개 확인 위치 · 우선 확인 0개 반환 상세구조 위험 검사완료수식 패턴 검사완료패턴 차이는 검토 후보이며, 잘못된 수식이나 업무 정답을 확정하지 않습니다.검사 범위와 한계파일 구조·명시적 수식 오류·외부 참조·숨김 구조와 ",
+        "candidateCards": 0,
+        "options": [
+          "월별보고 · 발견된 수정 후보 없음",
+          "거래원장 · 발견된 수정 후보 없음",
+          "통합문서 · 현재 수정 제안 미지원"
+        ],
+        "step3Disabled": true,
+        "step4Disabled": true
+      },
+      "time": "2026-09-13T13:16:21.388Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-final-precision-scope",
+      "checks": {
+        "boundedIntentInMain": true,
+        "broadBusinessVerificationUnavailable": true,
+        "noPurchase": true
+      },
+      "time": "2026-09-13T13:16:55.542Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-final-comparison-boundary",
+      "checks": {
+        "separateReport": true,
+        "neverBTruth": true,
+        "sourceUnchanged": true
+      },
+      "time": "2026-09-13T13:17:03.400Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    },
+    {
+      "name": "1440-final-identifier-block",
+      "checks": {
+        "blocked": true,
+        "identifierSelected": true,
+        "message": "이 숫자는 어떤 용도인가요?계산에 쓸 숫자만 바꿉니다. 고객번호처럼 구분하는 번호는 문자로 남겨야 합니다.금액매출·비용·정산액처럼 더하거나 뺄 돈개수·수량상품 수·인원처럼 계산할 개수구분하는 번호고객번호·계좌·전화번호·우편번호구분하는 번호는 수정하지 않습니다. 앞자리0이나 원래 표기를 보존하세요.",
+        "options": [
+          "정산 · 수정 제안 후보 11곳",
+          "보존정보 · 발견된 수정 후보 없음"
+        ]
+      },
+      "time": "2026-09-13T13:19:44.276Z",
+      "worker": "6372fd95-9810-4cdd-8ebe-c8d01e35ad3d",
+      "visual_evidence_accepted": true
+    }
+  ],
+  "screenshots_sha256": {
+    "artifacts/screenshots/proposal-flow/1024-boundary-no-proposal.jpg": "12b033a18a7200c52c0edffb9315e23c09a8c45579ad7b310ef504cb87e6d72b",
+    "artifacts/screenshots/proposal-flow/1024-normal-no-proposals.jpg": "249ead9628327cb17e6e2e8f67691d73022522d49b09250a18e8e0746cb0bba3",
+    "artifacts/screenshots/proposal-flow/1024-unsupported-sheet.jpg": "72183fccf77e770015b455360c18ee023db4246c771ec0bd3bd9e4f62ab74620",
+    "artifacts/screenshots/proposal-flow/1024-unsupported-types.jpg": "95364477b27f631df91c227a57014443b4e9e3d3a1f4d31788e1cff2b9e2f0da",
+    "artifacts/screenshots/proposal-flow/1440-final-comparison-boundary.jpg": "0986c0993dfc63739f422076dd3976a72c606c330e742340c2ed1338333a05b4",
+    "artifacts/screenshots/proposal-flow/1440-final-identifier-block.jpg": "dc2a4eb1b35680b7ed33e38c9e58b8470b59a7ace8624449cd60a00e56557c15",
+    "artifacts/screenshots/proposal-flow/1440-final-precision-scope.jpg": "18929e049e746959055e01956348dfcf034acd4f3437df01365d61a029808d85",
+    "artifacts/screenshots/proposal-flow/1440-final-reference-example.jpg": "9184ae57f337613e123d252c95f78bffab7c3f1718d7cb6287964dc2cce86ecb",
+    "artifacts/screenshots/proposal-flow/1440-final-source-anchor.jpg": "b076a5b9a194711ffbc63e53497e6011b1587ce094d951f03bf6c12a40205196",
+    "artifacts/screenshots/proposal-flow/1440-initial.jpg": "bedafa9d987a03d477ee5a7d897331e4b4e30362eb6145eaa5732e945363480b",
+    "artifacts/screenshots/proposal-flow/1440-intent-input.jpg": "140883454232a849485c0600cd1a787de82baf09a06c4600f78f2fb7403f6eaf",
+    "artifacts/screenshots/proposal-flow/1440-intent-mismatch.jpg": "69c17a35c0ac7de170b504c2a31bb2152fd8bd5c0babd77fcca509ef8b92fa7c",
+    "artifacts/screenshots/proposal-flow/1440-no-candidates.jpg": "a56a508de31a25e000dc55d5264b60190724fee44ba274773c45504fae827dbd",
+    "artifacts/screenshots/proposal-flow/1440-RP01-example.jpg": "057d9880548b9c947a25dff3c97cec8effbb6b0af7b431145e1080eaa70cd0a7",
+    "artifacts/screenshots/proposal-flow/1440-RP01-ready.jpg": "dc92614e17621a91d85a75c38d5bdfecb55ffbdf0af5ce588bda5896d370e44b",
+    "artifacts/screenshots/proposal-flow/1440-sheet-proposals.jpg": "459ecb3c242e05a5b793456a429ed63b0d38d06a7196262980281f662e9b0b3c",
+    "artifacts/screenshots/proposal-flow/390-intent-edit.jpg": "8f31e7773c3e1275b0ff621b76e0c8b6a7b9451a0bbba3ced9ac7c01ab0c54ff",
+    "artifacts/screenshots/proposal-flow/390-numeric-match.jpg": "1174aa20f67702bc24550cdb2d449c82472a7f47315c1bfafd17cc1427bdfb12",
+    "artifacts/screenshots/proposal-flow/390-RP02-ready.jpg": "7a0c1869ee1facc5c1ab95af077336aada792d029e5530b78553353ac634729f",
+    "artifacts/screenshots/proposal-flow/412-final-approval-overview.jpg": "4b422c9490935ceee799842e7a31e6d13d6c6d17acddbfa127451a0f28d4e3bd",
+    "artifacts/screenshots/proposal-flow/412-final-exact-disclosure.jpg": "648296f2b1b6437b7f988eb157537ccf60e0593f7f9f016e5c271249344cb78c",
+    "artifacts/screenshots/proposal-flow/native-RP01_SUBSET.png": "aec09be5869ed79de0f2b1768fe5f34552da56106eb946e16f27dcdb95f7eb58",
+    "artifacts/screenshots/proposal-flow/native-RP02_ALL.png": "ffe190c9c83c6697e05f7630ad5fbb1515acf1972d6384901f35159f4d48f47e"
+  },
+  "local_artifacts_sha256": {
+    "artifacts/verification/proposal-flow/baseline-web.log": "dd3ee4ee677adb4326da2217f589df50c2ecfd30f30ede9cc8d171d10f49a2bd",
+    "artifacts/verification/proposal-flow/build-1.log": "c0471a1f46e3f646fa8c0729b83f63c8a73cdf04fbc3913d9d6ea1e0474c551c",
+    "artifacts/verification/proposal-flow/download-excel-repair.json": "01278af6f836d0d8efdc5847a6f538de89a0aae36f33b56151810bf4dabcf38d",
+    "artifacts/verification/proposal-flow/download-excel.log": "38da74ea458b52a25e894673c8eaaa16bfa288af52db5abb5e1551d6483b89c9",
+    "artifacts/verification/proposal-flow/download-validation.json": "12e47c98228a5f713ba7f4614f8f8e5020bde609ac327dc54b9aefea6597b307",
+    "artifacts/verification/proposal-flow/full-regression.log": "c4a1813410cfd2531f6d5e9f9b9e8ab2110ac127af0f08ae42e7f7e44f71c0de",
+    "artifacts/verification/proposal-flow/preservation.json": "ddc80b0ccb05170f964ce1ba4eaf7b8b1d1344aac2a1302d727ef06f44fc8d00",
+    "artifacts/verification/proposal-flow/RP01_SUBSET-ui-validation.json": "8259c46ac9f0f03887e8abc67ed648179620c4c405e47427ed7b4ac8f39fa4b1",
+    "artifacts/verification/proposal-flow/RP02_ALL-ui-validation.json": "646063c84f53cdebbf41793d8c184f5728f5c8f80ea9e1838d7262422d472187",
+    "artifacts/verification/proposal-flow/startup.json": "7d1b6c63e29fdbc4a28df6715ab1932356d6489a5ce6cd82e6a072c055160b18",
+    "artifacts/verification/proposal-flow/web-1.log": "986b7090b76f21e7057c056e05d7ceda7118a9a9e507ea1e3a0bd5ab72115860",
+    "artifacts/verification/proposal-flow/web-2.log": "6c943930d3b45e9e5011d8d177e9960ed455088bb5621a588a67aba8fd3ec92a",
+    "artifacts/verification/proposal-flow/web-3.log": "d8245867e1c282eba555c515d3c56f48ed9ee7a0b0fca733318ab29a0a80e1b5",
+    "artifacts/verification/proposal-flow/web-copy.log": "d3fb815d74a2eb9517167f96d522a205f864821d693f9b81522256a12a1afe28",
+    "artifacts/verification/proposal-flow/web-final.log": "0f43949c1a791a932e2255a86e73a78587e0dea9e6cd6bd1547b9a23b21e65a7",
+    "artifacts/verification/proposal-flow/browser-downloads/RP01_SUBSET-before.json": "26543335d7ad46a3ece9f808ea920ff5f665af5e07552c221562eb432666d78b",
+    "artifacts/verification/proposal-flow/browser-downloads/RP01_SUBSET.json": "bf0eed2d0f5cbbba406a03a093cbff468ed30fd6afd40c0c3d3852ce46fd93ad",
+    "artifacts/verification/proposal-flow/browser-downloads/RP02_ALL-before.json": "1a1a4748410b7cc65a31ced69fa3343494c587ec904345c72068f84f8a497dac",
+    "artifacts/verification/proposal-flow/browser-downloads/RP02_ALL.json": "6604e6efbce7b0ba7ed7e43736a9c5266051ef62a2e382af58bfe05755a59fa3",
+    "artifacts/verification/proposal-flow/download-pdfs/RP01_SUBSET.pdf": "dec1e591fbbe31a9300e4c04fe8d423ed886dfe1c9c0e32b56efe71de71616c0",
+    "artifacts/verification/proposal-flow/download-pdfs/RP02_ALL.pdf": "7ce934a93d556500d4090c4b3f1a5488861c832075619f5eeb55f01320fa0429",
+    "artifacts/verification/proposal-flow/executed-helpers/collect_complex_downloads.py": "566eaa9387c6d7aebcfa0e133e4b80fb7386f736e86a323738b3b7de3b6a6d74",
+    "artifacts/verification/proposal-flow/executed-helpers/finalize.py": "4adca09434addc8ebc92897d5fb95d471bc823336e3276635cc379edde96a0c5",
+    "artifacts/verification/proposal-flow/executed-helpers/fix1.py": "47c4cbc18a5950bfe2e95fd0524ce4d02673ab6a525513c2c0cee677b489aa88",
+    "artifacts/verification/proposal-flow/executed-helpers/fix2.py": "dc82cd991c8f8b10a6f236d6744e89b1602251c19cb7262074dea745ed9cb4dc",
+    "artifacts/verification/proposal-flow/executed-helpers/fix3.py": "0f82bf9b7bea53be7b029abf02103c6f9aeb3bd94fd593698310b913f8c78613",
+    "artifacts/verification/proposal-flow/executed-helpers/integrate.py": "90daee853806944a5215847c1858059f950f60d5c6507557f60d2ef39ad39689",
+    "artifacts/verification/proposal-flow/executed-helpers/integrate_workspace.py": "079edd467803ccd2fd066b95e2b7cdafe94225c92ebd1aa51cfb4e78173d86cc",
+    "artifacts/verification/proposal-flow/executed-helpers/precision_copy.py": "985992f12ce0f2c969b6b51ecccb08fbb53198d3419b280ac7534154c7c2651d",
+    "artifacts/verification/proposal-flow/executed-helpers/prepare_final_release.py": "5611b93d70c6a2d1ba6df43666376e0bae99ff2124b9900b6c1d2256feef6f03",
+    "artifacts/verification/proposal-flow/executed-helpers/prepare_helpers.py": "70fe9a577d4f144f8f746cf4b4719ba296b05f59660cbd72bff599e4334f927c",
+    "artifacts/verification/proposal-flow/executed-helpers/preservation.py": "9d5a14348a2d0d8d02aa8d6b47aa724f44510c43595e05a0660ff27b0916cb46",
+    "artifacts/verification/proposal-flow/executed-helpers/release.py": "47cf6aa08f53754d328db771061888f6154b34b9ec98178edd04fd3ccb1c3cb6",
+    "artifacts/verification/proposal-flow/executed-helpers/release_copy.py": "a25dc75395cd923d6c17c10baa3c0f427aa63cf3a2090f0ae122dfbbfce1e477",
+    "artifacts/verification/proposal-flow/executed-helpers/release_final.py": "69ab872d8944f8a80ee15e9a3f58a8ebd6ab908dad9f6ce15eebbea59f1017d8",
+    "artifacts/verification/proposal-flow/executed-helpers/render_native.py": "c4f01c90720d966cd9607a24a235b7883af21949643dac5f040446b6d819de5b",
+    "artifacts/verification/proposal-flow/executed-helpers/start.py": "f33bdcaf1278b578743f68191052ad42cf9d6f25965534c08a088cda951ac1f6",
+    "artifacts/verification/proposal-flow/executed-helpers/verify_complex_downloads.py": "9b119fff06e9fe285a15093b61ac226028803f0470af38794a5dc3ad1819a53b",
+    "artifacts/verification/proposal-flow/executed-helpers/verify_complex_download_excel.ps1": "852ff8b3279ad45877a7cd47cfa2fa8dec860f39ffc194c3900e5702ef274d8a",
+    "artifacts/verification/proposal-flow/executed-helpers/verify_plan_ui.py": "5d5da6958409e0863599b384bd96595840d9ad36dc746469e984104b108a2e98",
+    "artifacts/verification/proposal-flow/executed-helpers/visual_fix.py": "84f88204bc829321006a315f6e9a8b2f96ef6cf632c95339732f24aadb8e8265",
+    "artifacts/verification/proposal-flow/release/baseline.json": "2d226878f18939ec9df96e8d0afda82ed294443eaecf9ec95b514242153476ac",
+    "artifacts/verification/proposal-flow/release/commands.jsonl": "345a7aa406e8ac4a07c432233359593ca6278c8a66f1e2b939ee1f7d7d544d31",
+    "artifacts/verification/proposal-flow/release/live.json": "abeef302d1bd7094555f051de032d17984f094cf3c004f0523517ceb6ec2d0a6",
+    "artifacts/verification/proposal-flow/release/upload.json": "8ebf7343c5e02a077a4ddb60855e2e0914a5bd297ba247db33af3670181862a5",
+    "artifacts/verification/proposal-flow/release/web.json": "2920c0d770a5e3617169ae6630862c27d774288815edbf0234b0c2df7a46385e",
+    "artifacts/verification/proposal-flow/release-copy/baseline.json": "8c101e3910923db889d236e9ae76cc398462ee6d369503f7ac6bfab1afcc8295",
+    "artifacts/verification/proposal-flow/release-copy/commands.jsonl": "2741ed36793c36b0be77ec0d7120c7ac9ec9c49df245795b8ec20fb678ba43f2",
+    "artifacts/verification/proposal-flow/release-copy/live.json": "d0aaac6bf90ce3ad835d2d3a128f3c5cce2ed02f1d0f6cd757d5c239e031d5dc",
+    "artifacts/verification/proposal-flow/release-copy/upload.json": "b73373fcf00204ed3f37f6c6884527b12975ce77581989f2b317dabf4ee62f48",
+    "artifacts/verification/proposal-flow/release-copy/web.json": "9a6319c1e8ce6c728204052da190a22af7e2a88f4dd99910494239f0e95e51bc",
+    "artifacts/verification/proposal-flow/release-final/baseline.json": "40718005044f27194f462c25dbc07b7dc1e0b0db747c357d83083eb8d9247762",
+    "artifacts/verification/proposal-flow/release-final/commands.jsonl": "37de525d119bafb12bd4412360b29b1897ca179e4f862b1c57285d94abf164b2",
+    "artifacts/verification/proposal-flow/release-final/live.json": "ae86539f8c009fbc108993bb14049c83b6658e27dc2f9e088c112ef38aebdaa1",
+    "artifacts/verification/proposal-flow/release-final/upload.json": "f32babe52800fcdd7e2be987871e09521fd005baa3c14f5cc197145d6605725c",
+    "artifacts/verification/proposal-flow/release-final/web.json": "17f6c86eaa9a92c23e6135e7cb320e0148826ba4d909e99e8bf31bef9d814241"
+  },
+  "fidelity": {
+    "actual_downloads": 6,
+    "installed_excel_workbooks": 4,
+    "expected_cells_per_repaired_workbook": 725,
+    "native_pdf_pages_visually_reviewed": 2
+  },
+  "failure_corrections": [
+    "web-1: prior entry ID/name and pre-expanded detail expectations corrected; 4 failures",
+    "web-2: wait for real expiry alert before asserting removed detail; 1 failure",
+    "Initial integration helper mismatched div/section marker; retained partial work and completed remaining targeted edits",
+    "CUA names, timing and unsupported compareDocumentPosition recovered using fresh snapshot, keyboard and DOM sequence",
+    "Two stale screenshot frames excluded; later settled desktop/mobile proof used"
+  ],
+  "not_run": [
+    "Official PG sandbox/live payment/refund",
+    "Real customer files",
+    "Price/legal/tax/support sign-off",
+    "Commercial durable storage or concurrency/load/all maximum combinations",
+    "Arbitrary natural-language/LLM repair or existing SUM/value rewrite",
+    "Server persistence of user desired outcome in approval/report",
+    "Full comparison 888-row replay and capacity UI rerun in this unit",
+    "Downloaded HTML opened in browser in this unit",
+    "API deployment or new resources",
+    "Anonymous/public production or H2/H3 remaining gates",
+    "Git remote push",
+    "Next development unit",
+    "Owner acceptance"
+  ],
+  "user_intent_boundary": "Browser-session matching only; explicitly selected and confirmed source anchor is passed through existing private preflight policy. No new LLM/feedback/log store.",
+  "all_commerce_enabled": false,
+  "owner_acceptance": "PENDING",
+  "next_unit_approved": false
+}

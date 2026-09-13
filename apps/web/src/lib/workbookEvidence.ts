@@ -1,5 +1,5 @@
 // Read-only, on-demand source evidence. This is not a scanner or calculation engine.
-// Nothing from this reader is sent to an API, a log, storage, or an export.
+// Previews stay local. A user-selected, confirmed anchor is passed through the existing private preflight policy.
 import type { Finding } from '../types';
 
 export type OriginalCell = { cell: string; type: 'formula' | 'text' | 'number' | 'blank' | 'boolean' | 'error' | 'unsupported'; text: string; cached?: string };
@@ -91,18 +91,13 @@ function children(element: Element, name: string) { return Array.from(element.ch
 function only(element: Element, name: string) { const result = children(element, name); requireSafe(result.length <= 1); return result[0]; }
 function bounded(text: string | null | undefined) { const value = text ?? ''; requireSafe(value.length <= limits.text); return value; }
 
-export async function readFormulaContext(file: File, finding: Finding, signal?: AbortSignal): Promise<FormulaContext> {
-  checkSignal(signal);
-  requireSafe(finding.sheet && finding.cell && validCell(finding.cell) && finding.formula_pattern);
-  const targetRow = Number(finding.cell.replace(/^[A-Z]+/, ''));
-  const refs = [...new Set(finding.formula_pattern.comparison_locations?.length ? finding.formula_pattern.comparison_locations : finding.formula_pattern.evidence_locations)]
-    .filter(c => validCell(c) && c !== finding.cell).slice(0, 4)
-    .sort((a, b) => Math.abs(Number(a.replace(/^[A-Z]+/, '')) - targetRow) - Math.abs(Number(b.replace(/^[A-Z]+/, '')) - targetRow)).slice(0, 2);
-  const wanted = [finding.cell, ...refs]; const bytes = await fileBytes(file); checkSignal(signal); const entries = directory(bytes);
+export async function readSourceCells(file: File, sheetName: string, requested: string[], signal?: AbortSignal): Promise<OriginalCell[]> {
+  checkSignal(signal); requireSafe(sheetName && requested.length > 0 && requested.length <= 64 && requested.every(validCell));
+  const wanted = [...new Set(requested)]; const bytes = await fileBytes(file); checkSignal(signal); const entries = directory(bytes);
   const part = async (name: string, max = limits.xml) => { const entry = entries.get(name); requireSafe(entry); return inflate(bytes, entry, max, signal); };
   const workbook = xml(await part('xl/workbook.xml', limits.metadata), 'workbook', mainNS);
   const sheets = only(workbook, 'sheets'); requireSafe(sheets);
-  const matches = children(sheets, 'sheet').filter(s => s.getAttribute('name') === finding.sheet); requireSafe(matches.length === 1);
+  const matches = children(sheets, 'sheet').filter(s => s.getAttribute('name') === sheetName); requireSafe(matches.length === 1);
   const rid = relationshipNS.map(ns => matches[0].getAttributeNS(ns, 'id')).find(Boolean); requireSafe(rid);
   const relations = xml(await part('xl/_rels/workbook.xml.rels', limits.metadata), 'Relationships', [relNS]);
   const links = children(relations, 'Relationship').filter(r => r.getAttribute('Id') === rid); requireSafe(links.length === 1);
@@ -138,5 +133,24 @@ export async function readFormulaContext(file: File, finding: Finding, signal?: 
     requireSafe(!type || ['n', 'b', 'e', 'str'].includes(type));
     return { cell: coordinate, type: type === 'b' ? 'boolean' : type === 'e' ? 'error' : type === 'str' ? 'text' : 'number', text: bounded(value.textContent) };
   };
-  checkSignal(signal); return { sheet: finding.sheet, target: read(finding.cell), comparisons: refs.map(read) };
+  checkSignal(signal); return wanted.map(read);
+}
+
+export async function readFormulaContext(file: File, finding: Finding, signal?: AbortSignal): Promise<FormulaContext> {
+  checkSignal(signal);
+  requireSafe(finding.sheet && finding.cell && validCell(finding.cell) && finding.formula_pattern);
+  const targetRow = Number(finding.cell.replace(/^[A-Z]+/, ''));
+  const refs = [...new Set(finding.formula_pattern.comparison_locations?.length ? finding.formula_pattern.comparison_locations : finding.formula_pattern.evidence_locations)]
+    .filter(c => validCell(c) && c !== finding.cell).slice(0, 4)
+    .sort((a, b) => Math.abs(Number(a.replace(/^[A-Z]+/, '')) - targetRow) - Math.abs(Number(b.replace(/^[A-Z]+/, '')) - targetRow)).slice(0, 2);
+  const cells = await readSourceCells(file, finding.sheet, [finding.cell, ...refs], signal);
+  return { sheet: finding.sheet, target: cells[0], comparisons: cells.slice(1) };
+}
+
+export async function readSourceSheets(file: File, signal?: AbortSignal): Promise<string[]> {
+  checkSignal(signal); const bytes = await fileBytes(file); const entries = directory(bytes), entry = entries.get('xl/workbook.xml'); requireSafe(entry);
+  const root = xml(await inflate(bytes, entry, limits.metadata, signal), 'workbook', mainNS), sheets = only(root, 'sheets'); requireSafe(sheets);
+  const names = children(sheets, 'sheet').map(s => bounded(s.getAttribute('name')));
+  requireSafe(names.length > 0 && names.length <= 128 && names.every(n => n.length > 0) && new Set(names).size === names.length);
+  checkSignal(signal); return names;
 }

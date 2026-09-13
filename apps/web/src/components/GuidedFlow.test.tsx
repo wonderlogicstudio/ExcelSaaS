@@ -32,7 +32,10 @@ describe('guided approval boundaries',()=>{
   const actions:Record<string,unknown>[]=[];
   vi.stubGlobal('fetch',vi.fn(async(_url,init)=>{const action=JSON.parse(init.body);actions.push(action);return response(action.action==='plan_details'?detail:{...job,status:'APPROVED',approval_status:'APPROVED'});}));
   function Harness(){const [current,setCurrent]=useState(job),[step,setStep]=useState<CoreStep>(3);return <RepairPlanPreview job={current} onJob={setCurrent} guidedStep={step} onNextStep={setStep}/>;}
-  render(<Harness/>);await waitFor(()=>expect(screen.getByText('숫자 5,232')).toBeVisible());
+  render(<Harness/>);await screen.findByRole('button',{name:'전체 1곳의 정확한 변경·수식 확인'});
+  expect(screen.queryByRole('button',{name:'이 변경계획 승인'})).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button',{name:'전체 1곳의 정확한 변경·수식 확인'}));
+  expect(screen.getByText('숫자 5,232')).toBeVisible();
   expect(screen.getByText('숫자 937,923')).toBeVisible();
   expect(screen.getByText('=ROUND(C31*D31*(1-E31),0)')).toBeVisible();
   const approve=screen.getByRole('button',{name:'이 변경계획 승인'});expect(approve).toBeDisabled();
@@ -56,8 +59,9 @@ describe('guided approval boundaries',()=>{
  it('removes expired details and blocks approval even when refresh fails',async()=>{
   vi.stubGlobal('fetch',vi.fn(async(_url,init)=>JSON.parse(init.body).action==='plan_details'?response({...detail,expires_at:Date.now()/1000+0.12}):Promise.reject(new Error('synthetic offline'))));
   function Harness(){const [current,setCurrent]=useState(job);return <RepairPlanPreview job={current} onJob={setCurrent} guidedStep={3}/>;}
-  render(<Harness/>);await waitFor(()=>expect(screen.getByText('숫자 5,232')).toBeVisible());
-  await waitFor(()=>expect(screen.queryByRole('button',{name:'이 변경계획 승인'})).not.toBeInTheDocument());
-  expect(screen.getByRole('alert')).toHaveTextContent('계획이 만료되었습니다');
+  render(<Harness/>);await waitFor(()=>expect(screen.getByRole('region',{name:'대표 수정 예시'})).toBeVisible());
+  await waitFor(()=>expect(screen.getByRole('alert')).toHaveTextContent('계획이 만료되었습니다'));
+  expect(screen.queryByRole('button',{name:'이 변경계획 승인'})).not.toBeInTheDocument();
+  expect(screen.queryByRole('region',{name:'대표 수정 예시'})).not.toBeInTheDocument();
  });
 });

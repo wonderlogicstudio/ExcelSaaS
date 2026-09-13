@@ -125,7 +125,7 @@ describe('approved protected-beta M4 upload flow', () => {
     finish(ok(audit()));
     await waitFor(() => expect(screen.getByRole('tab',{name:/수정 범위·검증/})).toBeEnabled());
     fireEvent.click(screen.getByRole('tab',{name:/수정 범위·검증/}));
-    expect(screen.getByRole('heading',{name:'선택한 항목의 수정 방법 확인'})).toBeVisible();
+    expect(screen.getByRole('heading',{name:'어떤 시트의 수정 제안을 볼까요?'})).toBeVisible();
     expect(screen.getByRole('tab',{name:/변경 승인/})).toBeDisabled();
     expect(screen.getByRole('tab',{name:/결과 받기/})).toBeDisabled();
     fireEvent.click(screen.getByRole('tab',{name:/무료 진단/}));

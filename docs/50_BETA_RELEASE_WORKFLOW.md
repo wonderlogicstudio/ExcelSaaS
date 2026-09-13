@@ -1,3 +1,9 @@
+# Current proposal-led repair release — 2026-09-13
+
+Worker `1fa2992b-c75d-400b-8acc-14dd484c7a40`100%; immediate previous `6372fd95-9810-4cdd-8ebe-c8d01e35ad3d`, pre-unit `4f756e00-dc3d-4c2c-ae5c-862e79b6422c`. Three frontend iterations: proposal UX, example-before-next order, two precision-page scope sentences. Private API00014-nah/Gateway/bindings/IAM/Access/paymentOFF unchanged,9 anonymous routes302. No API deployment/Docker/resources/push. Full139/16/231/36 and final web139/type/build PASS. Actual6downloads/4installed-Excel; version-specific screens and commands in [PROPOSAL_FLOW evidence](delivery-v3_2/reviews/evidence/PROPOSAL_FLOW.json). Local proof at artifacts/verification/proposal-flow; prior release proof preserved. Stop for owner; D08 commercial remainsPARTIAL.
+
+---
+
 # Current guided tabs / diagnosis evidence release — 2026-09-13
 
 Worker `4f756e00-dc3d-4c2c-ae5c-862e79b6422c`100%; immediate previous `d466d4e3-eef5-4b0d-960b-f072e04224d4`, pre-unit baseline `5a857656-3807-4fb5-84a5-70b6b49517ee`. Private API `workbookcare-api-beta-00014-nah` and Gateway `workbookcare-beta-d08-e6132fcdf496` unchanged. No API deployment, Docker, resource creation, binding or security gate change.

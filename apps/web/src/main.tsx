@@ -11,3 +11,4 @@ createRoot(document.getElementById('root')!).render(
 );
 
 import './guided-flow.css';
+import './proposal-flow.css';
