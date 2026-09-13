@@ -909,6 +909,10 @@
     "payment_mode": "OFF",
     "commerce_ready": false,
     "owner_acceptance": "PENDING",
-    "next_unit_approved": false
+    "next_unit_approved": false,
+    "implementation_commit": "901d445267334cefa58c50947f27099bdf664cc6",
+    "commit_exit_code": 0,
+    "verified_committed_files": 56,
+    "commit_record": "reviews/evidence/PROPOSAL_FLOW-commit.json"
   }
 }

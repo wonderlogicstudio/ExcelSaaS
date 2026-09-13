@@ -963,9 +963,14 @@
     "payment_mode": "OFF",
     "commerce_ready": false,
     "owner_acceptance": "PENDING",
-    "next_unit_approved": false
+    "next_unit_approved": false,
+    "implementation_commit": "901d445267334cefa58c50947f27099bdf664cc6",
+    "commit_exit_code": 0,
+    "verified_committed_files": 56,
+    "commit_record": "reviews/evidence/PROPOSAL_FLOW-commit.json"
   },
   "proposal_flow_evidence": {
-    "PROPOSAL_FLOW.json": "b42a79c3391590c04d789d3c17b041682c272007d170ffb6c2b156ff4a9dcf25"
+    "PROPOSAL_FLOW.json": "b42a79c3391590c04d789d3c17b041682c272007d170ffb6c2b156ff4a9dcf25",
+    "PROPOSAL_FLOW-commit.json": "72922f084f45e5bf3d49bc27d32e19242c7790ba25e4421c3bd75a37c8fbafa0"
   }
 }
