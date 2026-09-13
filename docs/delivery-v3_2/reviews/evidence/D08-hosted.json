@@ -1005,9 +1005,13 @@
     }
   ],
   "local_commit": {
-    "status": "SELECTED_VERIFIED_SNAPSHOT_IN_THIS_COMMIT",
+    "commit": "42c88b40eec5319be75694eeb8e9434207a31bd1",
+    "base_commit": "f022af7822d5f7ea6b0903b370356c8a7c392564",
     "file_count": 55,
+    "command": "git commit -m \"feat: validate protected beta synthetic delivery and hosted UX\"",
+    "exit_code": 0,
     "remote_push": false,
-    "result_record": "D08-hosted-commit.json is added after Git returns the actual commit/exit"
+    "beta_worker": "521ad0aa-55f9-4606-b481-fc4861d8a60f",
+    "beta_api": "workbookcare-api-beta-00011-bav"
   }
 }

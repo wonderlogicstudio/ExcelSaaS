@@ -322,14 +322,17 @@
     "payment_mode": "OFF",
     "official_pg": "NOT_RUN_OWNER_ACCOUNT_NOT_READY",
     "screens_and_downloaded_excel": "VERIFIED",
-    "remote_push": false
+    "remote_push": false,
+    "implementation_commit": "42c88b40eec5319be75694eeb8e9434207a31bd1",
+    "commit_exit_code": 0
   },
   "hosted_evidence": {
     "D08-hosted-excel.json": "04332259bcd73f506b1ad3a2c58817e4e1dd9db8ebcfb4cf9948950329b25fc2",
     "D08-hosted-image.json": "4530e2dc035369a2f09c7d2af9cb5e65e340a3588fea95997db10dc46d4e59ff",
     "D08-hosted-preservation.json": "32e2b40786731acac9d1ac0336090d46da428022486bf1c537b628b183cda278",
     "D08-hosted-release.json": "c9db33b81fa80336b6845e79f9aaf4c927d040cb46a9816d8b98171033d45335",
-    "D08-hosted.json": "431b5eafd145c826c45b99798eee42658c9d8402e839f771b7a1f06a017fbaa9"
+    "D08-hosted.json": "1b7c214edb44251fd1c13c46b38d4cee2656b899fb3dc9c2e3cd08ce063bb31a",
+    "D08-hosted-commit.json": "dfd9233561cbab76b10f23434f70904cb9778e12a35830057700ebbb7c97e39c"
   },
   "source_hash_basis": "Exact working-tree bytes used for verification. PowerShell scripts retain CRLF by .gitattributes; Git normalizes their blob to LF."
 }

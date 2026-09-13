@@ -1,3 +1,5 @@
+로컬 구현·검증 커밋 `42c88b40eec5319be75694eeb8e9434207a31bd1` · 검증한55파일 · Git commit exit0 · 원격 push 없음. 아래 현재 보호 베타 확인 행동을 검토한 뒤 다음 단위를 결정합니다.
+
 ## 현재 베타에서 확인할 네 가지 — D08에서 정지
 
 [보호 베타 열기](https://workbookcare-beta.wonderlogic-studio.workers.dev/)에서 새로고침 후 확인하세요. 일반 결제는 OFF이며 등록된 합성 자료만 납품 시험이 가능합니다. 이전 로컬 기록은 아래에 보존합니다.
