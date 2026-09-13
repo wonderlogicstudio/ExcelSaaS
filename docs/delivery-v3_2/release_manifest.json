@@ -465,7 +465,10 @@
     "owner_acceptance": "PENDING",
     "commerce_ready": false,
     "next_unit_approved": false,
-    "commit_record": "reviews/evidence/D08-complex-commit.json"
+    "commit_record": "reviews/evidence/D08-complex-commit.json",
+    "implementation_commit": "311d1515642a32553e05a96bd7b193bf23141142",
+    "commit_exit_code": 0,
+    "verified_committed_files": 61
   },
   "prior_beta_before_complex_followup": {
     "url": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
@@ -534,6 +537,7 @@
     "D08-complex-product.json": "09e68d42613f76f030ce557fb248794c3f249837ccccc880a3963f2ff691010c",
     "D08-complex-release.json": "4da12d19ab2b3b9acee766147bfb56cac5fa280471d2eeae3aa7b1fcb42d0188",
     "D08-complex-ui.json": "3dce56bf8ad55d37998b8d6ad4bc343b01dfb3894e243df87a24f624866f477e",
-    "D08-complex.json": "3b21314475a7f44983603dd980021239646deffcb4171a60f0b7c14f4fefcca6"
+    "D08-complex.json": "1d068480559662b2f2a4a9557e277d9ed5b6f319ffa8fd95231c88365681f5cd",
+    "D08-complex-commit.json": "26e01eca00ce139c4311e1bfae91887aefa1ee481e58f6bf8503305e204b6032"
   }
 }

@@ -327,7 +327,8 @@
     "D08-complex-image.json": "20c3e7bbb819b940cfcbc01f274510d210d91e346902e3a82b6cca77313a12e3",
     "D08-complex-product.json": "09e68d42613f76f030ce557fb248794c3f249837ccccc880a3963f2ff691010c",
     "D08-complex-release.json": "4da12d19ab2b3b9acee766147bfb56cac5fa280471d2eeae3aa7b1fcb42d0188",
-    "D08-complex-ui.json": "3dce56bf8ad55d37998b8d6ad4bc343b01dfb3894e243df87a24f624866f477e"
+    "D08-complex-ui.json": "3dce56bf8ad55d37998b8d6ad4bc343b01dfb3894e243df87a24f624866f477e",
+    "D08-complex-commit.json": "26e01eca00ce139c4311e1bfae91887aefa1ee481e58f6bf8503305e204b6032"
   },
   "not_run": [
     "Official Toss sandbox/SDK/auth/approve/query/cancel/webhook: owner account and keys not prepared",
@@ -341,5 +342,8 @@
   "stopped_after": "D08",
   "remote_push": false,
   "commercial_ready": false,
-  "commit_record": "D08-complex-commit.json after selective local commit"
+  "commit_record": "D08-complex-commit.json after selective local commit",
+  "implementation_commit": "311d1515642a32553e05a96bd7b193bf23141142",
+  "commit_exit_code": 0,
+  "verified_committed_files": 61
 }

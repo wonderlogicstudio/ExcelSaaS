@@ -582,7 +582,10 @@
         "owner_acceptance": "PENDING",
         "commerce_ready": false,
         "next_unit_approved": false,
-        "commit_record": "reviews/evidence/D08-complex-commit.json"
+        "commit_record": "reviews/evidence/D08-complex-commit.json",
+        "implementation_commit": "311d1515642a32553e05a96bd7b193bf23141142",
+        "commit_exit_code": 0,
+        "verified_committed_files": 61
       },
       "beta_deployment_history": [
         "NOT_DEPLOYED_DOCKER_AND_LINUX_RUNTIME_PENDING"

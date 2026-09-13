@@ -1,3 +1,5 @@
+복합 검증 로컬 커밋 `311d1515642a32553e05a96bd7b193bf23141142` · 검증한61파일 · commit exit0 · 원격 push 없음. [커밋 증거](reviews/evidence/D08-complex-commit.json)
+
 ## 복합 샘플에서 확인할 다섯 가지 — D08 추가 검증 후 정지
 
 [베타](https://workbookcare-beta.wonderlogic-studio.workers.dev/)에 새로고침 후 [신규 샘플/정확한 입력 안내](../../samples/WorkbookCare_Complex_Validation_2026-09-13/README.md)를 사용하세요. `expected/예상결과.xlsx`와 JSON을 함께 제공합니다. 일반 결제는 OFF입니다.
