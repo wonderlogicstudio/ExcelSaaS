@@ -37,7 +37,7 @@ describe('WorkbookCare landing page', () => {
     expect(navigation.querySelectorAll('a')).toHaveLength(5);
   });
 
-  it('runs the sample flow and displays the beta price range and planned verification status', async () => {
+  it('runs free diagnosis without a premature price and keeps unsupported later steps locked', async () => {
     vi.useFakeTimers();
     render(<App />);
 
@@ -49,9 +49,10 @@ describe('WorkbookCare landing page', () => {
     });
 
     expect(screen.getByRole('heading', { name: /중요한 구조적 문제가 발견됐습니다/i })).toBeInTheDocument();
-    expect(screen.getByText('29,000원 ~ 49,000원')).toBeInTheDocument();
-    expect(screen.getByText('정밀 검증 · 준비 중')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /정밀 검증·수정 기능 준비 중/i })).toBeDisabled();
+    expect(document.querySelector('#results .quote-panel')).toBeNull();
+    expect(screen.queryByText('29,000원 ~ 49,000원')).not.toBeInTheDocument();
+    expect(screen.getByRole('tab', { name: /수정 범위·검증/ })).toBeDisabled();
+    expect(screen.getByRole('tab', { name: /변경 승인/ })).toBeDisabled();
   });
 
   it('starts a same-session re-validation without keeping the previous workbook file', async () => {
@@ -63,7 +64,8 @@ describe('WorkbookCare landing page', () => {
       await vi.advanceTimersByTimeAsync(2200);
     });
 
-    fireEvent.click(screen.getByRole('button', { name: '수정 후 다시 검사' }));
+    fireEvent.click(screen.getByText('직접 수정한 파일 다시 검사'));
+    fireEvent.click(screen.getByRole('button', { name: '수정 후 파일 선택' }));
 
     expect(screen.getByText('직접 수정한 테스트용 파일을 다시 선택하세요.')).toBeInTheDocument();
     expect(screen.getByText('이전 검사 결과와 같은 정적 규칙으로 비교합니다. 이전 원본 파일은 보관하지 않습니다.')).toBeInTheDocument();
@@ -74,7 +76,8 @@ describe('WorkbookCare landing page', () => {
     render(<App />);
     fireEvent.click(screen.getAllByRole('button', { name: /샘플 결과 보기/i })[0]);
     await act(async () => { await vi.advanceTimersByTimeAsync(2200); });
-    fireEvent.click(screen.getByRole('button', { name: '수정 후 다시 검사' }));
+    fireEvent.click(screen.getByText('직접 수정한 파일 다시 검사'));
+    fireEvent.click(screen.getByRole('button', { name: '수정 후 파일 선택' }));
     fireEvent.click(screen.getAllByRole('button', { name: /샘플 결과 보기/i })[0]);
     await act(async () => { await vi.advanceTimersByTimeAsync(2200); });
     const group = screen.getByRole('article', { name: '계속 탐지됨' });

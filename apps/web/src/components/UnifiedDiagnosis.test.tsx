@@ -46,7 +46,9 @@ describe('D01 integrated structure and pattern diagnosis', () => {
     }
     render(<Stateful />);
     fireEvent.change(screen.getByLabelText('처리 상태로 보기'), { target: { value: 'UNREVIEWED' } });
-    fireEvent.click(within(screen.getByRole('region', { name: 'FORMULA_PATTERN_OUTLIER 유형' })).getByRole('button', { name: '표시된 1개 확인함' }));
+    fireEvent.click(screen.getByRole('region', { name: 'FORMULA_PATTERN_OUTLIER 유형' }).querySelector('summary')!);
+    fireEvent.click(within(screen.getByRole('region', { name: 'FORMULA_PATTERN_OUTLIER 유형' })).getByText('이 유형의 메모 일괄 변경'));
+    fireEvent.click(within(screen.getByRole('region', { name: 'FORMULA_PATTERN_OUTLIER 유형' })).getByRole('button', { name: '표시된 1개를 읽어봄으로 메모' }));
     expect(screen.getByLabelText('처리 상태로 보기')).toHaveFocus();
     expect(screen.getByRole('region', { name: 'FORMULA_REF_ERROR 유형' })).toBeInTheDocument();
     expect(screen.queryByRole('region', { name: 'FORMULA_PATTERN_OUTLIER 유형' })).not.toBeInTheDocument();

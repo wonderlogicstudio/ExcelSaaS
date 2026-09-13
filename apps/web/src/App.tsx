@@ -1,7 +1,8 @@
 import { useProductNavigation, routeTitles } from './lib/navigation';
 import { reviewKey, type RepairDraft } from './lib/repairReview';
 import { RepairReview } from './components/RepairReview';
-import { CoreJourney, ServiceIntro } from './components/ProductPages';
+import { CoreFlowTabs, initialDeliveryProgress, type CoreStep } from './components/CoreFlowTabs';
+import { ServiceIntro } from './components/ProductPages';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, FileSearch, ShieldCheck, Sparkles } from 'lucide-react';
 import {DeliveryOperations} from './components/DeliveryOperations';
@@ -53,14 +54,16 @@ export default function App() {
   const diagnosisPage = path === '/' || path === '/diagnosis';
   const visited = useRef(new Set<string>());
   visited.current.add(path);
+  const [activeStep, setActiveStep] = useState<CoreStep>(1);
+  const [deliveryProgress, setDeliveryProgress] = useState(initialDeliveryProgress);
   const [reviewFindings, setReviewFindings] = useState<Finding[]>([]);
   const [reviewLocked, setReviewLocked] = useState(false);
   const [reviewDraft, setReviewDraft] = useState<RepairDraft>();
   const reviewSelection = { findings: reviewFindings, locked: reviewLocked, toggle: (finding: Finding) => {
-    if (!reviewLocked) { setReviewDraft(undefined); setReviewFindings(current => current.some(f => reviewKey(f) === reviewKey(finding))
+    if (!reviewLocked) { setDeliveryProgress(initialDeliveryProgress); setReviewDraft(undefined); setReviewFindings(current => current.some(f => reviewKey(f) === reviewKey(finding))
       ? current.filter(f => reviewKey(f) !== reviewKey(finding)) : [...current, finding]); }
   }};
-  const clearReview = () => { setReviewFindings([]); setReviewLocked(false); setReviewDraft(undefined); };
+  const clearReview = () => { setActiveStep(1); setDeliveryProgress(initialDeliveryProgress); setReviewFindings([]); setReviewLocked(false); setReviewDraft(undefined); };
   const uploadRef = useRef<HTMLDivElement>(null);
   const activeRequest = useRef(0);
   const activeController = useRef<AbortController | null>(null);
@@ -138,12 +141,13 @@ export default function App() {
   };
 
   const startUpload = () => {
+    setActiveStep(1);
     if (!diagnosisPage) navigate('/');
     const reveal = () => {
       uploadRef.current?.scrollIntoView({ behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' });
       uploadRef.current?.querySelector<HTMLButtonElement>('button')?.focus({ preventScroll: true });
     };
-    if (diagnosisPage) reveal(); else requestAnimationFrame(reveal);
+    if (diagnosisPage && activeStep === 1) reveal(); else requestAnimationFrame(reveal);
   };
 
   const runDemo = async () => {
@@ -256,11 +260,18 @@ export default function App() {
     setFormulaAuditStatuses((current) => ({ ...current, [findingKey]: status }));
   };
 
+  const diagnosisComplete = !!result && !!sourceFile && deliveryBetaEnabled && !busy && !(formulaAuditHostedBetaEnabled && formulaAuditBusy);
+  const maxStep: CoreStep = !diagnosisComplete ? 1 : deliveryProgress.deliveryAvailable ? 4 : deliveryProgress.approvalAvailable ? 3 : 2;
+  useEffect(() => { if (activeStep > maxStep) setActiveStep(maxStep); }, [activeStep, maxStep]);
+  const goToStep = (step: CoreStep) => { if (step <= maxStep) setActiveStep(step); };
+  const continueToStep = (step: CoreStep) => { goToStep(step); requestAnimationFrame(() => { const panel = document.getElementById('core-work-panel'); panel?.focus({ preventScroll: true }); document.querySelector('.core-flow')?.scrollIntoView({ block: 'start' }); }); };
   return (
     <div id="top" onClick={onLink}>
       <Header onStart={startUpload} path={path}/>
       <main id="main-content" tabIndex={-1}>
         <div data-product-page="diagnosis" hidden={!diagnosisPage}>
+        <CoreFlowTabs active={activeStep} diagnosisComplete={diagnosisComplete} progress={deliveryProgress} onChange={goToStep}/>
+        <div id="core-diagnosis-panel" role="tabpanel" aria-labelledby="core-tab-1" hidden={activeStep !== 1}>
         <section className="hero" id="free-diagnosis" aria-labelledby="hero-title">
           <div className="hero__glow hero__glow--one" aria-hidden="true" />
           <div className="hero__glow hero__glow--two" aria-hidden="true" />
@@ -316,7 +327,7 @@ export default function App() {
           </div>
         </section>
 
-        <CoreJourney/>
+
         {result && (
           <>
             {formulaAuditInternalBetaEnabled && !formulaAuditHostedBetaEnabled && (
@@ -335,6 +346,7 @@ export default function App() {
             )}
             <ResultsPanel
               result={result}
+              guided sourceFile={sourceFile} reviewReady={diagnosisComplete} onContinueReview={() => continueToStep(2)}
               reviewSelection={reviewSelection}
               formulaAudit={formulaAuditHostedBetaEnabled ? {
                 result: formulaAuditResult, busy: formulaAuditBusy, error: formulaAuditError,
@@ -350,11 +362,17 @@ export default function App() {
               onPrepareRevalidation={prepareRevalidation}
               onReset={reset}
             />
-            <RepairReview selection={reviewSelection} available={deliveryBetaEnabled} hasFile={Boolean(sourceFile)} onPrepare={draft => setReviewDraft(draft)}/>
-            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={`${result.analysis_id}:${reviewDraft ? JSON.stringify(reviewDraft) : 'manual'}`} file={sourceFile} compactEntry reviewDraft={reviewDraft} onSourceFixed={setReviewLocked}/> }
+
           </>
         )}
         {!result && <div className="core-next shell"><p>먼저 무료 진단으로 확인할 항목을 찾으세요. 두 자료 비교와 추가 검증은 별도 서비스에서 확인할 수 있습니다.</p><a href="/help">검사 범위와 이용 방법</a></div>}
+        </div>
+        <div id="core-work-panel" role="tabpanel" tabIndex={-1} aria-labelledby={`core-tab-${activeStep === 1 ? 2 : activeStep}`} hidden={activeStep === 1}>
+          {result && <>
+            <div hidden={activeStep !== 2 || reviewLocked}><RepairReview selection={reviewSelection} available={deliveryBetaEnabled} hasFile={Boolean(sourceFile)} onPrepare={draft => { setDeliveryProgress(initialDeliveryProgress); setReviewDraft(draft); }}/></div>
+            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={`${result.analysis_id}:${reviewDraft ? JSON.stringify(reviewDraft) : 'manual'}`} file={sourceFile} compactEntry reviewDraft={reviewDraft} onSourceFixed={setReviewLocked} guidedStep={activeStep} onProgress={setDeliveryProgress} onNextStep={continueToStep}/>}
+          </>}
+        </div>
         </div>
         <div data-product-page="precision" hidden={path !== '/precision-verification'}>{path === '/precision-verification' && <ServiceIntro kind="precision" patterns={formulaAuditHostedBetaEnabled} delivery={deliveryBetaEnabled} onStart={startUpload}/>}</div>
         <div data-product-page="compare" hidden={path !== '/compare'}>{path === '/compare' && <ServiceIntro kind="compare" patterns={formulaAuditHostedBetaEnabled} delivery={deliveryBetaEnabled} onStart={startUpload}/>}

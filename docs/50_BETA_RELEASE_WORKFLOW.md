@@ -1,3 +1,11 @@
+# Current guided tabs / diagnosis evidence release — 2026-09-13
+
+Worker `4f756e00-dc3d-4c2c-ae5c-862e79b6422c`100%; immediate previous `d466d4e3-eef5-4b0d-960b-f072e04224d4`, pre-unit baseline `5a857656-3807-4fb5-84a5-70b6b49517ee`. Private API `workbookcare-api-beta-00014-nah` and Gateway `workbookcare-beta-d08-e6132fcdf496` unchanged. No API deployment, Docker, resource creation, binding or security gate change.
+
+Two frontend iterations: first guided flow, second mobile scroll/focus correction. Final web121/type/build, actual protected desktop/mobile and frozen expected plans, six actual downloads/four installed-Excel workbooks. Earlier screenshots01–07 belong to first version;08+ to final. All binding hashes and API spec/traffic/IAM unchanged;9 anonymous routes redirect302 to existing Access. Current flags and paymentOFF unchanged. [Full version-scoped proof](delivery-v3_2/reviews/evidence/GUIDED_FLOW.json). Commands at `artifacts/verification/guided-flow/release[-v2]/commands.jsonl`; exact helpers preserved in `executed-helpers/`. No rollback executed. Stop for owner review; commercial D08 remainsPARTIAL.
+
+---
+
 # Current core product flow / IA release — 2026-09-13
 
 Current Worker `5a857656-3807-4fb5-84a5-70b6b49517ee` at100%; previous single-step rollback `09e3e200-f7d0-4d00-9faf-dae30da47eef`. Full pre-IA Worker baseline `521ad0aa-55f9-4606-b481-fc4861d8a60f`. Private API remains `workbookcare-api-beta-00014-nah`; Gateway remains `workbookcare-beta-d08-e6132fcdf496`. No API deployment, Docker or resource changes in this unit.

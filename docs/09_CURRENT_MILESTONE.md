@@ -1,3 +1,15 @@
+# STOPPED — Guided Flow owner review
+
+2026-09-13 승인된 [52_GUIDED_DIAGNOSIS_FLOW.md](52_GUIDED_DIAGNOSIS_FLOW.md)의 구현·전체 회귀·실제 보호 베타/Excel 검증 완료. [리뷰](delivery-v3_2/reviews/GUIDED_FLOW.md)와 [사용자5개 행동](delivery-v3_2/owner_action.md)을 남기고 정지한다. UX ENGINEERING_VERIFIED_AWAITING_OWNER / D08 PARTIAL. 다음 한 단위는 무료 진단 요약 보고서 제안만; 다음 묶음 자동 실행 금지. 아래 ACTIVE 항목은 완료 전 이력이다.
+
+---
+
+# ACTIVE APPROVED — Guided steps and understandable diagnosis
+
+2026-09-13 latest owner feedback approves four completion-gated tabs, clear original formula comparisons, one common limitations area, unambiguous review selection versus private notes, merged diagnosis/review entry, and removing premature quotes from free diagnosis. Scope: [52_GUIDED_DIAGNOSIS_FLOW.md](52_GUIDED_DIAGNOSIS_FLOW.md). Reuse all existing engines and gates. Current baseline web95; no customer data, price decision, actual PG, backend/security expansion, resources or remote push. Existing protected beta deployment approval applies. Verify frozen expected values in actual UI, relevant full regression and real downloads; selective local commit and stop. Historical entries below are preserved.
+
+---
+
 # STOPPED — Core product flow / IA owner review
 
 2026-09-13 승인된 IA 후속 구현·전체 회귀·실제 보호 베타 화면/예상 값·다운로드/Excel 검증 완료. [17항목 review](delivery-v3_2/reviews/CORE_FLOW.md), [사용자 확인 행동](delivery-v3_2/owner_action.md). IA ENGINEERING_VERIFIED_AWAITING_OWNER, D08 전체 PARTIAL. 다음 한 단위는 일반 사용자용 지원 범위 → 의뢰 범위·견적 연결 제안만; D09/다음 단위 자동 실행 금지. 아래 ACTIVE/STOPPED 항목은 역사 기록이다.

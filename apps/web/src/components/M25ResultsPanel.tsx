@@ -1,3 +1,4 @@
+import { reviewNoteLabel } from '../lib/reviewNotes';
 import type { ReviewSelection } from '../lib/repairReview';
 import { ReviewChoice } from './RepairReview';
 import { useRef, useState } from 'react';
@@ -31,12 +32,13 @@ import type { FeedbackRepository } from '../lib/feedback';
 import { FindingFeedbackControl, ResultFeedbackPanel } from './FeedbackCapture';
 import { RevalidationPanel } from './RevalidationPanel';
 import { FindingViews } from './FindingViews';
-import { ProgressiveFindingViews } from './ProgressiveFindingViews';
+import { GeneralFindingGuidance, ProgressiveFindingViews } from './ProgressiveFindingViews';
 import { UnifiedDiagnosisStatus, integratedAuditState, type IntegratedFormulaAudit } from './UnifiedDiagnosisStatus';
 import { findingCounts } from '../lib/findingCounts';
 import { diagnosisCsvArtifact, displayedProducts } from '../lib/products';
 
 interface ResultsPanelProps {
+  guided?: boolean; sourceFile?: File | null; reviewReady?: boolean; onContinueReview?: () => void;
   reviewSelection?: ReviewSelection;
   result: ScanResult;
   formulaAudit?: IntegratedFormulaAudit;
@@ -288,6 +290,7 @@ export function M25ResultsPanel(props: ResultsPanelProps) {
 }
 
 function ResultsContent({
+  guided = false, sourceFile, reviewReady = false, onContinueReview,
   result,
   reviewSelection,
   formulaAudit,
@@ -438,25 +441,24 @@ function ResultsContent({
     ['정보 제공 · 즉시 수정 불필요', informationOnlyCount, '즉시 수정하지 않아도 되는 구조·성능 참고 항목입니다.'],
   ] as const;
 
-  if (formulaAudit) return (
+  if (formulaAudit || guided) return (
     <section className="results-section diagnosis-progressive" id="results" aria-labelledby="results-title">
       <div className="shell">
         <div className="results-header"><div>
-          <span className="section-kicker">{formulaAudit.busy ? '검사 진행 중' : auditState?.complete && counts.scan_complete ? '검사 완료' : '일부 검사 완료'}</span>
+          <span className="section-kicker">{formulaAudit?.busy ? '검사 진행 중' : (formulaAudit ? auditState?.complete : true) && counts.scan_complete ? '검사 완료' : '일부 검사 완료'}</span>
           <h2 id="results-title">{resultHeadline}</h2>
-          <p className="diagnosis-breakdown">구조 위험 {structureCounts.total_detected}건 · 수식 검토 후보 {auditState?.complete ? `${candidates.length}건` : '확인 미완료'}</p>
+          <p className="diagnosis-breakdown">구조 위험 {structureCounts.total_detected}건 · 수식 검토 후보 {formulaAudit ? auditState?.complete ? `${candidates.length}건` : '확인 미완료' : '미실행'}</p>
         </div><button className="button button--ghost" type="button" onClick={onReset}><RotateCcw size={17}/>다른 파일 검사</button></div>
         <p className="diagnosis-main-summary">{findingTypes.length}개 문제 유형 · {counts.total_detected}개 확인 위치 · 우선 확인 {allFindings.filter(f => f.severity !== 'info').length}개 반환 상세</p>
-        {reviewSelection && <a className="button button--primary" href="#repair-review">수정 검토 선택 {reviewSelection.findings.length}개 · 다음 단계</a>}
-        <UnifiedDiagnosisStatus audit={formulaAudit} truncated={workbook.scan_truncated} compact />
-        {counts.total_detected===0 && !formulaAudit.busy && <aside className="zero-findings-note" role="note" aria-label="발견 0건 해석">
+        {formulaAudit ? <UnifiedDiagnosisStatus audit={formulaAudit} truncated={workbook.scan_truncated} compact><GeneralFindingGuidance findings={allFindings} limitations={result.limitations}/></UnifiedDiagnosisStatus>
+          : <details className="diagnosis-status__scope"><summary>검사 범위와 한계</summary><p>구조 위험만 검사했습니다. 수식 계산과 업무상 정답은 검증하지 않았습니다.</p><GeneralFindingGuidance findings={allFindings} limitations={result.limitations}/></details>}
+        {counts.total_detected===0 && !formulaAudit?.busy && <aside className="zero-findings-note" role="note" aria-label="발견 0건 해석">
           <strong>계산 결과와 업무적 정확성을 보장하지 않습니다.</strong>
           <p>{auditState?.complete && counts.scan_complete ? '완료한 검사 범위에서 확인할 항목을 찾지 못했습니다.' : '완료하지 못한 검사나 읽지 못한 범위가 남아 있습니다. 검사 진행과 범위를 확인하세요.'}</p>
         </aside>}
         <details className="diagnosis-summary-details"><summary>규칙 기반 우선순위 점수 {summary.risk_score} / 100</summary>
           <p>구조 위험의 우선순위 점수입니다. 수식 검토 후보는 포함하지 않으며 계산·업무 정확도를 뜻하지 않습니다.</p>
           <p>{result.filename} · {formatFileSize(result.file_size_bytes)} · 시트 {workbook.sheet_count}개 · 내용이 있는 셀 {workbook.scanned_cell_count}개 · 수식 문자열 {workbook.formula_count}개</p>
-          <ul>{result.limitations.map(item=><li key={item}>{item}</li>)}</ul>
         </details>
         <div className="findings-panel" ref={findingsHeadingRef} tabIndex={-1}>
           <div className="panel-heading"><h3 id="all-findings-title">문제 유형별 확인</h3><span>{new Set(allFindings.map(f=>f.rule_code)).size}개 유형</span></div>
@@ -476,11 +478,11 @@ function ResultsContent({
               <label><span>시트</span><select aria-label="시트" value={sheetFilter} onChange={event=>setSheetFilter(event.target.value)}>
                 <option value="all">모든 위치</option>{sheetOptions.map(([value,label])=><option key={value} value={value}>{label}</option>)}</select></label>
               <label><span>처리 상태로 보기</span><select aria-label="처리 상태로 보기" ref={statusFilterRef} value={statusFilter} onChange={event=>setStatusFilter(event.target.value as FindingUserStatus|'all')}>
-                <option value="all">모든 처리 상태</option>{userStatusOptions.map(s=><option key={s} value={s}>{userStatusLabel[s]}</option>)}</select></label>
-            </div><div className="finding-filters__footer"><p>필터는 표시만 바꿉니다. 확인함은 개인 처리 상태이며 변경 승인이 아닙니다.</p>
+                <option value="all">모든 처리 상태</option>{userStatusOptions.map(s=><option key={s} value={s}>{reviewNoteLabel[s]}</option>)}</select></label>
+            </div><div className="finding-filters__footer"><p>필터는 표시만 바꿉니다. 읽어봄은 개인 메모입니다.</p>
               <button className="button button--outline button--small" type="button" disabled={!filtersActive} onClick={resetFilters}>필터 초기화</button></div></fieldset>
           </details>
-          {visibleFindings.length>0 ? <ProgressiveFindingViews findings={visibleFindings} allFindings={allFindings} mode={viewMode} statuses={viewStatuses} reviewSelection={reviewSelection}
+          {visibleFindings.length>0 ? <ProgressiveFindingViews sourceFile={sourceFile} findings={visibleFindings} allFindings={allFindings} mode={viewMode} statuses={viewStatuses} reviewSelection={reviewSelection}
             categoryLabel={finding=>formulaEntry(finding)?'수식 검토 후보':'구조 위험'}
             onStatusChange={(finding,status)=>{updateStatus(finding,status);if(statusFilter!=='all'&&statusFilter!==status)statusFilterRef.current?.focus();}}
             onReviewGroup={findings=>{if(statusFilter!=='all'&&statusFilter!=='REVIEWED')statusFilterRef.current?.focus();for(const f of findings)updateStatus(f,'REVIEWED');}}/>
@@ -488,44 +490,16 @@ function ResultsContent({
             : counts.total_detected>0 ? <p className="empty-result-note">발견된 항목의 반환 상세가 없습니다. 상세 생략 수와 검사 한계를 확인하세요.</p>
             : <p className="empty-result-note">완료한 검사에서 반환된 항목이 없습니다. 위의 검사 진행과 범위를 확인하세요.</p>}
         </div>
+        {reviewSelection && <section className="diagnosis-continue" aria-label="다음 단계로 이동"><div><h3>이 중 고칠 항목을 확인할까요?</h3><p>2단계에 포함한 항목 {reviewSelection.findings.length}개 · 선택만으로 변경하거나 승인하지 않습니다.</p><small>유형 전체 또는 필요한 셀만 포함할 수 있습니다. ‘읽어봄’은 선택과 관계없는 개인 메모입니다.</small></div><button className="button button--primary" type="button" disabled={!reviewReady || !reviewSelection.findings.length} onClick={onContinueReview}>선택한 {reviewSelection.findings.length}개로 수정 범위 확인</button>{reviewReady && <button className="button button--ghost" type="button" onClick={onContinueReview}>대상 셀 직접 지정</button>}</section>}
         <div className="diagnosis-result-tools">
           <div className="diagnosis-csv"><button className="button button--outline" type="button" onClick={()=>downloadDiagnosisCsv(result,statuses)}><Download size={17}/>진단 결과 CSV 다운로드</button>
             <p>CSV 범위: 구조 검사 결과만 포함 · 수식 검토 후보 제외. 필터 적용 전 반환 상세와 개인 처리 상태를 내보냅니다.</p></div>
-          <details className="diagnosis-handling"><summary>개인 처리 상태 요약</summary><p>확인함·정상으로 판단은 변경 승인이 아닙니다. 이 화면을 열어 둔 동안만 유지됩니다.</p>
-            <div className="user-status-summary">{userStatusOptions.map(s=><span key={s}><strong>{userStatusCounts[s]}</strong>{userStatusLabel[s]}</span>)}</div></details>
+          <details className="diagnosis-handling"><summary>내 검토 메모 요약</summary><p>개인 메모는 변경 승인에 사용하지 않습니다. 이 화면을 열어 둔 동안만 유지됩니다.</p>
+            <div className="user-status-summary">{userStatusOptions.map(s=><span key={s}><strong>{userStatusCounts[s]}</strong>{reviewNoteLabel[s]}</span>)}</div></details>
           <details className="diagnosis-revalidation" open={revalidationComparison ? true : undefined}><summary>직접 수정한 파일 다시 검사</summary>
             <p>직접 재검사 비교는 구조 검사 결과 기준입니다. 수식 후보는 매번 새로 검사합니다.</p>
             <RevalidationPanel comparison={revalidationComparison} onPrepareRevalidation={onPrepareRevalidation}/></details>
-          <details className="diagnosis-next"><summary>향후 수정 범위와 참고 견적 · 준비 중</summary>
-            <p>미구현 수정 기능은 구매하거나 실행할 수 없습니다. 아래 내용은 현재 구조 검사 결과에 따른 참고 범위입니다.</p>
-                      <aside className="quote-panel" aria-label="정밀검증 예상 범위와 베타 가격 가설">
-            <div className="quote-panel__eyebrow"><Sparkles size={17} />정밀 검증 · 준비 중</div>
-            <h3>{quote.headline}</h3>
-            <div className="quote-price">
-              <strong>{formatPriceRange(quote.amount_min, quote.amount_max, quote.amount)}</strong>
-              <span>{quote.tier} · 베타 예상 가격 범위</span>
-            </div>
-            {quote.pricing_note && <p className="pricing-note">{quote.pricing_note}</p>}
-            <div className="quote-factors">{quote.factors.map((factor) => <span key={factor}>{factor}</span>)}</div>
-            <div className="planned-deliverables">
-              <h4>승인 기반 수정 패키지의 향후 필수 파일 · 준비 중</h4>
-              <ul>{repairProduct.deliverables.map((item) => <li key={item.kind}><FileClock size={16} />{item.label}</li>)}</ul>
-              <p>정밀검증은 패키지에 포함할 검증 활동입니다. 위 참고 금액은 구매권이나 변경 승인이 아닙니다.</p>
-            </div>
-            <div className="scope-list">
-              <h4>예상 범위에 포함</h4>
-              {quote.included.map((item) => <p key={item}><Check size={16} />{item}</p>)}
-            </div>
-            <div className="scope-list scope-list--excluded">
-              <h4>예상 범위에서 제외</h4>
-              {quote.excluded.map((item) => <p key={item}><ChevronRight size={16} />{item}</p>)}
-            </div>
-            <button className="button button--primary button--wide" type="button" disabled>
-              정밀 검증·수정 기능 준비 중<FileClock size={18} />
-            </button>
-            <p className="prototype-note">이 참고 견적은 구매권이나 변경 승인이 아닙니다. 일반 신청·결제·전문가 견적 요청은 준비 중입니다.</p>
-          </aside>
-          </details>
+
         </div>
       </div>
     </section>

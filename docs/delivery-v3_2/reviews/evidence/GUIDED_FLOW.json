@@ -1,0 +1,1428 @@
+{
+  "kind": "ACTUAL_GUIDED_UX_IMPLEMENTATION_AND_PROTECTED_BETA_VERIFICATION",
+  "date": "2026-09-13",
+  "base_commit": "79b7dddd742eb4c99d1660d798ecc0a5001c0afb",
+  "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+  "execution_state": "STOPPED_AWAITING_OWNER",
+  "source_sha256": {
+    "apps/web/package.json": "fb6f25340b270566a5bf60640c21294a33c59cc4eda6463cba381d2f5a6f9208",
+    "apps/web/src/App.hosted-beta.test.tsx": "bc90eef06a27fd35f8afca19e563ff7ccb094be56cf243e0b5a17344b06b2a8e",
+    "apps/web/src/App.navigation.test.tsx": "5b8bf83b794d91474cda0ff88e7bb2a7882904769446c5014f36ae4a14735f15",
+    "apps/web/src/App.test.tsx": "6701b5b53309acc13828f0257c9a884e2429409f812938a61264990516dcb0db",
+    "apps/web/src/App.tsx": "4b797c4b2427f8799e041413a67cb07511ce24c377cfd85d1c23c1f11e9fb9e5",
+    "apps/web/src/components/CoreFlowTabs.tsx": "236a59b1350dd9a86ecf4ff76f88f9a0a797c16c2611093a8a975d4398e45828",
+    "apps/web/src/components/DeliveryWorkspace.tsx": "f41bf5ca06cd0b034463334c9d4a8e32797052beba5eec3dc5e4623f13ad8387",
+    "apps/web/src/components/GuidedFlow.test.tsx": "4ac852c3bf5f665c8975a56452d1ae05cea6fd850c0bbdfd48daf42b77a29606",
+    "apps/web/src/components/M25ResultsPanel.tsx": "cdbc6f9d50fe54346ff76aeb5fd9528aa79c031d0547ba5db402203ca3a43dfd",
+    "apps/web/src/components/OriginalFormulaComparison.test.tsx": "72454f7cdae9f857ae6ca1b71146c3ca1f6d30e87d9487ac3a8f71ef6dae9aaf",
+    "apps/web/src/components/OriginalFormulaComparison.tsx": "160472d0ef14c9e4628864b63bd9561d163247fe5d13423363390dacf58c10dd",
+    "apps/web/src/components/ProductPages.tsx": "5986f8fd75d69acc280df006bb67235a19e79151f57b6d7d25c9f0edb4f331de",
+    "apps/web/src/components/ProgressiveFindingViews.tsx": "d9c27631394a6d8c3fcbf71e04c3eb3907496e05e803a24fc7feeabe8b44457b",
+    "apps/web/src/components/RepairDelivery.tsx": "a58f40fef1d62954826846483ddf846812aa43f37cdb4994b0b409242f9aff19",
+    "apps/web/src/components/RepairPlanPreview.tsx": "28f16c67d77466c84a2404677f9654c09b626d4b080f1c06f2bdafb88ad3ae14",
+    "apps/web/src/components/RepairReview.test.tsx": "b3ea59008a575bc856427d8e331d78a998b4d9d0c4989d806632d3eeb405d021",
+    "apps/web/src/components/RepairReview.tsx": "7a656f078bb7281beaaa24ef22609faa8cefc4a04da20a31a5160a703ddafd1e",
+    "apps/web/src/components/UnifiedDiagnosis.test.tsx": "623fb3ffcdd2dd2a1619c0db6f680360c6c054dff368761df3731e47708c6561",
+    "apps/web/src/components/UnifiedDiagnosisStatus.tsx": "bc4dd4a94244b4fa22450d1e3a842c31bf72d481bd78f0652f4cec91d7330d02",
+    "apps/web/src/guided-flow.css": "a635199845de07e4547f0e65dabdf89b9d0632838f5830ed432c3148aa9ff7b4",
+    "apps/web/src/lib/repairReview.ts": "cc652d2979643ba26e83a819721873a73f2259ddf5be9ac06ad52910943c0927",
+    "apps/web/src/lib/reviewNotes.ts": "9a2777dd24ca610abfe799b52251481dc55d765e3008f1646af4021988df085a",
+    "apps/web/src/lib/workbookEvidence.test.ts": "9455eaa43a02b96340b2662ff9ed04c0c8bbf06c5250c0a69ecd983ca3d9eda0",
+    "apps/web/src/lib/workbookEvidence.ts": "e2cca90ddc8cdf09443e1cdfdd449edb0fd782ee70cb4c63b070665d26b5a20b",
+    "apps/web/src/main.tsx": "dfeb94f5b470f1623a0454b0063008c88cff44e34a284128d844ba18fe045ae0",
+    "package-lock.json": "c68e037fc4d39158069f931b9887225e4bfd9db5eb5d4f6902a00cab25d094ae"
+  },
+  "startup": {
+    "base_commit": "79b7dddd742eb4c99d1660d798ecc0a5001c0afb",
+    "source_hashes": {
+      "apps/web/src/App.tsx": "98114e15e76a7360d1eb2676d1a910c274d0a4eff5076632cacf395d734d9d3c",
+      "apps/web/src/components/ProgressiveFindingViews.tsx": "09b87c64d15ab6b2625b4cef9c0d83e9788212f36e40ead4d3de6df08b3f292c",
+      "apps/web/src/components/RepairReview.tsx": "b12f55ee5fbcf022d6e22b9b12b229230c645ac41ed0643cc05ea3d7e05398ff",
+      "apps/web/src/components/M25ResultsPanel.tsx": "3a43a4393e21464737d7d2a43dc7b7692a533665442c9664a0ccfca8e1140f22",
+      "apps/web/src/components/UnifiedDiagnosisStatus.tsx": "c4802517f5afce3bc8de8cf9b2f77bedd75b833be9117c16865282f0ad5732f9",
+      "apps/web/src/components/DeliveryWorkspace.tsx": "d88b9417adff96d5360d3ed6d558b1e9777974b4300c261fbd6ef96f193bd529",
+      "apps/web/src/components/RepairPlanPreview.tsx": "adb28c9d4f7c5c1cd8b9cca882975af1cd6425a63f0bb69545302ff01e1994cd",
+      "apps/web/src/components/RepairDelivery.tsx": "91a2e7fa420c1ed7090db05dc13554a31797557c1119e19dbd1772255b20a806",
+      "apps/web/src/components/ProductPages.tsx": "5a16e6d4ffbc09279813ce5ba5b485e52a7c9fd50e262dc026fcb9803943398e",
+      "docs/09_CURRENT_MILESTONE.md": "4fc5e5c2352926774aeaaaadbdc9dfe072af3de1a12e2eefd5e80f78ec6258f7"
+    }
+  },
+  "final_worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+  "previous_worker": "5a857656-3807-4fb5-84a5-70b6b49517ee",
+  "api": "workbookcare-api-beta-00014-nah",
+  "release_stages": [
+    {
+      "directory": "artifacts/verification/guided-flow/release",
+      "baseline": {
+        "worker": "5a857656-3807-4fb5-84a5-70b6b49517ee",
+        "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+        "api": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "spec_hash": "a8ae10eb87adfa08ad9163e442d7425e18e4ae298f2d4cb018ae46a43540c1bd",
+          "traffic_hash": "34174e4fb80de9a0e8a678ab0dc589fe295cc91917e4f1fc66baa1214c1357ff",
+          "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+        },
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "web": {
+        "flags": {
+          "VITE_PRODUCT_ENV": "hosted_beta",
+          "VITE_API_BASE_URL": "/api",
+          "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+          "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+          "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+          "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+          "VITE_DELIVERY_BETA_ENABLED": "true"
+        },
+        "assets": {
+          "apps/web/dist/index.html": "488ba1df698d06ad6096e10f425889d7aac038f845b27d5d4448620e6a7d718a",
+          "apps/web/dist/assets/index-BgY4lJ0b.css": "967b31aebdabf71a67e0e1cdc5dccf777df7f3e1d53c3c25eb1c602e89fb3b6b",
+          "apps/web/dist/assets/index-DoBa7cFp.js": "69a1b0632b21cc2f120df152eefc8bcebc640cbd88a5660be8c25a7821da7179",
+          "apps/web/dist/assets/workbookEvidence-C49nbEe3.js": "494bbdc1c72d66f22945cd1acff365cd99f67b69fd1c30bc9283be2103f3d4bc"
+        }
+      },
+      "upload": {
+        "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+        "all_bindings_equal": true
+      },
+      "live": {
+        "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+        "rollback_worker": "5a857656-3807-4fb5-84a5-70b6b49517ee",
+        "all_bindings_equal": true,
+        "api_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "commands": [
+        {
+          "phase": "baseline",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "wrangler versions view 5a857656-3807-4fb5-84a5-70b6b49517ee --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag guided-flow --message Approved guided tabs and source formula evidence; same private boundaries",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions view d466d4e3-eef5-4b0d-960b-f072e04224d4 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions view d466d4e3-eef5-4b0d-960b-f072e04224d4 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions deploy d466d4e3-eef5-4b0d-960b-f072e04224d4@100 --yes --message Approved guided diagnosis and approval flow",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        }
+      ]
+    },
+    {
+      "directory": "artifacts/verification/guided-flow/release-v2",
+      "baseline": {
+        "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+        "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+        "api": {
+          "revision": "workbookcare-api-beta-00014-nah",
+          "spec_hash": "a8ae10eb87adfa08ad9163e442d7425e18e4ae298f2d4cb018ae46a43540c1bd",
+          "traffic_hash": "34174e4fb80de9a0e8a678ab0dc589fe295cc91917e4f1fc66baa1214c1357ff",
+          "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+        },
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "web": {
+        "flags": {
+          "VITE_PRODUCT_ENV": "hosted_beta",
+          "VITE_API_BASE_URL": "/api",
+          "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+          "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+          "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+          "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+          "VITE_DELIVERY_BETA_ENABLED": "true"
+        },
+        "assets": {
+          "apps/web/dist/index.html": "21573e7b9b1175339bea8a273f6ffdf73af08eb6558ee90f1c2b42c328bc21c3",
+          "apps/web/dist/assets/index-B37ljgPX.css": "eddb6810ced224cd7ddf94395b0291c9c5399aba8a98c4e04af9df505630a8fd",
+          "apps/web/dist/assets/index-Bu_mgAug.js": "4fa1a49cbe8a1b62524fa2e9e19c98cbdacc5c31e0dd5364667a44a68a57bc6f",
+          "apps/web/dist/assets/workbookEvidence-C49nbEe3.js": "494bbdc1c72d66f22945cd1acff365cd99f67b69fd1c30bc9283be2103f3d4bc"
+        }
+      },
+      "upload": {
+        "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+        "all_bindings_equal": true
+      },
+      "live": {
+        "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+        "rollback_worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+        "all_bindings_equal": true,
+        "api_unchanged": true,
+        "access": [
+          {
+            "path": "/",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/precision-verification",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/compare",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/automation",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/help",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/orders",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/scans",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/formula-audits",
+            "status": 302,
+            "existing_access": true
+          },
+          {
+            "path": "/api/v1/delivery",
+            "status": 302,
+            "existing_access": true
+          }
+        ]
+      },
+      "commands": [
+        {
+          "phase": "baseline",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "baseline",
+          "command": "wrangler versions view d466d4e3-eef5-4b0d-960b-f072e04224d4 --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "build",
+          "command": "npm build hosted beta",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag guided-flow --message Approved guided tabs and source formula evidence; same private boundaries",
+          "exit_code": 0
+        },
+        {
+          "phase": "upload",
+          "command": "wrangler versions view 4f756e00-dc3d-4c2c-ae5c-862e79b6422c --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions view 4f756e00-dc3d-4c2c-ae5c-862e79b6422c --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler versions deploy 4f756e00-dc3d-4c2c-ae5c-862e79b6422c@100 --yes --message Approved guided diagnosis and approval flow",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "wrangler deployments list --json",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        },
+        {
+          "phase": "deploy",
+          "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+          "exit_code": 0
+        }
+      ]
+    }
+  ],
+  "ui_checks": [
+    {
+      "name": "01-desktop-tabs",
+      "checks": {
+        "overflow": false,
+        "scripts": [
+          "/assets/index-DoBa7cFp.js"
+        ],
+        "tabs": [
+          {
+            "disabled": false,
+            "selected": "true",
+            "text": "1무료 진단위치와 수식 비교현재 단계"
+          },
+          {
+            "disabled": true,
+            "selected": "false",
+            "text": "2수정 범위·검증대상과 지원 여부앞 단계 완료 후"
+          },
+          {
+            "disabled": true,
+            "selected": "false",
+            "text": "3변경 승인전후 값과 영향앞 단계 완료 후"
+          },
+          {
+            "disabled": true,
+            "selected": "false",
+            "text": "4결과 받기수정본·변경내역·재검증앞 단계 완료 후"
+          }
+        ],
+        "width": 1440
+      },
+      "time": "2026-09-13T10:21:57.511Z",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4"
+    },
+    {
+      "name": "02-complex01-summary",
+      "checks": {
+        "breakdown": "구조 위험 1건 · 수식 검토 후보 15건",
+        "limits": 1,
+        "quotes": 0,
+        "summary": "3개 문제 유형 · 16개 확인 위치 · 우선 확인 16개 반환 상세"
+      },
+      "time": "2026-09-13T10:22:27.403Z",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4"
+    },
+    {
+      "name": "03-original-F22",
+      "checks": {
+        "visibleOriginal": "원본 수식 비교\n확인할 셀 · 온라인 F22\n=C22*D21\n\n파일에 저장된 결과 2384\n재계산하지 않은 값\n\n주변 반복 수식 · 온라인 F11\n=C11*D11\n\n파일에 저장된 결과 4810\n재계산하지 않은 값\n\n주변 반복 수식 · 온라인 F10\n=C10*D10\n\n파일에 저장된 결과 3756\n재계산하지 않은 값\n\n탐지한 차이\n대상 수식의 상대 참조 위치가 주변 반복 패턴과 다릅니다.",
+        "notInferredRepair": true
+      },
+      "time": "2026-09-13T10:22:44.940Z",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4"
+    },
+    {
+      "name": "04-mobile-original",
+      "checks": {
+        "formulas": [
+          "=C22*D21",
+          "=C11*D11",
+          "=C10*D10"
+        ],
+        "overflow": false,
+        "width": 390
+      },
+      "time": "2026-09-13T10:23:22.494Z",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4"
+    },
+    {
+      "name": "05-mobile-unsupported-scope",
+      "checks": {
+        "selected": 1,
+        "unsupported": 1,
+        "approvalLocked": true
+      },
+      "time": "2026-09-13T10:23:37.988Z",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4"
+    },
+    {
+      "name": "06-tablet-constant-blank",
+      "checks": {
+        "cells": [
+          {
+            "cell": "F22",
+            "text": "=C22*D21"
+          },
+          {
+            "cell": "F11",
+            "text": "=C11*D11"
+          },
+          {
+            "cell": "F10",
+            "text": "=C10*D10"
+          },
+          {
+            "cell": "I95",
+            "text": "42"
+          },
+          {
+            "cell": "I94",
+            "text": "=H94-E94"
+          },
+          {
+            "cell": "I96",
+            "text": "=H96-E96"
+          },
+          {
+            "cell": "I145",
+            "text": "빈 셀"
+          },
+          {
+            "cell": "I144",
+            "text": "=H144-E144"
+          },
+          {
+            "cell": "I146",
+            "text": "=H146-E146"
+          }
+        ],
+        "overflow": false,
+        "width": 1024
+      },
+      "time": "2026-09-13T10:26:12.231Z",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4"
+    },
+    {
+      "name": "07-complex02-zero",
+      "checks": {
+        "counts": "구조 위험 0건 · 수식 검토 후보 0건",
+        "noCorrectnessGuarantee": "계산 결과와 업무적 정확성을 보장하지 않습니다.\n\n완료한 검사 범위에서 확인할 항목을 찾지 못했습니다."
+      },
+      "time": "2026-09-13T10:27:06.288Z",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4"
+    },
+    {
+      "name": "08-final-mobile-tabs",
+      "checks": {
+        "scripts": [
+          "/assets/index-Bu_mgAug.js"
+        ],
+        "width": 412
+      },
+      "time": "2026-09-13T10:28:51.780Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "09-final-step2-mobile",
+      "checks": {
+        "overflow": false,
+        "tabs": [
+          {
+            "bottom": 164,
+            "disabled": false,
+            "text": "1무료 진단위치와 수식 비교완료 · 다시 보기",
+            "top": 91
+          },
+          {
+            "bottom": 164,
+            "disabled": false,
+            "text": "2수정 범위·검증대상과 지원 여부현재 단계",
+            "top": 91
+          },
+          {
+            "bottom": 245,
+            "disabled": true,
+            "text": "3변경 승인전후 값과 영향앞 단계 완료 후",
+            "top": 172
+          },
+          {
+            "bottom": 245,
+            "disabled": true,
+            "text": "4결과 받기수정본·변경내역·재검증앞 단계 완료 후",
+            "top": 172
+          }
+        ],
+        "width": 412,
+        "notesDidNotSelect": true,
+        "selected": 8
+      },
+      "time": "2026-09-13T10:29:34.859Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "retained-notes-selection",
+      "checks": {
+        "notes": 8,
+        "selected": 4
+      },
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "10-RP01-expected-sum",
+      "checks": {
+        "sum": "정산 · J130\n변경 전 계산\n숫자 919,682\n변경안 적용 후 계산\n숫자 2,029,526",
+        "patches": 4,
+        "impacts": 20,
+        "approvalSeparate": true
+      },
+      "time": "2026-09-13T10:32:51.497Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "11-RP01-separate-execution",
+      "checks": {
+        "approved": true,
+        "executionButton": true,
+        "downloads": 0
+      },
+      "time": "2026-09-13T10:34:43.865Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "12-RP01-three-files",
+      "checks": {
+        "ready": 4,
+        "downloads": 3
+      },
+      "time": "2026-09-13T10:36:07.065Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "13-RP02-original-blank",
+      "checks": {
+        "original": "원본 수식 비교\n확인할 셀 · 정산 F31\n빈 셀\n주변 반복 수식 · 정산 F30\n=ROUND(C30*D30*(1-E30),0)\n\n파일에 저장된 결과 3292\n재계산하지 않은 값\n\n주변 반복 수식 · 정산 F32\n=ROUND(C32*D32*(1-E32),0)\n\n파일에 저장된 결과 6294\n재계산하지 않은 값\n\n탐지한 차이\n반복 수식 사이의 대상 셀이 비어 있습니다."
+      },
+      "time": "2026-09-13T10:38:41.181Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "14-RP02-calculated-values",
+      "checks": {
+        "patches": [
+          {
+            "cell": "F107",
+            "values": [
+              "빈 셀",
+              "=ROUND(C107*D107*(1-E107),0)",
+              "숫자 7,800"
+            ]
+          },
+          {
+            "cell": "F31",
+            "values": [
+              "빈 셀",
+              "=ROUND(C31*D31*(1-E31),0)",
+              "숫자 5,232"
+            ]
+          },
+          {
+            "cell": "F64",
+            "values": [
+              "빈 셀",
+              "=ROUND(C64*D64*(1-E64),0)",
+              "숫자 3,551"
+            ]
+          }
+        ],
+        "impacts": 16,
+        "approvalDisabled": true
+      },
+      "time": "2026-09-13T10:41:21.143Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "15-RP02-sum-937923",
+      "checks": {
+        "sum": "정산 · J130\n변경 전 계산\n숫자 919,682\n변경안 적용 후 계산\n숫자 937,923"
+      },
+      "time": "2026-09-13T10:41:48.505Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "16-precision-scope",
+      "checks": {
+        "text": "정밀 검증\n추가로 검증할 업무 범위를 확인하세요.\n\n무료 진단에서 발견한 수식 후보의 근거를 살펴보고, 아직 확인하지 않은 범위를 구분합니다.\n\n현재 보호 베타에서 제공\n수식 패턴 확인\n\n주변 수식과 다른 참조·함수, 반복 수식의 빈 셀·상수 대체 후보를 정적으로 분석합니다. 후보는 무료 진단의 같은 결과 목록에서 확인합니다.\n\n원본 수식 계산이나 업무적 정답 판정은 포함하지 않습니다.\n\n준비 중\n업무 기준에 따른 추가 검증\n\n복합 수식 설명, 계산 흐름 설명, 고객 기대값 대조, 업무 규칙 검증은 현재 신청·구매·실행할 수 없습니다.\n\n지원되는 수정안의 계산 검증은 메인 작업의 2단계에서 확인합니다. 모든 수정에 별도 유료 정밀 검증을 요구하지 않습니다. 추가 유료 검증은 검증 항목·보고서·가격을 확정한 뒤 선택할 별도 서비스이며, 현재 구매할 수 없습니다.\n\n무료 진단에서 수식 후보 확인",
+        "paidButtons": 0
+      },
+      "time": "2026-09-13T10:42:32.507Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "17-separate-comparison",
+      "checks": {
+        "text": "비교·대사\n두 자료의 차이를 확인하세요.\n\n두 파일의 일치·금액 차이·누락·중복·자료 오류를 비교 보고서로 받습니다. B는 비교 자료이며 정답으로 간주하지 않습니다.\n\n등록된 합성 자료로 비교·보고서 시험 가능 · 일반 구매 준비 중\n\n두 파일의 차이를 함께 확인하세요\n\n같은 거래번호의 금액과 한쪽 자료에만 있는 항목을 비교합니다. A/B 원본을 바꾸지 않는 별도 보고서입니다.\n\n두 파일 비교 사전 확인",
+        "comparisonExecution": "NOT_RUN_UNCHANGED"
+      },
+      "time": "2026-09-13T10:42:46.257Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "18-RP02-ready-desktop",
+      "checks": {
+        "readyPatches": 3,
+        "routeReturnPreserved": true
+      },
+      "time": "2026-09-13T10:43:01.988Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "19-unsupported-blocked",
+      "checks": {
+        "source": "04_실무서식_지원경계.xlsx",
+        "diagnosis": {
+          "structure": 1,
+          "formula": 0
+        },
+        "target": "거래원장!C2",
+        "supported": 0,
+        "structureAndFunctionReasonsVisible": true,
+        "overflow": false,
+        "tabs": [
+          {
+            "disabled": false,
+            "text": "1무료 진단위치와 수식 비교완료 · 다시 보기"
+          },
+          {
+            "disabled": false,
+            "text": "2수정 범위·검증대상과 지원 여부현재 단계"
+          },
+          {
+            "disabled": true,
+            "text": "3변경 승인전후 값과 영향앞 단계 완료 후"
+          },
+          {
+            "disabled": true,
+            "text": "4결과 받기수정본·변경내역·재검증앞 단계 완료 후"
+          }
+        ]
+      },
+      "time": "2026-09-13T10:52:28.134Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "20-final-complex01-summary",
+      "checks": {
+        "overflow": false,
+        "scripts": [
+          "/assets/index-Bu_mgAug.js"
+        ],
+        "tabs": [
+          {
+            "disabled": false,
+            "text": "1무료 진단위치와 수식 비교현재 단계"
+          },
+          {
+            "disabled": false,
+            "text": "2수정 범위·검증대상과 지원 여부진행 가능"
+          },
+          {
+            "disabled": true,
+            "text": "3변경 승인전후 값과 영향앞 단계 완료 후"
+          },
+          {
+            "disabled": true,
+            "text": "4결과 받기수정본·변경내역·재검증앞 단계 완료 후"
+          }
+        ]
+      },
+      "time": "2026-09-13T10:53:02.696Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    },
+    {
+      "name": "21-final-mobile-formula",
+      "checks": {
+        "original": "원본 수식 비교확인할 셀 · 온라인 F22=C22*D21파일에 저장된 결과 2384 재계산하지 않은 값주변 반복 수식 · 온라인 F11=C11*D11파일에 저장된 결과 4810 재계산하지 않은 값주변 반복 수식 · 온라인 F10=C10*D10파일에 저장된 결과 3756 재계산하지 않은 값탐지한 차이 대상 수식의 상대 참조 위치가 주변 반복 패턴과 다릅니다.",
+        "overflow": false,
+        "width": 390
+      },
+      "time": "2026-09-13T10:53:33.006Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "CAPTURE_RETRY_REQUIRED_COLLAPSED",
+      "superseded_by": "22-final-mobile-formula-open"
+    },
+    {
+      "name": "22-final-mobile-formula-open",
+      "checks": {
+        "open": true,
+        "original": "원본 수식 비교확인할 셀 · 온라인 F22=C22*D21파일에 저장된 결과 2384 재계산하지 않은 값주변 반복 수식 · 온라인 F11=C11*D11파일에 저장된 결과 4810 재계산하지 않은 값주변 반복 수식 · 온라인 F10=C10*D10파일에 저장된 결과 3756 재계산하지 않은 값탐지한 차이 대상 수식의 상대 참조 위치가 주변 반복 패턴과 다릅니다.",
+        "overflow": false,
+        "width": 390
+      },
+      "time": "2026-09-13T10:54:16.367Z",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c"
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "artifacts/screenshots/guided-flow/01-desktop-tabs.jpg",
+      "sha256": "bedafa9d987a03d477ee5a7d897331e4b4e30362eb6145eaa5732e945363480b",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/02-complex01-summary.jpg",
+      "sha256": "183342e65fe1f4a1ad7b6339043b0b716e092a328cc1a9766fc8511c7364b6c4",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/03-original-F22.jpg",
+      "sha256": "80481da3602ec6808fa7fb66f3e0d871cb7c5d56846b742ef91e7ce677fa3e1a",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/04-mobile-original.jpg",
+      "sha256": "8d06d8e7997c6732758822828a0d0d7cf72e5b131ee9e68791fd918492139edc",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/05-mobile-unsupported-scope.jpg",
+      "sha256": "83cc28c6c6c23c9370a5ce3b14cc80ec093c52a2062c3259a7b38ca71361bb79",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/06-tablet-constant-blank.jpg",
+      "sha256": "c7657ccf1d3ab29db0584968ab11c62479d58b613bfd65d0f98f66925cb932ed",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/07-complex02-zero.jpg",
+      "sha256": "df49bc946c1844eee27eb1782bb04c079b7a0f168f6b217c7ef865133d7a59aa",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "d466d4e3-eef5-4b0d-960b-f072e04224d4",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/08-final-mobile-tabs.jpg",
+      "sha256": "63a033a28817c09eed230ea31ab33e5e9bf988ad88adbf03b61ac75d7c935585",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/09-final-step2-mobile.jpg",
+      "sha256": "0fba69e12862455667c9bcdd1d168b7fe6cd7f6f832f0e6cdbecad522f6fc59d",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/10-RP01-expected-sum.jpg",
+      "sha256": "085e8767698f02d3317b1f5de5be71ef711901bf08aef6c435f6876659702728",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/11-RP01-separate-execution.jpg",
+      "sha256": "e350fca0ac89100029888a51bfc59980e10b99ec790c2be6551f9b737ba90bd9",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/12-RP01-three-files.jpg",
+      "sha256": "7c00118b1e8b88d22ac0b9385222775207e3ae1bb342227921603f5084f2622d",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/13-RP02-original-blank.jpg",
+      "sha256": "457cb8c183e5cf1b3e0db781d42ae97e9886ed9f57077a1bc8a137326b6fa0d4",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/14-RP02-calculated-values.jpg",
+      "sha256": "6a47da7c096b9ce82331c5c87ff592b4253d5326fa047f27161a26ce9d6cfaac",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/15-RP02-sum-937923.jpg",
+      "sha256": "5c5e3dcb518abd0d4d67fb252cb526c1c47608bc475ee2c6ef045b638e6121b7",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/16-precision-scope.jpg",
+      "sha256": "c87400edfd870d32b711ad20163c910263d7d73251824a17381b141dc37c8391",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/17-separate-comparison.jpg",
+      "sha256": "07ccf76c7b68843d3a8e39d7fd6bdacc3876c964d684e66414fd8f4c4ebd84da",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/18-RP02-ready-desktop.jpg",
+      "sha256": "7b149874247d619b80d7a2e7731ddf440aed8973918192ada250edfe9c1b9035",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/19-unsupported-blocked.jpg",
+      "sha256": "6d3ceb11e0277eb068de3d4ec3ae627c249fbaa6051b7356d4414c9bf9a74cdc",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/20-final-complex01-summary.jpg",
+      "sha256": "183342e65fe1f4a1ad7b6339043b0b716e092a328cc1a9766fc8511c7364b6c4",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/21-final-mobile-formula.jpg",
+      "sha256": "c233b2bd49a0030a736a272fa166f8cbd2f4461b2c2b7bdaeebbba70a0d2abe7",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "CAPTURE_RETRY_REQUIRED_COLLAPSED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/22-final-mobile-formula-open.jpg",
+      "sha256": "267ef743a00274f2283dd8611b74b3d51b864a07b872b716a81d33efd97aa4e9",
+      "kind": "ACTUAL_PROTECTED_BETA_UI",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/native-RP01_SUBSET.png",
+      "sha256": "aec09be5869ed79de0f2b1768fe5f34552da56106eb946e16f27dcdb95f7eb58",
+      "kind": "NATIVE_EXCEL_PDF_RENDER",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    },
+    {
+      "path": "artifacts/screenshots/guided-flow/native-RP02_ALL.png",
+      "sha256": "ffe190c9c83c6697e05f7630ad5fbb1515acf1972d6384901f35159f4d48f47e",
+      "kind": "NATIVE_EXCEL_PDF_RENDER",
+      "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+      "status": "VISUALLY_REVIEWED"
+    }
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web",
+      "phase": "baseline",
+      "exit_code": 0,
+      "tests": 95,
+      "log": "baseline-web.log"
+    },
+    {
+      "command": "npm.cmd run typecheck --workspace @workbookcare/web",
+      "phase": "initial incorrect script name",
+      "exit_code": 1,
+      "log": "typecheck-1.log"
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web",
+      "phase": "initial stream types",
+      "exit_code": 2,
+      "log": "build-1.log"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "phase": "first UI assertion migration",
+      "exit_code": 1,
+      "pass": 85,
+      "fail": 10,
+      "log": "web-1.log"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "phase": "fixture URL and inactive order request",
+      "exit_code": 1,
+      "pass": 114,
+      "fail": 4,
+      "log": "web-2.log"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "phase": "tests pass, Node type build failure",
+      "exit_code": 2,
+      "tests": 118,
+      "log": "web-3.log"
+    },
+    {
+      "command": "npm.cmd install --save-dev --save-exact @types/node@24 --workspace @workbookcare/web",
+      "phase": "development-only Node24 type definitions",
+      "exit_code": 0,
+      "log": "node-types.log"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify-m4-release.ps1 -AcceptProductOwnerFixtureWaiver",
+      "phase": "full existing verify.ps1 plus M4 gate",
+      "exit_code": 0,
+      "web": 118,
+      "worker": 16,
+      "api": 231,
+      "m4_exact": 36,
+      "ruff": "PASS",
+      "quality": "CONDITIONAL_GO_EXISTING_WAIVER_UNCHANGED",
+      "log": "full-regression.log"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "phase": "final lifecycle and stale plan coverage",
+      "exit_code": 0,
+      "tests": 121,
+      "log": "web-4.log"
+    },
+    {
+      "command": "npm.cmd run verify --workspace @workbookcare/web",
+      "phase": "mobile scroll root correction; final frontend",
+      "exit_code": 0,
+      "tests": 121,
+      "files": 25,
+      "typecheck": "PASS",
+      "build": "PASS",
+      "log": "web-5.log"
+    },
+    {
+      "command": "python -X utf8 <scratch>/verify_plan_ui.py RP01_SUBSET",
+      "phase": "initial UI oracle omitted direct numeric patches",
+      "exit_code": 1,
+      "expected_values_changed": false
+    },
+    {
+      "command": "python -X utf8 <scratch>/verify_plan_ui.py RP01_SUBSET",
+      "phase": "compare exact rendered patches and indirect impacts",
+      "exit_code": 0,
+      "evidence": "RP01_SUBSET-ui-validation.json"
+    },
+    {
+      "command": "python -X utf8 <scratch>/verify_plan_ui.py RP02_ALL",
+      "phase": "compare exact rendered formulas and calculated values",
+      "exit_code": 0,
+      "evidence": "RP02_ALL-ui-validation.json"
+    },
+    {
+      "command": "python -X utf8 <scratch>/collect_complex_downloads.py begin|collect RP01_SUBSET|RP02_ALL",
+      "phase": "four successful independent invocations around actual UI downloads",
+      "exit_code": 0,
+      "files": 6
+    },
+    {
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe -X utf8 <scratch>/verify_complex_downloads.py",
+      "phase": "actual downloaded bytes against frozen oracle",
+      "exit_code": 0,
+      "evidence": "download-validation.json"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File <scratch>/verify_complex_download_excel.ps1 -Mode repair",
+      "phase": "actual four downloaded XLSX in installed Excel",
+      "exit_code": 0,
+      "evidence": "download-excel-repair.json"
+    },
+    {
+      "command": "python -X utf8 <scratch>/render_native.py",
+      "phase": "restricted process cannot import existing PDF runtime",
+      "exit_code": 1,
+      "repeated_in_api_venv": true
+    },
+    {
+      "command": "python -X utf8 <scratch>/render_native.py",
+      "phase": "approved process reads existing PDF runtime and renders two native PDF outputs",
+      "exit_code": 0,
+      "visual_review": "PASS"
+    },
+    {
+      "command": "python -X utf8 <scratch>/preservation.py",
+      "phase": "original owner documents and fixed samples",
+      "exit_code": 0,
+      "evidence": "preservation.json"
+    },
+    {
+      "command": "git diff --check",
+      "phase": "final source whitespace check",
+      "exit_code": 0
+    },
+    {
+      "command": "python -X utf8 <scratch>/record.py",
+      "phase": "review writer incorrectly required PARTIAL instead of existing PARTIAL_AWAITING_OWNER; stopped before manifest save",
+      "exit_code": 1,
+      "product_code_affected": false
+    },
+    {
+      "command": "python -X utf8 <scratch>/record_resume.py",
+      "phase": "resume only unfinished manifest/selection; preserve original status and already-prepended docs",
+      "exit_code": 0
+    }
+  ],
+  "scratch_path": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\guided-flow",
+  "executed_helpers": {
+    "collect_complex_downloads.py": "96d369400aba418fad6ce3ebcc9d6ba63868a868cb9bdb3593a6c2c91046bce0",
+    "preservation.py": "814953f90931c41e54b10c883f2bf5d73643bf94d9e83211b881bd8d9e413226",
+    "release-v2.py": "9a887a3d166a33dcd74f81d08a49d713af1250d0e0b5988cbd9f89338807f0d5",
+    "release.py": "b48c0c00c7d10f435fb1349a2b8db4df422e5ab54d29859e525ea7c065fd6f7a",
+    "render_native.py": "9b452116bc715ea62bd353728144a34ff1d7229b1ed34d1be1ea70d73c42e90a",
+    "verify_complex_downloads.py": "90891f3a868fe5bf256fd4abfba66267374b71f4f4406e74286d666fb8c340d4",
+    "verify_complex_download_excel.ps1": "bc044c6a8bbb5e9c4b305e6fded57df454b65a11fc6de1e1edde60fec5de7a73",
+    "verify_plan_ui.py": "44490f96f4b24348198a1d24c328c339361fe35a939362f422e329d67722adb0"
+  },
+  "ui_oracle": {
+    "RP01_SUBSET": {
+      "kind": "ACTUAL_BETA_RENDERED_PLAN_VS_FROZEN_ORACLE",
+      "status": "PASS",
+      "case": "RP01_SUBSET",
+      "exact_patches": 4,
+      "exact_calculated_impacts": 20,
+      "sum_after": 2029526,
+      "approval_not_granted": true,
+      "official_pg_verified": false
+    },
+    "RP02_ALL": {
+      "kind": "ACTUAL_BETA_RENDERED_PLAN_VS_FROZEN_ORACLE",
+      "status": "PASS",
+      "case": "RP02_ALL",
+      "exact_patches": 3,
+      "exact_calculated_impacts": 16,
+      "sum_after": 937923,
+      "approval_not_granted": true,
+      "official_pg_verified": false
+    }
+  },
+  "download_validation": {
+    "kind": "ACTUAL_BETA_DOWNLOADED_FILES_VS_FROZEN_ORACLE",
+    "status": "PASS",
+    "results": [
+      {
+        "case": "RP01_SUBSET",
+        "status": "PASS",
+        "cached_expected_values": 725,
+        "change_rows": 4,
+        "exact_html_impacts": 20,
+        "html_checks": 9,
+        "unchanged_zip_members": 7,
+        "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+      },
+      {
+        "case": "RP02_ALL",
+        "status": "PASS",
+        "cached_expected_values": 725,
+        "change_rows": 3,
+        "exact_html_impacts": 13,
+        "html_checks": 9,
+        "unchanged_zip_members": 7,
+        "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+      }
+    ],
+    "all_frozen_inputs_unchanged": true,
+    "official_pg_verified": false
+  },
+  "native_excel": {
+    "excel_build": 20326,
+    "official_pg_verified": false,
+    "excel_version": "16.0",
+    "kind": "ACTUAL_BETA_DOWNLOADS_REOPENED_IN_INSTALLED_EXCEL",
+    "results": [
+      {
+        "case": "RP01_SUBSET",
+        "sum_after": 2029526,
+        "download_unchanged": true,
+        "preserved_source_values": 854,
+        "native_calculated_cells": 725,
+        "status": "PASS",
+        "formula_checks": 602,
+        "sha256": "4d2a7c0fd325c3b8dc69c3a04c179c8f6b2fe154672591f3cf2c677d947fa089"
+      },
+      {
+        "patch_count": 4,
+        "status": "PASS",
+        "case": "RP01_SUBSET-changes",
+        "native_open": true
+      },
+      {
+        "case": "RP02_ALL",
+        "sum_after": 937923,
+        "download_unchanged": true,
+        "preserved_source_values": 858,
+        "native_calculated_cells": 725,
+        "status": "PASS",
+        "formula_checks": 605,
+        "sha256": "dd7384aa85f9eb7444a6040e8efee4c16c1a147f1f97bafb290fe0333b860d08"
+      },
+      {
+        "patch_count": 3,
+        "status": "PASS",
+        "case": "RP02_ALL-changes",
+        "native_open": true
+      }
+    ],
+    "status": "PASS"
+  },
+  "preservation": {
+    "status": "PASS",
+    "owner_original_files": 83,
+    "previous_sample_files": 68,
+    "frozen_complex_files": 13
+  },
+  "not_run": [
+    "Official PG sandbox/real charge/refund: owner account not prepared, PAYMENT_MODE OFF.",
+    "Real customer data, general sales, final pricing/legal/tax/support approval, anonymous release, new paid resources, Git remote push.",
+    "Full comparison execution/download/888 rows were not rerun in this UX unit; previous CORE_FLOW and D08 evidence preserved. Separate comparison route and B-not-truth copy inspected.",
+    "RP01_ALL was not rerun in this unit; existing RP01_SUBSET and RP02_ALL actual beta flows were rerun.",
+    "Downloaded revalidation HTML content was parsed against oracle; opening the HTML file itself in a browser was not rerun.",
+    "Every frozen candidate position was not reopened in this UX unit; 36 exact M4 candidates checked by existing automated verifier and selected raw formula/constant/blank positions by actual UI.",
+    "Expiry/cancel/network/stale-file negative cases tested locally; not every failure was deliberately recreated in hosted UI.",
+    "Full assistive technology/WCAG/performance audit, all Excel versions/shared-array formula expansion, maximal combination capacity and concurrency/load/restart tests.",
+    "D08 commercial completion and owner acceptance remain pending. No next bundle executed."
+  ],
+  "authorization_review": {
+    "rejected_action": "Combined RP01 collect and RP02 begin command",
+    "reason": "RP02 mistaken for the next development bundle",
+    "resolution": "Read HEAD DeliveryWorkspace and CORE_FLOW review showing existing RP02 profile; isolated collection and explicit current-UX regression request approved. No new D02 bundle or bypass.",
+    "currently_blocked": false
+  },
+  "known_limits": {
+    "comparison_positions": "At most two from the first four existing server-supplied positions; may not be adjacent rows. No inferred reference positions.",
+    "stored_values": "Original XLSX cached result only, explicitly not recalculated.",
+    "expected_values": "Actual approved isolated repair calculation only in exact-change plan. No predicted result or replacement for unsupported free candidates.",
+    "browser_reader": "Bounded lazy native ZIP reader, no runtime dependency, no formula execution/API payload/storage/log expansion; unavailable on unsupported browsers or shared/array formulas.",
+    "commercial": "Protected synthetic beta only, original fifteen-minute ephemeral retention and all existing commerce gates unchanged."
+  },
+  "remote_push": false,
+  "owner_acceptance": "PENDING",
+  "next_unit_approved": false,
+  "prior_document_preservation": {
+    "status": "PASS",
+    "method": "New current entry prepended; every previous byte preserved as suffix",
+    "prior_sha256": {
+      "docs/09_CURRENT_MILESTONE.md": "b0fd06f3c113ac2529c12279abc723a71b6e0e112dec38e7d63a1cf545c99e83",
+      "docs/10_PROGRESS.md": "1b945163e68d61a62dbdd632794de11aab24f66615490fbaadd66848989705ee",
+      "docs/MILESTONE_REVIEW.md": "a3de8f8d325ce7978b861c9c4898fd3bacb19ac472795b98703bd4a38ba26ff8",
+      "docs/delivery-v3_2/owner_action.md": "ac97637f3c92bdda7764a417aa0276510a821a752d1c4ed2e29a075c3efdab29",
+      "docs/delivery-v3_2/reviews/D01.md": "21c85e734509962e3471d372e71ab59df562ccf74c42a7837ada6dec3cbb8b14",
+      "docs/delivery-v3_2/reviews/D08.md": "bef7f026660d0c3c78565d96116ddf6b5fe9f90f40e9cb89653e3e1f870fe23d",
+      "docs/11_DECISIONS.md": "e3456231eda9088fba031e0ddf916333f9346dcd750de5fa75d008fd9c19a411",
+      "docs/50_BETA_RELEASE_WORKFLOW.md": "deb04e883b740ba9bc39bf875fa399902c1111e544b6f6594ff4c912b04a2c83"
+    }
+  },
+  "dependency_install_notes": {
+    "new_dependencies": "Development-only @types/node24 and its undici-types; no production browser library added",
+    "npm_install_report": "2 moderate audit findings and existing esbuild install-script warning were reported. No force audit fix or dependency upgrade was attempted. This run is not a complete dependency security audit."
+  },
+  "artifact_sha256": {
+    "artifacts/verification/guided-flow/baseline-web.log": "383d8918fb720872883a049e39a03a2af3dcd614b5dcc1b7c4633b1544772282",
+    "artifacts/verification/guided-flow/build-1.log": "044cda7570cf151ce0db03c1c6dfb505a3e9966ab8a78fd446247549914a1bf0",
+    "artifacts/verification/guided-flow/download-excel-repair.json": "01278af6f836d0d8efdc5847a6f538de89a0aae36f33b56151810bf4dabcf38d",
+    "artifacts/verification/guided-flow/download-validation.json": "12e47c98228a5f713ba7f4614f8f8e5020bde609ac327dc54b9aefea6597b307",
+    "artifacts/verification/guided-flow/full-regression.log": "a104bf7ff941fef8e516ddf33251f9758936e3271a5e3df8a091b1bcef536873",
+    "artifacts/verification/guided-flow/native-excel.log": "38da74ea458b52a25e894673c8eaaa16bfa288af52db5abb5e1551d6483b89c9",
+    "artifacts/verification/guided-flow/node-types.log": "3b66a4e1283ad07e903c5e3036e3b2e20171dadd8887609009f12a152faea42e",
+    "artifacts/verification/guided-flow/preservation.json": "ddc80b0ccb05170f964ce1ba4eaf7b8b1d1344aac2a1302d727ef06f44fc8d00",
+    "artifacts/verification/guided-flow/prior-document-preservation.json": "dc42266354e3f9acbc015af357852039b92be5f1604101912c11abaa8c18628c",
+    "artifacts/verification/guided-flow/RP01_SUBSET-plan.json": "c6fb8074aed048236bf7c798dad8ee1c439901fb11b7cff1dac70af5ece8d100",
+    "artifacts/verification/guided-flow/RP01_SUBSET-ui-validation.json": "8259c46ac9f0f03887e8abc67ed648179620c4c405e47427ed7b4ac8f39fa4b1",
+    "artifacts/verification/guided-flow/RP02_ALL-plan.json": "bc242e9dcb71a6b9c6fdcc0d3e8eed8e214f02b6227d4b55d94bfb88ad9d6d0e",
+    "artifacts/verification/guided-flow/RP02_ALL-ui-validation.json": "646063c84f53cdebbf41793d8c184f5728f5c8f80ea9e1838d7262422d472187",
+    "artifacts/verification/guided-flow/startup.json": "2c7654c88892b8b6c8fdadc43768fe6aa68bff278d369703fd68c4203442c514",
+    "artifacts/verification/guided-flow/typecheck-1.log": "f666dadc19e52776c5194a3506c1c7935d95ec55a9e85ef83b6c5def9f588089",
+    "artifacts/verification/guided-flow/ui-checks.json": "cd57a806ba8debfdcbb16c16a546aafbfcb6850e3b3c2ce5b11e031dca6a3b06",
+    "artifacts/verification/guided-flow/web-1.log": "c80bce87349b824c2fec3b57c6a88a6f5b3fe0a7deb9f7dc2ab38d5e07ea4533",
+    "artifacts/verification/guided-flow/web-2.log": "a253ce2a8b38d1308a0fa3eaedabc0652bcbf5f99e47637cbd9b21a88aece3b3",
+    "artifacts/verification/guided-flow/web-3.log": "3878bc8f1cb86e9bcb047519ad8065708450124fd9466d714e64078141cd3171",
+    "artifacts/verification/guided-flow/web-4.log": "b962c6d65f650dbdc1a4a9295a21a1ee5c7411e9d1059a0b3d9242e6eaea6b9d",
+    "artifacts/verification/guided-flow/web-5.log": "7d288f88862d10901c96b1a83bbc4bfc6f1ab354cc2ce1fca30d78d15992f3db",
+    "artifacts/verification/guided-flow/browser-downloads/RP01_SUBSET-before.json": "c6b125a0d39dc698c1fd21ee0b86caa6192e5b9d0b93dddfcc919b9d761ad7fa",
+    "artifacts/verification/guided-flow/browser-downloads/RP01_SUBSET.json": "96a5000e493a85f04e5ea28c74b15c589c0be9c012651b7805d07e37090de9a5",
+    "artifacts/verification/guided-flow/browser-downloads/RP02_ALL-before.json": "fff9837afc55c4387dc04721ec06875dd0f241c0e72e55c6cff7fdebb6d4d74f",
+    "artifacts/verification/guided-flow/browser-downloads/RP02_ALL.json": "6e1b6f4566cc439e848ea671f1e9fa84dbf959968a18674e24d454f99f6ceaaa",
+    "artifacts/verification/guided-flow/download-pdfs/RP01_SUBSET.pdf": "448a6336a97c8cd8472dfc1856090442ee4d8d3800224b6bc9c25befee507e94",
+    "artifacts/verification/guided-flow/download-pdfs/RP02_ALL.pdf": "44311900fb64a2ad98082ac7bb20723e9b691e2e58ef4d01f19c7eb699d8d29e",
+    "artifacts/verification/guided-flow/executed-helpers/collect_complex_downloads.py": "96d369400aba418fad6ce3ebcc9d6ba63868a868cb9bdb3593a6c2c91046bce0",
+    "artifacts/verification/guided-flow/executed-helpers/preservation.py": "814953f90931c41e54b10c883f2bf5d73643bf94d9e83211b881bd8d9e413226",
+    "artifacts/verification/guided-flow/executed-helpers/release-v2.py": "9a887a3d166a33dcd74f81d08a49d713af1250d0e0b5988cbd9f89338807f0d5",
+    "artifacts/verification/guided-flow/executed-helpers/release.py": "b48c0c00c7d10f435fb1349a2b8db4df422e5ab54d29859e525ea7c065fd6f7a",
+    "artifacts/verification/guided-flow/executed-helpers/render_native.py": "9b452116bc715ea62bd353728144a34ff1d7229b1ed34d1be1ea70d73c42e90a",
+    "artifacts/verification/guided-flow/executed-helpers/verify_complex_downloads.py": "90891f3a868fe5bf256fd4abfba66267374b71f4f4406e74286d666fb8c340d4",
+    "artifacts/verification/guided-flow/executed-helpers/verify_complex_download_excel.ps1": "bc044c6a8bbb5e9c4b305e6fded57df454b65a11fc6de1e1edde60fec5de7a73",
+    "artifacts/verification/guided-flow/executed-helpers/verify_plan_ui.py": "44490f96f4b24348198a1d24c328c339361fe35a939362f422e329d67722adb0",
+    "artifacts/verification/guided-flow/release/baseline.json": "c6cf4c1665b3b9e7c64f5fab15b2d775b12ea93a7ca422b0d7de49f00b899f9c",
+    "artifacts/verification/guided-flow/release/commands.jsonl": "40aaf6ddf44562b168d53c9d188a58a53673dc980f26fd0096cf0b158c33fc9d",
+    "artifacts/verification/guided-flow/release/live.json": "b257fbf44bbf544c8e960b64997537d0c77d48b0b7fc294cd294e5b03d4edec0",
+    "artifacts/verification/guided-flow/release/upload.json": "c28385cfbad2eb94b0cab6ae8a9acc3c456c9869bde64cfb44f12d0edb40c83b",
+    "artifacts/verification/guided-flow/release/web.json": "7d9fce12cdef7e53adf208aeb5fa2a8cfbff0c65f42bb17e4346bdb5611740c4",
+    "artifacts/verification/guided-flow/release-v2/baseline.json": "74a8618a984da21230712fbc0ac2506d8d97e0ca91cb93bdf6240f05a29e5b76",
+    "artifacts/verification/guided-flow/release-v2/commands.jsonl": "2f9c45b29e5da31c74cee78b97c12f1a2e34c85c07af98918138db4331c7c44e",
+    "artifacts/verification/guided-flow/release-v2/live.json": "c9f0b4f401a67f2ed572072ee4858df2892dad2f6a0baf349f66a22e50e0b55b",
+    "artifacts/verification/guided-flow/release-v2/upload.json": "02ecbe8721da72b3137e8f419fedb878a7da142ff2cb1e6aa9519060cfaaa4f0",
+    "artifacts/verification/guided-flow/release-v2/web.json": "3b1a309c182e143557370ba68a16e0117699d4abd3a915b6575dd23a2d145176",
+    "artifacts/verification/guided-flow/browser-downloads/RP01_SUBSET/changes_78e59d47-829a-4c5a-97be-e38078019cf3.xlsx": "ac9a871fe51449058f0038ede23e1f0b0c0c504c8231aa0f97f530dcad5d5d82",
+    "artifacts/verification/guided-flow/browser-downloads/RP01_SUBSET/verification_78e59d47-829a-4c5a-97be-e38078019cf3.html": "4cf6fef1c74691cbe772afa53f806afe43d5cf9440d600e09ce516fd008debbb",
+    "artifacts/verification/guided-flow/browser-downloads/RP01_SUBSET/workbookcare_repaired_78e59d47-829a-4c5a-97be-e38078019cf3.xlsx": "4d2a7c0fd325c3b8dc69c3a04c179c8f6b2fe154672591f3cf2c677d947fa089",
+    "artifacts/verification/guided-flow/browser-downloads/RP02_ALL/changes_83a3d761-f561-4e6a-a472-12df452b5034.xlsx": "2d7dfa7c83b8fbdb0dcafc0b978652103be4474b2d1b687576c5530518d03a91",
+    "artifacts/verification/guided-flow/browser-downloads/RP02_ALL/verification_83a3d761-f561-4e6a-a472-12df452b5034.html": "1b2503b7bf2c677760ca93b742524afa6e53a1eb043e07d9c6305cd20b5cf448",
+    "artifacts/verification/guided-flow/browser-downloads/RP02_ALL/workbookcare_repaired_83a3d761-f561-4e6a-a472-12df452b5034.xlsx": "dd7384aa85f9eb7444a6040e8efee4c16c1a147f1f97bafb290fe0333b860d08"
+  }
+}

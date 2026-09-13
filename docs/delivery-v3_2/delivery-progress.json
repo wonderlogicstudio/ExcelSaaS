@@ -472,7 +472,7 @@
       "review": "reviews/D08.md",
       "evidence": "reviews/evidence/D08-local.json",
       "commerce_ready": false,
-      "beta_deployment": "VERIFIED_CORE_FLOW_WORKER5A857656_PRIVATE_API00014_SYNTHETIC_ONLY",
+      "beta_deployment": "VERIFIED_GUIDED_FLOW_WORKER4F756E00_PRIVATE_API00014_SYNTHETIC_ONLY",
       "pg_sandbox": "NOT_RUN",
       "implementation_commit": "8880d179aca80e4fff9f5bb44ebf50a45a5e7037",
       "hosted_followup": {
@@ -589,7 +589,8 @@
       },
       "beta_deployment_history": [
         "NOT_DEPLOYED_DOCKER_AND_LINUX_RUNTIME_PENDING",
-        "VERIFIED_PRIVATE_API00014_UNCHANGED_WORKER521_SYNTHETIC_ONLY"
+        "VERIFIED_PRIVATE_API00014_UNCHANGED_WORKER521_SYNTHETIC_ONLY",
+        "VERIFIED_CORE_FLOW_WORKER5A857656_PRIVATE_API00014_SYNTHETIC_ONLY"
       ],
       "core_flow_followup": {
         "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
@@ -632,6 +633,45 @@
         "commit_exit_code": 0,
         "verified_committed_files": 50,
         "commit_record": "reviews/evidence/CORE_FLOW-commit.json"
+      },
+      "guided_flow_followup": {
+        "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+        "execution_state": "STOPPED_AWAITING_OWNER",
+        "date": "2026-09-13",
+        "base_commit": "79b7dddd742eb4c99d1660d798ecc0a5001c0afb",
+        "review": "reviews/GUIDED_FLOW.md",
+        "evidence": "reviews/evidence/GUIDED_FLOW.json",
+        "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+        "api": "workbookcare-api-beta-00014-nah",
+        "full_regression": {
+          "web": 118,
+          "worker": 16,
+          "api": 231,
+          "ruff": "PASS",
+          "m4_exact": 36,
+          "exit_code": 0,
+          "quality_decision": "CONDITIONAL_GO_EXISTING_WAIVER_UNCHANGED"
+        },
+        "final_web": {
+          "tests": 121,
+          "files": 25,
+          "typecheck": "PASS",
+          "build": "PASS",
+          "exit_code": 0
+        },
+        "actual_downloads": 6,
+        "actual_downloaded_xlsx_opened_in_excel": 4,
+        "native_pdf_pages_visually_reviewed": 2,
+        "viewport_widths": [
+          1440,
+          1024,
+          390,
+          412
+        ],
+        "payment_mode": "OFF",
+        "commerce_ready": false,
+        "owner_acceptance": "PENDING",
+        "next_unit_approved": false
       }
     }
   },
@@ -682,7 +722,7 @@
     "NOT_IMPLEMENTED_BY_D01",
     "IMPLEMENTED_LOCAL_SYNTHETIC_ONLY_D04"
   ],
-  "next_recommended_unit": "GENERAL_CUSTOMER_ELIGIBILITY_SCOPE_AND_QUOTE_CONNECTION",
+  "next_recommended_unit": "무료 진단 요약 보고서의 읽기 전용 화면·내보내기 (제안만, 승인 전 실행 금지)",
   "current_status": "PARTIAL_AWAITING_OWNER",
   "execution_state": "STOPPED_AWAITING_OWNER",
   "readiness_history": [
@@ -704,7 +744,8 @@
   ],
   "next_recommended_unit_history": [
     "EXISTING_PROTECTED_BETA_DELIVERY_DEPLOYMENT_AND_SCREEN_VERIFICATION",
-    "D08_COMPLEX_CONCURRENT_REQUEST_CANCELLATION_RETRY_ACCEPTANCE"
+    "D08_COMPLEX_CONCURRENT_REQUEST_CANCELLATION_RETRY_ACCEPTANCE",
+    "GENERAL_CUSTOMER_ELIGIBILITY_SCOPE_AND_QUOTE_CONNECTION"
   ],
   "core_flow_followup": {
     "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
@@ -747,5 +788,61 @@
     "commit_exit_code": 0,
     "verified_committed_files": 50,
     "commit_record": "reviews/evidence/CORE_FLOW-commit.json"
+  },
+  "state_before_guided_flow": {
+    "current_status": "PARTIAL_AWAITING_OWNER",
+    "execution_state": "STOPPED_AWAITING_OWNER",
+    "next_recommended_unit": "GENERAL_CUSTOMER_ELIGIBILITY_SCOPE_AND_QUOTE_CONNECTION",
+    "readiness": {
+      "repair_profiles": {
+        "RP01": "HOSTED_SYNTHETIC_ENGINEERING_VERIFIED_COMMERCIAL_PENDING",
+        "RP02": "HOSTED_SYNTHETIC_ENGINEERING_VERIFIED_COMMERCIAL_PENDING"
+      },
+      "repair_delivery": "HOSTED_SYNTHETIC_ENGINEERING_VERIFIED_COMMERCIAL_PENDING",
+      "comparison_delivery": "HOSTED_SYNTHETIC_ENGINEERING_VERIFIED_COMMERCIAL_PENDING",
+      "operations": "EXISTING_HOSTED_GUARDS_VERIFIED_CONCURRENCY_DURABILITY_PENDING",
+      "owner_release_approved": false,
+      "commercial_signal": "NOT_OBSERVED",
+      "release_manifest": "release_manifest.json"
+    }
+  },
+  "guided_flow_followup": {
+    "status": "ENGINEERING_VERIFIED_AWAITING_OWNER",
+    "execution_state": "STOPPED_AWAITING_OWNER",
+    "date": "2026-09-13",
+    "base_commit": "79b7dddd742eb4c99d1660d798ecc0a5001c0afb",
+    "review": "reviews/GUIDED_FLOW.md",
+    "evidence": "reviews/evidence/GUIDED_FLOW.json",
+    "worker": "4f756e00-dc3d-4c2c-ae5c-862e79b6422c",
+    "api": "workbookcare-api-beta-00014-nah",
+    "full_regression": {
+      "web": 118,
+      "worker": 16,
+      "api": 231,
+      "ruff": "PASS",
+      "m4_exact": 36,
+      "exit_code": 0,
+      "quality_decision": "CONDITIONAL_GO_EXISTING_WAIVER_UNCHANGED"
+    },
+    "final_web": {
+      "tests": 121,
+      "files": 25,
+      "typecheck": "PASS",
+      "build": "PASS",
+      "exit_code": 0
+    },
+    "actual_downloads": 6,
+    "actual_downloaded_xlsx_opened_in_excel": 4,
+    "native_pdf_pages_visually_reviewed": 2,
+    "viewport_widths": [
+      1440,
+      1024,
+      390,
+      412
+    ],
+    "payment_mode": "OFF",
+    "commerce_ready": false,
+    "owner_acceptance": "PENDING",
+    "next_unit_approved": false
   }
 }

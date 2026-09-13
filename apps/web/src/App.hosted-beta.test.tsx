@@ -114,7 +114,29 @@ describe('approved protected-beta M4 upload flow', () => {
     expect(document.querySelector('#formula-audit')).toBeNull();
   });
 
-  it('does not automatically audit a truncated free scan', async () => {
+  it('opens scope only after diagnosis settles and resets all later tabs for a new file', async () => {
+    vi.stubEnv('VITE_DELIVERY_BETA_ENABLED','true');
+    let finish!: (value: Response) => void;
+    const pending = new Promise<Response>(resolve => { finish=resolve; });
+    await start(vi.fn(async url => String(url).endsWith('/formula-audits') ? pending : ok(base)));
+    upload();
+    await waitFor(() => expect(screen.getByText('수식 패턴 확인')).toBeVisible());
+    expect(screen.getByRole('tab',{name:/수정 범위·검증/})).toBeDisabled();
+    finish(ok(audit()));
+    await waitFor(() => expect(screen.getByRole('tab',{name:/수정 범위·검증/})).toBeEnabled());
+    fireEvent.click(screen.getByRole('tab',{name:/수정 범위·검증/}));
+    expect(screen.getByRole('heading',{name:'선택한 항목의 수정 방법 확인'})).toBeVisible();
+    expect(screen.getByRole('tab',{name:/변경 승인/})).toBeDisabled();
+    expect(screen.getByRole('tab',{name:/결과 받기/})).toBeDisabled();
+    fireEvent.click(screen.getByRole('tab',{name:/무료 진단/}));
+    expect(screen.getByRole('heading',{name:'확인할 항목 1건'})).toBeVisible();
+    fireEvent.click(screen.getByRole('button',{name:'다른 파일 검사'}));
+    expect(screen.getByRole('tab',{name:/수정 범위·검증/})).toBeDisabled();
+    expect(screen.getByRole('tab',{name:/무료 진단/})).toHaveAttribute('aria-selected','true');
+    expect(screen.queryByRole('button',{name:'이 변경계획 승인'})).not.toBeInTheDocument();
+  });
+
+  it('does not automatically audit a truncated free scan' , async () => {
     const fetcher = vi.fn(async () => ok({ ...base, workbook: { ...base.workbook, scan_truncated: true } }));
     await start(fetcher);
     upload();
