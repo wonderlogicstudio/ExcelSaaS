@@ -1,3 +1,5 @@
+로컬 구현 커밋 `0096622606699d2f8e41225121ff6dbfcd9943f1` · 검증한63파일 · commit exit0 · 원격 push 없음.
+
 ## 현재 단계별 탭·원본 비교에서 확인할 다섯 행동 — 완료 후 정지
 
 [보호 베타](https://workbookcare-beta.wonderlogic-studio.workers.dev/)를 새로고침하세요. [복합 합성 샘플·입력 안내](../../samples/WorkbookCare_Complex_Validation_2026-09-13/README.md)를 사용합니다. 현재 무료 진단과 등록 합성 수정 시험만 제공하며 일반 결제는OFF입니다.

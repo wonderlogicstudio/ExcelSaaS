@@ -671,7 +671,11 @@
         "payment_mode": "OFF",
         "commerce_ready": false,
         "owner_acceptance": "PENDING",
-        "next_unit_approved": false
+        "next_unit_approved": false,
+        "implementation_commit": "0096622606699d2f8e41225121ff6dbfcd9943f1",
+        "commit_exit_code": 0,
+        "verified_committed_files": 63,
+        "commit_record": "reviews/evidence/GUIDED_FLOW-commit.json"
       }
     }
   },
@@ -843,6 +847,10 @@
     "payment_mode": "OFF",
     "commerce_ready": false,
     "owner_acceptance": "PENDING",
-    "next_unit_approved": false
+    "next_unit_approved": false,
+    "implementation_commit": "0096622606699d2f8e41225121ff6dbfcd9943f1",
+    "commit_exit_code": 0,
+    "verified_committed_files": 63,
+    "commit_record": "reviews/evidence/GUIDED_FLOW-commit.json"
   }
 }

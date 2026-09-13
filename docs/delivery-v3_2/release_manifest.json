@@ -787,9 +787,14 @@
     "payment_mode": "OFF",
     "commerce_ready": false,
     "owner_acceptance": "PENDING",
-    "next_unit_approved": false
+    "next_unit_approved": false,
+    "implementation_commit": "0096622606699d2f8e41225121ff6dbfcd9943f1",
+    "commit_exit_code": 0,
+    "verified_committed_files": 63,
+    "commit_record": "reviews/evidence/GUIDED_FLOW-commit.json"
   },
   "guided_flow_evidence": {
-    "GUIDED_FLOW.json": "c2b833a68a41e03ad72c6ef37f12ae8f021774f482f2fc7252923d49d2074b70"
+    "GUIDED_FLOW.json": "c2b833a68a41e03ad72c6ef37f12ae8f021774f482f2fc7252923d49d2074b70",
+    "GUIDED_FLOW-commit.json": "d6cf6e0c4d44d59dbfb35682cdbb1d88c20409c373f6cf863652f7585bf1da91"
   }
 }
