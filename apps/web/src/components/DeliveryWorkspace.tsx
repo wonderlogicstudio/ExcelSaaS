@@ -3,6 +3,7 @@ import type { RepairDraft } from '../lib/repairReview';
 import type { RepairIntent } from '../lib/repairProposals';
 import { useEffect, useRef, useState } from 'react';
 import {RepairPlanPreview} from './RepairPlanPreview';
+import { revealElement } from '../lib/reveal';
 import { resolveApiBaseUrl } from '../lib/api';
 
 type Preflight = { status: string; eligible_count: number; reason_codes: string[]; purchase_enabled: boolean;
@@ -50,6 +51,16 @@ export function DeliveryWorkspace({ file, initialJob, reviewDraft, onSourceFixed
   const [role, setRole] = useState(''); const [anchor, setAnchor] = useState(''); const [formula, setFormula] = useState(''); const [confirmed, setConfirmed] = useState(false);
   const [dirty, setDirty] = useState(false); const [maxBytes, setMaxBytes] = useState<number | null>(null); const abort = useRef<AbortController | null>(null);
   const heading = useRef<HTMLHeadingElement>(null); const scopeVisible = !guidedStep || guidedStep === 2;
+  const [entryReveal, setEntryReveal] = useState<{epoch:number}|null>(null);
+  const revealedEntry = useRef<typeof entryReveal>(null);
+  const [planRevealToken, setPlanRevealToken] = useState(0);
+  const viewEpoch = useRef(0);
+  const previousView = useRef(guidedStep);
+  if (previousView.current !== guidedStep) { previousView.current = guidedStep; viewEpoch.current += 1; }
+  useEffect(() => { if (entryReveal && open && scopeVisible) return revealElement(heading.current, 'start', () => {
+    if (entryReveal.epoch !== viewEpoch.current || revealedEntry.current === entryReveal) return false;
+    revealedEntry.current = entryReveal; return true;
+  }); }, [entryReveal, open, scopeVisible]);
   const expire = () => { onSourceFixed?.(false); setJob(null); setConsent(false); setConfirmed(false); setError('원본 보관이 만료되었습니다. 기존 주문에서 복구 또는 취소를 선택하고 같은 원본을 새로 업로드하세요.'); };
   useEffect(() => { if (!job) return; const timer = setTimeout(expire, Math.max(0, job.expires_at * 1000 - Date.now())); return () => clearTimeout(timer); }, [job?.job_id, job?.expires_at]);
   useEffect(() => () => abort.current?.abort(), []);
@@ -65,9 +76,9 @@ export function DeliveryWorkspace({ file, initialJob, reviewDraft, onSourceFixed
     finally { if (!controller.signal.aborted) setBusy(false); }
   };
   const edit = (change: () => void) => { change(); setConfirmed(false); setDirty(true); };
-  const start = () => run(async signal => { const caps = await deliveryRequest<{ max_bytes: number }>({ action: 'capabilities' }, signal); setMaxBytes(caps.max_bytes); setOpen(true); requestAnimationFrame(() => heading.current?.focus()); });
+  const start = () => { const epoch = viewEpoch.current; return run(async signal => { const caps = await deliveryRequest<{ max_bytes: number }>({ action: 'capabilities' }, signal); setMaxBytes(caps.max_bytes); if (!signal.aborted) { setOpen(true); setEntryReveal({epoch}); } }); };
   useEffect(() => { if (reviewDraft && !job) { setProfile(reviewDraft.profile); setSheet(reviewDraft.sheet); setTargets(reviewDraft.targets.join(', ')); setConfirmed(reviewDraft.confirmed === true); setRole(reviewDraft.role ?? ''); setAnchor(reviewDraft.anchor ?? ''); setFormula(reviewDraft.anchor_formula ?? ''); void start(); } }, [reviewDraft]);
-  const upload = () => run(async signal => {
+  const upload = () => { const epoch = viewEpoch.current; return run(async signal => {
     if (!file) throw new Error('새 원본 파일을 선택하세요.'); if (!consent) throw new Error('업로드 권한과 검사 동의를 확인하세요.');
     if (maxBytes !== null && file.size > maxBytes) throw new Error(`수정 가능 여부 검사는 ${maxBytes / 1024 / 1024}MiB 이하 파일만 지원합니다.`);
     const next = await deliveryRequest<DeliveryJob>({ action: 'create_input', filename: file.name, file_base64: await fileBase64(file), consent: true, request_key: crypto.randomUUID() }, signal);
@@ -79,11 +90,11 @@ export function DeliveryWorkspace({ file, initialJob, reviewDraft, onSourceFixed
       if (signal.aborted) return; setJob(checked);
       if (checked.preflight?.status === 'PRELIMINARY_ONLY') {
         const prepared = await deliveryRequest<DeliveryJob>({ action: 'prepare_plan', job_id: checked.job_id, revision: checked.revision, source_hash: checked.source_hash }, signal);
-        if (!signal.aborted) setJob(prepared);
+        if (!signal.aborted) { setJob(prepared); if (viewEpoch.current === epoch) setPlanRevealToken(value => value + 1); }
       }
     }
-  });
-  const check = () => run(async signal => {
+  }); };
+  const check = () => { const epoch = viewEpoch.current; return run(async signal => {
     if (!job) return;
     const next = await deliveryRequest<DeliveryJob>({ action: 'preflight', job_id: job.job_id, revision: job.revision, source_hash: job.source_hash,
       policy: { profile, sheet, targets: targets.split(/[\s,]+/).filter(Boolean).map(x => x.toUpperCase()), role, anchor: anchor.toUpperCase(), anchor_formula: formula, confirmed } }, signal);
@@ -91,9 +102,9 @@ export function DeliveryWorkspace({ file, initialJob, reviewDraft, onSourceFixed
     setJob(next); setDirty(false);
     if (next.preflight?.status === 'PRELIMINARY_ONLY') {
       const prepared = await deliveryRequest<DeliveryJob>({ action: 'prepare_plan', job_id: next.job_id, revision: next.revision, source_hash: next.source_hash }, signal);
-      if (!signal.aborted) setJob(prepared);
+      if (!signal.aborted) { setJob(prepared); if (viewEpoch.current === epoch) setPlanRevealToken(value => value + 1); }
     }
-  });
+  }); };
   if (!open) return <section className={`delivery-entry shell ${compactEntry ? 'delivery-manual' : ''}`}><h3>직접 지정이 필요한 경우</h3><p>수정 제안을 먼저 확인하세요. 목록에 없는 숫자 텍스트 또는 실제 빈 셀을 검사할 때 사용합니다. 셀과 수정 기준을 지정한 뒤 지원 여부를 확인합니다.</p><button className="button button--outline" type="button" disabled={busy} onClick={start}>확인할 셀 직접 지정하기</button>{error && <p role="alert">{error}</p>}</section>;
   return <section id="repair-preflight" className="delivery-workspace shell" aria-label="선택한 항목의 수정 가능 여부">
     <div hidden={!scopeVisible}>
@@ -122,7 +133,7 @@ export function DeliveryWorkspace({ file, initialJob, reviewDraft, onSourceFixed
         </>}
     </div>
     {job?.status === 'PLAN_EXPIRED' && <p role="status">변경계획이 만료되었습니다. 2단계에서 다시 계산한 뒤 새로 승인하세요.</p>}
-    {job?.preflight?.status === 'PRELIMINARY_ONLY' && !dirty && <RepairPlanPreview job={job} onJob={setJob} guidedStep={guidedStep} onNextStep={onNextStep} intent={intent} onIntentCheck={setIntentSatisfied} externalBusy={busy}/>}
+    {job?.preflight?.status === 'PRELIMINARY_ONLY' && !dirty && <RepairPlanPreview job={job} onJob={setJob} guidedStep={guidedStep} onNextStep={onNextStep} intent={intent} onIntentCheck={setIntentSatisfied} externalBusy={busy} planRevealToken={planRevealToken}/>}
     {job && onRestartProposal && <button type="button" className="button button--ghost proposal-restart" disabled={busy || ['APPROVED','RUNNING','CANCEL_REQUESTED','READY'].includes(job.status)} onClick={() => run(async signal => {
       const next = await deliveryRequest<{status:string}>({action:'delete',job_id:job.job_id},signal);
       if (next.status === 'DELETED') { onSourceFixed?.(false); onRestartProposal(); }

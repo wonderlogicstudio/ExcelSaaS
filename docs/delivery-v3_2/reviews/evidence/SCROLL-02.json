@@ -1,0 +1,371 @@
+{
+  "kind": "SCROLL02_ACTUAL_VERIFICATION",
+  "status": "STOPPED_ENGINEERING_VERIFIED_OWNER_REVIEW",
+  "source": [
+    {
+      "file": "apps/web/src/App.tsx",
+      "sha256": "4e058aa8fbc0e948c81354726ff7372e563ce79a96719e79dbcc3fd6249656e5"
+    },
+    {
+      "file": "apps/web/src/components/DeliveryWorkspace.tsx",
+      "sha256": "2b07842a8643a8cdb8609f4158bf39518ab5c4dd3a754df01e7f5d700abf2d10"
+    },
+    {
+      "file": "apps/web/src/components/RepairPlanPreview.tsx",
+      "sha256": "7b88c5e6ce8c77c27261e53d30100e5366e8d3b4842bcecd10fda9e8a1291ac5"
+    },
+    {
+      "file": "apps/web/src/components/RepairDelivery.tsx",
+      "sha256": "d2b5ddb8d2d6ab07ca1f90f5665925b219669b3f7509b353b8905d70e48bf6ba"
+    },
+    {
+      "file": "apps/web/src/components/OrderStatus.tsx",
+      "sha256": "ac7847abff47d2541845cbce37f21b111989a2b13b0cc20725de22ee34437dc8"
+    },
+    {
+      "file": "apps/web/src/lib/reveal.ts",
+      "sha256": "a06ed511a9988fac83e6aad2d54f117e6d1a7af15a814dde9a2129736399de17"
+    },
+    {
+      "file": "apps/web/src/lib/reveal.test.ts",
+      "sha256": "87c7f7711c7850002fa86e353725e37bee9209ba0b8456abb8f0142ac6f246ef"
+    },
+    {
+      "file": "apps/web/src/components/ProposalFlow.test.tsx",
+      "sha256": "9ddd2ed4acf036b1abcad60e6074e2b0bdb42960941fd109549fa7d713a2faed"
+    },
+    {
+      "file": "apps/web/src/components/ScrollFlow.test.tsx",
+      "sha256": "bfbc717272b1936251cc8a1567c315dd43bd8e46d4280eab30dfe6c68cae5842"
+    }
+  ],
+  "full_regression": {
+    "command": [
+      "powershell.exe",
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "scripts/verify.ps1"
+    ],
+    "started": "2026-09-15T21:55:49.459595+09:00",
+    "finished": "2026-09-15T22:00:13.994148+09:00",
+    "exit_code": 0,
+    "log": "final-full-2.log",
+    "prior_attempt": "run_full.ps1 stopped on native stderr warning before completion; not product test failure"
+  },
+  "targeted_tests": 24,
+  "web_tests": 157,
+  "worker_tests": 16,
+  "api_tests": 240,
+  "m4_exact_candidates": 36,
+  "release": {
+    "worker": "58309b3d-5a70-4a13-b950-1055a73f8379",
+    "rollback_worker": "c6e1ed05-eed2-4322-8044-7acd67a95dd5",
+    "all_bindings_equal": true,
+    "api_unchanged": true,
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/precision-verification",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/compare",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/automation",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/help",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/orders",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "ui": {
+    "status": "PASS",
+    "method": "Actual authenticated Chrome beta UI via CUA; read-only rendered DOM geometry plus screenshots viewed in tool output",
+    "worker": "58309b3d-5a70-4a13-b950-1055a73f8379",
+    "desktop": {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "repair": "RP01_ALL_FINAL",
+      "source_findings": [
+        8,
+        3
+      ],
+      "observed_focus_heading_top_px": {
+        "start": 356,
+        "prepared_settled": 224,
+        "example": 247,
+        "exact_changes": 94,
+        "approved": 341,
+        "ready_parent_heading": 209
+      },
+      "ready_result_heading_top_px": 275,
+      "prepared_next_trial_heading_top_px": 444,
+      "scroll_y": {
+        "start": 1443.4285888671875,
+        "prepared_settled": 550.2857055664062,
+        "example": 787.4285888671875,
+        "exact_changes": 642.2857055664062,
+        "approved": 1.1428571939468384,
+        "ready": 132.57142639160156
+      },
+      "exact_values": {
+        "B12": -1250,
+        "B24": 7200,
+        "B39": 0,
+        "B52": 120000,
+        "B65": -2400,
+        "B78": 999999,
+        "B94": 500,
+        "B111": 3000,
+        "J130": 2159436
+      },
+      "patches": 8,
+      "indirect_impacts": 32,
+      "screenshots_viewed": [
+        "prepared with next trial CTA",
+        "exact changes"
+      ]
+    },
+    "mobile": {
+      "viewport": [
+        390,
+        844
+      ],
+      "repair": "RP02_ALL_FINAL",
+      "source_findings": [
+        8,
+        3
+      ],
+      "observed_focus_heading_top_px": {
+        "start": 82,
+        "prepared": 82,
+        "example": 82,
+        "exact_changes": 82,
+        "approved": 100,
+        "ready_parent_heading": 82
+      },
+      "ready_result_heading_top_px": 142,
+      "prepared_next_trial_heading_top_px": 339,
+      "scroll_y": {
+        "start": 2174.28564453125,
+        "prepared": 847.4285888671875,
+        "example": 1145.142822265625,
+        "exact_changes": 778.2857055664062,
+        "approved": 274.8571472167969,
+        "ready": 292.5714416503906
+      },
+      "exact_values": {
+        "F31": 5232,
+        "F64": 3551,
+        "F107": 7800,
+        "J130": 937923
+      },
+      "patches": 3,
+      "calculation_positions": 16,
+      "indirect_impacts": 13,
+      "screenshots_viewed": [
+        "prepared with next trial CTA",
+        "exact changes",
+        "READY with all three download buttons"
+      ]
+    },
+    "observed_transition_notes": [
+      "RP01 preliminary support result had BODY focus before asynchronous calculation completed; not treated as completed result",
+      "RP01 completed heading initially top770 during smooth scroll; settled at224 before next action",
+      "READY focuses parent result heading; ready child heading and downloads are in viewport",
+      "No manual scroll was used to find newly generated result after each action; semantic clicking controls may scroll the clicked control into view"
+    ],
+    "not_claimed": [
+      "fresh Excel COM",
+      "fresh UI reupload of repaired output",
+      "human novice acceptance",
+      "10-click target",
+      "actual OS reduced motion toggle",
+      "saved screenshot files"
+    ],
+    "keyboard": {
+      "status": "PASS",
+      "viewport": [
+        1692,
+        858
+      ],
+      "steps": [
+        "Enter on explicit tab3 selects stage3; exact-change heading receives focus at top94",
+        "Space on explicit tab4 selects stage4; result heading receives focus at top94,READYchild159",
+        "Tab from result heading reaches repaired XLSX download button; visible focus ring confirmed in screenshot"
+      ],
+      "scope": "bounded keyboard return path, not full keyboard-only onboarding"
+    },
+    "viewport_override_reset": true
+  },
+  "downloads": {
+    "kind": "ACTUAL_BETA_DOWNLOADED_FILES_VS_FROZEN_ORACLE",
+    "status": "PASS",
+    "results": [
+      {
+        "case": "RP01_ALL",
+        "status": "PASS",
+        "cached_expected_values": 725,
+        "change_rows": 8,
+        "exact_html_impacts": 32,
+        "html_checks": 12,
+        "unchanged_zip_members": 7,
+        "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+      },
+      {
+        "case": "RP02_ALL",
+        "status": "PASS",
+        "cached_expected_values": 725,
+        "change_rows": 3,
+        "exact_html_impacts": 13,
+        "html_checks": 12,
+        "unchanged_zip_members": 7,
+        "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+      }
+    ],
+    "all_frozen_inputs_unchanged": true,
+    "official_pg_verified": false
+  },
+  "sample_checks": {
+    "kind": "ACTUAL_EXISTING_BETA_DIAGNOSIS",
+    "worker": "c6e1ed05-eed2-4322-8044-7acd67a95dd5",
+    "date": "2026-09-15",
+    "cases": [
+      {
+        "file": "01_다채널정산_혼합오류.xlsx",
+        "tab": "209532875",
+        "expected": {
+          "static": 1,
+          "formula": 15,
+          "groups": 3
+        },
+        "actual": {
+          "static": 1,
+          "formula": 15,
+          "groups": 3
+        },
+        "both_detectors": "COMPLETED",
+        "status": "PASS"
+      },
+      {
+        "file": "02_다채널정산_정상예외.xlsx",
+        "tab": "209532878",
+        "expected": {
+          "static": 0,
+          "formula": 0
+        },
+        "actual": {
+          "static": 0,
+          "formula": 0
+        },
+        "both_detectors": "COMPLETED",
+        "status": "PASS"
+      }
+    ],
+    "repair_delivery": "NOT_RUN_NOT_CLAIMED_FOR_THESE_INPUTS"
+  },
+  "recovery": {
+    "kind": "AGENT_EDIT_FAILURE_AND_PRESERVED_RECOVERY",
+    "base": "9dad620",
+    "events": [
+      {
+        "phase": "initial builder",
+        "status": "INCOMPLETE_REVIEW_CHANGES_REQUIRED",
+        "failures": [
+          "post-render focus",
+          "first-plan CTA",
+          "stale and duplicate reveal",
+          "insufficient state transition tests"
+        ],
+        "test_pass_not_claimed": true
+      },
+      {
+        "phase": "takeover builder",
+        "status": "FAILED_NEWLINES_REMOVED",
+        "files": [
+          "App.tsx",
+          "DeliveryWorkspace.tsx",
+          "RepairPlanPreview.tsx"
+        ],
+        "restore_approval_rejections": 2,
+        "reason": "Would discard uncommitted edits",
+        "tests": "NOT_RUN",
+        "deployed": false
+      },
+      {
+        "phase": "PL preservation",
+        "status": "BACKED_UP_ALL_THREE_FILES_AND_FULL_WEB_DIFF",
+        "path": "recovery/manifest.json",
+        "api_hashes_unchanged": 48,
+        "protected_hashes_unchanged": 152
+      },
+      {
+        "phase": "recovery builder",
+        "model": "GPT-6 Astra High",
+        "basis": "ORCH02 bounded escalation after unsuccessful passes; async state/focus repair",
+        "status": "IN_PROGRESS"
+      },
+      {
+        "phase": "recovery completion",
+        "status": "PASS_NORMAL_APPROVAL_WITH_PRESERVED_BACKUPS",
+        "targeted": 24,
+        "full_web": 157,
+        "full_regression_exit": 0,
+        "environment_failures": "esbuild EPERM before tests; PowerShell stderr wrapper stopped; retained logs and corrected execution",
+        "worker": "58309b3d-5a70-4a13-b950-1055a73f8379",
+        "api_unchanged": true
+      }
+    ],
+    "no_remote_push": true,
+    "historical_checkpoint_no_deployment": true,
+    "current_status": "RECOVERED_REVIEWED_TESTED_BETA_DEPLOYED"
+  },
+  "review": "PASS_INDEPENDENT_FINAL_REVIEW",
+  "protected_files_unchanged": 152,
+  "api_files_unchanged": 48,
+  "remote_push": false,
+  "local_commit": "Commit containing this final record",
+  "next_unit": "NOT_APPROVED",
+  "not_run": [
+    "fresh Excel COM (unchanged engine proof reused)",
+    "official PG",
+    "human novice acceptance",
+    "actual OS reduced-motion toggle"
+  ]
+}

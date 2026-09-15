@@ -57,6 +57,7 @@ export default function App() {
   const visited = useRef(new Set<string>());
   visited.current.add(path);
   const [activeStep, setActiveStep] = useState<CoreStep>(1);
+  const activeStepRef = useRef(activeStep); activeStepRef.current = activeStep;
   const [pendingStep, setPendingStep] = useState<CoreStep | null>(null);
   const [deliveryProgress, setDeliveryProgress] = useState(initialDeliveryProgress);
   const [reviewFindings, setReviewFindings] = useState<Finding[]>([]);
@@ -268,11 +269,11 @@ export default function App() {
   const proposalFindings = [...(result?.findings ?? []), ...(formulaAuditHostedBetaEnabled && formulaAuditResult?.status === 'COMPLETED' ? formulaAuditResult.candidates : [])];
   const diagnosisComplete = !!result && !!sourceFile && deliveryBetaEnabled && !busy && !(formulaAuditHostedBetaEnabled && formulaAuditBusy);
   const maxStep: CoreStep = !diagnosisComplete ? 1 : deliveryProgress.deliveryAvailable ? 4 : deliveryProgress.approvalAvailable ? 3 : 2;
-  const focusWorkPanel = () => requestAnimationFrame(() => { const panel = document.getElementById('core-work-panel'); panel?.focus({ preventScroll: true }); document.querySelector('.core-flow')?.scrollIntoView({ block: 'start' }); });
+  const focusWorkPanel = () => requestAnimationFrame(() => { if (activeStepRef.current > 2) return; const panel = document.getElementById('core-work-panel'); panel?.focus({ preventScroll: true }); document.querySelector('.core-flow')?.scrollIntoView({ block: 'start' }); });
   useEffect(() => { if (activeStep > maxStep) { setPendingStep(null); setActiveStep(maxStep); } }, [activeStep, maxStep]);
-  useEffect(() => { if (pendingStep && pendingStep <= maxStep) { setActiveStep(pendingStep); setPendingStep(null); focusWorkPanel(); } }, [pendingStep, maxStep]);
+  useEffect(() => { if (pendingStep && pendingStep <= maxStep) { setActiveStep(pendingStep); setPendingStep(null); if (pendingStep <= 2) focusWorkPanel(); } }, [pendingStep, maxStep]);
   const goToStep = (step: CoreStep) => { if (step <= maxStep) { setPendingStep(null); setActiveStep(step); } };
-  const continueToStep = (step: CoreStep) => { if (step <= maxStep) { setPendingStep(null); setActiveStep(step); focusWorkPanel(); } else setPendingStep(step); };
+  const continueToStep = (step: CoreStep) => { if (step <= maxStep) { setPendingStep(null); setActiveStep(step); if (step <= 2) focusWorkPanel(); } else setPendingStep(step); };
   return (
     <div id="top" onClick={onLink}>
       <Header onStart={startUpload} path={path}/>

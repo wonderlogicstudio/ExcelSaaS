@@ -1088,5 +1088,18 @@
     ],
     "required_activations_each": 16,
     "activation_target_met": false
+  },
+  "scroll_02": {
+    "status": "STOPPED_ENGINEERING_VERIFIED_OWNER_REVIEW",
+    "review": "PASS_INDEPENDENT_FINAL_REVIEW",
+    "evidence": "reviews/evidence/SCROLL-02.json",
+    "scope": "WEB_SCROLL_FOCUS_ONLY",
+    "full_regression": "PASS_WEB157_WORKER16_API240_RUFF_M4EXACT36",
+    "targeted": 24,
+    "actual_beta": "PASS",
+    "worker": "58309b3d-5a70-4a13-b950-1055a73f8379",
+    "api_unchanged": true,
+    "remote_push": false,
+    "next_unit": "NOT_APPROVED"
   }
 }

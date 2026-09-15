@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { RepairProposalPicker } from './RepairProposalPicker';
 import { RepairIntentEditor } from './RepairIntent';
 import { DeliveryWorkspace, type DeliveryJob } from './DeliveryWorkspace';
+import { RepairDelivery } from './RepairDelivery';
 import { RepairPlanPreview, type PlanDetail } from './RepairPlanPreview';
 import { noRepairIntent, RP01, RP02 } from '../lib/repairProposals';
 import { demoResult } from '../data/demo';
@@ -16,7 +17,7 @@ const ok=(v:unknown)=>({ok:true,json:async()=>v} as Response);
 const base:DeliveryJob={job_id:'synthetic',revision:1,status:'INPUT_READY',source_hash:'synthetic-only',expires_at:Date.now()/1000+900,sheets:[{name:'정산',cell_count:10}],preflight:null,purchase_enabled:false,source_unchanged:true};
 const plan:DeliveryJob={...base,revision:3,status:'PREVIEW_VALIDATED',entitlement_active:true,repair_execution_available:true,policy:{profile:RP02,sheet:'정산',targets:['F3'],anchor:'F2',anchor_formula:'=C2*D2',confirmed:true},preflight:{status:'PRELIMINARY_ONLY',eligible_count:1,reason_codes:[],targets:[],purchase_enabled:false},plan_summary:{digest:'plan-a',status:'PREVIEW_VALIDATED',patch_count:1,impact_count:2,formula_impact_count:2,coverage:{formula_count:2},reference:{status:'PASS',case_count:36}}};
 const detail:PlanDetail={digest:'plan-a',expires_at:Date.now()/1000+600,patches:[{candidate_id:'one',sheet:'정산',cell:'F3',before:{type:'blank',value:null},after:{type:'formula',value:'=C3*D3'}}],impact:[{sheet:'정산',cell:'F3',before:{type:'number',value:0},after:{type:'number',value:12}},{sheet:'정산',cell:'J10',before:{type:'number',value:20},after:{type:'number',value:32}}]};
-afterEach(()=>{cleanup();vi.unstubAllGlobals();vi.clearAllMocks()});
+afterEach(()=>{cleanup();vi.useRealTimers();vi.unstubAllGlobals();vi.clearAllMocks()});
 describe('proposal-led UI contracts, not actual engine evidence',()=>{
  it('offers sheets including no candidates, preserves the exact chosen subset and blocks identifier conversion',async()=>{
   evidence.readSourceCells.mockResolvedValue([{cell:'B2',type:'text',text:'1,200'}]); const prepare=vi.fn();
@@ -78,5 +79,77 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   expect(screen.queryByRole('button',{name:'전체 1곳의 정확한 변경·수식 확인'})).not.toBeInTheDocument();
   if(status==='matched'){await waitFor(()=>expect(gate).toHaveBeenLastCalledWith(true));expect(screen.getByRole('button',{name:'이 변경계획 승인'})).toBeDisabled();}
   else {expect(screen.queryByRole('button',{name:'이 변경계획 승인'})).not.toBeInTheDocument();expect(gate).toHaveBeenLastCalledWith(false);}
+ });
+ it('reveals the calculated step 2 result once and consumes stale reveal requests after leaving the step',async()=>{
+  vi.stubGlobal('fetch',vi.fn(async()=>ok(detail)));
+  const scroll=vi.spyOn(Element.prototype,'scrollIntoView');
+  const focus=vi.spyOn(HTMLElement.prototype,'focus');
+  const view=render(<RepairPlanPreview job={plan} onJob={vi.fn()} guidedStep={2} planRevealToken={0}/>);
+  await screen.findByText('예를 들면 이렇게 바뀝니다');
+  scroll.mockClear();focus.mockClear();
+  view.rerender(<RepairPlanPreview job={plan} onJob={vi.fn()} guidedStep={2} planRevealToken={1}/>);
+  await waitFor(()=>expect(scroll).toHaveBeenCalledTimes(1));
+  expect(focus).toHaveBeenCalledWith({preventScroll:true});
+  scroll.mockClear();focus.mockClear();
+  view.rerender(<RepairPlanPreview job={plan} onJob={vi.fn()} guidedStep={1} planRevealToken={2}/>);
+  await waitFor(()=>expect(scroll).toHaveBeenCalledTimes(0));
+  view.rerender(<RepairPlanPreview job={plan} onJob={vi.fn()} guidedStep={2} planRevealToken={2}/>);
+  await waitFor(()=>expect(scroll).toHaveBeenCalledTimes(0));
+ });
+ it('reveals the step 2 plan summary and trial CTA before entitlement unlocks the verified example',async()=>{
+  const trialPlan={...plan,entitlement_active:false,internal_rehearsal:false,synthetic_rehearsal_available:true};
+  vi.stubGlobal('fetch',vi.fn(async()=>ok({payment_mode:'OFF'})));
+  const scroll=vi.spyOn(Element.prototype,'scrollIntoView');
+  render(<RepairPlanPreview job={trialPlan} onJob={vi.fn()} guidedStep={2} planRevealToken={1}/>);
+  await screen.findByText('검증한 수정 예시 보기');
+  await waitFor(()=>expect(scroll).toHaveBeenCalledTimes(1));
+ });
+ it('reveals step 3 only from the current explicit next-step action',async()=>{
+  vi.stubGlobal('fetch',vi.fn(async()=>ok(detail)));
+  const scroll=vi.spyOn(Element.prototype,'scrollIntoView');
+  function Harness(){const [step,setStep]=useState<2|3>(2);return <RepairPlanPreview job={plan} onJob={vi.fn()} guidedStep={step} onNextStep={next=>{if(next===2||next===3)setStep(next);}}/>;}
+  render(<Harness/>);
+  await screen.findByText('예를 들면 이렇게 바뀝니다');
+  scroll.mockClear();
+  fireEvent.click(screen.getByRole('button',{name:/3/}));
+  await waitFor(()=>expect(scroll).toHaveBeenCalledTimes(1));
+  expect(screen.getByText(/바꾸려는 내용과 계산 결과/)).toBeInTheDocument();
+ });
+ it('reveals delivery files once after user-triggered execution reaches ready',async()=>{
+  const ready={...plan,status:'READY',approval_status:'APPROVED',delivery:{delivery_id:'d1',patch_count:1,expires_at:Date.now()/1000+600,files:{REPAIRED_XLSX:{bytes:10},CHANGES_XLSX:{bytes:10},VERIFICATION_HTML:{bytes:10}}}};
+  vi.stubGlobal('fetch',vi.fn(async(_url,init)=>ok(JSON.parse(String(init?.body)).action==='execute'?ready:ready)));
+  const scroll=vi.spyOn(Element.prototype,'scrollIntoView');
+  const focus=vi.spyOn(HTMLElement.prototype,'focus');
+  function Harness(){const [job,setJob]=useState<DeliveryJob>({...plan,approval_status:'APPROVED'});return <RepairDelivery job={job} detail={detail} onJob={setJob} mode="delivery"/>;}
+  render(<Harness/>);
+  fireEvent.click(screen.getByRole('button',{name:/사본|실행/}));
+  await screen.findByText(/준비되었습니다/);
+  await waitFor(()=>expect(scroll).toHaveBeenCalledTimes(1));
+  expect(focus).toHaveBeenCalledWith({preventScroll:true});
+ });
+ it('does not reveal a late execution result after leaving the delivery step',async()=>{
+  let finish!:(value:Response)=>void;
+  const ready={...plan,status:'READY',approval_status:'APPROVED',delivery:{delivery_id:'d1',patch_count:1,expires_at:Date.now()/1000+600,files:{REPAIRED_XLSX:{bytes:10}}}};
+  vi.stubGlobal('fetch',vi.fn(async(_url,init)=>JSON.parse(String(init?.body)).action==='execute'?new Promise<Response>(resolve=>{finish=resolve;}):ok(ready)));
+  const scroll=vi.spyOn(Element.prototype,'scrollIntoView');
+  function Harness(){const [job,setJob]=useState<DeliveryJob>({...plan,approval_status:'APPROVED'});const [mode,setMode]=useState<'approval'|'delivery'>('delivery');return <><button type="button" onClick={()=>setMode('approval')}>back to approval</button><RepairDelivery job={job} detail={detail} onJob={setJob} mode={mode}/></>;}
+  render(<Harness/>);
+  fireEvent.click(screen.getByRole('button',{name:/사본|실행/}));
+  fireEvent.click(screen.getByRole('button',{name:'back to approval'}));
+  finish(ok(ready));
+  await waitFor(()=>expect(screen.getByText('정확한 변경 승인')).toBeInTheDocument());
+  expect(scroll).not.toHaveBeenCalled();
+ });
+ it('reveals a polled ready result once even if the execute response also returns ready',async()=>{
+  let finish!:(value:Response)=>void;
+  const ready={...plan,status:'READY',approval_status:'APPROVED',delivery:{delivery_id:'d1',patch_count:1,expires_at:Date.now()/1000+600,files:{REPAIRED_XLSX:{bytes:10}}}};
+  vi.stubGlobal('fetch',vi.fn(async(_url,init)=>{const action=JSON.parse(String(init?.body)).action;if(action==='execute')return new Promise<Response>(resolve=>{finish=resolve;});return ok(ready);}));
+  const scroll=vi.spyOn(Element.prototype,'scrollIntoView');
+  function Harness(){const [job,setJob]=useState<DeliveryJob>({...plan,approval_status:'APPROVED'});return <RepairDelivery job={job} detail={detail} onJob={setJob} mode="delivery"/>;}
+  render(<Harness/>);
+  fireEvent.click(screen.getByRole('button',{name:/사본|실행/}));
+  await waitFor(()=>expect(scroll).toHaveBeenCalledTimes(1));
+  await act(async()=>{finish(ok(ready));});
+  expect(scroll).toHaveBeenCalledTimes(1);
  });
 });
