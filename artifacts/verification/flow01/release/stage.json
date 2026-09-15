@@ -1,0 +1,12 @@
+{
+  "revision": "workbookcare-api-beta-00016-big",
+  "conditions": {
+    "Ready": "True",
+    "Active": "True",
+    "ContainerHealthy": "True",
+    "ContainerReady": "True",
+    "ResourcesAvailable": "True"
+  },
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:e6d5fb61cd81c2340ffcea6bfd68ec021cb5af992d05b5798c0ff08f1d62ae71",
+  "rollback_revision": "workbookcare-api-beta-00014-nah"
+}

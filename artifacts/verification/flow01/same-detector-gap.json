@@ -1,0 +1,44 @@
+{
+  "kind": "FLOW01_CURRENT_VERIFY_OUTPUT_TARGET_REMAINING_PROOF",
+  "scenario": "same detector reports the same target finding key before and after repair",
+  "current_result": "PASS",
+  "why": "verify_output rejects only new repaired-output finding keys; unchanged target finding keys are allowed",
+  "patch_count": 2,
+  "static_before": 1,
+  "static_remaining": 1,
+  "static_resolved": 0,
+  "checks": [
+    {
+      "code": "SOURCE_IMMUTABLE",
+      "status": "PASS"
+    },
+    {
+      "code": "EXACT_APPROVED_PATCH",
+      "status": "PASS"
+    },
+    {
+      "code": "UNTOUCHED_MEMBERS",
+      "status": "PASS"
+    },
+    {
+      "code": "NON_TARGET_XML_AND_STYLES",
+      "status": "PASS"
+    },
+    {
+      "code": "TYPED_FORMULA_CACHES",
+      "status": "PASS"
+    },
+    {
+      "code": "WHOLE_WORKBOOK_POST_CALCULATION",
+      "status": "PASS"
+    },
+    {
+      "code": "NO_NEW_CALCULATION_ERRORS",
+      "status": "PASS"
+    },
+    {
+      "code": "NO_NEW_STATIC_FINDINGS",
+      "status": "PASS"
+    }
+  ]
+}

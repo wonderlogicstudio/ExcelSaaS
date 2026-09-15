@@ -12,18 +12,36 @@ function display(cell:{type:string;value:unknown}) {
   if(cell.type==='blank')return '빈 셀'; if(cell.type==='text')return `문자 “${String(cell.value)}”`; if(cell.type==='formula')return String(cell.value);
   if(cell.type==='number')return `숫자 ${Number(cell.value).toLocaleString('ko-KR',{maximumFractionDigits:15})}`; return String(cell.value);
 }
-export function RepairPlanPreview({ job, onJob, guidedStep, onNextStep, intent, onIntentCheck }: { job:DeliveryJob; onJob:(job:DeliveryJob)=>void; guidedStep?:CoreStep; onNextStep?:(step:CoreStep)=>void; intent?:RepairIntent; onIntentCheck?:(satisfied:boolean)=>void }) {
+export function RepairPlanPreview({ job, onJob, guidedStep, onNextStep, intent, onIntentCheck, externalBusy=false }: { job:DeliveryJob; onJob:(job:DeliveryJob)=>void; guidedStep?:CoreStep; onNextStep?:(step:CoreStep)=>void; intent?:RepairIntent; onIntentCheck?:(satisfied:boolean)=>void; externalBusy?:boolean }) {
   const [busy,setBusy]=useState(false), [error,setError]=useState<string|null>(null), [detail,setDetail]=useState<PlanDetail|null>(null);
   const [reviewedDigest,setReviewedDigest]=useState<string|null>(null);
+  const [approvalAdvanceDigest,setApprovalAdvanceDigest]=useState<string|null>(null);
+  const approvalRequestSeq=useRef(0);
+  const approvalNavigation=useRef<{digest:string;token:number;active:boolean}|null>(null);
+  const guidedStepRef=useRef<CoreStep|undefined>(guidedStep);
+  guidedStepRef.current=guidedStep;
   const [detailBusy,setDetailBusy]=useState(false); const [expiredDigest,setExpiredDigest]=useState<string|null>(null); const abort=useRef<AbortController|null>(null);
   const plan=job.plan_summary; const rights=!!(job.internal_rehearsal||job.entitlement_active); const currentDetail=detail?.digest===plan?.digest ? detail : null;
   const scopeVisible=!guidedStep||guidedStep===2;
   const validPlan=plan?.status==='PREVIEW_VALIDATED'&&!['PLAN_EXPIRED','CANCELLED','INPUT_EXPIRED'].includes(job.status);
   useEffect(()=>()=>abort.current?.abort(),[]);
-  useEffect(()=>{setDetail(null);setError(null);setReviewedDigest(null);},[job.job_id,plan?.digest]);
+  useEffect(()=>{approvalNavigation.current=null;setDetail(null);setError(null);setReviewedDigest(null);setApprovalAdvanceDigest(null);},[job.job_id,plan?.digest]);
+  useEffect(()=>{if(guidedStep!==3){approvalNavigation.current=null;setApprovalAdvanceDigest(null);}},[guidedStep]);
   const verdict=currentDetail?intentVerdict(intent,currentDetail,job.policy):null;
   const requestSatisfied=!intent?.enabled || verdict?.status==='matched';
+  useEffect(()=>{if(guidedStep===3&&currentDetail)setReviewedDigest(currentDetail.digest);},[guidedStep,currentDetail?.digest]);
   useEffect(()=>{onIntentCheck?.(requestSatisfied && (!intent?.enabled || !!currentDetail));},[requestSatisfied,currentDetail?.digest,intent?.enabled,onIntentCheck]);
+  useEffect(()=>{if(guidedStep===3&&currentDetail&&approvalAdvanceDigest===currentDetail.digest&&job.approval_status==='APPROVED'&&job.plan_summary?.digest===currentDetail.digest){approvalNavigation.current=null;setApprovalAdvanceDigest(null);onNextStep?.(4);}},[guidedStep,currentDetail?.digest,approvalAdvanceDigest,job.approval_status,job.plan_summary?.digest,onNextStep]);
+  const beginApprovalNavigation=(planDigest:string)=>{
+    if(guidedStepRef.current!==3)return null;
+    const token=approvalRequestSeq.current+1;approvalRequestSeq.current=token;
+    approvalNavigation.current={digest:planDigest,token,active:true};setApprovalAdvanceDigest(null);
+    return token;
+  };
+  const completeApprovalNavigation=(planDigest:string,token:number|null)=>{
+    const pending=approvalNavigation.current;
+    if(token!==null&&pending?.active&&pending.digest===planDigest&&pending.token===token&&guidedStepRef.current===3)setApprovalAdvanceDigest(planDigest);
+  };
   const run=async(work:(signal:AbortSignal)=>Promise<void>)=>{abort.current?.abort();const c=new AbortController();abort.current=c;setBusy(true);setError(null);
     try{await work(c.signal);}catch(e){if(!c.signal.aborted)setError(e instanceof Error?e.message:'계산하지 못했습니다.');}finally{if(!c.signal.aborted)setBusy(false);}};
   useEffect(()=>{
@@ -40,7 +58,7 @@ export function RepairPlanPreview({ job, onJob, guidedStep, onNextStep, intent, 
   </section>;
   return <section className="delivery-plan delivery-step" aria-label="변경계획 계산">
     <div hidden={!scopeVisible} className="delivery-plan-review"><h3>변경 후 계산 영향 확인</h3><p>선택한 기준을 사본에 적용했을 때의 수식과 결과를 검사합니다. 원본은 바꾸지 않습니다.</p>
-      <button type="button" className="button button--primary" disabled={busy||['APPROVED','RUNNING','CANCEL_REQUESTED','READY'].includes(job.status)} onClick={()=>run(async signal=>{setExpiredDigest(null);onJob(await deliveryRequest<DeliveryJob>({action:'prepare_plan',job_id:job.job_id,revision:job.revision,source_hash:job.source_hash},signal));})}>{plan?'변경 후 계산 영향 다시 확인':'변경 후 계산 영향 확인하기'}</button>
+      <button type="button" className="button button--primary" disabled={busy||externalBusy||['APPROVED','RUNNING','CANCEL_REQUESTED','READY'].includes(job.status)} onClick={()=>run(async signal=>{setExpiredDigest(null);onJob(await deliveryRequest<DeliveryJob>({action:'prepare_plan',job_id:job.job_id,revision:job.revision,source_hash:job.source_hash},signal));})}>{plan?'변경 후 계산 영향 다시 확인':'변경 후 계산 영향 확인하기'}</button>
       {plan&&<div className="delivery-plan-summary" role="status"><h4>{validPlan?'수정 범위와 계산 검증 완료':job.status==='PLAN_EXPIRED'?'이전 계획 만료 · 다시 계산 필요':job.status==='CANCELLED'?'변경 취소됨 · 새 계획 필요':'계산 완료 · 기준 엔진 검증 필요'}</h4><p>변경 대상 {plan.patch_count}개 · 영향을 받는 수식 {plan.formula_impact_count}곳</p>
         <details><summary>검증 범위</summary><p>전체 수식 {plan.coverage.formula_count}개 계산 · 저장된 계산 캐시 사용 안 함</p><p>{plan.reference.status==='PASS'?`지원 범위의 합성 시험 ${plan.reference.case_count}개를 Excel 기준과 대조했습니다.`:'Excel 기준 대조를 완료하지 못해 수정 제공을 차단했습니다.'}</p></details>
         <p className="scope-price-status">제공 파일: 별도 수정본 XLSX · 변경내역 XLSX · 재검증 HTML<br/>가격: 일반 구매 준비 중 · 아직 확정하지 않았습니다.</p>
@@ -51,11 +69,11 @@ export function RepairPlanPreview({ job, onJob, guidedStep, onNextStep, intent, 
       {guidedStep===2&&validPlan&&rights&&currentDetail&&requestSatisfied&&<button type="button" className="button button--primary" onClick={()=>onNextStep?.(3)}>3단계 · 변경 내용과 예상 결과 확인</button>}
     {(!guidedStep||guidedStep===2||guidedStep===3)&&validPlan&&rights&&<>
       {detailBusy&&<p role="status">검증한 변경계획을 불러오고 있습니다…</p>}
-      {(!guidedStep||(!currentDetail&&!detailBusy))&&<button type="button" className="button button--outline" disabled={busy} onClick={()=>run(async signal=>setDetail(await deliveryRequest<PlanDetail>({action:'plan_details',job_id:job.job_id},signal)))}>정확한 변경계획 보기</button>}
-      {guidedStep===3 && currentDetail && <div className="proposal-exact"><button className="button button--outline" type="button" onClick={()=>setReviewedDigest(currentDetail.digest)}>전체 {currentDetail.patches.length}곳의 정확한 변경·수식 확인</button>{reviewedDigest===currentDetail.digest ? detailsView : <p>대표 예시를 확인한 뒤 전체 변경 목록을 열어보세요. 목록 확인과 별도 승인 후에만 수정본을 만듭니다.</p>}</div>}
+      {(!guidedStep||(!currentDetail&&!detailBusy))&&<button type="button" className="button button--outline" disabled={busy||externalBusy} onClick={()=>run(async signal=>setDetail(await deliveryRequest<PlanDetail>({action:'plan_details',job_id:job.job_id},signal)))}>정확한 변경계획 보기</button>}
+      {guidedStep===3 && currentDetail && <div className="proposal-exact">{detailsView}</div>}
       {!guidedStep && detailsView}
     </>}
-    {(currentDetail||job.status==='READY')&&(!guidedStep||guidedStep>=3)&&(rights||job.status==='READY')&&requestSatisfied&&(!guidedStep||guidedStep===4||reviewedDigest===currentDetail?.digest||job.status==='READY')&&<RepairDelivery job={job} detail={currentDetail??{digest:'',patches:[],impact:[],expires_at:job.expires_at}} onJob={onJob} mode={guidedStep===3?'approval':guidedStep===4?'delivery':'all'} onContinue={()=>onNextStep?.(4)}/>}
+    {(currentDetail||job.status==='READY')&&(!guidedStep||guidedStep>=3)&&(rights||job.status==='READY')&&requestSatisfied&&(!guidedStep||guidedStep===3||guidedStep===4||reviewedDigest===currentDetail?.digest||job.status==='READY')&&<RepairDelivery job={job} detail={currentDetail??{digest:'',patches:[],impact:[],expires_at:job.expires_at}} onJob={onJob} mode={guidedStep===3?'approval':guidedStep===4?'delivery':'all'} onContinue={()=>onNextStep?.(4)} onApprovalStart={beginApprovalNavigation} onApproved={completeApprovalNavigation}/>}
     {guidedStep===4&&currentDetail&&<details className="delivery-approved-copy"><summary>승인한 변경 내용 다시 보기</summary>{detailsView}</details>}
     {busy&&<p role="status">사본에서 계산 중입니다…</p>}{error&&<p role="alert">{error}</p>}
   </section>;

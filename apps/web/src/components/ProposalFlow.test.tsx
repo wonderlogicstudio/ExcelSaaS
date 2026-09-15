@@ -74,11 +74,9 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   render(<RepairPlanPreview job={plan} onJob={vi.fn()} guidedStep={3} intent={{...noRepairIntent,enabled:true,sheet:'정산',cell:'F3',expected}} onIntentCheck={gate}/>);
   const representative=await screen.findByRole('region',{name:'대표 수정 예시'});
   expect(within(representative).getByText('12',{exact:true})).toBeVisible();
-  expect(screen.queryByText('=C3*D3')).not.toBeInTheDocument();
-  expect(screen.queryByRole('button',{name:'이 변경계획 승인'})).not.toBeInTheDocument();
-  fireEvent.click(screen.getByRole('button',{name:'전체 1곳의 정확한 변경·수식 확인'}));
   expect(screen.getByText('=C3*D3')).toBeVisible();
-  if(status==='matched'){expect(screen.getByRole('button',{name:'이 변경계획 승인'})).toBeDisabled();expect(gate).toHaveBeenLastCalledWith(true);}
+  expect(screen.queryByRole('button',{name:'전체 1곳의 정확한 변경·수식 확인'})).not.toBeInTheDocument();
+  if(status==='matched'){await waitFor(()=>expect(gate).toHaveBeenLastCalledWith(true));expect(screen.getByRole('button',{name:'이 변경계획 승인'})).toBeDisabled();}
   else {expect(screen.queryByRole('button',{name:'이 변경계획 승인'})).not.toBeInTheDocument();expect(gate).toHaveBeenLastCalledWith(false);}
  });
 });

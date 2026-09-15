@@ -1,0 +1,19 @@
+{"phase": "build", "command": "npm build hosted beta", "exit_code": 0}
+{"phase": "baseline", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "baseline", "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "baseline", "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "baseline", "command": "wrangler versions view 1fa2992b-c75d-400b-8acc-14dd484c7a40 --json", "exit_code": 0}
+{"phase": "upload", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "upload", "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "upload", "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag flow01 --message Approved FLOW-01 reduced intermediate actions; same private boundaries", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions view c6e1ed05-eed2-4322-8044-7acd67a95dd5 --json", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler versions view c6e1ed05-eed2-4322-8044-7acd67a95dd5 --json", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler versions deploy c6e1ed05-eed2-4322-8044-7acd67a95dd5@100 --yes --message Approved FLOW-01 repair flow", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3", "exit_code": 0}

@@ -1,0 +1,220 @@
+{
+  "kind": "ACTUAL_LOCAL_SERVICES_ENGINE_ARTIFACTS",
+  "official_pg_verified": false,
+  "results": [
+    {
+      "case": "RP01_ALL",
+      "status": "PASS",
+      "exact_cells": 725,
+      "sum_after": 2159436,
+      "patches": 8,
+      "approval_required": true,
+      "source_unchanged": true,
+      "artifacts": [
+        {
+          "kind": "REPAIRED_XLSX",
+          "filename": "workbookcare_repaired_e6768995-50df-431b-b1f4-b699c02c84f2.xlsx",
+          "sha256": "c6959118c364b675615283b9548378d8f707a01c4c7c604ab9404ffd97141a25",
+          "bytes": 18776
+        },
+        {
+          "kind": "CHANGES_XLSX",
+          "filename": "changes_e6768995-50df-431b-b1f4-b699c02c84f2.xlsx",
+          "sha256": "9ac6b10a9573a7e5df732646606a3067d86a0f7c68fc5f84d45a7a29465bbb3a",
+          "bytes": 12197
+        },
+        {
+          "kind": "VERIFICATION_HTML",
+          "filename": "verification_e6768995-50df-431b-b1f4-b699c02c84f2.html",
+          "sha256": "3503409c325dc56d752ad3d2cecd570598c0cd036e444dcb94ad75c36498f567",
+          "bytes": 11499
+        }
+      ],
+      "seconds": 11.493
+    },
+    {
+      "case": "RP01_SUBSET",
+      "status": "PASS",
+      "exact_cells": 725,
+      "sum_after": 2029526,
+      "patches": 4,
+      "approval_required": true,
+      "source_unchanged": true,
+      "artifacts": [
+        {
+          "kind": "REPAIRED_XLSX",
+          "filename": "workbookcare_repaired_35826a58-8fa5-4139-ab45-0a2743c63926.xlsx",
+          "sha256": "4d2a7c0fd325c3b8dc69c3a04c179c8f6b2fe154672591f3cf2c677d947fa089",
+          "bytes": 18751
+        },
+        {
+          "kind": "CHANGES_XLSX",
+          "filename": "changes_35826a58-8fa5-4139-ab45-0a2743c63926.xlsx",
+          "sha256": "a34808d921db9ad6e0c6c76424fa5617768432bfef972079c30cbd732667902f",
+          "bytes": 11456
+        },
+        {
+          "kind": "VERIFICATION_HTML",
+          "filename": "verification_35826a58-8fa5-4139-ab45-0a2743c63926.html",
+          "sha256": "7a478051ab78f5393e3d6e17d76df11ab14260258899d28c7d25d6e057900602",
+          "bytes": 9521
+        }
+      ],
+      "seconds": 8.589
+    },
+    {
+      "case": "RP02_ALL",
+      "status": "PASS",
+      "exact_cells": 725,
+      "sum_after": 937923,
+      "patches": 3,
+      "approval_required": true,
+      "source_unchanged": true,
+      "artifacts": [
+        {
+          "kind": "REPAIRED_XLSX",
+          "filename": "workbookcare_repaired_18b35f0d-2d72-4614-9381-41560c76d286.xlsx",
+          "sha256": "dd7384aa85f9eb7444a6040e8efee4c16c1a147f1f97bafb290fe0333b860d08",
+          "bytes": 18800
+        },
+        {
+          "kind": "CHANGES_XLSX",
+          "filename": "changes_18b35f0d-2d72-4614-9381-41560c76d286.xlsx",
+          "sha256": "862dd789fd4cbe70f6ab990f27db5c9f0b9152dc57e19bf2b3867def0125d9a8",
+          "bytes": 11176
+        },
+        {
+          "kind": "VERIFICATION_HTML",
+          "filename": "verification_18b35f0d-2d72-4614-9381-41560c76d286.html",
+          "sha256": "38e732181b95341a41a028a7804cffe72e7719a8b3aecc8784f689bbebe6b678",
+          "bytes": 8797
+        }
+      ],
+      "seconds": 6.822
+    },
+    {
+      "case": "comparison",
+      "status": "PASS",
+      "summary": {
+        "counts": {
+          "MATCHED": 350,
+          "AMOUNT_DIFF": 41,
+          "ONLY_A": 23,
+          "ONLY_B": 23,
+          "AMBIGUOUS": 14,
+          "INPUT_ERROR": 13
+        },
+        "group_count": 464,
+        "input_rows": {
+          "A": 448,
+          "B": 440
+        },
+        "assigned_rows": {
+          "A": 448,
+          "B": 440
+        },
+        "excluded_rows": {
+          "A": 0,
+          "B": 0
+        },
+        "known_amount_totals": {
+          "A": "9007199260823885",
+          "B": "9007199260814989"
+        },
+        "uncompared_known_amounts": {
+          "A": "5891",
+          "B": "6273"
+        },
+        "excluded_known_amount_totals": {
+          "A": "0",
+          "B": "0"
+        },
+        "unknown_amount_row_counts": {
+          "A": 5,
+          "B": 0
+        },
+        "rows_preserved": true,
+        "known_amount_conservation": true,
+        "whole_ledger_correctness_verified": false
+      },
+      "all_physical_rows_verified": true,
+      "artifacts": [
+        {
+          "kind": "COMPARISON_REPORT_XLSX",
+          "filename": "comparison_report_1bd3f332-5559-48c5-b695-fc87db63c156.xlsx",
+          "sha256": "6ee0435c3276c29e3735573ea7b37edbab8c4d5c6b334d7c6215bdf78559e0ef",
+          "bytes": 82565
+        },
+        {
+          "kind": "COMPARISON_VERIFICATION_HTML",
+          "filename": "comparison_verification_1bd3f332-5559-48c5-b695-fc87db63c156.html",
+          "sha256": "0e6b2fec2c08278b9197fd745787896984dcd41f0495800339134baed42ebac9",
+          "bytes": 250250
+        }
+      ],
+      "seconds": 6.248
+    },
+    {
+      "case": "comparison-capacity",
+      "status": "PASS",
+      "summary": {
+        "counts": {
+          "MATCHED": 1000,
+          "AMOUNT_DIFF": 0,
+          "ONLY_A": 0,
+          "ONLY_B": 0,
+          "AMBIGUOUS": 0,
+          "INPUT_ERROR": 0
+        },
+        "group_count": 1000,
+        "input_rows": {
+          "A": 1000,
+          "B": 1000
+        },
+        "assigned_rows": {
+          "A": 1000,
+          "B": 1000
+        },
+        "excluded_rows": {
+          "A": 0,
+          "B": 0
+        },
+        "known_amount_totals": {
+          "A": "3503500",
+          "B": "3503500"
+        },
+        "uncompared_known_amounts": {
+          "A": "0",
+          "B": "0"
+        },
+        "excluded_known_amount_totals": {
+          "A": "0",
+          "B": "0"
+        },
+        "unknown_amount_row_counts": {
+          "A": 0,
+          "B": 0
+        },
+        "rows_preserved": true,
+        "known_amount_conservation": true,
+        "whole_ledger_correctness_verified": false
+      },
+      "all_physical_rows_verified": true,
+      "artifacts": [
+        {
+          "kind": "COMPARISON_REPORT_XLSX",
+          "filename": "comparison_report_229cb7da-43b6-4fb9-8dd3-200b533e0f1d.xlsx",
+          "sha256": "4db5b3263a0124ce35484e2a9d0326e09ca152698933f3de1443246855aa8790",
+          "bytes": 156933
+        },
+        {
+          "kind": "COMPARISON_VERIFICATION_HTML",
+          "filename": "comparison_verification_229cb7da-43b6-4fb9-8dd3-200b533e0f1d.html",
+          "sha256": "d29f1a83f97b4fc03c19dd24cf4e5151360c14a7893077ea95aa2b70f84c453a",
+          "bytes": 395058
+        }
+      ],
+      "seconds": 9.716
+    }
+  ]
+}

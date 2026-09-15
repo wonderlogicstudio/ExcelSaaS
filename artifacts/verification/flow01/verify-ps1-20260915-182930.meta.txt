@@ -1,0 +1,5 @@
+﻿command=powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\verify.ps1
+cwd=C:\Users\JinwonLee\project\ExcelSaaS
+started=2026-09-15T18:29:30.4832478+09:00
+ended=2026-09-15T18:33:39.1597387+09:00
+exit=0

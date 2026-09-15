@@ -1,3 +1,33 @@
+# STOPPED — FLOW-01 기술 검증 완료 / UX 부분 충족 / 사용자 확인
+
+기존 두 수정 기능의 실제 보호 베타 흐름과 다운로드 검증을 마쳤습니다. 숫자 정리8개/합계2,159,436, 빈 수식3개/5,232·3,551·7,800/합계937,923이 화면과 고정 예상값에 일치했습니다. 실제 다운로드6개, 수정본별725개 예상값 및 원본·비대상 보존 검증 PASS. 같은 베타 재업로드에서 RP01 구조8→0/수식3유지, RP02 수식3→0/구조8유지를 확인했습니다. 지원 검사 후 자동 계산, 정확한 변경의 직접 표시, 별도 승인 후 결과 단계 이동을 적용했고 별도 실행·승인 경계는 유지했습니다.
+
+전체 회귀 exit0(web141/Worker16/API240/Ruff/M4exact36), 복잡도 통합5사례 exit0, 승인받은 실제 Excel4파일 읽기 전용 검증 PASS. 이 Excel4개는 호환성 증거용 출력이며 최종 복잡도 다운로드와 구분합니다. API00017-xid와 Workerc6e1ed05를 기존 보호 베타에 배포했습니다. 원격 Git push 없음.
+
+UX는 부분 충족입니다: 두 경로 모두4단계·필수 앱 조작16회·필수 셀/수식 입력0회. 10회 목표는 미달이며, 긴 전체 변경/영향 목록과 초보자의 실제 이해도는 남은 과제입니다. 제품 엔진·화면의 기술 검증과 고객 사용성 승인, D08 상용화 판단은 별개입니다. FLOW-01의 검증된 수정과 기록을 선별 local commit한 뒤 멈추며 다음 단위는 승인하지 않았습니다.
+
+[검증 기록](delivery-v3_2/reviews/FLOW-01.md) · [증거](delivery-v3_2/reviews/evidence/FLOW-01.json)
+
+---
+
+# ACTIVE — FLOW-01 / Excel verified, final regression and beta verification
+
+Owner COM method approval received. Actual four-file Excel verification and registered compatibility PASS; complex integration5cases PASS. Full regression and protected-beta acceptance continue. Prior checkpoint history retained below.
+
+---
+
+# ACTIVE — FLOW-01 / Excel method confirmation pending
+
+FLOW-01 remains approved but incomplete. Existing protected-beta RP01/RP02 actual screen flows, six downloads and same-beta rescan passed on the pre-change deployment. Each repaired workbook matches725 frozen cached values; RP01 static8→0/M4remaining3, RP02 M4 3→0/staticremaining8. This is not evidence for the new local report/UI deployment. Scoped source corrections and independent code review PASS; final full regression exit1: web141/build and Worker16 PASS, API228passed/12failed at stale-compatibility gates (8 REFERENCE_NOT_VERIFIED,4 PRODUCT_NOT_READY). Separately API Ruff and M4 frozen36-candidate checks exit0. Full regression is not PASS. New source binds same-detector resolution/completeness, truthful abstention, direct exact-change display, automatic calculation, and one-shot approved navigation with safe return/cancel. Existing explicit approval, separate execution and private beta boundaries remain. Fresh actual synthetic compatibility artifacts were generated but not published READY. Actual Excel reopening NOT_RUN; compatibility remains STALE until new measured evidence is registered. Updated-beta screen/release/runtime verification NOT_RUN. Local HTML opening was blocked by browser URL policy; no workaround or visual PASS claimed. No deployment, local commit or remote push this unit. Initial usability target10 activations NOT_MET (baseline RP02=19); updated count and human comprehension NOT_RUN. Awaiting explicit Excel COM method approval only; no next unit approval inferred. [Work order and evidence](delivery-v3_2/reviews/FLOW-01.md).
+
+---
+
+# ACTIVE APPROVED — FLOW-01 novice repair completion verification
+
+2026-09-15 explicit owner approval starts one bounded unit: [FLOW-01 work order](delivery-v3_2/reviews/FLOW-01.md). Reuse RP01/RP02; verify actual protected beta, frozen expected, downloads, same-detector resolution and measured UX; fix demonstrated blockers only. Baseline pending. Prior records preserved below. Next unit NOT_APPROVED; D08 PARTIAL.
+
+---
+
 # STOPPED — ORCH-02 role model routing / owner review
 
 2026-09-15 owner-approved role/difficulty routing is configured: PL AstraMedium, builder5.5Medium, reviewerAstraHigh; bounded simple Low/complex High policy in [contract](54_AGENT_ORCHESTRATION.md). TOML/native isolated config-read and independent review PASS. Current root session is not switched by saving settings. [Review](delivery-v3_2/reviews/MODEL_ROUTING.md). Product/beta unchanged, UX/savings NOT_MEASURED, FLOW-01 NOT_APPROVED. Prior evidence/history retained below.

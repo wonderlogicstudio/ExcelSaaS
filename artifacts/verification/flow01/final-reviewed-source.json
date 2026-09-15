@@ -1,0 +1,18 @@
+{
+  "status": "INDEPENDENT_SCOPED_CODE_REVIEW_PASS",
+  "files": {
+    "apps/api/app/delivery_patch.py": "dcb5b39d3c9773a35911d952c8c15abded93d5e4e9391cbed996ef57e2fa49b0",
+    "apps/api/app/delivery_artifacts.py": "69c66a93d3103c179c481bc44ce4f21b684e01dfb113f04533598cbbe941a81f",
+    "apps/api/app/delivery_verification_template.html": "0ba74aefd76ad98f83c5059067e63411a05946a99df4b613f8dcca1a678484f9",
+    "apps/api/tests/test_delivery_patch.py": "5b348553a2c9b48bc734e8e8baddb5b2b71f4b024d932aba08a541133178a26f",
+    "apps/api/tests/test_delivery_execution.py": "61e75e4616037e2197b3c7521f81741f534f856f1ec32fc6de49f65004412edc",
+    "apps/web/src/App.tsx": "f52c66eefdef679418d2ef9f199e07217499aa1fa6ca5e77703ff05815187b6a",
+    "apps/web/src/components/DeliveryWorkspace.tsx": "a92e30fa5edf7dc8182973a36ccaea72f8033d623131def8154083854d83bdef",
+    "apps/web/src/components/RepairPlanPreview.tsx": "8bd95c2469e467a70c57d499491806550c1437354d961a10db798b4541e2f43c",
+    "apps/web/src/components/RepairDelivery.tsx": "5f2a2f32b1f721002fcf4c67505409b2895b8a34942387f31cc8e4a2d1d13024",
+    "apps/web/src/components/GuidedFlow.test.tsx": "3b5368d922fa19e46b985bfa86cbaebb7ebdb64bf32b33a449502335b34129be",
+    "apps/web/src/components/ProposalFlow.test.tsx": "9c690ee86e934599806ae7420cd967ca1f55c774354ca975c869a6d81bec3c5e"
+  },
+  "excel": "NOT_RUN",
+  "updated_beta_ui": "NOT_RUN"
+}

@@ -2,17 +2,49 @@ from __future__ import annotations
 
 import copy
 from io import BytesIO
+from types import SimpleNamespace
 from zipfile import ZipFile
 
 import pytest
+from openpyxl import Workbook
 from test_delivery_inputs import policy
 from test_delivery_plan import make_job
 
 from app.config import Settings
+from app.delivery_artifacts import verification_html
 from app.delivery_inputs import PROFILE_2, inspect_input
 from app.delivery_patch import patch_workbook, verify_output
 from app.delivery_plan import build_plan
+from app.delivery_store import DeliveryStore
 from app.errors import WorkbookCareError
+
+
+def scan_stub(findings=(), *, truncated=False, issue_count=None):
+    findings = list(findings)
+    return SimpleNamespace(
+        workbook=SimpleNamespace(scan_truncated=truncated),
+        summary=SimpleNamespace(issue_count=len(findings) if issue_count is None else issue_count),
+        findings=findings,
+    )
+
+
+def audit_stub(candidates=(), *, status="COMPLETED", limitations=()):
+    return SimpleNamespace(
+        status=status,
+        candidates=list(candidates),
+        limitations=list(limitations),
+        rule_set_version="test-m4",
+    )
+
+
+def finding(rule_code, sheet, cell, *, subtype=None):
+    return SimpleNamespace(
+        finding_key=f"{rule_code}:{sheet}:{cell}",
+        rule_code=rule_code,
+        sheet=sheet,
+        cell=cell,
+        formula_pattern=SimpleNamespace(pattern_subtype=subtype) if subtype else None,
+    )
 
 
 def rewrite(payload, part, operation):
@@ -123,3 +155,187 @@ def test_partial_patch_blocked_and_shared_string_member_preserved(tmp_path):
     incomplete["patches"] = []
     with pytest.raises(WorkbookCareError):
         verify_output(source, patch_workbook(source, job["snapshot"], incomplete), plan, Settings())
+
+
+def test_retained_static_target_finding_is_blocked(tmp_path, monkeypatch):
+    _, job = make_job(tmp_path)
+    plan = build_plan(job, policy(targets=["B2"]))
+    output = patch_workbook(job["source"], job["snapshot"], plan)
+    target = plan["patches"][0]
+    retained = finding("NUMBER_STORED_AS_TEXT", target["sheet"], target["cell"])
+    monkeypatch.setattr("app.delivery_patch.scan_workbook", lambda *a, **k: scan_stub([retained]))
+    monkeypatch.setattr("app.delivery_patch.run_formula_audit", lambda *a, **k: audit_stub())
+    with pytest.raises(WorkbookCareError) as error:
+        verify_output(job["source"], output, plan, Settings())
+    assert error.value.code == "TARGET_STATIC_FINDING_REMAINING"
+
+
+def test_retained_formula_target_candidate_is_blocked(tmp_path, monkeypatch):
+    _, job = make_job(tmp_path)
+    plan = build_plan(job, policy(PROFILE_2, ["F3"]))
+    output = patch_workbook(job["source"], job["snapshot"], plan)
+    target = plan["patches"][0]
+    retained = finding(
+        "FORMULA_PATTERN_GAP",
+        target["sheet"],
+        target["cell"],
+        subtype="BLANK_GAP_CANDIDATE",
+    )
+    monkeypatch.setattr("app.delivery_patch.scan_workbook", lambda *a, **k: scan_stub())
+    monkeypatch.setattr(
+        "app.delivery_patch.run_formula_audit", lambda *a, **k: audit_stub([retained])
+    )
+    with pytest.raises(WorkbookCareError) as error:
+        verify_output(job["source"], output, plan, Settings())
+    assert error.value.code == "TARGET_FORMULA_CANDIDATE_REMAINING"
+
+
+def test_new_formula_candidate_is_blocked(tmp_path, monkeypatch):
+    _, job = make_job(tmp_path)
+    plan = build_plan(job, policy(PROFILE_2, ["F3"]))
+    output = patch_workbook(job["source"], job["snapshot"], plan)
+    new_candidate = finding(
+        "FORMULA_PATTERN_GAP",
+        plan["patches"][0]["sheet"],
+        "F4",
+        subtype="BLANK_GAP_CANDIDATE",
+    )
+    calls = iter([audit_stub(), audit_stub([new_candidate])])
+    monkeypatch.setattr("app.delivery_patch.scan_workbook", lambda *a, **k: scan_stub())
+    monkeypatch.setattr("app.delivery_patch.run_formula_audit", lambda *a, **k: next(calls))
+    with pytest.raises(WorkbookCareError) as error:
+        verify_output(job["source"], output, plan, Settings())
+    assert error.value.code == "NEW_FORMULA_AUDIT_CANDIDATES"
+
+
+def test_incomplete_formula_audit_is_blocked(tmp_path, monkeypatch):
+    _, job = make_job(tmp_path)
+    plan = build_plan(job, policy())
+    output = patch_workbook(job["source"], job["snapshot"], plan)
+    monkeypatch.setattr("app.delivery_patch.scan_workbook", lambda *a, **k: scan_stub())
+    monkeypatch.setattr(
+        "app.delivery_patch.run_formula_audit",
+        lambda *a, **k: audit_stub(status="SKIPPED_TRUNCATED"),
+    )
+    with pytest.raises(WorkbookCareError) as error:
+        verify_output(job["source"], output, plan, Settings())
+    assert error.value.code == "INCOMPLETE_FORMULA_AUDIT_VALIDATION"
+
+
+def test_unrelated_remaining_candidate_and_no_original_target_candidate_can_pass(
+    tmp_path, monkeypatch
+):
+    _, job = make_job(tmp_path)
+    plan = build_plan(job, policy(targets=["B2"]))
+    output = patch_workbook(job["source"], job["snapshot"], plan)
+    unrelated = finding(
+        "FORMULA_PATTERN_GAP",
+        plan["patches"][0]["sheet"],
+        "F9",
+        subtype="BLANK_GAP_CANDIDATE",
+    )
+    monkeypatch.setattr("app.delivery_patch.scan_workbook", lambda *a, **k: scan_stub())
+    monkeypatch.setattr(
+        "app.delivery_patch.run_formula_audit",
+        lambda *a, **k: audit_stub([unrelated]),
+    )
+    result = verify_output(job["source"], output, plan, Settings())
+    codes = {check["code"] for check in result["checks"]}
+    assert result["formula_candidates_remaining"] == 1
+    assert result["detectors"]["formula"]["target_before"] == []
+    assert "TARGET_FORMULA_CANDIDATES_RESOLVED" not in codes
+    assert all(check["status"] == "PASS" for check in result["checks"])
+
+
+
+def test_incomplete_static_detail_count_is_blocked(tmp_path, monkeypatch):
+    _, job = make_job(tmp_path)
+    plan = build_plan(job, policy())
+    output = patch_workbook(job["source"], job["snapshot"], plan)
+    monkeypatch.setattr(
+        "app.delivery_patch.scan_workbook", lambda *a, **k: scan_stub(issue_count=1)
+    )
+    monkeypatch.setattr("app.delivery_patch.run_formula_audit", lambda *a, **k: audit_stub())
+    with pytest.raises(WorkbookCareError) as error:
+        verify_output(job["source"], output, plan, Settings())
+    assert error.value.code == "INCOMPLETE_STATIC_VALIDATION"
+
+
+def test_formula_abstained_numeric_only_repair_stays_supported(tmp_path, monkeypatch):
+    book = Workbook()
+    sheet = book.active
+    sheet.title = policy()["sheet"]
+    sheet["B2"] = "12,000"
+    source_io = BytesIO()
+    book.save(source_io)
+    book.close()
+    source = rewrite(
+        source_io.getvalue(),
+        "xl/workbook.xml",
+        lambda raw: raw.replace(b"<workbookProtection/>", b""),
+    )
+    snapshot = inspect_input("numeric-only.xlsx", source, Settings())
+    store = DeliveryStore(tmp_path)
+    job = store.create("owner", source, snapshot, "numeric-only")
+    plan = build_plan(job, policy(targets=["B2"]))
+    output = patch_workbook(source, snapshot, plan)
+    result = verify_output(source, output, plan, Settings())
+    codes = {check["code"] for check in result["checks"]}
+    assert result["detectors"]["formula_comparison_status"] == "NOT_ESTABLISHED"
+    assert "FORMULA_AUDIT_COMPLETED" not in codes
+    assert "NO_NEW_FORMULA_CANDIDATES" not in codes
+    assert "TARGET_FORMULA_CANDIDATES_RESOLVED" not in codes
+
+
+def test_formula_abstained_then_completed_with_candidate_is_blocked(tmp_path, monkeypatch):
+    _, job = make_job(tmp_path)
+    plan = build_plan(job, policy(targets=["B2"]))
+    output = patch_workbook(job["source"], job["snapshot"], plan)
+    new_candidate = finding(
+        "FORMULA_PATTERN_GAP",
+        plan["patches"][0]["sheet"],
+        "F9",
+        subtype="BLANK_GAP_CANDIDATE",
+    )
+    calls = iter(
+        [
+            audit_stub(status="ABSTAINED_INSUFFICIENT_EVIDENCE"),
+            audit_stub([new_candidate], status="COMPLETED"),
+        ]
+    )
+    monkeypatch.setattr("app.delivery_patch.scan_workbook", lambda *a, **k: scan_stub())
+    monkeypatch.setattr("app.delivery_patch.run_formula_audit", lambda *a, **k: next(calls))
+    with pytest.raises(WorkbookCareError) as error:
+        verify_output(job["source"], output, plan, Settings())
+    assert error.value.code == "NEW_FORMULA_AUDIT_CANDIDATES"
+
+
+
+def test_verification_html_summarizes_static_and_formula_detectors_without_raw_abstain(
+    tmp_path, monkeypatch
+):
+    _, job = make_job(tmp_path)
+    plan = build_plan(job, policy(targets=["B2"]))
+    output = patch_workbook(job["source"], job["snapshot"], plan)
+    monkeypatch.setattr("app.delivery_patch.scan_workbook", lambda *a, **k: scan_stub())
+    monkeypatch.setattr(
+        "app.delivery_patch.run_formula_audit",
+        lambda *a, **k: audit_stub(
+            status="ABSTAINED_INSUFFICIENT_EVIDENCE", limitations=["too_few_formulas"]
+        ),
+    )
+    result = verify_output(job["source"], output, plan, Settings())
+    result = {
+        **result,
+        "static_before": 8,
+        "static_remaining": 8,
+        "formula_candidates_before": 3,
+        "formula_candidates_remaining": 0,
+    }
+    rendered = verification_html(plan, result).decode("utf-8")
+    assert "정적 구조 발견: 원본 8건 → 수정본 8건" in rendered
+    assert "수식 후보: 비교 미확정(증거 부족)" in rendered
+    assert "수식 후보: 원본 3건 → 수정본 0건" not in rendered
+    assert "수식 후보 비교에 필요한 증거가 부족" in rendered
+    assert "too_few_formulas" in rendered
+    assert "ABSTAINED_INSUFFICIENT_EVIDENCE" not in rendered

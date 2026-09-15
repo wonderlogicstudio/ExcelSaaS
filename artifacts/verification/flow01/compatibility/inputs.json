@@ -1,0 +1,59 @@
+{
+  "patch_fingerprint": "53facec2dc172d17a52d6db5be7db167c60cf3dfd76aca5742edbb8407a4c2bb",
+  "rows": [
+    {
+      "profile": "RP01",
+      "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+      "plan_digest": "1882f0cb04677c30505394f93d6ffe0263c16b78abc28784ee90b2e94e0cca3b",
+      "output_hash": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+      "files": {
+        "REPAIRED_XLSX": {
+          "name": "workbookcare_repaired_7c2093d9-4a34-42c2-9867-7576899812a1.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+          "bytes": 2046
+        },
+        "CHANGES_XLSX": {
+          "name": "changes_7c2093d9-4a34-42c2-9867-7576899812a1.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "e48641200fce11ed3714b64a056f6241ad154ff1c29deb211fab38ed508ff18c",
+          "bytes": 9985
+        },
+        "VERIFICATION_HTML": {
+          "name": "verification_7c2093d9-4a34-42c2-9867-7576899812a1.html",
+          "mime": "text/html;charset=utf-8",
+          "sha256": "f99bf93f92a0503e4c225a979a47d47054af74b128974ec17f5beaca9582ef33",
+          "bytes": 4993
+        }
+      },
+      "ready_published": false
+    },
+    {
+      "profile": "RP02",
+      "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+      "plan_digest": "b9e73cf2fc6a0a8e3e3a5ba5ce624f9c2ddf78ae25a3743eadb6298149d5747f",
+      "output_hash": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+      "files": {
+        "REPAIRED_XLSX": {
+          "name": "workbookcare_repaired_d141b5ed-80cc-4981-9001-0d43266f4079.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+          "bytes": 2067
+        },
+        "CHANGES_XLSX": {
+          "name": "changes_d141b5ed-80cc-4981-9001-0d43266f4079.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "1784f539305a6e353b7b3ed939cf4b8efcb157a686ba95aee8fe7b4e52cdbe24",
+          "bytes": 9949
+        },
+        "VERIFICATION_HTML": {
+          "name": "verification_d141b5ed-80cc-4981-9001-0d43266f4079.html",
+          "mime": "text/html;charset=utf-8",
+          "sha256": "b9985484996474133c09c77bd472823fd2141e6ee06e65dbb2e16f83045d439d",
+          "bytes": 4932
+        }
+      },
+      "ready_published": false
+    }
+  ]
+}

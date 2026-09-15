@@ -1024,5 +1024,69 @@
     "next_unit": "FLOW-01",
     "next_unit_approved": false,
     "execution_state": "STOPPED_BEFORE_NEXT_UNIT"
+  },
+  "flow_01": {
+    "status": "STOPPED_ENGINEERING_VERIFIED_UX_PARTIAL_OWNER_REVIEW",
+    "owner_approved": true,
+    "review": "reviews/FLOW-01.md",
+    "evidence": "reviews/evidence/FLOW-01.json",
+    "baseline": "PASS",
+    "ui": "FINAL_TWO_REPAIRS_SIX_DOWNLOADS_SAME_BETA_RESCANS_PASS",
+    "human_understanding": "NOT_RUN",
+    "next_unit": "NOT_APPROVED",
+    "ux_target": "NOT_MET_16_ACTIVATIONS_EACH",
+    "product_edits": "SCOPED_REUSED_AND_FIXED_TESTED_BETA_VERIFIED",
+    "compatibility": "PASS_ACTUAL_EXCEL_4_FILES",
+    "deployment": {
+      "status": "EXISTING_PROTECTED_BETA_DEPLOYED",
+      "worker": "c6e1ed05-eed2-4322-8044-7acd67a95dd5",
+      "api": "workbookcare-api-beta-00017-xid",
+      "staged_runtime": "workbookcare-api-beta-00016-big",
+      "image": "sha256:e6d5fb61cd81c2340ffcea6bfd68ec021cb5af992d05b5798c0ff08f1d62ae71",
+      "linux_runtime": {
+        "reference_cases": 20,
+        "repair_profiles": 2,
+        "artifacts": 6,
+        "status": "PASS"
+      },
+      "security": "Existing Access/private IAM/Gateway/all Worker bindings preserved; no new resources",
+      "evidence": "artifacts/verification/flow01/release and web-release"
+    },
+    "final_regression": "PASS_EXIT_0_WEB141_WORKER16_API240_RUFF_M4EXACT36",
+    "separate_ruff": "PASS_EXIT_0",
+    "separate_m4": "PASS_EXIT_0_36_EXACT",
+    "review_status": "SCOPED_CODE_AND_EVIDENCE_PASS",
+    "updated_beta_ui": "PASS_2_FLOWS_6_DOWNLOADS_SAME_DETECTOR_RESCAN",
+    "local_commit": "SELECTIVE_COMMIT_OF_THIS_RECORD_AND_VERIFIED_FILES; resolve hash from git log for this file",
+    "remote_push": false,
+    "owner_com_method_approved": true,
+    "complex_integration": "PASS_5_CASES",
+    "historical_checkpoints": [
+      {
+        "status": "FINAL_REGRESSION_RUNNING",
+        "owner_approved": true,
+        "review": "reviews/FLOW-01.md",
+        "evidence": "reviews/evidence/FLOW-01.json",
+        "baseline": "PASS",
+        "ui": "BASELINE_TWO_REPAIRS_AND_RESCAN_VERIFIED",
+        "human_understanding": "NOT_RUN",
+        "next_unit": "NOT_APPROVED",
+        "ux_target": "NOT_MET_19_ACTIVATIONS_RP02",
+        "product_edits": "SCOPED_CODE_REVIEW_PASS_REGRESSION_BLOCKED_BY_COMPATIBILITY",
+        "compatibility": "PASS_ACTUAL_EXCEL_4_FILES",
+        "deployment": false,
+        "final_regression": "FAILED_EXIT_1_COMPATIBILITY_GATE",
+        "separate_ruff": "PASS_EXIT_0",
+        "separate_m4": "PASS_EXIT_0_36_EXACT",
+        "review_status": "SCOPED_CODE_PASS",
+        "updated_beta_ui": "NOT_RUN",
+        "local_commit": false,
+        "remote_push": false,
+        "owner_com_method_approved": true,
+        "complex_integration": "PASS_5_CASES"
+      }
+    ],
+    "required_activations_each": 16,
+    "activation_target_met": false
   }
 }

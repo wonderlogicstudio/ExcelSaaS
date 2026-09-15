@@ -1,0 +1,58 @@
+{
+  "existing": {
+    "version": "1fa2992b-c75d-400b-8acc-14dd484c7a40",
+    "flags": [
+      {
+        "name": "DELIVERY_BETA_ENABLED",
+        "text": "true",
+        "type": "plain_text"
+      },
+      {
+        "name": "FORMULA_AUDIT_ENABLED",
+        "text": "true",
+        "type": "plain_text"
+      }
+    ],
+    "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b"
+  },
+  "candidate": {
+    "version": "c6e1ed05-eed2-4322-8044-7acd67a95dd5",
+    "flags": [
+      {
+        "name": "DELIVERY_BETA_ENABLED",
+        "text": "true",
+        "type": "plain_text"
+      },
+      {
+        "name": "FORMULA_AUDIT_ENABLED",
+        "text": "true",
+        "type": "plain_text"
+      }
+    ],
+    "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b"
+  },
+  "anonymous_access": [
+    {
+      "path": "/",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/scans",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/formula-audits",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/delivery",
+      "status": 302,
+      "existing_access": true
+    }
+  ],
+  "all_bindings_identical": true,
+  "mutation_performed": false
+}

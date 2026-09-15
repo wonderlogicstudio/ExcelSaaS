@@ -31,6 +31,14 @@ def blueprint(tmp_path_factory):
     return job, p, build_plan(job, p)
 
 
+@pytest.fixture(autouse=True)
+def current_patch_compatibility(monkeypatch):
+    monkeypatch.setattr(
+        "app.delivery_execution.compatibility_status",
+        lambda: {"status": "PASS", "excel_version": "test", "profiles": ["test"]},
+    )
+
+
 def prepared(tmp_path, blueprint):
     original, p, plan = blueprint
     store = DeliveryStore(tmp_path)

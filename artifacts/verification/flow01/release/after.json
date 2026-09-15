@@ -1,0 +1,31 @@
+{
+  "revision": "workbookcare-api-beta-00017-xid",
+  "worker_version": "1fa2992b-c75d-400b-8acc-14dd484c7a40",
+  "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+  "security_invariants_preserved": true,
+  "private_iam": true,
+  "max_instances": 1,
+  "payment_mode": "OFF",
+  "access": [
+    {
+      "path": "/",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/scans",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/formula-audits",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/delivery",
+      "status": 302,
+      "existing_access": true
+    }
+  ]
+}

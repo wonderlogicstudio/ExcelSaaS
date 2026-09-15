@@ -1,0 +1,4 @@
+﻿command=powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1
+started=2026-09-15T20:33:38.3934207+09:00
+finished=2026-09-15T20:38:04.0229306+09:00
+exit_code=0

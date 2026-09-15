@@ -1,0 +1,31 @@
+﻿{
+    "excel_build":  20326,
+    "excel_version":  "16.0",
+    "profiles":  [
+                     "RP01",
+                     "RP02"
+                 ],
+    "kind":  "ACTUAL_PRODUCT_PATCH_AND_INSTALLED_EXCEL_REOPEN",
+    "results":  [
+                    {
+                        "repaired_opened":  true,
+                        "read_only_hash_unchanged":  true,
+                        "profile":  "RP01",
+                        "actual_values_match":  true,
+                        "literal_report_formulas":  true,
+                        "output_hash":  "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+                        "changes_opened":  true
+                    },
+                    {
+                        "repaired_opened":  true,
+                        "read_only_hash_unchanged":  true,
+                        "profile":  "RP02",
+                        "actual_values_match":  true,
+                        "literal_report_formulas":  true,
+                        "output_hash":  "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+                        "changes_opened":  true
+                    }
+                ],
+    "status":  "PASS",
+    "patch_fingerprint":  "53facec2dc172d17a52d6db5be7db167c60cf3dfd76aca5742edbb8407a4c2bb"
+}

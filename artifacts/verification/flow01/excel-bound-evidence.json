@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "actual_excel_files_opened": 4,
+  "all_generated_artifact_hashes_unchanged": {
+    "RP01-REPAIRED_XLSX.xlsx": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+    "RP01-CHANGES_XLSX.xlsx": "e48641200fce11ed3714b64a056f6241ad154ff1c29deb211fab38ed508ff18c",
+    "RP01-VERIFICATION_HTML.html": "f99bf93f92a0503e4c225a979a47d47054af74b128974ec17f5beaca9582ef33",
+    "RP02-REPAIRED_XLSX.xlsx": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+    "RP02-CHANGES_XLSX.xlsx": "1784f539305a6e353b7b3ed939cf4b8efcb157a686ba95aee8fe7b4e52cdbe24",
+    "RP02-VERIFICATION_HTML.html": "b9985484996474133c09c77bd472823fd2141e6ee06e65dbb2e16f83045d439d"
+  },
+  "source_sha256": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+  "patch_fingerprint": "53facec2dc172d17a52d6db5be7db167c60cf3dfd76aca5742edbb8407a4c2bb",
+  "reference_registered": false,
+  "excel_version": "16.0",
+  "excel_build": 20326
+}

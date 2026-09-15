@@ -1,3 +1,23 @@
+# FLOW-01 — 베타에서 확인할5개 행동
+
+Excel COM 방식 승인은 받아서 검증을 완료했습니다. 아래 이전의 승인 대기 문단은 당시 이력입니다. 현재 [보호 베타](https://workbookcare-beta.wonderlogic-studio.workers.dev/)에 검증한 버전이 배포되어 있습니다.
+
+1. 합성 `03_정산수정_연쇄계산.xlsx`를 올려 전체11건(구조8+수식3), 유형별2묶음을 확인하세요.
+2. 시트별 숫자 또는 빈 수식 제안을 골라 셀/수식을 입력하지 않고 전후 예시를 이해할 수 있는지 확인하세요.
+3. 전체 변경과 예상 결과를 확인한 뒤 별도 승인하세요. 수식 예상은5,232/3,551/7,800, 합계937,923입니다. 숫자 정리 합계는2,159,436입니다.
+4. 수정본·변경내역·재검증3파일을 받고, 수정본 재검사에서 선택한 유형만 해소되는지 확인하세요.
+5. 이해하기 어려운 용어와 길게 스크롤한 구간을 알려주세요. 측정16회로10회 목표에는 미달입니다. 사람이 이해하고 편하게 쓰는지는 아직 검증하지 않았습니다.
+
+다음 한 단위 제안: 2단계 반복 판단과3단계 영향 목록을 단순화한 뒤10회 목표·초보자 이해도를 재측정합니다. 승인 전 실행하지 않습니다. D08 상용화/공식PG는 여전히PARTIAL, 이번 원격push 없음. Local commit은 이 최종 기록을 포함하는Git커밋으로 식별합니다.
+
+---
+
+# FLOW-01 — one current owner action
+
+Confirm the prepared PowerShell/Excel COM method for four generated synthetic XLSX files. Current browser control does not expose native Excel. This is execution-method permission, not a price, purchase, release expansion or new product scope approval. Existing beta still serves the prior verified version. After the proof and protected beta retest, review representative before/after results, exact approval, and three downloads; these new-version checks are not yet complete.
+
+---
+
 ## ORCH-02 — 모델 배정 확인 세 가지
 
 1. 기본이 PL AstraMedium·빌더5.5Medium·리뷰어AstraHigh인지 [배정 정책](../54_AGENT_ORCHESTRATION.md)을 확인합니다.

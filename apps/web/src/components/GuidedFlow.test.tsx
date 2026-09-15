@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { CoreFlowTabs, initialDeliveryProgress, type CoreStep } from './CoreFlowTabs';
@@ -31,22 +31,60 @@ describe('guided approval boundaries',()=>{
  it('shows calculated expected values and records exact approval without automatically executing',async()=>{
   const actions:Record<string,unknown>[]=[];
   vi.stubGlobal('fetch',vi.fn(async(_url,init)=>{const action=JSON.parse(init.body);actions.push(action);return response(action.action==='plan_details'?detail:{...job,status:'APPROVED',approval_status:'APPROVED'});}));
-  function Harness(){const [current,setCurrent]=useState(job),[step,setStep]=useState<CoreStep>(3);return <RepairPlanPreview job={current} onJob={setCurrent} guidedStep={step} onNextStep={setStep}/>;}
-  render(<Harness/>);await screen.findByRole('button',{name:'전체 1곳의 정확한 변경·수식 확인'});
-  expect(screen.queryByRole('button',{name:'이 변경계획 승인'})).not.toBeInTheDocument();
-  fireEvent.click(screen.getByRole('button',{name:'전체 1곳의 정확한 변경·수식 확인'}));
+  function Harness(){
+   const [current,setCurrent]=useState(job),[step,setStep]=useState<CoreStep>(3),[pending,setPending]=useState<CoreStep|null>(null);
+   const maxStep:CoreStep=current.approval_status==='APPROVED'?4:3;
+   useEffect(()=>{if(pending&&pending<=maxStep){setStep(pending);setPending(null);}},[pending,maxStep]);
+   const guarded=(next:CoreStep)=>{if(next<=maxStep){setPending(null);setStep(next);}else setPending(next);};
+   return <><button type="button" onClick={()=>guarded(3)}>3단계로 이동</button><RepairPlanPreview job={current} onJob={setCurrent} guidedStep={step} onNextStep={guarded}/><output aria-label="현재 단계">{step}</output></>;
+  }
+  render(<Harness/>);await screen.findByText('=ROUND(C31*D31*(1-E31),0)');
+  expect(screen.queryByRole('button',{name:'전체 1곳의 정확한 변경·수식 확인'})).not.toBeInTheDocument();
   expect(screen.getByText('숫자 5,232')).toBeVisible();
   expect(screen.getByText('숫자 937,923')).toBeVisible();
   expect(screen.getByText('=ROUND(C31*D31*(1-E31),0)')).toBeVisible();
-  const approve=screen.getByRole('button',{name:'이 변경계획 승인'});expect(approve).toBeDisabled();
-  fireEvent.click(screen.getByRole('checkbox',{name:/위 1개 셀의 정확한/}));fireEvent.click(approve);
-  await waitFor(()=>expect(screen.getByRole('button',{name:'4단계 · 승인한 결과 받기'})).toBeVisible());
+  expect(screen.getByRole('button',{name:'이 변경계획 승인'})).toBeDisabled();
+  fireEvent.click(screen.getByRole('checkbox',{name:/위 1개 셀의 정확한/}));
+  await waitFor(()=>expect(screen.getByRole('button',{name:'이 변경계획 승인'})).toBeEnabled());
+  fireEvent.click(screen.getByRole('button',{name:'이 변경계획 승인'}));
+  await waitFor(()=>expect(screen.getByRole('button',{name:'승인한 사본 만들기'})).toBeVisible());
+  expect(screen.getByLabelText('현재 단계')).toHaveTextContent('4');
   expect(actions.map(a=>a.action)).toEqual(['plan_details','approve_plan']);
   expect(actions[1]).toMatchObject({plan_digest:'plan-a',candidate_ids:['p1'],acknowledge_exact_changes:true});
+  fireEvent.click(screen.getByRole('button',{name:'3단계로 이동'}));
+  await waitFor(()=>expect(screen.getByLabelText('현재 단계')).toHaveTextContent('3'));
+  expect(screen.getByRole('button',{name:'승인 취소하고 범위 다시 확인'})).toBeVisible();
+  expect(screen.getByRole('button',{name:'4단계 · 승인한 결과 받기'})).toBeVisible();
   expect(screen.queryByRole('button',{name:'승인한 사본 만들기'})).not.toBeInTheDocument();
-  fireEvent.click(screen.getByRole('button',{name:'4단계 · 승인한 결과 받기'}));
-  expect(screen.getByRole('button',{name:'승인한 사본 만들기'})).toBeVisible();
   expect(actions.some(a=>a.action==='execute')).toBe(false);
+ });
+ it('keeps stage 2 when the user leaves approval before the approval response',async()=>{
+  const actions:Record<string,unknown>[]=[];let finish!:(v:Response)=>void;const approved=new Promise<Response>(resolve=>{finish=resolve;});
+  vi.stubGlobal('fetch',vi.fn(async(_url,init)=>{const action=JSON.parse(init.body);actions.push(action);return action.action==='plan_details'?response(detail):action.action==='approve_plan'?approved:response(job);}));
+  function Harness(){
+   const [current,setCurrent]=useState(job),[step,setStep]=useState<CoreStep>(3),[pending,setPending]=useState<CoreStep|null>(null);
+   const maxStep:CoreStep=current.approval_status==='APPROVED'?4:3;
+   useEffect(()=>{if(pending&&pending<=maxStep){setStep(pending);setPending(null);}},[pending,maxStep]);
+   const guarded=(next:CoreStep)=>{if(next<=maxStep){setPending(null);setStep(next);}else setPending(next);};
+   return <><button type="button" onClick={()=>{setPending(null);setStep(2);}}>2단계로 이동</button><button type="button" aria-label="stage-three-return" onClick={()=>guarded(3)}>3</button><RepairPlanPreview job={current} onJob={setCurrent} guidedStep={step} onNextStep={guarded}/><output aria-label="현재 단계">{step}</output></>;
+  }
+  render(<Harness/>);await screen.findByText('=ROUND(C31*D31*(1-E31),0)');
+  fireEvent.click(screen.getByRole('checkbox',{name:/위 1개 셀의 정확한/}));
+  await waitFor(()=>expect(screen.getByRole('button',{name:'이 변경계획 승인'})).toBeEnabled());
+  fireEvent.click(screen.getByRole('button',{name:'이 변경계획 승인'}));
+  fireEvent.click(screen.getByRole('button',{name:'2단계로 이동'}));
+  finish(response({...job,status:'APPROVED',approval_status:'APPROVED'}));
+  await waitFor(()=>expect(actions.some(a=>a.action==='approve_plan')).toBe(true));
+  expect(screen.getByLabelText('현재 단계')).toHaveTextContent('2');
+  expect(screen.queryByRole('button',{name:'승인한 사본 만들기'})).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button',{name:'stage-three-return'}));
+  await waitFor(()=>expect(document.querySelector('.delivery-execution .button--ghost')).toBeVisible());
+  expect(screen.getByLabelText('현재 단계')).toHaveTextContent('3');
+  expect(screen.queryByRole('button',{name:'승인된 사본 만들기'})).not.toBeInTheDocument();
+ });
+ it('disables manual plan calculation while an automatic prepare is still busy',()=>{
+  render(<RepairPlanPreview job={{...job,entitlement_active:false}} onJob={vi.fn()} guidedStep={2} externalBusy/>);
+  expect(screen.getByRole('button',{name:/변경 후 계산 영향/})).toBeDisabled();
  });
  it('does not accept delayed exact details from the previous plan',async()=>{
   let finish!:(v:Response)=>void;const pending=new Promise<Response>(r=>finish=r);

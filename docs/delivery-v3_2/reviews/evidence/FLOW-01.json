@@ -1,0 +1,385 @@
+{
+  "kind": "FLOW01_ACTUAL_EXECUTION_CHECKPOINT",
+  "date": "2026-09-15",
+  "status": "STOPPED_ENGINEERING_VERIFIED_UX_PARTIAL_OWNER_REVIEW",
+  "baseline": {
+    "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\scripts\\verify.ps1",
+    "exit_code": 0,
+    "web_tests": 139,
+    "worker_tests": 16,
+    "api_tests": 231,
+    "m4_exact_candidates": 36,
+    "ruff": "PASS",
+    "log": "artifacts/verification/flow01/verify-ps1-20260915-182930.log",
+    "meta": "artifacts/verification/flow01/verify-ps1-20260915-182930.meta.txt"
+  },
+  "browser": {
+    "site": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+    "access": "EXISTING_SESSION_LOGIN_SUCCESS",
+    "landing": "OBSERVED",
+    "input": "samples/WorkbookCare_Complex_Validation_2026-09-13/03_정산수정_연쇄계산.xlsx",
+    "filechooser": "RECOVERED_CUA_AX_CLICK_WITH_SUPPORTED_CHOOSER",
+    "product_upload_failure": "NOT_ESTABLISHED",
+    "owner_file_selection": "FIRST_RUN_ONLY_COMPLETED",
+    "ui_flow_completed": true,
+    "required_activations": {
+      "RP01": "18 after diagnosis; owner initial selection not directly measured",
+      "RP02": 19,
+      "RP02_scope": "empty new tab, no scan-consent modal observed; automatic scan on file selection confirmed in source",
+      "manual_cell_or_formula_entry": 0,
+      "target_maximum": 10,
+      "target_met": false,
+      "tool_retries_separate": true
+    },
+    "downloads": "SIX_ACTUAL_BASELINE_FILES_VERIFIED",
+    "human_understanding": "NOT_RUN",
+    "actual_baseline_results": {
+      "source": {
+        "structure": 8,
+        "formula": 3
+      },
+      "RP01_ALL": {
+        "patches": 8,
+        "indirect_calculation_impacts": 32,
+        "J130": 2159436,
+        "rescanned_download": {
+          "structure": 0,
+          "formula": 3
+        }
+      },
+      "RP02_ALL": {
+        "patches": 3,
+        "calculation_positions": 16,
+        "F31": 5232,
+        "F64": 3551,
+        "F107": 7800,
+        "J130": 937923,
+        "rescanned_download": {
+          "structure": 8,
+          "formula": 0
+        }
+      }
+    },
+    "download_manifests": {
+      "RP01_ALL_BASELINE": {
+        "case": "RP01_ALL_BASELINE",
+        "actual_browser_downloads": [
+          {
+            "file": "RP01_ALL_BASELINE/changes_23c2a7b2-4836-47fb-9390-84871ac6a8cc.xlsx",
+            "sha256": "75b3b33071f1514c5edc4ca7825c97bf59804ba6f7cef0ed3510e2b28fd11543",
+            "bytes": 10452
+          },
+          {
+            "file": "RP01_ALL_BASELINE/verification_23c2a7b2-4836-47fb-9390-84871ac6a8cc.html",
+            "sha256": "3aa716792fad49503dbe8907917f9d2bdc5a26cb17154fa002856c76e4d1f3b5",
+            "bytes": 7215
+          },
+          {
+            "file": "RP01_ALL_BASELINE/workbookcare_repaired_23c2a7b2-4836-47fb-9390-84871ac6a8cc.xlsx",
+            "sha256": "c6959118c364b675615283b9548378d8f707a01c4c7c604ab9404ffd97141a25",
+            "bytes": 18776
+          }
+        ]
+      },
+      "RP02_ALL_BASELINE": {
+        "case": "RP02_ALL_BASELINE",
+        "actual_browser_downloads": [
+          {
+            "file": "RP02_ALL_BASELINE/changes_16937c2a-c9f4-4895-b9a7-0ce1e807b61c.xlsx",
+            "sha256": "bdf7111c9e97a71db4c36d3808942ea2fc783b66a1b3fd60bc17b7d6e3f86fac",
+            "bytes": 9576
+          },
+          {
+            "file": "RP02_ALL_BASELINE/verification_16937c2a-c9f4-4895-b9a7-0ce1e807b61c.html",
+            "sha256": "6e282cd5b897c50c9d97523300bca003e0b78d61a48fddb5918293da64e52ac1",
+            "bytes": 5315
+          },
+          {
+            "file": "RP02_ALL_BASELINE/workbookcare_repaired_16937c2a-c9f4-4895-b9a7-0ce1e807b61c.xlsx",
+            "sha256": "dd7384aa85f9eb7444a6040e8efee4c16c1a147f1f97bafb290fe0333b860d08",
+            "bytes": 18800
+          }
+        ]
+      }
+    },
+    "independent_download_check": {
+      "hashes": 6,
+      "frozen_cached_values_per_repaired_xlsx": 725,
+      "status": "PASS",
+      "actual_excel_reopen": "NOT_RUN"
+    },
+    "screenshots": {
+      "viewed_in_tool_output": [
+        "RP01 approval",
+        "RP01 ready desktop1440",
+        "RP01 ready mobile390"
+      ],
+      "saved_files": false,
+      "content_export": "UNSUPPORTED_BY_CHROME"
+    },
+    "connection_recovery": "Old claimed tabs debugger unavailable; fresh Chrome beta tab209532851 opened successfully; temporary viewport reset"
+  },
+  "product_edits": "SCOPED_REUSED_AND_FIXED_TESTED_BETA_VERIFIED",
+  "deployment": {
+    "status": "EXISTING_PROTECTED_BETA_DEPLOYED",
+    "worker": "c6e1ed05-eed2-4322-8044-7acd67a95dd5",
+    "api": "workbookcare-api-beta-00017-xid",
+    "staged_runtime": "workbookcare-api-beta-00016-big",
+    "image": "sha256:e6d5fb61cd81c2340ffcea6bfd68ec021cb5af992d05b5798c0ff08f1d62ae71",
+    "linux_runtime": {
+      "reference_cases": 20,
+      "repair_profiles": 2,
+      "artifacts": 6,
+      "status": "PASS"
+    },
+    "security": "Existing Access/private IAM/Gateway/all Worker bindings preserved; no new resources",
+    "evidence": "artifacts/verification/flow01/release and web-release"
+  },
+  "push": false,
+  "next_unit": "NOT_APPROVED",
+  "review": {
+    "status": "SCOPED_CODE_AND_EVIDENCE_PASS",
+    "updated_beta_acceptance": "ENGINEERING_PASS_UX_TARGET_NOT_MET",
+    "independent_final_evidence_review": "PASS",
+    "final_record_review": {
+      "status": "PASS",
+      "exit_code": 0,
+      "corrected": "Current flow_01 UI/UX fields now final2flows/16each; old baseline preserved",
+      "scope": "Technical evidence and accurate PARTIAL usability reporting, not overall UX acceptance"
+    }
+  },
+  "aborted_verification": {
+    "log": "artifacts/verification/flow01/verify-ps1-final-20260915-184820.log",
+    "status": "ABORTED_INCOMPLETE",
+    "exit_code": null,
+    "reason": "review corrections; no successful completion metadata"
+  },
+  "root_targeted_checkpoint": {
+    "command": "apps/api/.venv/Scripts/python.exe -m pytest apps/api/tests/test_delivery_patch.py apps/api/tests/test_delivery_execution.py -q",
+    "exit_code": 0,
+    "passed": 30,
+    "source_hashes": {
+      "apps/api/app/delivery_patch.py": "fd4319afdbc21b3d36bea0ab46e0d6b39347c9b36421ef3a6e71ed6cb46765fa",
+      "apps/api/app/delivery_artifacts.py": "bb95982b58ab2d3fcbade18b31ce49aaf4707fa7d2b5c12f14f1b554a9ee2be5",
+      "apps/api/app/delivery_verification_template.html": "9085287149a7f1145e24b59c17952512023702960bc8a8f1dc56ede7c80cb858",
+      "apps/api/tests/test_delivery_patch.py": "daa97f522579d7b367831fb411d7ac2e88b1a6d2930792a11be384b41724a439",
+      "apps/api/tests/test_delivery_execution.py": "61e75e4616037e2197b3c7521f81741f534f856f1ec32fc6de49f65004412edc"
+    },
+    "subsequent_source_changes": [],
+    "compatibility_generation": {
+      "command": "apps/api/.venv/Scripts/python.exe DigitalTwin/.tmp/workbookcare-flow01/generate_compatibility.py",
+      "exit_code": 0,
+      "artifacts": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-flow01\\compatibility",
+      "published_ready": false,
+      "excel_reopen": "NOT_RUN_PENDING_USER_COM_METHOD_APPROVAL"
+    },
+    "baseline_provider": {
+      "exit_code": 0,
+      "evidence": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-flow01\\release\\baseline.json"
+    },
+    "deployments": false,
+    "push": false
+  },
+  "compatibility": {
+    "status": "PASS",
+    "owner_com_method_approved": true,
+    "actual_excel_reopen": "PASS_4_FILES",
+    "excel_version": "16.0",
+    "excel_build": 20326,
+    "reference_updated": true,
+    "gate_bypassed": false,
+    "evidence": "artifacts/verification/flow01/excel-bound-evidence.json"
+  },
+  "final_regression": {
+    "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+    "exit_code": 0,
+    "web_passed": 141,
+    "worker_passed": 16,
+    "api_passed": 240,
+    "ruff": "PASS",
+    "m4_exact_candidates": 36,
+    "log": "artifacts/verification/flow01/verify-after-excel-20260915-203338.log",
+    "meta": "artifacts/verification/flow01/verify-after-excel-20260915-203338.meta.txt"
+  },
+  "source_snapshot": "artifacts/verification/flow01/final-reviewed-source.json",
+  "new_report_browser_open": "BLOCKED_BY_BROWSER_FILE_URL_POLICY_NO_WORKAROUND",
+  "local_commit": "SELECTIVE_COMMIT_OF_THIS_RECORD_AND_VERIFIED_FILES; resolve hash from git log for this file",
+  "protected_files_unchanged": 152,
+  "complex_integration": {
+    "exit_code": 0,
+    "cases": 5,
+    "evidence": "artifacts/verification/flow01/complex-final/execution.json"
+  },
+  "historical_checkpoints": [
+    {
+      "status": "FINAL_REGRESSION_RUNNING",
+      "product_edits": "SCOPED_CODE_REVIEW_PASS_REGRESSION_BLOCKED_BY_COMPATIBILITY",
+      "deployment": false,
+      "review": {
+        "status": "SCOPED_CODE_PASS",
+        "updated_beta_acceptance": "NOT_RUN"
+      },
+      "final_regression": {
+        "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+        "exit_code": 1,
+        "web_passed": 141,
+        "worker_passed": 16,
+        "api_passed": 228,
+        "api_failed": 12,
+        "failure_codes": [
+          "REFERENCE_NOT_VERIFIED",
+          "PRODUCT_NOT_READY"
+        ],
+        "meta": "artifacts/verification/flow01/verify-final-20260915-193109.meta.txt"
+      }
+    }
+  ],
+  "browser_final": {
+    "kind": "ACTUAL_PROTECTED_BETA_UI_FINAL",
+    "date": "2026-09-15",
+    "site": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+    "worker": "c6e1ed05-eed2-4322-8044-7acd67a95dd5",
+    "api": "workbookcare-api-beta-00017-xid",
+    "source": {
+      "structure": 8,
+      "formula": 3,
+      "total": 11,
+      "groups": 2
+    },
+    "RP01_ALL": {
+      "tab": "209532861",
+      "changes": 8,
+      "indirect_impacts": 32,
+      "B_values": {
+        "B12": -1250,
+        "B24": 7200,
+        "B39": 0,
+        "B52": 120000,
+        "B65": -2400,
+        "B78": 999999,
+        "B94": 500,
+        "B111": 3000
+      },
+      "J130": 2159436,
+      "required_activations": 16,
+      "downloads": 3,
+      "rescan_tab": "209532867",
+      "rescan": {
+        "structure": 0,
+        "formula": 3,
+        "both_detectors": "COMPLETED"
+      }
+    },
+    "RP02_ALL": {
+      "tab": "209532864",
+      "changes": 3,
+      "calculation_positions": 16,
+      "indirect_impacts": 13,
+      "F31": 5232,
+      "F64": 3551,
+      "F107": 7800,
+      "J130": 937923,
+      "required_activations": 16,
+      "downloads": 3,
+      "rescan_tab": "209532870",
+      "rescan": {
+        "structure": 8,
+        "formula": 0,
+        "both_detectors": "COMPLETED"
+      }
+    },
+    "required_action_ledger_each": [
+      "choose synthetic XLSX (auto diagnosis)",
+      "open sheet proposals",
+      "RP01 money role / RP02 F-column proposal",
+      "confirm business meaning",
+      "request repair example",
+      "confirm synthetic retention",
+      "check scope (auto calculation)",
+      "confirm no-payment synthetic trial",
+      "view verified example",
+      "open exact approval stage",
+      "check exact-change approval",
+      "approve plan (auto result stage)",
+      "create approved copy",
+      "download repaired XLSX",
+      "download changes XLSX",
+      "download revalidation HTML"
+    ],
+    "counting": "From empty job file chooser through all three downloads. File-dialog OS actions, tool retries, optional responsive/keyboard/return QA and separate rescans excluded from APP activations.",
+    "stages": 4,
+    "mandatory_cell_or_formula_entry": 0,
+    "activation_target": 10,
+    "target_met": false,
+    "automatic_calculation": "OBSERVED_BOTH",
+    "full_exact_changes_without_disclosure": "OBSERVED_BOTH",
+    "explicit_approval_before_separate_execution": "OBSERVED_BOTH",
+    "automatic_result_navigation": "OBSERVED_BOTH",
+    "return_to_approval_without_forced_advance": "OBSERVED_BOTH_AFTER_READY",
+    "keyboard": "RP02 ArrowLeft result->approval and ArrowRight approval->result; selected tab and visible focus confirmed",
+    "responsive": {
+      "desktop": {
+        "width": 1440,
+        "height": 1000,
+        "scroll_width": 1425,
+        "viewed": "RP02 full change preview"
+      },
+      "mobile": {
+        "width": 390,
+        "height": 844,
+        "scroll_width": 375,
+        "viewed": [
+          "RP02 three download buttons",
+          "RP02 approval example and focus"
+        ]
+      },
+      "temporary_viewport_reset": true,
+      "screenshots": "Visually inspected in tool output; no saved screenshot export supported in this Chrome connection. Immediate resize frame was stale; inspected settled responsive frame."
+    },
+    "tool_retry": "RP01 one Playwright click timed out before activation; fresh AX showed unchanged state; supported AX click succeeded. Not counted as product activation.",
+    "human_understanding": "NOT_RUN",
+    "normal_unsupported_identifier_nonblank_approval_negative": "Existing automated regression coverage reused; not freshly replayed in final beta UI",
+    "limitations": [
+      "16 required activations exceeds target10",
+      "Full change/impact lists require lengthy scrolling, particularly32 indirect RP01 impacts",
+      "Actual human novice comprehension not measured",
+      "Local downloaded HTML visual opening blocked by browser file-URL policy; offline HTML verification PASS, no workaround",
+      "Four actual Excel reopen files were compatibility outputs, not these six final complex browser downloads",
+      "Official PG/live commerce/commercial readiness not verified"
+    ]
+  },
+  "download_validation": {
+    "kind": "ACTUAL_BETA_DOWNLOADED_FILES_VS_FROZEN_ORACLE",
+    "status": "PASS",
+    "results": [
+      {
+        "case": "RP01_ALL",
+        "status": "PASS",
+        "cached_expected_values": 725,
+        "change_rows": 8,
+        "exact_html_impacts": 32,
+        "html_checks": 12,
+        "unchanged_zip_members": 7,
+        "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+      },
+      {
+        "case": "RP02_ALL",
+        "status": "PASS",
+        "cached_expected_values": 725,
+        "change_rows": 3,
+        "exact_html_impacts": 13,
+        "html_checks": 12,
+        "unchanged_zip_members": 7,
+        "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+      }
+    ],
+    "all_frozen_inputs_unchanged": true,
+    "official_pg_verified": false
+  },
+  "automatic_review": {
+    "initial_deploy_rejected": true,
+    "reason": "Historic public Formula Audit OFF vs candidate flag true",
+    "resolution": "Read-only proof established old deployed flag already true and candidate all-binding hash identical under Access; later owner explicitly authorized integrated diagnosis and protected beta release. Same command resubmitted with concrete proof and accepted by normal automatic review; no bypass.",
+    "evidence": "artifacts/verification/flow01/web-release/private-scope-proof.json"
+  }
+}

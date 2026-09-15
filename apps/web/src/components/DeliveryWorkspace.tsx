@@ -87,7 +87,12 @@ export function DeliveryWorkspace({ file, initialJob, reviewDraft, onSourceFixed
     if (!job) return;
     const next = await deliveryRequest<DeliveryJob>({ action: 'preflight', job_id: job.job_id, revision: job.revision, source_hash: job.source_hash,
       policy: { profile, sheet, targets: targets.split(/[\s,]+/).filter(Boolean).map(x => x.toUpperCase()), role, anchor: anchor.toUpperCase(), anchor_formula: formula, confirmed } }, signal);
+    if (signal.aborted) return;
     setJob(next); setDirty(false);
+    if (next.preflight?.status === 'PRELIMINARY_ONLY') {
+      const prepared = await deliveryRequest<DeliveryJob>({ action: 'prepare_plan', job_id: next.job_id, revision: next.revision, source_hash: next.source_hash }, signal);
+      if (!signal.aborted) setJob(prepared);
+    }
   });
   if (!open) return <section className={`delivery-entry shell ${compactEntry ? 'delivery-manual' : ''}`}><h3>직접 지정이 필요한 경우</h3><p>수정 제안을 먼저 확인하세요. 목록에 없는 숫자 텍스트 또는 실제 빈 셀을 검사할 때 사용합니다. 셀과 수정 기준을 지정한 뒤 지원 여부를 확인합니다.</p><button className="button button--outline" type="button" disabled={busy} onClick={start}>확인할 셀 직접 지정하기</button>{error && <p role="alert">{error}</p>}</section>;
   return <section id="repair-preflight" className="delivery-workspace shell" aria-label="선택한 항목의 수정 가능 여부">
@@ -117,7 +122,7 @@ export function DeliveryWorkspace({ file, initialJob, reviewDraft, onSourceFixed
         </>}
     </div>
     {job?.status === 'PLAN_EXPIRED' && <p role="status">변경계획이 만료되었습니다. 2단계에서 다시 계산한 뒤 새로 승인하세요.</p>}
-    {job?.preflight?.status === 'PRELIMINARY_ONLY' && !dirty && <RepairPlanPreview job={job} onJob={setJob} guidedStep={guidedStep} onNextStep={onNextStep} intent={intent} onIntentCheck={setIntentSatisfied}/>}
+    {job?.preflight?.status === 'PRELIMINARY_ONLY' && !dirty && <RepairPlanPreview job={job} onJob={setJob} guidedStep={guidedStep} onNextStep={onNextStep} intent={intent} onIntentCheck={setIntentSatisfied} externalBusy={busy}/>}
     {job && onRestartProposal && <button type="button" className="button button--ghost proposal-restart" disabled={busy || ['APPROVED','RUNNING','CANCEL_REQUESTED','READY'].includes(job.status)} onClick={() => run(async signal => {
       const next = await deliveryRequest<{status:string}>({action:'delete',job_id:job.job_id},signal);
       if (next.status === 'DELETED') { onSourceFixed?.(false); onRestartProposal(); }

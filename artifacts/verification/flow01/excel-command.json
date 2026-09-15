@@ -1,0 +1,4 @@
+{
+  "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File verify_excel.ps1",
+  "exit_code": 0
+}

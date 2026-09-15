@@ -1,0 +1,28 @@
+{
+  "kind": "ACTUAL_BETA_DOWNLOADED_FILES_VS_FROZEN_ORACLE",
+  "status": "PASS",
+  "results": [
+    {
+      "case": "RP01_ALL",
+      "status": "PASS",
+      "cached_expected_values": 725,
+      "change_rows": 8,
+      "exact_html_impacts": 32,
+      "html_checks": 12,
+      "unchanged_zip_members": 7,
+      "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+    },
+    {
+      "case": "RP02_ALL",
+      "status": "PASS",
+      "cached_expected_values": 725,
+      "change_rows": 3,
+      "exact_html_impacts": 13,
+      "html_checks": 12,
+      "unchanged_zip_members": 7,
+      "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+    }
+  ],
+  "all_frozen_inputs_unchanged": true,
+  "official_pg_verified": false
+}

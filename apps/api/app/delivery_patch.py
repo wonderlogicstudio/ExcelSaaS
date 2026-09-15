@@ -15,7 +15,7 @@ from .config import Settings
 from .delivery_calculation import calculate
 from .delivery_inputs import NS, inspect_input, reject
 from .delivery_plan import typed_source
-from .scanner import SCANNER_VERSION, scan_workbook
+from .scanner import SCANNER_VERSION, run_formula_audit, scan_workbook
 
 PATCH_VERSION = "minimal-ooxml-patch-v1"
 
@@ -207,6 +207,149 @@ def _masked_tree(
     return _shape(root)
 
 
+def _finding_identity(finding) -> dict:
+    pattern = getattr(finding, "formula_pattern", None)
+    return {
+        "rule_code": finding.rule_code,
+        "sheet": finding.sheet or "",
+        "cell": finding.cell or "",
+        "pattern_subtype": getattr(pattern, "pattern_subtype", None) if pattern else None,
+    }
+
+
+def _identity_key(item: dict) -> tuple[str, str, str]:
+    return (item["rule_code"], item["sheet"], item["cell"])
+
+
+def _sorted_identities(values):
+    return sorted(values, key=lambda x: (x["sheet"], x["cell"], x["rule_code"]))
+
+
+def _classify_detector(
+    before: list[dict], after: list[dict], targets: set[tuple[str, str]]
+) -> dict:
+    before_by_key = {_identity_key(item): item for item in before}
+    after_by_key = {_identity_key(item): item for item in after}
+    target_before = {
+        key: item for key, item in before_by_key.items() if (item["sheet"], item["cell"]) in targets
+    }
+    return {
+        "before": _sorted_identities(before_by_key.values()),
+        "remaining": _sorted_identities(after_by_key.values()),
+        "resolved": _sorted_identities(
+            before_by_key[k] for k in before_by_key.keys() - after_by_key.keys()
+        ),
+        "new": _sorted_identities(
+            after_by_key[k] for k in after_by_key.keys() - before_by_key.keys()
+        ),
+        "target_before": _sorted_identities(target_before.values()),
+        "target_remaining": _sorted_identities(
+            target_before[k] for k in target_before if k in after_by_key
+        ),
+    }
+
+
+def _detector_summary(source: bytes, output: bytes, plan: dict, settings: Settings) -> dict:
+    targets = {(p["sheet"], p["cell"]) for p in plan["patches"]}
+    scans = [scan_workbook("workbook.xlsx", data, settings) for data in [source, output]]
+    if any(
+        scan.workbook.scan_truncated
+        or getattr(getattr(scan, "summary", None), "issue_count", len(scan.findings))
+        != len(scan.findings)
+        for scan in scans
+    ):
+        reject("INCOMPLETE_STATIC_VALIDATION", "정적 재검증을 완료하지 못했습니다.", 422)
+    static = _classify_detector(
+        [_finding_identity(f) for f in scans[0].findings],
+        [_finding_identity(f) for f in scans[1].findings],
+        targets,
+    )
+    if static["new"]:
+        reject("NEW_STATIC_FINDINGS", "수정본에서 새 정적 발견이 나왔습니다.", 422)
+    if static["target_remaining"]:
+        reject(
+            "TARGET_STATIC_FINDING_REMAINING",
+            "승인한 대상 정적 발견이 수정본에 남아 있습니다.",
+            422,
+        )
+
+    audits = [run_formula_audit("workbook.xlsx", data, settings) for data in [source, output]]
+    before_status = audits[0].status
+    after_status = audits[1].status
+
+    def incomplete(status: str) -> bool:
+        return status == "FAILED" or status.startswith("SKIPPED_")
+
+    if incomplete(before_status) or incomplete(after_status):
+        reject(
+            "INCOMPLETE_FORMULA_AUDIT_VALIDATION",
+            "수식 후보 재검증을 완료하지 못했습니다.",
+            422,
+        )
+
+    formula_comparison_status = "NOT_ESTABLISHED"
+    if before_status == "COMPLETED":
+        if after_status != "COMPLETED":
+            reject(
+                "INCOMPLETE_FORMULA_AUDIT_VALIDATION",
+                "수식 후보 재검증을 완료하지 못했습니다.",
+                422,
+            )
+        formula_comparison_status = "COMPLETED"
+        formula = _classify_detector(
+            [_finding_identity(f) for f in audits[0].candidates],
+            [_finding_identity(f) for f in audits[1].candidates],
+            targets,
+        )
+        if formula["new"]:
+            reject(
+                "NEW_FORMULA_AUDIT_CANDIDATES",
+                "수정본에서 새 수식 후보가 나왔습니다.",
+                422,
+            )
+        if formula["target_remaining"]:
+            reject(
+                "TARGET_FORMULA_CANDIDATE_REMAINING",
+                "승인한 대상 수식 후보가 수정본에 남아 있습니다.",
+                422,
+            )
+    elif before_status == "ABSTAINED_INSUFFICIENT_EVIDENCE":
+        if after_status == "ABSTAINED_INSUFFICIENT_EVIDENCE":
+            formula = _classify_detector([], [], targets)
+        elif after_status == "COMPLETED":
+            after_candidates = [_finding_identity(f) for f in audits[1].candidates]
+            formula = _classify_detector([], after_candidates, targets)
+            if formula["remaining"]:
+                reject(
+                    "NEW_FORMULA_AUDIT_CANDIDATES",
+                    "수정본에서 새 수식 후보가 나왔습니다.",
+                    422,
+                )
+        else:
+            reject(
+                "INCOMPLETE_FORMULA_AUDIT_VALIDATION",
+                "수식 후보 재검증을 완료하지 못했습니다.",
+                422,
+            )
+    else:
+        reject(
+            "INCOMPLETE_FORMULA_AUDIT_VALIDATION",
+            "수식 후보 재검증을 완료하지 못했습니다.",
+            422,
+        )
+
+    return {
+        "static": static,
+        "formula": formula,
+        "static_scanner_version": SCANNER_VERSION,
+        "formula_audit_rule_set_version": audits[0].rule_set_version,
+        "formula_audit_before_status": before_status,
+        "formula_audit_after_status": after_status,
+        "formula_audit_before_limitations": list(getattr(audits[0], "limitations", [])),
+        "formula_audit_after_limitations": list(getattr(audits[1], "limitations", [])),
+        "formula_comparison_status": formula_comparison_status,
+    }
+
 def verify_output(source: bytes, output: bytes, plan: dict, settings: Settings) -> dict:
     original = inspect_input("workbook.xlsx", source, settings)
     result = inspect_input("workbook.xlsx", output, settings)
@@ -314,25 +457,24 @@ def verify_output(source: bytes, output: bytes, plan: dict, settings: Settings) 
     calculated = calculate(result["cells"])
     if calculated["values"] != plan["expected_calculated_values"]:
         reject("POST_CALCULATION_MISMATCH", "후계산 값이 승인한 예상 영향과 다릅니다.", 422)
-    scans = [scan_workbook("workbook.xlsx", data, settings) for data in [source, output]]
-    if any(scan.workbook.scan_truncated for scan in scans):
-        reject("INCOMPLETE_STATIC_VALIDATION", "정적 재검증 범위를 완료하지 못했습니다.", 422)
-    findings = [{f.finding_key for f in scan.findings} for scan in scans]
-    if findings[1] - findings[0]:
-        reject("NEW_STATIC_FINDINGS", "수정 후 새로운 정적 위험 신호가 발견됐습니다.", 422)
-    checks = [
-        {"code": code, "status": "PASS"}
-        for code in [
-            "SOURCE_IMMUTABLE",
-            "EXACT_APPROVED_PATCH",
-            "UNTOUCHED_MEMBERS",
-            "NON_TARGET_XML_AND_STYLES",
-            "TYPED_FORMULA_CACHES",
-            "WHOLE_WORKBOOK_POST_CALCULATION",
-            "NO_NEW_CALCULATION_ERRORS",
-            "NO_NEW_STATIC_FINDINGS",
-        ]
+    detectors = _detector_summary(source, output, plan, settings)
+    check_codes = [
+        "SOURCE_IMMUTABLE",
+        "EXACT_APPROVED_PATCH",
+        "UNTOUCHED_MEMBERS",
+        "NON_TARGET_XML_AND_STYLES",
+        "TYPED_FORMULA_CACHES",
+        "WHOLE_WORKBOOK_POST_CALCULATION",
+        "NO_NEW_CALCULATION_ERRORS",
+        "NO_NEW_STATIC_FINDINGS",
     ]
+    if detectors["static"]["target_before"]:
+        check_codes.append("TARGET_STATIC_FINDINGS_RESOLVED")
+    if detectors["formula_comparison_status"] == "COMPLETED":
+        check_codes.extend(["FORMULA_AUDIT_COMPLETED", "NO_NEW_FORMULA_CANDIDATES"])
+        if detectors["formula"]["target_before"]:
+            check_codes.append("TARGET_FORMULA_CANDIDATES_RESOLVED")
+    checks = [{"code": code, "status": "PASS"} for code in check_codes]
     return {
         "checks": checks,
         "source_hash": original["source_hash"],
@@ -341,10 +483,15 @@ def verify_output(source: bytes, output: bytes, plan: dict, settings: Settings) 
         "patch_count": len(patches),
         "untouched_member_count": len(original["parts"]) - len(changed_parts),
         "engine_version": calculated["engine_version"],
-        "static_scanner_version": SCANNER_VERSION,
-        "static_before": len(findings[0]),
-        "static_remaining": len(findings[1]),
-        "static_resolved": len(findings[0] - findings[1]),
+        "static_scanner_version": detectors["static_scanner_version"],
+        "formula_audit_rule_set_version": detectors["formula_audit_rule_set_version"],
+        "static_before": len(detectors["static"]["before"]),
+        "static_remaining": len(detectors["static"]["remaining"]),
+        "static_resolved": len(detectors["static"]["resolved"]),
+        "formula_candidates_before": len(detectors["formula"]["before"]),
+        "formula_candidates_remaining": len(detectors["formula"]["remaining"]),
+        "formula_candidates_resolved": len(detectors["formula"]["resolved"]),
+        "detectors": detectors,
         "coverage": calculated["coverage"],
         "business_truth_guaranteed": False,
     }

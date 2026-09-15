@@ -1,0 +1,114 @@
+{
+  "kind": "ACTUAL_PROTECTED_BETA_UI_FINAL",
+  "date": "2026-09-15",
+  "site": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+  "worker": "c6e1ed05-eed2-4322-8044-7acd67a95dd5",
+  "api": "workbookcare-api-beta-00017-xid",
+  "source": {
+    "structure": 8,
+    "formula": 3,
+    "total": 11,
+    "groups": 2
+  },
+  "RP01_ALL": {
+    "tab": "209532861",
+    "changes": 8,
+    "indirect_impacts": 32,
+    "B_values": {
+      "B12": -1250,
+      "B24": 7200,
+      "B39": 0,
+      "B52": 120000,
+      "B65": -2400,
+      "B78": 999999,
+      "B94": 500,
+      "B111": 3000
+    },
+    "J130": 2159436,
+    "required_activations": 16,
+    "downloads": 3,
+    "rescan_tab": "209532867",
+    "rescan": {
+      "structure": 0,
+      "formula": 3,
+      "both_detectors": "COMPLETED"
+    }
+  },
+  "RP02_ALL": {
+    "tab": "209532864",
+    "changes": 3,
+    "calculation_positions": 16,
+    "indirect_impacts": 13,
+    "F31": 5232,
+    "F64": 3551,
+    "F107": 7800,
+    "J130": 937923,
+    "required_activations": 16,
+    "downloads": 3,
+    "rescan_tab": "209532870",
+    "rescan": {
+      "structure": 8,
+      "formula": 0,
+      "both_detectors": "COMPLETED"
+    }
+  },
+  "required_action_ledger_each": [
+    "choose synthetic XLSX (auto diagnosis)",
+    "open sheet proposals",
+    "RP01 money role / RP02 F-column proposal",
+    "confirm business meaning",
+    "request repair example",
+    "confirm synthetic retention",
+    "check scope (auto calculation)",
+    "confirm no-payment synthetic trial",
+    "view verified example",
+    "open exact approval stage",
+    "check exact-change approval",
+    "approve plan (auto result stage)",
+    "create approved copy",
+    "download repaired XLSX",
+    "download changes XLSX",
+    "download revalidation HTML"
+  ],
+  "counting": "From empty job file chooser through all three downloads. File-dialog OS actions, tool retries, optional responsive/keyboard/return QA and separate rescans excluded from APP activations.",
+  "stages": 4,
+  "mandatory_cell_or_formula_entry": 0,
+  "activation_target": 10,
+  "target_met": false,
+  "automatic_calculation": "OBSERVED_BOTH",
+  "full_exact_changes_without_disclosure": "OBSERVED_BOTH",
+  "explicit_approval_before_separate_execution": "OBSERVED_BOTH",
+  "automatic_result_navigation": "OBSERVED_BOTH",
+  "return_to_approval_without_forced_advance": "OBSERVED_BOTH_AFTER_READY",
+  "keyboard": "RP02 ArrowLeft result->approval and ArrowRight approval->result; selected tab and visible focus confirmed",
+  "responsive": {
+    "desktop": {
+      "width": 1440,
+      "height": 1000,
+      "scroll_width": 1425,
+      "viewed": "RP02 full change preview"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "scroll_width": 375,
+      "viewed": [
+        "RP02 three download buttons",
+        "RP02 approval example and focus"
+      ]
+    },
+    "temporary_viewport_reset": true,
+    "screenshots": "Visually inspected in tool output; no saved screenshot export supported in this Chrome connection. Immediate resize frame was stale; inspected settled responsive frame."
+  },
+  "tool_retry": "RP01 one Playwright click timed out before activation; fresh AX showed unchanged state; supported AX click succeeded. Not counted as product activation.",
+  "human_understanding": "NOT_RUN",
+  "normal_unsupported_identifier_nonblank_approval_negative": "Existing automated regression coverage reused; not freshly replayed in final beta UI",
+  "limitations": [
+    "16 required activations exceeds target10",
+    "Full change/impact lists require lengthy scrolling, particularly32 indirect RP01 impacts",
+    "Actual human novice comprehension not measured",
+    "Local downloaded HTML visual opening blocked by browser file-URL policy; offline HTML verification PASS, no workaround",
+    "Four actual Excel reopen files were compatibility outputs, not these six final complex browser downloads",
+    "Official PG/live commerce/commercial readiness not verified"
+  ]
+}

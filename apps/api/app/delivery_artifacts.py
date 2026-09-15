@@ -25,6 +25,27 @@ LABELS = {
     "NO_NEW_STATIC_FINDINGS": "신규 정적 위험 신호 없음",
     "EXCEL_FIXTURE_COMPATIBILITY": "지원 합성 파일의 Excel 재개봉 대조",
 }
+LABELS.update(
+    {
+        "TARGET_STATIC_FINDINGS_RESOLVED": "승인 대상 정적 발견 해소",
+        "FORMULA_AUDIT_COMPLETED": "수식 후보 재검증 완료",
+        "NO_NEW_FORMULA_CANDIDATES": "새 수식 후보 없음",
+        "TARGET_FORMULA_CANDIDATES_RESOLVED": "승인 대상 수식 후보 해소",
+    }
+)
+
+REQUIRED_VALIDATION_CODES = {
+    "SOURCE_IMMUTABLE",
+    "EXACT_APPROVED_PATCH",
+    "UNTOUCHED_MEMBERS",
+    "NON_TARGET_XML_AND_STYLES",
+    "TYPED_FORMULA_CACHES",
+    "WHOLE_WORKBOOK_POST_CALCULATION",
+    "NO_NEW_CALCULATION_ERRORS",
+    "NO_NEW_STATIC_FINDINGS",
+    "EXCEL_FIXTURE_COMPATIBILITY",
+}
+
 
 
 def sha(data: bytes) -> str:
@@ -46,6 +67,99 @@ def text_row(sheet, values):
         c.data_type = "s"
         c.alignment = Alignment(vertical="top", wrap_text=True)
 
+
+def _detector_detail(item: dict) -> str:
+    parts = [item.get("rule_code", "")]
+    if item.get("pattern_subtype"):
+        parts.append(str(item["pattern_subtype"]))
+    return " / ".join(part for part in parts if part)
+
+
+def _audit_status_label(status: str) -> str:
+    return {
+        "COMPLETED": "완료",
+        "ABSTAINED_INSUFFICIENT_EVIDENCE": "증거 부족으로 판단 보류",
+        "FAILED": "실패",
+    }.get(status, "완료하지 못함")
+
+
+def detector_rows(verification: dict):
+    labels = {"static": "정적 구조 검사", "formula": "수식 후보 검사"}
+    statuses = {
+        "target_before": "원본 승인 대상 발견",
+        "resolved": "수정본에서 해소됨",
+        "target_remaining": "수정본에 승인 대상 남음",
+        "new": "수정본 신규 발견",
+        "remaining": "수정본에 남은 비대상 발견",
+    }
+    detectors = verification.get("detectors") or {}
+    for detector, label in labels.items():
+        summary = detectors.get(detector) or {}
+        for status in ["target_before", "resolved", "target_remaining", "new", "remaining"]:
+            for item in summary.get(status, []):
+                yield [
+                    label,
+                    statuses[status],
+                    item.get("sheet", ""),
+                    item.get("cell", ""),
+                    "같은 검사 기준으로 다시 확인했습니다.",
+                    _detector_detail(item),
+                ]
+    if detectors.get("formula_comparison_status") == "NOT_ESTABLISHED":
+        before_status = _audit_status_label(detectors.get("formula_audit_before_status", ""))
+        after_status = _audit_status_label(detectors.get("formula_audit_after_status", ""))
+        limitations = list(detectors.get("formula_audit_before_limitations") or []) + list(
+            detectors.get("formula_audit_after_limitations") or []
+        )
+        detail = "; ".join(str(item) for item in limitations)
+        yield [
+            "수식 후보 검사",
+            "비교 미확정",
+            "",
+            "",
+            "수식 후보 비교에 필요한 증거가 부족해 완료 여부를 판단하지 않았습니다.",
+            f"원본 {before_status}, 수정본 {after_status}"
+            + (f"; 제한: {detail}" if detail else ""),
+        ]
+
+
+def detector_html(verification: dict) -> str:
+    rows = []
+    for detector, status, sheet, cell, description, detail in detector_rows(verification):
+        shown_detail = detail if status == "비교 미확정" else ""
+        rows.append(
+            "<tr>"
+            f"<td>{html.escape(detector, quote=True)}</td>"
+            f"<td>{html.escape(status, quote=True)}</td>"
+            f"<td>{html.escape(sheet, quote=True)}</td>"
+            f"<td>{html.escape(cell, quote=True)}</td>"
+            f"<td>{html.escape(description, quote=True)}</td>"
+            f"<td>{html.escape(shown_detail, quote=True)}</td>"
+            "</tr>"
+        )
+    if not rows:
+        rows.append('<tr><td colspan="6">재검증에서 표시할 발견 또는 후보가 없습니다.</td></tr>')
+    return (
+        '<div class="table"><table><thead><tr>'
+        "<th>검사</th><th>상태</th><th>시트</th><th>셀</th><th>설명</th><th>상세</th>"
+        "</tr></thead><tbody>"
+        + "".join(rows)
+        + "</tbody></table></div>"
+    )
+
+def detector_summary_text(verification: dict) -> str:
+    formula_summary = (
+        "수식 후보: 비교 미확정(증거 부족)"
+        if (verification.get("detectors") or {}).get("formula_comparison_status")
+        == "NOT_ESTABLISHED"
+        else f"수식 후보: 원본 {verification['formula_candidates_before']}건 → "
+        f"수정본 {verification['formula_candidates_remaining']}건"
+    )
+    return (
+        f"정적 구조 발견: 원본 {verification['static_before']}건 → "
+        f"수정본 {verification['static_remaining']}건 · "
+        + formula_summary
+    )
 
 def report_book(plan: dict, verification: dict) -> bytes:
     book = Workbook()
@@ -123,11 +237,21 @@ def report_book(plan: dict, verification: dict) -> bytes:
         "plan_digest",
         "engine_version",
         "static_scanner_version",
+        "formula_audit_rule_set_version",
     ]:
         text_row(metadata, [key, verification[key]])
     text_row(metadata, ["report_version", REPORT_VERSION])
     for check in verification["checks"]:
         text_row(metadata, [LABELS.get(check["code"], check["code"]), check["status"]])
+    detectors = book.create_sheet("탐지 재검증")
+    text_row(detectors, ["검사", "상태", "시트", "셀", "설명", "상세"])
+    rows = list(detector_rows(verification))
+    if rows:
+        for row in rows:
+            text_row(detectors, row)
+    else:
+        text_row(detectors, ["정적 구조 검사", "표시할 항목 없음", "", "", "", ""])
+        text_row(detectors, ["수식 후보 검사", "표시할 항목 없음", "", "", "", ""])
     for sheet in book:
         sheet.freeze_panes = "A2"
         sheet.auto_filter.ref = sheet.dimensions
@@ -220,12 +344,27 @@ def verification_html(plan: dict, verification: dict) -> bytes:
             "plan_digest",
             "engine_version",
             "static_scanner_version",
+            "formula_audit_rule_set_version",
         ]
     )
     from pathlib import Path
 
     rendered = (
         Path(__file__).with_name("delivery_verification_template.html").read_text(encoding="utf-8")
+    )
+    detector_section = (
+        "    <section>\n"
+        "<h2>탐지 재검증</h2>\n"
+        "<p>원본에서 발견된 정적 구조 발견과 수식 후보를 같은 검사로 다시 확인했습니다. "
+        "승인한 대상에서 원래 발견된 항목은 수정본에서 사라져야 하며, "
+        "승인 범위 밖의 남은 항목은 그대로 표시합니다. "
+        "이 표는 파일 전체가 업무적으로 맞다는 보장이 아닙니다.</p>\n"
+        + detector_html(verification)
+        + "\n</section>\n"
+    )
+    rendered = rendered.replace(
+        "    <section>\n<details><summary>",
+        detector_section + "    <section>\n<details><summary>",
     )
     values = [
         len(plan["patches"]),
@@ -236,6 +375,7 @@ def verification_html(plan: dict, verification: dict) -> bytes:
         changes,
         impacts,
         provenance,
+        detector_summary_text(verification),
     ]
     for index, value in enumerate(values):
         rendered = rendered.replace("@@" + str(index) + "@@", str(value))
@@ -319,7 +459,9 @@ def validate_artifacts(package: dict, plan: dict, *, require_compatibility: bool
         "output_hash": sha(artifacts["REPAIRED_XLSX"]["data"]),
         "plan_digest": plan["digest"],
     }
-    required = set(LABELS) - (set() if require_compatibility else {"EXCEL_FIXTURE_COMPATIBILITY"})
+    required = set(REQUIRED_VALIDATION_CODES) - (
+        set() if require_compatibility else {"EXCEL_FIXTURE_COMPATIBILITY"}
+    )
     passed = {c["code"] for c in manifest["verification"]["checks"] if c["status"] == "PASS"}
     if not required.issubset(passed):
         reject("REQUIRED_VALIDATION_INCOMPLETE", "필수 검증이 누락되었거나 실패했습니다.", 422)

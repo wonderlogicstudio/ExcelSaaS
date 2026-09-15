@@ -57,6 +57,7 @@ export default function App() {
   const visited = useRef(new Set<string>());
   visited.current.add(path);
   const [activeStep, setActiveStep] = useState<CoreStep>(1);
+  const [pendingStep, setPendingStep] = useState<CoreStep | null>(null);
   const [deliveryProgress, setDeliveryProgress] = useState(initialDeliveryProgress);
   const [reviewFindings, setReviewFindings] = useState<Finding[]>([]);
   const [reviewLocked, setReviewLocked] = useState(false);
@@ -66,7 +67,7 @@ export default function App() {
     if (!reviewLocked) { setDeliveryProgress(initialDeliveryProgress); setReviewDraft(undefined); setReviewFindings(current => current.some(f => reviewKey(f) === reviewKey(finding))
       ? current.filter(f => reviewKey(f) !== reviewKey(finding)) : [...current, finding]); }
   }};
-  const clearReview = () => { setRepairIntent(noRepairIntent); setActiveStep(1); setDeliveryProgress(initialDeliveryProgress); setReviewFindings([]); setReviewLocked(false); setReviewDraft(undefined); };
+  const clearReview = () => { setRepairIntent(noRepairIntent); setActiveStep(1); setPendingStep(null); setDeliveryProgress(initialDeliveryProgress); setReviewFindings([]); setReviewLocked(false); setReviewDraft(undefined); };
   const uploadRef = useRef<HTMLDivElement>(null);
   const activeRequest = useRef(0);
   const activeController = useRef<AbortController | null>(null);
@@ -267,9 +268,11 @@ export default function App() {
   const proposalFindings = [...(result?.findings ?? []), ...(formulaAuditHostedBetaEnabled && formulaAuditResult?.status === 'COMPLETED' ? formulaAuditResult.candidates : [])];
   const diagnosisComplete = !!result && !!sourceFile && deliveryBetaEnabled && !busy && !(formulaAuditHostedBetaEnabled && formulaAuditBusy);
   const maxStep: CoreStep = !diagnosisComplete ? 1 : deliveryProgress.deliveryAvailable ? 4 : deliveryProgress.approvalAvailable ? 3 : 2;
-  useEffect(() => { if (activeStep > maxStep) setActiveStep(maxStep); }, [activeStep, maxStep]);
-  const goToStep = (step: CoreStep) => { if (step <= maxStep) setActiveStep(step); };
-  const continueToStep = (step: CoreStep) => { goToStep(step); requestAnimationFrame(() => { const panel = document.getElementById('core-work-panel'); panel?.focus({ preventScroll: true }); document.querySelector('.core-flow')?.scrollIntoView({ block: 'start' }); }); };
+  const focusWorkPanel = () => requestAnimationFrame(() => { const panel = document.getElementById('core-work-panel'); panel?.focus({ preventScroll: true }); document.querySelector('.core-flow')?.scrollIntoView({ block: 'start' }); });
+  useEffect(() => { if (activeStep > maxStep) { setPendingStep(null); setActiveStep(maxStep); } }, [activeStep, maxStep]);
+  useEffect(() => { if (pendingStep && pendingStep <= maxStep) { setActiveStep(pendingStep); setPendingStep(null); focusWorkPanel(); } }, [pendingStep, maxStep]);
+  const goToStep = (step: CoreStep) => { if (step <= maxStep) { setPendingStep(null); setActiveStep(step); } };
+  const continueToStep = (step: CoreStep) => { if (step <= maxStep) { setPendingStep(null); setActiveStep(step); focusWorkPanel(); } else setPendingStep(step); };
   return (
     <div id="top" onClick={onLink}>
       <Header onStart={startUpload} path={path}/>
