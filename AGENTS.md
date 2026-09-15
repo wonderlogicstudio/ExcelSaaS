@@ -1,5 +1,10 @@
 # WorkbookCare repository instructions
 
+## Cost and scope priority
+
+Follow EFFICIENCY-01 in docs/54_AGENT_ORCHESTRATION.md before the historical broad verification/delegation rules below. Classify the task, run only impact-relevant checks, reuse unchanged evidence, and stop duplicate work. Documentation/operating settings use root only; no agents, product regression or deployment. Local UI does not require full Excel delivery replay or all-repository regression unless affected. Two failed attempts on one cause require reporting and user decision before further escalation.
+
+
 ## Approved PL / Builder / Reviewer operation (2026-09-15)
 
 Follow `docs/54_AGENT_ORCHESTRATION.md` for approved development work. The main conversation is PL/orchestrator: maintain the product premise, one approved work order, exact acceptance and evidence, and hand tasks/results to the builder and independent reviewer. The user does not need to paste commands between roles. Read the corresponding `.codex/agents/*.toml` instructions when the runtime uses generic delegation instead of named agents; do not claim named-role loading or permission enforcement without evidence.
