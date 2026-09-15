@@ -914,5 +914,52 @@
     "commit_exit_code": 0,
     "verified_committed_files": 56,
     "commit_record": "reviews/evidence/PROPOSAL_FLOW-commit.json"
+  },
+  "agent_orchestration": {
+    "id": "ORCH-01",
+    "date": "2026-09-15",
+    "status": "CONFIGURED_VERIFIED_AWAITING_OWNER",
+    "development_approved": true,
+    "approval_basis": "Owner asked to configure PL/builder/reviewer and measurable UX constraints; product implementation is outside this unit.",
+    "base_commit": "6681dc6940e9b579f1b9cf0dc4c97e01f9002c60",
+    "contract": "../54_AGENT_ORCHESTRATION.md",
+    "review": "reviews/ORCHESTRATION.md",
+    "evidence": "reviews/evidence/ORCHESTRATION.json",
+    "roles": {
+      "pl": "RESULT_REPORT",
+      "builder": "CONFIGURATION_VERIFIED",
+      "reviewer": "CONTENT_REVIEW_PASS"
+    },
+    "configuration_files_applied": true,
+    "operating_documents_applied": true,
+    "native_config_loader": "PASS_ISOLATED_CODEX_HOME",
+    "native_named_role_discovery": "NOT_VERIFIED",
+    "desktop_reload": "NOT_RUN",
+    "sandbox_enforcement": "NOT_VERIFIED_RUNTIME_INHERITS_PARENT",
+    "ux_targets": {
+      "main_stages_max": 4,
+      "required_app_activations_max": 10,
+      "required_cell_address_or_formula_entry_max": 0,
+      "repeated_same_information_entry_max": 0,
+      "primary_next_cta_per_state": 1,
+      "three_deliverables_in_activation_budget": true,
+      "measurement_status": "NOT_MEASURED"
+    },
+    "human_usability": "NOT_RUN",
+    "commercial_readiness_change": false,
+    "product_changed": false,
+    "beta_deployed": false,
+    "remote_push": false,
+    "next_unit": "FLOW-01: existing RP01/RP02 same-detector repair resolution and real UX baseline",
+    "next_unit_approved": false,
+    "blocker": null,
+    "execution_state": "STOPPED_BEFORE_NEXT_UNIT",
+    "local_commit_record": "../../artifacts/verification/orchestration/commit.json",
+    "limitations": [
+      "Native individual role discovery and Desktop reload were not exercised.",
+      "Sandbox enforcement inherits live parent policy and was not independently proven.",
+      "UX targets and human understanding are not measured.",
+      "D08 commercial readiness stays PARTIAL."
+    ]
   }
 }

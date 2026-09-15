@@ -20,7 +20,7 @@ Use this file to avoid loading the full repository into Codex context.
 | AI use or cost | `15_AI_TOKEN_BUDGET.md`, `05_SECURITY_PRIVACY.md` |
 | Deployment | `04_ARCHITECTURE.md`, `14_HOSTING_DEPLOYMENT.md`, `05_SECURITY_PRIVACY.md` |
 | Risk review | `16_RISK_REGISTER.md`, `13_TEST_PLAN.md` |
-| Codex operating model | `17_CODEX_OPERATING_GUIDE.md`, `.agents/skills/milestone-runner/SKILL.md` |
+| Codex operating model | `54_AGENT_ORCHESTRATION.md`, `17_CODEX_OPERATING_GUIDE.md`, `.agents/skills/milestone-runner/SKILL.md` |
 | User validation | `18_USER_TEST_PLAYBOOK.md`, `12_SUCCESS_METRICS.md` |
 | Revenue validation | `19_REVENUE_EXPERIMENTS.md`, `07_PRICING_AND_QUOTING.md` |
 | Market evidence | `research/MARKET_RESEARCH.md`, `research/SOURCES.md` |

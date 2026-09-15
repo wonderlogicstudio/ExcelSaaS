@@ -1,5 +1,15 @@
 # WorkbookCare repository instructions
 
+## Approved PL / Builder / Reviewer operation (2026-09-15)
+
+Follow `docs/54_AGENT_ORCHESTRATION.md` for approved development work. The main conversation is PL/orchestrator: maintain the product premise, one approved work order, exact acceptance and evidence, and hand tasks/results to the builder and independent reviewer. The user does not need to paste commands between roles. Read the corresponding `.codex/agents/*.toml` instructions when the runtime uses generic delegation instead of named agents; do not claim named-role loading or permission enforcement without evidence.
+
+PL edits operating/progress records, not product source. One builder owns approved source edits; the reviewer does not edit product source or expected answers. Use independent agents for the approved workflow, avoid overlapping writes, and do not spawn roles for simple questions. State transitions must reflect actual activity. Preserve previous records and current user changes; this rule supersedes older replace/reset progress instructions.
+
+The product premise and measurable UX targets in that contract are acceptance inputs. Four stages, ten required app activations through all three downloads, and zero mandatory cell-address/formula entry are initial targets, not measured achievements. Never remove exact approval, evidence, security or Excel preservation to meet a click target. Agent approval, customer change approval, owner acceptance and commercial readiness remain separate.
+
+Current explicit user authorization can define one new bounded work unit despite a previously STOPPED milestone. Record that scope in the current milestone; do not reopen historical approvals or infer permission for another unit. Reuse standing beta authorization only within an approved product task. No remote push, live commerce, real data, new paid resources or anonymous release without their explicit authorization.
+
 ## Product contract
 
 WorkbookCare diagnoses risky Excel workbooks, explains findings with evidence, quotes an exact repair scope before payment, and produces a separate repaired copy only after approval.
@@ -22,16 +32,16 @@ Do not recursively re-read the entire repository unless the current milestone ch
 
 - Implement only the milestone marked `APPROVED` in `docs/09_CURRENT_MILESTONE.md`.
 - Do not start the next milestone automatically.
-- When acceptance criteria pass, update `docs/10_PROGRESS.md`, create or replace `docs/MILESTONE_REVIEW.md`, and stop for human approval.
+- When acceptance criteria pass, add concise current results to `docs/10_PROGRESS.md` and `docs/MILESTONE_REVIEW.md` while preserving prior records, then stop before the next unapproved unit.
 - If blocked by credentials, commercial account setup, legal wording, pricing approval, destructive migration, or unresolved product direction, record the blocker and stop.
 - Do not ask the user about ordinary engineering choices that can be resolved from the specifications.
 
 ## Token and context discipline
 
 - Prefer targeted file inspection and targeted tests.
-- Keep progress notes short and replace stale status instead of appending a diary.
+- Keep the newest progress summary short and preserve prior records; do not reset progress or rewrite history.
 - Do not restate entire specifications in code comments or chat summaries.
-- Do not invoke subagents by default. Use them only for genuinely independent research or review, never to edit overlapping files.
+- For approved development use the PL/builder/reviewer handoff above; parallelize only independent work and never edit overlapping files. Simple questions do not need subagents.
 - Do not add AI/LLM calls when deterministic rules or templates can solve the task.
 - Keep each code change focused on one acceptance criterion or one root cause.
 

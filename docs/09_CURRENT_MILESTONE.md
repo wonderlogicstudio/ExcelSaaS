@@ -1,3 +1,9 @@
+# STOPPED — ORCH-01 configured / owner review
+
+2026-09-15 latest owner request approved PL/builder/reviewer configuration and measurable UX constraints only. Role TOML/project config, [operating contract](54_AGENT_ORCHESTRATION.md), startup/handoff/history-preservation rules are implemented. Isolated native config/read and independent content review passed; generic role handoff was exercised. Native named-role discovery/Desktop reload/sandbox enforcement remain unverified. UX targets remain NOT_MEASURED; product/engine/UI/beta unchanged. [Review](delivery-v3_2/reviews/ORCHESTRATION.md). FLOW-01 same-detector repair proof/UX measurement is a proposal only, NOT_APPROVED. Historical records and D08 PARTIAL remain below.
+
+---
+
 # STOPPED — Proposal Flow owner review
 
 2026-09-13 승인된 [53_REPAIR_PROPOSAL_FLOW.md](53_REPAIR_PROPOSAL_FLOW.md) 구현·회귀·실제 베타·Excel 검증 완료. [리뷰](delivery-v3_2/reviews/PROPOSAL_FLOW.md), [확인5행동](delivery-v3_2/owner_action.md). UX ENGINEERING_VERIFIED_AWAITING_OWNER / D08 PARTIAL. 다음은 요청 조건을 서버 계획·재검증 보고서에 연결하는 한 단위 제안만이며 실행하지 않는다. 아래 ACTIVE는 당시 이력이다.

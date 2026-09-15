@@ -1,5 +1,9 @@
 # Codex operating guide
 
+## Current operation — PL / Builder / Reviewer (2026-09-15)
+
+Use [54_AGENT_ORCHESTRATION.md](54_AGENT_ORCHESTRATION.md) as the current role, approval and UX-evidence contract. The main conversation acts as PL and transfers the approved task to one builder and an independent reviewer. The owner gives goals and decisions in ordinary language; no repeated command copying or separate orchestration service is required. Approved repairs keep exact customer change approval. Preserve prior progress/reviews; newer authorized scope and current evidence take priority over historical templates below.
+
 ## Operating model
 
 The product owner decides **what outcome matters and whether a milestone is approved**. Codex decides **how to implement the approved scope**. This separation prevents two common failures:
@@ -11,7 +15,7 @@ The product owner decides **what outcome matters and whether a milestone is appr
 
 1. Product owner reviews the current demo and `docs/MILESTONE_REVIEW.md`.
 2. Product owner approves one milestone in `docs/09_CURRENT_MILESTONE.md`.
-3. A single Codex goal is opened using `prompts/02_APPROVE_AND_CONTINUE.md`.
+3. PL records one approved work order and its user authorization. The existing approval prompt is optional; create a Codex goal only if explicitly requested.
 4. Codex reads the context index and only the documents/files necessary for that milestone.
 5. Codex implements, tests, documents trade-offs, and creates `docs/MILESTONE_REVIEW.md`.
 6. Codex stops. It must not approve its own next milestone.
@@ -40,7 +44,7 @@ Better goal:
 - Start from `docs/00_CONTEXT_INDEX.md`; do not reread every document.
 - Search by symbol or rule code before opening whole source files.
 - Use deterministic scripts/tests for verification instead of asking another model to review everything.
-- Do not launch parallel agents unless the milestone has truly independent workstreams.
+- Use the approved PL/builder/reviewer handoff; parallelize only truly independent workstreams and keep a single source writer.
 - Do not ask an LLM to inspect raw workbook data when Python rules can answer the question.
 - Record durable facts in documents; do not depend on conversation history.
 - Keep logs concise and quote only the failure lines needed for diagnosis.

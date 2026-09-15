@@ -7,7 +7,7 @@ description: Execute one approved WorkbookCare product milestone autonomously, v
 
 1. Read repository `AGENTS.md`.
 2. Read `docs/00_CONTEXT_INDEX.md`, `docs/09_CURRENT_MILESTONE.md`, `docs/10_PROGRESS.md`, and `docs/11_DECISIONS.md`.
-3. Confirm the current milestone status is `APPROVED`. If it is not, do not implement it.
+3. Read `docs/54_AGENT_ORCHESTRATION.md`. Confirm one approved work unit. A new explicit owner request may authorize a bounded unit after STOPPED; record that scope before implementation and never reactivate historical approvals.
 4. Load only the task-specific documents listed in the context index.
 5. Run the current baseline checks relevant to the milestone.
 6. Create a concise execution checklist from the milestone acceptance criteria.
@@ -15,8 +15,8 @@ description: Execute one approved WorkbookCare product milestone autonomously, v
 8. Run targeted tests after each focused change; run the full relevant verification before completion.
 9. Exercise the changed user flow. Inspect visual output when the milestone changes the UI.
 10. Review the diff for security, privacy, Excel-fidelity, accessibility, and scope regressions.
-11. Replace `docs/10_PROGRESS.md` with the current concise state.
-12. Create or replace `docs/MILESTONE_REVIEW.md` with:
+11. Add a concise current state to `docs/10_PROGRESS.md`, preserving all prior records and user changes.
+12. Add a current review to `docs/MILESTONE_REVIEW.md` while preserving earlier records, with:
     - milestone and status;
     - user-visible result;
     - files changed;
@@ -32,7 +32,7 @@ description: Execute one approved WorkbookCare product milestone autonomously, v
 
 - Do not scan the full repository without a concrete need.
 - Do not restate specifications in source comments.
-- Do not use subagents unless independent work would materially reduce risk.
+- Use the approved PL/builder/reviewer handoff. Parallelize only independent work, keep one product source writer, and do not spawn roles for simple questions.
 - Do not add an LLM call when a deterministic rule or template is sufficient.
 - Do not fix unrelated issues unless they block the milestone; record them instead.
 
