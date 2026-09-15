@@ -1,3 +1,9 @@
+## 2026-09-15 — ORCH-02 모델 분리 설정 검증
+
+PL AstraMedium·빌더5.5Medium·리뷰어AstraHigh, 단순Low/복잡High 배정 규칙을 반영했다. 실제5.5Medium 빌더/AstraHigh 리뷰어 위임, TOML/격리native config-read/독립리뷰 PASS. 기존 제품·샘플·사용자460파일hash와 과거 기록 보존. 현재 루트 모델 자동 전환·Desktop 개별역할 자동등록·절감률은 미검증/미측정. 제품변경·배포·push 없음. [리뷰](delivery-v3_2/reviews/MODEL_ROUTING.md). 다음 FLOW-01 미승인, D08 PARTIAL 유지.
+
+---
+
 ## 2026-09-15 — ORCH-01 세 역할 운영 구성 검증 / 다음 단위 전 정지
 
 PL·빌더·리뷰어 설정, 하위 동시성2, 서비스 대전제/승인/증거/편의성 기준과 기존 지침 연결을 구성했다. 실제 설치 Codex의 격리 홈 strict config/read exit0, 독립 내용 리뷰에서 합성 증거 금지 충돌을 수정 후 PASS. 자동 승인 검토 capacity로3회 미실행됐던 운영 문서 적용은4회차 정상 승인 경로로 성공했다. 제품·기존샘플·사용자파일460개 hash 보존. 4단계/세다운로드까지10activation/주소·수식입력0/재입력0/주CTA1은 미측정 목표다. 실제 Desktop 역할 자동로드/권한강제/사용성/제품회귀/배포/push는 미실행. [리뷰](delivery-v3_2/reviews/ORCHESTRATION.md). 현재 CONFIGURED_VERIFIED_AWAITING_OWNER, D08 PARTIAL 유지, 다음 FLOW-01 미승인.

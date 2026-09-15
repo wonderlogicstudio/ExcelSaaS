@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "scope": "ORCH-02 model configuration only",
+  "state": {
+    "id": "ORCH-02",
+    "date": "2026-09-15",
+    "status": "CONFIGURED_VERIFIED_AWAITING_OWNER",
+    "approval_basis": "Owner explicitly approved role- and difficulty-based model assignment.",
+    "development_approved": true,
+    "base_commit": "80128957814d46672d93002d65731bb8be7cbe73",
+    "roles": {
+      "pl": {
+        "model": "gpt-6-astra",
+        "reasoning_effort": "medium"
+      },
+      "builder": {
+        "model": "gpt-5.5",
+        "reasoning_effort": "medium"
+      },
+      "reviewer": {
+        "model": "gpt-6-astra",
+        "reasoning_effort": "high"
+      }
+    },
+    "simple_builder": {
+      "model": "gpt-5.5",
+      "reasoning_effort": "low"
+    },
+    "complex_builder": {
+      "model": "gpt-5.5",
+      "reasoning_effort": "high"
+    },
+    "hard_problem_consultation": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high"
+    },
+    "spark": "NOT_SELECTED_UNAVAILABLE_IN_CURRENT_DELEGATION_TOOL",
+    "current_root_model_changed": false,
+    "native_project_config_read": "PASS_ISOLATED_HOME",
+    "native_named_role_discovery": "NOT_VERIFIED",
+    "sandbox_enforcement": "NOT_VERIFIED",
+    "delegation_requests": [
+      {
+        "task": "builder_routing",
+        "model": "gpt-5.5",
+        "reasoning_effort": "medium",
+        "fork_turns": "none"
+      },
+      {
+        "task": "reviewer_routing",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "high",
+        "fork_turns": "none"
+      }
+    ],
+    "savings_measurement": "NOT_MEASURED",
+    "product_changed": false,
+    "deployment": false,
+    "remote_push": false,
+    "review": "reviews/MODEL_ROUTING.md",
+    "evidence": "reviews/evidence/MODEL_ROUTING.json",
+    "commit_record": "../../artifacts/verification/model-routing/commit.json",
+    "next_unit": "FLOW-01",
+    "next_unit_approved": false,
+    "execution_state": "STOPPED_BEFORE_NEXT_UNIT"
+  },
+  "validation": {
+    "status": "PASS",
+    "changed_files_expected_only": true,
+    "changed_files": [
+      ".codex/config.toml",
+      ".codex/agents/pl.toml",
+      ".codex/agents/builder.toml",
+      ".codex/agents/reviewer.toml"
+    ],
+    "checks": [
+      {
+        "file": ".codex/config.toml",
+        "key": "model",
+        "ok": true
+      },
+      {
+        "file": ".codex/config.toml",
+        "key": "model_reasoning_effort",
+        "ok": true
+      },
+      {
+        "file": ".codex/config.toml",
+        "key": "agents.enabled",
+        "ok": true
+      },
+      {
+        "file": ".codex/config.toml",
+        "key": "agents.max_concurrent_threads_per_session",
+        "ok": true
+      },
+      {
+        "file": ".codex/config.toml",
+        "key": "agents.default_subagent_model",
+        "ok": true
+      },
+      {
+        "file": ".codex/config.toml",
+        "key": "agents.default_subagent_reasoning_effort",
+        "ok": true
+      },
+      {
+        "file": ".codex/agents/pl.toml",
+        "key": "model",
+        "ok": true
+      },
+      {
+        "file": ".codex/agents/pl.toml",
+        "key": "model_reasoning_effort",
+        "ok": true
+      },
+      {
+        "file": ".codex/agents/pl.toml",
+        "key": "sandbox_mode",
+        "ok": true
+      },
+      {
+        "file": ".codex/agents/builder.toml",
+        "key": "model",
+        "ok": true
+      },
+      {
+        "file": ".codex/agents/builder.toml",
+        "key": "model_reasoning_effort",
+        "ok": true
+      },
+      {
+        "file": ".codex/agents/builder.toml",
+        "key": "sandbox_mode",
+        "ok": true
+      },
+      {
+        "file": ".codex/agents/reviewer.toml",
+        "key": "model",
+        "ok": true
+      },
+      {
+        "file": ".codex/agents/reviewer.toml",
+        "key": "model_reasoning_effort",
+        "ok": true
+      },
+      {
+        "file": ".codex/agents/reviewer.toml",
+        "key": "sandbox_mode",
+        "ok": true
+      }
+    ],
+    "failures": []
+  },
+  "native_config_read": {
+    "probe": "Codex app-server config/read",
+    "model_calls": 0,
+    "cwd": "C:\\Users\\JinwonLee\\project\\ExcelSaaS",
+    "isolated_codex_home": true,
+    "user_home_changed": false,
+    "initialize_ok": true,
+    "root_model": "gpt-6-astra",
+    "root_model_reasoning_effort": "medium",
+    "agent_setting_keys": [
+      "default_subagent_model",
+      "default_subagent_reasoning_effort",
+      "enabled",
+      "interrupt_message",
+      "job_max_runtime_seconds",
+      "max_concurrent_threads_per_session",
+      "max_depth"
+    ],
+    "agents_enabled": true,
+    "max_concurrent_threads_per_session": 2,
+    "default_subagent_model": "gpt-5.5",
+    "default_subagent_reasoning_effort": "medium",
+    "role_names_in_agents": [],
+    "native_role_discovery": "NOT_VERIFIED: config/read does not expose agent definitions",
+    "response_top_level_keys": [
+      "config",
+      "layers",
+      "origins"
+    ],
+    "layer_count": 3,
+    "project_layers": [
+      {
+        "name": {
+          "type": "project",
+          "dotCodexFolder": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\.codex"
+        },
+        "disabledReason": null,
+        "has_agents": true
+      }
+    ],
+    "status": "CONFIG_READ_OK",
+    "app_server_exit": 0,
+    "stderr_line_count": 0,
+    "strict_config_unsupported": false,
+    "unknown_config_field": false,
+    "permission_warning": false,
+    "safe_error_categories": [],
+    "startup_error_lines": []
+  },
+  "independent_review": "PASS",
+  "first_config_apply": {
+    "process_started": false,
+    "exit_code": null,
+    "reason": "AUTOMATIC_APPROVAL_REVIEW_MODEL_AT_CAPACITY"
+  },
+  "second_config_apply": {
+    "exit_code": 0,
+    "same_normal_approval_path": true
+  },
+  "final_verification": {
+    "status": "PASS",
+    "exit_code": 0,
+    "prior_document_suffixes": 5,
+    "prior_progress_json_unchanged": true,
+    "preserved_file_hashes": 460,
+    "git_diff_check_exit_code": 0
+  },
+  "record_and_check_command": "python <scratch>/record_and_check.py",
+  "commit_record": "artifacts/verification/model-routing/commit.json",
+  "not_run": [
+    "product_regression",
+    "beta_ui",
+    "Excel",
+    "PG",
+    "human_usability",
+    "UX_counts",
+    "cost_benchmark",
+    "push",
+    "deployment",
+    "FLOW-01"
+  ]
+}

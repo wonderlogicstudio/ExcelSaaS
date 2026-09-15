@@ -1,3 +1,9 @@
+# STOPPED — ORCH-02 role model routing / owner review
+
+2026-09-15 owner-approved role/difficulty routing is configured: PL AstraMedium, builder5.5Medium, reviewerAstraHigh; bounded simple Low/complex High policy in [contract](54_AGENT_ORCHESTRATION.md). TOML/native isolated config-read and independent review PASS. Current root session is not switched by saving settings. [Review](delivery-v3_2/reviews/MODEL_ROUTING.md). Product/beta unchanged, UX/savings NOT_MEASURED, FLOW-01 NOT_APPROVED. Prior evidence/history retained below.
+
+---
+
 # STOPPED — ORCH-01 configured / owner review
 
 2026-09-15 latest owner request approved PL/builder/reviewer configuration and measurable UX constraints only. Role TOML/project config, [operating contract](54_AGENT_ORCHESTRATION.md), startup/handoff/history-preservation rules are implemented. Isolated native config/read and independent content review passed; generic role handoff was exercised. Native named-role discovery/Desktop reload/sandbox enforcement remain unverified. UX targets remain NOT_MEASURED; product/engine/UI/beta unchanged. [Review](delivery-v3_2/reviews/ORCHESTRATION.md). FLOW-01 same-detector repair proof/UX measurement is a proposal only, NOT_APPROVED. Historical records and D08 PARTIAL remain below.

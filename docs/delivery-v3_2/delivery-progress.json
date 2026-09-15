@@ -961,5 +961,68 @@
       "UX targets and human understanding are not measured.",
       "D08 commercial readiness stays PARTIAL."
     ]
+  },
+  "agent_model_routing": {
+    "id": "ORCH-02",
+    "date": "2026-09-15",
+    "status": "CONFIGURED_VERIFIED_AWAITING_OWNER",
+    "approval_basis": "Owner explicitly approved role- and difficulty-based model assignment.",
+    "development_approved": true,
+    "base_commit": "80128957814d46672d93002d65731bb8be7cbe73",
+    "roles": {
+      "pl": {
+        "model": "gpt-6-astra",
+        "reasoning_effort": "medium"
+      },
+      "builder": {
+        "model": "gpt-5.5",
+        "reasoning_effort": "medium"
+      },
+      "reviewer": {
+        "model": "gpt-6-astra",
+        "reasoning_effort": "high"
+      }
+    },
+    "simple_builder": {
+      "model": "gpt-5.5",
+      "reasoning_effort": "low"
+    },
+    "complex_builder": {
+      "model": "gpt-5.5",
+      "reasoning_effort": "high"
+    },
+    "hard_problem_consultation": {
+      "model": "gpt-6-astra",
+      "reasoning_effort": "high"
+    },
+    "spark": "NOT_SELECTED_UNAVAILABLE_IN_CURRENT_DELEGATION_TOOL",
+    "current_root_model_changed": false,
+    "native_project_config_read": "PASS_ISOLATED_HOME",
+    "native_named_role_discovery": "NOT_VERIFIED",
+    "sandbox_enforcement": "NOT_VERIFIED",
+    "delegation_requests": [
+      {
+        "task": "builder_routing",
+        "model": "gpt-5.5",
+        "reasoning_effort": "medium",
+        "fork_turns": "none"
+      },
+      {
+        "task": "reviewer_routing",
+        "model": "gpt-6-astra",
+        "reasoning_effort": "high",
+        "fork_turns": "none"
+      }
+    ],
+    "savings_measurement": "NOT_MEASURED",
+    "product_changed": false,
+    "deployment": false,
+    "remote_push": false,
+    "review": "reviews/MODEL_ROUTING.md",
+    "evidence": "reviews/evidence/MODEL_ROUTING.json",
+    "commit_record": "../../artifacts/verification/model-routing/commit.json",
+    "next_unit": "FLOW-01",
+    "next_unit_approved": false,
+    "execution_state": "STOPPED_BEFORE_NEXT_UNIT"
   }
 }

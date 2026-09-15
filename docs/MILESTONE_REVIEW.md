@@ -1,3 +1,9 @@
+## 2026-09-15 — ORCH-02 역할별 모델 배정 검증 완료
+
+프로젝트 PL AstraMedium·빌더5.5Medium·리뷰어AstraHigh 기본과 작업별Low/High를 구성했다. TOML/격리native config-read/독립리뷰 PASS, 기존 기록/제품 보존. 현재 루트 대화 전환·Desktop 개별역할 자동등록·절감효과는 검증하지 않았다. [명령·증거·한계](delivery-v3_2/reviews/MODEL_ROUTING.md). 제품/베타/push 없음. 다음 FLOW-01 미승인.
+
+---
+
 ## 2026-09-15 — ORCH-01 운영 구성 검증 완료 / 사용자 확인 대기
 
 세 역할·모델 상속·하위 동시성2 설정과 제품 대전제/UX 예산/자동 인계·승인·보존 지침을 연결했다. 격리 Codex strict config/read exit0, 독립 리뷰 결함1개 수정 후 내용PASS. 이전 자동 승인 모델 capacity 차단은 정상 경로 재시도로 해결됐다. 실제 Desktop 네이티브 역할 등록·권한강제·UX 실측은 미검증이며 제품/베타/Excel/PG 검증으로 보고하지 않는다. [실제 변경·명령·한계](delivery-v3_2/reviews/ORCHESTRATION.md). 검증한 파일만 local commit, push 없음. 다음 FLOW-01 미승인, D08 PARTIAL 보존.

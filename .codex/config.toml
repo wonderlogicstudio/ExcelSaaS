@@ -1,5 +1,9 @@
 # Primary conversation is PL. Two delegated workers maximum.
 # Contract and UX budgets: docs/54_AGENT_ORCHESTRATION.md
+model = "gpt-6-astra"
+model_reasoning_effort = "medium"
 [agents]
 enabled = true
 max_concurrent_threads_per_session = 2
+default_subagent_model = "gpt-5.5"
+default_subagent_reasoning_effort = "medium"
