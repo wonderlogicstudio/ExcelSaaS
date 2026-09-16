@@ -23,6 +23,7 @@ MAX_PATCHES = 100
 MAX_BYTES = 2 * 1024 * 1024
 PROFILE_1 = "RP01_NUMERIC_TEXT_FIELD_V1"
 PROFILE_2 = "RP02_APPROVED_FORMULA_RESTORE_V1"
+PROFILE_COMBINED = "COMBINED_RP01_RP02_REPAIR_V1"
 POLICY_VERSION = "ko-KR-integer15-v1"
 CELL = re.compile(r"^[A-Z]{1,3}[1-9][0-9]{0,6}$")
 PART = re.compile(
@@ -285,7 +286,96 @@ def numeric_text(value: object) -> int | None:
     return result
 
 
-def preflight(snapshot: dict, policy: dict, *, calculation_verified: bool = False) -> dict:
+def policy_items(policy: dict) -> list[dict]:
+    items = policy.get("items")
+    if items is None:
+        return [policy]
+    if (
+        policy.get("profile") != PROFILE_COMBINED
+        or not isinstance(items, list)
+        or not 1 <= len(items) <= 20
+        or any(not isinstance(item, dict) for item in items)
+    ):
+        reject("INVALID_POLICY", "수정 종류와 업무 기준을 입력하세요.")
+    return items
+
+
+def policy_base(policy: dict) -> dict:
+    if policy.get("profile") == PROFILE_COMBINED:
+        return {
+            **{key: value for key, value in policy.items() if key not in {"items", "targets"}},
+            "items": [policy_base(item) for item in policy_items(policy)],
+        }
+    return {key: value for key, value in policy.items() if key != "targets"}
+
+
+def _combined_top_base(policy: dict) -> dict:
+    return {key: value for key, value in policy.items() if key not in {"items", "targets"}}
+
+
+def policy_item_base_hashes(policy: dict) -> list[str]:
+    if policy.get("profile") != PROFILE_COMBINED:
+        return []
+    return [digest(policy_base(item)) for item in policy_items(policy)]
+
+
+def policy_target_bindings(policy: dict) -> list[dict]:
+    if policy.get("profile") != PROFILE_COMBINED:
+        return []
+    bindings = []
+    for item in policy_items(policy):
+        item_hash = digest(policy_base(item))
+        sheet = item.get("sheet")
+        for cell in item.get("targets", []):
+            bindings.append({"sheet": sheet, "cell": cell, "policy_base_hash": item_hash})
+    return sorted(
+        bindings,
+        key=lambda row: (row["sheet"] or "", row["cell"], row["policy_base_hash"]),
+    )
+
+
+def policy_scope(policy: dict) -> dict:
+    if policy.get("profile") == PROFILE_COMBINED:
+        return {
+            "policy_base_hash": digest(_combined_top_base(policy)),
+            "policy_item_base_hashes": policy_item_base_hashes(policy),
+            "policy_target_bindings": policy_target_bindings(policy),
+        }
+    return {"policy_base_hash": digest(policy_base(policy))}
+
+
+def policy_item_hashes_subset(current: list[str] | None, granted: list[str] | None) -> bool:
+    remaining = list(granted or [])
+    for item_hash in current or []:
+        if item_hash not in remaining:
+            return False
+        remaining.remove(item_hash)
+    return True
+
+
+def policy_bindings_subset(current: list[dict] | None, granted: list[dict] | None) -> bool:
+    remaining = list(granted or [])
+    for binding in current or []:
+        if binding not in remaining:
+            return False
+        remaining.remove(binding)
+    return True
+
+
+def policy_scope_matches(policy: dict, grant: dict) -> bool:
+    scope = policy_scope(policy)
+    if scope["policy_base_hash"] != grant.get("policy_base_hash"):
+        return False
+    if policy.get("profile") == PROFILE_COMBINED:
+        return policy_item_hashes_subset(
+            scope.get("policy_item_base_hashes"), grant.get("policy_item_base_hashes")
+        ) and policy_bindings_subset(
+            scope.get("policy_target_bindings"), grant.get("policy_target_bindings")
+        )
+    return True
+
+
+def _preflight_single(snapshot: dict, policy: dict, *, calculation_verified: bool = False) -> dict:
     profile = policy.get("profile")
     if profile not in {PROFILE_1, PROFILE_2}:
         reject("INVALID_PROFILE", "지원하는 수정 종류를 선택하세요.")
@@ -356,6 +446,52 @@ def preflight(snapshot: dict, policy: dict, *, calculation_verified: bool = Fals
         "targets": rows,
         "eligible_count": eligible_count,
         "reason_codes": sorted(set(reasons)),
+        "calculation_status": "NOT_RUN",
+        "quote_enabled": False,
+        "purchase_enabled": False,
+        "source_hash": snapshot["source_hash"],
+        "inventory_hash": snapshot["inventory_hash"],
+        "policy_digest": digest(policy),
+        "input_unchanged": True,
+    }
+
+
+def preflight(snapshot: dict, policy: dict, *, calculation_verified: bool = False) -> dict:
+    items = policy_items(policy)
+    if len(items) == 1 and items[0] is policy:
+        return _preflight_single(snapshot, policy, calculation_verified=calculation_verified)
+    rows = []
+    reasons = set()
+    eligible_count = 0
+    seen: set[tuple[str, str]] = set()
+    for index, item in enumerate(items):
+        result = _preflight_single(snapshot, item, calculation_verified=calculation_verified)
+        reasons.update(result["reason_codes"])
+        eligible_count += result["eligible_count"]
+        for target in result["targets"]:
+            key = (target["sheet"], target["cell"])
+            if key in seen:
+                reasons.add("OVERLAPPING_TARGETS")
+            seen.add(key)
+            rows.append({**target, "policy_index": index, "profile": item.get("profile")})
+    if len(rows) > MAX_PATCHES:
+        reject("LIMIT_EXCEEDED", "선택한 기준이 너무 큽니다.", 413)
+    if "OVERLAPPING_TARGETS" in reasons:
+        eligible_count = 0
+    state = (
+        "UNSUPPORTED"
+        if reasons
+        else "PRELIMINARY_ONLY"
+        if not calculation_verified
+        else "FEASIBILITY_VERIFIED"
+    )
+    return {
+        "status": state,
+        "profile": PROFILE_COMBINED,
+        "policy_version": POLICY_VERSION,
+        "targets": rows,
+        "eligible_count": eligible_count,
+        "reason_codes": sorted(reasons),
         "calculation_status": "NOT_RUN",
         "quote_enabled": False,
         "purchase_enabled": False,

@@ -1,0 +1,188 @@
+{
+  "status": "VERIFIED_BETA_COMBINED_DELIVERY",
+  "review": {
+    "RESELECT_01": "PASS",
+    "TYPE_01": "PASS",
+    "SCOPE_02": "PASS",
+    "combined_excel_registration": "PASS",
+    "final_recovery": "PASS",
+    "final_artifacts": "PASS"
+  },
+  "excel": "Fresh combined source/repaired/changes Excel COM read-only/no-save PASS; 725 expected values matched",
+  "regression": "scripts/verify.ps1 exit 0: web161, worker16, API248, Ruff PASS, M4 exact36 candidates",
+  "recovery": "User explicitly approved; exact proposed bytes applied, 32 tests/build and independent review PASS.",
+  "not_run": [
+    "official PG or live payment/refund",
+    "remote Git push"
+  ],
+  "deployment": {
+    "api": "workbookcare-api-beta-00020-qiv",
+    "worker": "8e7c4569-2801-4502-aad0-2a714b190234",
+    "security": {
+      "revision": "workbookcare-api-beta-00020-qiv",
+      "worker_version": "58309b3d-5a70-4a13-b950-1055a73f8379",
+      "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+      "security_invariants_preserved": true,
+      "private_iam": true,
+      "max_instances": 1,
+      "payment_mode": "OFF",
+      "access": [
+        {
+          "path": "/",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/scans",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/formula-audits",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/delivery",
+          "status": 302,
+          "existing_access": true
+        }
+      ]
+    },
+    "web": {
+      "worker": "8e7c4569-2801-4502-aad0-2a714b190234",
+      "rollback_worker": "58309b3d-5a70-4a13-b950-1055a73f8379",
+      "all_bindings_equal": true,
+      "api_unchanged": true,
+      "access": [
+        {
+          "path": "/",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/precision-verification",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/compare",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/automation",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/help",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/orders",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/scans",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/formula-audits",
+          "status": 302,
+          "existing_access": true
+        },
+        {
+          "path": "/api/v1/delivery",
+          "status": 302,
+          "existing_access": true
+        }
+      ]
+    }
+  },
+  "ui": {
+    "status": "PASS",
+    "source": "Actual Chrome beta UI, user selected existing synthetic complex03 file",
+    "diagnosis": {
+      "structural": 8,
+      "formula_candidates": 3
+    },
+    "changes": 11,
+    "indirect_impacts": 42,
+    "expected_actual": {
+      "F31": 5232,
+      "F64": 3551,
+      "F107": 7800,
+      "J130": 2177677
+    },
+    "reselection": "Returned to basket and recalculated using retained source without upload or consent step; approval relocked.",
+    "approval": "Checkbox initially clear and approval disabled; explicit approval led to step4 without executing; separate make-copy action completed.",
+    "downloads": 3,
+    "screenshots": "Viewed actual 390x844 and 1440x900 screenshots in CUA tool; temporary viewport reset.",
+    "keyboard": "Space collapsed and Enter expanded formula group.",
+    "manual_cell_formula_entry": 0,
+    "ux_limit": "Normal path counted as approximately 20 required activations including file selection and three downloads, excluding optional review/reselection checks. Initial 10-activation target NOT met; no human-usability claim."
+  },
+  "download_validation": {
+    "kind": "ACTUAL_BETA_DOWNLOADED_FILES_VS_FROZEN_ORACLE",
+    "status": "PASS",
+    "results": [
+      {
+        "case": "COMBINED",
+        "status": "PASS",
+        "cached_expected_values": 725,
+        "change_rows": 11,
+        "exact_html_impacts": 42,
+        "html_checks": 13,
+        "unchanged_zip_members": 7,
+        "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+      }
+    ],
+    "all_frozen_inputs_unchanged": true,
+    "official_pg_verified": false
+  },
+  "local_commit": "Selective verified files only; resulting commit is identified in Git history and local-commit.json scratch evidence.",
+  "browser_download_manifest": {
+    "case": "COMBINED_FINAL",
+    "actual_browser_downloads": [
+      {
+        "file": "COMBINED_FINAL/changes_7eaa6bce-a3ab-4e3e-a5f8-bb6b1bc48a0e.xlsx",
+        "sha256": "0e96b0b634c9e118e732a7923c03674e17e77108fb3476d5c7f5df2f520da93a",
+        "bytes": 12886
+      },
+      {
+        "file": "COMBINED_FINAL/verification_7eaa6bce-a3ab-4e3e-a5f8-bb6b1bc48a0e.html",
+        "sha256": "07f212e3273d79684433c44f988a47546ac6469a2232580fd1395ef6f96f07c9",
+        "bytes": 13303
+      },
+      {
+        "file": "COMBINED_FINAL/workbookcare_repaired_7eaa6bce-a3ab-4e3e-a5f8-bb6b1bc48a0e.xlsx",
+        "sha256": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
+        "bytes": 18858
+      }
+    ]
+  },
+  "command_artifacts": {
+    "full_verify": {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\\Users\\JinwonLee\\project\\ExcelSaaS\\scripts\\verify.ps1",
+      "cwd": "C:\\Users\\JinwonLee\\project\\ExcelSaaS",
+      "exit": 0,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-final01\\13-full-verify-final.log",
+      "temp": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-final01\\verify-temp-final",
+      "timestamp": "2026-09-16T11:38:04.1967897+09:00"
+    },
+    "download_collection": {
+      "command": "python collect_downloads.py collect COMBINED_FINAL",
+      "exit": 0
+    },
+    "download_validation": {
+      "command": "apps/api/.venv/Scripts/python.exe verify_downloads.py",
+      "exit": 0
+    },
+    "api_release_commands": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\release\\commands.jsonl",
+    "web_release_commands": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-final01\\web-release\\commands.jsonl"
+  }
+}

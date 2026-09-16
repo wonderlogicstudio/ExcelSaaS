@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import time
 
-from .delivery_inputs import digest
+from .delivery_inputs import policy_scope_matches
 
 
 def payment_grant(job, app_env):
@@ -37,8 +37,7 @@ def payment_grant(job, app_env):
         not ids
         or not ids <= set(grant.get("scope_ids", []))
         or plan.get("profile_version") != grant.get("profile")
-        or digest({k: v for k, v in policy.items() if k != "targets"})
-        != grant.get("policy_base_hash")
+        or not policy_scope_matches(policy, grant)
     ):
         return None
     return grant

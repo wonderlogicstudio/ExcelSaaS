@@ -1,0 +1,62 @@
+{
+  "defect": "RESELECT-01",
+  "changed_files": [
+    "apps/web/src/App.tsx",
+    "apps/web/src/components/DeliveryWorkspace.tsx",
+    "apps/web/src/App.reselect.test.tsx"
+  ],
+  "commands": [
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web",
+      "exit_code": 2,
+      "log": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-reselect01/baseline-build.log",
+      "classification": "baseline failed with pre-existing DeliveryWorkspace confirmed optional boolean and combined DeliveryPolicy type diagnostics"
+    },
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- App.reselect.test.tsx",
+      "exit_code": 1,
+      "log": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-reselect01/app-reselect-test-1.log",
+      "classification": "test harness mock missing resolveApiBaseUrl export; corrected once"
+    },
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- App.reselect.test.tsx",
+      "exit_code": 0,
+      "log": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-reselect01/app-reselect-test-2.log",
+      "classification": "focused App real callback/key path regression passed; React duplicate FILE_DRAWING_PARTS key warning observed from fixture data"
+    },
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- ProposalFlow.test.tsx",
+      "exit_code": 0,
+      "log": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-reselect01/proposal-flow-test.log",
+      "classification": "adjacent proposal flow regression passed"
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web",
+      "exit_code": 2,
+      "log": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-reselect01/after-build.log",
+      "classification": "same pre-existing diagnostics as baseline; no new type/build diagnostic identified"
+    },
+    {
+      "command": "git diff --check -- apps/web/src/App.tsx apps/web/src/components/DeliveryWorkspace.tsx apps/web/src/App.reselect.test.tsx",
+      "exit_code": 0,
+      "log": null,
+      "classification": "passed; Git reported CRLF normalization warnings for existing tracked files"
+    }
+  ],
+  "remaining_not_run": [
+    "full web suite",
+    "Excel/browser/deployment validation",
+    "commit",
+    "push"
+  ],
+  "status": "TARGETED_TESTS_PASSED_REVIEW_PENDING",
+  "review": "NOT_COMPLETED_AGENT_THREAD_LIMIT",
+  "beta_deployment": false,
+  "product_commit": false,
+  "remote_push": false,
+  "source_hashes": {
+    "apps/web/src/App.reselect.test.tsx": "63e279710c4db34df988b985b67bb159a1ffd77676bb22d06b9f85c10e11bc44",
+    "apps/web/src/App.tsx": "74870ac6529968ff7e5d5b0f9881fd0e37bfa857fd3cf2318df3c3ba37e56728",
+    "apps/web/src/components/DeliveryWorkspace.tsx": "e18336668c37ba1ebca59bd2b8921d4e126114482492c3ca27d59412cb430fe1"
+  }
+}

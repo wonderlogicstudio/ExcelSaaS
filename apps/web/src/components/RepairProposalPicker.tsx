@@ -3,8 +3,9 @@ import type { Finding } from '../types';
 import type { OriginalCell } from '../lib/workbookEvidence';
 import type { RepairDraft, ReviewSelection } from '../lib/repairReview';
 import { proposalGroups, RP01, RP02, type RepairIntent, type RepairProposal } from '../lib/repairProposals';
+const COMBINED='COMBINED_RP01_RP02_REPAIR_V1';
 
-function ProposalDetail({ proposal, file, intent, onPrepare }: { proposal: RepairProposal; file: File; intent: RepairIntent; onPrepare: (draft: RepairDraft) => void }) {
+function ProposalDetail({ proposal, file, intent, onPrepare, onAdd, listActive }: { proposal: RepairProposal; file: File; intent: RepairIntent; onPrepare: (draft: RepairDraft) => void; onAdd: (draft: RepairDraft) => void; listActive: boolean }) {
   const [targets, setTargets] = useState(proposal.findings.slice(0, 50).map(f => f.cell!).filter(Boolean));
   const [role, setRole] = useState(''), [confirmed, setConfirmed] = useState(false), [anchor, setAnchor] = useState('');
   const [cells, setCells] = useState<OriginalCell[]>([]), [loading, setLoading] = useState(true), [error, setError] = useState(false);
@@ -45,14 +46,18 @@ function ProposalDetail({ proposal, file, intent, onPrepare }: { proposal: Repai
       {!loading && !formula && <p>유효한 기준 수식이 없어 아직 수정안을 제안할 수 없습니다. 요청한 셀에 실제 수식이 있는지 확인하세요.</p>}
     </div>}
     <label className="delivery-check"><input type="checkbox" checked={confirmed} disabled={loading || error || !targets.length || (proposal.profile === RP01 ? !['AMOUNT','QUANTITY'].includes(role) : !formula)} onChange={e => setConfirmed(e.target.checked)}/>{proposal.profile === RP01 ? '선택한 칸은 계산할 금액·개수입니다. 문자 숫자를 계산에 포함하는 제안을 확인하겠습니다.' : '선택한 빈 칸도 이 기준 칸과 같은 업무 계산을 해야 합니다.'}</label>
-    <button className="button button--primary" type="button" disabled={!canPrepare} onClick={() => onPrepare({ profile: proposal.profile!, sheet: proposal.sheet, targets, role, anchor, anchor_formula: formula?.text ?? '', confirmed: true, proposal: true })}>이 제안으로 수정 예시 확인</button>
+    <button className="button button--outline" type="button" disabled={!canPrepare} onClick={() => onAdd({ profile: proposal.profile!, sheet: proposal.sheet, targets, role, anchor, anchor_formula: formula?.text ?? '', confirmed: true, proposal: true })}>수정 목록에 이 묶음 추가</button>
+    <button className={listActive ? 'button button--outline' : 'button button--primary'} type="button" disabled={!canPrepare} onClick={() => onPrepare({ profile: proposal.profile!, sheet: proposal.sheet, targets, role, anchor, anchor_formula: formula?.text ?? '', confirmed: true, proposal: true })}>{listActive ? '이 묶음만 따로 수정 예시 확인' : '이 제안으로 수정 예시 확인'}</button>
     <p className="proposal-footnote">제안 선택은 변경 승인이 아닙니다. 파일 보존·수정 범위·계산이 검증된 경우에만 실제 변경 예시를 보여드립니다.</p>
   </section>;
 }
 export function RepairProposalPicker({ findings, sheets, file, selection, intent, available, onPrepare }: { findings: Finding[]; sheets: string[]; file: File | null; selection: ReviewSelection; intent: RepairIntent; available: boolean; onPrepare: (draft: RepairDraft) => void }) {
   const [selectedOnly, setSelectedOnly] = useState(selection.findings.length > 0), [chosenSheet, setChosenSheet] = useState(''), [active, setActive] = useState('');
+  const [basket,setBasket]=useState<RepairDraft[]>([]);
   const selectionKey = selection.findings.map(f => JSON.stringify([f.rule_code,f.sheet,f.cell])).join('|');
   useEffect(() => { setSelectedOnly(selection.findings.length > 0); setActive(''); }, [selectionKey]);
+  const addToBasket=(draft:RepairDraft)=>setBasket(old=>{const key=JSON.stringify([draft.profile,draft.sheet,draft.targets,draft.role,draft.anchor]);return [...old.filter(item=>JSON.stringify([item.profile,item.sheet,item.targets,item.role,item.anchor])!==key),draft];});
+  const prepareBasket=()=>{if(!basket.length)return;onPrepare(basket.length===1?basket[0]:{profile:COMBINED,sheet:basket[0].sheet,targets:basket.flatMap(item=>item.targets),confirmed:true,proposal:true,items:basket});};
   const chosen = selectedOnly && selection.findings.length ? selection.findings : findings;
   const groups = proposalGroups(chosen), names = [...new Set([...sheets, ...groups.map(g => g.sheet)])];
   const sheet = names.includes(chosenSheet) ? chosenSheet : groups.find(g => g.profile)?.sheet ?? names[0] ?? '';
@@ -64,7 +69,8 @@ export function RepairProposalPicker({ findings, sheets, file, selection, intent
     <label className="proposal-sheet">제안을 확인할 시트<select value={sheet} onChange={e => { setChosenSheet(e.target.value); setActive(''); }}>{names.map(name => <option key={name} value={name}>{sheetLabel(name)}</option>)}</select></label>
     <p>‘후보’는 수정 가능 확정이 아닙니다. 선택 후 파일 전체의 보존 조건과 지원 범위를 검사합니다.</p>
     {!visible.length && <p role="status">이 시트에서 발견된 수정 후보가 없습니다. 모든 계산이 맞거나 수정 가능한 시트라는 뜻은 아닙니다.</p>}
+    {basket.length>0&&<details className="proposal-basket" open><summary>수정 목록 {basket.length}개 묶음</summary><ul>{basket.map(item=><li key={JSON.stringify([item.profile,item.sheet,item.targets,item.anchor])}><span>{item.sheet} · {item.profile===RP01?'숫자 텍스트':'빈 셀'} {item.targets.length}곳</span><button type="button" className="text-link" onClick={()=>setBasket(old=>old.filter(x=>x!==item))}>제외</button></li>)}</ul><button type="button" className="button button--primary" disabled={!file||!available} onClick={prepareBasket}>수정 목록의 전체 변경 예시 확인</button></details>}
     <div className="proposal-options">{visible.map(g => <article key={g.id} className={g.id === selected?.id ? 'proposal-option is-selected' : 'proposal-option'}><h3>{g.column ? `${g.column}열 · ` : ''}{g.title}</h3><p>{g.findings.length}곳 · {g.profile ? '수정 예시를 검증할 후보' : '현재 자동 수정 미지원'}</p>{g.profile ? <button type="button" className="button button--outline" disabled={g.id === selected?.id || !file || !available} onClick={() => setActive(g.id)}>이 수정 제안 보기</button> : <p>{g.explanation}</p>}</article>)}</div>
-    {selected && file && available ? <ProposalDetail key={selected.id+selected.findings.map(f=>f.cell).join(',')} proposal={selected} file={file} intent={intent} onPrepare={onPrepare}/> : !file || !available ? <p>직접 업로드한 등록 합성 파일로 보호 베타에서 제안을 검증할 수 있습니다. 일반 구매는 준비 중입니다.</p> : <p>현재 지원하는 제안은 계산용 숫자 텍스트 정리와 실제 빈 셀의 수식 복원입니다. 다른 유형의 예상값은 생성하지 않습니다.</p>}
+    {selected && file && available ? <ProposalDetail key={selected.id+selected.findings.map(f=>f.cell).join(',')} proposal={selected} file={file} intent={intent} onPrepare={onPrepare} onAdd={addToBasket} listActive={basket.length>0}/> : !file || !available ? <p>직접 업로드한 등록 합성 파일로 보호 베타에서 제안을 검증할 수 있습니다. 일반 구매는 준비 중입니다.</p> : <p>현재 지원하는 제안은 계산용 숫자 텍스트 정리와 실제 빈 셀의 수식 복원입니다. 다른 유형의 예상값은 생성하지 않습니다.</p>}
   </section>;
 }

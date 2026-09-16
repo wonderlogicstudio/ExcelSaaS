@@ -9,7 +9,7 @@ import uuid
 from dataclasses import asdict
 from pathlib import Path
 
-from .delivery_inputs import digest, reject
+from .delivery_inputs import digest, policy_scope, reject
 from .payment_adapter import (
     LocalContractAdapter,
     PaymentObservation,
@@ -93,9 +93,7 @@ def supported_scope(job):
             "spec_hash": plan["digest"],
             "profile": plan["profile_version"],
             "scope_ids": [p["candidate_id"] for p in plan["patches"]],
-            "policy_base_hash": digest(
-                {k: v for k, v in job["state"]["policy"].items() if k != "targets"}
-            ),
+            **policy_scope(job["state"]["policy"]),
             "artifact_kinds": plan["required_artifacts"],
             "patch_count": len(plan["patches"]),
         }
@@ -348,6 +346,8 @@ def sync_job(db, order):
             "order_id": order["id"],
             "expires_at": min(row["expires"], order["expires_at"]),
             "policy_base_hash": order.get("policy_base_hash"),
+            "policy_item_base_hashes": order.get("policy_item_base_hashes"),
+            "policy_target_bindings": order.get("policy_target_bindings"),
         }
         if not state.get("approval") and state["status"] not in {"RUNNING", "READY", "QUARANTINED"}:
             state["status"] = (

@@ -1,0 +1,106 @@
+{
+  "status": "STOPPED_AWAITING_OWNER_DECISION",
+  "reason": "EFFICIENCY-01 same-cause initial attempt plus one correction failed independent review; no automatic further builder/model escalation",
+  "review": "CHANGES_REQUIRED",
+  "issues": [
+    {
+      "severity": "P1",
+      "cause": "same_source_reselection",
+      "attempts_failed": 2,
+      "detail": "Restart still calls delete and clearing draft changes App component key. Isolated component rerender test misses real restart path."
+    },
+    {
+      "severity": "P1",
+      "cause": "criteria_target_binding",
+      "attempts_failed": 2,
+      "detail": "Independent item base hashes and global candidate IDs allow criteria swapping between targets; order restoration omits nested validation. Bind criteria to individual targets."
+    },
+    {
+      "severity": "build_cleanup",
+      "detail": "Optional confirmed assigned to boolean; intentVerdict type excludes combined items-only policy; unused import flagged by source review. Type/Ruff execution pending."
+    }
+  ],
+  "fixed": [
+    "combined representative preview crash",
+    "both-type visible summary",
+    "corrupted Korean error strings"
+  ],
+  "targeted": {
+    "generated_at": "2026-09-16T09:43:16.7425142+09:00",
+    "api_latest": {
+      "session_id": 1434,
+      "result": "exit 0",
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest tests/test_delivery_inputs.py tests/test_delivery_plan.py tests/test_delivery_patch.py -q -p no:cacheprovider --basetemp C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\pytest-api-2",
+      "notes": "Includes subset-aware combined paid-scope negative tests for role/anchor changes. FastAPI/TestClient deprecation warning only."
+    },
+    "web_latest": {
+      "result": "exit 0",
+      "command": "npm.cmd test -- --run src/components/ProposalFlow.test.tsx src/lib/repairProposals.test.ts",
+      "summary": "2 files passed, 25 tests passed",
+      "notes": "Includes combined preview without top-level targets and same-source revised combined draft with one create_input."
+    },
+    "artifact_bootstrap": {
+      "result": "exit 0",
+      "command": ".\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\bootstrap_combined_artifacts.py",
+      "inputs_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\compatibility\\inputs.json",
+      "patch_fingerprint": "a0f66d87d8a47a6c0793324520bf09dc6578cd19e97339a159d6744214424aad",
+      "compatibility_status": "STALE",
+      "note": "Prior combined-excel.json proof belongs to old fingerprint; PL must rerun Excel COM against regenerated artifacts before reference registration."
+    },
+    "not_run": [
+      "Full scripts/verify.ps1 by instruction until fresh Excel compatibility proof is registered",
+      "Compatibility reference registration; held because current fingerprint needs a fresh Excel COM proof"
+    ]
+  },
+  "historical_excel": {
+    "saved": false,
+    "macros_disabled": true,
+    "expected_values": 725,
+    "kind": "ACTUAL_EXCEL_COM_COMBINED_REPAIR",
+    "source_and_output_hashes": {
+      "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\samples\\WorkbookCare_Complex_Validation_2026-09-13\\03_정산수정_연쇄계산.xlsx": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
+      "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-batch01/compatibility/complex03_combined_changes.xlsx": "ba5b2377aa24eb8540906a196898d88329667d5704770c32e61f67ff8b1cd3c3",
+      "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-batch01/compatibility/complex03_combined_repaired.xlsx": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368"
+    },
+    "actual_files_opened": 3,
+    "external_link_update_disabled": true,
+    "combined_sum": 2177677,
+    "excel_version": "16.0",
+    "status": "PASS",
+    "patches": 11,
+    "excel_build": 20326
+  },
+  "historical_excel_fingerprint": "4c3bdd26c8e318fab84b7b29def99c8c5d5f48544a81a51f637da8c62b3264d0",
+  "current_bootstrap_fingerprint": "a0f66d87d8a47a6c0793324520bf09dc6578cd19e97339a159d6744214424aad",
+  "current_compatibility": "STALE",
+  "not_run": [
+    "current-fingerprint Excel COM",
+    "final full regression/type/Ruff",
+    "new beta deployment",
+    "actual combined beta UI/downloads",
+    "official PG",
+    "human acceptance"
+  ],
+  "old_expected_and_user_lock_preserved": true,
+  "changed_tracked_files": [
+    "apps/api/app/delivery_inputs.py",
+    "apps/api/app/delivery_plan.py",
+    "apps/api/app/delivery_rights.py",
+    "apps/api/app/payment_plan_actions.py",
+    "apps/api/app/payment_service.py",
+    "apps/api/tests/test_delivery_plan.py",
+    "apps/web/src/App.tsx",
+    "apps/web/src/components/DeliveryWorkspace.tsx",
+    "apps/web/src/components/ProposalExample.tsx",
+    "apps/web/src/components/ProposalFlow.test.tsx",
+    "apps/web/src/components/RepairPlanPreview.tsx",
+    "apps/web/src/components/RepairProposalPicker.tsx",
+    "apps/web/src/lib/repairProposals.ts",
+    "apps/web/src/lib/repairReview.ts",
+    "docs/09_CURRENT_MILESTONE.md"
+  ],
+  "product_commit": false,
+  "remote_push": false,
+  "next_unit": "NOT_APPROVED",
+  "evidence_root": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01"
+}

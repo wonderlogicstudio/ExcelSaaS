@@ -4,7 +4,13 @@ from __future__ import annotations
 
 import copy
 
-from .delivery_inputs import reject
+from .delivery_inputs import (
+    PROFILE_COMBINED,
+    policy_bindings_subset,
+    policy_item_hashes_subset,
+    policy_items,
+    reject,
+)
 from .delivery_plan import build_plan, plan_digest
 from .delivery_rights import payment_grant
 from .payment_service import get_order, persist, supported_scope, sync_job
@@ -22,6 +28,8 @@ def validate_paid_scope(store, job, plan):
             **grant,
             "scope_ids": order["scope_ids"],
             "policy_base_hash": order.get("policy_base_hash"),
+            "policy_item_base_hashes": order.get("policy_item_base_hashes"),
+            "policy_target_bindings": order.get("policy_target_bindings"),
             "profile": order["profile"],
         }
         if not payment_grant(
@@ -59,8 +67,33 @@ def reselect(store, job, body, settings):
             "현재 계획에서 한 개 이상을 선택하세요. 전부 거부는 취소를 이용하세요.",
             409,
         )
-    policy = copy.deepcopy(job["state"]["policy"])
-    policy["targets"] = [p["cell"] for p in old["patches"] if p["candidate_id"] in ids]
+    source_policy = copy.deepcopy(job["state"]["policy"])
+    if source_policy.get("profile") == PROFILE_COMBINED:
+        selected_by_item: dict[int, list[str]] = {}
+        for patch in old["patches"]:
+            if patch["candidate_id"] in ids:
+                selected_by_item.setdefault(
+                    int(patch.get("policy_index", 0)), []
+                ).append(patch["cell"])
+        items = []
+        for index, item in enumerate(policy_items(source_policy)):
+            targets = selected_by_item.get(index, [])
+            if targets:
+                item = copy.deepcopy(item)
+                item["targets"] = targets
+                items.append(item)
+        policy = {
+            **{
+                key: value
+                for key, value in source_policy.items()
+                if key not in {"items", "targets"}
+            },
+            "profile": PROFILE_COMBINED,
+            "items": items,
+        }
+    else:
+        policy = source_policy
+        policy["targets"] = [p["cell"] for p in old["patches"] if p["candidate_id"] in ids]
     candidate = {**job, "state": {**job["state"], "policy": policy}}
     from .delivery_operations import claim_attempt
 
@@ -99,6 +132,12 @@ def restore_order(store, owner, order_id, new_job):
         or scope["profile"] != order["profile"]
         or not set(scope["scope_ids"]) <= set(order["scope_ids"])
         or scope.get("policy_base_hash") != order.get("policy_base_hash")
+        or not policy_item_hashes_subset(
+            scope.get("policy_item_base_hashes"), order.get("policy_item_base_hashes")
+        )
+        or not policy_bindings_subset(
+            scope.get("policy_target_bindings"), order.get("policy_target_bindings")
+        )
         or new_job["product"] == "TWO_FILE_COMPARISON"
         and scope["spec_hash"] != order["spec_hash"]
     ):

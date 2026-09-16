@@ -12,6 +12,7 @@ import type { Finding } from '../types';
 const evidence=vi.hoisted(()=>({readSourceCells:vi.fn(),readSourceSheets:vi.fn()}));
 vi.mock('../lib/workbookEvidence',()=>evidence);
 const file=new File(['synthetic-test-only'],'synthetic.xlsx');
+const COMBINED='COMBINED_RP01_RP02_REPAIR_V1';
 const f=(cell:string,rule_code='NUMBER_STORED_AS_TEXT')=>({...demoResult.findings[0],sheet:'정산',cell,rule_code,formula_pattern:rule_code==='FORMULA_PATTERN_GAP'?{pattern_subtype:'BLANK_GAP_CANDIDATE',comparison_locations:['F2','F4'],evidence_locations:['F2','F4']}:null} as Finding);
 const ok=(v:unknown)=>({ok:true,json:async()=>v} as Response);
 const base:DeliveryJob={job_id:'synthetic',revision:1,status:'INPUT_READY',source_hash:'synthetic-only',expires_at:Date.now()/1000+900,sheets:[{name:'정산',cell_count:10}],preflight:null,purchase_enabled:false,source_unchanged:true};
@@ -33,6 +34,26 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   expect(prepare).toHaveBeenCalledWith(expect.objectContaining({profile:RP01,sheet:'정산',targets:['B2'],role:'AMOUNT',confirmed:true,proposal:true}));
   fireEvent.change(screen.getByLabelText('제안을 확인할 시트'),{target:{value:'메모'}});
   expect(screen.getByRole('status')).toHaveTextContent('발견된 수정 후보가 없습니다');
+ });
+
+ it('collects numeric and blank-formula proposals into one combined 수정 목록 draft',async()=>{
+  evidence.readSourceCells
+   .mockResolvedValueOnce([{cell:'B2',type:'text',text:'1,200'}])
+   .mockResolvedValueOnce([{cell:'F3',type:'blank',text:'빈 셀'},{cell:'F2',type:'formula',text:'=C2*D2',cached:'10'},{cell:'F4',type:'formula',text:'=C4*D4',cached:'14'}]);
+  const prepare=vi.fn();
+  const view=render(<RepairProposalPicker findings={[f('B2'),f('F3','FORMULA_PATTERN_GAP')]} sheets={['정산']} file={file} selection={{findings:[],locked:false,toggle:vi.fn()}} intent={noRepairIntent} available onPrepare={prepare}/>);
+  await waitFor(()=>expect(view.container.querySelector('input[value="AMOUNT"]')).toBeTruthy());
+  fireEvent.click(view.container.querySelector('input[value="AMOUNT"]')!);
+  fireEvent.click(view.container.querySelector('.delivery-check input[type="checkbox"]')!);
+  fireEvent.click(screen.getByRole('button',{name:'수정 목록에 이 묶음 추가'}));
+  const optionButtons=Array.from(view.container.querySelectorAll<HTMLButtonElement>('.proposal-option button'));
+  fireEvent.click(optionButtons.find(button=>!button.disabled)!);
+  await waitFor(()=>expect(evidence.readSourceCells).toHaveBeenCalledTimes(2));
+  await waitFor(()=>expect(view.container.querySelector('.proposal-anchor select')).toHaveValue('F2'));
+  fireEvent.click(view.container.querySelector('.delivery-check input[type="checkbox"]')!);
+  fireEvent.click(screen.getByRole('button',{name:'수정 목록에 이 묶음 추가'}));
+  fireEvent.click(screen.getByRole('button',{name:'수정 목록의 전체 변경 예시 확인'}));
+  expect(prepare).toHaveBeenCalledWith(expect.objectContaining({profile:COMBINED,confirmed:true,proposal:true,targets:['B2','F3'],items:[expect.objectContaining({profile:RP01,targets:['B2']}),expect.objectContaining({profile:RP02,targets:['F3'],anchor:'F2',anchor_formula:'=C2*D2'})]}));
  });
  it('carries the selected real anchor formula without requiring cell or formula typing or auto-confirmation',async()=>{
   evidence.readSourceCells.mockResolvedValue([{cell:'F3',type:'blank',text:'빈 셀'},{cell:'F2',type:'formula',text:'=C2*D2',cached:'10'},{cell:'F4',type:'formula',text:'=C4*D4',cached:'14'}]);const prepare=vi.fn();
@@ -75,10 +96,35 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   render(<RepairPlanPreview job={plan} onJob={vi.fn()} guidedStep={3} intent={{...noRepairIntent,enabled:true,sheet:'정산',cell:'F3',expected}} onIntentCheck={gate}/>);
   const representative=await screen.findByRole('region',{name:'대표 수정 예시'});
   expect(within(representative).getByText('12',{exact:true})).toBeVisible();
+  fireEvent.click(screen.getAllByText(/빈 셀 수식 복원/).find(el=>el.tagName==='SUMMARY')!);
   expect(screen.getByText('=C3*D3')).toBeVisible();
   expect(screen.queryByRole('button',{name:'전체 1곳의 정확한 변경·수식 확인'})).not.toBeInTheDocument();
   if(status==='matched'){await waitFor(()=>expect(gate).toHaveBeenLastCalledWith(true));expect(screen.getByRole('button',{name:'이 변경계획 승인'})).toBeDisabled();}
   else {expect(screen.queryByRole('button',{name:'이 변경계획 승인'})).not.toBeInTheDocument();expect(gate).toHaveBeenLastCalledWith(false);}
+ });
+
+ it('summarizes both repair types for a combined policy without top-level targets',async()=>{
+  const combinedJob={...plan,policy:{profile:COMBINED,items:[{profile:RP01,sheet:'정산',targets:['B2'],role:'AMOUNT',confirmed:true},{profile:RP02,sheet:'정산',targets:['F3'],anchor:'F2',anchor_formula:'=C2*D2',confirmed:true}]}} as DeliveryJob;
+  const combinedDetail:PlanDetail={...detail,patches:[{candidate_id:'n',sheet:'정산',cell:'B2',profile_version:RP01,before:{type:'text',value:'1,200'},after:{type:'number',value:1200}},{candidate_id:'f',sheet:'정산',cell:'F3',profile_version:RP02,before:{type:'blank',value:null},after:{type:'formula',value:'=C3*D3'}}],impact:[{sheet:'정산',cell:'B2',before:{type:'text',value:'1,200'},after:{type:'number',value:1200}},{sheet:'정산',cell:'F3',before:{type:'number',value:0},after:{type:'number',value:12}},{sheet:'정산',cell:'J10',before:{type:'number',value:20},after:{type:'number',value:1232}}]};
+  vi.stubGlobal('fetch',vi.fn(async()=>ok(combinedDetail)));
+  render(<RepairPlanPreview job={combinedJob} onJob={vi.fn()} guidedStep={2} intent={noRepairIntent}/>);
+  await screen.findByRole('region',{name:'대표 수정 예시'});
+  expect(screen.getByText(/숫자 텍스트 정리 1곳/)).toBeVisible();
+  expect(screen.getByText(/빈 셀 수식 복원 1곳/)).toBeVisible();
+ });
+ it('rechecks a revised same-source combined draft without uploading the source again',async()=>{
+  const actions:Record<string,unknown>[]=[]; let revision=1; let currentPolicy:unknown=null;
+  vi.stubGlobal('fetch',vi.fn(async(_url,init)=>{const a=JSON.parse(String(init?.body));actions.push(a); if(a.action==='capabilities')return ok({max_bytes:2097152}); if(a.action==='create_input')return ok({...base,job_id:'same-source',revision:revision++}); if(a.action==='preflight'){currentPolicy=a.policy;return ok({...base,job_id:'same-source',revision:revision++,policy:a.policy,preflight:plan.preflight,status:'INPUT_READY'});} if(a.action==='prepare_plan')return ok({...plan,job_id:'same-source',revision:revision++,policy:currentPolicy,plan_summary:{...plan.plan_summary,digest:`plan-${revision}`}}); return ok(plan);}));
+  const first={profile:RP01,sheet:'정산',targets:['B2'],role:'AMOUNT',confirmed:true,proposal:true};
+  const second={profile:COMBINED,sheet:'정산',targets:['B2','F3'],confirmed:true,proposal:true,items:[first,{profile:RP02,sheet:'정산',targets:['F3'],anchor:'F2',anchor_formula:'=C2*D2',confirmed:true,proposal:true}]};
+  const view=render(<DeliveryWorkspace file={file} reviewDraft={first} intent={noRepairIntent}/>);
+  fireEvent.click(await screen.findByRole('checkbox',{name:/업로드 권한/}));
+  fireEvent.click(screen.getByRole('button',{name:'이 원본으로 수정 범위 확인'}));
+  await waitFor(()=>expect(actions.filter(a=>a.action==='prepare_plan')).toHaveLength(1));
+  view.rerender(<DeliveryWorkspace file={file} reviewDraft={second} intent={noRepairIntent}/>);
+  await waitFor(()=>expect(actions.filter(a=>a.action==='prepare_plan')).toHaveLength(2));
+  expect(actions.filter(a=>a.action==='create_input')).toHaveLength(1);
+  expect(actions.filter(a=>a.action==='preflight').at(-1)).toMatchObject({policy:{profile:COMBINED,items:[expect.objectContaining({profile:RP01,targets:['B2']}),expect.objectContaining({profile:RP02,targets:['F3'],anchor:'F2'})]}});
  });
  it('reveals the calculated step 2 result once and consumes stale reveal requests after leaving the step',async()=>{
   vi.stubGlobal('fetch',vi.fn(async()=>ok(detail)));

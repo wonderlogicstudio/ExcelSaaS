@@ -7,11 +7,14 @@ import { revealElement } from '../lib/reveal';
 import { ProposalExample } from './ProposalExample';
 import { intentVerdict, type RepairIntent } from '../lib/repairProposals';
 
-export type PlanDetail = { digest:string; patches:{candidate_id:string;sheet:string;cell:string;before:{type:string;value:unknown};after:{type:string;value:unknown}}[];
+export type PlanDetail = { digest:string; patches:{candidate_id:string;sheet:string;cell:string;profile_version?:string;change_kind?:string;before:{type:string;value:unknown};after:{type:string;value:unknown}}[];
   impact:{sheet:string;cell:string;before:{type:string;value:unknown};after:{type:string;value:unknown}}[]; expires_at:number; technical_changes?:{kind:string}[] };
 function display(cell:{type:string;value:unknown}) {
   if(cell.type==='blank')return '빈 셀'; if(cell.type==='text')return `문자 “${String(cell.value)}”`; if(cell.type==='formula')return String(cell.value);
   if(cell.type==='number')return `숫자 ${Number(cell.value).toLocaleString('ko-KR',{maximumFractionDigits:15})}`; return String(cell.value);
+}
+function patchKindLabel(p:{profile_version?:string;change_kind?:string;after:{type:string}}) {
+  return (p.profile_version??p.change_kind)==='RP01_NUMERIC_TEXT_FIELD_V1'||p.change_kind==='TYPE_NORMALIZATION' ? '숫자 텍스트 정리' : '빈 셀 수식 복원';
 }
 export function RepairPlanPreview({ job, onJob, guidedStep, onNextStep, intent, onIntentCheck, externalBusy=false, planRevealToken=0 }: { job:DeliveryJob; onJob:(job:DeliveryJob)=>void; guidedStep?:CoreStep; onNextStep?:(step:CoreStep)=>void; intent?:RepairIntent; onIntentCheck?:(satisfied:boolean)=>void; externalBusy?:boolean; planRevealToken?:number }) {
   const [busy,setBusy]=useState(false), [error,setError]=useState<string|null>(null), [detail,setDetail]=useState<PlanDetail|null>(null);
@@ -67,6 +70,10 @@ export function RepairPlanPreview({ job, onJob, guidedStep, onNextStep, intent, 
   useEffect(()=>{if(guidedStep===3&&currentDetail)setReviewedDigest(currentDetail.digest);},[guidedStep,currentDetail?.digest]);
   useEffect(()=>{onIntentCheck?.(requestSatisfied && (!intent?.enabled || !!currentDetail));},[requestSatisfied,currentDetail?.digest,intent?.enabled,onIntentCheck]);
   useEffect(()=>{if(guidedStep===3&&currentDetail&&approvalAdvanceDigest===currentDetail.digest&&job.approval_status==='APPROVED'&&job.plan_summary?.digest===currentDetail.digest){approvalNavigation.current=null;setApprovalAdvanceDigest(null);onNextStep?.(4);}},[guidedStep,currentDetail?.digest,approvalAdvanceDigest,job.approval_status,job.plan_summary?.digest,onNextStep]);
+  const patchGroups=currentDetail?[...new Map(currentDetail.patches.map(p=>[`${p.sheet}:${p.profile_version??p.change_kind??p.after.type}`,currentDetail.patches.filter(x=>x.sheet===p.sheet&&(x.profile_version??x.change_kind??x.after.type)===(p.profile_version??p.change_kind??p.after.type))])).values()]:[];
+  const indirectImpacts=currentDetail?currentDetail.impact.filter(i=>!currentDetail.patches.some(p=>p.sheet===i.sheet&&p.cell===i.cell)):[];
+  const impactGroups=[...new Map(indirectImpacts.map(i=>[i.sheet,indirectImpacts.filter(x=>x.sheet===i.sheet)])).values()];
+  const kindSummary=patchGroups.map(group=>`${patchKindLabel(group[0])} ${group.length}곳`).join(' · ');
   const beginApprovalNavigation=(planDigest:string)=>{
     if(guidedStepRef.current!==3)return null;
     const token=approvalRequestSeq.current+1;approvalRequestSeq.current=token;
@@ -87,9 +94,10 @@ export function RepairPlanPreview({ job, onJob, guidedStep, onNextStep, intent, 
   },[guidedStep,rights,job.job_id,plan?.digest,plan?.status,currentDetail?.digest,expiredDigest,job.status]);
   useEffect(()=>{if(!currentDetail||job.status==='READY')return;const timer=setTimeout(()=>{setExpiredDigest(currentDetail.digest);setDetail(null);onJob({...job,status:'PLAN_EXPIRED'});deliveryRequest<DeliveryJob>({action:'get',job_id:job.job_id}).then(onJob).catch(()=>setError('계획이 만료되었습니다. 새 계획을 확인하세요.'));},Math.max(0,currentDetail.expires_at*1000-Date.now()));return()=>clearTimeout(timer);},[currentDetail?.digest,currentDetail?.expires_at,job.job_id,job.status,onJob]);
   const detailsView=currentDetail && <section aria-label="정확한 변경계획"><h3 ref={guidedStep===3?exactHeading:undefined} tabIndex={-1}>바꾸려는 내용과 계산 결과</h3><p>사용자가 지정한 기준으로 계산한 변경안입니다. 업무상 정답인지 확인한 뒤 승인하세요. 선택을 바꾸면 다시 계산합니다.</p>
-    <div className="delivery-plan-patches">{currentDetail.patches.map(p=>{const calculated=currentDetail.impact.find(i=>i.sheet===p.sheet&&i.cell===p.cell);return <article className="delivery-patch" key={p.sheet+p.cell} data-plan-cell={p.cell}><h4>{p.sheet} · {p.cell}</h4><dl><dt>원본의 값·수식</dt><dd>{display(p.before)}</dd><dt>승인하면 적용할 값·수식</dt><dd>{display(p.after)}</dd>{p.after.type==='formula'&&calculated&&<><dt>이 변경안의 예상 결과 · 계산 검증함</dt><dd data-impact-cell={p.cell}>{display(calculated.after)}</dd></>}</dl></article>;})}</div>
+    <p className="delivery-plan-key-summary">직접 바뀌는 내용: {kindSummary || `${currentDetail.patches.length}곳`} · 함께 달라지는 계산 결과: {indirectImpacts.length}곳</p>
+    {patchGroups.map(group=><details key={`${group[0].sheet}:${group[0].profile_version??group[0].change_kind??group[0].after.type}`} className="delivery-plan-group"><summary>{group[0].sheet} · {patchKindLabel(group[0])} {group.length}곳</summary><div className="delivery-plan-patches">{group.map(p=>{const calculated=currentDetail.impact.find(i=>i.sheet===p.sheet&&i.cell===p.cell);return <article className="delivery-patch" key={p.sheet+p.cell} data-plan-cell={p.cell}><h4>{p.sheet} · {p.cell}</h4><dl><dt>원본의 값·수식</dt><dd>{display(p.before)}</dd><dt>승인하면 적용할 값·수식</dt><dd>{display(p.after)}</dd>{p.after.type==='formula'&&calculated&&<><dt>이 변경안의 예상 결과 · 계산 검증함</dt><dd data-impact-cell={p.cell}>{display(calculated.after)}</dd></>}</dl></article>;})}</div></details>)}
     <h4>함께 달라지는 계산 결과</h4><p>직접 바꾸는 셀 이외에 영향을 받는 수식입니다. 저장된 계산 캐시가 아니라 지원 엔진에서 다시 계산한 결과입니다.</p>
-    <div className="delivery-plan-patches">{currentDetail.impact.filter(i=>!currentDetail.patches.some(p=>p.sheet===i.sheet&&p.cell===i.cell)).map(p=><article className="delivery-patch" key={p.sheet+p.cell} data-impact-cell={p.cell}><h5>{p.sheet} · {p.cell}</h5><dl><dt>변경 전 계산</dt><dd>{display(p.before)}</dd><dt>변경안 적용 후 계산</dt><dd>{display(p.after)}</dd></dl></article>)}</div>
+    {impactGroups.length ? impactGroups.map(group=><details key={group[0].sheet} className="delivery-plan-group"><summary>{group[0].sheet} · 계산 영향 {group.length}곳</summary><div className="delivery-plan-patches">{group.map(p=><article className="delivery-patch" key={p.sheet+p.cell} data-impact-cell={p.cell}><h5>{p.sheet} · {p.cell}</h5><dl><dt>변경 전 계산</dt><dd>{display(p.before)}</dd><dt>변경안 적용 후 계산</dt><dd>{display(p.after)}</dd></dl></article>)}</div></details>) : <p>직접 바꾸는 셀 밖의 추가 계산 영향은 없습니다.</p>}
   </section>;
   return <section className="delivery-plan delivery-step" aria-label="변경계획 계산">
     <div hidden={!scopeVisible} className="delivery-plan-review"><h3>변경 후 계산 영향 확인</h3><p>선택한 기준을 사본에 적용했을 때의 수식과 결과를 검사합니다. 원본은 바꾸지 않습니다.</p>

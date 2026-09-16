@@ -1,0 +1,47 @@
+{
+  "defect": "TYPE-01",
+  "scope": "Fix existing frontend type mismatches only",
+  "changed_for_type01": [
+    "apps/web/src/components/DeliveryWorkspace.tsx",
+    "apps/web/src/lib/repairProposals.ts"
+  ],
+  "preserved_wip": [
+    "RESELECT/BATCH changes in App.tsx, DeliveryWorkspace.tsx, ProposalExample.tsx, RepairPlanPreview.tsx, App.reselect.test.tsx remain present"
+  ],
+  "artifacts": {
+    "stray_file": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-type01",
+    "stray_file_note": "This exact path is a file, not a directory, length 15299, created by the initial bad snapshot command and left untouched.",
+    "snapshot_dir": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-type01-snapshot",
+    "tests_log": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-type01-tests.log",
+    "tests_json": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-type01-tests.json",
+    "build_log": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-type01-build.log",
+    "build_json": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-type01-build.json"
+  },
+  "commands": [
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- repairProposals.test.ts ProposalFlow.test.tsx App.reselect.test.tsx",
+      "exit_code": 0,
+      "note": "26 tests passed; App.reselect emits pre-existing duplicate FILE_DRAWING_PARTS React key warning"
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web",
+      "exit_code": 0,
+      "note": "tsc -b and vite build passed"
+    },
+    {
+      "command": "git diff --check -- apps/web/src/components/DeliveryWorkspace.tsx apps/web/src/lib/repairProposals.ts",
+      "exit_code": 0,
+      "note": "passed; Git reported CRLF normalization warning for DeliveryWorkspace.tsx"
+    }
+  ],
+  "review": "Independent review NOT completed: reviewer spawn/followup unavailable due agent thread limit.",
+  "not_run": [
+    "full suite",
+    "Excel/browser validation",
+    "deployment",
+    "commit",
+    "push"
+  ],
+  "status": "BUILD_AND_TARGETED_TESTS_PASSED_REVIEW_PENDING",
+  "summary": "Normalized optional confirmed with === true and aligned intentVerdict with single/combined policy items. Web production build (tsc and Vite) exit 0; 3 related test files / 26 tests passed, exit 0. Scoped diff check exit 0. PL inspected actual build/test logs. This resolves the reported TypeScript build errors; it does not complete BATCH or RESELECT independent review."
+}

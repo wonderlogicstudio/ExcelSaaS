@@ -380,7 +380,7 @@ export default function App() {
         <div id="core-work-panel" role="tabpanel" tabIndex={-1} aria-labelledby={`core-tab-${activeStep === 1 ? 2 : activeStep}`} hidden={activeStep === 1}>
           {result && <>
             <div hidden={activeStep !== 2 || reviewLocked}><RepairProposalPicker findings={proposalFindings} sheets={sourceSheets} file={sourceFile} selection={reviewSelection} intent={repairIntent} available={deliveryBetaEnabled} onPrepare={draft => { setDeliveryProgress(initialDeliveryProgress); setReviewDraft(draft); }}/></div>
-            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={`${result.analysis_id}:${reviewDraft ? JSON.stringify(reviewDraft) : 'manual'}`} file={sourceFile} compactEntry reviewDraft={reviewDraft} intent={repairIntent} onRestartProposal={() => { setReviewLocked(false); setReviewDraft(undefined); setDeliveryProgress(initialDeliveryProgress); }} onSourceFixed={setReviewLocked} guidedStep={activeStep} onProgress={setDeliveryProgress} onNextStep={continueToStep}/>}
+            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={result.analysis_id} file={sourceFile} compactEntry reviewDraft={reviewDraft} intent={repairIntent} onRestartProposal={() => { setReviewLocked(false); setReviewDraft(undefined); setDeliveryProgress(initialDeliveryProgress); setPendingStep(null); setActiveStep(2); }} onSourceFixed={setReviewLocked} guidedStep={activeStep} onProgress={setDeliveryProgress} onNextStep={continueToStep}/>}
           </>}
         </div>
         </div>

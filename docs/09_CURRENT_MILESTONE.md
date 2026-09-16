@@ -1,3 +1,116 @@
+
+
+## FINAL-01 - verified protected-beta combined delivery
+
+Actual beta diagnosis: structural8 + formula3. One combined plan applied numeric-text8 + blank-formula3 changes. Screen results F31=5232, F64=3551, F107=7800, J130=2177677 matched frozen expectations. Same-source reselection did not request another upload; exact approval and execution remained separate. Three actual browser downloads passed 725 cached-value checks,11 change rows,42 HTML impacts,13 report checks and non-target OOXML preservation. Existing frozen input hashes unchanged. Desktop/mobile screenshots and keyboard disclosure checked; viewport reset.
+
+Full regression: web161, Worker16, API248, Ruff and M4 exact36 candidate checks PASS. Fresh actual Excel COM evidence:3 files,725 values,read-only/no-save. Code/recovery/evidence reviews PASS. Protected beta API00020-qiv / Worker8e7c4569-2801-4502-aad0-2a714b190234 deployed with existing security boundaries preserved.
+
+Limits: official PG and live payments not verified. Approximate normal path20 activations exceeds initial10 target; zero mandatory cell/formula typing achieved. Functional validation is not human usability or commercial readiness. Remote push not performed. Selective local commit excludes user's dependencies.lock.json change and unrelated untracked files. Previous failures/recovery preserved below. Stop; next proposed unit only: reduce required interactions without removing exact approval.
+
+---
+
+
+## FINAL-01 - beta deployed; actual UI file selection pending
+
+User-approved UTF-8 recovery completed and independently reviewed PASS. Full verify.ps1 exit 0 (web161, Worker16, API248, Ruff, exact M4 candidates36). Fresh actual combined Excel725-value evidence remains valid. API workbookcare-api-beta-00020-qiv and Worker 8e7c4569-2801-4502-aad0-2a714b190234 deployed; existing Access/private IAM/Gateway/bindings preserved.
+
+Beta home loaded in Chrome. File chooser timed out twice before upload; owner must select the existing synthetic complex03 file to continue actual combined UI/expected/download checks. These checks are NOT PASS. Local product commit and remote push NOT performed. Earlier failure/recovery history retained below.
+
+---
+# ACTIVE APPROVED - FINAL-01 recovery resumed
+
+Owner explicitly approved restoring the two prepared recovery files after the prior automatic review rejection. Verify damaged/proposed hashes against recovery-proposal/proposal-meta.json, apply only those two files, then focused tests and remaining integrated verification. Existing protected beta deployment authorization remains conditional on PASS. No remote push.
+
+---
+
+
+
+## FINAL-01 - recovery approval pending
+
+RESELECT/TYPE independent review and current combined actual Excel verification passed (725 values). Full regression found two web issues. During correction the agent damaged UTF-8 in DeliveryWorkspace.tsx and GuidedFlow.test.tsx. Damaged files are backed up; proposed recovery preserves known WIP using hash-verified snapshot plus narrow intended corrections. Automatic approval review rejected overwrites; owner confirmation requested. No deployment/commit/push, no whole-regression PASS. Checkpoint: reviews/evidence/FINAL-01.json.
+
+---
+# ACTIVE APPROVED - FINAL-01
+
+Owner approved remaining review and final integrated verification. Review RESELECT/TYPE, refresh synthetic combined artifacts and actual Excel compatibility evidence, run scripts/verify.ps1, then protected beta deployment and actual UI/expected/download validation only if gates pass. Preserve source, approval, Access/private API/storage/payment boundaries. Reuse frozen independent oracle; do not change expectations to pass. Necessary corrections only, no new features. Selective local commit only after verified; no remote push. Preserve prior WIP/history.
+
+---
+
+
+
+## SCOPE-02 - SCOPED_PASS_AWAITING_OWNER
+
+Bound each combined repair target (sheet and cell) to its original business-criteria hash. Fresh targeted pytest passed 6 tests (33 deselected); scoped Ruff passed all 5 relevant files. Independent reviewer found no blocking code-path issue; requested missing file Ruff check passed exit 0. Genuine subsets are retained; role/anchor permutations and missing combined bindings are rejected. This is scoped backend verification, not Excel, PG, beta or whole-product acceptance.
+
+Evidence: reviews/evidence/SCOPE-02.json. No full regression, Excel, browser verification, deployment, commit or push. Other pending work remains pending; stop for owner checkpoint.
+
+---
+# ACTIVE APPROVED - SCOPE-02
+
+Owner explicitly approved another bounded attempt: implement per-target original criteria binding and verify permutation rejection. Include genuine target/item subset success, single-policy compatibility, restore validation, fail-closed missing combined binding. Allowlist delivery_inputs.py, delivery_rights.py, payment_plan_actions.py, payment_service.py and directly relevant API tests. Snapshot exact current files first. Fresh targeted pytest and scoped Ruff with exact command/exit evidence, focused review then STOP. Preserve all WIP; no deployment, commerce activation, full regression, Excel, commit or push.
+
+---
+
+
+
+## SCOPE-01 - CHANGES_REQUIRED / STOPPED
+
+Restore now checks nested item-criteria hashes and unused import was removed, but independent review found target-to-criteria binding remains missing. policy_base(item) excludes targets, so separate criteria-hash and candidate-set subset checks still allow target/criteria permutation. No acceptance PASS. Builder reported two scoped Ruff failures and stopped; no post-correction pytest was run.
+
+No new pytest PASS, deployment, commit or push. Historical session 1434 is not current evidence. Existing changes preserved; initial attempt plus one correction exhausted according to builder. Next proposed unit remains the same target-to-criteria binding defect; no next work automatically authorized. Evidence: reviews/evidence/SCOPE-01.json.
+
+---
+# ACTIVE APPROVED - SCOPE-01
+
+User approved next bounded defect: bind combined repair business criteria to each retained target/candidate, including order restore. Allowlist delivery_inputs.py, delivery_rights.py, payment_plan_actions.py, payment_service.py and directly related API tests. Preserve genuine subset selection and single-policy compatibility. Targeted negative/positive tests and scoped Ruff, independent review, report then STOP. No UI, deployment, commerce activation, full regression, Excel, commit or push. Existing WIP preserved.
+
+---
+
+
+
+## TYPE-01 - BUILD_AND_TARGETED_TESTS_PASSED_REVIEW_PENDING
+
+Normalized optional confirmed with === true and aligned intentVerdict with single/combined policy items. Web production build (tsc and Vite) exit 0; 3 related test files / 26 tests passed, exit 0. Scoped diff check exit 0. PL inspected actual build/test logs. This resolves the reported TypeScript build errors; it does not complete BATCH or RESELECT independent review.
+
+Independent reviewer could not start: agent thread limit reached. Independent review remains pending. No beta deployment, push, commit, full regression, Excel or browser validation. Existing BATCH/RESELECT changes and records preserved.
+
+Evidence: `reviews/evidence/TYPE-01.json`.
+
+---
+# ACTIVE APPROVED - TYPE-01
+
+User approved fixing existing frontend type mismatches only. Allowlist: DeliveryWorkspace.tsx, lib/repairProposals.ts and directly related types/tests. Reuse previous failed build baseline; verify web build and targeted tests, independent review, then STOP. No deployment, push, full regression or other BATCH defects. Preserve existing WIP.
+
+---
+
+
+
+## RESELECT-01 checkpoint: targeted tests passed, independent review pending
+
+The real App restart path retains the uploaded job and reruns preflight/prepare_plan for revised selections. Targeted App reselection and adjacent ProposalFlow tests passed (exit 0); the first test harness run failed and was corrected once. Baseline and final builds both failed (exit 2) with the same pre-existing BATCH type errors. No global build PASS is claimed.
+
+Independent reviewer startup and follow-up both returned `agent thread limit reached`. Independent review is NOT completed; do not treat this checkpoint as final acceptance. Existing BATCH work is preserved. No full regression, Excel, actual browser verification, beta deployment, product commit or push was performed. Current-turn delta and command logs are in DigitalTwin/.tmp/workbookcare-reselect01. Next action is independent review of this same defect, not another defect.
+
+---
+# ACTIVE APPROVED — RESELECT-01 / 한 건만 재개
+
+수정 목록 재선택 시 원본 재사용 결함만 수정·표적시험·리뷰합니다. [작업지시](delivery-v3_2/reviews/RESELECT-01.md). 다른 BATCH-01 결함·통합 검증·배포는 재개하지 않습니다. 결과 보고 후 사용자 확인을 기다립니다.
+
+---
+
+# STOPPED — BATCH-01 / 사용자 결정 대기
+
+BATCH-01 통합 수정은 미완료입니다. 독립 검토에서 동일 원인 두 항목이 최초 구현과 재수정 후에도 남아 EFFICIENCY-01 기준으로 자동 작업을 중단했습니다. 변경은 보존했으며 베타 배포·커밋·push는 하지 않았습니다. 표적시험 통과는 완료 판정이 아닙니다. [상세 기록](delivery-v3_2/reviews/BATCH-01.md).
+
+---
+
+# ACTIVE APPROVED — BATCH-01
+
+Combine existing RP01/RP02 into one plan and grouped disclosure UX. [Work order](delivery-v3_2/reviews/BATCH-01.md). EFFICIENCY-01; no next unit or push.
+
+---
+
 # STOPPED — SCROLL-02 / 베타 화면 검증 완료
 
 2·3단계의 사용자 작업 후 새 계산 결과·검증한 예시·정확한 변경 제목으로 스크롤과 포커스를 이동하도록 수정했습니다. 승인 후 결과와 사본 준비 완료도 한 번만 안내합니다. 이전 단계·작업으로 이동한 뒤 늦게 도착하는 결과, 중복 polling/execute 응답은 화면을 빼앗지 않도록 검사했습니다. 정확한 변경 승인·별도 실행·검사/수정 범위는 유지했습니다.

@@ -7,6 +7,8 @@ export const RP02 = 'RP02_APPROVED_FORMULA_RESTORE_V1';
 export type RepairIntent = { enabled: boolean; kind: 'number' | 'same_formula'; sheet: string; cell: string; expected: string; anchor: string };
 export const noRepairIntent: RepairIntent = { enabled: false, kind: 'number', sheet: '', cell: '', expected: '', anchor: '' };
 export type RepairProposal = { id: string; sheet: string; column: string; profile?: string; title: string; explanation: string; findings: Finding[] };
+export type RepairPolicyItem = { profile: string; sheet: string; targets: string[]; anchor?: string };
+export type RepairPolicy = RepairPolicyItem | { profile: string; items: RepairPolicyItem[] };
 export const cellOrder = (a: string, b: string) => a.localeCompare(b, 'en', { numeric: true });
 export function proposalGroups(findings: Finding[]): RepairProposal[] {
   const result = new Map<string, RepairProposal>();
@@ -42,12 +44,13 @@ export function canonicalDecimal(value: unknown): string | null {
   if (!digits || /^0+$/.test(digits)) return '0';
   return `${negative ? '-' : ''}${digits}:${scale}`;
 }
-export function intentVerdict(intent: RepairIntent | undefined, detail: PlanDetail, policy?: { profile: string; sheet: string; targets: string[]; anchor?: string }) {
+export function intentVerdict(intent: RepairIntent | undefined, detail: PlanDetail, policy?: RepairPolicy) {
   if (!intent?.enabled) return { status: 'none' as const, message: '별도 요청 없이 선택한 규칙으로 계산했습니다.' };
   if (!intent.sheet || !intent.cell) return { status: 'unverified' as const, message: '원하는 결과를 확인할 위치를 먼저 선택하세요.' };
   if (intent.kind === 'same_formula') {
     const patch = detail.patches.find(p => p.sheet === intent.sheet && p.cell === intent.cell && p.before.type === 'blank' && p.after.type === 'formula');
-    const matches = patch && intent.anchor && policy?.profile === RP02 && policy.sheet === intent.sheet && policy.targets.includes(intent.cell) && policy.anchor === intent.anchor;
+    const policies = policy && 'items' in policy ? policy.items : policy ? [policy] : [];
+    const matches = patch && intent.anchor && policies.some(item => item.profile === RP02 && item.sheet === intent.sheet && item.targets.includes(intent.cell) && item.anchor === intent.anchor);
     return matches ? { status: 'matched' as const, message: `${intent.sheet} ${intent.cell}에 ${intent.anchor}의 계산 방식을 적용한 제안입니다. 행에 맞게 참조를 옮겨 계산했습니다.` }
       : { status: 'unverified' as const, message: '요청한 기준 셀·대상과 이번 제안이 다릅니다. 같은 계산 방식 적용은 실제 빈 셀 복원에서만 확인할 수 있습니다.' };
   }

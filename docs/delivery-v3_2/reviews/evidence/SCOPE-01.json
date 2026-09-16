@@ -1,0 +1,25 @@
+{
+  "status": "CHANGES_REQUIRED_STOPPED",
+  "summary": "Restore now checks nested item-criteria hashes and unused import was removed, but independent review found target-to-criteria binding remains missing. policy_base(item) excludes targets, so separate criteria-hash and candidate-set subset checks still allow target/criteria permutation. No acceptance PASS. Builder reported two scoped Ruff failures and stopped; no post-correction pytest was run.",
+  "independent_review": "CHANGES_REQUIRED by reselect01_builder: source inspected without edits or test reruns",
+  "current_turn_changes_identified": [
+    "payment_plan_actions.py restore nested hash check",
+    "payment_service.py unused import removal",
+    "test_delivery_plan.py restore negative test and import edits"
+  ],
+  "command_evidence": {
+    "builder_report": "Scoped Ruff failed initially and after correction; exact commands and numeric exit codes not supplied at record creation. Not independently verified.",
+    "pytest": "NOT_RUN after current correction; old session1434 explicitly excluded",
+    "snapshot": "Builder omitted requested before snapshot; exact turn-only delta cannot be certified",
+    "artifact": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-scope01/scope01_correction.py"
+  },
+  "not_run": [
+    "full regression",
+    "Excel",
+    "browser",
+    "beta deployment",
+    "commit",
+    "push"
+  ],
+  "next_proposal": "Bind each candidate/target to its originally approved criteria and test role/anchor permutation rejection; requires owner decision under two-failure rule."
+}

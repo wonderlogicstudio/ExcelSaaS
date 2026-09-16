@@ -1,31 +1,34 @@
 {
-  "excel_build": 20326,
-  "excel_version": "16.0",
-  "profiles": [
-    "RP01",
-    "RP02"
-  ],
-  "kind": "ACTUAL_PRODUCT_PATCH_AND_INSTALLED_EXCEL_REOPEN",
-  "results": [
-    {
-      "repaired_opened": true,
-      "read_only_hash_unchanged": true,
-      "profile": "RP01",
-      "actual_values_match": true,
-      "literal_report_formulas": true,
-      "output_hash": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
-      "changes_opened": true
-    },
-    {
-      "repaired_opened": true,
-      "read_only_hash_unchanged": true,
-      "profile": "RP02",
-      "actual_values_match": true,
-      "literal_report_formulas": true,
-      "output_hash": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
-      "changes_opened": true
-    }
-  ],
   "status": "PASS",
-  "patch_fingerprint": "53facec2dc172d17a52d6db5be7db167c60cf3dfd76aca5742edbb8407a4c2bb"
+  "kind": "ACTUAL_EXCEL_COM_COMBINED_REPAIR",
+  "case": "COMBINED_RP01_RP02_complex03",
+  "profiles": [
+    "COMBINED_RP01_RP02"
+  ],
+  "patch_fingerprint": "418f6d6e86c4ec9826cd455cf817ff6f48ac78b8c9ad1919133a394d001e712a",
+  "excel_version": "16.0",
+  "excel_build": 20326,
+  "actual_excel_files_opened": 3,
+  "expected_values": 725,
+  "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
+  "plan_digest": "59d86b3badc656bafec684158bbdd05497937840d5a11786c0f81250e8081855",
+  "output_hash": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
+  "changes_hash": "84c313bc1af842387fd9a159b6f7df3344939a8935d935f8c29c3e19f4480cfe",
+  "verification_html_hash": "ba9fb1ba312ff0b85ceaf47dd16d9b9e9836555536915196df554bc2c60e6f81",
+  "original_and_outputs_unchanged": true,
+  "macros_disabled": true,
+  "external_link_update_disabled": true,
+  "saved": false,
+  "source_and_output_hashes": {
+    "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\compatibility\\complex03_combined_repaired.xlsx": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
+    "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\samples\\WorkbookCare_Complex_Validation_2026-09-13\\03_정산수정_연쇄계산.xlsx": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
+    "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\compatibility\\complex03_combined_changes.xlsx": "84c313bc1af842387fd9a159b6f7df3344939a8935d935f8c29c3e19f4480cfe"
+  },
+  "legacy_profiles_not_freshly_claimed": true,
+  "provenance": {
+    "oracle_sha256": "de614e665c08e2779d8c23ba5ba7655671a498e66744b3ea42b0ba1c3e2bf1d3",
+    "inputs_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\compatibility\\inputs.json",
+    "excel_evidence_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\combined-excel.json",
+    "bound_evidence_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\excel-bound-evidence.json"
+  }
 }

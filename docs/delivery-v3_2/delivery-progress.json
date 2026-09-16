@@ -1101,5 +1101,69 @@
     "api_unchanged": true,
     "remote_push": false,
     "next_unit": "NOT_APPROVED"
+  },
+  "batch_01": {
+    "status": "STOPPED_AWAITING_OWNER_DECISION",
+    "review": "CHANGES_REQUIRED",
+    "evidence": "reviews/evidence/BATCH-01.json",
+    "reason": "EFFICIENCY01_TWO_ATTEMPTS_SAME_CAUSES",
+    "compatibility": "STALE",
+    "full_regression": "NOT_RUN",
+    "beta_deploy": false,
+    "local_commit": false,
+    "remote_push": false,
+    "next_unit": "NOT_APPROVED"
+  },
+  "reselect_01": {
+    "status": "TARGETED_TESTS_PASSED_REVIEW_PENDING",
+    "review": "NOT_COMPLETED_AGENT_THREAD_LIMIT",
+    "beta_deployment": false,
+    "product_commit": false,
+    "remote_push": false,
+    "evidence": "reviews/evidence/RESELECT-01.json"
+  },
+  "type_01": {
+    "status": "BUILD_AND_TARGETED_TESTS_PASSED_REVIEW_PENDING",
+    "review": "PENDING_AGENT_THREAD_LIMIT",
+    "evidence": "reviews/evidence/TYPE-01.json",
+    "deployed": false,
+    "committed": false,
+    "pushed": false
+  },
+  "scope_01": {
+    "status": "CHANGES_REQUIRED_STOPPED",
+    "evidence": "reviews/evidence/SCOPE-01.json",
+    "deployed": false,
+    "committed": false,
+    "pushed": false
+  },
+  "scope_02": {
+    "status": "SCOPED_PASS_AWAITING_OWNER",
+    "review": "PASS after missing delivery_rights.py Ruff coverage supplied; no source changes after tested revision",
+    "evidence": "reviews/evidence/SCOPE-02.json",
+    "deployed": false,
+    "committed": false,
+    "pushed": false
+  },
+  "final_01": {
+    "status": "VERIFIED_BETA_COMBINED_DELIVERY",
+    "evidence": "reviews/evidence/FINAL-01.json",
+    "deployed": true,
+    "remote_push": false,
+    "ux_budget": "NOT_MET_APPROX20_VS10",
+    "previous_checkpoint": {
+      "status": "DEPLOYED_BETA_UI_FILE_SELECTION_PENDING",
+      "evidence": "reviews/evidence/FINAL-01.json",
+      "deployed": true,
+      "committed": false,
+      "pushed": false,
+      "previous_checkpoint": {
+        "status": "WAITING_OWNER_RECOVERY_APPROVAL",
+        "evidence": "reviews/evidence/FINAL-01.json",
+        "deployed": false,
+        "committed": false,
+        "pushed": false
+      }
+    }
   }
 }

@@ -14,7 +14,16 @@ from .delivery_calculation import (
     engine_fingerprint,
     translate_formula,
 )
-from .delivery_inputs import POLICY_VERSION, PROFILE_1, digest, numeric_text, preflight, reject
+from .delivery_inputs import (
+    POLICY_VERSION,
+    PROFILE_1,
+    PROFILE_COMBINED,
+    digest,
+    numeric_text,
+    policy_items,
+    preflight,
+    reject,
+)
 
 PLAN_VERSION = "repair-plan-v1"
 TEMPLATE_VERSION = "plain-xlsx-three-artifacts-v1"
@@ -82,37 +91,59 @@ def build_plan(job: dict, policy: dict) -> dict:
         )
     after_cells = copy.deepcopy(snapshot["cells"])
     patches = []
-    for target in gate["targets"]:
-        sheet = target["sheet"]
-        address = target["cell"]
-        current = after_cells[sheet].get(address, {"type": "blank", "value": None, "style": "0"})
-        if policy["profile"] == PROFILE_1:
-            replacement = {**current, "type": "number", "value": numeric_text(current["value"])}
-        else:
-            replacement = {
-                **current,
-                "type": "formula",
-                "value": translate_formula(policy["anchor_formula"], policy["anchor"], address),
-            }
-        replacement.pop("cached", None)
-        after_cells[sheet][address] = replacement
-        previous = typed_source(current)
-        updated = typed_source(replacement)
-        patches.append(
-            {
-                "candidate_id": digest(
-                    [snapshot["source_hash"], sheet, address, previous, updated]
-                ),
-                "sheet": sheet,
-                "cell": address,
-                "before": previous,
-                "before_hash": digest(previous),
-                "after": updated,
-                "change_kind": target["change_kind"],
-                "policy_digest": gate["policy_digest"],
-                "anchor": policy.get("anchor") if policy["profile"] != PROFILE_1 else None,
-            }
-        )
+    items = policy_items(policy)
+    item_gates = [
+        gate if len(items) == 1 and item is policy else preflight(snapshot, item)
+        for item in items
+    ]
+    seen: set[tuple[str, str]] = set()
+    for index, item in enumerate(items):
+        item_gate = item_gates[index]
+        if item_gate["status"] != "PRELIMINARY_ONLY":
+            reject(
+                "PREVIEW_VALIDATION_FAILED",
+                "선택한 전체 범위가 사전 검사 조건을 충족해야 합니다.",
+                422,
+            )
+        for target in item_gate["targets"]:
+            sheet = target["sheet"]
+            address = target["cell"]
+            key = (sheet, address)
+            if key in seen:
+                reject("OVERLAPPING_TARGETS", "같은 셀이 두 개 이상의 수정 기준과 중복됩니다.", 422)
+            seen.add(key)
+            current = after_cells[sheet].get(
+                address, {"type": "blank", "value": None, "style": "0"}
+            )
+            if item["profile"] == PROFILE_1:
+                replacement = {**current, "type": "number", "value": numeric_text(current["value"])}
+            else:
+                replacement = {
+                    **current,
+                    "type": "formula",
+                    "value": translate_formula(item["anchor_formula"], item["anchor"], address),
+                }
+            replacement.pop("cached", None)
+            after_cells[sheet][address] = replacement
+            previous = typed_source(current)
+            updated = typed_source(replacement)
+            patches.append(
+                {
+                    "candidate_id": digest(
+                        [snapshot["source_hash"], sheet, address, previous, updated]
+                    ),
+                    "sheet": sheet,
+                    "cell": address,
+                    "before": previous,
+                    "before_hash": digest(previous),
+                    "after": updated,
+                    "change_kind": target["change_kind"],
+                    "policy_digest": item_gate["policy_digest"],
+                    "policy_index": index,
+                    "profile_version": item["profile"],
+                    "anchor": item.get("anchor") if item["profile"] != PROFILE_1 else None,
+                }
+            )
     after = calculate(after_cells)
     impact = []
     auxiliary = []
@@ -176,12 +207,13 @@ def build_plan(job: dict, policy: dict) -> dict:
         "owner": job["owner"],
         "job_id": job["id"],
         "product_id": job["product"],
-        "sku": policy["profile"],
+        "sku": policy["profile"] if len(items) == 1 else PROFILE_COMBINED,
         "source_hash": snapshot["source_hash"],
         "inventory_hash": snapshot["inventory_hash"],
-        "profile_version": policy["profile"],
+        "profile_version": policy["profile"] if len(items) == 1 else PROFILE_COMBINED,
         "policy_version": POLICY_VERSION,
         "policy_digest": gate["policy_digest"],
+        "policy_items": copy.deepcopy(items),
         "engine_version": ENGINE_VERSION,
         "engine_fingerprint": engine_fingerprint(),
         "registry_version": REGISTRY_VERSION,

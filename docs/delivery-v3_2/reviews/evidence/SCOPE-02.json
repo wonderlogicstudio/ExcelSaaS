@@ -1,0 +1,59 @@
+{
+  "repo": "C:\\Users\\JinwonLee\\project\\ExcelSaaS",
+  "scratch": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-scope02",
+  "diff": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-scope02\\scope01.diff",
+  "status": "SCOPED_PASS_AWAITING_OWNER",
+  "scope": "SCOPE-01 retry: per-target original criteria binding for combined WorkbookCare policy grants/restores/reselects",
+  "changed_files": [
+    "apps/api/app/delivery_inputs.py",
+    "apps/api/app/payment_plan_actions.py",
+    "apps/api/app/payment_service.py",
+    "apps/api/tests/test_delivery_plan.py"
+  ],
+  "preserved_existing_wip_note": "Existing BATCH/SCOPE WIP was not reverted; delivery_rights.py was snapshotted but not edited by this pass.",
+  "implementation": [
+    "policy_scope now includes combined policy_target_bindings keyed by sheet, target cell, and original item policy_base_hash.",
+    "policy_scope_matches and restore_order require both item hash subset and bound target criteria subset, so target/criteria permutations fail closed including old missing combined bindings.",
+    "payment grant/sync paths carry policy_item_base_hashes and policy_target_bindings.",
+    "combined reselect rebuilds selected targets per original policy_index to preserve item criteria binding."
+  ],
+  "verification": [
+    {
+      "command": "apps\\api\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider apps\\api\\tests\\test_delivery_plan.py -k \"combined_paid_grant or restore_order_rejects_combined or restore_order_allows_combined or combined_reselection\" --basetemp C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-scope02\\pytest-temp-final",
+      "exit": 0,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-scope02\\pytest-scope01-final.log",
+      "result": "6 passed, 33 deselected, 1 warning"
+    },
+    {
+      "command": "apps\\api\\.venv\\Scripts\\python.exe -m ruff check --no-cache apps/api/app/delivery_inputs.py apps/api/app/payment_plan_actions.py apps/api/app/payment_service.py apps/api/tests/test_delivery_plan.py",
+      "exit": 0,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-scope02\\ruff-scope01-final.log",
+      "result": "All checks passed"
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m ruff check --no-cache apps/api/app/delivery_rights.py",
+      "exit": 0,
+      "result": "All checks passed!",
+      "tool_chunk": "af3c47"
+    }
+  ],
+  "environment_failures": [
+    "pytest-scope01-3/4 failed before product assertions due pytest temp directory PermissionError; final targeted pytest used require_escalated and dedicated basetemp.",
+    "ruff-scope01.log failed before diagnostics due .ruff_cache PermissionError; final Ruff used require_escalated and --no-cache."
+  ],
+  "limitations": [
+    "No full suite, Excel, browser, deployment, commit or push.",
+    "Test-file before snapshot was missing; git diff includes previous BATCH changes. Main source before snapshots retained.",
+    "RESELECT and TYPE independent acceptance and final integration remain separate pending work."
+  ],
+  "timestamp": "2026-09-16T11:01:42.0188119+09:00",
+  "unit": "SCOPE-02",
+  "review": "PASS after missing delivery_rights.py Ruff coverage supplied; no source changes after tested revision",
+  "summary": "Bound each combined repair target (sheet and cell) to its original business-criteria hash. Fresh targeted pytest passed 6 tests (33 deselected); scoped Ruff passed all 5 relevant files. Independent reviewer found no blocking code-path issue; requested missing file Ruff check passed exit 0. Genuine subsets are retained; role/anchor permutations and missing combined bindings are rejected. This is scoped backend verification, not Excel, PG, beta or whole-product acceptance.",
+  "source_hashes": {
+    "apps/api/app/delivery_inputs.py": "db8c50720473cdb82c96ffc66d8b19cf520251fcaf07d425f0a6046bca368bc2",
+    "apps/api/app/payment_plan_actions.py": "3145b957f8f7b3c8f4394d52c053132a7c05f369a7a1cee62e4ea10a72d01536",
+    "apps/api/app/payment_service.py": "928760dfa18a0342352dd1d8c1211ffbca9e6a93d923728af9b05811a52a8220",
+    "apps/api/tests/test_delivery_plan.py": "ac6c513356d9ee4ae4c359f13cde2db20ab22afe8ec65996c16ea927abaa2ddb"
+  }
+}

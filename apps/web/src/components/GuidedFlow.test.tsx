@@ -38,11 +38,14 @@ describe('guided approval boundaries',()=>{
    const guarded=(next:CoreStep)=>{if(next<=maxStep){setPending(null);setStep(next);}else setPending(next);};
    return <><button type="button" onClick={()=>guarded(3)}>3단계로 이동</button><RepairPlanPreview job={current} onJob={setCurrent} guidedStep={step} onNextStep={guarded}/><output aria-label="현재 단계">{step}</output></>;
   }
-  render(<Harness/>);await screen.findByText('=ROUND(C31*D31*(1-E31),0)');
+  render(<Harness/>);const restoredFormula=await screen.findByText('=ROUND(C31*D31*(1-E31),0)');
+  fireEvent.click(restoredFormula.closest('details')!.querySelector('summary')!);
+  const indirectImpact=screen.getByText('숫자 937,923');
+  fireEvent.click(indirectImpact.closest('details')!.querySelector('summary')!);
   expect(screen.queryByRole('button',{name:'전체 1곳의 정확한 변경·수식 확인'})).not.toBeInTheDocument();
   expect(screen.getByText('숫자 5,232')).toBeVisible();
-  expect(screen.getByText('숫자 937,923')).toBeVisible();
-  expect(screen.getByText('=ROUND(C31*D31*(1-E31),0)')).toBeVisible();
+  expect(indirectImpact).toBeVisible();
+  expect(restoredFormula).toBeVisible();
   expect(screen.getByRole('button',{name:'이 변경계획 승인'})).toBeDisabled();
   fireEvent.click(screen.getByRole('checkbox',{name:/위 1개 셀의 정확한/}));
   await waitFor(()=>expect(screen.getByRole('button',{name:'이 변경계획 승인'})).toBeEnabled());

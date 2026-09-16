@@ -1,5 +1,5 @@
 import type { Finding } from '../types';
-export type RepairDraft = { profile: string; sheet: string; targets: string[]; role?: string; anchor?: string; anchor_formula?: string; confirmed?: boolean; proposal?: boolean };
+export type RepairDraft = { profile: string; sheet: string; targets: string[]; role?: string; anchor?: string; anchor_formula?: string; confirmed?: boolean; proposal?: boolean; items?: RepairDraft[] };
 export const reviewKey = (finding: Finding) => JSON.stringify([finding.rule_code, finding.sheet, finding.cell]);
 export function reviewDisposition(finding: Finding): { label: string; profile?: string } {
   const cell = Boolean(finding.sheet && finding.cell && /^[A-Z]+[1-9][0-9]*$/.test(finding.cell));
