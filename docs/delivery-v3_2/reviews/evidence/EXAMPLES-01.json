@@ -1,0 +1,99 @@
+{
+  "task": "EXAMPLES-01",
+  "status": "CODE_REVIEW_PASS_UI_PENDING",
+  "source_changes_after_handoff_request": false,
+  "changed_files": [
+    "apps/web/src/components/ProposalExample.tsx",
+    "apps/web/src/components/ProposalExample.test.tsx",
+    "apps/web/src/proposal-flow.css"
+  ],
+  "preserved_files": [
+    {
+      "path": "apps/web/src/components/ProposalFlow.test.tsx",
+      "snapshot_sha256": "2C490A34178BDAACE49F5CA32478CBF77CE50356B8722E0E03FA053E80D162A3",
+      "current_sha256": "2C490A34178BDAACE49F5CA32478CBF77CE50356B8722E0E03FA053E80D162A3",
+      "matches_snapshot": true
+    },
+    {
+      "path": "apps/web/src/components/ScrollFlow.test.tsx",
+      "snapshot_sha256": "BFBC717272B1936251CC8A1567C315DD43BD8E46D4280EAB30DFE6C68CAE5842",
+      "current_sha256": "BFBC717272B1936251CC8A1567C315DD43BD8E46D4280EAB30DFE6C68CAE5842",
+      "matches_snapshot": true
+    }
+  ],
+  "commands": [
+    {
+      "command": "npm --prefix apps/web run test -- src/components/ProposalExample.test.tsx",
+      "workdir": "C:\\Users\\JinwonLee\\project\\ExcelSaaS",
+      "exit_code": 1,
+      "result": "failed_before_test_start",
+      "notes": "PowerShell blocked C:\\Program Files\\nodejs\\npm.ps1 because running scripts is disabled."
+    },
+    {
+      "command": "npm.cmd --prefix apps/web run test -- src/components/ProposalExample.test.tsx",
+      "workdir": "C:\\Users\\JinwonLee\\project\\ExcelSaaS",
+      "exit_code": 1,
+      "result": "failed",
+      "counts": {
+        "test_files_failed": 1,
+        "tests_failed": 3,
+        "tests_passed": 1
+      },
+      "notes": "Initial new test file lacked cleanup between renders; fixed test harness only."
+    },
+    {
+      "command": "npm.cmd --prefix apps/web run test -- src/components/ProposalExample.test.tsx",
+      "workdir": "C:\\Users\\JinwonLee\\project\\ExcelSaaS",
+      "exit_code": 0,
+      "result": "passed",
+      "counts": {
+        "test_files_passed": 1,
+        "tests_passed": 4
+      }
+    },
+    {
+      "command": "npm.cmd --prefix apps/web run test -- src/components/ProposalFlow.test.tsx src/components/ScrollFlow.test.tsx",
+      "workdir": "C:\\Users\\JinwonLee\\project\\ExcelSaaS",
+      "exit_code": 0,
+      "result": "passed",
+      "counts": {
+        "test_files_passed": 2,
+        "tests_passed": 27
+      }
+    },
+    {
+      "command": "npm.cmd --prefix apps/web run build",
+      "workdir": "C:\\Users\\JinwonLee\\project\\ExcelSaaS",
+      "exit_code": 0,
+      "result": "passed",
+      "notes": "Ran tsc -b && vite build; Vite reported 1630 modules transformed."
+    }
+  ],
+  "logs": {
+    "captured_in_tool_returns": true,
+    "separate_log_files": false
+  },
+  "not_run": [
+    "actual beta UI/browser verification",
+    "deploy",
+    "commit",
+    "push",
+    "backend tests",
+    "Excel replay",
+    "full regression"
+  ],
+  "review": {
+    "result": "PASS",
+    "scope": "Independent source/snapshot review; test execution inspected through builder handoff, raw logs not separately captured. No tests rerun.",
+    "findings": "No blocking findings; downstream exact disclosure and approval unchanged."
+  },
+  "deployed": false,
+  "committed": false,
+  "pushed": false,
+  "source_sha256": {
+    "apps/web/src/components/ProposalExample.tsx": "8bbe084f813b7be1059cbdbe9e2ce29c20787b93fbd6d752a96f436238f3f432",
+    "apps/web/src/components/ProposalExample.test.tsx": "6d11bb92d097c3a99d2b155313bfe2dc9d306b2087b29a2de71dec27e2ebc858",
+    "apps/web/src/proposal-flow.css": "fccce349e056a67b970f6c0674cd709f6fd1a9236a41fa45a728d74560dda89c"
+  },
+  "recording_history": "Previous record-write approval rejected because review model was at capacity. Owner explicitly requested completion in ExcelSaaS; records now resumed. No product edits in recording step."
+}

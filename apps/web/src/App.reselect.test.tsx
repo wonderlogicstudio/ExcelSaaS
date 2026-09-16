@@ -86,11 +86,11 @@ describe('App proposal reselection flow', () => {
     fireEvent.click(await screen.findByRole('button', { name: '시트별 수정 제안 보기' }));
     await screen.findByRole('heading', { name: '어떤 시트의 수정 제안을 볼까요?' });
     fireEvent.click(view.container.querySelector('.proposal-option button')!);
-    const details = await screen.findByRole('region', { name: /정산 B열 제안/ });
+    const details = await screen.findByRole('region', { name: /정산 B의 제안/ });
     fireEvent.click(within(details).getByLabelText('B3'));
     fireEvent.click(details.querySelector<HTMLInputElement>('input[value="AMOUNT"]')!);
     fireEvent.click(details.querySelector<HTMLInputElement>('.delivery-check input[type="checkbox"]')!);
-    fireEvent.click(within(details).getByRole('button', { name: '이 제안으로 수정 예시 확인' }));
+    fireEvent.click(within(details).getByRole('button', { name: '이 묶음만 변경 예시 확인' }));
     fireEvent.click(await screen.findByRole('checkbox', { name: /업로드 권한/ }));
     fireEvent.click(screen.getByRole('button', { name: /원본으로 수정 범위 확인/ }));
     await waitFor(() => expect(actions.filter(action => action.action === 'prepare_plan')).toHaveLength(1));
@@ -99,7 +99,7 @@ describe('App proposal reselection flow', () => {
     await screen.findByRole('heading', { name: '어떤 시트의 수정 제안을 볼까요?' });
     fireEvent.click(within(details).getByLabelText('B3'));
     fireEvent.click(details.querySelector<HTMLInputElement>('.delivery-check input[type="checkbox"]')!);
-    fireEvent.click(within(details).getByRole('button', { name: '이 제안으로 수정 예시 확인' }));
+    fireEvent.click(within(details).getByRole('button', { name: '이 묶음만 변경 예시 확인' }));
 
     await waitFor(() => expect(actions.filter(action => action.action === 'prepare_plan')).toHaveLength(2));
     expect(actions.filter(action => action.action === 'delete')).toHaveLength(0);

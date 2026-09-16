@@ -27,10 +27,10 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   await screen.findByText('문자 “1,200”');
   expect(screen.getByLabelText('1단계에서 고른 1개만 제안받기')).toBeChecked();
   expect(screen.getByRole('option',{name:'메모 · 발견된 수정 후보 없음'})).toBeInTheDocument();
-  fireEvent.click(screen.getByRole('radio',{name:/구분하는 번호/}));expect(screen.getByRole('button',{name:'이 제안으로 수정 예시 확인'})).toBeDisabled();
+  fireEvent.click(screen.getByRole('radio',{name:/구분하는 번호/}));expect(screen.getByRole('button',{name:'이 묶음만 변경 예시 확인'})).toBeDisabled();
   fireEvent.click(screen.getByRole('radio',{name:/^금액/}));
   fireEvent.click(screen.getByRole('checkbox',{name:/선택한 칸은 계산할/}));
-  fireEvent.click(screen.getByRole('button',{name:'이 제안으로 수정 예시 확인'}));
+  fireEvent.click(screen.getByRole('button',{name:'이 묶음만 변경 예시 확인'}));
   expect(prepare).toHaveBeenCalledWith(expect.objectContaining({profile:RP01,sheet:'정산',targets:['B2'],role:'AMOUNT',confirmed:true,proposal:true}));
   fireEvent.change(screen.getByLabelText('제안을 확인할 시트'),{target:{value:'메모'}});
   expect(screen.getByRole('status')).toHaveTextContent('발견된 수정 후보가 없습니다');
@@ -45,15 +45,58 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   await waitFor(()=>expect(view.container.querySelector('input[value="AMOUNT"]')).toBeTruthy());
   fireEvent.click(view.container.querySelector('input[value="AMOUNT"]')!);
   fireEvent.click(view.container.querySelector('.delivery-check input[type="checkbox"]')!);
-  fireEvent.click(screen.getByRole('button',{name:'수정 목록에 이 묶음 추가'}));
+  fireEvent.click(screen.getByRole('button',{name:'변경 목록에 추가'}));
   const optionButtons=Array.from(view.container.querySelectorAll<HTMLButtonElement>('.proposal-option button'));
   fireEvent.click(optionButtons.find(button=>!button.disabled)!);
   await waitFor(()=>expect(evidence.readSourceCells).toHaveBeenCalledTimes(2));
   await waitFor(()=>expect(view.container.querySelector('.proposal-anchor select')).toHaveValue('F2'));
   fireEvent.click(view.container.querySelector('.delivery-check input[type="checkbox"]')!);
-  fireEvent.click(screen.getByRole('button',{name:'수정 목록에 이 묶음 추가'}));
-  fireEvent.click(screen.getByRole('button',{name:'수정 목록의 전체 변경 예시 확인'}));
+  fireEvent.click(screen.getByRole('button',{name:'변경 목록에 추가'}));
+  fireEvent.click(screen.getByRole('button',{name:'선택한 2곳의 변경 예시 확인'}));
   expect(prepare).toHaveBeenCalledWith(expect.objectContaining({profile:COMBINED,confirmed:true,proposal:true,targets:['B2','F3'],items:[expect.objectContaining({profile:RP01,targets:['B2']}),expect.objectContaining({profile:RP02,targets:['F3'],anchor:'F2',anchor_formula:'=C2*D2'})]}));
+ });
+ it('clears the basket when the upstream step 1 selection changes but keeps it while switching sheets',async()=>{
+  evidence.readSourceCells.mockResolvedValue([{cell:'B2',type:'text',text:'1,200'}]);
+  const prepare=vi.fn();
+  function Harness(){
+    const [selection,setSelection]=useState({findings:[f('B2')],locked:false,toggle:vi.fn()});
+    return <><button type="button" onClick={()=>setSelection({findings:[f('B3')],locked:false,toggle:vi.fn()})}>change upstream selection</button><RepairProposalPicker findings={[f('B2'),f('B3'),{...f('B2'),sheet:'다른'}]} sheets={['정산','다른']} file={file} selection={selection} intent={noRepairIntent} available onPrepare={prepare}/></>;
+  }
+  render(<Harness/>);
+  await waitFor(()=>expect(screen.getByRole('radio',{name:/^금액/})).toBeInTheDocument());
+  fireEvent.click(screen.getByRole('radio',{name:/^금액/}));
+  fireEvent.click(screen.getByRole('checkbox',{name:/선택한 칸은 계산할/}));
+  fireEvent.click(screen.getByRole('button',{name:'변경 목록에 추가'}));
+  expect(screen.getByRole('region',{name:'선택한 수정 목록'})).toHaveTextContent('선택한 1곳');
+  fireEvent.click(screen.getByText('담은 묶음 1개 보기'));
+  expect(screen.getByRole('button',{name:'정산 B열 숫자 텍스트 정리 1곳 제외'})).toBeVisible();
+  fireEvent.change(screen.getByLabelText('제안을 확인할 시트'),{target:{value:'다른'}});
+  expect(screen.getByRole('region',{name:'선택한 수정 목록'})).toHaveTextContent('선택한 1곳');
+  fireEvent.click(screen.getByRole('button',{name:'change upstream selection'}));
+  await waitFor(()=>expect(screen.queryByRole('region',{name:'선택한 수정 목록'})).not.toBeInTheDocument());
+  expect(screen.getByText('1단계 선택이 바뀌어 기존 수정 목록을 비웠습니다.')).toBeInTheDocument();
+  expect(prepare).not.toHaveBeenCalled();
+ });
+ it('shows an added basket state, undo, and an explicit update when criteria change',async()=>{
+  evidence.readSourceCells.mockResolvedValue([{cell:'B2',type:'text',text:'1,200'}]);
+  const prepare=vi.fn();
+  render(<RepairProposalPicker findings={[f('B2'),f('B3')]} sheets={['정산']} file={file} selection={{findings:[],locked:false,toggle:vi.fn()}} intent={noRepairIntent} available onPrepare={prepare}/>);
+  await waitFor(()=>expect(screen.getByRole('radio',{name:/^금액/})).toBeInTheDocument());
+  fireEvent.click(screen.getByRole('radio',{name:/^금액/}));
+  fireEvent.click(screen.getByRole('checkbox',{name:/선택한 칸은 계산할/}));
+  fireEvent.click(screen.getByRole('button',{name:'변경 목록에 추가'}));
+  expect(screen.getByRole('button',{name:'✓ 추가됨'})).toBeDisabled();
+  expect(screen.getByRole('button',{name:'되돌리기'})).toBeVisible();
+  expect(screen.getByRole('region',{name:'선택한 수정 목록'})).toHaveTextContent('선택한 2곳');
+  expect(screen.getByRole('button',{name:'선택한 2곳의 변경 예시 확인'})).toBeVisible();
+  fireEvent.click(screen.getByLabelText('B3'));
+  expect(screen.getByText(/목록은 아직 이전 선택/)).toBeVisible();
+  fireEvent.click(screen.getByRole('checkbox',{name:/선택한 칸은 계산할/}));
+  fireEvent.click(screen.getByRole('button',{name:'목록 업데이트'}));
+  expect(screen.getByRole('region',{name:'선택한 수정 목록'})).toHaveTextContent('선택한 1곳');
+  fireEvent.click(screen.getByRole('button',{name:'되돌리기'}));
+  expect(screen.queryByRole('region',{name:'선택한 수정 목록'})).not.toBeInTheDocument();
+  expect(prepare).not.toHaveBeenCalled();
  });
  it('carries the selected real anchor formula without requiring cell or formula typing or auto-confirmation',async()=>{
   evidence.readSourceCells.mockResolvedValue([{cell:'F3',type:'blank',text:'빈 셀'},{cell:'F2',type:'formula',text:'=C2*D2',cached:'10'},{cell:'F4',type:'formula',text:'=C4*D4',cached:'14'}]);const prepare=vi.fn();
@@ -62,7 +105,7 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   expect(screen.getByRole('checkbox',{name:/선택한 빈 칸도/})).not.toBeChecked();
   fireEvent.change(screen.getByLabelText('어느 칸과 같은 방식으로 계산할까요?'),{target:{value:'F4'}});
   fireEvent.click(screen.getByRole('checkbox',{name:/선택한 빈 칸도/}));
-  fireEvent.click(screen.getByRole('button',{name:'이 제안으로 수정 예시 확인'}));
+  fireEvent.click(screen.getByRole('button',{name:'이 묶음만 변경 예시 확인'}));
   expect(prepare).toHaveBeenCalledWith(expect.objectContaining({targets:['F3'],anchor:'F4',anchor_formula:'=C4*D4',confirmed:true}));
  });
  it('does not use delayed source evidence from a previous sheet',async()=>{

@@ -1,3 +1,33 @@
+## EXAMPLES-01 - code reviewed; beta/UI pending
+
+One actual representative per repair type, type/cell totals and honest missing-calculation copy implemented. Existing exact disclosure/approval and BASKET-01 work preserved. Builder executed focused tests: 4+27 PASS and web type/build exit 0. Initial npm.ps1 policy failure and test-cleanup failure followed by corrected tests are preserved in the evidence. Independent source review PASS; raw test logs not separately captured, reviewer did not rerun tests.
+
+Changed files: ProposalExample.tsx, ProposalExample.test.tsx, proposal-flow.css. Exact commands, exit codes and source hashes: docs/delivery-v3_2/reviews/evidence/EXAMPLES-01.json. Actual desktop/mobile/keyboard and beta verification NOT_RUN; no deployment, commit or push for EXAMPLES-01. No backend changes, full regression or Excel replay. Prior FINAL-01 engine/Excel evidence applies only to unchanged scope, not a fresh run.
+
+Next single proposed unit: protected-beta deployment of EXAMPLES-01 and screen verification together with pending BASKET-01. Stop under EFFICIENCY-02. Previous record write was blocked by approval-model capacity; owner requested this documentation-only completion.
+
+---
+
+# ACTIVE APPROVED - EXAMPLES-01
+
+Owner approved one real representative example per selected repair type, type/cell totals and continued access to full exact changes. Frontend ProposalExample and focused tests/CSS only; preserve pending BASKET-01 work. Targeted tests, web build and independent review; actual beta screen verification remains separate/pending. No backend changes, full regression, Excel replay or push.
+
+---
+
+
+## BASKET-01 - deployed, actual UI file selection pending
+
+Added/undo/update states, persistent basket counts and colocated preview CTA implemented. Desktop side and mobile compact expandable summary. Upstream selection resets basket; sheet switch preserves it. Focused ProposalFlow19 + App.reselect1 tests, build and independent review PASS. Web Worker 5534e8ce-6671-4be7-aead-03ebb5972305 deployed; API, bindings, Access and user lock unchanged.
+
+File chooser timed out before synthetic upload. Actual changed-basket screen validation is NOT PASS and awaits user selection of complex03 in tab209532909. No commit/push yet. Reuse FINAL01 unchanged backend/Excel/delivery evidence; do not replay expensive checks. [Evidence](reviews/evidence/BASKET-01.json).
+
+---
+# ACTIVE APPROVED - BASKET-01
+
+Owner approved clear added/undo states and a persistent selected-repair basket with co-located preview CTA (desktop side, mobile bottom), counts and removal. No backend/repair/approval contract changes. Allowlist RepairProposalPicker.tsx, related CSS and focused picker/proposal tests. Use UTF-8-safe edits and snapshots. Targeted tests and web build, independent review, protected beta web-only deploy and actual UI verification; reuse unchanged engine/Excel evidence. Selective local commit after verification, no push, stop. Preserve user dependencies.lock.json and prior records.
+
+---
+
 
 
 ## FINAL-01 - verified protected-beta combined delivery

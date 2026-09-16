@@ -1,0 +1,149 @@
+{
+  "status": "DEPLOYED_UI_SELECTION_PENDING",
+  "review": "PASS after upstream-selection reset and accessible removal corrections",
+  "implementation": [
+    "Added/check/color and adjacent undo",
+    "Explicit update for changed criteria; no silent basket mutation",
+    "Desktop side summary and compact mobile bottom summary with expandable list",
+    "Co-located group/cell counts, removal and preview CTA",
+    "Upstream selection resets basket; sheet switching preserves it"
+  ],
+  "tests": [
+    {
+      "command": "npm.cmd exec vitest run src/components/ProposalFlow.test.tsx",
+      "exit": 0,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-basket01\\09-proposalflow-test-review-correction.log",
+      "result": "19 tests passed"
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web",
+      "exit": 0,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-basket01\\10-web-build-review-correction.log",
+      "result": "tsc -b and vite build passed"
+    },
+    {
+      "command": "git diff --check -- apps/web/src/components/RepairProposalPicker.tsx apps/web/src/proposal-flow.css apps/web/src/components/ProposalFlow.test.tsx",
+      "exit": 0,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-basket01\\11-diff-check-review-correction.log",
+      "result": "passed with CRLF warnings only"
+    }
+  ],
+  "app_reselection": {
+    "status": "PASS_AFTER_AFFECTED_TEST_CORRECTION",
+    "scope": "BASKET-01 affected App.reselect label/locator correction",
+    "changed_files": [
+      "apps/web/src/components/RepairProposalPicker.tsx",
+      "apps/web/src/proposal-flow.css",
+      "apps/web/src/components/ProposalFlow.test.tsx",
+      "apps/web/src/App.reselect.test.tsx"
+    ],
+    "additional_correction": [
+      "Updated App.reselect button labels to 이 묶음만 변경 예시 확인",
+      "Updated App.reselect detail region locator to current 정산 B의 제안 accessible name"
+    ],
+    "verification": [
+      {
+        "command": "npm.cmd exec vitest run src/App.reselect.test.tsx",
+        "exit": 0,
+        "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-basket01\\15-app-reselect-test.log",
+        "result": "1 test passed; pre-existing FILE_DRAWING_PARTS duplicate-key warning remains"
+      },
+      {
+        "command": "npm.cmd exec vitest run src/components/ProposalFlow.test.tsx",
+        "exit": 0,
+        "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-basket01\\09-proposalflow-test-review-correction.log",
+        "result": "19 tests passed"
+      },
+      {
+        "command": "npm.cmd run build --workspace @workbookcare/web",
+        "exit": 0,
+        "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-basket01\\10-web-build-review-correction.log",
+        "result": "previous review-correction build passed; not rerun for test-only App.reselect change"
+      }
+    ],
+    "artifacts": {
+      "handoff": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-basket01\\handoff-app-reselect-corrected.json",
+      "diff": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-basket01\\basket01-app-reselect-corrected.diff",
+      "git_status": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-basket01\\git-status-app-reselect-corrected.txt",
+      "app_reselect_snapshot": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-basket01\\before\\apps\\web\\src\\App.reselect.test.tsx"
+    },
+    "not_run": [
+      "full web suite",
+      "API tests",
+      "Excel replay",
+      "browser/deployment checks",
+      "commit",
+      "push",
+      "build after App.reselect test-only locator update"
+    ],
+    "timestamp": "2026-09-16T15:18:45.2563159+09:00"
+  },
+  "deployment": {
+    "worker": "5534e8ce-6671-4be7-aead-03ebb5972305",
+    "rollback_worker": "8e7c4569-2801-4502-aad0-2a714b190234",
+    "all_bindings_equal": true,
+    "api_unchanged": true,
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/precision-verification",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/compare",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/automation",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/help",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/orders",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "api_and_user_lock_unchanged": true,
+  "ui": {
+    "tab": "209532909",
+    "url": "https://workbookcare-beta.wonderlogic-studio.workers.dev/",
+    "status": "Home loads; file chooser timed out before upload. Changed basket UI visual verification pending user selection.",
+    "file": "samples/WorkbookCare_Complex_Validation_2026-09-13/03_정산수정_연쇄계산.xlsx"
+  },
+  "reused": "FINAL01 engine/Excel725-value/actual3downloads evidence; no backend changes, no replay",
+  "not_run": [
+    "new basket actual desktop/mobile visual validation",
+    "whole regression repeated",
+    "new Excel replay",
+    "local commit",
+    "remote push"
+  ]
+}

@@ -1165,5 +1165,19 @@
         "pushed": false
       }
     }
+  },
+  "basket_01": {
+    "status": "DEPLOYED_UI_SELECTION_PENDING",
+    "evidence": "reviews/evidence/BASKET-01.json",
+    "deployed": true,
+    "committed": false,
+    "pushed": false
+  },
+  "examples_01": {
+    "status": "CODE_REVIEW_PASS_UI_PENDING",
+    "evidence": "reviews/evidence/EXAMPLES-01.json",
+    "deployed": false,
+    "committed": false,
+    "pushed": false
   }
 }
