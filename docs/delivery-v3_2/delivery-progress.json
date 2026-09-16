@@ -1170,14 +1170,23 @@
     "status": "DEPLOYED_UI_SELECTION_PENDING",
     "evidence": "reviews/evidence/BASKET-01.json",
     "deployed": true,
-    "committed": false,
-    "pushed": false
+    "committed": true,
+    "pushed": true,
+    "source_commit": "012ab92"
   },
   "examples_01": {
-    "status": "CODE_REVIEW_PASS_UI_PENDING",
+    "status": "DEPLOYED_EXAMPLE_UI_PENDING",
     "evidence": "reviews/evidence/EXAMPLES-01.json",
-    "deployed": false,
-    "committed": false,
-    "pushed": false
+    "deployed": true,
+    "committed": true,
+    "pushed": true,
+    "source_commit": "012ab92",
+    "deployment_evidence": "reviews/evidence/EXAMPLES-01-DEPLOY.json"
+  },
+  "rules_01": {
+    "status": "VERIFIED_DEPLOYED",
+    "evidence": "reviews/evidence/RULES-01.json",
+    "deployed": true,
+    "git_delivery": "owner-authorized; verify commit and remote head in Git"
   }
 }

@@ -5,30 +5,30 @@
   "profiles": [
     "COMBINED_RP01_RP02"
   ],
-  "patch_fingerprint": "418f6d6e86c4ec9826cd455cf817ff6f48ac78b8c9ad1919133a394d001e712a",
+  "patch_fingerprint": "9b33f53a0d9694c7fc212bd308658bae6571fc7def547dc1869f9c0c472db452",
   "excel_version": "16.0",
   "excel_build": 20326,
   "actual_excel_files_opened": 3,
   "expected_values": 725,
   "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
-  "plan_digest": "59d86b3badc656bafec684158bbdd05497937840d5a11786c0f81250e8081855",
+  "plan_digest": "dab477d9b415a120070bfbbcabcf70aa7940c0c53018c167016b0d80e1f21ae9",
   "output_hash": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
-  "changes_hash": "84c313bc1af842387fd9a159b6f7df3344939a8935d935f8c29c3e19f4480cfe",
-  "verification_html_hash": "ba9fb1ba312ff0b85ceaf47dd16d9b9e9836555536915196df554bc2c60e6f81",
+  "changes_hash": "403d13f834b4d7e6aa99e12e10cf30581faf0ba9203ab798cb2039f8d325e46c",
+  "verification_html_hash": "100493b26915c1ba97e2d5c904304d76031a3461520ad3d8d2404a620ad82f47",
   "original_and_outputs_unchanged": true,
   "macros_disabled": true,
   "external_link_update_disabled": true,
   "saved": false,
   "source_and_output_hashes": {
-    "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\compatibility\\complex03_combined_repaired.xlsx": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
+    "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\compatibility\\complex03_combined_repaired.xlsx": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
     "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\samples\\WorkbookCare_Complex_Validation_2026-09-13\\03_정산수정_연쇄계산.xlsx": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
-    "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\compatibility\\complex03_combined_changes.xlsx": "84c313bc1af842387fd9a159b6f7df3344939a8935d935f8c29c3e19f4480cfe"
+    "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\compatibility\\complex03_combined_changes.xlsx": "403d13f834b4d7e6aa99e12e10cf30581faf0ba9203ab798cb2039f8d325e46c"
   },
   "legacy_profiles_not_freshly_claimed": true,
   "provenance": {
     "oracle_sha256": "de614e665c08e2779d8c23ba5ba7655671a498e66744b3ea42b0ba1c3e2bf1d3",
-    "inputs_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\compatibility\\inputs.json",
-    "excel_evidence_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\combined-excel.json",
-    "bound_evidence_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\excel-bound-evidence.json"
+    "inputs_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\compatibility\\inputs.json",
+    "excel_evidence_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\combined-excel.json",
+    "bound_evidence_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\excel-bound-evidence.json"
   }
 }

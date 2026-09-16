@@ -1,3 +1,23 @@
+## RULES-01 - verified and deployed
+
+Extracted numeric-text parsing/eligibility/replacement and blank-formula eligibility/replacement into repair_rules modules. Common validation, translation, calculation, approval, storage and UI unchanged. Compatibility re-export retained; all new modules covered by patch fingerprint. Before/after substantive behavior capture is byte-identical. Focused tests and Ruff PASS; full scripts/verify.ps1 exit0; fresh actual Excel3files/725values PASS, read-only/no-save. Independent code and evidence review PASS.
+
+Protected beta API workbookcare-api-beta-00023-juy deployed after staged Linux runtime20 calculation cases/two repair profiles/six artifacts. Existing Worker/Gateway/Access/private IAM/maxScale1/paymentOFF preserved. Original dirty dependencies.lock.json and unrelated untracked files excluded. Fresh Excel evidence remains combined-only. No new features or full browser/PG/commercial readiness claim. Evidence: reviews/evidence/RULES-01.json and RULES-01-full-verify.log. User explicitly authorized selective commit/push/deploy for this unit. Stop; no next feature started.
+
+---
+
+# ACTIVE APPROVED - RULES-01
+
+Owner explicitly approved extracting numeric normalization and blank-formula restoration rules with unchanged core/UI/results, followed by verification, selective commit, push and protected-beta deployment. Builder 5.5 Medium; independent reviewer Astra High. Scope: two rule modules, existing input/plan callers, necessary fingerprint coverage and focused tests; no support expansion or unrelated deletion. Preserve dirty dependencies.lock.json and earlier records. Validate standalone/combined/negative behavior and renew actual compatibility evidence if source fingerprints change; no evidence waiver. Final integration/deployment explicitly authorized in this unit.
+
+---
+
+## EXAMPLES-01 protected-beta deployment completed
+
+Owner approved deployment. Source commit 012ab92 is committed and pushed to origin/main. Hosted-beta build and guarded upload/deploy commands exit0. Worker eddaac03-d2d4-4d8a-8fe5-5ee3a38c8dee active at 100%; API, bindings and Access unchanged. Authenticated browser homepage loaded successfully. Per-type example result screen validation remains NOT_RUN; do not treat deployment as completed sample/UI verification. Initial system Python lacked httpx; existing project virtualenv resolved tooling without package installation. Evidence: reviews/evidence/EXAMPLES-01-DEPLOY.json. Previous status records below are historical.
+
+---
+
 ## EXAMPLES-01 - code reviewed; beta/UI pending
 
 One actual representative per repair type, type/cell totals and honest missing-calculation copy implemented. Existing exact disclosure/approval and BASKET-01 work preserved. Builder executed focused tests: 4+27 PASS and web type/build exit 0. Initial npm.ps1 policy failure and test-cleanup failure followed by corrected tests are preserved in the evidence. Independent source review PASS; raw test logs not separately captured, reviewer did not rerun tests.

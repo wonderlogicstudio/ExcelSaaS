@@ -1,0 +1,162 @@
+{
+  "status": "DEPLOYED_EXAMPLE_UI_PENDING",
+  "source_commit": "012ab92bb9f5335283d4e80a5d1a0f5816dc9259",
+  "live": {
+    "worker": "eddaac03-d2d4-4d8a-8fe5-5ee3a38c8dee",
+    "rollback_worker": "5534e8ce-6671-4be7-aead-03ebb5972305",
+    "all_bindings_equal": true,
+    "api_unchanged": true,
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/precision-verification",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/compare",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/automation",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/help",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/orders",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "commands": [
+    {
+      "phase": "baseline",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+      "exit_code": 0
+    },
+    {
+      "phase": "baseline",
+      "command": "wrangler versions view 5534e8ce-6671-4be7-aead-03ebb5972305 --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "build",
+      "command": "npm build hosted beta",
+      "exit_code": 0
+    },
+    {
+      "phase": "upload",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "upload",
+      "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+      "exit_code": 0
+    },
+    {
+      "phase": "upload",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+      "exit_code": 0
+    },
+    {
+      "phase": "upload",
+      "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true",
+      "exit_code": 0
+    },
+    {
+      "phase": "upload",
+      "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag examples01 --message Approved EXAMPLES-01 per-type representative examples; same private boundaries",
+      "exit_code": 0
+    },
+    {
+      "phase": "upload",
+      "command": "wrangler versions view eddaac03-d2d4-4d8a-8fe5-5ee3a38c8dee --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "deploy",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "deploy",
+      "command": "wrangler versions view eddaac03-d2d4-4d8a-8fe5-5ee3a38c8dee --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "deploy",
+      "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+      "exit_code": 0
+    },
+    {
+      "phase": "deploy",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+      "exit_code": 0
+    },
+    {
+      "phase": "deploy",
+      "command": "wrangler versions deploy eddaac03-d2d4-4d8a-8fe5-5ee3a38c8dee@100 --yes --message Approved EXAMPLES-01 per-type representative examples",
+      "exit_code": 0
+    },
+    {
+      "phase": "deploy",
+      "command": "wrangler deployments list --json",
+      "exit_code": 0
+    },
+    {
+      "phase": "deploy",
+      "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3",
+      "exit_code": 0
+    },
+    {
+      "phase": "deploy",
+      "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3",
+      "exit_code": 0
+    }
+  ],
+  "browser": "Authenticated Chrome tab209532922 loaded beta home successfully. Per-type result display not exercised in this deployment check.",
+  "initial_failure": "System Python missing httpx exit1; reused existing apps/api/.venv Python, no installation.",
+  "not_run": [
+    "synthetic upload and per-type result desktop/mobile check",
+    "full delivery replay",
+    "Excel replay",
+    "full regression"
+  ]
+}

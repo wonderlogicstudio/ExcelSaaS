@@ -1,0 +1,175 @@
+{
+  "status": "VERIFIED_DEPLOYED",
+  "scope": "RP01/RP02 eligibility and replacement extraction; shared translation/core/UI unchanged; not a plugin framework",
+  "changed_runtime_files": [
+    "apps/api/app/delivery_execution.py",
+    "apps/api/app/delivery_inputs.py",
+    "apps/api/app/delivery_patch_reference.json",
+    "apps/api/app/delivery_plan.py",
+    "apps/api/app/repair_rules/formula_restore.py",
+    "apps/api/app/repair_rules/numeric_text.py",
+    "apps/api/app/repair_rules/__init__.py"
+  ],
+  "behavior_comparison": {
+    "byte_identical": true,
+    "sha256": "1947b289d5421048597444017c709ced5dded372c2e44a7dae2f4599136bc648",
+    "coverage": "positive/negative preflights and substantive standalone/combined plans; volatile identity fields excluded by capture script"
+  },
+  "review": "Astra High independent source and bound-evidence reviews PASS; no duplicate test execution",
+  "targeted": {
+    "baseline": 79,
+    "post_initial_passed": 80,
+    "post_initial_failed": 1,
+    "correction": "Sparse blank fixture corrected; two new tests passed. Ruff import correction passed."
+  },
+  "full_regression": {
+    "command": [
+      "powershell.exe",
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      ".\\scripts\\verify.ps1"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 306.06,
+    "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\22-full-verify.log"
+  },
+  "excel": {
+    "saved": false,
+    "macros_disabled": true,
+    "expected_values": 725,
+    "kind": "ACTUAL_EXCEL_COM_COMBINED_REPAIR",
+    "source_and_output_hashes": {
+      "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\compatibility\\complex03_combined_repaired.xlsx": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
+      "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\samples\\WorkbookCare_Complex_Validation_2026-09-13\\03_정산수정_연쇄계산.xlsx": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
+      "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\compatibility\\complex03_combined_changes.xlsx": "403d13f834b4d7e6aa99e12e10cf30581faf0ba9203ab798cb2039f8d325e46c"
+    },
+    "actual_files_opened": 3,
+    "external_link_update_disabled": true,
+    "combined_sum": 2177677,
+    "excel_version": "16.0",
+    "status": "PASS",
+    "patches": 11,
+    "excel_build": 20326
+  },
+  "release": {
+    "revision": "workbookcare-api-beta-00023-juy",
+    "worker_version": "eddaac03-d2d4-4d8a-8fe5-5ee3a38c8dee",
+    "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+    "security_invariants_preserved": true,
+    "private_iam": true,
+    "max_instances": 1,
+    "payment_mode": "OFF",
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "runtime": {
+    "revision": "workbookcare-api-beta-00022-qan",
+    "checks": [
+      {
+        "event": "delivery_runtime_verified",
+        "reference_cases": 20,
+        "repair_profiles": 2,
+        "artifacts": 6
+      }
+    ],
+    "payment_tested": false
+  },
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:8f68132ce9c6285e447b3a1cd1a767691c62579e08752ecffb45e30e6f9c12e7",
+  "source_freeze": {
+    "api_changed": [
+      "apps/api/app/delivery_execution.py",
+      "apps/api/app/delivery_inputs.py",
+      "apps/api/app/delivery_patch_reference.json",
+      "apps/api/app/delivery_plan.py",
+      "apps/api/app/repair_rules/formula_restore.py",
+      "apps/api/app/repair_rules/numeric_text.py",
+      "apps/api/app/repair_rules/__init__.py"
+    ],
+    "sha256": {
+      "apps/api/app/comparison_artifacts.py": "781f109e578b77ff39c93d298b57bc70093827078239768586cdbbbeb4d20a6c",
+      "apps/api/app/comparison_engine.py": "01ac62bb1633a6dbfb967297f8a5b00498bd79d834400dc2bd531d8193073d4d",
+      "apps/api/app/comparison_process.py": "99231013e20efa3d143779a768f42fc0878112358028a2972ef0c730de6ebda7",
+      "apps/api/app/comparison_service.py": "a97f0c91c248957fd1bd2243fb7d1712ae46dbf7079d54c360bd3c7458d4fb8a",
+      "apps/api/app/comparison_synthetic_sources.json": "bec9c0495b658df59c3719d84328dac3acd324df64a984d16f2c8ab054598489",
+      "apps/api/app/comparison_verification_template.html": "6a82e55a55211973961a69cfed1c7eff28367cf4a9b7201b1fa8e79e5f8c21c2",
+      "apps/api/app/comparison_worker.py": "ca4bc1a50657a5e9698d678ffb023b06f770251c57b987b706e8cf1bbd99464a",
+      "apps/api/app/config.py": "2c51d8404addf68e1d47b6b01099fdd2ee3919396cb241184e2df462b6d77d30",
+      "apps/api/app/control_plane.py": "cb98528b704a8405a85bbead9b2db1d53d6b7ad9a8cc983409c087868e6cb3ec",
+      "apps/api/app/delivery_api.py": "d7cfc3818e884fe7b002e9037b5793508ce26cbcde6b337905550f09ef87d956",
+      "apps/api/app/delivery_artifacts.py": "69c66a93d3103c179c481bc44ce4f21b684e01dfb113f04533598cbbe941a81f",
+      "apps/api/app/delivery_artifact_process.py": "4b07ecaef3556e41e8268f98503e17a3903fba25fa481fd3cbc04ce8834e9a76",
+      "apps/api/app/delivery_calculation.py": "641670c51add34fd51cb9ffdc6d34caa8cf31da7ce052f1749663cff425a986d",
+      "apps/api/app/delivery_execution.py": "20d390043ce31f7601e56c1c184ea2b28646e49b1fa66f4cf5022d359fd2646f",
+      "apps/api/app/delivery_execution_control.py": "c2acda2a7cd70d9faae6ae44496e1ac945d760fb0aaa87107e5b30060a3919ca",
+      "apps/api/app/delivery_hosted_rehearsal.py": "b92023705e7d0f8a9ba01998bb32e303802fd91dad585c588a6b37cabd0a0205",
+      "apps/api/app/delivery_inputs.py": "726b2788f8f57378d7d2206c14a3e25ca4acb379194463226f876545b305b017",
+      "apps/api/app/delivery_operations.py": "3b7105019cf11f0977baeaf048752d19f11b809f4c0b2cd320b35052f4291e40",
+      "apps/api/app/delivery_package.py": "144c591493612302b35d69a7c4bf4786ac0f4590969842a5560f4fa3abeae2b0",
+      "apps/api/app/delivery_patch.py": "dcb5b39d3c9773a35911d952c8c15abded93d5e4e9391cbed996ef57e2fa49b0",
+      "apps/api/app/delivery_patch_reference.json": "4c617c2cd3ef64f122de19c7f38c905f77bc0502ed14f418662add09962e7e63",
+      "apps/api/app/delivery_plan.py": "fa7cca830f4957069d7105b19848366c83b84812c1579df6f84f8de7993fe1cb",
+      "apps/api/app/delivery_process.py": "fcc51b50ad06f7636dec8706d6dbec0981470d92ce51b05c9c29c7cf53eb1086",
+      "apps/api/app/delivery_receipts.py": "e2361e79c999bed690eed6c45e194fc4b4262370fb7f0a3158b12a8160bc24ef",
+      "apps/api/app/delivery_reference.json": "e46aaec14b74685384d2cb8d1632ef279d4eb6697381a09b72dcd4e301e6f2d0",
+      "apps/api/app/delivery_rehearsal.py": "a4c5426c3e91d0c7efc8ec4edc6852b44115232e01b906bd983d6f40d797d138",
+      "apps/api/app/delivery_rights.py": "134006b1a11a34cb31c866328017dad6d42b11b79d9d151df9c546171c4a6558",
+      "apps/api/app/delivery_runtime_check.py": "3a5a0dc47b238fed5e14dea30a04383d98fff931b0b2283091599ab702631e51",
+      "apps/api/app/delivery_storage_validation.py": "0734dcc8d61f471a7d8dc74ffc0559dda24a25847c3be2662a7faa0b41753163",
+      "apps/api/app/delivery_store.py": "fc73635d99b3806c55ccafa17a02eabb5b84e20b6892deb98fed9a8eed3cff97",
+      "apps/api/app/delivery_verification_template.html": "0ba74aefd76ad98f83c5059067e63411a05946a99df4b613f8dcca1a678484f9",
+      "apps/api/app/errors.py": "2a83a99be178983e8e2672ff263beb3f77841a5833637a0becfada706809fc0d",
+      "apps/api/app/formula_patterns.py": "2a86608e91dfff0ecadcd03970e9efefd3400ea748a3a7afcd5c826f6bb9cbc9",
+      "apps/api/app/m4_release.py": "34e5b709bd4760ab512dec8d59a13927f8da7f8be9b5d1e1c643a4e569528175",
+      "apps/api/app/main.py": "d3c14c25d413b88f527281daa09e32185e45ff5169baade0654e34f05dbd08a9",
+      "apps/api/app/models.py": "a8709db1d652b5ba50112a2bca0072d762dd0a343a33859ab4bbb42e3c073a5d",
+      "apps/api/app/observability.py": "6cf31396ea2641178c6d191b3cc4a5eb7c98839cf3bc27961deddfd7602e05e0",
+      "apps/api/app/payment_adapter.py": "474f8ad4e3c28b6a7d9669e0376c95f8e4620366d4f161e48c67c5b9178316bf",
+      "apps/api/app/payment_plan_actions.py": "3145b957f8f7b3c8f4394d52c053132a7c05f369a7a1cee62e4ea10a72d01536",
+      "apps/api/app/payment_rehearsal.py": "86c45dadbea6b631eeb1feabe95b7c3d8c88a411e10b3b726288ce1049491593",
+      "apps/api/app/payment_service.py": "928760dfa18a0342352dd1d8c1211ffbca9e6a93d923728af9b05811a52a8220",
+      "apps/api/app/pricing.py": "529c6192d916c918ff6ad9d23edc2f45ab57003f2c4ea35e278bf9680d6e4780",
+      "apps/api/app/recommendation_engine.py": "4dd9f760a390056d14af0e452751db4fea9917cf73451acaf0e55b6211f6846e",
+      "apps/api/app/runtime.py": "9a0205982ca31de4eebf227f0b34a536272af80f7d7c347cd0a793f718ca70df",
+      "apps/api/app/scanner.py": "ac49f5716ca73d60bbb2e93d841d908fe9b267f0345fb8b3d35888aef01f1ca5",
+      "apps/api/app/security.py": "562bd1bfe9add725a8682c072a032f5753ad15fe1cf3513913e393c8a85e1c94",
+      "apps/api/app/service_catalog.py": "1edf6bb2263d35f8302e22622d1589ea72ae18b2276d5769ade040f9c5305106",
+      "apps/api/app/__init__.py": "d4b867ef171ae1eb6fd0e8d80c0fcc76c1259b743a7f390b927560adc56f3b75",
+      "apps/api/app/repair_rules/formula_restore.py": "92a97a4843976ee224c825a0515019fcd44831a118bd1c1c4c4990a0c6e00d62",
+      "apps/api/app/repair_rules/numeric_text.py": "97f45343b3d5af74b7678d18f4fb15752ba0f8cb986a249b102c736edb7abd1f",
+      "apps/api/app/repair_rules/__init__.py": "0c62f1ef17398b6e4a725b9852bd22c733bb5cf4845ced2ab8a19e560437b534"
+    }
+  },
+  "preserved_user_lock": true,
+  "limits": [
+    "No live payments/PG validation",
+    "UI unchanged; no new customer usability or complete browser-delivery claim",
+    "Excel evidence scope combined-only; standalone execution covered by tests and staged Linux runtime"
+  ],
+  "tooling_failures": [
+    "System Python lacked pytest; used existing API venv",
+    "Sandbox Windows temp/chmod denied; authorized escalation",
+    "Malformed git patch rejected before source changes; corrected via UTF-8 exact edits"
+  ]
+}

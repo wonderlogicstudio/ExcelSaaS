@@ -38,6 +38,9 @@ def patch_fingerprint():
                 "delivery_plan.py",
                 "delivery_package.py",
                 "delivery_verification_template.html",
+                "repair_rules/__init__.py",
+                "repair_rules/formula_restore.py",
+                "repair_rules/numeric_text.py",
             ]
         }
     )

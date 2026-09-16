@@ -1,3 +1,9 @@
+## EXAMPLES-01 protected-beta deployment completed
+
+Owner approved deployment. Source commit 012ab92 is committed and pushed to origin/main. Hosted-beta build and guarded upload/deploy commands exit0. Worker eddaac03-d2d4-4d8a-8fe5-5ee3a38c8dee active at 100%; API, bindings and Access unchanged. Authenticated browser homepage loaded successfully. Per-type example result screen validation remains NOT_RUN; do not treat deployment as completed sample/UI verification. Initial system Python lacked httpx; existing project virtualenv resolved tooling without package installation. Evidence: reviews/evidence/EXAMPLES-01-DEPLOY.json. Previous status records below are historical.
+
+---
+
 # EXAMPLES-01
 
 ## EXAMPLES-01 - code reviewed; beta/UI pending

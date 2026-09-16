@@ -13,6 +13,9 @@ from defusedxml import ElementTree as ET
 
 from .config import Settings
 from .errors import WorkbookCareError
+from .repair_rules.formula_restore import blank_formula_eligible
+from .repair_rules.numeric_text import numeric_text as numeric_text
+from .repair_rules.numeric_text import numeric_text_eligible
 from .security import validate_ooxml
 
 NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
@@ -275,17 +278,6 @@ def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
     }
 
 
-def numeric_text(value: object) -> int | None:
-    if not isinstance(value, str) or not re.fullmatch(
-        r"[+-]?(?:0|[1-9][0-9]*|[1-9][0-9]{0,2}(?:,[0-9]{3})+)", value
-    ):
-        return None
-    result = int(value.replace(",", ""))
-    if len(str(abs(result))) > 15 or result == 0 and value != "0":
-        return None
-    return result
-
-
 def policy_items(policy: dict) -> list[dict]:
     items = policy.get("items")
     if items is None:
@@ -407,14 +399,10 @@ def _preflight_single(snapshot: dict, policy: dict, *, calculation_verified: boo
         eligible = not reasons
         why = []
         if profile == PROFILE_1:
-            if (
-                current["type"] != "text"
-                or numeric_text(current["value"]) is None
-                or current.get("special_format")
-            ):
+            if not numeric_text_eligible(current):
                 eligible = False
                 why.append("NOT_UNAMBIGUOUS_INTEGER_TEXT")
-        elif current["type"] != "blank":
+        elif not blank_formula_eligible(current):
             eligible = False
             why.append("TARGET_NOT_TRUE_BLANK")
         rows.append(

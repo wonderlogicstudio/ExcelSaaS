@@ -19,11 +19,12 @@ from .delivery_inputs import (
     PROFILE_1,
     PROFILE_COMBINED,
     digest,
-    numeric_text,
     policy_items,
     preflight,
     reject,
 )
+from .repair_rules.formula_restore import formula_restore_replacement
+from .repair_rules.numeric_text import numeric_text_replacement
 
 PLAN_VERSION = "repair-plan-v1"
 TEMPLATE_VERSION = "plain-xlsx-three-artifacts-v1"
@@ -116,13 +117,12 @@ def build_plan(job: dict, policy: dict) -> dict:
                 address, {"type": "blank", "value": None, "style": "0"}
             )
             if item["profile"] == PROFILE_1:
-                replacement = {**current, "type": "number", "value": numeric_text(current["value"])}
+                replacement = numeric_text_replacement(current)
             else:
-                replacement = {
-                    **current,
-                    "type": "formula",
-                    "value": translate_formula(item["anchor_formula"], item["anchor"], address),
-                }
+                replacement = formula_restore_replacement(
+                    current,
+                    translate_formula(item["anchor_formula"], item["anchor"], address),
+                )
             replacement.pop("cached", None)
             after_cells[sheet][address] = replacement
             previous = typed_source(current)
