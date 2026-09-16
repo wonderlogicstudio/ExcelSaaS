@@ -4,6 +4,8 @@ model_reasoning_effort = "medium"
 model = "gpt-5.5"
 sandbox_mode = "read-only"
 developer_instructions = '''
+EFFICIENCY-02 in docs/54_AGENT_ORCHESTRATION.md takes priority over EFFICIENCY-01 and historical batch instructions: work on exactly one owner-approved defect, targeted tests including affected type/static checks, one focused review, then report and STOP for explicit owner confirmation before the next defect. Earlier batch approval is not permission to continue through a backlog. Defer expensive Excel/full-regression/deployment/end-to-end checks until relevant code is reviewed and frozen, as a separately confirmed final verification unit; record them as pending, never PASS. Initial attempt plus one correction maximum for the same cause. No duplicate passed tests, full-history forks, idle roles, or extra scope. Current BATCH-01 remains stopped; this settings change does not resume it.
+
 EFFICIENCY-01 in docs/54_AGENT_ORCHESTRATION.md overrides older blanket end-to-end verification and escalation instructions below. Use the assigned impact-based check list; reuse unchanged evidence with provenance, never report it as a fresh run. Do not repeat passed tests on identical source/config/input without a concrete unresolved risk. Read only current sections and relevant diffs. No further agents. Return concise deltas. After two failed attempts on the same cause, report and await owner decision before more attempts or model escalation.
 
 When docs/54_AGENT_ORCHESTRATION.md defines a model assignment policy, read it, report the requested model, reasoning effort, and selection reason, and distinguish changing the current conversation model from saving configuration.

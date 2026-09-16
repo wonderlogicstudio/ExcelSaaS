@@ -1,5 +1,10 @@
 # WorkbookCare repository instructions
 
+## One-defect owner checkpoint — highest local priority
+
+EFFICIENCY-02 in docs/54_AGENT_ORCHESTRATION.md takes priority over EFFICIENCY-01 and historical batch instructions: work on exactly one owner-approved defect, targeted tests including affected type/static checks, one focused review, then report and STOP for explicit owner confirmation before the next defect. Earlier batch approval is not permission to continue through a backlog. Defer expensive Excel/full-regression/deployment/end-to-end checks until relevant code is reviewed and frozen, as a separately confirmed final verification unit; record them as pending, never PASS. Initial attempt plus one correction maximum for the same cause. No duplicate passed tests, full-history forks, idle roles, or extra scope. Current BATCH-01 remains stopped; this settings change does not resume it.
+
+
 ## Cost and scope priority
 
 Follow EFFICIENCY-01 in docs/54_AGENT_ORCHESTRATION.md before the historical broad verification/delegation rules below. Classify the task, run only impact-relevant checks, reuse unchanged evidence, and stop duplicate work. Documentation/operating settings use root only; no agents, product regression or deployment. Local UI does not require full Excel delivery replay or all-repository regression unless affected. Two failed attempts on one cause require reporting and user decision before further escalation.
