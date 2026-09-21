@@ -1,0 +1,57 @@
+﻿{
+    "link_updates_disabled":  true,
+    "macros_disabled":  true,
+    "saved":  false,
+    "kind":  "ACTUAL_EXCEL_COM_READ_ONLY_SYNTHETIC",
+    "workbooks":  2,
+    "started_utc":  "2026-09-21T07:28:50.2455290Z",
+    "excel_version":  "16.0",
+    "results":  [
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  -5,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -5,
+                                           "sheet":  "Budget",
+                                           "cell":  "N18",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "d4b47d4cb71314669cefb19b3b605ec31291328eaac9fccb26c005d7a84f4b90",
+                        "id":  "equivalent",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  null,
+                                           "expected_excel_error":  "#VALUE!",
+                                           "pass":  false,
+                                           "formula_matches":  true,
+                                           "actual":  -2146826273,
+                                           "sheet":  "Budget",
+                                           "cell":  "N18",
+                                           "excel_text":  ""
+                                       }
+                                   ],
+                        "sha256":  "816bc16d3b55dbae3a24ddce64f8952d93e54869a2951f453db24a7b94a77bf0",
+                        "id":  "grouped_hidden",
+                        "source_unchanged":  true
+                    }
+                ],
+    "failures":  [
+                     {
+                         "sheet":  "Budget",
+                         "cell":  "N18",
+                         "actual":  -2146826273,
+                         "id":  "grouped_hidden",
+                         "expected":  null
+                     }
+                 ],
+    "finished_utc":  "2026-09-21T07:28:53.9221566Z",
+    "status":  "FAIL",
+    "excel_build":  20326
+}

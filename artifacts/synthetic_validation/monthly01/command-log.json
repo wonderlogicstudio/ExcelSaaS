@@ -1,0 +1,115 @@
+[
+  {
+    "name": "red_monthly_pytest_from_root",
+    "command": "./.venv/Scripts/python.exe -m pytest -p no:cacheprovider tests/test_formula_patterns.py -k monthly --basetemp C:/Users/JinwonLee/project/DigitalTwin/.tmp/monthly01-red",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+    "exit_code": 1,
+    "result": "1 failed, 3 passed, 11 deselected; missing Budget!N18 as expected before implementation",
+    "provenance": "root executed before implementation; reused per handoff"
+  },
+  {
+    "name": "monthly_pytest_wrong_venv_path",
+    "command": "$env:PYTHONDONTWRITEBYTECODE='1'; ./.venv/Scripts/python.exe -m pytest -p no:cacheprovider tests/test_formula_patterns.py -k monthly --basetemp C:/Users/JinwonLee/project/DigitalTwin/.tmp/monthly01-api",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+    "exit_code": 1,
+    "result": "Command did not start tests; ./.venv/Scripts/python.exe not found from repo root"
+  },
+  {
+    "name": "monthly_pytest_first_fix_attempt",
+    "command": "$env:PYTHONDONTWRITEBYTECODE='1'; C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe -m pytest -p no:cacheprovider tests/test_formula_patterns.py -k monthly --basetemp C:/Users/JinwonLee/project/DigitalTwin/.tmp/monthly01-api",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+    "exit_code": 1,
+    "result": "2 failed, 2 passed, 11 deselected; fixed mixed direct month handling and negative fixtures"
+  },
+  {
+    "name": "monthly_pytest_corrected",
+    "command": "$env:PYTHONDONTWRITEBYTECODE='1'; C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe -m pytest -p no:cacheprovider tests/test_formula_patterns.py -k monthly --basetemp C:/Users/JinwonLee/project/DigitalTwin/.tmp/monthly01-api-fix",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+    "exit_code": 0,
+    "result": "4 passed, 11 deselected"
+  },
+  {
+    "name": "targeted_api_pytest",
+    "command": "$env:PYTHONDONTWRITEBYTECODE='1'; C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe -m pytest -p no:cacheprovider tests/test_formula_patterns.py tests/test_formula_audit_api.py tests/test_formula_audit_quality_gate.py --basetemp C:/Users/JinwonLee/project/DigitalTwin/.tmp/monthly01-api-targeted",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+    "exit_code": 0,
+    "result": "23 passed, 1 known Starlette/httpx deprecation warning"
+  },
+  {
+    "name": "targeted_ruff_first",
+    "command": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe -m ruff check --no-cache app/formula_patterns.py tests/test_formula_patterns.py tests/test_formula_audit_api.py tests/test_formula_audit_quality_gate.py",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+    "exit_code": 1,
+    "result": "4 lint issues; fixed line length, SIM108, and unused local variable"
+  },
+  {
+    "name": "targeted_ruff_corrected",
+    "command": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe -m ruff check --no-cache app/formula_patterns.py tests/test_formula_patterns.py tests/test_formula_audit_api.py tests/test_formula_audit_quality_gate.py",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+    "exit_code": 0,
+    "result": "All checks passed"
+  },
+  {
+    "name": "changed_web_tests_first",
+    "command": "npm.cmd run test --workspace @workbookcare/web -- FormulaAuditPanel.test.tsx UnifiedDiagnosis.test.tsx",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+    "exit_code": 1,
+    "result": "UnifiedDiagnosis 4 passed; FormulaAuditPanel suite failed on invalid regex assertion; fixed to literal substring predicate"
+  },
+  {
+    "name": "changed_web_tests_corrected",
+    "command": "npm.cmd run test --workspace @workbookcare/web -- FormulaAuditPanel.test.tsx UnifiedDiagnosis.test.tsx",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+    "exit_code": 0,
+    "result": "2 files passed, 8 tests passed"
+  },
+  {
+    "name": "web_build_typecheck",
+    "command": "npm.cmd run build --workspace @workbookcare/web",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+    "exit_code": 0,
+    "result": "tsc -b and vite build passed; 1630 modules transformed"
+  },
+  {
+    "name": "review_fix_monthly_pytest",
+    "command": "$env:PYTHONDONTWRITEBYTECODE='1'; C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe -m pytest -p no:cacheprovider tests/test_formula_patterns.py -k monthly --basetemp C:/Users/JinwonLee/project/DigitalTwin/.tmp/monthly01-review-fix-monthly",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+    "exit_code": 0,
+    "result": "5 passed, 11 deselected"
+  },
+  {
+    "name": "review_fix_targeted_api_pytest",
+    "command": "$env:PYTHONDONTWRITEBYTECODE='1'; C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe -m pytest -p no:cacheprovider tests/test_formula_patterns.py tests/test_formula_audit_api.py tests/test_formula_audit_quality_gate.py --basetemp C:/Users/JinwonLee/project/DigitalTwin/.tmp/monthly01-review-fix-api",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+    "exit_code": 0,
+    "result": "24 passed, 1 known Starlette/httpx deprecation warning"
+  },
+  {
+    "name": "review_fix_ruff_first",
+    "command": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe -m ruff check --no-cache app/formula_patterns.py tests/test_formula_patterns.py tests/test_formula_audit_api.py tests/test_formula_audit_quality_gate.py",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+    "exit_code": 1,
+    "result": "One E501 long test function name; shortened name only"
+  },
+  {
+    "name": "review_fix_ruff_corrected",
+    "command": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe -m ruff check --no-cache app/formula_patterns.py tests/test_formula_patterns.py tests/test_formula_audit_api.py tests/test_formula_audit_quality_gate.py",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+    "exit_code": 0,
+    "result": "All checks passed"
+  },
+  {
+    "name": "review_fix_changed_web_tests",
+    "command": "npm.cmd run test --workspace @workbookcare/web -- FormulaAuditPanel.test.tsx UnifiedDiagnosis.test.tsx",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+    "exit_code": 0,
+    "result": "2 files passed, 8 tests passed"
+  },
+  {
+    "name": "review_fix_web_build_typecheck",
+    "command": "npm.cmd run build --workspace @workbookcare/web",
+    "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+    "exit_code": 0,
+    "result": "tsc -b and vite build passed; 1630 modules transformed"
+  }
+]

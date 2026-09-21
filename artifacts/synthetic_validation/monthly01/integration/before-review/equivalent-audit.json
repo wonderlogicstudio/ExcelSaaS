@@ -1,0 +1,15 @@
+{
+  "status": "COMPLETED",
+  "formula_cell_count": 36,
+  "audited_sheet_count": 1,
+  "audited_formula_region_count": 0,
+  "candidates": [],
+  "limitations": [
+    "수식 계산 결과, 업무 규칙, 의도된 예외 계산은 확인하지 않았습니다.",
+    "지원하는 A1 참조 수식의 제한된 주변 패턴만 비교했습니다.",
+    "수정 수식 생성·적용이나 자동 수정 가능 여부는 제공하지 않습니다."
+  ],
+  "elapsed_ms": 20,
+  "scanner_version": "0.1.3",
+  "rule_set_version": "2026.09.5"
+}

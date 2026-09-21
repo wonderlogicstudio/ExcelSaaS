@@ -2672,5 +2672,169 @@
     "Two exploratory optional file reads used incorrect scratch cwd; corrected workspace path; no product impact."
   ],
   "final_independent_evidence_review": "PASS: coverage_review6; no duplicate execution"
+},
+"monthly01_final_integration_20260921": {
+  "status": "VERIFIED_BETA_PENDING_OWNER",
+  "checkpoint_commit_pushed": "fea78b0e6ad407ede48187a70bde294bd024bec2",
+  "regression": {
+    "exit_code": 0,
+    "web": 168,
+    "worker": 16,
+    "api": 259,
+    "ruff": "PASS",
+    "m4_exact_candidates": 36
+  },
+  "serialized_files": {
+    "unique": 18,
+    "normal_controls": 15,
+    "ui_cases": 4,
+    "all_fixed_expectations_matched": true
+  },
+  "native_excel": {
+    "new_files": 2,
+    "reused_unchanged_files": 2,
+    "equivalent_value": -5,
+    "raw_status": "FAIL",
+    "adjudicated_status": "PASS_WITH_HIDDEN_TEXT_ADJUDICATION",
+    "explanation": "Hidden Range.Text empty; unchanged formula Value2 matches independently verified #VALUE! code -2146826273. Raw failure kept; no rerun or expected rewrite.",
+    "read_only_no_save": true
+  },
+  "actual_beta_ui": [
+    {
+      "case": "normal",
+      "expected": 0,
+      "actual": 0,
+      "location": null
+    },
+    {
+      "case": "mutant",
+      "expected": 1,
+      "actual": 1,
+      "location": "Budget!N18"
+    },
+    {
+      "case": "equivalent",
+      "expected": 0,
+      "actual": 0,
+      "location": null
+    },
+    {
+      "case": "grouped_hidden",
+      "expected": 0,
+      "actual": 0,
+      "location": null
+    }
+  ],
+  "beta_evidence": "PL actual AX and screenshot observation, desktop/mobile; images viewed not saved; independent reviewer checks records without browser replay",
+  "api": {
+    "revision": "workbookcare-api-beta-00029-dir",
+    "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:6f43addbb68f991ab3cc8c625075e17713865f088a88665f4d339d5ee789d6df",
+    "worker_version": "7cbbadde-3b30-4792-a84f-0543db1c61a9",
+    "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+    "security_invariants_preserved": true,
+    "private_iam": true,
+    "max_instances": 1,
+    "payment_mode": "OFF",
+    "gateway_state": "ACTIVE",
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "worker": {
+    "worker": "7d353c64-457d-4376-922e-03ecbcc4d0bc",
+    "rollback_worker": "7cbbadde-3b30-4792-a84f-0543db1c61a9",
+    "all_bindings_equal": true,
+    "api_unchanged": true,
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/precision-verification",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/compare",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/automation",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/help",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/orders",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "linux_runtime": {
+    "reference_cases": 20,
+    "repair_profiles": 2,
+    "artifacts": 6
+  },
+  "historical_files_unchanged": 635,
+  "source_hashes_unchanged": true,
+  "scope": "M01..M12 explicit header/existing-sheet simple subtraction correspondence drift only; candidate not confirmed error; no new repair support",
+  "not_run": [
+    "new MONTHLY implementation commit/push",
+    "new repair browser delivery/download replay",
+    "real PG/payment/refund",
+    "commercial readiness or human usability study"
+  ],
+  "issues_preserved": [
+    "Child-agent test write auto-review rejection; root resubmitted exact single-file action with current user implementation authorization and approval succeeded.",
+    "Initial real-file18 pass preceded focused review corrections; before-review results preserved and final18 replay passed.",
+    "Korean copy and unverified dominant-pattern defects corrected before release; copy restriction then scoped to horizontal/monthly only.",
+    "Native hidden Text assertion failed; separately adjudicated against prior independently verified identical CVErr.",
+    "Fourth browser upload initially showed hosted-beta request could not be processed; console had no error detail. One spaced retry performed; rate limiting suspected but not independently confirmed."
+  ],
+  "next": "Selected reviewed MONTHLY changes commit/push after owner confirmation",
+  "known_ui_followup": "The monthly difference explanation is English in the actual Korean UI. Formula cards, locations and unsupported-repair label are correct. Localization remains an owner-checkpoint follow-up; no claim of finished UX.",
+  "final_independent_evidence_review": "PASS: coverage_review6; no duplicate execution"
 }
 }

@@ -1,0 +1,18 @@
+{
+  "id": "MONTHLY-01",
+  "status": "APPROVED_THROUGH_BETA_SCREEN_VERIFICATION",
+  "baseline_commit": "fea78b0",
+  "approval": "Owner approved checkpoint commit/push plus bounded monthly detection implementation/tests/beta screen verification",
+  "allowlist": [
+    "apps/api/app/formula_patterns.py",
+    "apps/api/tests/test_formula_patterns.py",
+    "apps/api/tests/test_formula_audit_api.py",
+    "apps/api/tests/test_formula_audit_quality_gate.py",
+    "apps/web/src/components/FormulaAuditPanel.tsx",
+    "apps/web/src/components/FormulaAuditPanel.test.tsx",
+    "apps/web/src/components/UnifiedDiagnosis.test.tsx"
+  ],
+  "scope": "Explicit contiguous M01..M12 header-to-existing-sheet mapping, same-row binary subtraction from two unanchored single-cell monthly refs; >=4 contiguous formulas, unique dominant pair>=3, exactly1 interior deviation with matching left/right. Header within4 rows above; unique qualifying header. Local A1-A1 target supported and one-hop equivalent direct monthly references suppressed. Never normalize sheet names globally. Reuse hidden-group/table/merged/summary/manual exclusions and rule/cell dedupe. Candidate only, no repairs.",
+  "excluded": "gaps/constants, functions/ranges/anchors/externals/names/mixed-month operands, missing/duplicate/reversed headers, missing month sheets, insufficient or ambiguous support, multiple drift, endpoints, hidden header/rows/columns, Table/merged/manual/summary.",
+  "checks": "Failing-before monthly fixture; relevant pytest/Ruff and changed UI tests/type/build; focused independent review; frozen full regression once; actual Excel and protected beta screenshots after reviewed release. Preserve historical truth unchanged."
+}

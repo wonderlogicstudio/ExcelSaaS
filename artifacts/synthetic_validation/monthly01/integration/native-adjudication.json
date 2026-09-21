@@ -1,0 +1,10 @@
+{
+  "status": "PASS_WITH_HIDDEN_TEXT_ADJUDICATION",
+  "raw_native_status": "FAIL",
+  "explanation": "Hidden column returns empty Range.Text; Value2 equals prior independently verified #VALUE! CVErr. No rerun or input changes.",
+  "original_error_code": -2146826273,
+  "hidden_error_code": -2146826273,
+  "normal_equivalent_pass": true,
+  "new_files": 2,
+  "reused_files": 2
+}

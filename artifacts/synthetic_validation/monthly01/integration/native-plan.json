@@ -1,0 +1,36 @@
+{
+  "cases": [
+    {
+      "id": "equivalent",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\monthly01\\integration\\workbooks\\monthly_equivalent.xlsx",
+      "sha256": "d4b47d4cb71314669cefb19b3b605ec31291328eaac9fccb26c005d7a84f4b90",
+      "expected_candidates": 0,
+      "expected_location": null,
+      "checks": [
+        {
+          "sheet": "Budget",
+          "cell": "N18",
+          "formula": "=N16-N15",
+          "expected": -5,
+          "expected_excel_error": null
+        }
+      ]
+    },
+    {
+      "id": "grouped_hidden",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\monthly01\\integration\\workbooks\\monthly_grouped_hidden.xlsx",
+      "sha256": "816bc16d3b55dbae3a24ddce64f8952d93e54869a2951f453db24a7b94a77bf0",
+      "expected_candidates": 0,
+      "expected_location": null,
+      "checks": [
+        {
+          "sheet": "Budget",
+          "cell": "N18",
+          "formula": "=N15-N14",
+          "expected": null,
+          "expected_excel_error": "#VALUE!"
+        }
+      ]
+    }
+  ]
+}

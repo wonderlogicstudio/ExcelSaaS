@@ -54,6 +54,7 @@ _FUNCTION_SIGNATURE = re.compile(r"(?P<name>[A-Z][A-Z0-9_.]*)\(")
 _REFERENCE_SIGNATURE = re.compile(
     r"REF\((?:(?:SHEET\((?P<sheet>[^)]*)\)!)?)(?P<coordinates>[^)]*)\)"
 )
+_MONTH_HEADER = re.compile(r"^M(?P<number>0[1-9]|1[0-2])$")
 
 
 @dataclass(frozen=True, slots=True)
@@ -83,6 +84,24 @@ class _NormalizedFormula:
     cell: Cell
     signature: str
     pattern_id: str
+
+
+@dataclass(frozen=True, slots=True)
+class _MonthlyFormula:
+    cell: Cell
+    header_row: int
+    month_number: int
+    signature: str
+    pattern_id: str
+
+
+@dataclass(frozen=True, slots=True)
+class _MonthlyReference:
+    sheet: str | None
+    column: str
+    row: int
+    relative_column: int
+    relative_row: int
 
 
 @dataclass(frozen=True, slots=True)
@@ -259,6 +278,199 @@ def _normalize_horizontal_arithmetic_formula(formula: str, origin: Cell) -> str 
     return "".join(canonical)
 
 
+def _sheet_name_token(sheet_name: str) -> str:
+    return sheet_name.strip("'").casefold()
+
+
+def _parse_binary_subtraction_references(
+    formula: str, origin: Cell
+) -> tuple[_MonthlyReference, _MonthlyReference] | None:
+    if not formula.startswith("=") or any(marker in formula for marker in ("[", "]", "$", ":")):
+        return None
+    try:
+        tokens = [token for token in Tokenizer(formula).items if token.type != "WSPACE"]
+    except Exception:
+        return None
+    if len(tokens) != 3 or tokens[1].type != "OPERATOR-INFIX" or tokens[1].value != "-":
+        return None
+    references: list[_MonthlyReference] = []
+    for token in (tokens[0], tokens[2]):
+        if token.type != "OPERAND" or token.subtype != "RANGE":
+            return None
+        sheet_name: str | None = None
+        coordinate_text = token.value
+        if "!" in coordinate_text:
+            raw_sheet, coordinate_text = coordinate_text.rsplit("!", 1)
+            if not raw_sheet:
+                return None
+            sheet_name = _sheet_name_token(raw_sheet)
+        match = _CELL_REFERENCE.fullmatch(coordinate_text)
+        if match is None:
+            return None
+        try:
+            column_index = column_index_from_string(match.group("column").upper())
+        except ValueError:
+            return None
+        references.append(
+            _MonthlyReference(
+                sheet=sheet_name,
+                column=match.group("column").upper(),
+                row=int(match.group("row")),
+                relative_column=column_index - origin.column,
+                relative_row=int(match.group("row")) - origin.row,
+            )
+        )
+    return references[0], references[1]
+
+
+def _month_header_for_cell(worksheet: Worksheet, cell: Cell) -> tuple[int, int, str] | None:
+    matches: list[tuple[int, int, str]] = []
+    workbook_sheet_names = {_sheet_name_token(name) for name in worksheet.parent.sheetnames}
+    for header_row in range(max(1, cell.row - 4), cell.row):
+        if worksheet.row_dimensions[header_row].hidden:
+            continue
+        header_cell = worksheet.cell(row=header_row, column=cell.column)
+        if _is_hidden_column(worksheet, cell.column) or _is_merged(worksheet, header_cell):
+            continue
+        value = header_cell.value
+        if not isinstance(value, str):
+            continue
+        match = _MONTH_HEADER.fullmatch(value.strip().upper())
+        if match is None:
+            continue
+        sheet_token = value.strip().casefold()
+        if sheet_token not in workbook_sheet_names:
+            continue
+        matches.append((header_row, int(match.group("number")), sheet_token))
+    if len(matches) != 1:
+        return None
+    return matches[0]
+
+
+def _direct_monthly_signature(
+    references: tuple[_MonthlyReference, _MonthlyReference],
+    expected_sheet: str,
+    worksheet: Worksheet,
+) -> str | None:
+    first, second = references
+    if first.sheet is None or second.sheet is None:
+        return None
+    if first.sheet != second.sheet:
+        return None
+    workbook_sheet_names = {_sheet_name_token(name) for name in worksheet.parent.sheetnames}
+    if first.sheet not in workbook_sheet_names:
+        return None
+    coordinate_signature = f"{first.column}{first.row},{second.column}{second.row}"
+    if first.sheet == expected_sheet:
+        return f"MONTHLY_SUB({coordinate_signature})"
+    return f"MONTHLY_SHEET({first.sheet})_SUB({coordinate_signature})"
+
+
+def _parse_single_monthly_reference(formula: str, origin: Cell) -> _MonthlyReference | None:
+    if not formula.startswith("=") or any(marker in formula for marker in ("[", "]", "$", ":")):
+        return None
+    try:
+        tokens = [token for token in Tokenizer(formula).items if token.type != "WSPACE"]
+    except Exception:
+        return None
+    if len(tokens) != 1 or tokens[0].type != "OPERAND" or tokens[0].subtype != "RANGE":
+        return None
+    value = tokens[0].value
+    sheet_name: str | None = None
+    if "!" in value:
+        raw_sheet, value = value.rsplit("!", 1)
+        if not raw_sheet:
+            return None
+        sheet_name = _sheet_name_token(raw_sheet)
+    match = _CELL_REFERENCE.fullmatch(value)
+    if match is None:
+        return None
+    try:
+        column_index = column_index_from_string(match.group("column").upper())
+    except ValueError:
+        return None
+    return _MonthlyReference(
+        sheet=sheet_name,
+        column=match.group("column").upper(),
+        row=int(match.group("row")),
+        relative_column=column_index - origin.column,
+        relative_row=int(match.group("row")) - origin.row,
+    )
+
+
+def _resolve_local_monthly_reference(
+    worksheet: Worksheet,
+    origin: Cell,
+    reference: _MonthlyReference,
+    expected_sheet: str,
+) -> tuple[str, int] | None:
+    if reference.sheet is not None or reference.relative_column != 0:
+        return None
+    source_cell = worksheet.cell(row=reference.row, column=origin.column)
+    source_formula = _formula_text(source_cell)
+    if source_formula is None:
+        return None
+    direct = _parse_single_monthly_reference(source_formula, source_cell)
+    if direct is None or direct.sheet != expected_sheet:
+        return None
+    return direct.column, direct.row
+
+
+def _normalize_monthly_subtraction_formula(
+    formula: str,
+    origin: Cell,
+    worksheet: Worksheet,
+) -> _MonthlyFormula | None:
+    header = _month_header_for_cell(worksheet, origin)
+    if header is None:
+        return None
+    header_row, month_number, expected_sheet = header
+    references = _parse_binary_subtraction_references(formula, origin)
+    if references is None:
+        return None
+    direct_signature = _direct_monthly_signature(references, expected_sheet, worksheet)
+    if direct_signature is not None:
+        return _MonthlyFormula(
+            cell=origin,
+            header_row=header_row,
+            month_number=month_number,
+            signature=direct_signature,
+            pattern_id=_pattern_id(direct_signature),
+        )
+    if any(reference.sheet is not None for reference in references):
+        return None
+    resolved: list[tuple[str, int]] = []
+    for reference in references:
+        resolved_reference = _resolve_local_monthly_reference(
+            worksheet,
+            origin,
+            reference,
+            expected_sheet,
+        )
+        if resolved_reference is None:
+            unresolved_signature = (
+                "MONTHLY_LOCAL_UNRESOLVED("
+                f"C[{references[0].relative_column}]R[{references[0].relative_row}]-"
+                f"C[{references[1].relative_column}]R[{references[1].relative_row}])"
+            )
+            return _MonthlyFormula(
+                cell=origin,
+                header_row=header_row,
+                month_number=month_number,
+                signature=unresolved_signature,
+                pattern_id=_pattern_id(unresolved_signature),
+            )
+        resolved.append(resolved_reference)
+    signature = f"MONTHLY_SUB({resolved[0][0]}{resolved[0][1]},{resolved[1][0]}{resolved[1][1]})"
+    return _MonthlyFormula(
+        cell=origin,
+        header_row=header_row,
+        month_number=month_number,
+        signature=signature,
+        pattern_id=_pattern_id(signature),
+    )
+
+
 def _table_bounds(worksheet: Worksheet) -> list[tuple[int, int, int, int]]:
     bounds: list[tuple[int, int, int, int]] = []
     for table in worksheet.tables.values():
@@ -409,6 +621,84 @@ def _region(column: int, rows: list[int]) -> str:
 
 def _horizontal_region(row: int, columns: list[int]) -> str:
     return f"{get_column_letter(min(columns))}{row}:{get_column_letter(max(columns))}{row}"
+
+
+def _monthly_headers_are_sequential(items: list[_MonthlyFormula]) -> bool:
+    if len({item.header_row for item in items}) != 1:
+        return False
+    month_numbers = [item.month_number for item in items]
+    return (
+        len(month_numbers) == len(set(month_numbers))
+        and month_numbers == list(range(month_numbers[0], month_numbers[0] + len(month_numbers)))
+    )
+
+
+def _ordered_monthly_supporting_cells(
+    run: list[_MonthlyFormula],
+    candidate: _MonthlyFormula,
+    dominant_signature: str,
+) -> list[Cell]:
+    by_column = {item.cell.column: item for item in run}
+    ordered: list[_MonthlyFormula] = []
+    for column in (candidate.cell.column - 1, candidate.cell.column + 1):
+        neighbor = by_column.get(column)
+        if neighbor is not None and neighbor.signature == dominant_signature:
+            ordered.append(neighbor)
+    ordered.extend(
+        item
+        for item in run
+        if item.cell.column != candidate.cell.column
+        and item.signature == dominant_signature
+        and item not in ordered
+    )
+    return [item.cell for item in ordered]
+
+
+def _monthly_candidate_evidence(
+    *,
+    region: str,
+    dominant_signature: str,
+    current_signature: str,
+    supporting_cells: list[Cell],
+) -> FormulaPatternEvidence:
+    comparison_locations = [cell.coordinate for cell in supporting_cells]
+    return FormulaPatternEvidence(
+        pattern_type="DOMINANT_NORMALIZED_PATTERN_OUTLIER",
+        formula_region=region,
+        dominant_pattern_id=_pattern_id(dominant_signature),
+        current_pattern_id=_pattern_id(current_signature),
+        neighbor_count=len(supporting_cells),
+        evidence_locations=comparison_locations,
+        detection_basis=(
+            "M01~M12 header-to-sheet correspondence was compared across a same-row "
+            "binary subtraction run; one interior cell differed while both adjacent "
+            "month cells matched the dominant sheet-reference pattern."
+        ),
+        current_limitations=[
+            "Formula results, business rules, and intentional exceptions were not evaluated.",
+            "Only explicit M01~M12 month headers with existing sheets and simple "
+            "subtraction are supported.",
+            "No repair formula or automatic workbook change is generated.",
+        ],
+        pattern_subtype="REFERENCE_SHEET_DRIFT",
+        evidence_summary=(
+            "The target formula uses a different monthly sheet-reference pattern from "
+            "the surrounding M01~M12 subtraction formulas."
+        ),
+        dominant_pattern_summary=(
+            "Nearby month formulas repeat the same subtraction shape against their "
+            "matching M01~M12 sheets."
+        ),
+        current_pattern_summary=(
+            "The target formula does not follow the resolved monthly subtraction "
+            "pattern used by the adjacent month cells."
+        ),
+        comparison_locations=comparison_locations,
+        normal_case_possibility=(
+            "This may be intentional when the workbook owner has a documented "
+            "exception for this one month cell."
+        ),
+    )
 
 
 def _pattern_profile(signature: str) -> _PatternProfile:
@@ -605,6 +895,7 @@ def inspect_worksheet_formula_patterns(worksheet: Worksheet) -> FormulaPatternWo
     summary_rows = _summary_rows(worksheet)
     normalized_by_column: dict[int, list[_NormalizedFormula]] = defaultdict(list)
     horizontal_by_row: dict[int, list[_NormalizedFormula]] = defaultdict(list)
+    monthly_by_row: dict[int, list[_MonthlyFormula]] = defaultdict(list)
     supported_formula_count = 0
 
     for row in worksheet.iter_rows():
@@ -633,6 +924,9 @@ def inspect_worksheet_formula_patterns(worksheet: Worksheet) -> FormulaPatternWo
                         pattern_id=_pattern_id(horizontal_signature),
                     )
                 )
+            monthly_signature = _normalize_monthly_subtraction_formula(formula, cell, worksheet)
+            if monthly_signature is not None:
+                monthly_by_row[cell.row].append(monthly_signature)
     candidates: list[FormulaPatternCandidate] = []
     emitted: set[tuple[str, str]] = set()
     for column, normalized_items in normalized_by_column.items():
@@ -834,6 +1128,64 @@ def inspect_worksheet_formula_patterns(worksheet: Worksheet) -> FormulaPatternWo
                         ),
                     )
                 )
+
+
+    for row, monthly_items in monthly_by_row.items():
+        monthly_items.sort(key=lambda item: item.cell.column)
+        for run in _contiguous_horizontal_formula_runs(monthly_items):
+            if len(run) < 4:
+                continue
+            run_columns = [entry.cell.column for entry in run]
+            if _has_hidden_column_between(worksheet, run_columns):
+                continue
+            if not _monthly_headers_are_sequential(run):
+                continue
+            counts = Counter(item.signature for item in run)
+            dominant_signature, dominant_count = counts.most_common(1)[0]
+            if not dominant_signature.startswith("MONTHLY_SUB("):
+                continue
+            if dominant_count < 3 or sum(count == dominant_count for count in counts.values()) != 1:
+                continue
+            deviations = [item for item in run if item.signature != dominant_signature]
+            if len(deviations) != 1:
+                continue
+            item = deviations[0]
+            if item.signature.startswith("MONTHLY_SUB("):
+                continue
+            if item is run[0] or item is run[-1]:
+                continue
+            by_column = {entry.cell.column: entry for entry in run}
+            left = by_column.get(item.cell.column - 1)
+            right = by_column.get(item.cell.column + 1)
+            if left is None or right is None:
+                continue
+            if left.signature != dominant_signature or right.signature != dominant_signature:
+                continue
+            supporting_cells = _ordered_monthly_supporting_cells(run, item, dominant_signature)
+            if len(supporting_cells) < 3:
+                continue
+            key = ("FORMULA_PATTERN_OUTLIER", item.cell.coordinate)
+            if key in emitted:
+                continue
+            emitted.add(key)
+            candidates.append(
+                FormulaPatternCandidate(
+                    rule_code="FORMULA_PATTERN_OUTLIER",
+                    title="월별 시트 참조 패턴과 다른 수식 후보가 있습니다.",
+                    description=(
+                        "M01~M12 머리글과 같은 이름의 월별 시트를 참조하는 반복 뺄셈 수식 중 "
+                        "한 셀만 주변 월 패턴과 다릅니다. 의도된 예외인지 확인이 필요합니다."
+                    ),
+                    sheet=worksheet.title,
+                    cell=item.cell.coordinate,
+                    evidence=_monthly_candidate_evidence(
+                        region=_horizontal_region(row, run_columns),
+                        dominant_signature=dominant_signature,
+                        current_signature=item.signature,
+                        supporting_cells=supporting_cells,
+                    ),
+                )
+            )
 
     return FormulaPatternWorksheetAudit(
         candidates=candidates,

@@ -1,0 +1,9 @@
+{
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:6f43addbb68f991ab3cc8c625075e17713865f088a88665f4d339d5ee789d6df",
+  "base_image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:1b0702e02c7b303b25d999d8da68a9a3c7c40a639a593dd3f8c4497fe6f3c596",
+  "changed_sources": [
+    "apps/api/app/formula_patterns.py"
+  ],
+  "pushed": true,
+  "source_freeze": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\monthly01\\integration\\source-freeze.json"
+}

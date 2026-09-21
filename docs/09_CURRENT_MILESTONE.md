@@ -1,3 +1,23 @@
+## MONTHLY-01 final integration - VERIFIED BETA / OWNER CHECKPOINT (2026-09-21)
+
+Approved monthly-sheet correspondence candidate detection implemented and reviewed. Full verify.ps1 exit0: web168, Worker16, API259, Ruff PASS, M4 exact36 candidates. Actual serialized files18 unique including15 frozen normals match the separate oracle; historical truth and635 files unchanged.
+
+Actual protected beta screen: normal0, equivalent0, grouped-hidden0, mutant1 at Budget!N18; structure0 each. Target =N15-N14 and adjacent M18/O18 monthly formulas visibly compared. Desktop1440/mobile390 screenshots viewed, not saved. English difference explanation remains a known localization follow-up; this is not finished UX. Fourth upload first showed a generic request error; one spaced retry succeeded, cause not proven.
+
+Native Excel:2 new files and2 unchanged results reused by hash. Raw hidden-column Text assertion FAIL retained; separate adjudication verifies identical #VALUE! numeric CVErr, no rewrite of expectations or rerun. Equivalent formula -5 confirmed. Read-only/no save/originals unchanged.
+
+API00029-dir / Worker7d353c64-457d-4376-922e-03ecbcc4d0bc deployed; Linux20cases/2profiles/6artifacts verified. Access/private IAM/Gateway/bindings/maxScale1/paymentOFF preserved. Independent source, release guard and final evidence review PASS. Evidence and command exits: artifacts/synthetic_validation/monthly01/integration/REPORT.md and result.json.
+
+HORIZONTAL checkpoint fea78b0 committed/pushed and remote confirmed. New MONTHLY source and records remain uncommitted/unpushed. No new automatic repair, live PG, repair download replay or commercial readiness claim. Owner checks: normal0; mutant N18 with M18/O18; equivalent0; grouped-hidden0. STOP. Next proposed single unit: localize the one English difference explanation, then present the reviewed checkpoint for commit/push.
+
+---
+
+## MONTHLY-01 — APPROVED through protected beta screen verification (2026-09-21)
+
+HORIZONTAL-01 verified checkpoint fea78b0 committed and pushed to origin/main (remote exact hash verified). User explicitly approves next bounded monthly-sheet pattern detection through implementation, relevant tests, integration, protected beta deployment and actual expected-result screen verification. Work order/oracle: artifacts/synthetic_validation/monthly01. Scope: explicit M01..M12 header/sheet correspondence and simple subtraction; preserve normal one-hop equivalent expression, no automatic repair expansion. Historical expected truth unchanged. Baseline previous full regression reused until reviewed source changes are frozen. User lock and unrelated files preserved.
+
+---
+
 ## HORIZONTAL-01 final integration — VERIFIED BETA / OWNER CHECKPOINT (2026-09-21)
 
 Owner-approved final integration completed; independent evidence review PASS. Full verify.ps1 exit0: web168/Worker16/API254, Ruff PASS and M4 sample36 exact candidates. Native Excel5 synthetic files/25 fixed values PASS, read-only/no save/unchanged originals. Actual protected beta automatic uploads5 match: normal0, column drift1 F8, row drift1 F8, grouped hidden0, outside-group1 F8; structure0 each. Desktop1440/mobile390 actual screenshots and accessible UI checked, screenshot files not saved. Comparison formula differences and automatic-repair unsupported label visible.

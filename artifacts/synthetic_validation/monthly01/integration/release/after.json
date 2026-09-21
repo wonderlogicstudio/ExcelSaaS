@@ -1,0 +1,33 @@
+{
+  "revision": "workbookcare-api-beta-00029-dir",
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:6f43addbb68f991ab3cc8c625075e17713865f088a88665f4d339d5ee789d6df",
+  "worker_version": "7cbbadde-3b30-4792-a84f-0543db1c61a9",
+  "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+  "security_invariants_preserved": true,
+  "private_iam": true,
+  "max_instances": 1,
+  "payment_mode": "OFF",
+  "gateway_state": "ACTIVE",
+  "access": [
+    {
+      "path": "/",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/scans",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/formula-audits",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/delivery",
+      "status": 302,
+      "existing_access": true
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "analysis_id": "f6704c66-5df5-4ab5-bbd8-8f23f2e6a4f9",
+  "filename": "monthly_grouped_hidden.xlsx",
+  "file_size_bytes": 12158,
+  "scanned_at": "2026-09-21T07:54:36.779183Z",
+  "scanner_version": "0.1.3",
+  "rule_set_version": "2026.09.4",
+  "workbook": {
+    "sheet_count": 13,
+    "hidden_sheet_count": 0,
+    "very_hidden_sheet_count": 0,
+    "formula_count": 36,
+    "merged_range_count": 0,
+    "external_link_count": 0,
+    "defined_name_count": 0,
+    "drawing_part_count": 0,
+    "has_macros": false,
+    "scanned_cell_count": 184,
+    "scan_truncated": false
+  },
+  "summary": {
+    "risk_score": 0,
+    "risk_band": "low",
+    "complexity_score": 1,
+    "complexity_band": "basic",
+    "issue_count": 0,
+    "critical_count": 0,
+    "warning_count": 0,
+    "info_count": 0,
+    "safe_candidate_count": 0,
+    "confirmation_required_count": 0,
+    "expert_review_count": 0,
+    "information_only_count": 0,
+    "repair_review_candidate_count": 0
+  },
+  "findings": [],
+  "quote": {
+    "status": "AVAILABLE",
+    "tier": "AUDIT",
+    "currency": "KRW",
+    "amount": 9900,
+    "headline": "현재 탐지된 구조 문제와 정밀검증 예상 범위를 기준으로 한 참고용 예상 금액입니다.",
+    "included": [
+      "현재 탐지된 구조 위험 신호 검토",
+      "규칙상 자동 수정 후보가 없는 항목의 상세 검토",
+      "변경 계획에 필요한 추가 확인 항목"
+    ],
+    "excluded": [
+      "신규 대시보드·VBA·업무 프로세스 개발"
+    ],
+    "factors": [
+      "기본 난이도",
+      "수식 36개"
+    ],
+    "amount_min": 9000,
+    "amount_max": 19000,
+    "pricing_note": "베타 가격 가설이며 현재 결제는 진행되지 않습니다. 최종 작업 범위와 가격은 향후 사용자 확인 후 확정됩니다.",
+    "service_code": "PRECISION_VERIFICATION",
+    "service_status": "PLANNED",
+    "planned_deliverables": [
+      "수식 일관성 검사",
+      "기술·업무 검증의 지원 및 제외 범위",
+      "향후 판매 패키지에 포함할 검증 활동 (별도 보고서 상품 아님)"
+    ]
+  },
+  "limitations": [
+    "정적 구조 분석 결과이며 Excel 계산 엔진을 실행하지 않았습니다.",
+    "업무 의미상 잘못된 수식까지 모두 발견한다고 보장하지 않습니다.",
+    "현재 버전은 파일을 수정하거나 다시 저장하지 않습니다."
+  ],
+  "products": [],
+  "finding_counts": null
+}

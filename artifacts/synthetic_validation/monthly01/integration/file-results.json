@@ -1,0 +1,147 @@
+{
+  "unique_files": 18,
+  "normal_controls": 15,
+  "ui_cases": 4,
+  "results": [
+    {
+      "case": "normal",
+      "sha256": "973510bb3f44f45cc8f77105726285b0efbefe7a0adfa1a5120d75e81db93e74",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "mutant",
+      "sha256": "602e9c47ed4ddb3af8bff775b6105f79ed8d6bd9a807ffb2c62de5b9d21a443e",
+      "expected_candidates": 1,
+      "actual": [
+        {
+          "sheet": "Budget",
+          "cell": "N18",
+          "rule": "FORMULA_PATTERN_OUTLIER",
+          "subtype": "REFERENCE_SHEET_DRIFT"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "case": "equivalent",
+      "sha256": "d4b47d4cb71314669cefb19b3b605ec31291328eaac9fccb26c005d7a84f4b90",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "grouped_hidden",
+      "sha256": "816bc16d3b55dbae3a24ddce64f8952d93e54869a2951f453db24a7b94a77bf0",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "004-budget_horizontal_months-normal-067598.xlsx",
+      "sha256": "973510bb3f44f45cc8f77105726285b0efbefe7a0adfa1a5120d75e81db93e74",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "014-budget_horizontal_months-normal-564518.xlsx",
+      "sha256": "ccac92bca58bd6b4b25f2b1040adc9bcc27c1a8860e7eadf3f1a11dfb4460438",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "024-budget_horizontal_months-normal-463983.xlsx",
+      "sha256": "f29601bf36d52a8e31ad9e865eca5aa8ac511699202ea308e348bd2de2e21920",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "034-budget_horizontal_months-normal-146597.xlsx",
+      "sha256": "05f9b94bd0224218fcabae334424767269cb26dcb7c405f74cee6b63a2f17758",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "044-budget_horizontal_months-normal-655934.xlsx",
+      "sha256": "248af6ed4a84635fa6763618a2332f56f28eec8d8f0b045dbd0f2e643e36f6e6",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "054-budget_horizontal_months-normal-972982.xlsx",
+      "sha256": "818322bfedfaa514b8c363ca7ee1eb3fe999abb81466956da5b77d06378d09fb",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "064-budget_horizontal_months-normal-065870.xlsx",
+      "sha256": "7919e9e6b76681550c1fec28109a47b52d178e1b3647882e74726e79f8e17007",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "074-budget_horizontal_months-normal-062190.xlsx",
+      "sha256": "ae7ccb1289a982362ecda4ff7c24da58163715a7ba57db9b3111bb1ebc552d3d",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "084-budget_horizontal_months-normal-820952.xlsx",
+      "sha256": "48d9473ac35d0be660377bc27dcd91f9deed657e653cd87f49dc87a9ba9aa1c6",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "094-budget_horizontal_months-normal-910808.xlsx",
+      "sha256": "c571f0a122be198e1b19f0cdcb41c0554c61e43bed97d87a625a252cc542b65f",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "104-budget_horizontal_months-normal-077159.xlsx",
+      "sha256": "45c706513a1ccf49afbee97fec0b5330f78aa90c69f662daae06420914c8ca91",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "114-budget_horizontal_months-normal-611065.xlsx",
+      "sha256": "78aa8029f1da1da19990fcd49a10fb7f202d0057fb3c33f05a6d9b0718625e9a",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "124-budget_horizontal_months-normal-954604.xlsx",
+      "sha256": "22ef4961fb4f2982897151beaa4a955388409154ce48acd25a50a89dc361a5d0",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "134-budget_horizontal_months-normal-696198.xlsx",
+      "sha256": "02094991e5275ae0ea6b7e8fdcbb399b528aed4eb288c7272c2954eb50ab14e1",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    },
+    {
+      "case": "144-budget_horizontal_months-normal-079107.xlsx",
+      "sha256": "322bebb0f1f6c21cd54d68d46f354dc8701e60bbd84b7049f7cfa4842323eab7",
+      "expected_candidates": 0,
+      "actual": [],
+      "pass": true
+    }
+  ]
+}

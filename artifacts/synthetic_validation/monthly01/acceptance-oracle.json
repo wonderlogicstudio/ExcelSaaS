@@ -1,0 +1,40 @@
+{
+  "id": "MONTHLY-01-oracle1",
+  "provenance": "PL frozen before implementation; based on independent read-only reviewer inspection, original historical truth unmodified",
+  "real_normal": "004-budget_horizontal_months-normal-067598.xlsx",
+  "real_mutant": "004-budget_horizontal_months-mutated-067598.xlsx",
+  "sheet": "Budget",
+  "header": "E14:P14 = M01..M12",
+  "expected_normal_candidates": [],
+  "normal_N18": "='M10'!B16-'M10'!B15",
+  "normal_N18_value": -5,
+  "mutant_N18": "=N15-N14",
+  "mutant_N18_excel_error": "#VALUE!",
+  "expected_mutant": [
+    {
+      "sheet": "Budget",
+      "cell": "N18",
+      "rule": "FORMULA_PATTERN_OUTLIER",
+      "subtype": "REFERENCE_SHEET_DRIFT"
+    }
+  ],
+  "equivalent_N18": "=N16-N15",
+  "equivalent_expected": [],
+  "equivalent_value": -5,
+  "negative_cases": [
+    "missing/duplicate/reversed header",
+    "missing sheet",
+    "3formula run",
+    "2deviations",
+    "edge deviation",
+    "left/right mismatch",
+    "hidden column group starts before run",
+    "hidden row/header",
+    "Table",
+    "merged",
+    "summary/manual",
+    "functions/ranges/anchors/externals/names/mixed-month operands",
+    "blank/constant target"
+  ],
+  "legacy": "vertical and HORIZONTAL-01 unchanged; original full300 expected files and results untouched"
+}

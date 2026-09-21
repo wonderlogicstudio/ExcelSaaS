@@ -1,0 +1,16 @@
+{
+  "revision": "workbookcare-api-beta-00029-dir",
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:6f43addbb68f991ab3cc8c625075e17713865f088a88665f4d339d5ee789d6df",
+  "verified_image_revision": "workbookcare-api-beta-00028-ciz",
+  "conditions": {
+    "Ready": "True",
+    "Active": "True",
+    "ContainerHealthy": "True",
+    "ContainerReady": "True",
+    "ResourcesAvailable": "True"
+  },
+  "rollback_revision": "workbookcare-api-beta-00026-get",
+  "startup_budget_seconds": 9,
+  "runtime_verify": false,
+  "traffic_unchanged": true
+}

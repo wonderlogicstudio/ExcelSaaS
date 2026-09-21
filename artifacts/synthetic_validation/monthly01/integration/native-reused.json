@@ -1,0 +1,157 @@
+{
+  "source": "beta-final6-20260921/native-excel.json",
+  "cases": [
+    {
+      "id": "normal",
+      "sha256": "973510bb3f44f45cc8f77105726285b0efbefe7a0adfa1a5120d75e81db93e74",
+      "prior_native_result": {
+        "checks": [
+          {
+            "expected": -23,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -23,
+            "sheet": "Budget",
+            "cell": "E18",
+            "excel_text": null
+          },
+          {
+            "expected": -21,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -21,
+            "sheet": "Budget",
+            "cell": "F18",
+            "excel_text": null
+          },
+          {
+            "expected": -19,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -19,
+            "sheet": "Budget",
+            "cell": "G18",
+            "excel_text": null
+          },
+          {
+            "expected": -17,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -17,
+            "sheet": "Budget",
+            "cell": "H18",
+            "excel_text": null
+          },
+          {
+            "expected": -15,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -15,
+            "sheet": "Budget",
+            "cell": "I18",
+            "excel_text": null
+          },
+          {
+            "expected": -13,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -13,
+            "sheet": "Budget",
+            "cell": "J18",
+            "excel_text": null
+          },
+          {
+            "expected": -11,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -11,
+            "sheet": "Budget",
+            "cell": "K18",
+            "excel_text": null
+          },
+          {
+            "expected": -9,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -9,
+            "sheet": "Budget",
+            "cell": "L18",
+            "excel_text": null
+          },
+          {
+            "expected": -7,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -7,
+            "sheet": "Budget",
+            "cell": "M18",
+            "excel_text": null
+          },
+          {
+            "expected": -5,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -5,
+            "sheet": "Budget",
+            "cell": "N18",
+            "excel_text": null
+          },
+          {
+            "expected": -3,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -3,
+            "sheet": "Budget",
+            "cell": "O18",
+            "excel_text": null
+          },
+          {
+            "expected": -1,
+            "expected_excel_error": null,
+            "pass": true,
+            "formula_matches": true,
+            "actual": -1,
+            "sheet": "Budget",
+            "cell": "P18",
+            "excel_text": null
+          }
+        ],
+        "sha256": "973510bb3f44f45cc8f77105726285b0efbefe7a0adfa1a5120d75e81db93e74",
+        "id": "004-budget_horizontal_months-normal-067598",
+        "source_unchanged": true
+      }
+    },
+    {
+      "id": "mutant",
+      "sha256": "602e9c47ed4ddb3af8bff775b6105f79ed8d6bd9a807ffb2c62de5b9d21a443e",
+      "prior_native_result": {
+        "checks": [
+          {
+            "expected": null,
+            "expected_excel_error": "#VALUE!",
+            "pass": true,
+            "formula_matches": true,
+            "actual": -2146826273,
+            "sheet": "Budget",
+            "cell": "N18",
+            "excel_text": "#VALUE!"
+          }
+        ],
+        "sha256": "602e9c47ed4ddb3af8bff775b6105f79ed8d6bd9a807ffb2c62de5b9d21a443e",
+        "id": "004-budget_horizontal_months-mutated-067598",
+        "source_unchanged": true
+      }
+    }
+  ]
+}

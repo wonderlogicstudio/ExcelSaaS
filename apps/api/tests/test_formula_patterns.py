@@ -56,6 +56,33 @@ def _add_horizontal_region(sheet, *, row: int = 8, outlier_formula: str | None =
     sheet[f"F{row}"] = outlier_formula or f"=F{row - 2}-F{row - 1}"
 
 
+def _ensure_monthly_source_sheets(workbook: Workbook) -> None:
+    for index in range(1, 13):
+        title = f"M{index:02d}"
+        sheet = workbook[title] if title in workbook.sheetnames else workbook.create_sheet(title)
+        sheet["B15"] = 100 + index
+        sheet["B16"] = 95 + index
+
+
+def _add_monthly_budget_region(
+    sheet,
+    *,
+    target_formula: str = "=N15-N14",
+    header_row: int = 14,
+    formula_row: int = 18,
+    first_column: int = 5,
+    month_count: int = 12,
+) -> None:
+    for offset in range(month_count):
+        column = first_column + offset
+        month = f"M{offset + 1:02d}"
+        sheet.cell(row=header_row, column=column).value = month
+        sheet.cell(row=15, column=column).value = f"='{month}'!B15"
+        sheet.cell(row=16, column=column).value = f"='{month}'!B16"
+        sheet.cell(row=formula_row, column=column).value = f"='{month}'!B16-'{month}'!B15"
+    sheet.cell(row=formula_row, column=14).value = target_formula
+
+
 def test_detects_supported_normalized_formula_pattern_outliers() -> None:
     workbook = Workbook()
     function_change = workbook.active
@@ -146,6 +173,190 @@ def test_detects_same_row_unanchored_arithmetic_reference_drift_from_run_formula
 
     assert [
         finding
+        for finding in result.candidates
+        if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+    ] == []
+
+
+def test_detects_monthly_sheet_reference_drift_from_run_formula_audit() -> None:
+    workbook = Workbook()
+    budget = workbook.active
+    budget.title = "Budget"
+    _ensure_monthly_source_sheets(workbook)
+    _add_monthly_budget_region(budget, target_formula="=N15-N14")
+
+    result = _scan_pattern_workbook(workbook)
+    candidates = [
+        finding
+        for finding in result.candidates
+        if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+    ]
+
+    assert [(finding.sheet, finding.cell) for finding in candidates] == [("Budget", "N18")]
+    evidence = candidates[0].formula_pattern
+    assert evidence is not None
+    assert evidence.pattern_subtype == "REFERENCE_SHEET_DRIFT"
+    assert evidence.formula_region == "E18:P18"
+    assert evidence.neighbor_count >= 3
+    assert evidence.comparison_locations[:2] == ["M18", "O18"]
+
+
+def test_monthly_sheet_reference_drift_preserves_equivalent_local_normal() -> None:
+    workbook = Workbook()
+    budget = workbook.active
+    budget.title = "Budget"
+    _ensure_monthly_source_sheets(workbook)
+    _add_monthly_budget_region(budget, target_formula="=N16-N15")
+
+    result = _scan_pattern_workbook(workbook)
+
+    assert [
+        (finding.sheet, finding.cell)
+        for finding in result.candidates
+        if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+    ] == []
+
+    missing_sheet_workbook = Workbook()
+    missing_sheet_budget = missing_sheet_workbook.active
+    missing_sheet_budget.title = "MissingSheet"
+    _ensure_monthly_source_sheets(missing_sheet_workbook)
+    missing_sheet_workbook.remove(missing_sheet_workbook["M10"])
+    _add_monthly_budget_region(missing_sheet_budget, target_formula="=N15-N14")
+    assert [
+        (finding.sheet, finding.cell)
+        for finding in _scan_pattern_workbook(missing_sheet_workbook).candidates
+        if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+    ] == []
+
+
+def test_monthly_sheet_reference_drift_excludes_header_and_support_negatives() -> None:
+    workbook = Workbook()
+    workbook.remove(workbook.active)
+    _ensure_monthly_source_sheets(workbook)
+
+    missing_header = workbook.create_sheet("MissingHeader")
+    _add_monthly_budget_region(missing_header, target_formula="=N15-N14")
+    missing_header["N14"] = None
+
+    duplicate_header = workbook.create_sheet("DuplicateHeader")
+    _add_monthly_budget_region(duplicate_header, target_formula="=N15-N14")
+    duplicate_header["N14"] = "M09"
+
+    reversed_header = workbook.create_sheet("ReversedHeader")
+    _add_monthly_budget_region(reversed_header, target_formula="=N15-N14")
+    reversed_header["M14"] = "M10"
+    reversed_header["N14"] = "M09"
+
+    three = workbook.create_sheet("ThreeFormulas")
+    _add_monthly_budget_region(three, month_count=3)
+    three["F18"] = "=F15-F14"
+
+    two_deviations = workbook.create_sheet("TwoDeviations")
+    _add_monthly_budget_region(two_deviations, month_count=5)
+    two_deviations["G18"] = "=G15-G14"
+    two_deviations["H18"] = "=H15-H14"
+
+    edge = workbook.create_sheet("EdgeDeviation")
+    _add_monthly_budget_region(edge, target_formula="='M05'!B16-'M05'!B15", month_count=5)
+    edge["E18"] = "=E15-E14"
+
+    mismatch = workbook.create_sheet("LeftRightMismatch")
+    _add_monthly_budget_region(mismatch, month_count=5)
+    mismatch["G18"] = "=G15-G14"
+    mismatch["H18"] = "='M05'!B16-'M05'!B15"
+
+    result = _scan_pattern_workbook(workbook)
+
+    assert [
+        (finding.sheet, finding.cell)
+        for finding in result.candidates
+        if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+    ] == []
+
+
+
+def test_monthly_sheet_reference_drift_excludes_out_of_scope_monthly_majorities() -> None:
+    workbook = Workbook()
+    workbook.remove(workbook.active)
+    _ensure_monthly_source_sheets(workbook)
+
+    unresolved_majority = workbook.create_sheet("UnresolvedLocalMajority")
+    _add_monthly_budget_region(unresolved_majority, month_count=5)
+    for column in range(5, 10):
+        unresolved_majority.cell(row=18, column=column).value = (
+            f"={unresolved_majority.cell(row=18, column=column).coordinate[0]}15-"
+            f"{unresolved_majority.cell(row=18, column=column).coordinate[0]}14"
+        )
+    unresolved_majority["G18"] = "='M03'!B16-'M03'!B15"
+
+    fixed_other_month_majority = workbook.create_sheet("FixedOtherMonthMajority")
+    _add_monthly_budget_region(fixed_other_month_majority, month_count=5)
+    for column in range(5, 10):
+        fixed_other_month_majority.cell(row=18, column=column).value = "='M12'!B16-'M12'!B15"
+    fixed_other_month_majority["G18"] = "='M03'!B16-'M03'!B15"
+
+    address_drift = workbook.create_sheet("AddressDrift")
+    _add_monthly_budget_region(address_drift, month_count=5)
+    address_drift["G18"] = "='M03'!B15-'M03'!B14"
+
+    result = _scan_pattern_workbook(workbook)
+
+    assert [
+        (finding.sheet, finding.cell)
+        for finding in result.candidates
+        if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+    ] == []
+
+def test_monthly_sheet_reference_drift_excludes_structural_and_grammar_negatives() -> None:
+    workbook = Workbook()
+    workbook.remove(workbook.active)
+    _ensure_monthly_source_sheets(workbook)
+
+    hidden_group = workbook.create_sheet("HiddenGroup")
+    _add_monthly_budget_region(hidden_group, target_formula="=N15-N14")
+    hidden_group.column_dimensions.group("M", "O", hidden=True)
+
+    hidden_header = workbook.create_sheet("HiddenHeader")
+    _add_monthly_budget_region(hidden_header, target_formula="=N15-N14")
+    hidden_header.row_dimensions[14].hidden = True
+
+    table_sheet = workbook.create_sheet("MonthlyTable")
+    _add_monthly_budget_region(table_sheet, target_formula="=N15-N14")
+    table = Table(displayName="MonthlyTableRef", ref="E14:P18")
+    table.tableStyleInfo = TableStyleInfo(name="TableStyleMedium2", showRowStripes=True)
+    table_sheet.add_table(table)
+
+    merged = workbook.create_sheet("MonthlyMerged")
+    _add_monthly_budget_region(merged, target_formula="=N15-N14")
+    merged.merge_cells("N18:O18")
+
+    summary = workbook.create_sheet("MonthlySummary")
+    _add_monthly_budget_region(summary, target_formula="=N15-N14")
+    summary["D18"] = "total"
+
+    blank = workbook.create_sheet("BlankTarget")
+    _add_monthly_budget_region(blank)
+    blank["N18"] = None
+
+    constant = workbook.create_sheet("ConstantTarget")
+    _add_monthly_budget_region(constant)
+    constant["N18"] = 0
+
+    unsupported_formulas = {
+        "FunctionRange": "=SUM(N15:N16)",
+        "Anchored": "=$N$16-$N$15",
+        "External": "='[other.xlsx]M10'!B16-'M10'!B15",
+        "NameRef": "=NamedAmount-N15",
+        "MixedMonthOperands": "='M10'!B16-'M09'!B15",
+    }
+    for sheet_name, formula in unsupported_formulas.items():
+        sheet = workbook.create_sheet(sheet_name)
+        _add_monthly_budget_region(sheet, target_formula=formula)
+
+    result = _scan_pattern_workbook(workbook)
+
+    assert [
+        (finding.sheet, finding.cell)
         for finding in result.candidates
         if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
     ] == []
