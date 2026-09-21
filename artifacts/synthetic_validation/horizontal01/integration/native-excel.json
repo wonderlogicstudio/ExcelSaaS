@@ -1,0 +1,302 @@
+﻿{
+    "link_updates_disabled":  true,
+    "macros_disabled":  true,
+    "saved":  false,
+    "kind":  "ACTUAL_EXCEL_COM_READ_ONLY_SYNTHETIC",
+    "workbooks":  5,
+    "started_utc":  "2026-09-21T01:40:28.5000763Z",
+    "excel_version":  "16.0",
+    "results":  [
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  9,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  9,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "D8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  18,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  18,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "E8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  27,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  27,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "F8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  36,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  36,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "G8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  45,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  45,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "H8",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "1074ba1a67dfe886f8c00249eb59877e3254975bac72ebda08b711008d6c85e3",
+                        "id":  "normal",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  9,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  9,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "D8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  18,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  18,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "E8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  17,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  17,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "F8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  36,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  36,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "G8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  45,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  45,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "H8",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "8663ed104462e846cfec0ef7db362f330daad2310be0c7064d6792e0f06b4550",
+                        "id":  "column_drift",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  9,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  9,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "D8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  18,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  18,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "E8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  97,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  97,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "F8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  36,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  36,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "G8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  45,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  45,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "H8",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "698a16a82251fd2dd04f2f96138f9074bc1faaba179d0c6ea914d30b0385c7e4",
+                        "id":  "row_drift",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  9,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  9,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "D8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  18,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  18,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "E8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  17,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  17,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "F8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  36,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  36,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "G8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  45,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  45,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "H8",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "083b5bbe92a9b25bb30a31ad01b0c704d4e84df6856053a14b0c0ebf7c5dd237",
+                        "id":  "grouped_hidden",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  9,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  9,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "D8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  18,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  18,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "E8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  17,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  17,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "F8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  36,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  36,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "G8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  45,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  45,
+                                           "sheet":  "Horizontal",
+                                           "cell":  "H8",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "fbd0edf215edcc9847c41754bd493ce3a3b4fc4547ebf11fa5cfd460ce6d606e",
+                        "id":  "outside_group",
+                        "source_unchanged":  true
+                    }
+                ],
+    "failures":  [
+
+                 ],
+    "finished_utc":  "2026-09-21T01:40:32.9671657Z",
+    "status":  "PASS",
+    "excel_build":  20326
+}

@@ -1,0 +1,35 @@
+{
+  "status": "CHANGES_REQUIRED_STOPPED_AFTER_ONE_CORRECTION",
+  "baseline_commit": "ebcacc1",
+  "push": "AUTO_REVIEW_BLOCKED_EXACT_OWNER_APPROVAL_PENDING",
+  "reviewer": "coverage_review6",
+  "remaining_blocker": "Individual column hidden lookup misses grouped ColumnDimension min/max. Group C:F hidden with D8:H8 formula run and F8 drift can expose hidden F8. HiddenSpan test is individual H.hidden, not grouped columns.",
+  "resolved_review_findings": [
+    "UTF-8 Korean evidence",
+    "actual tie and unsupported internal-target fixtures",
+    "accurate horizontal scope UI copy"
+  ],
+  "checks": {
+    "pytest": "18 passed exit 0",
+    "ruff": "exit 0",
+    "web_tests": "8 passed exit 0",
+    "type_build": "tsc -b && vite build exit 0"
+  },
+  "acceptance": "NOT PASSED: green tests lack actual grouped-hidden-column coverage",
+  "frozen_oracle_unchanged": true,
+  "frozen_prior_artifact_count": 635,
+  "process_deviations": [
+    "repeated temp permission cause retries",
+    "passing test rerun after docstring-only edit"
+  ],
+  "not_run": [
+    "full regression",
+    "native Excel for new detector",
+    "beta UI for new detector",
+    "new detector deployment",
+    "new detector commit/push"
+  ],
+  "next_proposed": "One bounded correction using ColumnDimension min/max and genuine grouped-column negative test; requires owner decision under EFFICIENCY-02",
+  "report": "artifacts/synthetic_validation/horizontal01/REPORT.md",
+  "commands": "artifacts/synthetic_validation/horizontal01/command-log.json"
+}

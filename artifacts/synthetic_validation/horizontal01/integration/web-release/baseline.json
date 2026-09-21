@@ -1,0 +1,58 @@
+{
+  "worker": "3b513785-21e8-4efe-8bc3-fcdf9301d0eb",
+  "binding_hash": "67b4034829544f49ddf9a4fc71c9628587f7e001e4c5a984b714f73928254d2b",
+  "api": {
+    "revision": "workbookcare-api-beta-00026-get",
+    "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:1b0702e02c7b303b25d999d8da68a9a3c7c40a639a593dd3f8c4497fe6f3c596",
+    "spec_hash": "b7001088513013fe18de8d0e696993926f7b63fc8d1491cdd630b7dff029dc27",
+    "traffic_hash": "7d1fd2bbcad750ebcaaf2b057c92768c24d366aa366907a4db8f518dcca25cba",
+    "iam_hash": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342"
+  },
+  "access": [
+    {
+      "path": "/",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/precision-verification",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/compare",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/automation",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/help",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/orders",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/scans",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/formula-audits",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/delivery",
+      "status": 302,
+      "existing_access": true
+    }
+  ]
+}

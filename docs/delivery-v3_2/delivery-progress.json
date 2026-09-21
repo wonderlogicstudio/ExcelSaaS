@@ -2444,5 +2444,233 @@
     "local commit"
   ],
   "next_proposed": "One horizontal same-row pattern detection design/acceptance unit, separately approved; preserve normal exceptions and bounded scope"
+},
+"horizontal01_checkpoint_20260921":{
+  "status": "CHANGES_REQUIRED_STOPPED_AFTER_ONE_CORRECTION",
+  "baseline_commit": "ebcacc1",
+  "push": "AUTO_REVIEW_BLOCKED_EXACT_OWNER_APPROVAL_PENDING",
+  "reviewer": "coverage_review6",
+  "remaining_blocker": "Individual column hidden lookup misses grouped ColumnDimension min/max. Group C:F hidden with D8:H8 formula run and F8 drift can expose hidden F8. HiddenSpan test is individual H.hidden, not grouped columns.",
+  "resolved_review_findings": [
+    "UTF-8 Korean evidence",
+    "actual tie and unsupported internal-target fixtures",
+    "accurate horizontal scope UI copy"
+  ],
+  "checks": {
+    "pytest": "18 passed exit 0",
+    "ruff": "exit 0",
+    "web_tests": "8 passed exit 0",
+    "type_build": "tsc -b && vite build exit 0"
+  },
+  "acceptance": "NOT PASSED: green tests lack actual grouped-hidden-column coverage",
+  "frozen_oracle_unchanged": true,
+  "frozen_prior_artifact_count": 635,
+  "process_deviations": [
+    "repeated temp permission cause retries",
+    "passing test rerun after docstring-only edit"
+  ],
+  "not_run": [
+    "full regression",
+    "native Excel for new detector",
+    "beta UI for new detector",
+    "new detector deployment",
+    "new detector commit/push"
+  ],
+  "next_proposed": "One bounded correction using ColumnDimension min/max and genuine grouped-column negative test; requires owner decision under EFFICIENCY-02",
+  "report": "artifacts/synthetic_validation/horizontal01/REPORT.md",
+  "commands": "artifacts/synthetic_validation/horizontal01/command-log.json"
+},
+"horizontal01_grouped_hidden_fix_20260921":{
+  "status": "TARGETED_CHECKS_AND_INDEPENDENT_REVIEW_PASS",
+  "owner_approval": "Explicit approval of exact ebcacc1 push and one grouped-hidden correction",
+  "pushed_commit": "ebcacc18eb1643b95d0ac1353ae069edd1e38134",
+  "remote": "origin/main",
+  "push_exit_code": 0,
+  "ls_remote_exit_code": 0,
+  "remote_matches": true,
+  "evidence": "artifacts/synthetic_validation/horizontal01/grouped-hidden-correction.json",
+  "independent_review": "coverage_review6 PASS; actual ColumnDimension interval handling and genuine group tests reviewed without duplicate execution",
+  "reused": "Unchanged horizontal01 web tests8 and type/build; no frontend change in this correction",
+  "not_run": [
+    "full regression for new detector",
+    "native Excel for new detector",
+    "beta deployment and screen verification of new detector",
+    "new detector commit/push"
+  ],
+  "next_proposed": "One final integration unit: full regression, required Excel checks, protected beta deployment and actual expected-result screen verification"
+},
+"horizontal01_final_integration_20260921":{
+  "status": "VERIFIED_BETA_PENDING_OWNER",
+  "regression": {
+    "exit_code": 0,
+    "web": 168,
+    "worker": 16,
+    "api": 254,
+    "ruff": "PASS",
+    "m4_pack_exact_candidates": 36
+  },
+  "native_excel": {
+    "files": 5,
+    "checks": 25,
+    "read_only": true,
+    "saved": false,
+    "original_hashes_preserved": true
+  },
+  "beta_ui": {
+    "actual_automatic_uploads": 5,
+    "structure_count_each": 0,
+    "cases": [
+      {
+        "id": "normal",
+        "expected_formula_count": 0,
+        "actual_formula_count": 0,
+        "location": null
+      },
+      {
+        "id": "column_drift",
+        "expected_formula_count": 1,
+        "actual_formula_count": 1,
+        "location": "Horizontal!F8"
+      },
+      {
+        "id": "row_drift",
+        "expected_formula_count": 1,
+        "actual_formula_count": 1,
+        "location": "Horizontal!F8"
+      },
+      {
+        "id": "grouped_hidden",
+        "expected_formula_count": 0,
+        "actual_formula_count": 0,
+        "location": null
+      },
+      {
+        "id": "outside_group",
+        "expected_formula_count": 1,
+        "actual_formula_count": 1,
+        "location": "Horizontal!F8"
+      }
+    ],
+    "comparison_formulas": [
+      "=E6-F7",
+      "=F5-F7"
+    ],
+    "scope_copy_verified": true,
+    "automatic_repair_unsupported_visible": true,
+    "desktop_and_390px_screens_viewed": true,
+    "screenshot_files_saved": false
+  },
+  "api": {
+    "revision": "workbookcare-api-beta-00026-get",
+    "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:1b0702e02c7b303b25d999d8da68a9a3c7c40a639a593dd3f8c4497fe6f3c596",
+    "worker_version": "3b513785-21e8-4efe-8bc3-fcdf9301d0eb",
+    "gateway_config": "workbookcare-beta-d08-e6132fcdf496",
+    "security_invariants_preserved": true,
+    "private_iam": true,
+    "max_instances": 1,
+    "payment_mode": "OFF",
+    "gateway_state": "ACTIVE",
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "worker": {
+    "worker": "7cbbadde-3b30-4792-a84f-0543db1c61a9",
+    "rollback_worker": "3b513785-21e8-4efe-8bc3-fcdf9301d0eb",
+    "all_bindings_equal": true,
+    "api_unchanged": true,
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/precision-verification",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/compare",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/automation",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/help",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/orders",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "frozen_previous_files_preserved": 635,
+  "source_hashes_unchanged": true,
+  "runtime_proof": {
+    "reference_cases": 20,
+    "repair_profiles": 2,
+    "artifacts": 6
+  },
+  "deployment_review": "PASS with separately reviewed guarded_transition.py; deficient helper traffic phase NOT executed",
+  "commands": "release/commands.jsonl and web-release/commands.jsonl; regression.log and regression-exit.txt",
+  "not_run": [
+    "new implementation git commit/push",
+    "new repair browser download replay (detector-only change; runtime proof executed)",
+    "PG/live payments/refunds",
+    "commercial readiness/human usability"
+  ],
+  "known_limits": [
+    "same-row same-sheet unanchored arithmetic drift only",
+    "no monthly sheet-name comparison, Table interior, horizontal blanks/constants",
+    "detection candidates are not confirmed errors or automatic repairs"
+  ],
+  "issues": [
+    "Deployment helper initial review found stale pins and missing runtime gates; one correction restored gates except traffic preflight. Did not retry editing; independent reviewer approved separate same-execution guard+traffic operation.",
+    "Evidence read used incorrect utf-16 for ASCII regression-exit file once; corrected using PowerShell Get-Content, no tests rerun.",
+    "Two exploratory optional file reads used incorrect scratch cwd; corrected workspace path; no product impact."
+  ],
+  "final_independent_evidence_review": "PASS: coverage_review6; no duplicate execution"
 }
 }

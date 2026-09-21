@@ -1,0 +1,29 @@
+{"phase": "baseline", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "baseline", "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway", "exit_code": 0}
+{"phase": "baseline", "command": "gcloud api-gateway api-configs describe workbookcare-beta-d08-e6132fcdf496", "exit_code": 0}
+{"phase": "baseline", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "baseline", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "baseline", "command": "wrangler versions view 3b513785-21e8-4efe-8bc3-fcdf9301d0eb", "exit_code": 0}
+{"phase": "stage", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "stage", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "stage", "command": "gcloud run deploy workbookcare-api-beta --region", "exit_code": 0}
+{"phase": "stage", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "stage", "command": "gcloud run revisions describe workbookcare-api-beta-00025-wof", "exit_code": 0}
+{"phase": "stage", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "proof", "command": "gcloud logging read resource.type=\"cloud_run_revision\" AND resource.labels.revision_name=\"workbookcare-api-beta-00025-wof\" AND jsonPayload.event=\"delivery_runtime_verified\" --limit", "exit_code": 0}
+{"phase": "live", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "live", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "live", "command": "gcloud run deploy workbookcare-api-beta --region", "exit_code": 0}
+{"phase": "live", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "live", "command": "gcloud run revisions describe workbookcare-api-beta-00026-get", "exit_code": 0}
+{"phase": "live", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "guarded_traffic", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "guarded_traffic", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "guarded_traffic", "command": "gcloud run revisions describe workbookcare-api-beta-00026-get", "exit_code": 0}
+{"phase": "guarded_traffic", "command": "gcloud run services update-traffic workbookcare-api-beta", "exit_code": 0}
+{"phase": "after", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "after", "command": "gcloud api-gateway gateways describe workbookcare-beta-gateway", "exit_code": 0}
+{"phase": "after", "command": "gcloud api-gateway api-configs describe workbookcare-beta-d08-e6132fcdf496", "exit_code": 0}
+{"phase": "after", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "after", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "after", "command": "wrangler versions view 3b513785-21e8-4efe-8bc3-fcdf9301d0eb", "exit_code": 0}

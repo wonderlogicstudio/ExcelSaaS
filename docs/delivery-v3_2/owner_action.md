@@ -1,3 +1,39 @@
+## HORIZONTAL-01 final integration — VERIFIED BETA / OWNER CHECKPOINT (2026-09-21)
+
+Owner-approved final integration completed; independent evidence review PASS. Full verify.ps1 exit0: web168/Worker16/API254, Ruff PASS and M4 sample36 exact candidates. Native Excel5 synthetic files/25 fixed values PASS, read-only/no save/unchanged originals. Actual protected beta automatic uploads5 match: normal0, column drift1 F8, row drift1 F8, grouped hidden0, outside-group1 F8; structure0 each. Desktop1440/mobile390 actual screenshots and accessible UI checked, screenshot files not saved. Comparison formula differences and automatic-repair unsupported label visible.
+
+API00026-get / Worker7cbbadde-3b30-4792-a84f-0543db1c61a9 deployed. Linux20cases/2profiles/6artifacts verified before promotion. Existing private IAM, Access, Gateway, binding hashes, maxScale1 and paymentOFF preserved. Exact rollback versions recorded. Source hashes and635 frozen previous artifacts unchanged. New detector is review-candidate detection only; no monthly-sheet/Table/horizontal-gap repair expansion.
+
+Evidence, actual commands/exits and limitations: artifacts/synthetic_validation/horizontal01/integration/REPORT.md and result.json. Traffic helper's missing preflight was not used; separately reviewed guarded transition performed provider checks and promotion in one execution. Prior failures and reviews preserved.
+
+Previous ebcacc1 is pushed; new HORIZONTAL implementation and records remain local/uncommitted, no new push. New repair browser delivery replay and PG/live commerce were not run. Owner may inspect normal.xlsx (0), column_drift.xlsx (F8), grouped_hidden.xlsx (0) from integration/workbooks on beta. Next proposed single unit: selected verified-change commit/push. STOP before further work.
+
+---
+
+## HORIZONTAL-01 grouped-hidden correction — REVIEW PASS (2026-09-21)
+
+Owner-approved exact checkpoint ebcacc1 pushed to origin/main, exit0; git ls-remote confirmed ebcacc18eb1643b95d0ac1353ae069edd1e38134. Earlier push block resolved by explicit approval. New detector working-tree changes were not included.
+
+Grouped-hidden-column correction and genuine group regression fixtures completed. Independent focused review PASS. Actual failing-before/fixed-after commands, exits and tests: artifacts/synthetic_validation/horizontal01/grouped-hidden-correction.json. Prior records and expected evidence preserved. Frontend tests/type/build reused unchanged, not rerun.
+
+This is targeted engineering verification, not beta acceptance. Full regression/native Excel/beta deployment and actual screen verification for the new detector remain NOT_RUN. New detector changes remain local and uncommitted. Next proposed single unit: final integration and protected beta verification after owner confirmation. STOP.
+
+---
+
+## HORIZONTAL-01 — CHANGES_REQUIRED / STOPPED (2026-09-21)
+
+Final rereview: grouped hidden columns remain incorrectly handled after one correction. ColumnDimension.min/max must be used; current HiddenSpan test does not exercise an actual group. Targeted API18/web8, Ruff and type/build passed but acceptance NOT passed. Next proposed single unit is this grouped-column correction and its actual regression fixture, subject to owner decision. No new detector deployment or commit.
+
+Previous six-group verification is locally committed as ebcacc1 (56 selected files). Push to origin/main was rejected by automatic approval review for insufficient exact default-branch/commit-scope authorization. Exact approval question is pending; remote push is NOT complete. User lock and unrelated files excluded.
+
+Bounded same-row relative A1 arithmetic candidate detection implemented; no repair expansion or monthly-sheet inference. See artifacts/synthetic_validation/horizontal01/REPORT.md, command-log.json and review-result.json for actual changes, targeted checks, review and pending gates. Original frozen oracle and prior evidence retained. Initial review requested corrections for hidden-column groups, damaged Korean evidence text, weak negative fixtures and coverage wording.
+
+Execution discipline deviation: repeated pytest temporary-directory permission failures and rerunning passing tests after a docstring-only edit violated EFFICIENCY-02. Recorded separately from functional results; no extra tests requested to remedy this process issue.
+
+Full regression, native Excel and actual beta-screen acceptance of this new detector remain NOT_RUN. Current beta retains previously verified engine. STOP before further correction or feature work; final integration follows resolution and owner approval. New HORIZONTAL-01 work is not committed or pushed at this checkpoint.
+
+---
+
 ## SYNTHETIC-01 final six verification groups — COMPLETE WITH KNOWN LIMITS (2026-09-21)
 
 Owner-approved six-group verification completed and independently reviewed PASS. Representative10 families/20 beta files (14 new,6 prior) matched frozen raw expectations; excluded cases are not detection passes. Monthly/Table scope gaps remain:18 excluded mutants undetected;30 hidden notices verified intentional Rate Card baseline. Fresh read-only native Excel11files/96checks (95 semantic values + monthly mutant #VALUE!) passed, no save. Existing combined two-rule delivery725values/11changes/42impacts/3downloads reused after51 API source hashes and output/download hashes matched. Frozen635 files preserved.

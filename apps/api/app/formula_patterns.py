@@ -218,6 +218,47 @@ def normalize_formula(formula: str, origin: Cell) -> str | None:
     return "".join(canonical)
 
 
+def _normalize_horizontal_arithmetic_formula(formula: str, origin: Cell) -> str | None:
+    """Normalize only same-sheet, unanchored A1 arithmetic formulas."""
+    unsupported_markers = ("[", "]", "!", "$", ":")
+    if not formula.startswith("=") or any(marker in formula for marker in unsupported_markers):
+        return None
+    try:
+        tokens = Tokenizer(formula).items
+    except Exception:
+        return None
+
+    canonical: list[str] = []
+    has_reference = False
+    for token in tokens:
+        if token.type == "WSPACE":
+            continue
+        if token.type == "OPERAND":
+            if token.subtype != "RANGE":
+                return None
+            normalized_reference = _normalise_reference(
+                token.value,
+                origin_row=origin.row,
+                origin_column=origin.column,
+            )
+            if normalized_reference is None:
+                return None
+            canonical.append(f"REF({normalized_reference})")
+            has_reference = True
+            continue
+        if token.type == "OPERATOR-INFIX" and token.value in {"+", "-", "*", "/", "^"}:
+            canonical.append(token.value)
+            continue
+        if token.type == "PAREN":
+            canonical.append(token.value)
+            continue
+        return None
+
+    if not has_reference or not canonical:
+        return None
+    return "".join(canonical)
+
+
 def _table_bounds(worksheet: Worksheet) -> list[tuple[int, int, int, int]]:
     bounds: list[tuple[int, int, int, int]] = []
     for table in worksheet.tables.values():
@@ -285,6 +326,32 @@ def _is_excluded_location(
     )
 
 
+def _is_hidden_column(worksheet: Worksheet, column: int) -> bool:
+    letter = get_column_letter(column)
+    direct_dimension = worksheet.column_dimensions[letter]
+    if direct_dimension.hidden:
+        return True
+    for dimension in worksheet.column_dimensions.values():
+        if not dimension.hidden:
+            continue
+        min_column = getattr(dimension, "min", None)
+        max_column = getattr(dimension, "max", None)
+        if (
+            isinstance(min_column, int)
+            and isinstance(max_column, int)
+            and min_column <= column <= max_column
+        ):
+            return True
+    return False
+
+
+def _has_hidden_column_between(worksheet: Worksheet, columns: list[int]) -> bool:
+    return any(
+        _is_hidden_column(worksheet, column)
+        for column in range(min(columns), max(columns) + 1)
+    )
+
+
 def _blank_row_has_context(worksheet: Worksheet, *, row: int, target_column: int) -> bool:
     """Avoid treating a fully empty separator row as a missing formula."""
     return any(
@@ -299,6 +366,20 @@ def _contiguous_formula_runs(items: list[_NormalizedFormula]) -> list[list[_Norm
     runs: list[list[_NormalizedFormula]] = [[items[0]]]
     for item in items[1:]:
         if item.cell.row == runs[-1][-1].cell.row + 1:
+            runs[-1].append(item)
+        else:
+            runs.append([item])
+    return runs
+
+
+def _contiguous_horizontal_formula_runs(
+    items: list[_NormalizedFormula],
+) -> list[list[_NormalizedFormula]]:
+    if not items:
+        return []
+    runs: list[list[_NormalizedFormula]] = [[items[0]]]
+    for item in items[1:]:
+        if item.cell.column == runs[-1][-1].cell.column + 1:
             runs[-1].append(item)
         else:
             runs.append([item])
@@ -324,6 +405,10 @@ def _supporting_items(
 
 def _region(column: int, rows: list[int]) -> str:
     return f"{get_column_letter(column)}{min(rows)}:{get_column_letter(column)}{max(rows)}"
+
+
+def _horizontal_region(row: int, columns: list[int]) -> str:
+    return f"{get_column_letter(min(columns))}{row}:{get_column_letter(max(columns))}{row}"
 
 
 def _pattern_profile(signature: str) -> _PatternProfile:
@@ -510,13 +595,16 @@ def _candidate_evidence(
 def inspect_worksheet_formula_patterns(worksheet: Worksheet) -> FormulaPatternWorksheetAudit:
     """Return conservative formula candidates for a single worksheet.
 
-    The comparison is column-local and requires three or more surrounding
-    formulas with one dominant normalized pattern. This deliberately misses
-    many possible inconsistencies in exchange for lower false-positive risk.
+    The legacy comparison is column-local; the bounded horizontal pass is
+    limited to same-row unanchored arithmetic formulas. Both require three or
+    more surrounding formulas with one dominant normalized pattern. This
+    deliberately misses many possible inconsistencies in exchange for lower
+    false-positive risk.
     """
     table_bounds = _table_bounds(worksheet)
     summary_rows = _summary_rows(worksheet)
     normalized_by_column: dict[int, list[_NormalizedFormula]] = defaultdict(list)
+    horizontal_by_row: dict[int, list[_NormalizedFormula]] = defaultdict(list)
     supported_formula_count = 0
 
     for row in worksheet.iter_rows():
@@ -536,7 +624,15 @@ def inspect_worksheet_formula_patterns(worksheet: Worksheet) -> FormulaPatternWo
                         pattern_id=_pattern_id(signature),
                     )
                 )
-
+            horizontal_signature = _normalize_horizontal_arithmetic_formula(formula, cell)
+            if horizontal_signature is not None:
+                horizontal_by_row[cell.row].append(
+                    _NormalizedFormula(
+                        cell=cell,
+                        signature=horizontal_signature,
+                        pattern_id=_pattern_id(horizontal_signature),
+                    )
+                )
     candidates: list[FormulaPatternCandidate] = []
     emitted: set[tuple[str, str]] = set()
     for column, normalized_items in normalized_by_column.items():
@@ -661,6 +757,83 @@ def inspect_worksheet_formula_patterns(worksheet: Worksheet) -> FormulaPatternWo
                     ),
                 )
             )
+
+    for row, normalized_items in horizontal_by_row.items():
+        normalized_items.sort(key=lambda item: item.cell.column)
+        for run in _contiguous_horizontal_formula_runs(normalized_items):
+            if len(run) < 4:
+                continue
+            run_columns = [entry.cell.column for entry in run]
+            if _has_hidden_column_between(worksheet, run_columns):
+                continue
+            counts = Counter(item.signature for item in run)
+            dominant_signature, dominant_count = counts.most_common(1)[0]
+            if dominant_count < 3 or sum(count == dominant_count for count in counts.values()) != 1:
+                continue
+
+            by_column = {item.cell.column: item for item in run}
+            for item in run[1:-1]:
+                if item.signature == dominant_signature:
+                    continue
+                left = by_column.get(item.cell.column - 1)
+                right = by_column.get(item.cell.column + 1)
+                if left is None or right is None:
+                    continue
+                if left.signature != dominant_signature or right.signature != dominant_signature:
+                    continue
+                supporting = [
+                    entry
+                    for entry in run
+                    if entry.cell.column != item.cell.column
+                    and entry.signature == dominant_signature
+                    and not _is_excluded_location(
+                        worksheet,
+                        entry.cell,
+                        table_bounds,
+                        summary_rows,
+                    )
+                ]
+                if len(supporting) < 3:
+                    continue
+                key = ("FORMULA_PATTERN_OUTLIER", item.cell.coordinate)
+                if key in emitted:
+                    continue
+                emitted.add(key)
+                candidates.append(
+                    FormulaPatternCandidate(
+                        rule_code="FORMULA_PATTERN_OUTLIER",
+                        title="주변 수식과 다른 패턴 후보가 있습니다.",
+                        description=(
+                            "같은 행의 연속 수식 영역에서 주변 수식과 다른 정규화된 패턴을 "
+                            "확인했습니다. 의도된 계산일 수 있으므로 사용자의 확인과 "
+                            "정밀 검증이 필요합니다."
+                        ),
+                        sheet=worksheet.title,
+                        cell=item.cell.coordinate,
+                        evidence=_candidate_evidence(
+                            pattern_type="DOMINANT_NORMALIZED_PATTERN_OUTLIER",
+                            region=_horizontal_region(
+                                row,
+                                [entry.cell.column for entry in run],
+                            ),
+                            dominant_signature=dominant_signature,
+                            current_signature=item.signature,
+                            supporting_cells=[
+                                entry.cell
+                                for entry in sorted(
+                                    supporting,
+                                    key=lambda entry: entry.cell.column,
+                                )
+                            ],
+                            detection_basis=(
+                                "같은 행의 연속 수식 영역에서 최소 3개의 주변 수식이 같은 "
+                                "정규화 패턴을 보이고, 대상 셀의 좌우 인접 수식도 그 패턴을 "
+                                "따르지만 대상 셀만 다른 패턴입니다."
+                            ),
+                            candidate_cell=item.cell,
+                        ),
+                    )
+                )
 
     return FormulaPatternWorksheetAudit(
         candidates=candidates,

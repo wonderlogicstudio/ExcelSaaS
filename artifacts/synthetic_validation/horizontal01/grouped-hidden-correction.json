@@ -1,0 +1,47 @@
+{
+  "id": "HORIZONTAL-01-GROUPED-HIDDEN",
+  "status": "IMPLEMENTED",
+  "scope": "Only formula_patterns.py and test_formula_patterns.py changed for grouped hidden column intervals.",
+  "commands": [
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider tests\\test_formula_patterns.py::test_horizontal_reference_drift_respects_grouped_hidden_column_ranges_after_reload --basetemp C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\horizontal01-grouped-hidden-red",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 1,
+      "result": "Expected pre-fix failure: GroupedHidden!F8 was emitted even though grouped hidden C:F overlaps the D8:H8 run."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py --basetemp C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\horizontal01-grouped-hidden-final",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 0,
+      "result": "19 passed, 1 pre-existing Starlette TestClient deprecation warning."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m ruff check --no-cache app\\formula_patterns.py tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 1,
+      "result": "Ruff SIM102 on new nested min/max hidden interval check; style-only simplification applied."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m ruff check --no-cache app\\formula_patterns.py tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 0,
+      "result": "All checks passed after style-only simplification."
+    }
+  ],
+  "evidence": {
+    "new_test": "test_horizontal_reference_drift_respects_grouped_hidden_column_ranges_after_reload",
+    "fixture": "GroupedHidden uses column_dimensions.group(\"C\", \"F\", hidden=True), is saved and reloaded through BytesIO, and overlaps formula run D8:H8 with F8 drift.",
+    "controls": [
+      "VisibleControl has the same F8 drift and remains detected.",
+      "OutsideGroupControl hides A:C and leaves D8:H8 detected, proving this is not blanket suppression."
+    ]
+  },
+  "not_run": [
+    "web retest",
+    "full regression",
+    "native Excel",
+    "hosted beta",
+    "commit",
+    "push"
+  ]
+}

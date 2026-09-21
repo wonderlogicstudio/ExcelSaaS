@@ -1,0 +1,12 @@
+{
+  "revision": "workbookcare-api-beta-00025-wof",
+  "checks": [
+    {
+      "event": "delivery_runtime_verified",
+      "reference_cases": 20,
+      "repair_profiles": 2,
+      "artifacts": 6
+    }
+  ],
+  "payment_tested": false
+}

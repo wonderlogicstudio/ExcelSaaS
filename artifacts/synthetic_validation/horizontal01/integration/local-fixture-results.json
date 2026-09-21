@@ -1,0 +1,74 @@
+[
+  {
+    "id": "normal",
+    "expected_candidates": [],
+    "actual_candidates": [],
+    "pass": true
+  },
+  {
+    "id": "column_drift",
+    "expected_candidates": [
+      {
+        "sheet": "Horizontal",
+        "cell": "F8",
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "subtype": "RELATIVE_REFERENCE_DRIFT"
+      }
+    ],
+    "actual_candidates": [
+      {
+        "sheet": "Horizontal",
+        "cell": "F8",
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "subtype": "RELATIVE_REFERENCE_DRIFT"
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "row_drift",
+    "expected_candidates": [
+      {
+        "sheet": "Horizontal",
+        "cell": "F8",
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "subtype": "RELATIVE_REFERENCE_DRIFT"
+      }
+    ],
+    "actual_candidates": [
+      {
+        "sheet": "Horizontal",
+        "cell": "F8",
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "subtype": "RELATIVE_REFERENCE_DRIFT"
+      }
+    ],
+    "pass": true
+  },
+  {
+    "id": "grouped_hidden",
+    "expected_candidates": [],
+    "actual_candidates": [],
+    "pass": true
+  },
+  {
+    "id": "outside_group",
+    "expected_candidates": [
+      {
+        "sheet": "Horizontal",
+        "cell": "F8",
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "subtype": "RELATIVE_REFERENCE_DRIFT"
+      }
+    ],
+    "actual_candidates": [
+      {
+        "sheet": "Horizontal",
+        "cell": "F8",
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "subtype": "RELATIVE_REFERENCE_DRIFT"
+      }
+    ],
+    "pass": true
+  }
+]

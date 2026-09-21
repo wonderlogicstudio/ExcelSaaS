@@ -1,0 +1,215 @@
+{
+  "cases": [
+    {
+      "id": "normal",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\horizontal01\\integration\\workbooks\\normal.xlsx",
+      "sha256": "1074ba1a67dfe886f8c00249eb59877e3254975bac72ebda08b711008d6c85e3",
+      "expected_candidates": [],
+      "checks": [
+        {
+          "sheet": "Horizontal",
+          "cell": "D8",
+          "formula": "=D6-D7",
+          "expected": 9
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "E8",
+          "formula": "=E6-E7",
+          "expected": 18
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "F8",
+          "formula": "=F6-F7",
+          "expected": 27
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "G8",
+          "formula": "=G6-G7",
+          "expected": 36
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "H8",
+          "formula": "=H6-H7",
+          "expected": 45
+        }
+      ]
+    },
+    {
+      "id": "column_drift",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\horizontal01\\integration\\workbooks\\column_drift.xlsx",
+      "sha256": "8663ed104462e846cfec0ef7db362f330daad2310be0c7064d6792e0f06b4550",
+      "expected_candidates": [
+        {
+          "sheet": "Horizontal",
+          "cell": "F8",
+          "rule": "FORMULA_PATTERN_OUTLIER",
+          "subtype": "RELATIVE_REFERENCE_DRIFT"
+        }
+      ],
+      "checks": [
+        {
+          "sheet": "Horizontal",
+          "cell": "D8",
+          "formula": "=D6-D7",
+          "expected": 9
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "E8",
+          "formula": "=E6-E7",
+          "expected": 18
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "F8",
+          "formula": "=E6-F7",
+          "expected": 17
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "G8",
+          "formula": "=G6-G7",
+          "expected": 36
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "H8",
+          "formula": "=H6-H7",
+          "expected": 45
+        }
+      ]
+    },
+    {
+      "id": "row_drift",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\horizontal01\\integration\\workbooks\\row_drift.xlsx",
+      "sha256": "698a16a82251fd2dd04f2f96138f9074bc1faaba179d0c6ea914d30b0385c7e4",
+      "expected_candidates": [
+        {
+          "sheet": "Horizontal",
+          "cell": "F8",
+          "rule": "FORMULA_PATTERN_OUTLIER",
+          "subtype": "RELATIVE_REFERENCE_DRIFT"
+        }
+      ],
+      "checks": [
+        {
+          "sheet": "Horizontal",
+          "cell": "D8",
+          "formula": "=D6-D7",
+          "expected": 9
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "E8",
+          "formula": "=E6-E7",
+          "expected": 18
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "F8",
+          "formula": "=F5-F7",
+          "expected": 97
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "G8",
+          "formula": "=G6-G7",
+          "expected": 36
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "H8",
+          "formula": "=H6-H7",
+          "expected": 45
+        }
+      ]
+    },
+    {
+      "id": "grouped_hidden",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\horizontal01\\integration\\workbooks\\grouped_hidden.xlsx",
+      "sha256": "083b5bbe92a9b25bb30a31ad01b0c704d4e84df6856053a14b0c0ebf7c5dd237",
+      "expected_candidates": [],
+      "checks": [
+        {
+          "sheet": "Horizontal",
+          "cell": "D8",
+          "formula": "=D6-D7",
+          "expected": 9
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "E8",
+          "formula": "=E6-E7",
+          "expected": 18
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "F8",
+          "formula": "=E6-F7",
+          "expected": 17
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "G8",
+          "formula": "=G6-G7",
+          "expected": 36
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "H8",
+          "formula": "=H6-H7",
+          "expected": 45
+        }
+      ]
+    },
+    {
+      "id": "outside_group",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\horizontal01\\integration\\workbooks\\outside_group.xlsx",
+      "sha256": "fbd0edf215edcc9847c41754bd493ce3a3b4fc4547ebf11fa5cfd460ce6d606e",
+      "expected_candidates": [
+        {
+          "sheet": "Horizontal",
+          "cell": "F8",
+          "rule": "FORMULA_PATTERN_OUTLIER",
+          "subtype": "RELATIVE_REFERENCE_DRIFT"
+        }
+      ],
+      "checks": [
+        {
+          "sheet": "Horizontal",
+          "cell": "D8",
+          "formula": "=D6-D7",
+          "expected": 9
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "E8",
+          "formula": "=E6-E7",
+          "expected": 18
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "F8",
+          "formula": "=E6-F7",
+          "expected": 17
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "G8",
+          "formula": "=G6-G7",
+          "expected": 36
+        },
+        {
+          "sheet": "Horizontal",
+          "cell": "H8",
+          "formula": "=H6-H7",
+          "expected": 45
+        }
+      ]
+    }
+  ]
+}

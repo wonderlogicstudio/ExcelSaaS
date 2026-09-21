@@ -32,7 +32,7 @@ const userStatusOptions: FindingUserStatus[] = [
   'MARKED_NORMAL',
 ];
 
-export const formulaAuditCoverageNotice = '지원 범위: 같은 열의 주변 A1 참조 수식 패턴을 비교하며, 반복 수식 사이의 빈 셀·상수도 후보로 확인합니다. 가로로 반복되는 월별 패턴, 월별 시트 사이의 패턴 비교, Excel Table 내부 수식은 비교하지 않습니다.';
+export const formulaAuditCoverageNotice = '지원 범위: 같은 열의 주변 A1 참조 수식 패턴과 제한된 같은 행의 상대 A1 산술 참조 이탈을 비교하며, 반복 수식 사이의 세로 빈 셀·상수도 후보로 확인합니다. 월별 시트 사이의 패턴 비교, Excel Table 내부 수식, 가로 빈 셀·상수는 비교하지 않습니다.';
 export const formulaAuditWorkbookSafetyNotice = '검사 완료는 지원 범위 안의 후보 스캔이 끝났다는 뜻입니다. 통합 문서 전체 안전성, 계산 결과, 업무 규칙 검증은 별도 확인이 필요합니다.';
 export const formulaAuditSheetMetricLabel = '수식 포함 시트';
 export const formulaAuditRegionMetricLabel = '후보가 발견된 영역';
@@ -64,7 +64,7 @@ export const formulaAuditStatusCopy: Record<FormulaAuditStatus, { label: string;
   },
   SKIPPED_UNSUPPORTED_STRUCTURE: {
     label: '미지원 구조로 생략',
-    description: '지원하지 않는 수식 구조는 안전하게 후보화하지 않습니다. Excel Table 내부 수식, 가로로 반복되는 월별 패턴, 월별 시트 사이의 패턴 비교는 이번 같은-열 패턴 검사 범위에 포함되지 않습니다.',
+    description: '지원하지 않는 수식 구조는 안전하게 후보화하지 않습니다. 월별 시트 사이의 패턴 비교, Excel Table 내부 수식, 가로 빈 셀·상수는 이번 수식 패턴 검사 범위에 포함되지 않습니다.',
   },
   FAILED: {
     label: '감사 실패, 기본 결과 유지',
@@ -270,7 +270,7 @@ export function FormulaAuditPanel({
               )}
 
               {auditResult.status === 'COMPLETED' && auditResult.candidates.length === 0 && (
-                <p className="formula-audit-panel__empty">이번 지원 범위 안에서는 수식 패턴 후보를 만들지 않았습니다. 가로로 반복되는 월별 패턴, 월별 시트 사이의 패턴 비교, Excel Table 내부 수식처럼 범위 밖인 구조는 0건 완료로 해석하지 말고 별도 확인이 필요합니다. 파일의 모든 수식, 계산 결과, 업무 규칙이 안전하다는 뜻은 아닙니다.</p>
+                <p className="formula-audit-panel__empty">이번 지원 범위 안에서는 수식 패턴 후보를 만들지 않았습니다. 월별 시트 사이의 패턴 비교, Excel Table 내부 수식, 가로 빈 셀·상수처럼 범위 밖인 구조는 0건 완료로 해석하지 말고 별도 확인이 필요합니다. 파일의 모든 수식, 계산 결과, 업무 규칙이 안전하다는 뜻은 아닙니다.</p>
               )}
 
               {auditResult.limitations.length > 0 && (

@@ -1,0 +1,53 @@
+{
+  "worker": "7cbbadde-3b30-4792-a84f-0543db1c61a9",
+  "rollback_worker": "3b513785-21e8-4efe-8bc3-fcdf9301d0eb",
+  "all_bindings_equal": true,
+  "api_unchanged": true,
+  "access": [
+    {
+      "path": "/",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/precision-verification",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/compare",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/automation",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/help",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/orders",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/scans",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/formula-audits",
+      "status": 302,
+      "existing_access": true
+    },
+    {
+      "path": "/api/v1/delivery",
+      "status": 302,
+      "existing_access": true
+    }
+  ]
+}

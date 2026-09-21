@@ -1,0 +1,19 @@
+{
+  "status": "TARGETED_CHECKS_AND_INDEPENDENT_REVIEW_PASS",
+  "owner_approval": "Explicit approval of exact ebcacc1 push and one grouped-hidden correction",
+  "pushed_commit": "ebcacc18eb1643b95d0ac1353ae069edd1e38134",
+  "remote": "origin/main",
+  "push_exit_code": 0,
+  "ls_remote_exit_code": 0,
+  "remote_matches": true,
+  "evidence": "artifacts/synthetic_validation/horizontal01/grouped-hidden-correction.json",
+  "independent_review": "coverage_review6 PASS; actual ColumnDimension interval handling and genuine group tests reviewed without duplicate execution",
+  "reused": "Unchanged horizontal01 web tests8 and type/build; no frontend change in this correction",
+  "not_run": [
+    "full regression for new detector",
+    "native Excel for new detector",
+    "beta deployment and screen verification of new detector",
+    "new detector commit/push"
+  ],
+  "next_proposed": "One final integration unit: full regression, required Excel checks, protected beta deployment and actual expected-result screen verification"
+}

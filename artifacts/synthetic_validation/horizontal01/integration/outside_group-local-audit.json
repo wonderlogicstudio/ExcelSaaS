@@ -1,0 +1,59 @@
+{
+  "status": "COMPLETED",
+  "formula_cell_count": 5,
+  "audited_sheet_count": 1,
+  "audited_formula_region_count": 1,
+  "candidates": [
+    {
+      "id": "36dc68fa-8487-4f9d-9046-a8e3d00742ba",
+      "finding_key": "FORMULA_PATTERN_OUTLIER|horizontal|f8",
+      "rule_code": "FORMULA_PATTERN_OUTLIER",
+      "severity": "warning",
+      "title": "주변 수식과 다른 패턴 후보",
+      "description": "주변 반복 수식과 다른 구조를 확인한 후보입니다. 업무적으로 정상일 수 있으므로 사용자가 직접 확인해야 합니다.",
+      "sheet": "Horizontal",
+      "cell": "F8",
+      "confidence": 0.0,
+      "repair_class": "EXPERT_REVIEW",
+      "formula_pattern": {
+        "pattern_type": "DOMINANT_NORMALIZED_PATTERN_OUTLIER",
+        "formula_region": "D8:H8",
+        "dominant_pattern_id": "5aae9d32d70d2512",
+        "current_pattern_id": "6cef38045df29346",
+        "neighbor_count": 4,
+        "evidence_locations": [
+          "D8",
+          "E8",
+          "G8",
+          "H8"
+        ],
+        "detection_basis": "같은 행의 연속 수식 영역에서 최소 3개의 주변 수식이 같은 정규화 패턴을 보이고, 대상 셀의 좌우 인접 수식도 그 패턴을 따르지만 대상 셀만 다른 패턴입니다.",
+        "current_limitations": [
+          "수식 계산 결과, 업무 규칙, 의도된 예외 계산은 확인하지 않았습니다.",
+          "지원하는 A1 참조 수식의 제한된 주변 패턴만 비교했습니다.",
+          "수정 수식 생성·적용이나 자동 수정 가능 여부는 제공하지 않습니다."
+        ],
+        "pattern_subtype": "RELATIVE_REFERENCE_DRIFT",
+        "evidence_summary": "대상 수식의 상대 참조 위치가 주변 반복 패턴과 다릅니다.",
+        "dominant_pattern_summary": "주변 수식은 같은 함수와 참조 구조가 반복되는 패턴입니다.",
+        "current_pattern_summary": "대상 수식은 주변과 다른 상대 참조 위치를 사용합니다.",
+        "comparison_locations": [
+          "D8",
+          "E8",
+          "G8",
+          "H8"
+        ],
+        "normal_case_possibility": "소계·예외 계산 또는 업무상 의도된 다른 수식일 수 있습니다."
+      },
+      "guidance": null
+    }
+  ],
+  "limitations": [
+    "수식 계산 결과, 업무 규칙, 의도된 예외 계산은 확인하지 않았습니다.",
+    "지원하는 A1 참조 수식의 제한된 주변 패턴만 비교했습니다.",
+    "수정 수식 생성·적용이나 자동 수정 가능 여부는 제공하지 않습니다."
+  ],
+  "elapsed_ms": 4,
+  "scanner_version": "0.1.3",
+  "rule_set_version": "2026.09.5"
+}

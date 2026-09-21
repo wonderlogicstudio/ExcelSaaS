@@ -80,7 +80,7 @@ describe('D01 integrated structure and pattern diagnosis', () => {
     render(<M25ResultsPanel result={zero} isDemo={false} formulaAudit={{ ...audit, result: { ...auditResult, candidates: [] } }} onReset={vi.fn()} />);
     expect(screen.getByRole('heading', { name: '검사 범위에서 발견된 항목이 없습니다' })).toBeInTheDocument();
     expect(document.querySelector('[data-audit-status=COMPLETED]')).toHaveTextContent('완료');
-    expect(screen.getAllByText('지원 범위: 같은 열의 주변 A1 참조 수식 패턴을 비교하며, 반복 수식 사이의 빈 셀·상수도 후보로 확인합니다. 가로로 반복되는 월별 패턴, 월별 시트 사이의 패턴 비교, Excel Table 내부 수식은 비교하지 않습니다.', { exact: false }).length).toBeGreaterThan(0);
+    expect(screen.getAllByText('지원 범위: 같은 열의 주변 A1 참조 수식 패턴과 제한된 같은 행의 상대 A1 산술 참조 이탈을 비교하며, 반복 수식 사이의 세로 빈 셀·상수도 후보로 확인합니다. 월별 시트 사이의 패턴 비교, Excel Table 내부 수식, 가로 빈 셀·상수는 비교하지 않습니다.', { exact: false }).length).toBeGreaterThan(0);
     expect(screen.getByText(/검사 완료는 지원 범위 안의 후보 스캔이 끝났다는 뜻입니다/)).toBeInTheDocument();
     expect(screen.getByText(/수식 포함 시트 1개 · 후보가 발견된 영역 1개/)).toBeInTheDocument();
     expect(screen.queryByText('수식 패턴 이탈·누락 검사')).not.toBeInTheDocument();

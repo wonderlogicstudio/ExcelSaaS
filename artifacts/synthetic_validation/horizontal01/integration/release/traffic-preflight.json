@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "revision": "workbookcare-api-beta-00026-get",
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:1b0702e02c7b303b25d999d8da68a9a3c7c40a639a593dd3f8c4497fe6f3c596",
+  "private_iam_unchanged": true,
+  "invariant_unchanged": true,
+  "old_traffic_100": true,
+  "runtime_verify": false,
+  "startup_probe_failure_threshold": 3,
+  "linux_proof_matches": true,
+  "unused_helper_phase": "traffic"
+}

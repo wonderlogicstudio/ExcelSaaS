@@ -1,0 +1,120 @@
+{
+  "id": "HORIZONTAL-01",
+  "baseline_commit": "ebcacc1",
+  "requested_model_assignment": {
+    "role": "builder",
+    "model": "gpt-5.5",
+    "reasoning_effort": "high",
+    "note": "Requested by work order for formula work; current conversation model was not switched by the agent."
+  },
+  "commands": [
+    {
+      "command": "python -m ruff check apps/api/app/formula_patterns.py apps/api/tests/test_formula_patterns.py apps/api/tests/test_formula_audit_api.py apps/api/tests/test_formula_audit_quality_gate.py",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+      "exit_code": 1,
+      "result": "System Python lacked ruff; no installation performed."
+    },
+    {
+      "command": "python -m pytest apps/api/tests/test_formula_patterns.py apps/api/tests/test_formula_audit_api.py apps/api/tests/test_formula_audit_quality_gate.py",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+      "exit_code": 1,
+      "result": "System Python lacked pytest; no installation performed."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m ruff check --no-cache app\\formula_patterns.py tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 1,
+      "result": "One E501 line-length issue in the new horizontal normalizer; corrected without changing behavior."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 1,
+      "result": "16 passed before two quality-gate setup errors caused by sandbox-denied pytest temp directory creation."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m ruff check --no-cache app\\formula_patterns.py tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 0,
+      "result": "All checks passed."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py --basetemp C:\\Users\\JinwonLee\\project\\ExcelSaaS\\.tmp\\horizontal01-pytest",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 1,
+      "result": "Same sandbox temp-directory permission class before tests."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py --basetemp C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\horizontal01-pytest",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 1,
+      "result": "16 passed, then sandbox permission error during pytest temp cleanup."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py --basetemp C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\horizontal01-pytest-escalated",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 0,
+      "result": "18 passed, 1 pre-existing Starlette TestClient deprecation warning."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m ruff check --no-cache app\\formula_patterns.py tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 0,
+      "result": "Final rerun after docstring-only source touch; all checks passed."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py --basetemp C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\horizontal01-pytest-final",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 0,
+      "result": "Final rerun after docstring-only source touch; 18 passed, 1 pre-existing Starlette TestClient deprecation warning."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m ruff check --no-cache app\\formula_patterns.py tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 0,
+      "result": "Focused review correction final API static check; all checks passed."
+    },
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider tests\\test_formula_patterns.py tests\\test_formula_audit_api.py tests\\test_formula_audit_quality_gate.py --basetemp C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\horizontal01-review-pytest",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS/apps/api",
+      "exit_code": 0,
+      "result": "Focused review correction final targeted API pytest; 18 passed, 1 pre-existing Starlette TestClient deprecation warning."
+    },
+    {
+      "command": "npm run test --workspace @workbookcare/web -- FormulaAuditPanel.test.tsx UnifiedDiagnosis.test.tsx",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+      "exit_code": 1,
+      "result": "PowerShell npm.ps1 execution policy blocked before tests; reran with npm.cmd."
+    },
+    {
+      "command": "npm run build --workspace @workbookcare/web",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+      "exit_code": 1,
+      "result": "PowerShell npm.ps1 execution policy blocked before build; reran with npm.cmd."
+    },
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- FormulaAuditPanel.test.tsx UnifiedDiagnosis.test.tsx",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+      "exit_code": 1,
+      "result": "Vitest reached tooling but sandbox blocked esbuild spawn with EPERM; reran outside sandbox."
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+      "exit_code": 1,
+      "result": "TypeScript reached tooling but sandbox blocked tsbuildinfo writes under node_modules/.tmp; reran outside sandbox."
+    },
+    {
+      "command": "npm.cmd run test --workspace @workbookcare/web -- FormulaAuditPanel.test.tsx UnifiedDiagnosis.test.tsx",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+      "exit_code": 0,
+      "result": "Focused review correction targeted web tests; 2 files passed, 8 tests passed."
+    },
+    {
+      "command": "npm.cmd run build --workspace @workbookcare/web",
+      "cwd": "C:/Users/JinwonLee/project/ExcelSaaS",
+      "exit_code": 0,
+      "result": "Focused review correction web type/build; production build completed."
+    }
+  ]
+}

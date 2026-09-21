@@ -1,0 +1,25 @@
+{
+  "id": "HORIZONTAL-01",
+  "status": "APPROVED_IMPLEMENTATION",
+  "approval": "Owner: 커밋 & 푸시 하고 다음 업무 진행하자! following proposed bounded horizontal detection enhancement",
+  "outcome": "Detect a conservative same-row relative A1 arithmetic reference drift as a review candidate, without changing vertical behavior or repair support",
+  "allowed_source": [
+    "apps/api/app/formula_patterns.py",
+    "apps/api/tests/test_formula_patterns.py",
+    "apps/api/tests/test_formula_audit_api.py",
+    "apps/api/tests/test_formula_audit_quality_gate.py",
+    "apps/web/src/components/FormulaAuditPanel.tsx",
+    "apps/web/src/components/FormulaAuditPanel.test.tsx",
+    "apps/web/src/components/UnifiedDiagnosis.test.tsx"
+  ],
+  "scope": "same-sheet unanchored A1 arithmetic only; >=4 contiguous formulas, interior target with3 supporting neighbors, adjacent left/right dominant pattern; unique dominant. Exclude hidden columns, Table, merged, hidden/summary/manual rows, functions/ranges/anchors/sheet-qualified/external refs. No horizontal gaps/constants, repair, monthly-sheet-name inference. Existing frozen monthly case remains excluded.",
+  "acceptance": [
+    "D8:H8 row normal D6-D7 through H6-H7:0; F8=E6-F7 or F5-F7 each exactlyF8 relative drift",
+    "Insufficient3 formulas,edge,target tie,left/right mismatch,hidden/table/merged/summary and unsupported grammar:0 horizontal candidates",
+    "Existing vertical exact candidate fixtures and free/API/repair boundaries unchanged; no duplicate same-cell/rule findings; same-row evidence direction truthful"
+  ],
+  "checks": "targeted formula/API/quality tests + Ruff; related web tests/type/build when copy changes; independent source/evidence review; final integration/beta only after frozen reviewed source",
+  "baseline_commit": "ebcacc1",
+  "current_verified_beta_worker": "3b513785-21e8-4efe-8bc3-fcdf9301d0eb",
+  "never_change": "frozen300 truth/results, user lock, customer data/security/payment"
+}

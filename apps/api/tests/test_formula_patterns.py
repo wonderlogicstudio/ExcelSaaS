@@ -22,6 +22,17 @@ def _scan_pattern_workbook(workbook: Workbook):
     )
 
 
+def _reload_workbook(workbook: Workbook) -> Workbook:
+    stream = BytesIO()
+    workbook.save(stream)
+    workbook.close()
+    stream.seek(0)
+
+    from openpyxl import load_workbook
+
+    return load_workbook(stream)
+
+
 def _add_formula_region(sheet, *, column: str = "C", outlier_formula: str | None = None) -> None:
     sheet["A1"] = "Label"
     sheet["B1"] = "Input"
@@ -32,6 +43,17 @@ def _add_formula_region(sheet, *, column: str = "C", outlier_formula: str | None
         sheet[f"{column}{row}"] = f"=SUM(B{row})"
     if outlier_formula is not None:
         sheet[f"{column}4"] = outlier_formula
+
+
+def _add_horizontal_region(sheet, *, row: int = 8, outlier_formula: str | None = None) -> None:
+    sheet[f"C{row - 2}"] = "Input A"
+    sheet[f"C{row - 1}"] = "Input B"
+    sheet[f"C{row}"] = "Difference"
+    for index, column in enumerate(("D", "E", "F", "G", "H"), start=1):
+        sheet[f"{column}{row - 2}"] = index * 10
+        sheet[f"{column}{row - 1}"] = index
+        sheet[f"{column}{row}"] = f"={column}{row - 2}-{column}{row - 1}"
+    sheet[f"F{row}"] = outlier_formula or f"=F{row - 2}-F{row - 1}"
 
 
 def test_detects_supported_normalized_formula_pattern_outliers() -> None:
@@ -87,6 +109,171 @@ def test_detects_supported_normalized_formula_pattern_outliers() -> None:
         assert finding.formula_pattern.normal_case_possibility
         assert finding.formula_pattern.current_pattern_id is not None
         assert finding.repair_class == "EXPERT_REVIEW"
+
+
+def test_detects_same_row_unanchored_arithmetic_reference_drift_from_run_formula_audit() -> None:
+    for formula in ("=E6-F7", "=F5-F7"):
+        workbook = Workbook()
+        sheet = workbook.active
+        sheet.title = "Horizontal"
+        _add_horizontal_region(sheet, outlier_formula=formula)
+        sheet["F5"] = 100
+
+        result = _scan_pattern_workbook(workbook)
+        candidates = [
+            finding
+            for finding in result.candidates
+            if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+        ]
+
+        assert [(finding.sheet, finding.cell) for finding in candidates] == [
+            ("Horizontal", "F8")
+        ]
+        evidence = candidates[0].formula_pattern
+        assert evidence is not None
+        assert evidence.pattern_subtype == "RELATIVE_REFERENCE_DRIFT"
+        assert evidence.formula_region == "D8:H8"
+        assert evidence.neighbor_count == 4
+        assert evidence.comparison_locations == ["D8", "E8", "G8", "H8"]
+        assert evidence.evidence_locations == ["D8", "E8", "G8", "H8"]
+
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = "Horizontal"
+    _add_horizontal_region(sheet)
+
+    result = _scan_pattern_workbook(workbook)
+
+    assert [
+        finding
+        for finding in result.candidates
+        if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+    ] == []
+
+
+def test_horizontal_reference_drift_excludes_unsupported_and_structural_cases() -> None:
+    workbook = Workbook()
+
+    three = workbook.active
+    three.title = "ThreeFormulas"
+    for column in ("D", "E", "F"):
+        three[f"{column}8"] = f"={column}6-{column}7"
+    three["E8"] = "=D6-E7"
+
+    edge = workbook.create_sheet("Edge")
+    _add_horizontal_region(edge)
+    edge["D8"] = "=C6-D7"
+
+    tie = workbook.create_sheet("Tie")
+    for column in ("D", "E"):
+        tie[f"{column}8"] = f"={column}6-{column}7"
+    tie["F8"] = "=E6-F7"
+    tie["G8"] = "=F6-G7"
+
+    neighbor_mismatch = workbook.create_sheet("NeighborMismatch")
+    _add_horizontal_region(neighbor_mismatch, outlier_formula="=E6-F7")
+    neighbor_mismatch["G8"] = "=F6-G7"
+
+    blank = workbook.create_sheet("Blank")
+    _add_horizontal_region(blank)
+    blank["F8"] = None
+
+    constant = workbook.create_sheet("Constant")
+    _add_horizontal_region(constant)
+    constant["F8"] = 0
+
+    hidden_column = workbook.create_sheet("HiddenColumn")
+    _add_horizontal_region(hidden_column, outlier_formula="=E6-F7")
+    hidden_column.column_dimensions["F"].hidden = True
+
+    hidden_span = workbook.create_sheet("HiddenSpan")
+    _add_horizontal_region(hidden_span, outlier_formula="=E6-F7")
+    hidden_span.column_dimensions["H"].hidden = True
+
+    hidden_row = workbook.create_sheet("HiddenRow")
+    _add_horizontal_region(hidden_row, outlier_formula="=E6-F7")
+    hidden_row.row_dimensions[8].hidden = True
+
+    table_sheet = workbook.create_sheet("Table")
+    _add_horizontal_region(table_sheet, outlier_formula="=E6-F7")
+    for column in ("C", "D", "E", "F", "G", "H"):
+        table_sheet[f"{column}5"] = f"Header {column}"
+    table = Table(displayName="HorizontalTable", ref="C5:H8")
+    table.tableStyleInfo = TableStyleInfo(name="TableStyleMedium2", showRowStripes=True)
+    table_sheet.add_table(table)
+
+    merged = workbook.create_sheet("Merged")
+    _add_horizontal_region(merged, outlier_formula="=E6-F7")
+    merged.merge_cells("F8:G8")
+
+    summary = workbook.create_sheet("Summary")
+    _add_horizontal_region(summary, outlier_formula="=E6-F7")
+    summary["C8"] = "total"
+
+    unsupported_formulas = {
+        "UnsupportedFunctionRange": "=SUM(F6:F7)",
+        "UnsupportedAnchor": "=F$6-F7",
+        "UnsupportedSheet": "=Other!F6-F7",
+        "UnsupportedName": "=NamedAmount-F7",
+        "UnsupportedExternal": "='[other.xlsx]Sheet1'!F6-F7",
+    }
+    for sheet_name, formula in unsupported_formulas.items():
+        unsupported = workbook.create_sheet(sheet_name)
+        _add_horizontal_region(unsupported, outlier_formula=formula)
+
+    result = _scan_pattern_workbook(workbook)
+
+    assert [
+        (finding.sheet, finding.cell)
+        for finding in result.candidates
+        if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+    ] == []
+
+
+def test_horizontal_reference_drift_respects_grouped_hidden_column_ranges_after_reload() -> None:
+    workbook = Workbook()
+    grouped_hidden = workbook.active
+    grouped_hidden.title = "GroupedHidden"
+    _add_horizontal_region(grouped_hidden, outlier_formula="=E6-F7")
+    grouped_hidden.column_dimensions.group("C", "F", hidden=True)
+
+    visible_control = workbook.create_sheet("VisibleControl")
+    _add_horizontal_region(visible_control, outlier_formula="=E6-F7")
+
+    outside_group_control = workbook.create_sheet("OutsideGroupControl")
+    _add_horizontal_region(outside_group_control, outlier_formula="=E6-F7")
+    outside_group_control.column_dimensions.group("A", "C", hidden=True)
+
+    reloaded = _reload_workbook(workbook)
+    result = _scan_pattern_workbook(reloaded)
+
+    assert [
+        (finding.sheet, finding.cell)
+        for finding in result.candidates
+        if finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+    ] == [
+        ("VisibleControl", "F8"),
+        ("OutsideGroupControl", "F8"),
+    ]
+
+
+def test_same_rule_cell_is_not_duplicated_between_vertical_and_horizontal_detection() -> None:
+    workbook = Workbook()
+    sheet = workbook.active
+    sheet.title = "Dedupe"
+    _add_horizontal_region(sheet, outlier_formula="=E6-F7")
+    for row in (6, 7, 9, 10):
+        sheet[f"F{row}"] = f"=F{row - 2}-F{row - 1}"
+
+    result = _scan_pattern_workbook(workbook)
+
+    assert [
+        (finding.sheet, finding.cell, finding.rule_code)
+        for finding in result.candidates
+        if finding.sheet == "Dedupe"
+        and finding.cell == "F8"
+        and finding.rule_code == "FORMULA_PATTERN_OUTLIER"
+    ] == [("Dedupe", "F8", "FORMULA_PATTERN_OUTLIER")]
 
 
 def test_detects_constant_and_blank_inside_supported_formula_patterns() -> None:
