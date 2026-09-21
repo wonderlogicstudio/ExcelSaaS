@@ -1,0 +1,659 @@
+{
+  "kind": "READ_ONLY_EXCEL_SYNTHETIC_ORACLE",
+  "provenance": "Frozen generator semantic expectations; not produced from product output. Monthly mutant N14 text M10, N15 numeric formula => arithmetic #VALUE!",
+  "cases": [
+    {
+      "id": "001-retail_sales_vertical-normal-745709",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\001-retail_sales_vertical-normal-745709.xlsx",
+      "sha256": "abf61a22c808f1582ecec77a9650b30b0ab102b1e5d082f7d8d2853e26316c92",
+      "checks": [
+        {
+          "sheet": "Sales Detail",
+          "cell": "G12",
+          "expected": 332.5,
+          "formula": "=E12*F12*(1-H12)"
+        },
+        {
+          "sheet": "Sales Detail",
+          "cell": "G13",
+          "expected": 1236.9,
+          "formula": "=E13*F13*(1-H13)"
+        },
+        {
+          "sheet": "Sales Detail",
+          "cell": "G14",
+          "expected": 2690.4,
+          "formula": "=E14*F14*(1-H14)"
+        },
+        {
+          "sheet": "Sales Detail",
+          "cell": "G15",
+          "expected": 4693.0,
+          "formula": "=E15*F15*(1-H15)"
+        },
+        {
+          "sheet": "Sales Detail",
+          "cell": "G16",
+          "expected": 6863.4,
+          "formula": "=E16*F16*(1-H16)"
+        },
+        {
+          "sheet": "Sales Detail",
+          "cell": "G17",
+          "expected": 1786.95,
+          "formula": "=E17*F17*(1-H17)"
+        },
+        {
+          "sheet": "Sales Detail",
+          "cell": "G18",
+          "expected": 855.0,
+          "formula": "=E18*F18*(1-H18)"
+        },
+        {
+          "sheet": "Sales Detail",
+          "cell": "G19",
+          "expected": 2114.7,
+          "formula": "=E19*F19*(1-H19)"
+        },
+        {
+          "sheet": "Sales Detail",
+          "cell": "G20",
+          "expected": 3923.5,
+          "formula": "=E20*F20*(1-H20)"
+        }
+      ]
+    },
+    {
+      "id": "002-purchase_orders_table-normal-353213",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\002-purchase_orders_table-normal-353213.xlsx",
+      "sha256": "e23e280cf9f187ad45e97e4edaf009de0006c8e3d63dddea9a98f0606baef2a8",
+      "checks": [
+        {
+          "sheet": "PO Lines",
+          "cell": "H8",
+          "expected": 4392,
+          "formula": "=IF(E8>0,F8*G8,0)"
+        },
+        {
+          "sheet": "PO Lines",
+          "cell": "H9",
+          "expected": 6942,
+          "formula": "=IF(E9>0,F9*G9,0)"
+        },
+        {
+          "sheet": "PO Lines",
+          "cell": "H10",
+          "expected": 1425,
+          "formula": "=IF(E10>0,F10*G10,0)"
+        },
+        {
+          "sheet": "PO Lines",
+          "cell": "H11",
+          "expected": 672,
+          "formula": "=IF(E11>0,F11*G11,0)"
+        },
+        {
+          "sheet": "PO Lines",
+          "cell": "H12",
+          "expected": 1862,
+          "formula": "=IF(E12>0,F12*G12,0)"
+        },
+        {
+          "sheet": "PO Lines",
+          "cell": "H13",
+          "expected": 3630,
+          "formula": "=IF(E13>0,F13*G13,0)"
+        },
+        {
+          "sheet": "PO Lines",
+          "cell": "H14",
+          "expected": 5976,
+          "formula": "=IF(E14>0,F14*G14,0)"
+        },
+        {
+          "sheet": "PO Lines",
+          "cell": "H15",
+          "expected": 801,
+          "formula": "=IF(E15>0,F15*G15,0)"
+        }
+      ]
+    },
+    {
+      "id": "003-inventory_cross_sheet-normal-996121",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\003-inventory_cross_sheet-normal-996121.xlsx",
+      "sha256": "678752277e8202775850889aca7b232fdb3af371681fb56c5bc8b736b47e5b46",
+      "checks": [
+        {
+          "sheet": "재고 이동",
+          "cell": "I10",
+          "expected": 107,
+          "formula": "='기초 재고'!B10+SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A10,'재고 거래'!$C$2:$C$100,\"IN\")-SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A10,'재고 거래'!$C$2:$C$100,\"OUT\")"
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I11",
+          "expected": 108,
+          "formula": "='기초 재고'!B11+SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A11,'재고 거래'!$C$2:$C$100,\"IN\")-SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A11,'재고 거래'!$C$2:$C$100,\"OUT\")"
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I12",
+          "expected": 109,
+          "formula": "='기초 재고'!B12+SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A12,'재고 거래'!$C$2:$C$100,\"IN\")-SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A12,'재고 거래'!$C$2:$C$100,\"OUT\")"
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I13",
+          "expected": 110,
+          "formula": "='기초 재고'!B13+SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A13,'재고 거래'!$C$2:$C$100,\"IN\")-SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A13,'재고 거래'!$C$2:$C$100,\"OUT\")"
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I14",
+          "expected": 202,
+          "formula": "='기초 재고'!B14+SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A14,'재고 거래'!$C$2:$C$100,\"IN\")-SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A14,'재고 거래'!$C$2:$C$100,\"OUT\")"
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I15",
+          "expected": 112,
+          "formula": "='기초 재고'!B15+SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A15,'재고 거래'!$C$2:$C$100,\"IN\")-SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A15,'재고 거래'!$C$2:$C$100,\"OUT\")"
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I16",
+          "expected": 113,
+          "formula": "='기초 재고'!B16+SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A16,'재고 거래'!$C$2:$C$100,\"IN\")-SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A16,'재고 거래'!$C$2:$C$100,\"OUT\")"
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I17",
+          "expected": 114,
+          "formula": "='기초 재고'!B17+SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A17,'재고 거래'!$C$2:$C$100,\"IN\")-SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A17,'재고 거래'!$C$2:$C$100,\"OUT\")"
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I18",
+          "expected": 115,
+          "formula": "='기초 재고'!B18+SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A18,'재고 거래'!$C$2:$C$100,\"IN\")-SUMIFS('재고 거래'!$D$2:$D$100,'재고 거래'!$A$2:$A$100,A18,'재고 거래'!$C$2:$C$100,\"OUT\")"
+        }
+      ]
+    },
+    {
+      "id": "004-budget_horizontal_months-normal-067598",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\004-budget_horizontal_months-normal-067598.xlsx",
+      "sha256": "973510bb3f44f45cc8f77105726285b0efbefe7a0adfa1a5120d75e81db93e74",
+      "checks": [
+        {
+          "sheet": "Budget",
+          "cell": "E18",
+          "expected": -23,
+          "formula": "='M01'!B16-'M01'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "F18",
+          "expected": -21,
+          "formula": "='M02'!B16-'M02'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "G18",
+          "expected": -19,
+          "formula": "='M03'!B16-'M03'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "H18",
+          "expected": -17,
+          "formula": "='M04'!B16-'M04'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "I18",
+          "expected": -15,
+          "formula": "='M05'!B16-'M05'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "J18",
+          "expected": -13,
+          "formula": "='M06'!B16-'M06'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "K18",
+          "expected": -11,
+          "formula": "='M07'!B16-'M07'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "L18",
+          "expected": -9,
+          "formula": "='M08'!B16-'M08'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "M18",
+          "expected": -7,
+          "formula": "='M09'!B16-'M09'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "N18",
+          "expected": -5,
+          "formula": "='M10'!B16-'M10'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "O18",
+          "expected": -3,
+          "formula": "='M11'!B16-'M11'!B15"
+        },
+        {
+          "sheet": "Budget",
+          "cell": "P18",
+          "expected": -1,
+          "formula": "='M12'!B16-'M12'!B15"
+        }
+      ]
+    },
+    {
+      "id": "005-payroll_overtime-normal-261773",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\005-payroll_overtime-normal-261773.xlsx",
+      "sha256": "f68ca4d6d88f13c5588e89620f26718cc374cda7434ed93f3a6746812f497e63",
+      "checks": [
+        {
+          "sheet": "Payroll",
+          "cell": "J11",
+          "expected": 2214.0,
+          "formula": "=H11*'Rate Card'!$B11+IF(H11>C$5,(H11-C$5)*'Rate Card'!$B11*$B$5,0)"
+        },
+        {
+          "sheet": "Payroll",
+          "cell": "J12",
+          "expected": 2772.0,
+          "formula": "=H12*'Rate Card'!$B12+IF(H12>C$5,(H12-C$5)*'Rate Card'!$B12*$B$5,0)"
+        },
+        {
+          "sheet": "Payroll",
+          "cell": "J13",
+          "expected": 725.0,
+          "formula": "=H13*'Rate Card'!$B13+IF(H13>C$5,(H13-C$5)*'Rate Card'!$B13*$B$5,0)"
+        },
+        {
+          "sheet": "Payroll",
+          "cell": "J14",
+          "expected": 1260.0,
+          "formula": "=H14*'Rate Card'!$B14+IF(H14>C$5,(H14-C$5)*'Rate Card'!$B14*$B$5,0)"
+        },
+        {
+          "sheet": "Payroll",
+          "cell": "J15",
+          "expected": 1180.0,
+          "formula": "=H15*'Rate Card'!$B15+IF(H15>C$5,(H15-C$5)*'Rate Card'!$B15*$B$5,0)"
+        },
+        {
+          "sheet": "Payroll",
+          "cell": "J16",
+          "expected": 1596.0,
+          "formula": "=H16*'Rate Card'!$B16+IF(H16>C$5,(H16-C$5)*'Rate Card'!$B16*$B$5,0)"
+        },
+        {
+          "sheet": "Payroll",
+          "cell": "J17",
+          "expected": 2046.0,
+          "formula": "=H17*'Rate Card'!$B17+IF(H17>C$5,(H17-C$5)*'Rate Card'!$B17*$B$5,0)"
+        },
+        {
+          "sheet": "Payroll",
+          "cell": "J18",
+          "expected": 437.0,
+          "formula": "=H18*'Rate Card'!$B18+IF(H18>C$5,(H18-C$5)*'Rate Card'!$B18*$B$5,0)"
+        },
+        {
+          "sheet": "Payroll",
+          "cell": "J19",
+          "expected": 864.0,
+          "formula": "=H19*'Rate Card'!$B19+IF(H19>C$5,(H19-C$5)*'Rate Card'!$B19*$B$5,0)"
+        }
+      ]
+    },
+    {
+      "id": "006-project_profit-normal-690527",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\006-project_profit-normal-690527.xlsx",
+      "sha256": "8cb3de2e0ec7e40967d2d8c1a6bd302c92b1f7f2c22ea2a27ee20cb4a4ec9154",
+      "checks": [
+        {
+          "sheet": "Project PnL",
+          "cell": "K13",
+          "expected": -6.44,
+          "formula": "=I13-J13+H13*0.12"
+        },
+        {
+          "sheet": "Project PnL",
+          "cell": "K14",
+          "expected": -4.4,
+          "formula": "=I14-J14+H14*0.12"
+        },
+        {
+          "sheet": "Project PnL",
+          "cell": "K15",
+          "expected": -2.36,
+          "formula": "=I15-J15+H15*0.12"
+        },
+        {
+          "sheet": "Project PnL",
+          "cell": "K16",
+          "expected": -0.32,
+          "formula": "=I16-J16+H16*0.12"
+        },
+        {
+          "sheet": "Project PnL",
+          "cell": "K17",
+          "expected": -8.3,
+          "formula": "=I17-J17+H17*0.18"
+        },
+        {
+          "sheet": "Project PnL",
+          "cell": "K18",
+          "expected": -7.16,
+          "formula": "=I18-J18+H18*0.12"
+        },
+        {
+          "sheet": "Project PnL",
+          "cell": "K19",
+          "expected": -5.12,
+          "formula": "=I19-J19+H19*0.12"
+        },
+        {
+          "sheet": "Project PnL",
+          "cell": "K20",
+          "expected": -3.08,
+          "formula": "=I20-J20+H20*0.12"
+        }
+      ]
+    },
+    {
+      "id": "007-receivables_aging-normal-948869",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\007-receivables_aging-normal-948869.xlsx",
+      "sha256": "716d81f217d3db5a88f82b7497c51bb2991e74b07bbafa454d70952151939bf5",
+      "checks": [
+        {
+          "sheet": "AR Aging",
+          "cell": "H10",
+          "expected": 69,
+          "formula": "=IF(G10>30,F10*0.97,F10)"
+        },
+        {
+          "sheet": "AR Aging",
+          "cell": "H11",
+          "expected": 86,
+          "formula": "=IF(G11>30,F11*0.97,F11)"
+        },
+        {
+          "sheet": "AR Aging",
+          "cell": "H12",
+          "expected": 11.64,
+          "formula": "=IF(G12>30,F12*0.97,F12)"
+        },
+        {
+          "sheet": "AR Aging",
+          "cell": "H13",
+          "expected": 28.13,
+          "formula": "=IF(G13>30,F13*0.97,F13)"
+        },
+        {
+          "sheet": "AR Aging",
+          "cell": "H14",
+          "expected": 44.62,
+          "formula": "=IF(G14>30,F14*0.97,F14)"
+        },
+        {
+          "sheet": "AR Aging",
+          "cell": "H15",
+          "expected": 63,
+          "formula": "=IF(G15>30,F15*0.97,F15)"
+        },
+        {
+          "sheet": "AR Aging",
+          "cell": "H16",
+          "expected": 80,
+          "formula": "=IF(G16>30,F16*0.97,F16)"
+        },
+        {
+          "sheet": "AR Aging",
+          "cell": "H17",
+          "expected": 94.09,
+          "formula": "=IF(G17>30,F17*0.97,F17)"
+        },
+        {
+          "sheet": "AR Aging",
+          "cell": "H18",
+          "expected": 22.31,
+          "formula": "=IF(G18>30,F18*0.97,F18)"
+        }
+      ]
+    },
+    {
+      "id": "008-manufacturing_bom-normal-024745",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\008-manufacturing_bom-normal-024745.xlsx",
+      "sha256": "ce811038bafeaefd94f808885acf12ff78197c9181759a2c65f0819fab194c89",
+      "checks": [
+        {
+          "sheet": "BOM Cost",
+          "cell": "I9",
+          "expected": 6816.49,
+          "formula": "=ROUND(VLOOKUP(A9,'Part Catalog'!$A$2:$C$20,2,FALSE)*H9/(1-J9),2)"
+        },
+        {
+          "sheet": "BOM Cost",
+          "cell": "I10",
+          "expected": 1272.63,
+          "formula": "=ROUND(VLOOKUP(A10,'Part Catalog'!$A$2:$C$20,2,FALSE)*H10/(1-J10),2)"
+        },
+        {
+          "sheet": "BOM Cost",
+          "cell": "I11",
+          "expected": 612.9,
+          "formula": "=ROUND(VLOOKUP(A11,'Part Catalog'!$A$2:$C$20,2,FALSE)*H11/(1-J11),2)"
+        },
+        {
+          "sheet": "BOM Cost",
+          "cell": "I12",
+          "expected": 1744.33,
+          "formula": "=ROUND(VLOOKUP(A12,'Part Catalog'!$A$2:$C$20,2,FALSE)*H12/(1-J12),2)"
+        },
+        {
+          "sheet": "BOM Cost",
+          "cell": "I13",
+          "expected": 3570.53,
+          "formula": "=ROUND(VLOOKUP(A13,'Part Catalog'!$A$2:$C$20,2,FALSE)*H13/(1-J13),2)"
+        },
+        {
+          "sheet": "BOM Cost",
+          "cell": "I14",
+          "expected": 6096.77,
+          "formula": "=ROUND(VLOOKUP(A14,'Part Catalog'!$A$2:$C$20,2,FALSE)*H14/(1-J14),2)"
+        },
+        {
+          "sheet": "BOM Cost",
+          "cell": "I15",
+          "expected": 8789.69,
+          "formula": "=ROUND(VLOOKUP(A15,'Part Catalog'!$A$2:$C$20,2,FALSE)*H15/(1-J15),2)"
+        },
+        {
+          "sheet": "BOM Cost",
+          "cell": "I16",
+          "expected": 328.42,
+          "formula": "=ROUND(VLOOKUP(A16,'Part Catalog'!$A$2:$C$20,2,FALSE)*H16/(1-J16),2)"
+        },
+        {
+          "sheet": "BOM Cost",
+          "cell": "I17",
+          "expected": 1322.58,
+          "formula": "=ROUND(VLOOKUP(A17,'Part Catalog'!$A$2:$C$20,2,FALSE)*H17/(1-J17),2)"
+        },
+        {
+          "sheet": "BOM Cost",
+          "cell": "I18",
+          "expected": 2810.31,
+          "formula": "=ROUND(VLOOKUP(A18,'Part Catalog'!$A$2:$C$20,2,FALSE)*H18/(1-J18),2)"
+        }
+      ]
+    },
+    {
+      "id": "009-cashflow_calendar-normal-210589",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\009-cashflow_calendar-normal-210589.xlsx",
+      "sha256": "723e39d48d29279b9b098a7a7d977aa07b019f39700e2012b75496f58c6e03b1",
+      "checks": [
+        {
+          "sheet": "Cash Plan",
+          "cell": "J12",
+          "expected": -11,
+          "formula": "=H12-I12"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J13",
+          "expected": -22,
+          "formula": "=J12+H13-I13"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J14",
+          "expected": 58,
+          "formula": "=J13+H14-I14"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J15",
+          "expected": 47,
+          "formula": "=J14+H15-I15"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J16",
+          "expected": 36,
+          "formula": "=J15+H16-I16"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J17",
+          "expected": 25,
+          "formula": "=J16+H17-I17"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J18",
+          "expected": 14,
+          "formula": "=J17+H18-I18"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J19",
+          "expected": 3,
+          "formula": "=J18+H19-I19"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J20",
+          "expected": -8,
+          "formula": "=J19+H20-I20"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J21",
+          "expected": -19,
+          "formula": "=J20+H21-I21"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J22",
+          "expected": -30,
+          "formula": "=J21+H22-I22"
+        },
+        {
+          "sheet": "Cash Plan",
+          "cell": "J23",
+          "expected": -41,
+          "formula": "=J22+H23-I23"
+        }
+      ]
+    },
+    {
+      "id": "010-subscriptions_kpi-normal-831697",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\010-subscriptions_kpi-normal-831697.xlsx",
+      "sha256": "8c40f13bc22b0088ad70b66b5ff064abd70ab0f734a2b19163ed9b65afeed86c",
+      "checks": [
+        {
+          "sheet": "KPI Detail",
+          "cell": "L11",
+          "expected": 0.7387,
+          "formula": "=IF(J11>0,ROUND(K11/J11,4),0)"
+        },
+        {
+          "sheet": "KPI Detail",
+          "cell": "L12",
+          "expected": 0.7411,
+          "formula": "=IF(J12>0,ROUND(K12/J12,4),0)"
+        },
+        {
+          "sheet": "KPI Detail",
+          "cell": "L13",
+          "expected": 0.7434,
+          "formula": "=IF(J13>0,ROUND(K13/J13,4),0)"
+        },
+        {
+          "sheet": "KPI Detail",
+          "cell": "L14",
+          "expected": 0.7456,
+          "formula": "=IF(J14>0,ROUND(K14/J14,4),0)"
+        },
+        {
+          "sheet": "KPI Detail",
+          "cell": "L15",
+          "expected": 0.7478,
+          "formula": "=IF(J15>0,ROUND(K15/J15,4),0)"
+        },
+        {
+          "sheet": "KPI Detail",
+          "cell": "L16",
+          "expected": 0.75,
+          "formula": "=IF(J16>0,ROUND(K16/J16,4),0)"
+        },
+        {
+          "sheet": "KPI Detail",
+          "cell": "L17",
+          "expected": 0.7521,
+          "formula": "=IF(J17>0,ROUND(K17/J17,4),0)"
+        },
+        {
+          "sheet": "KPI Detail",
+          "cell": "L18",
+          "expected": 0.678,
+          "formula": "=IF(J18>0,ROUND(K18/J18,4),0)"
+        },
+        {
+          "sheet": "KPI Detail",
+          "cell": "L19",
+          "expected": 0.6807,
+          "formula": "=IF(J19>0,ROUND(K19/J19,4),0)"
+        }
+      ]
+    },
+    {
+      "id": "004-budget_horizontal_months-mutated-067598",
+      "path": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\dataset\\workbooks\\004-budget_horizontal_months-mutated-067598.xlsx",
+      "sha256": "602e9c47ed4ddb3af8bff775b6105f79ed8d6bd9a807ffb2c62de5b9d21a443e",
+      "checks": [
+        {
+          "sheet": "Budget",
+          "cell": "N18",
+          "expected_excel_error": "#VALUE!",
+          "formula": "=N15-N14"
+        }
+      ]
+    }
+  ]
+}

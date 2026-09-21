@@ -1,0 +1,1054 @@
+﻿{
+    "link_updates_disabled":  true,
+    "macros_disabled":  true,
+    "saved":  false,
+    "kind":  "ACTUAL_EXCEL_COM_READ_ONLY_SYNTHETIC",
+    "workbooks":  11,
+    "started_utc":  "2026-09-21T00:16:25.1061903Z",
+    "excel_version":  "16.0",
+    "results":  [
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  332.5,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  332.5,
+                                           "sheet":  "Sales Detail",
+                                           "cell":  "G12",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  1236.9,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  1236.8999999999999,
+                                           "sheet":  "Sales Detail",
+                                           "cell":  "G13",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  2690.4,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  2690.4,
+                                           "sheet":  "Sales Detail",
+                                           "cell":  "G14",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  4693.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  4693,
+                                           "sheet":  "Sales Detail",
+                                           "cell":  "G15",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  6863.4,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  6863.4000000000005,
+                                           "sheet":  "Sales Detail",
+                                           "cell":  "G16",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  1786.95,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  1786.9499999999998,
+                                           "sheet":  "Sales Detail",
+                                           "cell":  "G17",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  855.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  855,
+                                           "sheet":  "Sales Detail",
+                                           "cell":  "G18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  2114.7,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  2114.7,
+                                           "sheet":  "Sales Detail",
+                                           "cell":  "G19",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  3923.5,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  3923.5,
+                                           "sheet":  "Sales Detail",
+                                           "cell":  "G20",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "abf61a22c808f1582ecec77a9650b30b0ab102b1e5d082f7d8d2853e26316c92",
+                        "id":  "001-retail_sales_vertical-normal-745709",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  4392,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  4392,
+                                           "sheet":  "PO Lines",
+                                           "cell":  "H8",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  6942,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  6942,
+                                           "sheet":  "PO Lines",
+                                           "cell":  "H9",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  1425,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  1425,
+                                           "sheet":  "PO Lines",
+                                           "cell":  "H10",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  672,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  672,
+                                           "sheet":  "PO Lines",
+                                           "cell":  "H11",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  1862,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  1862,
+                                           "sheet":  "PO Lines",
+                                           "cell":  "H12",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  3630,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  3630,
+                                           "sheet":  "PO Lines",
+                                           "cell":  "H13",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  5976,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  5976,
+                                           "sheet":  "PO Lines",
+                                           "cell":  "H14",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  801,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  801,
+                                           "sheet":  "PO Lines",
+                                           "cell":  "H15",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "e23e280cf9f187ad45e97e4edaf009de0006c8e3d63dddea9a98f0606baef2a8",
+                        "id":  "002-purchase_orders_table-normal-353213",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  107,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  107,
+                                           "sheet":  "재고 이동",
+                                           "cell":  "I10",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  108,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  108,
+                                           "sheet":  "재고 이동",
+                                           "cell":  "I11",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  109,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  109,
+                                           "sheet":  "재고 이동",
+                                           "cell":  "I12",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  110,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  110,
+                                           "sheet":  "재고 이동",
+                                           "cell":  "I13",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  202,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  202,
+                                           "sheet":  "재고 이동",
+                                           "cell":  "I14",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  112,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  112,
+                                           "sheet":  "재고 이동",
+                                           "cell":  "I15",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  113,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  113,
+                                           "sheet":  "재고 이동",
+                                           "cell":  "I16",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  114,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  114,
+                                           "sheet":  "재고 이동",
+                                           "cell":  "I17",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  115,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  115,
+                                           "sheet":  "재고 이동",
+                                           "cell":  "I18",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "678752277e8202775850889aca7b232fdb3af371681fb56c5bc8b736b47e5b46",
+                        "id":  "003-inventory_cross_sheet-normal-996121",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  -23,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -23,
+                                           "sheet":  "Budget",
+                                           "cell":  "E18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -21,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -21,
+                                           "sheet":  "Budget",
+                                           "cell":  "F18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -19,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -19,
+                                           "sheet":  "Budget",
+                                           "cell":  "G18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -17,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -17,
+                                           "sheet":  "Budget",
+                                           "cell":  "H18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -15,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -15,
+                                           "sheet":  "Budget",
+                                           "cell":  "I18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -13,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -13,
+                                           "sheet":  "Budget",
+                                           "cell":  "J18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -11,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -11,
+                                           "sheet":  "Budget",
+                                           "cell":  "K18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -9,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -9,
+                                           "sheet":  "Budget",
+                                           "cell":  "L18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -7,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -7,
+                                           "sheet":  "Budget",
+                                           "cell":  "M18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -5,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -5,
+                                           "sheet":  "Budget",
+                                           "cell":  "N18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -3,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -3,
+                                           "sheet":  "Budget",
+                                           "cell":  "O18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -1,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -1,
+                                           "sheet":  "Budget",
+                                           "cell":  "P18",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "973510bb3f44f45cc8f77105726285b0efbefe7a0adfa1a5120d75e81db93e74",
+                        "id":  "004-budget_horizontal_months-normal-067598",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  2214.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  2214,
+                                           "sheet":  "Payroll",
+                                           "cell":  "J11",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  2772.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  2772,
+                                           "sheet":  "Payroll",
+                                           "cell":  "J12",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  725.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  725,
+                                           "sheet":  "Payroll",
+                                           "cell":  "J13",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  1260.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  1260,
+                                           "sheet":  "Payroll",
+                                           "cell":  "J14",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  1180.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  1180,
+                                           "sheet":  "Payroll",
+                                           "cell":  "J15",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  1596.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  1596,
+                                           "sheet":  "Payroll",
+                                           "cell":  "J16",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  2046.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  2046,
+                                           "sheet":  "Payroll",
+                                           "cell":  "J17",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  437.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  437,
+                                           "sheet":  "Payroll",
+                                           "cell":  "J18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  864.0,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  864,
+                                           "sheet":  "Payroll",
+                                           "cell":  "J19",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "f68ca4d6d88f13c5588e89620f26718cc374cda7434ed93f3a6746812f497e63",
+                        "id":  "005-payroll_overtime-normal-261773",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  -6.44,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -6.44,
+                                           "sheet":  "Project PnL",
+                                           "cell":  "K13",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -4.4,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -4.4,
+                                           "sheet":  "Project PnL",
+                                           "cell":  "K14",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -2.36,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -2.3599999999999994,
+                                           "sheet":  "Project PnL",
+                                           "cell":  "K15",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -0.32,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -0.32000000000000028,
+                                           "sheet":  "Project PnL",
+                                           "cell":  "K16",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -8.3,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -8.3,
+                                           "sheet":  "Project PnL",
+                                           "cell":  "K17",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -7.16,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -7.16,
+                                           "sheet":  "Project PnL",
+                                           "cell":  "K18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -5.12,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -5.12,
+                                           "sheet":  "Project PnL",
+                                           "cell":  "K19",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -3.08,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -3.08,
+                                           "sheet":  "Project PnL",
+                                           "cell":  "K20",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "8cb3de2e0ec7e40967d2d8c1a6bd302c92b1f7f2c22ea2a27ee20cb4a4ec9154",
+                        "id":  "006-project_profit-normal-690527",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  69,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  69,
+                                           "sheet":  "AR Aging",
+                                           "cell":  "H10",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  86,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  86,
+                                           "sheet":  "AR Aging",
+                                           "cell":  "H11",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  11.64,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  11.64,
+                                           "sheet":  "AR Aging",
+                                           "cell":  "H12",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  28.13,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  28.13,
+                                           "sheet":  "AR Aging",
+                                           "cell":  "H13",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  44.62,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  44.62,
+                                           "sheet":  "AR Aging",
+                                           "cell":  "H14",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  63,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  63,
+                                           "sheet":  "AR Aging",
+                                           "cell":  "H15",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  80,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  80,
+                                           "sheet":  "AR Aging",
+                                           "cell":  "H16",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  94.09,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  94.09,
+                                           "sheet":  "AR Aging",
+                                           "cell":  "H17",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  22.31,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  22.31,
+                                           "sheet":  "AR Aging",
+                                           "cell":  "H18",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "716d81f217d3db5a88f82b7497c51bb2991e74b07bbafa454d70952151939bf5",
+                        "id":  "007-receivables_aging-normal-948869",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  6816.49,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  6816.49,
+                                           "sheet":  "BOM Cost",
+                                           "cell":  "I9",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  1272.63,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  1272.63,
+                                           "sheet":  "BOM Cost",
+                                           "cell":  "I10",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  612.9,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  612.9,
+                                           "sheet":  "BOM Cost",
+                                           "cell":  "I11",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  1744.33,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  1744.33,
+                                           "sheet":  "BOM Cost",
+                                           "cell":  "I12",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  3570.53,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  3570.53,
+                                           "sheet":  "BOM Cost",
+                                           "cell":  "I13",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  6096.77,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  6096.77,
+                                           "sheet":  "BOM Cost",
+                                           "cell":  "I14",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  8789.69,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  8789.69,
+                                           "sheet":  "BOM Cost",
+                                           "cell":  "I15",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  328.42,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  328.42,
+                                           "sheet":  "BOM Cost",
+                                           "cell":  "I16",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  1322.58,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  1322.58,
+                                           "sheet":  "BOM Cost",
+                                           "cell":  "I17",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  2810.31,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  2810.31,
+                                           "sheet":  "BOM Cost",
+                                           "cell":  "I18",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "ce811038bafeaefd94f808885acf12ff78197c9181759a2c65f0819fab194c89",
+                        "id":  "008-manufacturing_bom-normal-024745",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  -11,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -11,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J12",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -22,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -22,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J13",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  58,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  58,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J14",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  47,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  47,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J15",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  36,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  36,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J16",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  25,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  25,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J17",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  14,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  14,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  3,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  3,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J19",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -8,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -8,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J20",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -19,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -19,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J21",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -30,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -30,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J22",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  -41,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -41,
+                                           "sheet":  "Cash Plan",
+                                           "cell":  "J23",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "723e39d48d29279b9b098a7a7d977aa07b019f39700e2012b75496f58c6e03b1",
+                        "id":  "009-cashflow_calendar-normal-210589",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  0.7387,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  0.7387,
+                                           "sheet":  "KPI Detail",
+                                           "cell":  "L11",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  0.7411,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  0.7411,
+                                           "sheet":  "KPI Detail",
+                                           "cell":  "L12",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  0.7434,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  0.7434,
+                                           "sheet":  "KPI Detail",
+                                           "cell":  "L13",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  0.7456,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  0.7456,
+                                           "sheet":  "KPI Detail",
+                                           "cell":  "L14",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  0.7478,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  0.7478,
+                                           "sheet":  "KPI Detail",
+                                           "cell":  "L15",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  0.75,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  0.75,
+                                           "sheet":  "KPI Detail",
+                                           "cell":  "L16",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  0.7521,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  0.7521,
+                                           "sheet":  "KPI Detail",
+                                           "cell":  "L17",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  0.678,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  0.678,
+                                           "sheet":  "KPI Detail",
+                                           "cell":  "L18",
+                                           "excel_text":  null
+                                       },
+                                       {
+                                           "expected":  0.6807,
+                                           "expected_excel_error":  null,
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  0.6807,
+                                           "sheet":  "KPI Detail",
+                                           "cell":  "L19",
+                                           "excel_text":  null
+                                       }
+                                   ],
+                        "sha256":  "8c40f13bc22b0088ad70b66b5ff064abd70ab0f734a2b19163ed9b65afeed86c",
+                        "id":  "010-subscriptions_kpi-normal-831697",
+                        "source_unchanged":  true
+                    },
+                    {
+                        "checks":  [
+                                       {
+                                           "expected":  null,
+                                           "expected_excel_error":  "#VALUE!",
+                                           "pass":  true,
+                                           "formula_matches":  true,
+                                           "actual":  -2146826273,
+                                           "sheet":  "Budget",
+                                           "cell":  "N18",
+                                           "excel_text":  "#VALUE!"
+                                       }
+                                   ],
+                        "sha256":  "602e9c47ed4ddb3af8bff775b6105f79ed8d6bd9a807ffb2c62de5b9d21a443e",
+                        "id":  "004-budget_horizontal_months-mutated-067598",
+                        "source_unchanged":  true
+                    }
+                ],
+    "failures":  [
+
+                 ],
+    "finished_utc":  "2026-09-21T00:16:32.2206698Z",
+    "status":  "PASS",
+    "excel_build":  20326
+}

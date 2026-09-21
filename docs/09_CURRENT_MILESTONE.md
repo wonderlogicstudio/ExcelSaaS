@@ -1,3 +1,201 @@
+## SYNTHETIC-01 final six verification groups — COMPLETE WITH KNOWN LIMITS (2026-09-21)
+
+Owner-approved six-group verification completed and independently reviewed PASS. Representative10 families/20 beta files (14 new,6 prior) matched frozen raw expectations; excluded cases are not detection passes. Monthly/Table scope gaps remain:18 excluded mutants undetected;30 hidden notices verified intentional Rate Card baseline. Fresh read-only native Excel11files/96checks (95 semantic values + monthly mutant #VALUE!) passed, no save. Existing combined two-rule delivery725values/11changes/42impacts/3downloads reused after51 API source hashes and output/download hashes matched. Frozen635 files preserved.
+
+Coverage wording only changed in4 web component/test files. Focused8 tests, type/build, hosted build and independent source/evidence reviews passed. Protected Worker3b513785-21e8-4efe-8bc3-fcdf9301d0eb deployed; API/bindings/Access boundaries unchanged. Actual desktop/mobile and keyboard scope disclosure checked; monthly and Table affected states rechecked after deploy. No new detection/repair support, PG/commercial readiness, full-regression rerun, new repair execution, local commit or push. One transient request failure passed one paced retry; cause unconfirmed. One evidence-reader encoding typo fixed without rerunning Excel. Prior records retained.
+
+Commands, exits, actual/reused evidence and remaining limits: artifacts/synthetic_validation/beta-final6-20260921/REPORT.md and result.json. Next proposed single unit: bounded horizontal-pattern detection design/acceptance; NOT started. STOP at batch boundary.
+
+---
+
+## SYNTHETIC-01 final six verification groups — APPROVED (2026-09-21)
+
+Owner explicitly approves six remaining verification groups together: horizontal/monthly coverage, Table partial-scan boundary, excluded18/hidden30 adjudication, representative beta cases, existing two-rule complex delivery, native Excel and final evidence consistency. Reuse unchanged evidence. No expanded repair feature, expected-truth rewrite, live commerce, real customer data, new paid resource, remote push or public release. Product fixes require bounded review and tests; do not convert unsupported cases to PASS. This current approval supersedes historical per-unit stop gates for these six verification groups only.
+
+Evidence: artifacts/synthetic_validation/beta-final6-20260921. Prior records preserved.
+
+---
+
+## SYNTHETIC-01 monthly beta pair — parity confirmed, detection gap (2026-09-21)
+
+Owner continuation scoped to frozen monthly-sheet normal/mutant pair. Both auto-uploaded and returned structure0/formula0, both scan labels completed, matching saved raw responses. Mutant Budget!N18 is predeclared out_of_scope in frozen truth, so this is NOT a detection pass. Mutation replaces a monthly-sheet reference formula with =N15-N14. Live AX and screenshots inspected; mutant scope panel shows36 formula cells,1 inspected sheet,0 candidate regions and generic limitations, without an explicit horizontal-monthly unsupported notice. Record detection coverage gap and unclear zero-result scope communication; do not change expected truth or claim accuracy/repair support.
+
+Evidence and command exits: delivery-progress.json key `synthetic_beta_monthly_scope_gap_20260921`. No source changes, engine rerun, repair/Excel/new regression, commit/push/deployment. Prior history preserved. Next proposed bounded unit: investigate horizontal-monthly detection coverage and its UI status contract. STOP before implementation.
+
+---
+
+## SYNTHETIC-01 BOM exact-lookup beta pair — PASS (2026-09-21)
+
+Owner continuation scoped to frozen BOM pair. Both files automatically uploaded. Mutant: structure0/formula1 at BOM Cost!I11; VLOOKUP uses A10 instead of same-row A11, shown alongside surrounding formulas. Normal: structure0/formula0. Both scans completed for both files. Live AX and actual screenshots inspected; no screenshot file saved. Expected local raw JSON reused unchanged (read exit0), no repeat engine run. Formula comparison remains automatic-repair unsupported. No product edits, repair, Excel recalculation, new regression, commit/push/deploy. Prior history preserved. Structured evidence: delivery-progress.json key `synthetic_beta_bom_pair_pass_20260921`. Next proposed unit: monthly-sheet pair beta check; STOP.
+
+---
+
+## SYNTHETIC-01 paired beta diagnosis — PASS (2026-09-21)
+
+Normal inventory sample automatically selected through live screen button/filechooser after owner ChatGPT app restart. Beta summary structural0/formula0 and both scans completed matched frozen local expected response; AX and actual screenshot verified. Previous mutant showed structural0/formula1 at 재고 이동!I17. Both paired diagnostic UI checks now pass. Screenshot viewed in conversation only. Exact original chooser failure cause remains unisolated (restart and click route changed); no permanent recovery claim. No product edits, repair/Excel recalculation/new regression, commit/push/deployment. Previous history retained. STOP at paired-check boundary. Structured evidence: delivery-progress.json key `synthetic_beta_ui_normal_pass_20260921`.
+
+---
+
+## SYNTHETIC-01 beta paired check — mutant PASS, normal pending (2026-09-21)
+
+Owner manually uploaded 003-inventory_cross_sheet-mutated-996121.xlsx. Actual beta AX and screenshot showed structural0, formula candidate1, grouped FORMULA_PATTERN_OUTLIER at 재고 이동!I17. Formula compares 기초 재고 B16 against surrounding same-row references. Auto-repair explicitly unsupported.
+
+Next approved bounded unit: paired normal workbook beta check (expected structural0/formula0, both scans completed). Local frozen response verified; manual file selection pending due browser chooser timeout. No product code changes, repair/Excel/full regression, commit/push/deployment. This is one-file diagnostic UI evidence, not commercial readiness. Existing history preserved.
+
+Detailed evidence/status: delivery-progress.json key `synthetic_beta_ui_mutant_pass_normal_pending_20260921`.
+
+---
+
+## SYNTHETIC-01 beta UI — file selection handoff (2026-09-21)
+
+Owner confirmed login. Old auth callback displayed invalid state; navigation to the original beta origin showed the authenticated product home. File chooser event timed out before setFiles. DOM confirmed the selected control is an INPUT type=file. No repeated attempt or alternate automation bypass. Owner manual selection requested for the frozen inventory sample; expected base0/formula1 at 재고 이동!I17. No upload/result verification completed and no product defect claimed. Tab retained. Prior records, code and artifacts preserved.
+
+---
+
+## SYNTHETIC-01 beta screen verification — login handoff (2026-09-21)
+
+Owner approved next step. Scope is one representative frozen synthetic inventory file on existing protected beta, comparing summary/group/location against saved raw expected results. Browser connected successfully; beta origin currently presents Cloudflare Access login. Owner login requested; tab retained. No credentials or auth query recorded. Upload and result verification remain NOT_RUN. Expected: structural findings0, formula candidate1 at 재고 이동!I17 (RELATIVE_REFERENCE_DRIFT). Product code/deployment unchanged; previous completed batch and user changes preserved.
+
+---
+
+## SYNTHETIC-01 approved stages 1-5 batch — BATCH_STAGES_1_TO_5_VERIFIED_NO_ENGINE_FIX_REQUIRED
+
+Current owner explicitly approved conditional aggregates, exact lookup, monthly sheets, frozen300 local engine evaluation and up to3 high-impact engine fixes. This superseded earlier per-unit stop gates for this batch only. Existing direct fixture generation stays legacy by default; generate_dataset enables the three additions. Ten families and train/dev/holdout split180/60/60 preserved. Tool integration39 tests passed before freeze. Separate runner/scorer/cli preflight and root input/hash/order checks passed.
+
+Real evaluation300: {"workbooks_total": 300, "process_outputs": 300, "completed": 270, "partial": 30, "failed": 0, "timeouts": 0, "not_run": 0, "skipped": 30, "abstained": 0, "audit_failed": 0, "truncated": 0, "raw_errors": 0}. Full scoped metrics: TP132, FN0, FP0. Eighteen inserted mutations were outside the scoring contract before execution; they are not passes. Thirty hidden-sheet findings are unjudged outside this metric scope. Partial and successful-only metrics remain separate. This is synthetic diagnostic entrypoint evaluation, not Excel/UI/repair or commercial accuracy proof. Expected truth and frozen artifacts were not tuned after results. Initial relative-path command was blocked before engine execution by frozen path mismatch; retry used original absolute path without changing inputs/truth/source.
+
+Stage5 decision: Stages1-3 diversity implemented and integrated, stage4 frozen300 actual engine evaluation verified, stage5 defect triage found no scoped FN/FP or process failure. Product engine changes0; no fabricated fixes. 18 predeclared out-of-scope mutants and30 hidden-sheet notices remain separately accounted. Independent read-only evidence review agrees;6 representative raw responses checked.
+
+Detailed commands/exits/artifact hashes: reviews/SYNTHETIC-01.md and artifacts/synthetic_validation/full-20260920-batch01. Product changes, if any, are explicitly listed in the detailed evidence. Existing history and prior artifacts preserved. No commit/push/beta deployment, Excel recalculation or browser visual inspection. STOP at batch boundary or recorded approval condition.
+
+---
+
+## SYNTHETIC-01 remaining stages 1-5 - EXPLICIT BATCH APPROVAL
+
+Owner now explicitly authorizes remaining conditional aggregate, exact lookup and monthly-sheet cases, pre-evaluation truth freeze, 300-workbook real local engine evaluation, then up to3 high-impact engine defect fixes/revalidation. This current instruction overrides earlier per-unit STOP gates for these five stages only. Stop for changes to frozen expected truth, product feature/security boundaries, or two failures of the same cause. Preserve old evidence and user changes. No commit/push/deployment authorized in this batch. PL owns records/freeze/evaluation/review; single builder owns source allowlisted per stage. No duplicate passed tests or unnecessary full-history roles.
+
+---
+
+## SYNTHETIC-01 absolute/mixed references — generation checkpoint
+
+Owner approved one absolute/mixed-reference synthetic case using payroll shared threshold/premium inputs. Normal formulas and target-only anchor mutations are validated with external truth and independent Python arithmetic. Fixture inputs exercise the affected calculation so an incorrect reference has a numerical effect. Existing engine, original five-mutation schedule and prior frozen datasets remain unchanged.
+
+Artifacts: artifacts/synthetic_validation/anchor-refs-01. Commands, exits and hashes are recorded in the detailed review. Root independently reviewed the bounded changes and preservation. This is fixture generation/validation, not actual engine detection, Excel recalculation, UI or commercial accuracy verification. No full300, holdout engine run, full regression, commit/push/deployment. Existing history and user changes preserved.
+
+Next proposed unit: one conditional-aggregate synthetic case. Lookup/monthly diversity and broader frozen evaluation remain pending. STOP pending owner decision.
+
+---
+
+## SYNTHETIC-01 absolute/mixed references - APPROVED bounded unit
+
+Owner approved one anchored-reference synthetic case. Reuse payroll threshold/premium inputs for absolute and mixed references; create separate target-only anchor drift fixture with independently computed before/after values. Allowlist generator.py, verify_generated.py, scenarios.py if needed, anchors.py if needed and tests/test_anchor_refs.py; operating records and new anchor-refs-01 artifacts. Preserve legacy input validation and existing frozen artifacts, engine and original mutation schedule. No real engine, full300, Excel/UI, commit/push/deploy or next unit.
+
+---
+
+## SYNTHETIC-01 Korean spaced sheet references — verified generation checkpoint
+
+Coverage audit found conditional calculations, subtotals, cross-sheet references, tables and hidden support sheets already implemented. Korean/spaced sheet references were selected as the one approved missing item. Existing inventory family now generates Korean spaced detail/support sheet names with quoted cross-sheet formulas, consistent external truth and mutation metadata. Family count/split and engine are unchanged; prior frozen datasets were not rewritten.
+
+Normal and target-only mutated XLSX plus external expected/validation evidence are under artifacts/synthetic_validation/korean-sheet-refs-01. Targeted generation checks validate formula references and independent Python arithmetic, and reject a missing referenced sheet. Commands, exits and artifact hashes are in the detailed review. This is generated-fixture validation, not actual Excel recalculation, product detection/repair, beta UI or new detection accuracy evidence.
+
+Root reviewed the bounded source change and preservation hashes. Existing history and user changes preserved. No engine/full300/Excel/browser/full regression/commit/push/deploy. Absolute/mixed references, conditional aggregates, lookups and separate monthly sheets remain pending. Next proposed unit: one absolute/mixed reference case. STOP pending owner decision.
+
+---
+
+## SYNTHETIC-01 Korean spaced sheet references - APPROVED bounded unit
+
+Owner approved one missing diversity item after coverage audit. Extend existing inventory family Korean/spaced detail and support references; validate actual generated normal/mutated XLSX with external truth. Allowlist scenarios.py, generator.py, verify_generated.py, new test_korean_sheet_refs.py and new isolated fixture output. No engine, full300, Excel/UI, commit/push/deploy or next unit. Preserve old artifacts and product code.
+
+---
+
+## SYNTHETIC-01 diagnostic mismatch accounting — verified owner checkpoint
+
+Wrong-rule/subtype/source predictions overlapping scored expected locations on the same sheet now have a separate diagnostic mismatch classification. They remain FP for strict precision and missing expected findings remain FN; they no longer masquerade as normal-cell false alarms. Exact matching, duplicate handling and expected truth are preserved. Full/completed-only metrics, workbook/scope JSON and CSV, and HTML expose the distinction. Product engine and UI are unchanged.
+
+Targeted scorer/completion/CSV checks and focused lint were executed; exact commands and exit codes are recorded in reviews/SYNTHETIC-01.md. Root reviewed source diff and metric semantics independently. These are scoring-contract tests, not new Excel/engine/UI validation. Historical artifacts and pre-existing product files remain hash-identical. No full300, holdout, engine rerun, Excel recalculation, browser verification, commit/push/deploy. Prior regression evidence is reused only for unchanged product code.
+
+Next proposed unit: compare requested synthetic-case diversity with implemented generation and select one missing coverage item. Broader commercial accuracy remains unverified. STOP pending owner decision; no automatic next unit.
+
+---
+
+## SYNTHETIC-01 diagnostic mismatch accounting — APPROVED bounded unit
+
+Owner approved separating wrong-type predictions on known error locations from false alarms on normal cells. Allowlist: synthetic scorer.py, report.py, new test_mismatch_accounting.py; PL operating records only. Preserve exact matching, truth, engine and old artifacts. Wrong-type predictions remain incorrect in total FP/precision and the missed expected type remains FN. Targeted scorer/completion/CSV tests and focused static checks; root independent review. No 300-run, engine execution, full regression, Excel/UI, commit/push/deployment or next unit. Builder requested 5.5 Medium; new thread unavailable (thread limit), existing 5.5 High builder reused without claiming a model switch.
+
+---
+
+## SYNTHETIC-01 completion accounting correction — owner checkpoint
+
+Owner approved correcting analysis completion and partial/skipped accounting. Only synthetic validation worker, runner, scorer, report and their new targeted tests changed; product engine, UI, expected truth and historical artifacts remain unchanged. COMPLETED requires complete base and completed formula audit; skipped, abstained, truncated and partial outputs no longer inflate completion. Fully completed-only metrics use separate counters; full-contract metrics retain failed/missing expected findings as FN and valid partial findings as TP. Manifest IDs govern the denominator, not stale stored completion totals.
+
+Targeted test commands and exit codes are recorded below in the detailed review. Initial import-order lint failure was corrected; no product failure was implied. Root review found null-audit scoring and explicit NOT_RUN handling, corrected with a focused additional test. Existing product regression evidence is reused, not rerun.
+
+Historical smoke10 raw responses were replayed into a separate artifact directory: 10 process outputs, 8 fully analyzed, 2 partial due to unsupported-structure audit skips, completion 80%. TP3/FN0/FP0 remains bounded to the three scored mutations. This is historical response reaggregation, not fresh engine execution or new accuracy evidence. Original artifacts were hash-checked unchanged. Report: artifacts/synthetic_validation/completion-accounting-replay-01/reports/summary.html. Browser visual review remains unperformed after the prior file URL policy block; no workaround attempted.
+
+No 300-run, holdout execution, Excel recalculation, product changes, commit, push or deployment. Remaining wrong-subtype false-positive accounting and requested generator diversity are not completed. Next proposed unit is wrong-subtype mismatch accounting only; STOP pending owner decision.
+
+---
+
+## SYNTHETIC-01 real-engine smoke — verified bounded result
+
+Owner approved frozen evaluation contract and real local engine smoke5 pairs; engine enhancement remains deferred until evidence supports priorities. Generated/froze10 XLSX, executed scan_workbook + run_formula_audit through existing API venv, and independently verified input/truth/raw hashes and exact findings. Three scored relative-reference-drift candidates matched (TP3/FN0/FP0). Table/horizontal inserted mutations2 were declared out of scope before execution. Base hidden-sheet findings2 are outside this scoring scope, not false positives. All10 processes finished; raw M4 audit statuses were COMPLETED8 / SKIPPED_UNSUPPORTED_STRUCTURE2. No scan truncation or omitted detail evidence in this bounded run.
+
+Initial scoring wrote correct JSON but CSV export failed on a later-only tp column. Only CSV header union changed; matching/counters/truth unchanged. Focused tests4 pass, new-test lint pass; pre-existing scorer lint debt deferred. Original failed outputs preserved. Separate report-revision-01 was rendered from unchanged computed summary, with no rescoring/engine rerun; its metadata records before/after source hashes. Reconstructing the pre-export-fix tool tree matches the original frozen tool hash. Product hashes unchanged.
+
+The report HTML's ten data rows and all local links were checked statically. Browser file URL was blocked by browser security policy; visual inspection NOT_RUN, no bypass attempted. This is local diagnostic internals, one mutation type, training families only—not UI, repair, Excel recalculation, holdout, full300 or customer accuracy. No commit/push/deploy. Detailed evidence: reviews/SYNTHETIC-01.md; report: artifacts/synthetic_validation/smoke-20260920-01/report-revision-01/summary.html.
+
+Next proposed unit: faithful execution-completeness / skipped-status reporting before full evaluation. Successful-only metrics and wrong-subtype classification also remain pending. Engine enhancements follow measured commercial-impact priorities after broader evaluation, one independently verified change at a time. Stop at owner checkpoint.
+
+---
+
+## SYNTHETIC-01 ten-family generation — verified one unit
+
+Owner approved ten-family generation validation, without real engine evaluation. Initial 50-pair test failed because an unsupported Table mutation replaced the original detail role with exploratory; unchanged SUM was then falsely rejected. generator.py now preserves the original target role, while M4 support flags and out-of-scope expectations remain unchanged. New role tests cover Table/horizontal behavior; PL independent review PASS.
+
+Focused tests8 and all-family generation test1 passed, exit0. The latter generated and validated normal50 + mutated50 =100 temporary XLSX across10 families and5 mutation types per family. Temporary files were removed at test exit; this is not a delivered persistent dataset or actual Excel recalculation. New test Ruff passed; generator's pre-existing I001 remains deferred. No full-tool lint or complete original diversity/accuracy claim.
+
+Existing product files preserved (1026-file baseline comparison excluding authorized operating records). No schema/scorer/runner/validator changes, engine evaluation, full regression repeat, commit/push/deployment. Previous records preserved. Next proposed unit: evaluation-contract review/freeze and real engine smoke5 pairs, separately approved. Stop here. Evidence: reviews/SYNTHETIC-01.md and DigitalTwin/.tmp/workbookcare-synthetic01/family-generation-result.json.
+
+---
+
+## SYNTHETIC-01 intentional mutation validation — verified one unit
+
+Owner approved only distinguishing recorded intentional mutations from normal-workbook validation errors. verify_generated.py checks declared mutation sheet/cell, snapshot, formula spec, actual after value/data type and changed before state; only that exact cell bypasses normal formula-health checks. Undeclared/other-cell errors and mismatched mutation metadata remain rejected. No generator, scorer, runner, schema or product changes. PL independently inspected implementation/tests.
+
+Targeted tests: 7 passed, exit0. Exact commands, results and static-check limitations are recorded below. Previous eight helper/runner tests were not repeated. Full tool suite, real engine smoke/full300, Excel recalculation, commit/push/deployment NOT_RUN. Original protected files (1026 baseline entries) preserved except authorized operating records. Existing user changes retained.
+
+Remaining SYNTHETIC-01 acceptance is not complete. Next proposed unit: generation/validation of all ten families and mutation types, without real engine scoring, to identify remaining template defects. Stop for owner checkpoint.
+
+Evidence: docs/delivery-v3_2/reviews/SYNTHETIC-01.md and DigitalTwin/.tmp/workbookcare-synthetic01/intentional-mutant-result.json.
+
+---
+
+## SYNTHETIC-01 helper correction — verified; remaining work pending
+
+Owner approved only the missing truth-hash helper correction and targeted tests. The previously interrupted helper was already present and was reused; this change makes missing truth.json fail closed. Canonical matching accepts formatting changes but rejects manifest payload/hash or external truth mismatches. Six focused helper tests plus two existing RunnerContractTests passed (8 total, exit0). Independent PL source/test review passed. Existing product code and other tool modules unchanged; previous records preserved.
+
+Final static checks: new test file Ruff exit0; runner imports/undefined-name checks (I,F) exit0. Initial Ruff exit1 found import formatting (corrected) plus the pre-existing BLE001 in unrelated _raw_status (deferred). No claim of all-tool lint passing. Evidence: DigitalTwin/.tmp/workbookcare-synthetic01/truth-hash-import-ruff-20260920-210621.log. Earlier test attempts hit temporary-directory permissions before assertions; final elevated run passed, logs preserved. No duplicate pytest run for import-only formatting.
+
+This does not complete SYNTHETIC-01. Intentional #REF! mutant validation, wider generator acceptance, real engine smoke/full300, Excel recalculation and final report remain pending. No full-regression rerun, engine evaluation, commit/push or deployment. Next proposed unit: distinguish intentional mutant errors from normal-workbook generation failures. Stop for owner checkpoint.
+
+---
+
+## SYNTHETIC-01 — implementation incomplete; retry checkpoint (2026-09-20)
+
+Isolated tools/synthetic_validation draft only. Existing product source, tests, fixtures and original dirty dependency lock preserved (1026 baseline hashes checked; only previously authorized milestone header differed before this record update). Existing regression exit0: web167, Worker16, API250, Ruff, M4 supplied pack36 exact/no extras. This is separate from new-tool validation.
+
+Latest synthetic selftests v2 and v3 both exit1: 4 passed / 3 failed. Repeated contract-helper NameError reached the local initial-attempt-plus-one-correction checkpoint; no further retry executed. Separate generator validation fails on an intentionally inserted #REF! SUM argument. Real engine smoke/full, 300-file evaluation, Excel recalculation, final HTML inspection, commit/push/deploy NOT_RUN. No engine performance score or commercial-readiness claim. Preserve the draft and failure evidence; do not silently mark complete.
+
+Next proposed bounded correction: define and independently test the missing canonical truth-hash helper, without engine execution or unrelated changes. Remaining generator/coverage work stays pending. Detailed evidence and limitations: docs/delivery-v3_2/reviews/SYNTHETIC-01.md. Previous records below remain historical.
+
+---
+
+# ACTIVE APPROVED - SYNTHETIC-01
+
+Owner attachment approved an isolated local Python synthetic-workbook generator/mutator/real-diagnostic validator: smoke5pairs then full150pairs, 10 business domains, family-level splits/frozen oracle, self-validation, HTML/CSV/JSON, real engine evaluation and existing regression. Only new tools/synthetic_validation code; product/apps, existing tests/fixtures/config/dependency locks frozen. Existing engine shortcomings reported, never fixed. No push/deploy/new paid resources/customer data/external AI. User explicit full pipeline scope supersedes older single-defect stop within this unit. Commit deferred unless clearly authorized; do not commit generated workbook bulk. Baseline1026 files at2321cd2 recorded outside repo. Prior verified regression is baseline evidence; run current full regression once after independent tool review to avoid duplicate unchanged tests.
+
+---
+
 ## RULES-01 - verified and deployed
 
 Extracted numeric-text parsing/eligibility/replacement and blank-formula eligibility/replacement into repair_rules modules. Common validation, translation, calculation, approval, storage and UI unchanged. Compatibility re-export retained; all new modules covered by patch fingerprint. Before/after substantive behavior capture is byte-identical. Focused tests and Ruff PASS; full scripts/verify.ps1 exit0; fresh actual Excel3files/725values PASS, read-only/no-save. Independent code and evidence review PASS.

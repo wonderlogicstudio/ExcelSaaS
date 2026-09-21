@@ -1,0 +1,25 @@
+{
+  "source_files_checked": 51,
+  "source_mismatches": [],
+  "source_and_excel_output_hashes_checked": 3,
+  "artifact_mismatches": [],
+  "prior_excel": {
+    "saved": false,
+    "macros_disabled": true,
+    "expected_values": 725,
+    "kind": "ACTUAL_EXCEL_COM_COMBINED_REPAIR",
+    "source_and_output_hashes": {
+      "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\compatibility\\complex03_combined_repaired.xlsx": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
+      "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\samples\\WorkbookCare_Complex_Validation_2026-09-13\\03_정산수정_연쇄계산.xlsx": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
+      "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\compatibility\\complex03_combined_changes.xlsx": "403d13f834b4d7e6aa99e12e10cf30581faf0ba9203ab798cb2039f8d325e46c"
+    },
+    "actual_files_opened": 3,
+    "external_link_update_disabled": true,
+    "combined_sum": 2177677,
+    "excel_version": "16.0",
+    "status": "PASS",
+    "patches": 11,
+    "excel_build": 20326
+  },
+  "limitations": "Prior native combined repair evidence reused if hashes match; not a new execution or new beta-download proof."
+}

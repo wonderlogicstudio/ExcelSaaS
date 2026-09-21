@@ -1,0 +1,62 @@
+{
+  "status": "HASH_VERIFIED_EXISTING_EVIDENCE_REUSED",
+  "actual_prior_downloads": [
+    {
+      "file": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\browser-downloads\\COMBINED_FINAL\\changes_7eaa6bce-a3ab-4e3e-a5f8-bb6b1bc48a0e.xlsx",
+      "sha256": "0e96b0b634c9e118e732a7923c03674e17e77108fb3476d5c7f5df2f520da93a",
+      "bytes": 12886
+    },
+    {
+      "file": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\browser-downloads\\COMBINED_FINAL\\verification_7eaa6bce-a3ab-4e3e-a5f8-bb6b1bc48a0e.html",
+      "sha256": "07f212e3273d79684433c44f988a47546ac6469a2232580fd1395ef6f96f07c9",
+      "bytes": 13303
+    },
+    {
+      "file": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-batch01\\browser-downloads\\COMBINED_FINAL\\workbookcare_repaired_7eaa6bce-a3ab-4e3e-a5f8-bb6b1bc48a0e.xlsx",
+      "sha256": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
+      "bytes": 18858
+    }
+  ],
+  "prior_validation": {
+    "kind": "ACTUAL_BETA_DOWNLOADED_FILES_VS_FROZEN_ORACLE",
+    "status": "PASS",
+    "results": [
+      {
+        "case": "COMBINED",
+        "status": "PASS",
+        "cached_expected_values": 725,
+        "change_rows": 11,
+        "exact_html_impacts": 42,
+        "html_checks": 13,
+        "unchanged_zip_members": 7,
+        "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+      }
+    ],
+    "all_frozen_inputs_unchanged": true,
+    "official_pg_verified": false
+  },
+  "prior_ui": {
+    "status": "PASS",
+    "source": "Actual Chrome beta UI, user selected existing synthetic complex03 file",
+    "diagnosis": {
+      "structural": 8,
+      "formula_candidates": 3
+    },
+    "changes": 11,
+    "indirect_impacts": 42,
+    "expected_actual": {
+      "F31": 5232,
+      "F64": 3551,
+      "F107": 7800,
+      "J130": 2177677
+    },
+    "reselection": "Returned to basket and recalculated using retained source without upload or consent step; approval relocked.",
+    "approval": "Checkbox initially clear and approval disabled; explicit approval led to step4 without executing; separate make-copy action completed.",
+    "downloads": 3,
+    "screenshots": "Viewed actual 390x844 and 1440x900 screenshots in CUA tool; temporary viewport reset.",
+    "keyboard": "Space collapsed and Enter expanded formula group.",
+    "manual_cell_formula_entry": 0,
+    "ux_limit": "Normal path counted as approximately 20 required activations including file selection and three downloads, excluding optional review/reselection checks. Initial 10-activation target NOT met; no human-usability claim."
+  },
+  "scope": "Existing two-rule combined complex delivery; actual prior approval/three downloads/native725 evidence reused, not freshly executed. Relevant51 API source hashes unchanged per repair-reuse-audit.json."
+}

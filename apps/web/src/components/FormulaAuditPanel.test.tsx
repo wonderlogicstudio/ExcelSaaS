@@ -163,4 +163,22 @@ describe('FormulaAuditPanel', () => {
       quote: demoResult.quote,
     })).toBe(beforeContract);
   });
+
+  it('labels completed zero as same-column supported scope, not workbook-wide coverage', () => {
+    renderPanel({
+      auditResult: {
+        ...completedResult,
+        audited_formula_region_count: 0,
+        candidates: [],
+        limitations: [],
+      },
+    });
+
+    expect(screen.getAllByText('지원 범위: 같은 열의 주변 A1 참조 수식 패턴을 비교하며, 반복 수식 사이의 빈 셀·상수도 후보로 확인합니다. 가로로 반복되는 월별 패턴, 월별 시트 사이의 패턴 비교, Excel Table 내부 수식은 비교하지 않습니다.', { exact: false }).length).toBeGreaterThan(0);
+    expect(screen.getByText('수식 포함 시트')).toBeInTheDocument();
+    expect(screen.getByText('후보가 발견된 영역')).toBeInTheDocument();
+    expect(screen.getByText(/가로로 반복되는 월별 패턴, 월별 시트 사이의 패턴 비교, Excel Table 내부 수식처럼 범위 밖인 구조는 0건 완료로 해석하지 말고 별도 확인이 필요합니다/)).toBeInTheDocument();
+    expect(screen.queryByText('검사 시트')).not.toBeInTheDocument();
+    expect(screen.queryByText('후보 수식 영역')).not.toBeInTheDocument();
+  });
 });

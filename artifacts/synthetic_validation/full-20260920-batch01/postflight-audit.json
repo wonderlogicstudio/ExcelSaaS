@@ -1,0 +1,61 @@
+{
+  "files": 300,
+  "pairs": 150,
+  "split_counts": {
+    "train": 180,
+    "dev": 60,
+    "holdout": 60
+  },
+  "holdout_last": true,
+  "truth_file_sha256": "7d85876d3e40082bcf837fa6784fcac62b432c811e831be0c96bc3df894eaf21",
+  "frozen_contract_sha256": "37a051003bd7e2dc4aeebb88240af54f9db46e41abcb6417a2cf7bb7a1e626aa",
+  "workbook_hashes_verified": 300,
+  "scope": "synthetic diagnostic entrypoints only; no Excel/UI/repair/commerce validation",
+  "raw_record_count": 300,
+  "completion": {
+    "workbooks_total": 300,
+    "process_outputs": 300,
+    "completed": 270,
+    "partial": 30,
+    "failed": 0,
+    "timeouts": 0,
+    "not_run": 0,
+    "skipped": 30,
+    "abstained": 0,
+    "audit_failed": 0,
+    "truncated": 0,
+    "raw_errors": 0
+  },
+  "full_metrics": {
+    "tp": 132,
+    "fn": 0,
+    "fp": 0,
+    "candidate_fp": 0,
+    "definitive_fp": 0,
+    "normal_region_fp": 0,
+    "diagnostic_mismatch": 0,
+    "duplicates_not_fp": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "excluded_ambiguous_or_out_of_scope_not_passes": 0,
+    "unjudged_findings_not_passes": 30,
+    "workbooks_total": 300,
+    "workbooks_completed": 270,
+    "workbooks_partial": 30
+  },
+  "successful_only": {
+    "workbooks_completed": 270,
+    "workbooks_partial": 30,
+    "workbooks_total": 300,
+    "completion_rate": 0.9,
+    "tp": 126,
+    "fn": 0,
+    "fp": 0,
+    "normal_region_fp": 0,
+    "diagnostic_mismatch": 0,
+    "precision": 1.0,
+    "recall": 1.0
+  },
+  "all_raw_hashes_verified": true,
+  "truth_and_freeze_unchanged": true
+}

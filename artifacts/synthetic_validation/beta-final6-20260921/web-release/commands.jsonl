@@ -1,0 +1,19 @@
+{"phase": "baseline", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "baseline", "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "baseline", "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "baseline", "command": "wrangler versions view eddaac03-d2d4-4d8a-8fe5-5ee3a38c8dee --json", "exit_code": 0}
+{"phase": "build", "command": "npm build hosted beta", "exit_code": 0}
+{"phase": "upload", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "upload", "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "upload", "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions upload --dry-run --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions upload --keep-vars --strict --var FORMULA_AUDIT_ENABLED:true --var DELIVERY_BETA_ENABLED:true --tag scope6 --message Approved formula audit coverage wording; same private boundaries", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions view 3b513785-21e8-4efe-8bc3-fcdf9301d0eb --json", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler versions view 3b513785-21e8-4efe-8bc3-fcdf9301d0eb --json", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler versions deploy 3b513785-21e8-4efe-8bc3-fcdf9301d0eb@100 --yes --message Approved formula audit coverage wording", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services describe workbookcare-api-beta --region asia-northeast3", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services get-iam-policy workbookcare-api-beta --region asia-northeast3", "exit_code": 0}

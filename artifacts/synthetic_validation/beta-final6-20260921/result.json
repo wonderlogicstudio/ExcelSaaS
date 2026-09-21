@@ -1,0 +1,156 @@
+{
+  "status": "SIX_VERIFICATION_GROUPS_COMPLETED_WITH_KNOWN_DETECTION_LIMITS",
+  "scope": "User explicitly approved all six verification groups; no new repair/engine feature",
+  "groups": [
+    {
+      "id": 1,
+      "status": "GAP_CONFIRMED_AND_SCOPE_COPY_CORRECTED",
+      "evidence": "Monthly same-column/minimum-neighborhood mismatch; native mutant #VALUE! confirmed. Horizontal/monthly detection remains unsupported."
+    },
+    {
+      "id": 2,
+      "status": "UNSUPPORTED_BOUNDARY_VERIFIED",
+      "evidence": "Table pair UI shows partial/skipped. All30 Table datasets partial;9 pattern mutants excluded; base token detection remains distinct."
+    },
+    {
+      "id": 3,
+      "status": "ADJUDICATION_COMPLETE",
+      "evidence": "18 preexcluded undetected mutants: Table9/monthly9. 30 hidden notices intentional Rate Card,15normal+15mutant. Frozen score unchanged."
+    },
+    {
+      "id": 4,
+      "status": "REPRESENTATIVE_UI_VERIFIED",
+      "evidence": "10 families/20 unique files;14 newly tested,6 prior evidence reused. Support/exclusion results match raw; not blanket accuracy proof."
+    },
+    {
+      "id": 5,
+      "status": "UNCHANGED_EXISTING_REPAIR_EVIDENCE_REUSED",
+      "evidence": "51 API files unchanged; three actual prior beta downloads SHA256 verified. Existing numeric8+blankformula3 combined plan,725 values,11 change rows,42 HTML impacts, non-target preservation evidence retained. No new delivery execution."
+    },
+    {
+      "id": 6,
+      "status": "NATIVE_AND_INTEGRITY_VERIFIED",
+      "evidence": "Fresh native Excel11 files/96 checks; read-only,no save,macro/link disabled. Prior native combined725 reused by exact hashes. Frozen635 files preserved; final report/commands reconciled."
+    }
+  ],
+  "product_changes": [
+    "apps/web/src/components/FormulaAuditPanel.test.tsx",
+    "apps/web/src/components/FormulaAuditPanel.tsx",
+    "apps/web/src/components/UnifiedDiagnosis.test.tsx",
+    "apps/web/src/components/UnifiedDiagnosisStatus.tsx"
+  ],
+  "source_review": "coverage_review6 PASS after one coverage-copy correction; builder scope_copy_builder6",
+  "tests": {
+    "focused": "npm.cmd run test --workspace @workbookcare/web -- FormulaAuditPanel.test.tsx UnifiedDiagnosis.test.tsx",
+    "focused_exit": 0,
+    "passed": 8,
+    "type_build": "npm.cmd run build:web; tsc -b && vite build",
+    "type_build_exit": 0,
+    "hosted_build_exit": 0,
+    "scope": "No whole-product regression rerun for copy-only UI; unchanged engine/repair evidence reused"
+  },
+  "commands": [
+    {
+      "command": "final6.py",
+      "exit": 0
+    },
+    {
+      "command": "prepare_native6.py",
+      "exit": 0
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File verify_native6.ps1",
+      "exit": 0
+    },
+    {
+      "command": "audit_final6.py initial",
+      "exit": 1,
+      "reason": "unknown encoding utf8-sig in result reader only; Excel already PASS"
+    },
+    {
+      "command": "audit_final6.py corrected",
+      "exit": 0,
+      "correction": "utf-8-sig; identical earlier written evidence asserted before reuse"
+    },
+    {
+      "command": "release_web6.py baseline/build/upload/deploy",
+      "exit": 0,
+      "details": "web-release/commands.jsonl"
+    }
+  ],
+  "builder_attempts": "Initial npm.ps1 blocked; npm.cmd used. Sandbox spawn EPERM resolved through escalation. First assertions assumed singular text; corrected. Reviewer removed false4-consecutive restriction for gaps and clarified candidate-region metric. Final focused8/type/build passed.",
+  "deployment": {
+    "worker": "3b513785-21e8-4efe-8bc3-fcdf9301d0eb",
+    "rollback_worker": "eddaac03-d2d4-4d8a-8fe5-5ee3a38c8dee",
+    "all_bindings_equal": true,
+    "api_unchanged": true,
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/precision-verification",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/compare",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/automation",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/help",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/orders",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "not_run": [
+    "full300 engine rerun",
+    "new repair execution/download",
+    "new native repair725 rerun",
+    "official PG/live payment/refund",
+    "human usability study",
+    "remote push",
+    "local commit"
+  ],
+  "remaining_product_gaps": [
+    "Horizontal/monthly pattern detection",
+    "Table-interior formula pattern detection",
+    "Transient generic request failure cause unconfirmed; limiter unchanged"
+  ],
+  "commercial_status": "Not commercial readiness or support for arbitrary customer workbooks",
+  "next_proposed": "One horizontal same-row pattern detection design/acceptance unit, separately approved; preserve normal exceptions and bounded scope",
+  "final_independent_review": "coverage_review6 PASS; native95 semantic expectations+1 independent error, counts, hashes, reused vs fresh evidence and deployment consistency reviewed; no duplicate tests",
+  "additional_post_deploy_rechecks": [
+    "004-budget_horizontal_months-mutated-067598.xlsx",
+    "002-purchase_orders_table-mutated-353213.xlsx"
+  ]
+}

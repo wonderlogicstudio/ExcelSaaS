@@ -1,0 +1,35 @@
+{
+  "completion": {
+    "workbooks_total": 300,
+    "process_outputs": 300,
+    "completed": 270,
+    "partial": 30,
+    "failed": 0,
+    "timeouts": 0,
+    "not_run": 0,
+    "skipped": 30,
+    "abstained": 0,
+    "audit_failed": 0,
+    "truncated": 0,
+    "raw_errors": 0
+  },
+  "metrics": {
+    "tp": 132,
+    "fn": 0,
+    "fp": 0,
+    "candidate_fp": 0,
+    "definitive_fp": 0,
+    "normal_region_fp": 0,
+    "diagnostic_mismatch": 0,
+    "duplicates_not_fp": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "excluded_ambiguous_or_out_of_scope_not_passes": 0,
+    "unjudged_findings_not_passes": 30,
+    "workbooks_total": 300,
+    "workbooks_completed": 270,
+    "workbooks_partial": 30
+  },
+  "groups": [],
+  "examples": []
+}

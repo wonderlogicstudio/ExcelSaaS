@@ -1188,5 +1188,1261 @@
     "evidence": "reviews/evidence/RULES-01.json",
     "deployed": true,
     "git_delivery": "owner-authorized; verify commit and remote head in Git"
-  }
+  },
+  "synthetic_validation_checkpoint": {
+    "status": "INCOMPLETE_SAME_CAUSE_RETRY_CHECKPOINT",
+    "unit": "SYNTHETIC-01",
+    "date": "2026-09-20",
+    "review": "reviews/SYNTHETIC-01.md",
+    "existing_regression": "PASS_EXIT_0",
+    "synthetic_selftests_latest": {
+      "passed": 4,
+      "failed": 3,
+      "exit_code": 1
+    },
+    "real_engine_smoke": "NOT_RUN",
+    "full_300": "NOT_RUN",
+    "excel_recalculation": "NOT_RUN",
+    "commit_push_deploy": "NOT_RUN",
+    "next_proposed_unit": "missing canonical truth-hash helper correction and targeted test only"
+  },
+  "synthetic_truth_helper_correction": {
+    "status": "VERIFIED_OWNER_CHECKPOINT",
+    "scope": "truth hash helper only",
+    "tests": {
+      "exit_code": 0,
+      "passed": 8,
+      "log": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-synthetic01/truth-hash-helper-20260920-210437.log",
+      "commands": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider tools/synthetic_validation/tests/test_truth_hash.py -q",
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe -m pytest -p no:cacheprovider tools/synthetic_validation/tests/test_scorer.py::RunnerContractTests -q"
+      ],
+      "results": [
+        {
+          "passed": 6,
+          "exit_code": 0
+        },
+        {
+          "passed": 2,
+          "exit_code": 0
+        }
+      ],
+      "earlier_environment_failures": [
+        "truth-hash-helper-20260920-210351.log: temporary-directory permission failure before assertions",
+        "truth-hash-helper-20260920-210411.log: temporary-directory permission failure before assertions"
+      ],
+      "initial_static_check": {
+        "command": "python -m ruff check --no-cache tools/synthetic_validation/runner.py tools/synthetic_validation/tests/test_truth_hash.py",
+        "exit_code": 1,
+        "findings": "I001 import formatting in both files; pre-existing BLE001 in unrelated runner._raw_status remains deferred"
+      }
+    },
+    "product_code_unchanged": true,
+    "full_synthetic_evaluation": "NOT_RUN",
+    "next_proposed": "intentional mutant validation correction"
+  },
+  "synthetic_intentional_mutation_correction": {
+    "status": "VERIFIED_ONE_UNIT_ONLY",
+    "evidence": {
+      "exit_code": 0,
+      "passed": 7,
+      "command": ".\\apps\\api\\.venv\\Scripts\\python.exe -m pytest tools/synthetic_validation/tests/test_intentional_mutation.py tools/synthetic_validation/tests/test_scorer.py::GenerationTests::test_generated_normal_tamper_is_rejected -q",
+      "log": "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-synthetic01/intentional-mutant-pytest-final-20260920-2130.log",
+      "static_checks": [
+        {
+          "command": ".\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check tools/synthetic_validation/tests/test_intentional_mutation.py",
+          "exit_code": 0,
+          "log": "intentional-mutant-ruff-newtest-final-20260920-2131.log"
+        },
+        {
+          "command": ".\\apps\\api\\.venv\\Scripts\\python.exe -m ruff check tools/synthetic_validation/verify_generated.py --select I,F",
+          "exit_code": 0,
+          "log": "intentional-mutant-ruff-validator-if-final-20260920-2131.log"
+        }
+      ],
+      "limits": "Validator static check limited to imports/undefined names; no all-tool lint claim. No actual engine or Excel recalculation.",
+      "earlier_attempts": [
+        "System Python pytest failed: module absent; no installation performed.",
+        "System Python unittest failed: openpyxl absent; reused project venv afterward.",
+        "First venv run: 6 passed/1 failed due expected error-message mismatch. Test corrected to exercise subtotal membership directly; existing validation not weakened.",
+        "Final run included added missing-metadata cases. Earlier logs and import-format correction logs preserved in the same scratch directory."
+      ],
+      "review": "PL independently inspected exact-target guard, non-target and normal-workbook negative tests, final logs. No duplicate verification run."
+    },
+    "product_code_unchanged": true,
+    "next_proposed": "all-family generation validation; no engine evaluation"
+  },
+  "synthetic_ten_family_generation": {
+    "status": "VERIFIED_ONE_GENERATION_UNIT",
+    "families": 10,
+    "mutation_types_per_family": 5,
+    "normal_workbooks": 50,
+    "mutated_workbooks": 50,
+    "total_workbooks": 100,
+    "retention": "Temporary unittest files removed on test exit; no persistent 100-file dataset delivered",
+    "tests_passed": 9,
+    "engine_evaluation": "NOT_RUN",
+    "excel_recalculation": "NOT_RUN",
+    "product_code_unchanged": true,
+    "existing_tool_changes": [
+      "tools\\synthetic_validation\\generator.py"
+    ],
+    "new_test": "tools/synthetic_validation/tests/test_mutation_role.py",
+    "logs": {
+      "initial": "generation-ten-families-01.log",
+      "focused": "mutation-role-focused-20260920-0001.log",
+      "generation": "generation-50pair-after-rolefix-20260920-0001.log",
+      "new_test_lint": "mutation-role-newtest-ruff-full-20260920-0001.log",
+      "generator_lint": "mutation-role-ruff-if-20260920-0001.log"
+    },
+    "exits": {
+      "initial": 1,
+      "focused": 0,
+      "generation": 0,
+      "new_test_lint": 0,
+      "generator_lint": 1
+    },
+    "static_limitation": "Generator I001 import-block formatting is pre-existing, deferred; no full-tool lint-pass claim",
+    "review": "PL independent source/test/log review PASS; support flags and out-of-scope classifications unchanged",
+    "next_proposed": "freeze/review evaluation contract and run real-engine smoke on 5 pairs; separate approval"
+  },
+  "synthetic_real_engine_smoke": {
+    "status": "BOUNDED_REAL_ENGINE_SMOKE_VERIFIED_WITH_REPORT_REVISION",
+    "files": 10,
+    "scored_mutations": 3,
+    "tp": 3,
+    "fn": 0,
+    "fp": 0,
+    "excluded_mutations": 2,
+    "base_findings_unjudged": 2,
+    "m4_audit_completed_files": 8,
+    "m4_audit_skipped_unsupported_files": 2,
+    "engine_process_failures": 0,
+    "excel_recalculation": "NOT_RUN",
+    "full_300": "NOT_RUN",
+    "browser_visual": "BLOCKED_BY_BROWSER_FILE_URL_POLICY; no workaround attempted",
+    "report": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\report-revision-01\\summary.html",
+    "independent_audit": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\reports\\independent-audit.json",
+    "execution": {
+      "generate": {
+        "command": [
+          ".\\apps\\api\\.venv\\Scripts\\python.exe",
+          "-m",
+          "tools.synthetic_validation.cli",
+          "--output-root",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation",
+          "--run-id",
+          "smoke-20260920-01",
+          "generate",
+          "--mode",
+          "smoke"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.24,
+        "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\smoke-generate-01.log"
+      },
+      "engine": {
+        "command": [
+          ".\\apps\\api\\.venv\\Scripts\\python.exe",
+          "-m",
+          "tools.synthetic_validation.cli",
+          "run-engine",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 12.26,
+        "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\smoke-engine-01.log"
+      },
+      "initial_score": {
+        "command": [
+          ".\\apps\\api\\.venv\\Scripts\\python.exe",
+          "-m",
+          "tools.synthetic_validation.cli",
+          "score",
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01"
+        ],
+        "exit_code": 1,
+        "elapsed_seconds": 0.8,
+        "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\smoke-score-01.log"
+      },
+      "csv_fix_tests": {
+        "command": [
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+          "-m",
+          "pytest",
+          "tools/synthetic_validation/tests/test_csv_export.py",
+          "tools/synthetic_validation/tests/test_scorer.py::ScorerTests",
+          "-q"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 1.56,
+        "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\csv-export-focused-20260920-02.log"
+      },
+      "new_test_lint": {
+        "command": [
+          "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "tools/synthetic_validation/tests/test_csv_export.py"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.18,
+        "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\csv-export-ruff-newtest-20260920-01.log"
+      }
+    },
+    "report_revision": "Output-only separate directory from unchanged computed summary; no rescoring or repeated engine invocation; original partial CSV retained",
+    "static_checks": {
+      "table_data_rows": 10,
+      "links_checked": 27,
+      "all_links_exist": true,
+      "browser_visual": "BLOCKED_BY_BROWSER_FILE_URL_POLICY; no workaround attempted",
+      "original_source_reconstructed_hash_matches_freeze": true,
+      "product_code_unchanged": true,
+      "raw_hashes_still_match": true
+    },
+    "remaining": [
+      "Worker distinguishes only exact SKIPPED; full SKIPPED_* and truncation status need faithful reporting.",
+      "Successful-only scorer counters repeat full counters; must fix before interpreting failed full runs.",
+      "Wrong-subtype match can be labeled normal-cell FP; handle separately before full evaluation.",
+      "Original requested diversity coverage remains incomplete; no commercial-readiness or full-engine accuracy claim."
+    ],
+    "next_proposed": "execution completeness / skipped-status reporting correction only; before full300 or engine enhancement"
+  },
+  "synthetic_completion_accounting": {
+  "status": "COMPLETION_ACCOUNTING_VERIFIED_OWNER_CHECKPOINT",
+  "changed_existing_tool_files": [
+    "tools\\synthetic_validation\\engine_worker.py",
+    "tools\\synthetic_validation\\runner.py",
+    "tools\\synthetic_validation\\scorer.py",
+    "tools\\synthetic_validation\\report.py"
+  ],
+  "new_test": "tools/synthetic_validation/tests/test_completion_accounting.py",
+  "product_files_unchanged": true,
+  "replay": {
+    "mode": "HISTORICAL_RESPONSE_REPLAY_ONLY",
+    "source_run": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01",
+    "no_new_engine_execution": true,
+    "source_artifacts_unchanged": true,
+    "analysis_status_counts": {
+      "COMPLETED": 8,
+      "PARTIAL": 2
+    },
+    "analysis_completion_rate": 0.8,
+    "report": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\completion-accounting-replay-01\\reports\\summary.html",
+    "rows": [
+      {
+        "workbook_id": "001-retail_sales_vertical-mutated-745709",
+        "original_execution_status": "COMPLETED",
+        "raw_audit_status": "COMPLETED",
+        "corrected_analysis_status": "COMPLETED",
+        "source_raw_sha256": "b79599d6155fa8d2a6506a75f38ac08398d51d2f194cd46d0784783bcd2baa88"
+      },
+      {
+        "workbook_id": "001-retail_sales_vertical-normal-745709",
+        "original_execution_status": "COMPLETED",
+        "raw_audit_status": "COMPLETED",
+        "corrected_analysis_status": "COMPLETED",
+        "source_raw_sha256": "416123a608f5a5a6b5b19deaa9274cb77fa7b061b103c01819b1f238d9f29df0"
+      },
+      {
+        "workbook_id": "002-purchase_orders_table-mutated-353213",
+        "original_execution_status": "COMPLETED",
+        "raw_audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+        "corrected_analysis_status": "PARTIAL",
+        "source_raw_sha256": "16b71910b6ba1674dff63c381bacaabfed3e60abaf21083322499fda0aedb959"
+      },
+      {
+        "workbook_id": "002-purchase_orders_table-normal-353213",
+        "original_execution_status": "COMPLETED",
+        "raw_audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+        "corrected_analysis_status": "PARTIAL",
+        "source_raw_sha256": "2a937f4c66bba8ddcaf5cf78ff2707423618d468a1214328e1a50858d3022cdc"
+      },
+      {
+        "workbook_id": "003-inventory_cross_sheet-mutated-996121",
+        "original_execution_status": "COMPLETED",
+        "raw_audit_status": "COMPLETED",
+        "corrected_analysis_status": "COMPLETED",
+        "source_raw_sha256": "72c1ec9fa72e895670fcf556bc50f34b58f830ab1993b381aa1585e3839ea11b"
+      },
+      {
+        "workbook_id": "003-inventory_cross_sheet-normal-996121",
+        "original_execution_status": "COMPLETED",
+        "raw_audit_status": "COMPLETED",
+        "corrected_analysis_status": "COMPLETED",
+        "source_raw_sha256": "9b4f6c760f189a630e252c7961cf6769fa6291266edb191eaf1d936a7ccd1592"
+      },
+      {
+        "workbook_id": "004-budget_horizontal_months-mutated-067598",
+        "original_execution_status": "COMPLETED",
+        "raw_audit_status": "COMPLETED",
+        "corrected_analysis_status": "COMPLETED",
+        "source_raw_sha256": "943dca99fc3244a8f143008f9ec1141f0cac63b4dfb8dcc7de7ef0232baabd49"
+      },
+      {
+        "workbook_id": "004-budget_horizontal_months-normal-067598",
+        "original_execution_status": "COMPLETED",
+        "raw_audit_status": "COMPLETED",
+        "corrected_analysis_status": "COMPLETED",
+        "source_raw_sha256": "b8953435cc3ff5b275faea59e0d18846400a57ceb7dd20671901bc89d0d0b2d7"
+      },
+      {
+        "workbook_id": "005-payroll_overtime-mutated-261773",
+        "original_execution_status": "COMPLETED",
+        "raw_audit_status": "COMPLETED",
+        "corrected_analysis_status": "COMPLETED",
+        "source_raw_sha256": "bfcf801a9b5d388ce6e92cd7157dfe76f5870cb99b4243d49f4c2302bf5d8d9e"
+      },
+      {
+        "workbook_id": "005-payroll_overtime-normal-261773",
+        "original_execution_status": "COMPLETED",
+        "raw_audit_status": "COMPLETED",
+        "corrected_analysis_status": "COMPLETED",
+        "source_raw_sha256": "9f03785063e5ffa61d11c3cc6f5e9f6160781d192bb5aa0357df32fa6497227a"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tools/synthetic_validation/tests/test_completion_accounting.py::CompletionAccountingTests::test_score_handles_base_only_partial_with_null_audit_and_preserves_not_run",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-completion-accounting\\pytest-null-audit"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.59,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\completion-accounting-null-audit-pytest-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/runner.py",
+        "tools/synthetic_validation/scorer.py",
+        "tools/synthetic_validation/tests/test_completion_accounting.py",
+        "--select",
+        "I,F"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.18,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\completion-accounting-null-audit-ruff-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tools/synthetic_validation/tests/test_completion_accounting.py",
+        "tools/synthetic_validation/tests/test_scorer.py::ScorerTests",
+        "tools/synthetic_validation/tests/test_scorer.py::RunnerContractTests",
+        "tools/synthetic_validation/tests/test_csv_export.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-completion-accounting\\pytest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.5,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\completion-accounting-pytest-20260920.log"
+    },
+    {
+      "command": [
+        "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+        "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-synthetic01/replay_completion.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.95,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\completion-accounting-report-replay-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/engine_worker.py",
+        "tools/synthetic_validation/runner.py",
+        "tools/synthetic_validation/scorer.py",
+        "tools/synthetic_validation/report.py",
+        "--select",
+        "I,F"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 0.18,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\completion-accounting-ruff-if-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/engine_worker.py",
+        "tools/synthetic_validation/runner.py",
+        "tools/synthetic_validation/scorer.py",
+        "tools/synthetic_validation/report.py",
+        "--select",
+        "I,F"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.28,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\completion-accounting-ruff-if-final-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/tests/test_completion_accounting.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.18,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\completion-accounting-ruff-newtest-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-c",
+        "import json; from pathlib import Path; from tools.synthetic_validation.runner import _completion; root=Path('artifacts/synthetic_validation/smoke-20260920-01'); manifest=json.loads((root/'dataset'/'manifest.json').read_text(encoding='utf-8')); status=json.loads((root/'engine_status.json').read_text(encoding='utf-8')); print(json.dumps(_completion(status.get('records', []), [item['workbook_id'] for item in manifest['workbooks']]), sort_keys=True))"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.22,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\completion-accounting-smoke10-replay-20260920.log"
+    }
+  ],
+  "not_run": [
+    "new engine execution",
+    "300 workbook evaluation",
+    "Excel recalculation",
+    "browser visual review (prior file URL security-policy block)",
+    "full regression rerun",
+    "commit",
+    "push",
+    "deployment"
+  ],
+  "remaining": [
+    "wrong-subtype diagnostic mismatch versus normal-cell false-positive accounting",
+    "requested generator diversity coverage"
+  ],
+  "next_proposed": "wrong-subtype mismatch accounting only"
+},
+"synthetic_diagnostic_mismatch_accounting": {
+  "status": "DIAGNOSTIC_MISMATCH_ACCOUNTING_OWNER_CHECKPOINT",
+  "changed": [
+    "tools\\synthetic_validation\\report.py",
+    "tools\\synthetic_validation\\scorer.py"
+  ],
+  "new_test": "tools/synthetic_validation/tests/test_mismatch_accounting.py",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/tests/test_mismatch_accounting.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.17,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\mismatch-newtest-ruff-full-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tools/synthetic_validation/tests/test_mismatch_accounting.py",
+        "tools/synthetic_validation/tests/test_scorer.py::ScorerTests",
+        "tools/synthetic_validation/tests/test_completion_accounting.py",
+        "tools/synthetic_validation/tests/test_csv_export.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-mismatch-accounting\\pytest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.75,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\mismatch-pytest-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/scorer.py",
+        "tools/synthetic_validation/report.py",
+        "tools/synthetic_validation/tests/test_mismatch_accounting.py",
+        "--select",
+        "I,F"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.24,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\mismatch-ruff-20260920.log"
+    }
+  ],
+  "protected_files": 1026,
+  "historical_artifacts_unchanged": true,
+  "product_unchanged": true,
+  "model": "new5.5Medium thread rejected by thread limit; existing5.5High builder reused",
+  "not_run": [
+    "new engine execution",
+    "300 evaluation",
+    "Excel recalculation",
+    "browser visual",
+    "full regression",
+    "commit",
+    "push",
+    "deploy"
+  ],
+  "next_proposed": "audit requested synthetic diversity against generator coverage; one gap at a time"
+},
+"synthetic_korean_sheet_references":{
+  "status": "KOREAN_SHEET_REFERENCE_GENERATION_CHECKPOINT",
+  "changed": [
+    "tools\\synthetic_validation\\generator.py",
+    "tools\\synthetic_validation\\scenarios.py",
+    "tools\\synthetic_validation\\verify_generated.py"
+  ],
+  "new_test": "tools/synthetic_validation/tests/test_korean_sheet_refs.py",
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tools/synthetic_validation/tests/test_korean_sheet_refs.py::KoreanSheetReferenceTests::test_missing_korean_support_sheet_is_rejected",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-korean-sheet-refs\\pytest-compat"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.82,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\korean-compat-pytest-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/verify_generated.py",
+        "--select",
+        "I,F"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.22,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\korean-compat-ruff-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-c",
+        "import json; from pathlib import Path; from tools.synthetic_validation.generator import create_mutated_workbook, create_normal_workbook; from tools.synthetic_validation.scenarios import SCENARIOS; from tools.synthetic_validation.schema import dataclass_to_dict, write_json; from tools.synthetic_validation.verify_generated import validate_generated_workbook; root=Path('artifacts/synthetic_validation/korean-sheet-refs-01'); dataset=root/'dataset'; workbook_dir=dataset/'workbooks'; scenario=next(item for item in SCENARIOS if item.scenario_id=='inventory_cross_sheet'); normal=create_normal_workbook(scenario=scenario, seed=170917, workbook_id='korean-sheet-refs-normal-001', split='train', output_dir=workbook_dir); mutated=create_mutated_workbook(normal_truth=normal, mutation_index=0, seed=170917, output_dir=workbook_dir); validation={normal.workbook_id: validate_generated_workbook(dataset, normal), mutated.workbook_id: validate_generated_workbook(dataset, mutated)}; write_json(root/'expected_truth.json', {'scope':'standalone Korean sheet reference fixture; not a frozen engine evaluation artifact', 'validation_claim':'generation validation and independent arithmetic only; Excel recalculation NOT_RUN', 'workbooks':[dataclass_to_dict(normal), dataclass_to_dict(mutated)]}); write_json(root/'generation_validation.json', validation); write_json(root/'fixture_summary.json', {'normal':normal.relative_path, 'mutated':mutated.relative_path, 'mutation_target':mutated.mutation_target, 'expected_findings':[dataclass_to_dict(item) for item in mutated.expected_findings], 'validation':validation, 'excel_recalculation':'NOT_RUN'}); print(json.dumps({'root':str(root), 'normal':normal.relative_path, 'mutated':mutated.relative_path, 'mutation_target':mutated.mutation_target, 'expected_findings':len(mutated.expected_findings), 'validation':validation}, ensure_ascii=False, sort_keys=True))"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.76,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\korean-fixture-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-c",
+        "import json; from pathlib import Path; from tools.synthetic_validation.cli import _load_manifest; from tools.synthetic_validation.schema import sha256_file; from tools.synthetic_validation.verify_generated import validate_generated_workbook; root=Path('artifacts/synthetic_validation/smoke-20260920-01'); dataset=root/'dataset'; manifest=_load_manifest(dataset); truth=next(item for item in manifest.workbooks if item.scenario_id=='inventory_cross_sheet' and item.kind=='normal'); path=dataset/truth.relative_path; before=sha256_file(path); checks=validate_generated_workbook(dataset, truth); after=sha256_file(path); assert before==after; print(json.dumps({'workbook_id':truth.workbook_id, 'relative_path':truth.relative_path, 'sha256_before':before, 'sha256_after':after, 'checks':checks}, sort_keys=True))"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.0,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\korean-legacy-readonly-validate-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tools/synthetic_validation/tests/test_korean_sheet_refs.py",
+        "tools/synthetic_validation/tests/test_intentional_mutation.py",
+        "tools/synthetic_validation/tests/test_mutation_role.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-korean-sheet-refs\\pytest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.4,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\korean-pytest-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/scenarios.py",
+        "tools/synthetic_validation/generator.py",
+        "tools/synthetic_validation/verify_generated.py",
+        "tools/synthetic_validation/tests/test_korean_sheet_refs.py",
+        "--select",
+        "I,F"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 0.19,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\korean-ruff-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/scenarios.py",
+        "tools/synthetic_validation/generator.py",
+        "tools/synthetic_validation/verify_generated.py",
+        "tools/synthetic_validation/tests/test_korean_sheet_refs.py",
+        "--select",
+        "I,F"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.19,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\korean-ruff-final-20260920.log"
+    }
+  ],
+  "artifacts": {
+    "expected_truth.json": "3dccceebc3697e6b165cd765a1f5a3f4003c01fd2032e22327b86f2afc626501",
+    "fixture_summary.json": "0932cf360df853da0e43c936ec9565adce776e2b62055710ae66d4e0421b102d",
+    "generation_validation.json": "0f8a2197d3268e40ba4f31aa9e25aedc931f935a02abd102e549777c961c6279",
+    "dataset\\workbooks\\korean-sheet-refs-mutated-001.xlsx": "c7de0ba8eb19acfe81282014cff7533e1eb2f5e7f472782d42a7c65dfee47e65",
+    "dataset\\workbooks\\korean-sheet-refs-normal-001.xlsx": "169b6002ea3fb53bf1f033ec08a67afa19ac8d41c93e31093d86a5a9bc193c30"
+  },
+  "protected_prior_files": 1026,
+  "prior_artifacts_unchanged": true,
+  "product_unchanged": true,
+  "not_run": [
+    "real engine",
+    "full300",
+    "holdout engine execution",
+    "Excel recalculation",
+    "browser visual",
+    "full regression",
+    "commit",
+    "push",
+    "deploy"
+  ],
+  "remaining_diversity": [
+    "absolute and mixed references",
+    "conditional aggregates",
+    "lookup formulas",
+    "separate monthly sheets"
+  ],
+  "next_proposed": "one absolute/mixed reference generation case"
+},
+"synthetic_anchored_references":{
+  "status": "ANCHORED_REFERENCE_GENERATION_CHECKPOINT",
+  "changed": [
+    "tools\\synthetic_validation\\generator.py",
+    "tools\\synthetic_validation\\verify_generated.py"
+  ],
+  "added": [
+    "tools/synthetic_validation/anchors.py",
+    "tools/synthetic_validation/tests/test_anchor_refs.py"
+  ],
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-c",
+        "import json; from pathlib import Path; from tools.synthetic_validation.anchors import create_payroll_anchor_mutant, prepare_payroll_anchor_normal; from tools.synthetic_validation.schema import dataclass_to_dict, write_json; from tools.synthetic_validation.verify_generated import validate_generated_workbook; root=Path('artifacts/synthetic_validation/anchor-refs-01'); dataset=root/'dataset'; workbook_dir=dataset/'workbooks'; normal, normal_expected=prepare_payroll_anchor_normal(seed=170917, workbook_id='anchor-refs-normal-001', split='train', output_dir=workbook_dir); mutated, mutation_expected=create_payroll_anchor_mutant(normal_truth=normal, output_dir=workbook_dir); validation={normal.workbook_id: validate_generated_workbook(dataset, normal), mutated.workbook_id: validate_generated_workbook(dataset, mutated)}; write_json(root/'external_truth.json', {'scope':'standalone payroll absolute and mixed anchor reference fixture; not a frozen engine evaluation artifact', 'validation_claim':'generation validation and independent arithmetic only; Excel recalculation NOT_RUN', 'normal':dataclass_to_dict(normal), 'mutated':dataclass_to_dict(mutated)}); write_json(root/'expected_before_after.json', {'normal_inputs':normal_expected, 'mutation':mutation_expected}); write_json(root/'generation_validation.json', validation); write_json(root/'fixture_summary.json', {'normal':normal.relative_path, 'mutated':mutated.relative_path, 'mutation_target':mutated.mutation_target, 'expected_findings':[dataclass_to_dict(item) for item in mutated.expected_findings], 'validation':validation, 'excel_recalculation':'NOT_RUN'}); print(json.dumps({'root':str(root), 'normal':normal.relative_path, 'mutated':mutated.relative_path, 'mutation_target':mutated.mutation_target, 'before_expected':mutation_expected['before_expected'], 'after_expected':mutation_expected['after_expected'], 'validation':validation}, sort_keys=True))"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.91,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\anchor-fixture-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tools/synthetic_validation/tests/test_anchor_refs.py::AnchorReferenceTests::test_payroll_normal_uses_absolute_and_mixed_anchor_refs_with_independent_expected_value",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-anchor-refs\\pytest-label"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.76,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\anchor-label-pytest-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-c",
+        "import json; from pathlib import Path; from tools.synthetic_validation.cli import _load_manifest; from tools.synthetic_validation.schema import sha256_file; from tools.synthetic_validation.verify_generated import validate_generated_workbook; root=Path('artifacts/synthetic_validation/smoke-20260920-01'); dataset=root/'dataset'; manifest=_load_manifest(dataset); truth=next(item for item in manifest.workbooks if item.scenario_id=='payroll_overtime' and item.kind=='normal'); path=dataset/truth.relative_path; before=sha256_file(path); checks=validate_generated_workbook(dataset, truth); after=sha256_file(path); assert before==after; print(json.dumps({'workbook_id':truth.workbook_id, 'relative_path':truth.relative_path, 'sha256_before':before, 'sha256_after':after, 'checks':checks}, sort_keys=True))"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.81,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\anchor-legacy-payroll-readonly-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/anchors.py",
+        "tools/synthetic_validation/tests/test_anchor_refs.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.19,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\anchor-newfiles-ruff-full-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tools/synthetic_validation/tests/test_anchor_refs.py",
+        "tools/synthetic_validation/tests/test_intentional_mutation.py",
+        "tools/synthetic_validation/tests/test_mutation_role.py",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "--basetemp",
+        "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-anchor-refs\\pytest"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.38,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\anchor-pytest-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/generator.py",
+        "tools/synthetic_validation/verify_generated.py",
+        "tools/synthetic_validation/anchors.py",
+        "tools/synthetic_validation/tests/test_anchor_refs.py",
+        "--select",
+        "I,F"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 0.17,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\anchor-ruff-20260920.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/generator.py",
+        "tools/synthetic_validation/verify_generated.py",
+        "tools/synthetic_validation/anchors.py",
+        "tools/synthetic_validation/tests/test_anchor_refs.py",
+        "--select",
+        "I,F"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.25,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\anchor-ruff-final-20260920.log"
+    }
+  ],
+  "root_readonly_arithmetic": {
+    "exit_code": 0,
+    "method": "openpyxl read_only input inspection; independent Python arithmetic",
+    "hours": 176,
+    "hourly_rate": 20,
+    "threshold": 160,
+    "normal_premium": 0.5,
+    "wrong_premium": 0.25,
+    "normal_expected": 3680,
+    "wrong_anchor_expected": 3600,
+    "formula_replacement_exact": true
+  },
+  "artifacts": {
+    "expected_before_after.json": "c89f155816ebfe054f9f67ae29f595855dfff0561fc47cd5727803ac2bf2c4c2",
+    "external_truth.json": "c7ee096425b608f50d55d63c970e5fbb894b5dffac3ce4fcd742391d9a110d80",
+    "fixture_summary.json": "b1560aba2fd6f07ffe87abdf640b0c2940ea2d6d4b81d6580f3c1a843b61a4bb",
+    "generation_validation.json": "4cd8bc03c9211a6b99ce7f43da8eb3e1c505a143791279386d8ccc58b06ace2c",
+    "dataset\\workbooks\\anchor-refs-mutated-001.xlsx": "e73a7c545cbf68b317176c45618fc0534f5f4c5f711ae63374f9a099c966c67c",
+    "dataset\\workbooks\\anchor-refs-normal-001.xlsx": "f1c655e32886fff1cdc4bf97d6d68c8f0ce12a1337b8f7f3e320d6aa988a5250"
+  },
+  "prior_artifacts_unchanged": true,
+  "product_files_unchanged": true,
+  "not_run": [
+    "real engine",
+    "full300",
+    "Excel recalculation",
+    "browser UI",
+    "full regression",
+    "commit",
+    "push",
+    "deployment"
+  ],
+  "remaining": [
+    "conditional aggregate cases",
+    "lookup cases",
+    "monthly sheets",
+    "broader frozen real-engine evaluation"
+  ]
+},
+"synthetic_remaining_stages_batch":{
+  "status": "BATCH_STAGES_1_TO_5_VERIFIED_NO_ENGINE_FIX_REQUIRED",
+  "approval": "Explicit stages1-5 batch, max3 high-impact engine fixes; stop frozen expected changes/boundary changes/two failures samecause",
+  "changed_existing": [
+    "tools\\synthetic_validation\\generator.py",
+    "tools\\synthetic_validation\\scenarios.py",
+    "tools\\synthetic_validation\\verify_generated.py"
+  ],
+  "new_tests": [
+    "tools/synthetic_validation/tests/test_diversity_batch.py"
+  ],
+  "baseline_report": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\reports\\summary.html",
+  "preflight": {
+    "files": 300,
+    "pairs": 150,
+    "split_counts": {
+      "train": 180,
+      "dev": 60,
+      "holdout": 60
+    },
+    "holdout_last": true,
+    "truth_file_sha256": "7d85876d3e40082bcf837fa6784fcac62b432c811e831be0c96bc3df894eaf21",
+    "frozen_contract_sha256": "37a051003bd7e2dc4aeebb88240af54f9db46e41abcb6417a2cf7bb7a1e626aa",
+    "workbook_hashes_verified": 300,
+    "scope": "synthetic diagnostic entrypoints only; no Excel/UI/repair/commerce validation",
+    "pre_engine": true,
+    "formula_features": {
+      "conditional_sum": true,
+      "lookup": true,
+      "twelve_monthly_sheets": true
+    },
+    "scored_expected": 132
+  },
+  "postflight": {
+    "files": 300,
+    "pairs": 150,
+    "split_counts": {
+      "train": 180,
+      "dev": 60,
+      "holdout": 60
+    },
+    "holdout_last": true,
+    "truth_file_sha256": "7d85876d3e40082bcf837fa6784fcac62b432c811e831be0c96bc3df894eaf21",
+    "frozen_contract_sha256": "37a051003bd7e2dc4aeebb88240af54f9db46e41abcb6417a2cf7bb7a1e626aa",
+    "workbook_hashes_verified": 300,
+    "scope": "synthetic diagnostic entrypoints only; no Excel/UI/repair/commerce validation",
+    "raw_record_count": 300,
+    "completion": {
+      "workbooks_total": 300,
+      "process_outputs": 300,
+      "completed": 270,
+      "partial": 30,
+      "failed": 0,
+      "timeouts": 0,
+      "not_run": 0,
+      "skipped": 30,
+      "abstained": 0,
+      "audit_failed": 0,
+      "truncated": 0,
+      "raw_errors": 0
+    },
+    "full_metrics": {
+      "tp": 132,
+      "fn": 0,
+      "fp": 0,
+      "candidate_fp": 0,
+      "definitive_fp": 0,
+      "normal_region_fp": 0,
+      "diagnostic_mismatch": 0,
+      "duplicates_not_fp": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "excluded_ambiguous_or_out_of_scope_not_passes": 0,
+      "unjudged_findings_not_passes": 30,
+      "workbooks_total": 300,
+      "workbooks_completed": 270,
+      "workbooks_partial": 30
+    },
+    "successful_only": {
+      "workbooks_completed": 270,
+      "workbooks_partial": 30,
+      "workbooks_total": 300,
+      "completion_rate": 0.9,
+      "tp": 126,
+      "fn": 0,
+      "fp": 0,
+      "normal_region_fp": 0,
+      "diagnostic_mismatch": 0,
+      "precision": 1.0,
+      "recall": 1.0
+    },
+    "all_raw_hashes_verified": true,
+    "truth_and_freeze_unchanged": true
+  },
+  "predeclared_unscored_mutations": 18,
+  "commands": [
+    {
+      "command": [
+        "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+        "-m",
+        "tools.synthetic_validation.cli",
+        "run-engine",
+        "C:/Users/JinwonLee/project/ExcelSaaS/artifacts/synthetic_validation/full-20260920-batch01"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 330.58,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-full300-engine-absolute.log"
+    },
+    {
+      "command": [
+        "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+        "-m",
+        "tools.synthetic_validation.cli",
+        "run-engine",
+        "artifacts/synthetic_validation/full-20260920-batch01"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 1.08,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-full300-engine.log"
+    },
+    {
+      "command": [
+        "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+        "-m",
+        "tools.synthetic_validation.cli",
+        "--run-id",
+        "full-20260920-batch01",
+        "generate",
+        "--mode",
+        "full"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 12.19,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-full300-generate.log"
+    },
+    {
+      "command": [
+        "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+        "-m",
+        "tools.synthetic_validation.cli",
+        "score",
+        "C:/Users/JinwonLee/project/ExcelSaaS/artifacts/synthetic_validation/full-20260920-batch01"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.56,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-full300-score.log"
+    },
+    {
+      "command": [
+        "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "tools/synthetic_validation/generator.py",
+        "tools/synthetic_validation/scenarios.py",
+        "tools/synthetic_validation/verify_generated.py",
+        "tools/synthetic_validation/tests/test_diversity_batch.py",
+        "--select",
+        "I,F"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.18,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-lint.log"
+    },
+    {
+      "command": [
+        "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+        "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-synthetic01/audit_full_batch.py",
+        "after"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.37,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-postflight.log"
+    },
+    {
+      "command": [
+        "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+        "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-synthetic01/audit_full_batch.py",
+        "before"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.12,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-preflight.log"
+    },
+    {
+      "command": [
+        "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "tools/synthetic_validation/tests/test_diversity_batch.py",
+        "tools/synthetic_validation/tests/test_korean_sheet_refs.py",
+        "tools/synthetic_validation/tests/test_anchor_refs.py",
+        "tools/synthetic_validation/tests/test_scorer.py::GenerationTests::test_generated_normal_tamper_is_rejected",
+        "-q"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.29,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-targeted-tests.log"
+    },
+    {
+      "command": [
+        "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+        "-m",
+        "pytest",
+        "tools/synthetic_validation/tests",
+        "-q",
+        "-p",
+        "no:cacheprovider"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.52,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-tool-integration.log"
+    },
+    {
+      "command": [
+        "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+        "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-synthetic01/triage_full_batch.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.14,
+      "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-triage.log"
+    }
+  ],
+  "decision": {
+    "status": "BATCH_STAGES_1_TO_5_VERIFIED_NO_ENGINE_FIX_REQUIRED",
+    "summary": "Stages1-3 diversity implemented and integrated, stage4 frozen300 actual engine evaluation verified, stage5 defect triage found no scoped FN/FP or process failure. Product engine changes0; no fabricated fixes. 18 predeclared out-of-scope mutants and30 hidden-sheet notices remain separately accounted. Independent read-only evidence review agrees;6 representative raw responses checked.",
+    "owner_summary": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\full-20260920-batch01\\owner-summary.html",
+    "engine_fixes": 0,
+    "next_proposed": "Separate beta UI/end-to-end validation approval; no automatic continuation"
+  },
+  "prior_artifacts_unchanged": true,
+  "original_product_and_user_files_preserved": 1026,
+  "not_run": [
+    "Excel recalculation",
+    "browser visual",
+    "beta deployment",
+    "commit",
+    "push",
+    "real customer files",
+    "payment verification"
+  ],
+  "role_notes": "Initial builder interrupted after delayed progress; preserved in-progress source, completed by second builder. Root reviewed source; separate narrow runner/scorer/cli preflight PASS. New role thread unavailable so existing agents reused.",
+  "auxiliary_read_issue": "One ad-hoc read used Windows default cp949 and failed on Korean manifest; UTF8 audit scripts succeeded; no engine/data failure."
+},
+"synthetic_beta_ui_20260921":{
+  "status": "WAITING_FOR_OWNER_ACCESS_LOGIN",
+  "scope": "One representative synthetic file beta UI expected-value verification; no deployment or product change",
+  "sample": "artifacts/synthetic_validation/full-20260920-batch01/dataset/workbooks/003-inventory_cross_sheet-mutated-996121.xlsx",
+  "sha256": "a3d571e2e964b06e10881558eaaa882edaf500ba3181cdcbad3dbdb16ff12126",
+  "expected": {
+    "base_findings": 0,
+    "formula_candidates": 1,
+    "sheet": "재고 이동",
+    "cell": "I17",
+    "subtype": "RELATIVE_REFERENCE_DRIFT"
+  },
+  "baseline_commit": "2321cd2",
+  "observed": "Connected Chrome; beta origin redirects to Cloudflare Access login. Tab retained for owner login. No auth URL/query, credential or token stored.",
+  "not_run": [
+    "upload",
+    "beta result comparison",
+    "screenshot acceptance",
+    "product changes",
+    "deployment",
+    "commit",
+    "push"
+  ]
+},
+"synthetic_beta_ui_file_selection_20260921":{
+  "status": "WAITING_FOR_OWNER_FILE_SELECTION",
+  "login": "CONFIRMED_BETA_HOME_VISIBLE",
+  "browser_upload": "Filechooser event timed out before setFiles; inspected target is INPUT type=file; no blind retry",
+  "sample": "artifacts/synthetic_validation/full-20260920-batch01/dataset/workbooks/003-inventory_cross_sheet-mutated-996121.xlsx",
+  "expected": "base0; formula candidate1; 재고 이동!I17; RELATIVE_REFERENCE_DRIFT",
+  "not_run": [
+    "upload",
+    "scan result verification",
+    "visual result acceptance",
+    "deployment",
+    "commit",
+    "push"
+  ]
+},
+"synthetic_beta_ui_mutant_pass_normal_pending_20260921":{
+  "status": "MUTANT_UI_PASS_NORMAL_UI_PENDING",
+  "completed": "Owner manually uploaded 003-inventory_cross_sheet-mutated-996121.xlsx. Actual beta AX and screenshot showed structural0, formula candidate1, grouped FORMULA_PATTERN_OUTLIER at 재고 이동!I17. Formula compares 기초 재고 B16 against surrounding same-row references. Auto-repair explicitly unsupported.",
+  "next_scope": "One paired normal workbook beta diagnostic check only; owner authorized next task.",
+  "next_sample": "artifacts/synthetic_validation/full-20260920-batch01/dataset/workbooks/003-inventory_cross_sheet-normal-996121.xlsx",
+  "expected": {
+    "structural": 0,
+    "formula_candidates": 0,
+    "audit_status": "COMPLETED"
+  },
+  "evidence": "Frozen normal raw_engine JSON read, exit0. Prior mutant live browser accessibility and screenshot inspected in conversation; no screenshot file saved. Browser tool has no process exit code.",
+  "blocker": "File chooser timed out before setFiles even after Chrome restart. Await owner manual normal-file selection; no bypass or repeated attempt.",
+  "not_run": [
+    "normal beta result verification",
+    "repair",
+    "Excel recalculation",
+    "new regression run",
+    "commit",
+    "push",
+    "deployment"
+  ]
+},
+"synthetic_beta_ui_normal_pass_20260921":{
+  "status": "PAIRED_DIAGNOSTIC_UI_PASS",
+  "sample": "003-inventory_cross_sheet-normal-996121.xlsx",
+  "observed": {
+    "structural": 0,
+    "formula_candidates": 0,
+    "both_scans": "COMPLETED"
+  },
+  "upload": "After owner restarted ChatGPT app, AX click on visible file-selection button captured filechooser and setFiles succeeded. No manual selection this attempt.",
+  "evidence": "Live beta AX and screenshot verified summary0 and both scans completed. Prior paired mutant UI matched candidate1 at inventory I17. Browser calls succeeded; no shell exit code applies to browser actions. Screenshot inspected in conversation, not saved to file.",
+  "root_cause": "Not isolated: app restart and AX button click both differ from previous attempts; no claim of permanent resolution.",
+  "not_run": [
+    "repair",
+    "Excel recalculation",
+    "new product regression",
+    "deployment",
+    "commit",
+    "push"
+  ]
+},
+"synthetic_beta_bom_pair_pass_20260921":{
+  "status": "BETA_DIAGNOSTIC_PAIR_PASS",
+  "scope": "Owner requested continuation; one frozen exact-lookup BOM pair UI verification only",
+  "files": [
+    "008-manufacturing_bom-mutated-024745.xlsx",
+    "008-manufacturing_bom-normal-024745.xlsx"
+  ],
+  "expected_source": "artifacts/synthetic_validation/full-20260920-batch01/raw_engine corresponding JSON files; read command exit0, no engine rerun",
+  "observed": {
+    "mutated": {
+      "base": 0,
+      "formula": 1,
+      "sheet": "BOM Cost",
+      "cell": "I11",
+      "difference": "VLOOKUP references A10 instead of same-row A11",
+      "automatic_repair": "UNSUPPORTED"
+    },
+    "normal": {
+      "base": 0,
+      "formula": 0
+    },
+    "both_files": "Both scans completed; automatic filechooser/setFiles uploads succeeded"
+  },
+  "evidence": "Live accessibility tree and screenshots inspected for grouped candidate, formula comparison, unsupported repair boundary and normal zero-result summary. Browser tool calls succeeded; no process exit code applies. Screenshots in conversation only.",
+  "not_run": [
+    "repair",
+    "Excel recalculation",
+    "new regression",
+    "commit",
+    "push",
+    "deployment"
+  ],
+  "next_proposed_unit": "One paired monthly-sheet beta diagnostic verification; STOP pending owner confirmation"
+},
+"synthetic_beta_monthly_scope_gap_20260921":{
+  "status": "BETA_LOCAL_PARITY_CONFIRMED_KNOWN_DETECTION_GAP",
+  "scope": "Owner requested necessary verification; one frozen monthly-sheet pair",
+  "files": [
+    "004-budget_horizontal_months-mutated-067598.xlsx",
+    "004-budget_horizontal_months-normal-067598.xlsx"
+  ],
+  "truth": {
+    "target": "Budget!N18",
+    "before": "='M10'!B16-'M10'!B15",
+    "after": "=N15-N14",
+    "classification": "out_of_scope declared before evaluation; not a detection pass"
+  },
+  "observed": {
+    "both_files": {
+      "base": 0,
+      "formula_candidates": 0,
+      "scan_labels": "both completed"
+    },
+    "mutant_limitations_panel": "formula cells36; inspected sheets1; candidate regions0; generic A1/static-analysis limitations, no explicit horizontal-monthly unsupported notice"
+  },
+  "evidence": "Both automatic uploads succeeded. Live AX and screenshots inspected. Frozen raw response/truth reads exit0. Initial combined raw read plus rg triage search exit1 because search had no matching lines; not an engine failure. No engine rerun or changed expected values.",
+  "assessment": "Local/beta parity only. Inserted mutation remains undetected. Completed/zero-result UI plus generic limitations does not clearly communicate this scope gap.",
+  "not_run": [
+    "repair",
+    "Excel recalculation",
+    "new regression",
+    "commit",
+    "push",
+    "deployment"
+  ],
+  "next_proposed_unit": "One scoped engine/UI support-coverage investigation for horizontal monthly formulas before implementing or selling new repair capability"
+},
+"synthetic_final6_verified_with_limits_20260921":{
+  "status": "SIX_VERIFICATION_GROUPS_COMPLETED_WITH_KNOWN_DETECTION_LIMITS",
+  "groups": [
+    {
+      "id": 1,
+      "status": "GAP_CONFIRMED_AND_SCOPE_COPY_CORRECTED",
+      "evidence": "Monthly same-column/minimum-neighborhood mismatch; native mutant #VALUE! confirmed. Horizontal/monthly detection remains unsupported."
+    },
+    {
+      "id": 2,
+      "status": "UNSUPPORTED_BOUNDARY_VERIFIED",
+      "evidence": "Table pair UI shows partial/skipped. All30 Table datasets partial;9 pattern mutants excluded; base token detection remains distinct."
+    },
+    {
+      "id": 3,
+      "status": "ADJUDICATION_COMPLETE",
+      "evidence": "18 preexcluded undetected mutants: Table9/monthly9. 30 hidden notices intentional Rate Card,15normal+15mutant. Frozen score unchanged."
+    },
+    {
+      "id": 4,
+      "status": "REPRESENTATIVE_UI_VERIFIED",
+      "evidence": "10 families/20 unique files;14 newly tested,6 prior evidence reused. Support/exclusion results match raw; not blanket accuracy proof."
+    },
+    {
+      "id": 5,
+      "status": "UNCHANGED_EXISTING_REPAIR_EVIDENCE_REUSED",
+      "evidence": "51 API files unchanged; three actual prior beta downloads SHA256 verified. Existing numeric8+blankformula3 combined plan,725 values,11 change rows,42 HTML impacts, non-target preservation evidence retained. No new delivery execution."
+    },
+    {
+      "id": 6,
+      "status": "NATIVE_AND_INTEGRITY_VERIFIED",
+      "evidence": "Fresh native Excel11 files/96 checks; read-only,no save,macro/link disabled. Prior native combined725 reused by exact hashes. Frozen635 files preserved; final report/commands reconciled."
+    }
+  ],
+  "review": "coverage_review6 PASS; native95 semantic expectations+1 independent error, counts, hashes, reused vs fresh evidence and deployment consistency reviewed; no duplicate tests",
+  "report": "artifacts/synthetic_validation/beta-final6-20260921/REPORT.md",
+  "evidence": "artifacts/synthetic_validation/beta-final6-20260921/result.json",
+  "worker": "3b513785-21e8-4efe-8bc3-fcdf9301d0eb",
+  "api_unchanged": true,
+  "bindings_unchanged": true,
+  "not_run": [
+    "full300 engine rerun",
+    "new repair execution/download",
+    "new native repair725 rerun",
+    "official PG/live payment/refund",
+    "human usability study",
+    "remote push",
+    "local commit"
+  ],
+  "next_proposed": "One horizontal same-row pattern detection design/acceptance unit, separately approved; preserve normal exceptions and bounded scope"
+}
 }

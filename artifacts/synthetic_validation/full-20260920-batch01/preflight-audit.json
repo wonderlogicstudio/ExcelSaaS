@@ -1,0 +1,21 @@
+{
+  "files": 300,
+  "pairs": 150,
+  "split_counts": {
+    "train": 180,
+    "dev": 60,
+    "holdout": 60
+  },
+  "holdout_last": true,
+  "truth_file_sha256": "7d85876d3e40082bcf837fa6784fcac62b432c811e831be0c96bc3df894eaf21",
+  "frozen_contract_sha256": "37a051003bd7e2dc4aeebb88240af54f9db46e41abcb6417a2cf7bb7a1e626aa",
+  "workbook_hashes_verified": 300,
+  "scope": "synthetic diagnostic entrypoints only; no Excel/UI/repair/commerce validation",
+  "pre_engine": true,
+  "formula_features": {
+    "conditional_sum": true,
+    "lookup": true,
+    "twelve_monthly_sheets": true
+  },
+  "scored_expected": 132
+}

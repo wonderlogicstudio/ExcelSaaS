@@ -1,0 +1,440 @@
+{
+  "excluded": [
+    {
+      "id": "002-purchase_orders_table-mutated-353213",
+      "family": "F02-purchase-table",
+      "mutation": "m4_relative_reference_drift",
+      "cell": "H14",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "012-purchase_orders_table-mutated-375883",
+      "family": "F02-purchase-table",
+      "mutation": "m4_formula_gap",
+      "cell": "H9",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "022-purchase_orders_table-mutated-790301",
+      "family": "F02-purchase-table",
+      "mutation": "m4_constant_override",
+      "cell": "H10",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "052-purchase_orders_table-mutated-216562",
+      "family": "F02-purchase-table",
+      "mutation": "m4_relative_reference_drift",
+      "cell": "H14",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "062-purchase_orders_table-mutated-084292",
+      "family": "F02-purchase-table",
+      "mutation": "m4_formula_gap",
+      "cell": "H9",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "072-purchase_orders_table-mutated-621916",
+      "family": "F02-purchase-table",
+      "mutation": "m4_constant_override",
+      "cell": "H10",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "102-purchase_orders_table-mutated-105825",
+      "family": "F02-purchase-table",
+      "mutation": "m4_relative_reference_drift",
+      "cell": "H14",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "112-purchase_orders_table-mutated-452902",
+      "family": "F02-purchase-table",
+      "mutation": "m4_formula_gap",
+      "cell": "H9",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "122-purchase_orders_table-mutated-564191",
+      "family": "F02-purchase-table",
+      "mutation": "m4_constant_override",
+      "cell": "H10",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "004-budget_horizontal_months-mutated-067598",
+      "family": "F04-budget-horizontal",
+      "mutation": "m4_relative_reference_drift",
+      "cell": "N18",
+      "audit_status": "COMPLETED",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "014-budget_horizontal_months-mutated-564518",
+      "family": "F04-budget-horizontal",
+      "mutation": "m4_formula_gap",
+      "cell": "N18",
+      "audit_status": "COMPLETED",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "024-budget_horizontal_months-mutated-463983",
+      "family": "F04-budget-horizontal",
+      "mutation": "m4_constant_override",
+      "cell": "N18",
+      "audit_status": "COMPLETED",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "054-budget_horizontal_months-mutated-972982",
+      "family": "F04-budget-horizontal",
+      "mutation": "m4_relative_reference_drift",
+      "cell": "N18",
+      "audit_status": "COMPLETED",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "064-budget_horizontal_months-mutated-065870",
+      "family": "F04-budget-horizontal",
+      "mutation": "m4_formula_gap",
+      "cell": "N18",
+      "audit_status": "COMPLETED",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "074-budget_horizontal_months-mutated-062190",
+      "family": "F04-budget-horizontal",
+      "mutation": "m4_constant_override",
+      "cell": "N18",
+      "audit_status": "COMPLETED",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "104-budget_horizontal_months-mutated-077159",
+      "family": "F04-budget-horizontal",
+      "mutation": "m4_relative_reference_drift",
+      "cell": "N18",
+      "audit_status": "COMPLETED",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "114-budget_horizontal_months-mutated-611065",
+      "family": "F04-budget-horizontal",
+      "mutation": "m4_formula_gap",
+      "cell": "N18",
+      "audit_status": "COMPLETED",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    },
+    {
+      "id": "124-budget_horizontal_months-mutated-954604",
+      "family": "F04-budget-horizontal",
+      "mutation": "m4_constant_override",
+      "cell": "N18",
+      "audit_status": "COMPLETED",
+      "candidates": 0,
+      "base": 0,
+      "verdict": "PREDECLARED_EXCLUDED_UNDETECTED_NOT_PASS"
+    }
+  ],
+  "hidden": [
+    {
+      "id": "005-payroll_overtime-mutated-261773",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "005-payroll_overtime-normal-261773",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "015-payroll_overtime-mutated-084450",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "015-payroll_overtime-normal-084450",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "025-payroll_overtime-mutated-213548",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "025-payroll_overtime-normal-213548",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "035-payroll_overtime-mutated-905278",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "035-payroll_overtime-normal-905278",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "045-payroll_overtime-mutated-454068",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "045-payroll_overtime-normal-454068",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "055-payroll_overtime-mutated-223791",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "055-payroll_overtime-normal-223791",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "065-payroll_overtime-mutated-141431",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "065-payroll_overtime-normal-141431",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "075-payroll_overtime-mutated-057214",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "075-payroll_overtime-normal-057214",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "085-payroll_overtime-mutated-476050",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "085-payroll_overtime-normal-476050",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "095-payroll_overtime-mutated-555987",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "095-payroll_overtime-normal-555987",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "105-payroll_overtime-mutated-662321",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "105-payroll_overtime-normal-662321",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "115-payroll_overtime-mutated-750428",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "115-payroll_overtime-normal-750428",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "125-payroll_overtime-mutated-151462",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "125-payroll_overtime-normal-151462",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "135-payroll_overtime-mutated-042317",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "135-payroll_overtime-normal-042317",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "145-payroll_overtime-mutated-776131",
+      "kind": "mutated",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    },
+    {
+      "id": "145-payroll_overtime-normal-776131",
+      "kind": "normal",
+      "sheet": "Rate Card",
+      "severity": "info",
+      "state_verified": "hidden",
+      "verdict": "INTENTIONAL_BASELINE_INFORMATION_NOT_HARMFUL_CASE_PROOF"
+    }
+  ],
+  "counts": {
+    "excluded": 18,
+    "excluded_by_family": {
+      "F02-purchase-table": 9,
+      "F04-budget-horizontal": 9
+    },
+    "hidden": 30,
+    "hidden_by_kind": {
+      "mutated": 15,
+      "normal": 15
+    }
+  },
+  "original_scoped_metrics_unchanged": true,
+  "independent_review": "coverage_review6 confirmed source conditions and every excluded/hidden case; no engine rerun"
+}

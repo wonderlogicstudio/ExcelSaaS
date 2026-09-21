@@ -1,0 +1,268 @@
+[
+  {
+    "id": "001-retail_sales_vertical-mutated-745709",
+    "filename": "001-retail_sales_vertical-mutated-745709.xlsx",
+    "source_sha256": "86a55ca7f17de80867508a3b901f7d3071a0d8d603bd5cf8238dd8ed840ebd20",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [
+      {
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "sheet": "Sales Detail",
+        "cell": "G14"
+      }
+    ],
+    "out_of_scope": []
+  },
+  {
+    "id": "001-retail_sales_vertical-normal-745709",
+    "filename": "001-retail_sales_vertical-normal-745709.xlsx",
+    "source_sha256": "abf61a22c808f1582ecec77a9650b30b0ab102b1e5d082f7d8d2853e26316c92",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [],
+    "out_of_scope": []
+  },
+  {
+    "id": "002-purchase_orders_table-mutated-353213",
+    "filename": "002-purchase_orders_table-mutated-353213.xlsx",
+    "source_sha256": "68d5f46a4277cfcfbbf2a97677fe14ea692f0628f24a160ab420d8539e7ab905",
+    "base": [],
+    "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+    "candidates": [],
+    "out_of_scope": [
+      {
+        "expected_id": "002-purchase_orders_table-normal-353213-mut-0-outscope",
+        "kind": "out_of_scope",
+        "sheet": "PO Lines",
+        "cell": "H14",
+        "rule_code": "FORMULA_PATTERN_OUTLIER",
+        "pattern_subtype": "RELATIVE_REFERENCE_DRIFT",
+        "severity": null,
+        "family_id": "F02-purchase-table",
+        "mutation_type": "m4_relative_reference_drift",
+        "notes": "Current engine support contract does not score this structural family for M4."
+      }
+    ]
+  },
+  {
+    "id": "002-purchase_orders_table-normal-353213",
+    "filename": "002-purchase_orders_table-normal-353213.xlsx",
+    "source_sha256": "e23e280cf9f187ad45e97e4edaf009de0006c8e3d63dddea9a98f0606baef2a8",
+    "base": [],
+    "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+    "candidates": [],
+    "out_of_scope": []
+  },
+  {
+    "id": "003-inventory_cross_sheet-mutated-996121",
+    "filename": "003-inventory_cross_sheet-mutated-996121.xlsx",
+    "source_sha256": "a3d571e2e964b06e10881558eaaa882edaf500ba3181cdcbad3dbdb16ff12126",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [
+      {
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "sheet": "재고 이동",
+        "cell": "I17"
+      }
+    ],
+    "out_of_scope": []
+  },
+  {
+    "id": "003-inventory_cross_sheet-normal-996121",
+    "filename": "003-inventory_cross_sheet-normal-996121.xlsx",
+    "source_sha256": "678752277e8202775850889aca7b232fdb3af371681fb56c5bc8b736b47e5b46",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [],
+    "out_of_scope": []
+  },
+  {
+    "id": "004-budget_horizontal_months-mutated-067598",
+    "filename": "004-budget_horizontal_months-mutated-067598.xlsx",
+    "source_sha256": "602e9c47ed4ddb3af8bff775b6105f79ed8d6bd9a807ffb2c62de5b9d21a443e",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [],
+    "out_of_scope": [
+      {
+        "expected_id": "004-budget_horizontal_months-normal-067598-mut-0-outscope",
+        "kind": "out_of_scope",
+        "sheet": "Budget",
+        "cell": "N18",
+        "rule_code": "FORMULA_PATTERN_OUTLIER",
+        "pattern_subtype": "RELATIVE_REFERENCE_DRIFT",
+        "severity": null,
+        "family_id": "F04-budget-horizontal",
+        "mutation_type": "m4_relative_reference_drift",
+        "notes": "Current engine support contract does not score this structural family for M4."
+      }
+    ]
+  },
+  {
+    "id": "004-budget_horizontal_months-normal-067598",
+    "filename": "004-budget_horizontal_months-normal-067598.xlsx",
+    "source_sha256": "973510bb3f44f45cc8f77105726285b0efbefe7a0adfa1a5120d75e81db93e74",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [],
+    "out_of_scope": []
+  },
+  {
+    "id": "005-payroll_overtime-mutated-261773",
+    "filename": "005-payroll_overtime-mutated-261773.xlsx",
+    "source_sha256": "15f0a199c332df2e2a5469e6ef3cd989b829db2ead5435191d0732df355cf99a",
+    "base": [
+      {
+        "rule": "SHEET_HIDDEN",
+        "sheet": "Rate Card",
+        "cell": null
+      }
+    ],
+    "audit_status": "COMPLETED",
+    "candidates": [
+      {
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "sheet": "Payroll",
+        "cell": "J13"
+      }
+    ],
+    "out_of_scope": []
+  },
+  {
+    "id": "005-payroll_overtime-normal-261773",
+    "filename": "005-payroll_overtime-normal-261773.xlsx",
+    "source_sha256": "f68ca4d6d88f13c5588e89620f26718cc374cda7434ed93f3a6746812f497e63",
+    "base": [
+      {
+        "rule": "SHEET_HIDDEN",
+        "sheet": "Rate Card",
+        "cell": null
+      }
+    ],
+    "audit_status": "COMPLETED",
+    "candidates": [],
+    "out_of_scope": []
+  },
+  {
+    "id": "006-project_profit-mutated-690527",
+    "filename": "006-project_profit-mutated-690527.xlsx",
+    "source_sha256": "781d943c1be2fdc9e64b772bf5a03d5afcb7300fc130acf2985a4ff04c6360d7",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [
+      {
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "sheet": "Project PnL",
+        "cell": "K14"
+      }
+    ],
+    "out_of_scope": []
+  },
+  {
+    "id": "006-project_profit-normal-690527",
+    "filename": "006-project_profit-normal-690527.xlsx",
+    "source_sha256": "8cb3de2e0ec7e40967d2d8c1a6bd302c92b1f7f2c22ea2a27ee20cb4a4ec9154",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [],
+    "out_of_scope": []
+  },
+  {
+    "id": "007-receivables_aging-mutated-948869",
+    "filename": "007-receivables_aging-mutated-948869.xlsx",
+    "source_sha256": "fa894e3f48f04e6468bc33cc58b76bcab4a3beb8c8a149c1844826689f39098e",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [
+      {
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "sheet": "AR Aging",
+        "cell": "H16"
+      }
+    ],
+    "out_of_scope": []
+  },
+  {
+    "id": "007-receivables_aging-normal-948869",
+    "filename": "007-receivables_aging-normal-948869.xlsx",
+    "source_sha256": "716d81f217d3db5a88f82b7497c51bb2991e74b07bbafa454d70952151939bf5",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [],
+    "out_of_scope": []
+  },
+  {
+    "id": "008-manufacturing_bom-mutated-024745",
+    "filename": "008-manufacturing_bom-mutated-024745.xlsx",
+    "source_sha256": "9e56595965624c53b391c1809e03e1fbda9123d7fa8999c62601863eeb7ce540",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [
+      {
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "sheet": "BOM Cost",
+        "cell": "I11"
+      }
+    ],
+    "out_of_scope": []
+  },
+  {
+    "id": "008-manufacturing_bom-normal-024745",
+    "filename": "008-manufacturing_bom-normal-024745.xlsx",
+    "source_sha256": "ce811038bafeaefd94f808885acf12ff78197c9181759a2c65f0819fab194c89",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [],
+    "out_of_scope": []
+  },
+  {
+    "id": "009-cashflow_calendar-mutated-210589",
+    "filename": "009-cashflow_calendar-mutated-210589.xlsx",
+    "source_sha256": "beb96589e1db22a519800f4b47dd29d4fdea34740650c9ff50794342385b8b51",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [
+      {
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "sheet": "Cash Plan",
+        "cell": "J21"
+      }
+    ],
+    "out_of_scope": []
+  },
+  {
+    "id": "009-cashflow_calendar-normal-210589",
+    "filename": "009-cashflow_calendar-normal-210589.xlsx",
+    "source_sha256": "723e39d48d29279b9b098a7a7d977aa07b019f39700e2012b75496f58c6e03b1",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [],
+    "out_of_scope": []
+  },
+  {
+    "id": "010-subscriptions_kpi-mutated-831697",
+    "filename": "010-subscriptions_kpi-mutated-831697.xlsx",
+    "source_sha256": "db378c228836a14da68235108aa91430431c98c79f0397d6913d21b9679b37eb",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [
+      {
+        "rule": "FORMULA_PATTERN_OUTLIER",
+        "sheet": "KPI Detail",
+        "cell": "L17"
+      }
+    ],
+    "out_of_scope": []
+  },
+  {
+    "id": "010-subscriptions_kpi-normal-831697",
+    "filename": "010-subscriptions_kpi-normal-831697.xlsx",
+    "source_sha256": "8c40f13bc22b0088ad70b66b5ff064abd70ab0f734a2b19163ed9b65afeed86c",
+    "base": [],
+    "audit_status": "COMPLETED",
+    "candidates": [],
+    "out_of_scope": []
+  }
+]

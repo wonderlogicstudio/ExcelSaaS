@@ -1,0 +1,13 @@
+{
+  "status": "APPROVED_RUNNING",
+  "scope": "Owner explicitly approves six remaining verification groups together: horizontal/monthly coverage, Table partial-scan boundary, excluded18/hidden30 adjudication, representative beta cases, existing two-rule complex delivery, native Excel and final evidence consistency. Reuse unchanged evidence. No expanded repair feature, expected-truth rewrite, live commerce, real customer data, new paid resource, remote push or public release. Product fixes require bounded review and tests; do not convert unsupported cases to PASS. This current approval supersedes historical per-unit stop gates for these six verification groups only.",
+  "owner_approval": "남아 있는 검증 작업 6개 모두 승인할게.",
+  "root_role": "PL verification and evidence",
+  "review_role": "independent read-only source and coverage adjudication",
+  "not_started": [
+    "product implementation",
+    "deployment",
+    "commit",
+    "push"
+  ]
+}

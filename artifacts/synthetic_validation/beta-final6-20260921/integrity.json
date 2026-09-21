@@ -1,0 +1,15 @@
+{
+  "changed_product_files": [
+    "apps/web/src/components/FormulaAuditPanel.test.tsx",
+    "apps/web/src/components/FormulaAuditPanel.tsx",
+    "apps/web/src/components/UnifiedDiagnosis.test.tsx",
+    "apps/web/src/components/UnifiedDiagnosisStatus.tsx"
+  ],
+  "frozen_files_verified": 635,
+  "frozen_changes": [],
+  "native_excel_workbooks": 11,
+  "native_checks": 96,
+  "native_failures": [],
+  "prior_product_files_reused": 51,
+  "actual_prior_downloads_verified": 3
+}

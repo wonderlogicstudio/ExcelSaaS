@@ -32,6 +32,11 @@ const userStatusOptions: FindingUserStatus[] = [
   'MARKED_NORMAL',
 ];
 
+export const formulaAuditCoverageNotice = '지원 범위: 같은 열의 주변 A1 참조 수식 패턴을 비교하며, 반복 수식 사이의 빈 셀·상수도 후보로 확인합니다. 가로로 반복되는 월별 패턴, 월별 시트 사이의 패턴 비교, Excel Table 내부 수식은 비교하지 않습니다.';
+export const formulaAuditWorkbookSafetyNotice = '검사 완료는 지원 범위 안의 후보 스캔이 끝났다는 뜻입니다. 통합 문서 전체 안전성, 계산 결과, 업무 규칙 검증은 별도 확인이 필요합니다.';
+export const formulaAuditSheetMetricLabel = '수식 포함 시트';
+export const formulaAuditRegionMetricLabel = '후보가 발견된 영역';
+
 export const formulaAuditStatusCopy: Record<FormulaAuditStatus, { label: string; description: string }> = {
   COMPLETED: {
     label: '분석 완료',
@@ -59,7 +64,7 @@ export const formulaAuditStatusCopy: Record<FormulaAuditStatus, { label: string;
   },
   SKIPPED_UNSUPPORTED_STRUCTURE: {
     label: '미지원 구조로 생략',
-    description: '지원하지 않는 수식 구조는 안전하게 후보화하지 않습니다.',
+    description: '지원하지 않는 수식 구조는 안전하게 후보화하지 않습니다. Excel Table 내부 수식, 가로로 반복되는 월별 패턴, 월별 시트 사이의 패턴 비교는 이번 같은-열 패턴 검사 범위에 포함되지 않습니다.',
   },
   FAILED: {
     label: '감사 실패, 기본 결과 유지',
@@ -206,7 +211,7 @@ export function FormulaAuditPanel({
           </div>
 
           <div className="formula-audit-panel__scope">
-            <article><strong>검사 범위</strong><p>지원하는 A1 참조 수식에서 같은 열의 주변 반복 패턴을 비교합니다.</p></article>
+            <article><strong>검사 범위</strong><p>{formulaAuditCoverageNotice}</p></article>
             <article><strong>실행 조건</strong><p>기본 진단 완료 · 잘리지 않음 · 수식 셀 1~30,000개 · 같은 브라우저 파일 재전송</p></article>
             <article><strong>확인하지 않음</strong><p>계산 결과, 업무 규칙, 정답 수식, 자동 수정과 수정본 생성</p></article>
           </div>
@@ -231,10 +236,11 @@ export function FormulaAuditPanel({
               <div className="formula-audit-panel__metrics">
                 {auditResult.status === 'COMPLETED' && <span><strong>{auditResult.candidates.length}</strong> 수식 패턴 후보</span>}
                 <span><strong>{auditResult.formula_cell_count.toLocaleString('ko-KR')}</strong> 수식 셀</span>
-                <span><strong>{auditResult.audited_sheet_count}</strong> 검사 시트</span>
-                <span><strong>{auditResult.audited_formula_region_count}</strong> 후보 수식 영역</span>
+                <span><strong>{auditResult.audited_sheet_count}</strong> {formulaAuditSheetMetricLabel}</span>
+                <span><strong>{auditResult.audited_formula_region_count}</strong> {formulaAuditRegionMetricLabel}</span>
                 <span><strong>{auditResult.elapsed_ms ?? 0}ms</strong> 처리시간</span>
               </div>
+              <p className="formula-audit-panel__coverage-note">{formulaAuditCoverageNotice} {formulaAuditWorkbookSafetyNotice}</p>
 
               {auditResult.status === 'COMPLETED' && auditResult.candidates.length > 0 && (
                 <div className="formula-audit-finding-list">
@@ -264,7 +270,7 @@ export function FormulaAuditPanel({
               )}
 
               {auditResult.status === 'COMPLETED' && auditResult.candidates.length === 0 && (
-                <p className="formula-audit-panel__empty">이번 정밀검사 범위에서 수식 패턴 이상 후보를 만들지 않았습니다. 파일의 수식, 계산 결과, 업무 규칙이 정확하다는 뜻은 아닙니다.</p>
+                <p className="formula-audit-panel__empty">이번 지원 범위 안에서는 수식 패턴 후보를 만들지 않았습니다. 가로로 반복되는 월별 패턴, 월별 시트 사이의 패턴 비교, Excel Table 내부 수식처럼 범위 밖인 구조는 0건 완료로 해석하지 말고 별도 확인이 필요합니다. 파일의 모든 수식, 계산 결과, 업무 규칙이 안전하다는 뜻은 아닙니다.</p>
               )}
 
               {auditResult.limitations.length > 0 && (
