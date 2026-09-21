@@ -1,0 +1,5 @@
+{
+  "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
+  "scope": "One actual protected beta combined two-repair approval and three-download replay; fixed prior oracle, no product edits/full regression/native Excel rerun",
+  "source_commit": "5263abc9234892e4fd114260a75ee356733ba300"
+}

@@ -1,0 +1,20 @@
+{
+  "case": "COMBINED_FINAL",
+  "actual_browser_downloads": [
+    {
+      "file": "COMBINED_FINAL/changes_a27df80b-085a-428c-896c-d70c8758b77c.xlsx",
+      "sha256": "a601030632945f2491763cef621ed9eaffda793aa03e25997dca24f1c23f58f7",
+      "bytes": 12886
+    },
+    {
+      "file": "COMBINED_FINAL/verification_a27df80b-085a-428c-896c-d70c8758b77c.html",
+      "sha256": "0c69c3fcbdf357bf252c75da72c2f8b5786a92b2e32aa84dcfa658cdaa03675a",
+      "bytes": 13303
+    },
+    {
+      "file": "COMBINED_FINAL/workbookcare_repaired_a27df80b-085a-428c-896c-d70c8758b77c.xlsx",
+      "sha256": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
+      "bytes": 18858
+    }
+  ]
+}

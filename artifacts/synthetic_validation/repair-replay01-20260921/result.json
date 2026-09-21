@@ -1,0 +1,60 @@
+{
+  "kind": "ACTUAL_BETA_DOWNLOADED_FILES_VS_FROZEN_ORACLE",
+  "status": "PASS",
+  "results": [
+    {
+      "case": "COMBINED",
+      "status": "PASS",
+      "cached_expected_values": 725,
+      "change_rows": 11,
+      "exact_html_impacts": 42,
+      "html_checks": 13,
+      "unchanged_zip_members": 7,
+      "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+    }
+  ],
+  "all_frozen_inputs_unchanged": true,
+  "official_pg_verified": false,
+  "source_commit": "5263abc9234892e4fd114260a75ee356733ba300",
+  "actual_ui": {
+    "diagnosis": {
+      "structure": 8,
+      "formula": 3
+    },
+    "basket_groups": 2,
+    "changes": 11,
+    "indirect_impacts": 42,
+    "F31": 5232,
+    "F64": 3551,
+    "F107": 7800,
+    "J130": 2177677,
+    "approval_initially_unchecked_and_disabled": true,
+    "approval_and_make_copy_separate": true,
+    "downloads": 3,
+    "screenshots": "Desktop1440 actual screenshots viewed, not saved. No new mobile replay.",
+    "manual_cell_formula_entry": 0
+  },
+  "commands": [
+    {
+      "command": "prepare.py; collect_downloads.py begin COMBINED_FINAL",
+      "exit_code": 0
+    },
+    {
+      "command": "collect_downloads.py collect COMBINED_FINAL; verify_downloads.py",
+      "exit_code": 0
+    }
+  ],
+  "reused": "Existing fixed combined oracle and validator; no changes to expected values. Native Excel prior evidence reused, not newly run.",
+  "not_run": [
+    "full regression",
+    "native Excel COM",
+    "new mobile replay",
+    "live payment/refund",
+    "product edits",
+    "deployment"
+  ],
+  "operational_notes": [
+    "Two optional reads used the wrong repository working directory; no product or evidence change."
+  ],
+  "independent_review": "PASS: coverage_review6; evidence only, no duplicate execution"
+}

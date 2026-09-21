@@ -1,3 +1,27 @@
+## MONTHLY-COPY-01 - VERIFIED BETA / OWNER CHECKPOINT (2026-09-21)
+
+One remaining monthly difference explanation now displays Korean by exact-message mapping in OriginalFormulaComparison.tsx. Other evidence/fallbacks and engine/repair/approval behavior unchanged. Existing component2tests exit0; one hosted typecheck/build exit0; focused source/helper/evidence review PASS. Earlier npm.ps1 policy and sandbox spawn failures happened before assertions and are preserved in builder-evidence.md.
+
+Actual protected beta monthly mutant screen: structure0/formula1 Budget!N18, M18/O18 original formulas, Korean explanation and automatic-repair unsupported label confirmed. Desktop1440/mobile390 screenshots viewed, not saved. Worker 02a4700b-3031-4404-aa87-09f18726594e; API00029-dir and binding/private Access boundaries unchanged. No API deploy/full regression/native Excel/repeated repair replay. Reuse monthly01 and repair-replay01-20260921 proof. Evidence/commands/exits: artifacts/synthetic_validation/monthly-copy01/result.json and commands.jsonl.
+
+Previous5263abc is pushed. New UI localization and latest replay/progress records remain local/uncommitted. STOP. Next single proposed unit: selected verified-change commit/push.
+
+---
+
+## MONTHLY-COPY-01 - APPROVED (2026-09-21)
+
+Owner approved the one remaining English monthly difference sentence after successful two-repair replay. Scope: exact-message Korean display localization in OriginalFormulaComparison.tsx only; keep API/detection/other reasons untouched. Builder5.5Low, focused review, existing component tests and one hosted build/typecheck, then existing protected beta deployment and one actual monthly candidate screen check. No full regression/native Excel/new features. Prior verified repair evidence reused. No remote push in this unit. STOP after this one outcome.
+
+---
+
+## REPAIR-REPLAY-01 - VERIFIED / OWNER CHECKPOINT (2026-09-21)
+
+MONTHLY commit5263abc pushed to origin/main and exact remote hash confirmed. Owner subsequently approved one existing two-repair protected-beta replay. Actual complex03 UI: structure8 + formula3 -> two groups11changes -> exact approval -> separate copy -> three actual downloads. F31=5232/F64=3551/F107=7800/J130=2177677 match fixed oracle. Actual downloaded files pass725cached values/11change rows/42impacts/13HTML checks/7untouched ZIP members; all13 frozen input hashes unchanged. Independent evidence review PASS.
+
+No product edits, deployment, full regression, new native Excel or mobile replay. Prior native evidence reused explicitly. Evidence/commands/exits: artifacts/synthetic_validation/repair-replay01-20260921/REPORT.md and result.json. Both existing repair types work together on this supported synthetic fixture; no blanket arbitrary-file or new-pattern repair claim. New execution records local, not committed/pushed. STOP. Next proposed single unit: localize the monthly difference explanation still shown in English.
+
+---
+
 ## MONTHLY-01 final integration - VERIFIED BETA / OWNER CHECKPOINT (2026-09-21)
 
 Approved monthly-sheet correspondence candidate detection implemented and reviewed. Full verify.ps1 exit0: web168, Worker16, API259, Ruff PASS, M4 exact36 candidates. Actual serialized files18 unique including15 frozen normals match the separate oracle; historical truth and635 files unchanged.

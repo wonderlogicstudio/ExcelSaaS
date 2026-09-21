@@ -1,0 +1,18 @@
+{
+  "kind": "ACTUAL_BETA_DOWNLOADED_FILES_VS_FROZEN_ORACLE",
+  "status": "PASS",
+  "results": [
+    {
+      "case": "COMBINED",
+      "status": "PASS",
+      "cached_expected_values": 725,
+      "change_rows": 11,
+      "exact_html_impacts": 42,
+      "html_checks": 13,
+      "unchanged_zip_members": 7,
+      "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754"
+    }
+  ],
+  "all_frozen_inputs_unchanged": true,
+  "official_pg_verified": false
+}

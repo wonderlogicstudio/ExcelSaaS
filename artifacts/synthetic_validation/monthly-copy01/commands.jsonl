@@ -1,0 +1,21 @@
+{"phase": "baseline", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "baseline", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "baseline", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "baseline", "command": "wrangler versions view 7d353c64-457d-4376-922e-03ecbcc4d0bc", "exit_code": 0}
+{"phase": "build", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "build", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "build", "command": "npm build hosted beta", "exit_code": 0}
+{"phase": "upload", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "upload", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "upload", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions upload --dry-run", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions upload --keep-vars", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions view 02a4700b-3031-4404-aa87-09f18726594e", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler versions view 02a4700b-3031-4404-aa87-09f18726594e", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler versions deploy 02a4700b-3031-4404-aa87-09f18726594e@100", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}

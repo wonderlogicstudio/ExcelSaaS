@@ -1,0 +1,94 @@
+{
+  "status": "VERIFIED_BETA_PENDING_OWNER",
+  "change": "Exact monthly API evidence sentence localized in display only; other descriptions unchanged.",
+  "changed_product_files": [
+    "apps/web/src/components/OriginalFormulaComparison.tsx"
+  ],
+  "targeted_tests": {
+    "command": "npm.cmd --prefix apps/web test -- OriginalFormulaComparison",
+    "exit_code": 0,
+    "passed": 2
+  },
+  "build_typecheck": {
+    "command": "npm.cmd run build --workspace @workbookcare/web -- --mode hosted_beta",
+    "exit_code": 0
+  },
+  "review": "PASS monthly_copy_review, source/helper plus builder evidence; no duplicate execution",
+  "actual_ui": {
+    "structure": 0,
+    "formula_candidates": 1,
+    "location": "Budget!N18",
+    "comparison_cells": [
+      "M18",
+      "O18"
+    ],
+    "korean_sentence_visible": true,
+    "auto_repair_still_unsupported": true,
+    "screenshots": "Desktop1440/mobile390 actual views, not saved"
+  },
+  "release": {
+    "worker": "02a4700b-3031-4404-aa87-09f18726594e",
+    "rollback_worker": "7d353c64-457d-4376-922e-03ecbcc4d0bc",
+    "all_bindings_equal": true,
+    "api_unchanged": true,
+    "access": [
+      {
+        "path": "/",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/precision-verification",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/compare",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/automation",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/help",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/orders",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/scans",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/formula-audits",
+        "status": 302,
+        "existing_access": true
+      },
+      {
+        "path": "/api/v1/delivery",
+        "status": 302,
+        "existing_access": true
+      }
+    ]
+  },
+  "not_run": [
+    "full regression",
+    "native Excel",
+    "two-repair replay repeated",
+    "API deployment",
+    "git commit/push"
+  ],
+  "reused": "repair-replay01-20260921 and monthly01 integration; engine and repair paths unchanged",
+  "issues": [
+    "Builder initial npm.ps1 policy failure and sandbox spawn EPERM occurred before tests; corrected invocation/escalation passed."
+  ],
+  "next": "Commit/push selected verified localization and replay records after owner confirmation; no next feature started"
+}

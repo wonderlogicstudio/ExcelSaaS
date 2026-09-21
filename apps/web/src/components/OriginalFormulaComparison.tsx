@@ -2,6 +2,14 @@ import { useEffect, useState } from 'react';
 import type { Finding } from '../types';
 import type { FormulaContext, OriginalCell } from '../lib/workbookEvidence';
 
+const MONTHLY_SHEET_PATTERN_EVIDENCE = 'The target formula uses a different monthly sheet-reference pattern from the surrounding M01~M12 subtraction formulas.';
+const MONTHLY_SHEET_PATTERN_EVIDENCE_KO = '이 셀은 주변의 M01~M12 월별 시트를 참조하는 뺄셈 수식과 참조 방식이 다릅니다. 의도한 계산인지 확인하세요.';
+
+function displayFormulaDifference(finding: Finding) {
+  const difference = finding.formula_pattern?.evidence_summary ?? finding.description;
+  return difference === MONTHLY_SHEET_PATTERN_EVIDENCE ? MONTHLY_SHEET_PATTERN_EVIDENCE_KO : difference;
+}
+
 export function OriginalFormulaComparison({ file, finding, active }: { file?: File | null; finding: Finding; active: boolean }) {
   const [context, setContext] = useState<FormulaContext | null>(null);
   const [failed, setFailed] = useState(false);
@@ -26,6 +34,6 @@ export function OriginalFormulaComparison({ file, finding, active }: { file?: Fi
       : failed ? <p role="status">이 파일·브라우저에서는 원본 수식을 표시하지 못했습니다. 아래 비교 위치를 Excel에서 확인하세요. 검사 결과와 지원 판정은 바꾸지 않았습니다.</p>
         : !context ? <p role="status">선택한 파일에서 이 위치의 원문을 읽고 있습니다…</p>
           : <><div className="original-comparison__grid">{cell(context.target, true)}{context.comparisons.map(item => cell(item, false))}</div></>}
-    <p className="original-comparison__difference"><strong>탐지한 차이</strong> {finding.formula_pattern.evidence_summary ?? finding.description}</p>
+    <p className="original-comparison__difference"><strong>탐지한 차이</strong> {displayFormulaDifference(finding)}</p>
   </section>;
 }
