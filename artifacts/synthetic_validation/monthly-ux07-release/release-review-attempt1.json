@@ -1,0 +1,16 @@
+{
+  "status": "CHANGES_REQUIRED_BEFORE_ANY_CLOUD_MUTATION",
+  "rejected_image": "a088bc14578202bcd3d0e030826d4222428adb082a991b48f25eb72d38748d57",
+  "pushed": false,
+  "cloud_mutated": false,
+  "findings": [
+    "OCI tar root missing app prefix",
+    "restore and full service invariants insufficient; raw env must never be persisted",
+    "image push proof gate incorrect",
+    "wrapper needs packaged hashes, import path, source preservation, content-free logging",
+    "Worker needs live API/IAM and asset freeze guards",
+    "proof image binding and evidence overwrite protection",
+    "registry push and traffic phases incomplete"
+  ],
+  "action": "One consolidated helper correction and independent rereview before mutation; product code remains frozen"
+}

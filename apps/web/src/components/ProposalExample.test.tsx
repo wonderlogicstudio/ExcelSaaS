@@ -3,7 +3,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { ProposalExample } from './ProposalExample';
 import type { DeliveryJob } from './DeliveryWorkspace';
 import type { PlanDetail } from './RepairPlanPreview';
-import { noRepairIntent, RP01, RP02 } from '../lib/repairProposals';
+import { noRepairIntent, RP01, RP02, RP03 } from '../lib/repairProposals';
 
 const combined = 'COMBINED_RP01_RP02_REPAIR_V1';
 
@@ -87,4 +87,22 @@ describe('ProposalExample', () => {
     expect(within(region).getByText('이 예시 셀의 계산 결과는 아직 확인하지 못했습니다.', { exact: false })).toBeVisible();
     expect(within(region).queryByText('12')).not.toBeInTheDocument();
   });
+
+  it('shows monthly examples from backend-calculated impact without product hardcoding the value', () => {
+    const monthlyJob = { ...job, policy: { profile: RP03, sheet: 'Budget', targets: ['N18'], before_formula: '=N15-N14', confirmed: true } } as DeliveryJob;
+    const monthlyDetail: PlanDetail = {
+      digest: 'monthly-01',
+      expires_at: Date.now() / 1000 + 600,
+      patches: [{ candidate_id: 'm1', sheet: 'Budget', cell: 'N18', profile_version: RP03, change_kind: 'MONTHLY_FORMULA_REPLACEMENT', before: { type: 'formula', value: '=N15-N14' }, after: { type: 'formula', value: "='M10'!B16-'M10'!B15" } }],
+      impact: [{ sheet: 'Budget', cell: 'N18', before: { type: 'error', value: '#VALUE!' }, after: { type: 'number', value: -5 } }],
+    };
+    render(<ProposalExample detail={monthlyDetail} job={monthlyJob} intent={noRepairIntent} />);
+    const region = screen.getByRole('region', { name: '대표 수정 예시' });
+
+    expect(within(region).getAllByText(/월별 수식 검증/).length).toBeGreaterThan(0);
+    expect(within(region).getByText('#VALUE!')).toBeVisible();
+    expect(within(region).getByText('-5')).toBeVisible();
+    expect(within(region).getByText(/원본 수식과 실제 오류/)).toBeVisible();
+  });
+
 });

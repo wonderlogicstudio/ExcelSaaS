@@ -1,20 +1,24 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import subprocess
 import sys
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
+from io import BytesIO
 
 import pytest
-from test_delivery_inputs import fixture, policy
+from openpyxl import load_workbook
+from test_delivery_inputs import ROOT, fixture, monthly_policy, policy
 
 from app.config import Settings
 from app.delivery_artifacts import validate_artifacts
 from app.delivery_execution import approve, cancel, download, execute
 from app.delivery_execution_control import ExecutionControl, controlled_process, execution_scope
 from app.delivery_inputs import PROFILE_2, inspect_input
+from app.delivery_patch import patch_workbook, verify_output
 from app.delivery_plan import build_plan, plan_digest
 from app.delivery_store import DeliveryStore
 from app.errors import WorkbookCareError
@@ -83,6 +87,41 @@ def authorized(store, job, settings):
         },
         settings,
     )
+
+
+def monthly_source() -> bytes:
+    path = ROOT / "artifacts/synthetic_validation/monthly-repair-flow06/stage3"
+    return (path / "monthly-rp03-supported-6sheet.xlsx").read_bytes()
+
+
+def prepared_monthly(tmp_path):
+    source = monthly_source()
+    store = DeliveryStore(tmp_path)
+    job = store.create(
+        "owner",
+        source,
+        inspect_input("monthly.xlsx", source, Settings()),
+        "monthly-execution-request",
+    )
+    plan = build_plan(job, monthly_policy())
+    grant = {
+        "kind": "INTERNAL_SYNTHETIC",
+        "job_id": job["id"],
+        "source_hash": job["snapshot"]["source_hash"],
+        "expires_at": job["expires"],
+    }
+    job = store.update(
+        job,
+        job["revision"],
+        {
+            **job["state"],
+            "policy": monthly_policy(),
+            "plan": plan,
+            "status": "PREVIEW_VALIDATED",
+            "internal_grant": grant,
+        },
+    )
+    return store, job, Settings(app_env="internal_beta")
 
 
 def test_separate_approval_and_actual_atomic_delivery_redownload(tmp_path, blueprint):
@@ -230,3 +269,57 @@ def test_package_references_and_existing_calculation_errors(tmp_path, blueprint)
     assert e.value.code == "EXISTING_CALCULATION_ERROR"
     with pytest.raises(WorkbookCareError):
         validate_artifacts({"manifest": {"files": {}}, "artifacts": {}}, job["state"]["plan"])
+
+
+def test_monthly_actual_patch_and_verification_resolves_target_candidate(tmp_path):
+    source = monthly_source()
+    source_hash = hashlib.sha256(source).hexdigest()
+    store = DeliveryStore(tmp_path)
+    job = store.create(
+        "owner",
+        source,
+        inspect_input("monthly.xlsx", source, Settings()),
+        "monthly-actual-patch",
+    )
+    plan = build_plan(job, monthly_policy())
+    repaired = patch_workbook(source, job["snapshot"], plan)
+    verification = verify_output(source, repaired, plan, Settings())
+
+    assert hashlib.sha256(source).hexdigest() == source_hash
+    assert plan["expected_calculated_values"]["Budget"]["N18"] == {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED",
+    }
+    assert verification["formula_candidates_remaining"] == 0
+    assert verification["detectors"]["formula"]["target_remaining"] == []
+    workbook = load_workbook(BytesIO(repaired), data_only=False, read_only=False)
+    try:
+        assert workbook["Budget"]["N18"].value == "='M10'!B16-'M10'!B15"
+        assert workbook["M10"]["B15"].value == 1006
+        assert workbook["M10"]["B16"].value == 1001
+    finally:
+        workbook.close()
+
+
+def test_monthly_execute_requires_current_approval_and_rule_fingerprint(tmp_path):
+    store, job, settings = prepared_monthly(tmp_path)
+    with pytest.raises(WorkbookCareError) as missing:
+        execute(store, job, settings)
+    assert missing.value.code == "CURRENT_APPROVAL_REQUIRED"
+
+    stale_plan = copy.deepcopy(job["state"]["plan"])
+    stale_plan["repair_rule_fingerprint"] = "0" * 64
+    stale_plan["digest"] = plan_digest(stale_plan)
+    stale = {**job, "state": {**job["state"], "plan": stale_plan}}
+    with pytest.raises(WorkbookCareError) as stale_error:
+        execute(store, stale, settings)
+    assert stale_error.value.code == "STALE_PLAN"
+
+    missing_plan = copy.deepcopy(job["state"]["plan"])
+    missing_plan.pop("repair_rule_fingerprint")
+    missing_plan["digest"] = plan_digest(missing_plan)
+    missing = {**job, "state": {**job["state"], "plan": missing_plan}}
+    with pytest.raises(WorkbookCareError) as missing_error:
+        execute(store, missing, settings)
+    assert missing_error.value.code == "STALE_PLAN"

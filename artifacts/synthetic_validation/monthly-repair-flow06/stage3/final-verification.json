@@ -1,0 +1,34 @@
+{
+  "commands": [
+    {
+      "command": "apps/api/.venv/Scripts/python.exe scripts/verify_delivery_patch_compatibility.py --stage d08 --output-dir artifacts/synthetic_validation/monthly-repair-flow06/stage3/compatibility-final",
+      "exit_code": 0,
+      "result": "3 profiles actual patch/calculation/3 artifacts each; not READY"
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_delivery_output_excel.ps1 -Stage d08 -Directory C:/Users/JinwonLee/project/ExcelSaaS/artifacts/synthetic_validation/monthly-repair-flow06/stage3/compatibility-final",
+      "exit_code": 1,
+      "result": "Harness Windows PowerShell5.1 interpreted UTF8-without-BOM Korean sheetname as ANSI; DISP_E_BADINDEX on changes workbook. Partial run not PASS."
+    },
+    {
+      "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify_delivery_output_excel.ps1 -Stage d08 -Directory C:/Users/JinwonLee/project/ExcelSaaS/artifacts/synthetic_validation/monthly-repair-flow06/stage3/compatibility-final",
+      "exit_code": 0,
+      "result": "Actual installed Excel: RP01/RP02/RP03 repaired+changes six XLSX read-only; native expected values match; hashes unchanged"
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe scripts/register_delivery_patch_reference.py --stage d08 --evidence-dir artifacts/synthetic_validation/monthly-repair-flow06/stage3/compatibility-final",
+      "exit_code": 0,
+      "result": "Reviewed actual native evidence registered"
+    },
+    {
+      "command": "PYTHONPATH=apps/api apps/api/.venv/Scripts/python.exe artifacts/synthetic_validation/monthly-repair-flow06/stage3/rp03_saved_artifact_runtime.py",
+      "exit_code": 0,
+      "result": "Unmocked approval READY/download3; exact target N18; cached -5; candidate1->0; preserved source"
+    }
+  ],
+  "review": "Independent reviewer PASS native evidence and saved unmocked runtime artifacts",
+  "immutable_hashes_match": true,
+  "native": "REVIEW_PASS",
+  "runtime": "REVIEW_PASS",
+  "stage3": "PASS"
+}

@@ -32,6 +32,7 @@ from .delivery_inputs import (
     MAX_PATCHES,
     PROFILE_1,
     PROFILE_2,
+    PROFILE_3,
     inspect_input,
     preflight,
     reject,
@@ -45,6 +46,10 @@ from .payment_plan_actions import reselect, restore_order, retry_delivery, valid
 router = APIRouter()
 _stores: dict[str, DeliveryStore] = {}
 OWNER_HEADER = "x-workbookcare-owner"
+
+
+def _profile_context_for_policy(policy: dict) -> str | None:
+    return PROFILE_3 if policy.get("profile") == PROFILE_3 else None
 
 
 def get_store() -> DeliveryStore:
@@ -348,7 +353,18 @@ async def delivery(request: Request):
                 reject("INVALID_POLICY", "수정 종류와 업무 기준을 입력하세요.")
             if len(json.dumps(policy)) > 20_000:
                 reject("LIMIT_EXCEEDED", "선택한 기준이 너무 큽니다.", 413)
-            result = preflight(job["snapshot"], policy)
+            profile_context = _profile_context_for_policy(policy)
+            preflight_snapshot = (
+                inspect_input(
+                    "workbook.xlsx",
+                    job["source"],
+                    settings,
+                    profile_context=profile_context,
+                )
+                if profile_context
+                else job["snapshot"]
+            )
+            result = preflight(preflight_snapshot, policy)
             state = {
                 **job["state"],
                 "status": result["status"],

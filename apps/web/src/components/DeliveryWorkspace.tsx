@@ -8,7 +8,7 @@ import { resolveApiBaseUrl } from '../lib/api';
 
 type Preflight = { status: string; eligible_count: number; reason_codes: string[]; purchase_enabled: boolean;
   targets: {sheet:string;cell:string;eligible:boolean;current_type:string;reason_codes:string[]}[] };
-type DeliveryPolicyItem = {profile:string;sheet:string;targets:string[];role?:string;anchor?:string;anchor_formula?:string;confirmed?:boolean};
+type DeliveryPolicyItem = {profile:string;sheet:string;targets:string[];role?:string;anchor?:string;anchor_formula?:string;before_formula?:string;confirmed?:boolean};
 type DeliveryPolicy = DeliveryPolicyItem | {profile:'COMBINED_RP01_RP02_REPAIR_V1';items:DeliveryPolicyItem[];confirmed?:boolean};
 export type DeliveryJob = {synthetic_rehearsal_available?:boolean;approval_receipt?:{payload:{source_hash:string;plan_digest:string};signature:string}|null;order_id?:string|null;entitlement_active?:boolean;policy?:DeliveryPolicy;job_id:string;revision:number;source_hash:string;status:string;expires_at:number;
   repair_execution_available?:boolean;approval_status?:string;delivery?:{delivery_id:string;patch_count:number;expires_at:number;files:Record<string,{bytes:number}>}|null;
@@ -41,7 +41,7 @@ export async function deliveryRequest<T>(body:object,signal?:AbortSignal):Promis
 }
 function draftPolicy(draft:RepairDraft):object{
   if(draft.items?.length)return {profile:COMBINED,items:draft.items.map(item=>draftPolicy({...item,items:undefined}))};
-  return {profile:draft.profile,sheet:draft.sheet,targets:draft.targets,role:draft.role,anchor:draft.anchor,anchor_formula:draft.anchor_formula,confirmed:draft.confirmed===true};
+  return {profile:draft.profile,sheet:draft.sheet,targets:draft.targets,role:draft.role,anchor:draft.anchor,anchor_formula:draft.anchor_formula,before_formula:draft.before_formula,confirmed:draft.confirmed===true};
 }
 function fileBase64(file:File):Promise<string>{return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error('파일을 읽지 못했습니다.'));reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.readAsDataURL(file);});}
 

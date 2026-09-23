@@ -1,34 +1,50 @@
 {
-  "status": "PASS",
-  "kind": "ACTUAL_EXCEL_COM_COMBINED_REPAIR",
-  "case": "COMBINED_RP01_RP02_complex03",
-  "profiles": [
-    "COMBINED_RP01_RP02"
-  ],
-  "patch_fingerprint": "9b33f53a0d9694c7fc212bd308658bae6571fc7def547dc1869f9c0c472db452",
-  "excel_version": "16.0",
   "excel_build": 20326,
-  "actual_excel_files_opened": 3,
-  "expected_values": 725,
-  "source_sha256": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
-  "plan_digest": "dab477d9b415a120070bfbbcabcf70aa7940c0c53018c167016b0d80e1f21ae9",
-  "output_hash": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
-  "changes_hash": "403d13f834b4d7e6aa99e12e10cf30581faf0ba9203ab798cb2039f8d325e46c",
-  "verification_html_hash": "100493b26915c1ba97e2d5c904304d76031a3461520ad3d8d2404a620ad82f47",
-  "original_and_outputs_unchanged": true,
-  "macros_disabled": true,
-  "external_link_update_disabled": true,
-  "saved": false,
-  "source_and_output_hashes": {
-    "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\compatibility\\complex03_combined_repaired.xlsx": "767c10defe4bfc0b58fc6d214b09851d41c7d7e4163b92945c1cb1a085381368",
-    "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\samples\\WorkbookCare_Complex_Validation_2026-09-13\\03_정산수정_연쇄계산.xlsx": "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
-    "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\compatibility\\complex03_combined_changes.xlsx": "403d13f834b4d7e6aa99e12e10cf30581faf0ba9203ab798cb2039f8d325e46c"
-  },
-  "legacy_profiles_not_freshly_claimed": true,
-  "provenance": {
-    "oracle_sha256": "de614e665c08e2779d8c23ba5ba7655671a498e66744b3ea42b0ba1c3e2bf1d3",
-    "inputs_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\compatibility\\inputs.json",
-    "excel_evidence_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\combined-excel.json",
-    "bound_evidence_json": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-rules01\\excel-bound-evidence.json"
-  }
+  "excel_version": "16.0",
+  "profiles": [
+    "RP01",
+    "RP02",
+    "RP03"
+  ],
+  "kind": "ACTUAL_PRODUCT_PATCH_AND_INSTALLED_EXCEL_REOPEN",
+  "results": [
+    {
+      "output_hash": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+      "changes_hash": "2d4df806963d4a2855d0449041f5b0eb1c50b9efd623844f4d78008990bd0216",
+      "repaired_opened": true,
+      "profile": "RP01",
+      "native_formula": null,
+      "changes_opened": true,
+      "verification_html_hash": "05d390450e62918ce3788a12abae5efe1a2f4a66e76d014d01443578fdd5ecea",
+      "actual_values_match": true,
+      "read_only_hash_unchanged": true,
+      "literal_report_formulas": true
+    },
+    {
+      "output_hash": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+      "changes_hash": "f81905895d88cb798fc0543ceea7bff78e4d6ab4344d6b1c1a62fd038d6843e3",
+      "repaired_opened": true,
+      "profile": "RP02",
+      "native_formula": null,
+      "changes_opened": true,
+      "verification_html_hash": "eab4e09102b224638488ef4e7d2023f3eb843889adecc9ee5fd65d4f1743d0f4",
+      "actual_values_match": true,
+      "read_only_hash_unchanged": true,
+      "literal_report_formulas": true
+    },
+    {
+      "output_hash": "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+      "changes_hash": "ea46fa8b07fabf306c7fb6426695f151a36d3fa1fb762042a10b88d53c8c82e2",
+      "repaired_opened": true,
+      "profile": "RP03",
+      "native_formula": "='M10'!B16-'M10'!B15",
+      "changes_opened": true,
+      "verification_html_hash": "59c686f9a46ed44ef1da339fc3aef0b7d8b4618564aee451c7beef7c41d2fa30",
+      "actual_values_match": true,
+      "read_only_hash_unchanged": true,
+      "literal_report_formulas": true
+    }
+  ],
+  "status": "PASS",
+  "patch_fingerprint": "0432d8702a6b680ddbe18ffbd0cda3c1b9ff7e94d4f196e98e155fcb573b16c8"
 }

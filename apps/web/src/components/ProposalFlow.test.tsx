@@ -6,7 +6,7 @@ import { RepairIntentEditor } from './RepairIntent';
 import { DeliveryWorkspace, type DeliveryJob } from './DeliveryWorkspace';
 import { RepairDelivery } from './RepairDelivery';
 import { RepairPlanPreview, type PlanDetail } from './RepairPlanPreview';
-import { noRepairIntent, RP01, RP02 } from '../lib/repairProposals';
+import { noRepairIntent, RP01, RP02, RP03 } from '../lib/repairProposals';
 import { demoResult } from '../data/demo';
 import type { Finding } from '../types';
 const evidence=vi.hoisted(()=>({readSourceCells:vi.fn(),readSourceSheets:vi.fn()}));
@@ -146,6 +146,15 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   else {expect(screen.queryByRole('button',{name:'이 변경계획 승인'})).not.toBeInTheDocument();expect(gate).toHaveBeenLastCalledWith(false);}
  });
 
+ it('opens the exact monthly RP03 patch group by default without opening legacy groups',async()=>{
+  const monthlyJob={...plan,policy:{profile:RP03,sheet:'Budget',targets:['N18'],before_formula:'=N15-N14',confirmed:true},plan_summary:{...plan.plan_summary,digest:'monthly-plan'}} as DeliveryJob;
+  const monthlyDetail:PlanDetail={digest:'monthly-plan',expires_at:Date.now()/1000+600,patches:[{candidate_id:'m',sheet:'Budget',cell:'N18',profile_version:RP03,change_kind:'MONTHLY_FORMULA_REPLACEMENT',before:{type:'formula',value:'=N15-N14'},after:{type:'formula',value:"='M10'!B16-'M10'!B15"}}],impact:[{sheet:'Budget',cell:'N18',before:{type:'error',value:'#VALUE!'},after:{type:'number',value:-5}}]};
+  vi.stubGlobal('fetch',vi.fn(async()=>ok(monthlyDetail)));
+  render(<RepairPlanPreview job={monthlyJob} onJob={vi.fn()} guidedStep={3} intent={noRepairIntent}/>);
+  await screen.findByText("='M10'!B16-'M10'!B15");
+  expect(screen.getByText("='M10'!B16-'M10'!B15")).toBeVisible();
+  expect(screen.getByText('숫자 -5')).toBeVisible();
+ });
  it('summarizes both repair types for a combined policy without top-level targets',async()=>{
   const combinedJob={...plan,policy:{profile:COMBINED,items:[{profile:RP01,sheet:'정산',targets:['B2'],role:'AMOUNT',confirmed:true},{profile:RP02,sheet:'정산',targets:['F3'],anchor:'F2',anchor_formula:'=C2*D2',confirmed:true}]}} as DeliveryJob;
   const combinedDetail:PlanDetail={...detail,patches:[{candidate_id:'n',sheet:'정산',cell:'B2',profile_version:RP01,before:{type:'text',value:'1,200'},after:{type:'number',value:1200}},{candidate_id:'f',sheet:'정산',cell:'F3',profile_version:RP02,before:{type:'blank',value:null},after:{type:'formula',value:'=C3*D3'}}],impact:[{sheet:'정산',cell:'B2',before:{type:'text',value:'1,200'},after:{type:'number',value:1200}},{sheet:'정산',cell:'F3',before:{type:'number',value:0},after:{type:'number',value:12}},{sheet:'정산',cell:'J10',before:{type:'number',value:20},after:{type:'number',value:1232}}]};
@@ -216,6 +225,39 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   await waitFor(()=>expect(scroll).toHaveBeenCalledTimes(1));
   expect(focus).toHaveBeenCalledWith({preventScroll:true});
  });
+
+ it('starts all three ready downloads from one explicit click and keeps fallback buttons',async()=>{
+  const ready={...plan,status:'READY',approval_status:'APPROVED',delivery:{delivery_id:'d1',patch_count:1,expires_at:Date.now()/1000+600,files:{REPAIRED_XLSX:{bytes:10},CHANGES_XLSX:{bytes:10},VERIFICATION_HTML:{bytes:10}}}};
+  const actions:string[]=[];
+  vi.stubGlobal('fetch',vi.fn(async(_url,init)=>{const action=JSON.parse(String(init?.body)).action;actions.push(action);return ok({filename:`${actions.length}.bin`,mime:'application/octet-stream',file_base64:'eA=='});}));
+  vi.stubGlobal('URL',{createObjectURL:vi.fn(()=>`blob:${actions.length}`),revokeObjectURL:vi.fn()});
+  const clicks=vi.spyOn(HTMLAnchorElement.prototype,'click').mockImplementation(()=>undefined);
+  render(<RepairDelivery job={ready as DeliveryJob} detail={detail} onJob={vi.fn()} mode="delivery"/>);
+  expect(screen.getByRole('button',{name:'세 파일 모두 받기'})).toBeEnabled();
+  expect(screen.getByRole('button',{name:/수정본 XLSX 받기/})).toBeVisible();
+  fireEvent.click(screen.getByRole('button',{name:'세 파일 모두 받기'}));
+  await waitFor(()=>expect(actions.filter(a=>a==='download')).toHaveLength(3));
+  expect(clicks).toHaveBeenCalledTimes(3);
+ });
+ it('reports a partial all-download failure and prevents repeated clicks while busy',async()=>{
+  let release!:()=>void;
+  const ready={...plan,status:'READY',approval_status:'APPROVED',delivery:{delivery_id:'d1',patch_count:1,expires_at:Date.now()/1000+600,files:{REPAIRED_XLSX:{bytes:10},CHANGES_XLSX:{bytes:10},VERIFICATION_HTML:{bytes:10}}}};
+  const actions:string[]=[];
+  vi.stubGlobal('fetch',vi.fn(async(_url,init)=>{const body=JSON.parse(String(init?.body));actions.push(`${body.action}:${body.kind??''}`); if(body.action==='get')return ok(ready); if(body.kind==='REPAIRED_XLSX')await new Promise<void>(resolve=>{release=resolve;}); if(body.kind==='CHANGES_XLSX')throw new Error('changes download failed'); return ok({filename:`${body.kind}.bin`,mime:'application/octet-stream',file_base64:'eA=='});}));
+  vi.stubGlobal('URL',{createObjectURL:vi.fn(()=>'blob:one'),revokeObjectURL:vi.fn()});
+  vi.spyOn(HTMLAnchorElement.prototype,'click').mockImplementation(()=>undefined);
+  render(<RepairDelivery job={ready as DeliveryJob} detail={detail} onJob={vi.fn()} mode="delivery"/>);
+  const all=screen.getByRole('button',{name:'세 파일 모두 받기'});
+  fireEvent.click(all);
+  await waitFor(()=>expect(all).toBeDisabled());
+  fireEvent.click(all);
+  expect(actions.filter(a=>a==='download:REPAIRED_XLSX')).toHaveLength(1);
+  await act(async()=>{release();});
+  await screen.findByRole('alert');
+  expect(screen.getByRole('alert')).toHaveTextContent('서버에 연결하지 못했습니다');
+  expect(actions).toContain('get:');
+  expect(actions.filter(a=>a.startsWith('download:'))).toEqual(['download:REPAIRED_XLSX','download:CHANGES_XLSX']);
+ });
  it('does not reveal a late execution result after leaving the delivery step',async()=>{
   let finish!:(value:Response)=>void;
   const ready={...plan,status:'READY',approval_status:'APPROVED',delivery:{delivery_id:'d1',patch_count:1,expires_at:Date.now()/1000+600,files:{REPAIRED_XLSX:{bytes:10}}}};
@@ -240,5 +282,46 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   await waitFor(()=>expect(scroll).toHaveBeenCalledTimes(1));
   await act(async()=>{finish(ok(ready));});
   expect(scroll).toHaveBeenCalledTimes(1);
+ });
+
+ it('sends a monthly RP03 request with source-derived before_formula and no typed address or formula',async()=>{
+  evidence.readSourceCells.mockResolvedValue([{cell:'N18',type:'formula',text:'=N15-N14',cached:'#VALUE!'}]);
+  const prepare=vi.fn();
+  const monthly={...f('N18','FORMULA_PATTERN_OUTLIER'),sheet:'Budget',formula_pattern:{pattern_type:'DOMINANT_NORMALIZED_PATTERN_OUTLIER',formula_region:'N18',dominant_pattern_id:'m',neighbor_count:4,evidence_locations:['L18','M18','O18','P18'],detection_basis:'synthetic',current_limitations:[],pattern_subtype:'REFERENCE_SHEET_DRIFT'}} as Finding;
+  render(<RepairProposalPicker findings={[monthly]} sheets={['Budget']} file={file} selection={{findings:[],locked:false,toggle:vi.fn()}} intent={noRepairIntent} available onPrepare={prepare}/>);
+  await waitFor(()=>expect(screen.getAllByText('=N15-N14').length).toBeGreaterThan(0));
+  expect(screen.getAllByText(/검증 필요 후보/).length).toBeGreaterThan(0);
+  expect(screen.queryByRole('checkbox',{name:/월별 수식 후보/})).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button',{name:'선택한 월별 수식 서버 검증으로 변경 예시 확인'}));
+  expect(prepare).toHaveBeenCalledWith(expect.objectContaining({profile:RP03,sheet:'Budget',targets:['N18'],before_formula:'=N15-N14',confirmed:true,proposal:true}));
+  expect(prepare.mock.calls[0][0]).not.toHaveProperty('anchor_formula');
+ });
+ it('keeps a monthly basket single-target and refuses mixing without erasing the existing choice',async()=>{
+  evidence.readSourceCells.mockResolvedValue([{cell:'N18',type:'formula',text:'=N15-N14',cached:'#VALUE!'},{cell:'O18',type:'formula',text:'=O15-O14',cached:'#VALUE!'}]);
+  const prepare=vi.fn();
+  const m1={...f('N18','FORMULA_PATTERN_OUTLIER'),sheet:'Budget',formula_pattern:{pattern_type:'DOMINANT_NORMALIZED_PATTERN_OUTLIER',formula_region:'N18',dominant_pattern_id:'m',neighbor_count:4,evidence_locations:['L18','M18','O18','P18'],detection_basis:'synthetic',current_limitations:[],pattern_subtype:'REFERENCE_SHEET_DRIFT'}} as Finding;
+  const m2={...f('O18','FORMULA_PATTERN_OUTLIER'),sheet:'Budget',formula_pattern:{pattern_type:'DOMINANT_NORMALIZED_PATTERN_OUTLIER',formula_region:'O18',dominant_pattern_id:'m',neighbor_count:4,evidence_locations:['L18','M18','N18','P18'],detection_basis:'synthetic',current_limitations:[],pattern_subtype:'REFERENCE_SHEET_DRIFT'}} as Finding;
+  render(<RepairProposalPicker findings={[m1,m2]} sheets={['Budget']} file={file} selection={{findings:[],locked:false,toggle:vi.fn()}} intent={noRepairIntent} available onPrepare={prepare}/>);
+  await waitFor(()=>expect(screen.getAllByText('=N15-N14').length).toBeGreaterThan(0));
+  expect(screen.queryByRole('checkbox',{name:/월별 수식 후보/})).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button',{name:'변경 목록에 추가'}));
+  expect(screen.getByRole('region',{name:'선택한 수정 목록'})).toHaveTextContent('선택한 1곳');
+  fireEvent.click(screen.getAllByRole('button',{name:'이 수정 제안 보기'}).at(-1)!);
+  await waitFor(()=>expect(screen.getAllByText('=O15-O14').length).toBeGreaterThan(0));
+  expect(screen.queryByRole('checkbox',{name:/월별 수식 후보/})).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button',{name:'변경 목록에 추가'}));
+  expect(screen.getAllByText(/월별 수식 후보는 다른 수정 묶음과 함께 보낼 수 없습니다/).length).toBeGreaterThan(0);
+  expect(screen.getByRole('region',{name:'선택한 수정 목록'})).toHaveTextContent('선택한 1곳');
+  fireEvent.click(screen.getByRole('button',{name:'선택한 1곳의 변경 예시 확인'}));
+  expect(prepare).toHaveBeenCalledWith(expect.objectContaining({profile:RP03,targets:['N18'],before_formula:'=N15-N14'}));
+ });
+ it('passes monthly before_formula through the delivery preflight request',async()=>{
+  const actions:Record<string,unknown>[]=[];
+  vi.stubGlobal('fetch',vi.fn(async(_url,init)=>{const a=JSON.parse(String(init?.body));actions.push(a);return ok(a.action==='capabilities'?{max_bytes:2097152,payment_mode:'OFF'}:a.action==='create_input'?base:a.action==='preflight'?{...base,revision:2,policy:a.policy,preflight:plan.preflight}:{...plan,policy:a.policy});}));
+  render(<DeliveryWorkspace file={file} reviewDraft={{profile:RP03,sheet:'Budget',targets:['N18'],before_formula:'=N15-N14',confirmed:true,proposal:true}}/>);
+  fireEvent.click(await screen.findByRole('checkbox',{name:/업로드 권한/}));
+  fireEvent.click(screen.getByRole('button',{name:/원본으로 수정 범위 확인/}));
+  await waitFor(()=>expect(actions.some(a=>a.action==='preflight')).toBe(true));
+  expect(actions.find(a=>a.action==='preflight')).toMatchObject({policy:{profile:RP03,sheet:'Budget',targets:['N18'],before_formula:'=N15-N14',confirmed:true}});
  });
 });

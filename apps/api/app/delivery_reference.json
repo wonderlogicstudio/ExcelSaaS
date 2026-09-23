@@ -1,6 +1,7 @@
 {
   "status": "PASS",
-  "engine_fingerprint": "c4efc7e00d7633fa04220dd52984f11fe82dfedc247fbdce37d90fbd4ac0762f",
+  "kind": "SCRATCH_REFERENCE_VALIDATION_ONLY",
+  "engine_fingerprint": "958c9d5aa429b618ee4277b67604c1b516c3d34716a97903b78b6e8a9929cc65",
   "case_count": 20,
   "typed_result_count": 25,
   "excel_version": "16.0",

@@ -1,0 +1,14 @@
+{
+  "status": "BLOCKED_AFTER_ONE_CORRECTION",
+  "cloud_mutated": false,
+  "image_pushed": false,
+  "candidate_image": "e229f7df95435b69e677f5e9758c956cd0c666c739d8673e76f3410744d75b99",
+  "unresolved": [
+    "stage set-env-vars would clear baseline environment",
+    "empty baseline command/args not explicitly restored",
+    "full ingress identity secrets resources maxScale invariants incomplete",
+    "actual revision image and registry manifest digest binding incomplete",
+    "frontend source freeze missing; API-only freeze insufficient"
+  ],
+  "next_unit": "Correct guarded release helper baseline preservation, independent review, then existing protected beta release and browser proof; owner decision required after retry limit"
+}

@@ -26,6 +26,7 @@ MAX_PATCHES = 100
 MAX_BYTES = 2 * 1024 * 1024
 PROFILE_1 = "RP01_NUMERIC_TEXT_FIELD_V1"
 PROFILE_2 = "RP02_APPROVED_FORMULA_RESTORE_V1"
+PROFILE_3 = "RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1"
 PROFILE_COMBINED = "COMBINED_RP01_RP02_REPAIR_V1"
 POLICY_VERSION = "ko-KR-integer15-v1"
 CELL = re.compile(r"^[A-Z]{1,3}[1-9][0-9]{0,6}$")
@@ -62,16 +63,22 @@ def valid_cell(value: object) -> str:
     return value
 
 
-def inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
+def inspect_input(
+    filename: str, payload: bytes, settings: Settings, *, profile_context: str | None = None
+) -> dict:
     try:
-        return _inspect_input(filename, payload, settings)
+        return _inspect_input(filename, payload, settings, profile_context=profile_context)
     except WorkbookCareError:
         raise
     except (ValueError, KeyError, TypeError, ET.ParseError):
         reject("UNSUPPORTED_FILE", "파일 내부 구조를 일관되게 읽을 수 없습니다.")
 
 
-def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
+def _inspect_input(
+    filename: str, payload: bytes, settings: Settings, *, profile_context: str | None = None
+) -> dict:
+    if profile_context not in {None, PROFILE_3}:
+        reject("INVALID_PROFILE", "지원하지 않는 수정 종류를 선택하세요.")
     if not filename.lower().endswith(".xlsx"):
         reject("UNSUPPORTED_FILE", "사전 수정 검사는 매크로 없는 .xlsx만 지원합니다.")
     if len(payload) > MAX_BYTES:
@@ -105,6 +112,9 @@ def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
 
         validate_package(archive)
         workbook = ET.fromstring(archive.read("xl/workbook.xml"))
+        workbook_sheet_names = [
+            sheet.get("name", "") for sheet in workbook.findall(NS + "sheets/" + NS + "sheet")
+        ]
         if workbook.find(NS + "extLst") is not None:
             issues.add("UNSUPPORTED_WORKBOOK_STRUCTURE")
         if workbook.find(NS + "workbookProtection") is not None:
@@ -210,7 +220,22 @@ def _inspect_input(filename: str, payload: bytes, settings: Settings) -> dict:
                     if f.attrib or not f.text:
                         issues.add("SPECIAL_FORMULA")
                     value = "=" + str(f.text or "")
-                    if (
+                    if profile_context == PROFILE_3:
+                        try:
+                            from .delivery_calculation import (
+                                CALCULATION_MODE_MONTHLY_SHEETS,
+                                formula_shape,
+                            )
+
+                            formula_shape(
+                                value,
+                                calculation_mode=CALCULATION_MODE_MONTHLY_SHEETS,
+                                current_sheet=name,
+                                sheet_names=set(workbook_sheet_names),
+                            )
+                        except WorkbookCareError:
+                            issues.add("UNSUPPORTED_FORMULA")
+                    elif (
                         FORBIDDEN_FUNCTION.search(value)
                         or "[" in value
                         or "!" in value
@@ -289,6 +314,8 @@ def policy_items(policy: dict) -> list[dict]:
         or any(not isinstance(item, dict) for item in items)
     ):
         reject("INVALID_POLICY", "수정 종류와 업무 기준을 입력하세요.")
+    if any(item.get("profile") == PROFILE_3 for item in items):
+        reject("INVALID_POLICY", "월별 시트 수식 교체는 묶음 수정으로 진행할 수 없습니다.")
     return items
 
 
@@ -369,7 +396,7 @@ def policy_scope_matches(policy: dict, grant: dict) -> bool:
 
 def _preflight_single(snapshot: dict, policy: dict, *, calculation_verified: bool = False) -> dict:
     profile = policy.get("profile")
-    if profile not in {PROFILE_1, PROFILE_2}:
+    if profile not in {PROFILE_1, PROFILE_2, PROFILE_3}:
         reject("INVALID_PROFILE", "지원하는 수정 종류를 선택하세요.")
     sheet = policy.get("sheet")
     selected = policy.get("targets", [])
@@ -394,6 +421,8 @@ def _preflight_single(snapshot: dict, policy: dict, *, calculation_verified: boo
             "value"
         ):
             reasons.append("UNCONFIRMED_ANCHOR")
+    if profile == PROFILE_3 and len(selected) != 1:
+        reasons.append("MONTHLY_REPAIR_REQUIRES_SINGLE_TARGET")
     for cell in targets:
         current = snapshot["cells"][sheet].get(cell, {"type": "blank", "value": None, "style": "0"})
         eligible = not reasons
@@ -402,9 +431,15 @@ def _preflight_single(snapshot: dict, policy: dict, *, calculation_verified: boo
             if not numeric_text_eligible(current):
                 eligible = False
                 why.append("NOT_UNAMBIGUOUS_INTEGER_TEXT")
-        elif not blank_formula_eligible(current):
+        elif profile == PROFILE_2 and not blank_formula_eligible(current):
             eligible = False
             why.append("TARGET_NOT_TRUE_BLANK")
+        elif profile == PROFILE_3 and (
+            current.get("type") != "formula"
+            or current.get("value") != policy.get("before_formula")
+        ):
+            eligible = False
+            why.append("MONTHLY_TARGET_FORMULA_MISMATCH")
         rows.append(
             {
                 "sheet": sheet,
@@ -412,7 +447,11 @@ def _preflight_single(snapshot: dict, policy: dict, *, calculation_verified: boo
                 "eligible": eligible,
                 "current_type": current["type"],
                 "reason_codes": why or reasons,
-                "change_kind": "TYPE_NORMALIZATION" if profile == PROFILE_1 else "FORMULA_RESTORE",
+                "change_kind": {
+                    PROFILE_1: "TYPE_NORMALIZATION",
+                    PROFILE_2: "FORMULA_RESTORE",
+                    PROFILE_3: "MONTHLY_FORMULA_REPLACEMENT",
+                }[profile],
             }
         )
     eligible_count = sum(row["eligible"] for row in rows)

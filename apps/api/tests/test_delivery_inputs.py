@@ -4,16 +4,27 @@ import base64
 import hashlib
 import importlib.util
 from concurrent.futures import ThreadPoolExecutor
+from io import BytesIO
 from pathlib import Path
+from zipfile import ZIP_DEFLATED, ZipFile
 
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
+from openpyxl import Workbook
 
 from app.config import Settings
 from app.control_plane import ControlPlaneHmacMiddleware, build_control_plane_signature
 from app.delivery_api import router
-from app.delivery_inputs import PROFILE_1, PROFILE_2, inspect_input, numeric_text, preflight
+from app.delivery_inputs import (
+    PROFILE_1,
+    PROFILE_2,
+    PROFILE_3,
+    PROFILE_COMBINED,
+    inspect_input,
+    numeric_text,
+    preflight,
+)
 from app.delivery_store import DeliveryStore
 from app.errors import WorkbookCareError
 
@@ -34,6 +45,52 @@ def policy(profile=PROFILE_1, targets=None, **changes):
         "confirmed": True,
         "anchor": "F2",
         "anchor_formula": "=ROUND(C2*D2*(1-E2),0)",
+        **changes,
+    }
+
+
+def monthly_workbook_bytes(*, target_formula="=N15-N14", extra=None):
+    workbook = Workbook()
+    budget = workbook.active
+    budget.title = "Budget"
+    for month in range(8, 13):
+        sheet = workbook.create_sheet(f"M{month:02d}")
+        sheet["B15"] = 1000 + month
+        sheet["B16"] = 995 + month
+    workbook["M10"]["B15"] = 1006
+    workbook["M10"]["B16"] = 1001
+    for offset, column in enumerate(range(12, 17), start=8):
+        month = f"M{offset:02d}"
+        budget.cell(row=14, column=column).value = month
+        budget.cell(row=15, column=column).value = f"='{month}'!B15"
+        budget.cell(row=16, column=column).value = f"='{month}'!B16"
+        budget.cell(row=18, column=column).value = f"='{month}'!B16-'{month}'!B15"
+    budget["N18"] = target_formula
+    if extra:
+        extra(workbook)
+    stream = BytesIO()
+    workbook.save(stream)
+    workbook.close()
+    raw = stream.getvalue()
+    cleaned = BytesIO()
+    with ZipFile(BytesIO(raw), "r") as source, ZipFile(
+        cleaned, "w", compression=ZIP_DEFLATED
+    ) as target:
+        for info in source.infolist():
+            data = source.read(info.filename)
+            if info.filename == "xl/workbook.xml":
+                data = data.replace(b"<workbookProtection/>", b"")
+            target.writestr(info, data)
+    return cleaned.getvalue()
+
+
+def monthly_policy(**changes):
+    return {
+        "profile": PROFILE_3,
+        "sheet": "Budget",
+        "targets": ["N18"],
+        "before_formula": "=N15-N14",
+        "confirmed": True,
         **changes,
     }
 
@@ -83,6 +140,48 @@ def test_true_blank_and_unsupported_function_are_distinct():
         "synthetic.xlsx", fixture.workbook_bytes(unsupported=True), Settings()
     )
     assert "UNSUPPORTED_FORMULA" in preflight(unsupported, policy())["reason_codes"]
+
+
+def test_monthly_profile_inspection_is_profile_specific_and_single_target():
+    raw = monthly_workbook_bytes()
+    default_snapshot = inspect_input("monthly.xlsx", raw, Settings())
+    assert "UNSUPPORTED_FORMULA" in default_snapshot["issues"]
+
+    monthly_snapshot = inspect_input(
+        "monthly.xlsx", raw, Settings(), profile_context=PROFILE_3
+    )
+    assert "UNSUPPORTED_FORMULA" not in monthly_snapshot["issues"]
+    result = preflight(monthly_snapshot, monthly_policy())
+    assert result["status"] == "PRELIMINARY_ONLY"
+    assert result["eligible_count"] == 1
+    assert result["targets"][0]["change_kind"] == "MONTHLY_FORMULA_REPLACEMENT"
+
+    assert preflight(monthly_snapshot, monthly_policy(targets=["N18", "O18"]))[
+        "status"
+    ] == "UNSUPPORTED"
+    with pytest.raises(WorkbookCareError):
+        preflight(
+            monthly_snapshot,
+            {"profile": PROFILE_COMBINED, "items": [monthly_policy()]},
+        )
+
+
+def test_monthly_profile_inspection_keeps_unsupported_formula_rejection():
+    external = inspect_input(
+        "monthly.xlsx",
+        monthly_workbook_bytes(target_formula="='[other.xlsx]M10'!B16-'M10'!B15"),
+        Settings(),
+        profile_context=PROFILE_3,
+    )
+    assert "UNSUPPORTED_FORMULA" in external["issues"]
+
+    unsupported_function = inspect_input(
+        "monthly.xlsx",
+        monthly_workbook_bytes(target_formula="=OFFSET(N15,0,0)"),
+        Settings(),
+        profile_context=PROFILE_3,
+    )
+    assert "UNSUPPORTED_FORMULA" in unsupported_function["issues"]
 
 
 def test_owner_integrity_expiry_and_concurrent_updates(tmp_path):
@@ -160,6 +259,44 @@ def test_actual_api_owner_cookie_preflight_and_negative_version(tmp_path, monkey
         ).status_code
         == 404
     )
+
+
+def test_api_monthly_preflight_reinspects_default_upload_with_profile_context(
+    tmp_path, monkeypatch
+):
+    settings = Settings(delivery_beta_enabled=True, delivery_data_dir=str(tmp_path))
+    client = make_client(settings, monkeypatch)
+    headers = {"Origin": "http://localhost:5173", "X-WorkbookCare-CSRF": "1"}
+    raw = monthly_workbook_bytes()
+    created = client.post(
+        "/v1/delivery",
+        headers=headers,
+        json={
+            "action": "create_input",
+            "filename": "monthly.xlsx",
+            "file_base64": base64.b64encode(raw).decode(),
+            "consent": True,
+            "request_key": "monthly-api-request-0001",
+        },
+    )
+    assert created.status_code == 200
+    job = created.json()
+    checked = client.post(
+        "/v1/delivery",
+        headers=headers,
+        json={
+            "action": "preflight",
+            "job_id": job["job_id"],
+            "revision": 1,
+            "source_hash": job["source_hash"],
+            "policy": monthly_policy(),
+        },
+    )
+
+    assert checked.status_code == 200
+    payload = checked.json()
+    assert payload["preflight"]["status"] == "PRELIMINARY_ONLY"
+    assert payload["preflight"]["eligible_count"] == 1
 
 
 def test_hosted_owner_is_bound_to_body_signature(tmp_path, monkeypatch):

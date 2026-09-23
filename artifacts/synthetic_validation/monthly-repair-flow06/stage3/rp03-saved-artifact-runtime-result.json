@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "kind": "UNMOCKED_RP03_SAVED_ARTIFACT_RUNTIME_NO_REFERENCE_LOOP",
+  "reference_and_compatibility": {
+    "reference_status": {
+      "status": "PASS",
+      "case_count": 20,
+      "excel_version": "16.0",
+      "reference_digest": "a841c019a2fc8d240313e6c8feae4d58dfd646f523d1302271050f1d7d752cc4"
+    },
+    "compatibility_status": {
+      "status": "PASS",
+      "excel_version": "16.0",
+      "profiles": [
+        "RP01",
+        "RP02",
+        "RP03"
+      ],
+      "evidence_digest": "4fc575ebc98eacaceaa97d7c46f37c4d325f4482088f6d77f9736a25a7b6140b"
+    }
+  },
+  "source_path": "artifacts\\synthetic_validation\\monthly-repair-flow06\\stage3\\monthly-rp03-supported-6sheet.xlsx",
+  "source_sha256": "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+  "source_sha256_preserved": "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+  "profile": "RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1",
+  "patch_count": 1,
+  "exact_targets": [
+    [
+      "Budget",
+      "N18"
+    ]
+  ],
+  "expected_cell": "Budget!N18",
+  "expected_value": -5,
+  "downloaded_data_only_value": -5,
+  "raw_formula": "='M10'!B16-'M10'!B15",
+  "monthly_detector_target_candidates": {
+    "before": 1,
+    "after": 0
+  },
+  "delivery_status": "READY",
+  "artifacts": {
+    "REPAIRED_XLSX": {
+      "path": "artifacts\\synthetic_validation\\monthly-repair-flow06\\stage3\\saved-artifacts03\\rp03-repaired.xlsx",
+      "filename": "workbookcare_repaired_5b75d61e-2297-40c3-81a7-c9300243523b.xlsx",
+      "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "sha256": "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+      "bytes": 7463
+    },
+    "CHANGES_XLSX": {
+      "path": "artifacts\\synthetic_validation\\monthly-repair-flow06\\stage3\\saved-artifacts03\\rp03-changes.xlsx",
+      "filename": "changes_5b75d61e-2297-40c3-81a7-c9300243523b.xlsx",
+      "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "sha256": "ce7d5eb9336818ca416c365f7d01bc0e283f8d95321b6d7f24b42f16a3273f15",
+      "bytes": 10112
+    },
+    "VERIFICATION_HTML": {
+      "path": "artifacts\\synthetic_validation\\monthly-repair-flow06\\stage3\\saved-artifacts03\\rp03-verification.html",
+      "filename": "verification_5b75d61e-2297-40c3-81a7-c9300243523b.html",
+      "mime": "text/html;charset=utf-8",
+      "sha256": "12088a10371fda99848aae327849a08718138d6035743a343cded6a2da1d913b",
+      "bytes": 5366
+    }
+  },
+  "plan_path": "artifacts\\synthetic_validation\\monthly-repair-flow06\\stage3\\saved-artifacts03\\rp03-plan.json",
+  "mocked": false,
+  "note": "Skips the reference recalculation loop; requires registered real reference and compatibility PASS before execution."
+}

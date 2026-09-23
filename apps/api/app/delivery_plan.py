@@ -3,11 +3,18 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import time
+from io import BytesIO
 from pathlib import Path
 
+from openpyxl import load_workbook
+
+from .config import Settings
 from .delivery_calculation import (
+    CALCULATION_MODE_LEGACY,
+    CALCULATION_MODE_MONTHLY_SHEETS,
     ENGINE_VERSION,
     REGISTRY_VERSION,
     calculate,
@@ -17,18 +24,36 @@ from .delivery_calculation import (
 from .delivery_inputs import (
     POLICY_VERSION,
     PROFILE_1,
+    PROFILE_3,
     PROFILE_COMBINED,
     digest,
+    inspect_input,
     policy_items,
     preflight,
     reject,
 )
 from .repair_rules.formula_restore import formula_restore_replacement
+from .repair_rules.monthly_formula import monthly_formula_replacement
 from .repair_rules.numeric_text import numeric_text_replacement
 
 PLAN_VERSION = "repair-plan-v1"
 TEMPLATE_VERSION = "plain-xlsx-three-artifacts-v1"
 REQUIRED_ARTIFACTS = ["REPAIRED_XLSX", "CHANGES_XLSX", "VERIFICATION_HTML"]
+
+
+def repair_rule_fingerprint() -> str:
+    root = Path(__file__).parent
+    return digest(
+        {
+            name: hashlib.sha256((root / name).read_bytes()).hexdigest()
+            for name in [
+                "formula_patterns.py",
+                "repair_rules/monthly_formula.py",
+                "repair_rules/formula_restore.py",
+                "repair_rules/numeric_text.py",
+            ]
+        }
+    )
 
 
 def reference_status() -> dict:
@@ -66,8 +91,9 @@ def validate_plan(job: dict) -> dict:
         ("source_hash", job["snapshot"]["source_hash"]),
         ("inventory_hash", job["snapshot"]["inventory_hash"]),
         ("engine_fingerprint", engine_fingerprint()),
+        ("repair_rule_fingerprint", repair_rule_fingerprint()),
     ]:
-        if plan[key] != value:
+        if plan.get(key) != value:
             reject("STALE_PLAN", "원본·소유자·계산 기준이 달라져 새 계획이 필요합니다.", 409)
     if plan["policy_digest"] != digest(job["state"]["policy"]):
         reject("STALE_PLAN", "업무 기준이 변경되었습니다.", 409)
@@ -77,22 +103,52 @@ def validate_plan(job: dict) -> dict:
 
 
 def build_plan(job: dict, policy: dict) -> dict:
-    snapshot = job["snapshot"]
+    items = policy_items(policy)
+    monthly_profile = len(items) == 1 and items[0].get("profile") == PROFILE_3
+    snapshot = (
+        inspect_input(
+            "workbook.xlsx",
+            job["source"],
+            Settings(),
+            profile_context=PROFILE_3,
+        )
+        if monthly_profile
+        else job["snapshot"]
+    )
     gate = preflight(snapshot, policy)
     if gate["status"] != "PRELIMINARY_ONLY":
         reject(
             "PREVIEW_VALIDATION_FAILED", "선택한 전체 범위가 사전 검사 조건을 충족해야 합니다.", 422
         )
-    before = calculate(snapshot["cells"])
-    if any(v["type"] == "error" for rows in before["values"].values() for v in rows.values()):
+    calculation_mode = (
+        CALCULATION_MODE_MONTHLY_SHEETS if monthly_profile else CALCULATION_MODE_LEGACY
+    )
+    before = calculate(snapshot["cells"], calculation_mode=calculation_mode)
+    allowed_before_error = (policy["sheet"], policy["targets"][0]) if monthly_profile else None
+    existing_errors = [
+        (error_sheet, error_cell, value)
+        for error_sheet, rows in before["values"].items()
+        for error_cell, value in rows.items()
+        if value["type"] == "error"
+    ]
+    if any((sheet, cell) != allowed_before_error for sheet, cell, _value in existing_errors):
         reject(
             "EXISTING_CALCULATION_ERROR",
             "기존 계산 오류가 있어 이 수정 범위로 진행할 수 없습니다.",
             422,
         )
+    if monthly_profile and (
+        len(existing_errors) != 1
+        or existing_errors[0][2].get("value") != "#VALUE!"
+        or existing_errors[0][2].get("provenance") != "ENGINE_CALCULATED"
+    ):
+        reject(
+            "PREVIEW_VALIDATION_FAILED",
+            "월별 수식 교체 대상의 기존 계산 오류가 일치하지 않습니다.",
+            422,
+        )
     after_cells = copy.deepcopy(snapshot["cells"])
     patches = []
-    items = policy_items(policy)
     item_gates = [
         gate if len(items) == 1 and item is policy else preflight(snapshot, item)
         for item in items
@@ -118,6 +174,30 @@ def build_plan(job: dict, policy: dict) -> dict:
             )
             if item["profile"] == PROFILE_1:
                 replacement = numeric_text_replacement(current)
+            elif item["profile"] == PROFILE_3:
+                workbook = load_workbook(BytesIO(job["source"]), data_only=False, read_only=False)
+                try:
+                    monthly = monthly_formula_replacement(
+                        workbook,
+                        snapshot,
+                        before["values"].get(sheet, {}).get(address, {}),
+                        sheet=sheet,
+                        cell=address,
+                    )
+                finally:
+                    workbook.close()
+                if monthly is None:
+                    reject(
+                        "PREVIEW_VALIDATION_FAILED",
+                        "월별 시트 수식 교체 조건을 확인할 수 없습니다.",
+                        422,
+                    )
+                replacement = {
+                    **current,
+                    "type": "formula",
+                    "value": monthly.after_formula,
+                    "cached": monthly.after_value["value"],
+                }
             else:
                 replacement = formula_restore_replacement(
                     current,
@@ -144,7 +224,7 @@ def build_plan(job: dict, policy: dict) -> dict:
                     "anchor": item.get("anchor") if item["profile"] != PROFILE_1 else None,
                 }
             )
-    after = calculate(after_cells)
+    after = calculate(after_cells, calculation_mode=calculation_mode)
     impact = []
     auxiliary = []
     for sheet, rows in after_cells.items():
@@ -155,7 +235,7 @@ def build_plan(job: dict, policy: dict) -> dict:
                 .get(address, {"type": "blank", "value": None, "provenance": "SOURCE_VALUE"})
             )
             future = after["values"][sheet][address]
-            if future["type"] == "error" and prior != future:
+            if future["type"] == "error":
                 reject(
                     "PREVIEW_VALIDATION_FAILED",
                     "변경 후 새 계산 오류가 발생해 계획을 차단했습니다.",
@@ -215,7 +295,9 @@ def build_plan(job: dict, policy: dict) -> dict:
         "policy_digest": gate["policy_digest"],
         "policy_items": copy.deepcopy(items),
         "engine_version": ENGINE_VERSION,
+        "calculation_mode": calculation_mode,
         "engine_fingerprint": engine_fingerprint(),
+        "repair_rule_fingerprint": repair_rule_fingerprint(),
         "registry_version": REGISTRY_VERSION,
         "template_version": TEMPLATE_VERSION,
         "patches": patches,

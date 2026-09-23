@@ -1,3 +1,115 @@
+## MONTHLY-UX07-RELEASE ? deployment blocked; product checkpoint verified (2026-09-23)
+
+Second release-tool review still CHANGES_REQUIRED: stage environment replacement, incomplete command/args restoration, and incomplete service invariants. Initial attempt plus one correction exhausted; no further helper work or cloud mutation. Existing beta is unchanged. Product regression remains PASS as recorded below. Selective product commit/push is authorized and proceeds separately. Beta runtime, screen/download proof and10-action measurement NOT_RUN. Next proposed single unit: repair these deployment guards and independently review before deployment. Evidence: artifacts/synthetic_validation/monthly-ux07-release/release-review-attempt2.json.
+
+---
+
+## MONTHLY-UX07-RELEASE ? product regression passed; release pending (2026-09-23)
+
+Authorized: bounded monthly UX reduction, selective commit/push and existing protected beta release. RP03 exact approval and source consent preserved. Single monthly change group opens automatically; three-file download CTA retains individual fallbacks. Target10 actions is not yet measured on beta.
+
+Verification: web175/build and Worker16 PASS. Full API315 PASS/1 FAIL due cwd-relative frozen-fixture path; corrected repo-root path retested PASS (builder6 from each cwd; root1 overlap disclosed). Ruff and M4C exact36/noextras PASS. Final verify.ps1 itself exited1; combined follow-up checks close the failure without repeating315 passed tests. Engine/reference and native compatibility remain PASS; 16 fingerprint-bound staged blobs match validated bytes. Existing native Excel proof reused, not rerun.
+
+Release helper first review CHANGES_REQUIRED; invalid image never uploaded. Consolidated correction awaiting independent review. Cloud unchanged; commit/push and protected beta screen proof pending. Browser Access login required. No payment/commercial readiness claim.
+
+Evidence: artifacts/synthetic_validation/monthly-ux07-release/root-checks.json, staged-byte-proof.json, release-review-attempt1.json. Prior monthly engine/native/UI evidence: docs/delivery-v3_2/reviews/MONTHLY-REPAIR-FLOW-06.md. User lockfile excluded; unrelated working changes preserved.
+
+---
+
+## FLOW06 resume01 - functional PASS; UX target pending (2026-09-23)
+
+Stopped test corrected. Fresh navigation14/monthly3 tests and final build PASS; independent source/browser-output review PASS. Actual desktop/mobile flow showed #VALUE! to-5, exact approval, READY and three downloaded files matching server/native-validated bytes. No mandatory cell/formula input. UX14 actions exceeds initial10 target; human usability remains unverified. Full regression/Git/beta deployment NOT_RUN. Historical failures preserved.
+
+Details: docs/delivery-v3_2/reviews/MONTHLY-REPAIR-FLOW-06.md and artifacts/synthetic_validation/monthly-repair-flow06/stage4/resume01/result.json. Stop after approved retest. Next proposed single unit: reduce required actions while preserving approval and evidence.
+
+---
+
+## MONTHLY-REPAIR-FLOW-06 - stages1-3 PASS; stage4 STOPPED (2026-09-22)
+
+Stage3 actual Excel6 XLSX and unmocked RP03 approval/download3 PASS: exact N18 formula, cached-5, candidate1->0, original preserved. Stage4 correction suite40PASS/1FAIL: contradictory test assertions remain after retry limit. Final corrected build/full regression/UI approval-delivery/desktop-mobile remain pending. Actual local integrated diagnosis shows structure0/formula1. No Git or beta deployment. Historical9 artifacts recovered and reviewed; prior private DB state unknown. Original13-sheet limit unchanged.
+
+Details: docs/delivery-v3_2/reviews/MONTHLY-REPAIR-FLOW-06.md; artifacts/synthetic_validation/monthly-repair-flow06/final-status.json. STOP pending owner decision on next one correction+UI verification unit. Earlier stage4 test/build PASS is not final corrected-source proof.
+
+---
+
+## MONTHLY-REPAIR-FLOW-06 - STAGES 1-4 APPROVED (2026-09-22)
+
+User explicitly authorizes monthly repair stages1-4: separate rule, strict eligibility, exact approval/3artifact delivery, UI. Continue after internal tests/review for each stage; this approval overrides per-stage owner checkpoint only for this unit. Report scope changes or unresolved failures. No10sheetlimit change, commit/push/deploy. Preserve RP01/RP02, original, exactapproval, frozen expected -5 and unsupported boundaries. Original13sheet sample remains unsupported; supported-size controls must be labeled separately. Use actual local UI and affected final integration/native compatibility evidence before claiming completion; beta remains pending without deployment. Source baseline and immutable hashes: artifacts/synthetic_validation/monthly-repair-flow06/work-order.json.
+
+---
+
+## MONTHLY-CALC-INTEGRATION-05 - EXISTING REPAIR INTEGRATION PASS / OWNER CHECKPOINT (2026-09-22)
+
+User-approved existing RP01/RP02 plan/output integration completed. Eight targeted existing tests passed (one pre-existing Starlette deprecation warning). Unmocked reference_status and compatibility_status PASS. Separate approval and actual execution generated six saved artifacts; RP01 repaired H2=15500 and RP02 repaired F12=18200. Original hashes preserved; frozen product/classes/reference/fixtures/oracles/user lock hashes unchanged. Independent reviewer inspected all6 files, matching hashes, repaired values, change logs and HTML reports: PASS.
+
+Combined coverage is plan/calculation only:11patches,42indirect impacts,J130=2177677,F31/F64/F107=5232/3551/7800. Not a new combined-download proof. Existing execution pytest compatibility mock is disclosed; independent standalone runs use actual status without mocks. Existing runtime helper repeated20 engine reference calculations and discarded temp outputs; scoped second runner saved6files without repeating that loop. Native Excel20/monthly43 were not repeated. This duplicate-helper cost is recorded, not hidden as reused evidence.
+
+Actual commands/exits, runners, reports and saved files: artifacts/synthetic_validation/monthly-calc-integration05/. No product edits, full regression, native Excel, browser, beta deployment, commit/push or new monthly repair. No broad release-readiness claim. Commands and new artifacts use ExcelSaaS; host workspace permission root is not changed by shell workdir.
+
+STOP. Next single proposed unit: new monthly existing-formula replacement rule with exact before-formula checks, preserving RP02 blank-only behavior. Original13-sheet fixture still exceeds10-sheet limit; limit expansion is not included. Prior records preserved.
+
+---
+
+## MONTHLY-CALC-EXCEL-04 — CALCULATION COMPATIBILITY PASS / OWNER CHECKPOINT (2026-09-22)
+
+Actual installed Excel recalculated20 existing synthetic reference cases; current isolated engine and frozen policy agree on25 typed values. Reduced Budget/M10 monthly control was independently compared to fixed -5 (1001-1006); see saved native/engine evidence and independent review. This is not13-sheet repair or delivery support. Frozen source/classes/oracles/user lock unchanged. delivery_reference.json refreshed after review; actual reference_status() PASS. Prior reference bytes preserved in this unit; historical d03 evidence retained.
+
+Root native script output-path substitution initially failed and wrote d03/excel-reference.json. Fresh result was copied to this unit and historical bytes restored from pre-run backup; verified equality. Native20 was not repeated. Exact commands/exits in artifact evidence. No full regression, full RP01/RP02 delivery replay, browser, beta deployment, commit/push or new repair integration. Existing10-sheet limit unchanged. Prior legacy29 evidence is reused, not claimed as new execution.
+
+Monthly control harness corrections: initial engine checker rejected the extra provenance field despite correct -5; typed-value comparison corrected, rerun exit0. Initial Excel COM optional Add arguments failed before calculation; Add() corrected, rerun exit0 with actual -5. These harness failures are preserved, not product defects or oracle changes.
+
+STOP. Next single proposed unit: verify existing RP01/RP02 plan/output integration against refreshed reference before implementing new monthly replacement profile. Records preserved. Artifact: artifacts/synthetic_validation/monthly-calc-excel04/result.json.
+
+---
+
+## PONYTAIL-RULES-01 — 운영 원칙 보완 완료 (2026-09-22)
+
+사용자 승인으로 docs/54_AGENT_ORCHESTRATION.md의 기존 Ponytail 문단에 역할별 재사용/최소 변경 기준과 검증 우선 경계를 보완했다. PL 단독 문서 작업. 플러그인/hook 설치, 제품 코드 수정, 시험 재실행, Git commit/push, 베타 배포 없음. 기존 기록 보존 및 삽입 영역 외 원문 바이트 동일 확인 PASS; 기록 스크립트 exit 0. 월별 계산 Excel/reference 호환성 검증은 여전히 보류이며 이번 설정으로 재개하지 않았다. 토큰 절감률 미측정.
+
+---
+
+## MONTHLY-CALC-ACCEPT-03 - MATRIX REVIEW PASS / OWNER CHECKPOINT (2026-09-22)
+
+Remaining monthly calculation acceptance tests completed: 43 cases covered (prior42 passed plus1 targeted missing-cell case; no combined rerun), Ruff PASS, focused independent review PASS. Review initially requested the absent missing-cell case; correction verifies ENGINE_UNSUPPORTED before engine launch. Product source, compiled evaluator, existing input/plan/repair policies, user lock and native reference file hashes unchanged. Test-only extension; exact commands/exits in artifacts/synthetic_validation/monthly-calc-accept03 evidence JSON files.
+
+Initial1fail/33pass preserved and independently classified as a test-fixture defect: B15=A2 with blank A2 evaluates numeric0, so rejecting it based on upstream type would add a rule absent from the contract. Corrected positive control B15=0/N18=1001; actual empty-string, text, boolean/error formula results remain negative cases. No fixed monthly -5 oracle rewritten. Raw Java modes/grammar/finite operands and numeric controls tested.
+
+Unchanged-source legacy29 evidence reused, not repeated. No full regression/native Excel/reference refresh/browser/beta deploy/commit/push. Native compatibility evidence remains STALE due prior engine change. Original13-sheet fixture still exceeds10-sheet limit. This proves bounded internal calculation acceptance, not complete new repair/Excel/product readiness.
+
+STOP. Next one proposed unit: Excel/reference compatibility verification, then separately reviewed integration. Monthly formula replacement profile and customer approval UI still not implemented. Prior records preserved.
+
+---
+
+## MONTHLY-CALC-DEPTH-02 - FOCUSED REVIEW PASS / OWNER CHECKPOINT (2026-09-22)
+
+Remaining Python early-depth guard and Java AreaPtg qualified dependency/depth guard corrected; Korean error text restored. Independent focused review PASS. Range expansion capped before loops with long multiplication after review caught int overflow. Correct exact100-edge boundary test added. Final monthly17, Ruff and Java compile PASS. Legacy29 passed earlier in this unit and was reused after the range-size/test-only correction, not rerun on final source. Exact commands/exits/failures in artifacts/synthetic_validation/monthly-calc-depth02/builder-evidence.json and range-overflow-correction.json. Initial review evidence preserved separately. No observed red-before depth run claimed.
+
+Input/plan/RP01/RP02/user lock/reference hashes unchanged. Prior engine fingerprint/reference remains STALE pending integration; original13-sheet fixture still exceeds unchanged10-sheet limit. Broader monthly acceptance matrix remains pending; this PASS covers only assigned depth corrections, not the complete new repair feature. No full regression/native Excel/browser/beta deploy/commit/push. Existing beta unchanged; local implementation not release-ready.
+
+STOP. Next single proposal: remaining monthly calculation acceptance cases (direct references, unknown modes, missing/nonfinite/formula-derived operands, raw grammar), followed by a separate integration checkpoint. Do not open new repair UI yet. Historical records preserved.
+
+---
+
+## MONTHLY-CALC-01 - CHANGES_REQUIRED / OWNER CHECKPOINT (2026-09-21)
+
+Internal monthly calculation opt-in partially implemented; actual monthly13/affected legacy29 targeted tests, Ruff and Java compile passed. Independent review CHANGES_REQUIRED: Python depth guard runs after recursive descent, Java graph omits AreaPtg dependencies; corrupted depth error text remains. These are release blockers despite targeted PASS. See artifacts/synthetic_validation/monthly-calc01/REPORT.md, result.json and builder-evidence.json for exact limitations/commands/failures.
+
+Input/plan/RP01/RP02/user lock/native reference file hashes unchanged. Engine fingerprint changed; native compatibility evidence STALE pending future integration, no bypass. Original13-sheet sample remains beyond10-sheet limit. No full regression/native Excel/browser/deploy/commit/push. Current beta untouched; local source/classes are work in progress, not release-ready.
+
+STOP under AGENTS EFFICIENCY-02 initial attempt+one correction for same cause. Next single proposed unit: complete both depth guards and error text, add focused regression cases, targeted retest/review. Do not start replacement/approval UI yet. Prior records preserved.
+
+---
+
+## MONTHLY-REPAIR-SPEC-01 - SPEC FROZEN / OWNER CHECKPOINT (2026-09-21)
+
+Owner approved conditions and fixed expectations before implementation. Existing d1f75b1 checkpoint is pushed. New spec: artifacts/synthetic_validation/monthly-repair-spec01/SPEC.md and acceptance-oracle.json (sha256 locked). Reused independent prior normal native N18=-5 and four unchanged fixture hashes; JSON/provenance checks exit0. No product code/tests/Excel/browser/deploy/push executed in this document-only unit.
+
+Important prerequisite: current repair path rejects cross-sheet formulas, nonblank RP02 targets and any existing calculation error; dependency graph assumes same-sheet references. Reuse approval/artifact framework, but add a narrow new profile and validated cross-sheet graph support; do not globally loosen gates. Fixed goal: Budget!N18 =N15-N14/#VALUE! -> ='M10'!B16-'M10'!B15/-5; one patch and target candidate0. Normal/equivalent/hidden controls no patch. Contract negative cases are requirements, not PASS results.
+
+STOP per AGENTS owner checkpoint. Next one proposed unit: bounded internal monthly-sheet calculation/dependency support with targeted checks; no repair UI exposure yet. New spec/progress records local only.
+
+---
+
 ## MONTHLY-COPY-01 - VERIFIED BETA / OWNER CHECKPOINT (2026-09-21)
 
 One remaining monthly difference explanation now displays Korean by exact-message mapping in OriginalFormulaComparison.tsx. Other evidence/fallbacks and engine/repair/approval behavior unchanged. Existing component2tests exit0; one hosted typecheck/build exit0; focused source/helper/evidence review PASS. Earlier npm.ps1 policy and sandbox spawn failures happened before assertions and are preserved in builder-evidence.md.

@@ -13,6 +13,8 @@ SYNTHETIC_SOURCE_HASHES = {
     "acab2178721eceec8315704b0f668e4fb813bffda23db5656a45dac826573754",
     "7065c57aeb63185f1feff0992e48029ad3c09feb6878fc90bd605c0d79221e83",
     "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+    # Frozen FLOW06 six-sheet monthly RP03 synthetic source.
+    "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
 }
 
 

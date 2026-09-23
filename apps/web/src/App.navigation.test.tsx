@@ -79,10 +79,12 @@ describe('core product navigation and review boundaries', () => {
     const link = menu('정밀 검증'); fireEvent.click(link, { ctrlKey: true });
     expect(window.location.pathname).toBe('/compare');
   });
-  it('maps only explicit numeric text and true-blank candidates to a server preflight, never infers a formula', () => {
+  it('maps explicit repair candidates and value-free monthly candidates without inferring generic formulas', () => {
     const f = demoResult.findings[0];
     expect(reviewDisposition({...f,rule_code:'NUMBER_STORED_AS_TEXT',sheet:'Data',cell:'B2'}).profile).toBe('RP01_NUMERIC_TEXT_FIELD_V1');
-    expect(reviewDisposition({...f,rule_code:'FORMULA_PATTERN_OUTLIER'}).profile).toBeUndefined();
+    expect(reviewDisposition({...f,rule_code:'FORMULA_PATTERN_OUTLIER',formula_pattern:null}).profile).toBeUndefined();
+    expect(reviewDisposition({...f,rule_code:'FORMULA_PATTERN_OUTLIER',sheet:'Budget',cell:'N18',formula_pattern:{pattern_type:'DOMINANT_NORMALIZED_PATTERN_OUTLIER',formula_region:'N18',dominant_pattern_id:'x',neighbor_count:4,evidence_locations:['L18','M18','O18','P18'],detection_basis:'synthetic',current_limitations:[],pattern_subtype:'GENERIC_PATTERN_DRIFT'}}).profile).toBeUndefined();
+    expect(reviewDisposition({...f,rule_code:'FORMULA_PATTERN_OUTLIER',sheet:'Budget',cell:'N18',formula_pattern:{pattern_type:'DOMINANT_NORMALIZED_PATTERN_OUTLIER',formula_region:'N18',dominant_pattern_id:'x',neighbor_count:4,evidence_locations:['L18','M18','O18','P18'],detection_basis:'synthetic',current_limitations:[],pattern_subtype:'REFERENCE_SHEET_DRIFT'}}).profile).toBe('RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1');
     expect(reviewDisposition({...f,rule_code:'FORMULA_PATTERN_GAP'}).profile).toBeUndefined();
     expect(reviewDisposition({...f,rule_code:'NUMBER_STORED_AS_TEXT',cell:'B2:B99'}).profile).toBeUndefined();
   });

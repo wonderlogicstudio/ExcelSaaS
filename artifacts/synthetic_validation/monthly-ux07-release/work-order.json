@@ -1,0 +1,19 @@
+{
+  "id": "MONTHLY-UX07-RELEASE",
+  "approval": "User asks next step and authorizes commit/push/protected beta deployment after verification",
+  "scope": [
+    "reduce needless monthly-flow actions without weakening exact approval or source consent",
+    "final affected/full regression on frozen changes",
+    "selective commit and push reviewed accumulated monthly engine/UI changes",
+    "deploy to existing protected beta and inspect actual screen"
+  ],
+  "constraints": [
+    "no price/payment/customer data/new paid resources",
+    "preserve current Access/privateIAM/Gateway/R2/KV boundaries",
+    "never stage all untracked artifacts/private state",
+    "preserve user dirty dependencies.lock.json",
+    "native evidence reused only if current fingerprints unchanged",
+    "stop/report unresolved failures or expanded scope"
+  ],
+  "status": "DESIGN_AND_RELEASE_AUDIT"
+}

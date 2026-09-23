@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "paths": [
+    {
+      "path": "apps/api/engine/DeliveryCalc.java",
+      "sha256": "b66b6af83103029cd5e12f9c1fb1c619430991602c91d2ebd2406275a69cc871",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/engine/dependencies.lock.json",
+      "sha256": "4bb18c1a43e322f39682aa4afeac353ca4e1ccbde0662023a5736f5e05ec4dd0",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/delivery_calculation.py",
+      "sha256": "80c7588506ed7ccdb7b847422e5c141a4653d501b6cf15195ea8b266c058145c",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/delivery_process.py",
+      "sha256": "fcc51b50ad06f7636dec8706d6dbec0981470d92ce51b05c9c29c7cf53eb1086",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/delivery_execution_control.py",
+      "sha256": "c2acda2a7cd70d9faae6ae44496e1ac945d760fb0aaa87107e5b30060a3919ca",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/formula_patterns.py",
+      "sha256": "3f4314d6ef8bb9606bc5207c332869135a0511c1550e37c001c2f7adce46c5ae",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/repair_rules/monthly_formula.py",
+      "sha256": "2777227c2375d1e6493aedd10038347ad07d84c85524945523a3cd5b3d9cbd6d",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/repair_rules/formula_restore.py",
+      "sha256": "92a97a4843976ee224c825a0515019fcd44831a118bd1c1c4c4990a0c6e00d62",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/repair_rules/numeric_text.py",
+      "sha256": "97f45343b3d5af74b7678d18f4fb15752ba0f8cb986a249b102c736edb7abd1f",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/repair_rules/__init__.py",
+      "sha256": "0c62f1ef17398b6e4a725b9852bd22c733bb5cf4845ced2ab8a19e560437b534",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/delivery_patch.py",
+      "sha256": "b9ebb3c91cca13e086b8c5c65ae58c3b4747fb3feeb787f0c52700915970dde9",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/delivery_artifacts.py",
+      "sha256": "69c66a93d3103c179c481bc44ce4f21b684e01dfb113f04533598cbbe941a81f",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/delivery_inputs.py",
+      "sha256": "a3ec9a7efa2a309eac3568405d3994f4c50a52177c374236b995cc742393b176",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/delivery_plan.py",
+      "sha256": "b688ae134d4bb5ea81e559553634998554259a0096e1aecc3d0f56d5f3ea6b5b",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/delivery_package.py",
+      "sha256": "144c591493612302b35d69a7c4bf4786ac0f4590969842a5560f4fa3abeae2b0",
+      "staged_matches_validated_bytes": true
+    },
+    {
+      "path": "apps/api/app/delivery_verification_template.html",
+      "sha256": "0ba74aefd76ad98f83c5059067e63411a05946a99df4b613f8dcca1a678484f9",
+      "staged_matches_validated_bytes": true
+    }
+  ],
+  "excluded_user_lock": "apps/api/engine/dependencies.lock.json",
+  "staged_count": 34
+}

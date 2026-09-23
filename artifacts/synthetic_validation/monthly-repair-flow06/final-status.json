@@ -1,0 +1,51 @@
+{
+  "unit": "MONTHLY-REPAIR-FLOW-06",
+  "status": "FUNCTIONAL_REVIEW_PASS_UX_TARGET_PENDING",
+  "stage_status": {
+    "1": "REVIEW_PASS",
+    "2": "REVIEW_PASS",
+    "3": "REVIEW_PASS",
+    "4": "FUNCTIONAL_REVIEW_PASS_UX_TARGET_PENDING"
+  },
+  "stage3_evidence": "stage3/final-verification.json",
+  "stage4_final_test": {
+    "status": "PASS",
+    "evidence": "stage4/resume01/result.json",
+    "previous_failure": "stage4/resume01/final-status-before-resume01.json"
+  },
+  "stage4_review": "PASS_SOURCE_AND_ACTUAL_BROWSER_ARTIFACTS",
+  "stage4_build": "PASS_FINAL_CORRECTED_SOURCE",
+  "browser": {
+    "url": "http://localhost:5186/",
+    "tab_id": "209533813",
+    "actual_file": "stage3/monthly-rp03-supported-6sheet.xlsx",
+    "verified": "Desktop1440/mobile390 actual proposal#VALUE! to-5; exact formula; keyboard approval; READY; actual3 downloads byte-equal saved server artifacts",
+    "remaining": [],
+    "note": "Browser upload control calls took333/778seconds; not measured app processing time. No human usability or UX activation-budget pass claimed.",
+    "ux": "14 core activations vs target10; zero mandatory address/formula entry; four stages. Human usability unverified."
+  },
+  "local_runtime": {
+    "api_exec_session": 24802,
+    "api_port": 8016,
+    "web_exec_session": 31590,
+    "web_port": 5186,
+    "frontend_options": "hosted_beta presentation + integrated formula audit, API localhost8016",
+    "api_mode": "internal_beta; PAYMENT_MODE=OFF; isolated stage4/private-state",
+    "beta_deployed": false
+  },
+  "preservation": "Historical9 artifact files restored and independently hash-reviewed; unknown prior private DB state not claimed restored. See stage3/recovery.json and preservation-incident.json.",
+  "not_run": [
+    "full repository regression",
+    "beta deployment/readiness",
+    "Git commit",
+    "Git push"
+  ],
+  "limits": [
+    "Original13-sheet file remains unsupported by unchanged10-sheet limit",
+    "RP03 supports exactly one validated monthly target, not mixed with RP01/RP02",
+    "No new commercial/payment readiness claim"
+  ],
+  "immutable_hashes_match": true,
+  "next_single_unit": "Reduce required actions toward10 without weakening exact approval or evidence; requires separate scope approval",
+  "resume01": "stage4/resume01/result.json"
+}

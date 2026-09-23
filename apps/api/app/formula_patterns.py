@@ -701,6 +701,75 @@ def _monthly_candidate_evidence(
     )
 
 
+def strict_monthly_reference_sheet_drift_candidate(
+    worksheet: Worksheet, coordinate: str
+) -> tuple[str, ...] | None:
+    """Return strict same-row monthly evidence cells for one target coordinate.
+
+    This helper intentionally mirrors only the dedicated M01~M12 monthly pass,
+    so callers do not treat generic reference-sheet drift candidates as repair
+    eligibility.
+    """
+    table_bounds = _table_bounds(worksheet)
+    summary_rows = _summary_rows(worksheet)
+    target = worksheet[coordinate]
+    if _formula_text(target) is None or _is_excluded_location(
+        worksheet, target, table_bounds, summary_rows
+    ):
+        return None
+
+    monthly_items: list[_MonthlyFormula] = []
+    for cell in worksheet[target.row]:
+        formula = _formula_text(cell)
+        if formula is None or _is_excluded_location(
+            worksheet, cell, table_bounds, summary_rows
+        ):
+            continue
+        monthly_signature = _normalize_monthly_subtraction_formula(formula, cell, worksheet)
+        if monthly_signature is not None:
+            monthly_items.append(monthly_signature)
+
+    monthly_items.sort(key=lambda item: item.cell.column)
+    for run in _contiguous_horizontal_formula_runs(monthly_items):
+        if target.column not in {item.cell.column for item in run}:
+            continue
+        if len(run) < 4:
+            continue
+        run_columns = [entry.cell.column for entry in run]
+        if _has_hidden_column_between(worksheet, run_columns):
+            continue
+        if not _monthly_headers_are_sequential(run):
+            continue
+        counts = Counter(item.signature for item in run)
+        dominant_signature, dominant_count = counts.most_common(1)[0]
+        if not dominant_signature.startswith("MONTHLY_SUB("):
+            continue
+        if dominant_count < 3 or sum(count == dominant_count for count in counts.values()) != 1:
+            continue
+        deviations = [item for item in run if item.signature != dominant_signature]
+        if len(deviations) != 1:
+            continue
+        item = deviations[0]
+        if item.cell.column != target.column:
+            continue
+        if item.signature.startswith("MONTHLY_SUB("):
+            continue
+        if item is run[0] or item is run[-1]:
+            continue
+        by_column = {entry.cell.column: entry for entry in run}
+        left = by_column.get(item.cell.column - 1)
+        right = by_column.get(item.cell.column + 1)
+        if left is None or right is None:
+            continue
+        if left.signature != dominant_signature or right.signature != dominant_signature:
+            continue
+        supporting_cells = _ordered_monthly_supporting_cells(run, item, dominant_signature)
+        if len(supporting_cells) < 3:
+            continue
+        return tuple(cell.coordinate for cell in supporting_cells)
+    return None
+
+
 def _pattern_profile(signature: str) -> _PatternProfile:
     """Extract only structural comparison facts from a private signature.
 

@@ -1,5 +1,5 @@
 import type { Finding } from '../types';
-import { reviewDisposition, reviewKey, type RepairDraft, type ReviewSelection } from '../lib/repairReview';
+import { reviewDisposition, reviewKey, RP03, type RepairDraft, type ReviewSelection } from '../lib/repairReview';
 
 export function ReviewChoice({ finding, selection }: { finding: Finding; selection: ReviewSelection }) {
   return <div className="repair-review-choice"><span>{reviewDisposition(finding).label}</span>
@@ -11,7 +11,8 @@ export function RepairReview({ selection, available, hasFile, onPrepare }: { sel
   const groups = new Map<string, RepairDraft>();
   for (const f of selection.findings) {
     const disposition = reviewDisposition(f); if (!disposition.profile || !f.sheet || !f.cell) continue;
-    const key = JSON.stringify([disposition.profile, f.sheet]), group = groups.get(key) ?? { profile: disposition.profile, sheet: f.sheet, targets: [] };
+    const key = JSON.stringify([disposition.profile, f.sheet, disposition.profile === RP03 ? f.cell : '']);
+    const group = groups.get(key) ?? { profile: disposition.profile, sheet: f.sheet, targets: [] };
     if (!group.targets.includes(f.cell)) group.targets.push(f.cell); groups.set(key, group);
   }
   const candidates = selection.findings.filter(f => reviewDisposition(f).profile).length;

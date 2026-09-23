@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "job_id": "6c485e8b-4aee-4ab2-9d57-21f4cbccc014",
+  "actual_browser_url": "http://localhost:5186/",
+  "actual_approval_then_execution": "READY",
+  "downloaded_files": [
+    {
+      "kind": "CHANGES_XLSX",
+      "filename": "changes_6c485e8b-4aee-4ab2-9d57-21f4cbccc014.xlsx",
+      "bytes": 10114,
+      "sha256": "4d067e9bf1bc72cd147d3ec28a796147cf03fd83e1d777ab18e5f9c76dec3a1b",
+      "browser_file_equals_stored_artifact": true
+    },
+    {
+      "kind": "REPAIRED_XLSX",
+      "filename": "workbookcare_repaired_6c485e8b-4aee-4ab2-9d57-21f4cbccc014.xlsx",
+      "bytes": 7463,
+      "sha256": "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+      "browser_file_equals_stored_artifact": true
+    },
+    {
+      "kind": "VERIFICATION_HTML",
+      "filename": "verification_6c485e8b-4aee-4ab2-9d57-21f4cbccc014.html",
+      "bytes": 5366,
+      "sha256": "6dfc734c6521496eaa6983bf68b2cc75daa55d845c98930ea599c8fc3d06effd",
+      "browser_file_equals_stored_artifact": true
+    }
+  ],
+  "source_hash_preserved": "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+  "actual_raw_formula": "='M10'!B16-'M10'!B15",
+  "actual_cached_value": -5,
+  "repaired_hash_matches_native_validated_stage3": true,
+  "browser_download_event": "first wait timed out; actual file existed and byte-equal; no repeatclick",
+  "native_rerun": false,
+  "payment": "OFF; existing operator synthetic grant, not PG validation",
+  "ux": {
+    "stages": 4,
+    "mandatory_address_or_formula_inputs": 0,
+    "observed_core_activations": 14,
+    "counting": "file-picker opener through three downloads, includes exact-detail expansion, excludes native file chooser, operator refresh and inspection-only controls",
+    "initial_target": 10,
+    "target_met": false,
+    "human_usability": "NOT_VALIDATED"
+  }
+}

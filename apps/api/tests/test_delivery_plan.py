@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import base64
 import copy
+import hashlib
 import json
 import math
 import os
@@ -11,7 +12,14 @@ import tempfile
 import time
 
 import pytest
-from test_delivery_inputs import ROOT, fixture, make_client, policy
+from test_delivery_inputs import (
+    ROOT,
+    fixture,
+    make_client,
+    monthly_policy,
+    monthly_workbook_bytes,
+    policy,
+)
 
 from app.config import Settings
 from app.delivery_api import get_store
@@ -19,6 +27,7 @@ from app.delivery_calculation import calculate, formula_shape, translate_formula
 from app.delivery_inputs import (
     PROFILE_1,
     PROFILE_2,
+    PROFILE_3,
     PROFILE_COMBINED,
     inspect_input,
     policy_scope,
@@ -69,6 +78,14 @@ def make_job(tmp_path):
     return store, store.create("owner", source, snapshot, "synthetic-request-one")
 
 
+def make_monthly_job(tmp_path, *, source=None):
+    store = DeliveryStore(tmp_path)
+    data = source or monthly_workbook_bytes()
+    snapshot = inspect_input("monthly.xlsx", data, Settings())
+    request_key = f"monthly-{hashlib.sha256(data).hexdigest()[:16]}"
+    return store, store.create("owner", data, snapshot, request_key)
+
+
 def test_whole_selected_set_and_subset_have_independent_impacts(tmp_path):
     store, job = make_job(tmp_path)
     both = build_plan(job, policy())
@@ -79,6 +96,69 @@ def test_whole_selected_set_and_subset_have_independent_impacts(tmp_path):
     assert both["exact_targets"] == [["검증", "B2"], ["검증", "B3"]]
     assert store.load("owner", job["id"])["source"] == fixture.workbook_bytes()
     assert both["source_cache_used"] is False
+
+
+def test_monthly_profile_builds_exact_single_target_plan_from_actual_workbook(tmp_path):
+    _store, job = make_monthly_job(tmp_path)
+    plan = build_plan(job, monthly_policy())
+
+    assert plan["profile_version"] == PROFILE_3
+    assert plan["calculation_mode"] == "monthly_sheet_internal"
+    assert plan["patches"] == [
+        {
+            **plan["patches"][0],
+            "sheet": "Budget",
+            "cell": "N18",
+            "before": {"type": "formula", "value": "=N15-N14", "style": "0"},
+            "after": {
+                "type": "formula",
+                "value": "='M10'!B16-'M10'!B15",
+                "style": "0",
+            },
+            "change_kind": "MONTHLY_FORMULA_REPLACEMENT",
+            "profile_version": PROFILE_3,
+        }
+    ]
+    assert plan["expected_calculated_values"]["Budget"]["N18"] == {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED",
+    }
+    assert plan["exact_targets"] == [["Budget", "N18"]]
+    assert plan["digest"] == plan_digest(plan)
+
+
+def test_monthly_profile_rejects_normal_equivalent_and_no_eligible(tmp_path):
+    for formula in ("='M10'!B16-'M10'!B15", "=N16-N15"):
+        _store, job = make_monthly_job(
+            tmp_path,
+            source=monthly_workbook_bytes(target_formula=formula),
+        )
+        with pytest.raises(WorkbookCareError):
+            build_plan(job, monthly_policy(before_formula=formula))
+
+    _store, job = make_monthly_job(tmp_path)
+    with pytest.raises(WorkbookCareError):
+        build_plan(job, monthly_policy(targets=["O18"], before_formula="='M11'!B16-'M11'!B15"))
+
+
+def test_monthly_profile_rejects_other_before_error_and_unsupported_source(tmp_path):
+    def other_error(workbook):
+        workbook["Budget"]["P20"] = "=P21/P22"
+        workbook["Budget"]["P21"] = 1
+        workbook["Budget"]["P22"] = 0
+
+    _store, job = make_monthly_job(tmp_path, source=monthly_workbook_bytes(extra=other_error))
+    with pytest.raises(WorkbookCareError) as existing_error:
+        build_plan(job, monthly_policy())
+    assert existing_error.value.code == "EXISTING_CALCULATION_ERROR"
+
+    _store, job = make_monthly_job(
+        tmp_path,
+        source=monthly_workbook_bytes(target_formula="=OFFSET(N15,0,0)"),
+    )
+    with pytest.raises(WorkbookCareError):
+        build_plan(job, monthly_policy(before_formula="=OFFSET(N15,0,0)"))
 
 
 def test_combined_policy_calculates_once_against_frozen_complex03(tmp_path):

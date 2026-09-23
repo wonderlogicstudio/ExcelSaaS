@@ -32,18 +32,20 @@ export function RepairDelivery({job,detail,onJob,mode='all',onContinue,onApprova
  },[job.job_id,job.status,onJob]);
  const run=async(work:()=>Promise<void>)=>{setBusy(true);setError(null);try{await work();}catch(e){setError(e instanceof Error?e.message:'작업을 완료하지 못했습니다.');try{onJob(await deliveryRequest<DeliveryJob>({action:'get',job_id:job.job_id}));}catch{/* Keep the original actionable error. */}}finally{setBusy(false);}};
  const active=['RUNNING','CANCEL_REQUESTED'].includes(job.status);
- const download=(kind:string)=>run(async()=>{
+ const downloadFile=async(kind:string)=>{
   const file=await deliveryRequest<{filename:string;mime:string;file_base64:string}>({action:'download',job_id:job.job_id,kind});
   const data=Uint8Array.from(atob(file.file_base64),c=>c.charCodeAt(0));const url=URL.createObjectURL(new Blob([data],{type:file.mime}));
   const link=document.createElement('a');link.href=url;link.download=file.filename;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
- });
+ };
+ const download=(kind:string)=>run(async()=>downloadFile(kind));
+ const downloadAll=()=>run(async()=>{for(const kind of Object.keys(job.delivery?.files??{}))await downloadFile(kind);});
  const approvalOnly=mode==='approval';
  return <section className="delivery-execution delivery-step" aria-label="변경 승인과 납품"><h3 ref={headingRef} tabIndex={-1}>{approvalOnly?'정확한 변경 승인':mode==='delivery'?'승인한 결과 받기':job.status==='READY'?'수정 패키지 수령':'변경 승인과 납품'}</h3>
   {job.status!=='READY'&&mode!=='delivery'&&<p>위 셀의 변경과 계산 영향을 승인하면 원본과 분리된 사본을 만듭니다.</p>}
   {job.status!=='READY'&&mode!=='delivery'&&<details className="delivery-technical"><summary>함께 적용할 계산 정보 확인</summary><p>계획에 포함된 수식 {detail.technical_changes?.filter(c=>c.kind==='FORMULA_CACHE').length??0}개의 계산 캐시를 갱신하고, Excel에서 다시 계산하도록 설정합니다. 필요한 시트 범위 갱신도 계획에 포함됩니다.</p><p>비대상 셀의 업무 값·수식·서식은 보존 여부를 별도로 검사합니다.</p></details>}
   {approvalOnly && (job.approval_status==='APPROVED'||job.status==='READY') ? <div role="status"><p>현재 변경계획 승인 완료 · 결제나 앞 단계의 기준 확인과 별도로 기록했습니다.</p><button type="button" className="button button--primary" onClick={onContinue}>4단계 · 승인한 결과 받기</button>{job.status==='APPROVED'&&<button type="button" className="button button--ghost" disabled={busy} onClick={()=>run(async()=>onJob(await deliveryRequest<DeliveryJob>({action:'cancel',job_id:job.job_id})))}>승인 취소하고 범위 다시 확인</button>}</div>
   : job.status==='READY'&&job.delivery ? <div className="delivery-ready" role="status"><h4>승인한 {job.delivery.patch_count}개 변경의 세 파일이 준비되었습니다</h4><p>원본 보존·승인 범위·실제 재계산·파일 일치를 확인했습니다. 남은 위험과 검증 범위는 재검증 HTML에서 확인하세요.</p>
-   <div className="delivery-downloads">{Object.keys(job.delivery.files).map(kind=><button key={kind} type="button" className="button button--outline" disabled={busy} onClick={()=>download(kind)}>{labels[kind]??kind} 받기</button>)}</div><p>보관 만료: {new Date(job.delivery.expires_at*1000).toLocaleString('ko-KR')} · 이 작업의 파일은 다시 결제하지 않고 받을 수 있습니다.</p></div>
+   <div className="delivery-downloads"><button type="button" className="button button--primary" disabled={busy || Object.keys(job.delivery.files).length===0} onClick={downloadAll}>세 파일 모두 받기</button>{Object.keys(job.delivery.files).map(kind=><button key={kind} type="button" className="button button--outline" disabled={busy} onClick={()=>download(kind)}>{labels[kind]??kind} 받기</button>)}</div><p className="delivery-download-note">브라우저가 여러 파일 다운로드 허용을 물을 수 있습니다. 일부 파일이 열리지 않으면 아래 개별 버튼으로 다시 받을 수 있습니다.</p><p>보관 만료: {new Date(job.delivery.expires_at*1000).toLocaleString('ko-KR')} · 이 작업의 파일은 다시 결제하지 않고 받을 수 있습니다.</p></div>
   : active ? <div role="status"><h4>{job.status==='CANCEL_REQUESTED'?'취소 요청됨 · 실행 종료와 임시 파일 정리 중':'승인한 사본을 만들고 검증 중'}</h4><p>필수 세 파일의 검증이 끝난 뒤 다운로드가 열립니다.</p><button type="button" className="button button--outline" disabled={job.status==='CANCEL_REQUESTED'} onClick={()=>run(async()=>onJob(await deliveryRequest<DeliveryJob>({action:'cancel',job_id:job.job_id})))}>실행 취소</button></div>
   : job.status==='CANCELLED' ? <p role="status">취소 완료 · 수정본을 게시하지 않았습니다. 새 계획을 계산하면 다시 시작할 수 있습니다.</p>
   : <>

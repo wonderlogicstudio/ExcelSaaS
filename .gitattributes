@@ -3,3 +3,21 @@
 *.xlsx binary
 *.xlsm binary
 *.png binary
+
+# WorkbookCare fingerprint-bound text sources keep raw bytes stable across platforms - MONTHLY-UX07-RELEASE
+apps/api/engine/DeliveryCalc.java -text
+apps/api/engine/dependencies.lock.json -text
+apps/api/app/delivery_calculation.py -text
+apps/api/app/delivery_process.py -text
+apps/api/app/delivery_execution_control.py -text
+apps/api/app/formula_patterns.py -text
+apps/api/app/repair_rules/monthly_formula.py -text
+apps/api/app/repair_rules/formula_restore.py -text
+apps/api/app/repair_rules/numeric_text.py -text
+apps/api/app/repair_rules/__init__.py -text
+apps/api/app/delivery_patch.py -text
+apps/api/app/delivery_artifacts.py -text
+apps/api/app/delivery_inputs.py -text
+apps/api/app/delivery_plan.py -text
+apps/api/app/delivery_package.py -text
+apps/api/app/delivery_verification_template.html -text

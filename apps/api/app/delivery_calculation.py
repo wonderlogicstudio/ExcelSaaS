@@ -5,11 +5,13 @@ from __future__ import annotations
 import base64
 import hashlib
 import json
+import math
 import os
 import shutil
 import subprocess
 import tempfile
 import threading
+from dataclasses import dataclass
 from pathlib import Path
 
 from openpyxl.formula import Tokenizer
@@ -24,6 +26,10 @@ ENGINE_VERSION = "apache-poi-5.5.1-adapter-v1"
 REGISTRY_VERSION = "integer-repair-combinations-v1"
 ENGINE_DIR = Path(__file__).resolve().parents[1] / "engine"
 CALC_LOCK = threading.BoundedSemaphore(1)
+CALCULATION_MODE_LEGACY = "legacy_local"
+CALCULATION_MODE_MONTHLY_SHEETS = "monthly_sheet_internal"
+CALCULATION_MODES = {CALCULATION_MODE_LEGACY, CALCULATION_MODE_MONTHLY_SHEETS}
+MONTHLY_SHEETS = frozenset(f"M{month:02d}" for month in range(1, 13))
 SHAPES = {
     "SUM(G)": "SUM_INTERNAL_RANGE",
     "ROUND(R*R*(1-R),0)": "ROUND_AMOUNT",
@@ -38,23 +44,90 @@ SHAPES = {
     "R*R": "MULTIPLY",
     '""': "EMPTY_STRING",
     "R": "DIRECT_REFERENCE",
+    "M!R": "MONTHLY_DIRECT_REFERENCE",
+    "M!R-M!R": "MONTHLY_SAME_MONTH_SUBTRACT",
 }
 
 
-def formula_shape(formula: str) -> tuple[str, set[str]]:
+@dataclass(frozen=True)
+class _Reference:
+    sheet: str
+    cell: str
+    monthly_sheet: bool = False
+
+
+def _validate_mode(calculation_mode: str) -> None:
+    if calculation_mode not in CALCULATION_MODES:
+        reject("ENGINE_UNSUPPORTED", "unsupported calculation mode")
+
+
+def _parse_monthly_reference(value: str, sheet_names: set[str]) -> _Reference | None:
+    if "!" not in value or "[" in value or "]" in value or ":" in value or "$" in value:
+        return None
+    sheet, cell = value.rsplit("!", 1)
+    if sheet.startswith("'") and sheet.endswith("'"):
+        sheet = sheet[1:-1].replace("''", "'")
+    if sheet not in MONTHLY_SHEETS:
+        return None
+    if sheet not in sheet_names:
+        reject("ENGINE_UNSUPPORTED", "missing monthly sheet")
+    return _Reference(sheet, valid_cell(cell.upper()), monthly_sheet=True)
+
+
+def _validate_monthly_operand(cells: dict, ref: _Reference) -> None:
+    record = cells.get(ref.sheet, {}).get(ref.cell)
+    if record is None:
+        reject("ENGINE_UNSUPPORTED", "missing monthly reference cell")
+    if record["type"] == "number":
+        try:
+            number = float(record["value"])
+        except (TypeError, ValueError):
+            reject("ENGINE_UNSUPPORTED", "monthly reference must be numeric")
+        if not math.isfinite(number):
+            reject("ENGINE_UNSUPPORTED", "monthly reference must be finite")
+        return
+    if record["type"] == "formula":
+        return
+    reject("ENGINE_UNSUPPORTED", "monthly reference must be numeric")
+
+
+def _formula_shape(
+    formula: str,
+    *,
+    calculation_mode: str = CALCULATION_MODE_LEGACY,
+    current_sheet: str | None = None,
+    sheet_names: set[str] | None = None,
+) -> tuple[str, set[_Reference]]:
+    _validate_mode(calculation_mode)
     if not isinstance(formula, str) or len(formula) > 1024 or not formula.startswith("="):
         reject("ENGINE_UNSUPPORTED", "지원하는 수식 문법과 길이를 벗어났습니다.")
     try:
         tokens = Tokenizer(formula).items
     except Exception:
         reject("ENGINE_UNSUPPORTED", "수식을 안전하게 해석할 수 없습니다.")
+    if calculation_mode == CALCULATION_MODE_MONTHLY_SHEETS and current_sheet is None:
+        reject("ENGINE_UNSUPPORTED", "missing current sheet")
+    sheet_names = set(sheet_names or [])
     shape = []
-    references = set()
+    references: set[_Reference] = set()
+    monthly_references: list[_Reference] = []
     for t in tokens:
         if t.type == "WHITE-SPACE":
             continue
         if t.type == "OPERAND" and t.subtype == "RANGE":
+            monthly = (
+                _parse_monthly_reference(t.value, sheet_names)
+                if calculation_mode == CALCULATION_MODE_MONTHLY_SHEETS
+                else None
+            )
+            if monthly is not None:
+                references.add(monthly)
+                monthly_references.append(monthly)
+                shape.append("M!R")
+                continue
             clean = t.value.replace("$", "").upper()
+            if "!" in clean:
+                reject("ENGINE_UNSUPPORTED", "cross-sheet references require monthly mode")
             if ":" in clean:
                 ends = clean.split(":")
                 if len(ends) != 2:
@@ -65,20 +138,42 @@ def formula_shape(formula: str) -> tuple[str, set[str]]:
                 if a > c or b > d or (c - a + 1) * (d - b + 1) > MAX_CELLS:
                     reject("ENGINE_UNSUPPORTED", "참조 범위가 계산 한도를 넘습니다.")
                 references.update(
-                    f"{get_column_letter(col)}{row}"
+                    _Reference(current_sheet or "", f"{get_column_letter(col)}{row}")
                     for col in range(a, c + 1)
                     for row in range(b, d + 1)
                 )
                 shape.append("G")
             else:
-                references.add(valid_cell(clean))
+                references.add(_Reference(current_sheet or "", valid_cell(clean)))
                 shape.append("R")
         else:
             shape.append(t.value.upper() if t.type == "FUNC" else t.value)
     signature = "".join(shape)
+    if monthly_references and signature == "M!R-M!R" and len(
+        {ref.sheet for ref in monthly_references}
+    ) != 1:
+        reject("ENGINE_UNSUPPORTED", "monthly subtraction requires one source sheet")
     if signature not in SHAPES:
         reject("ENGINE_UNSUPPORTED", "이 수식 조합은 아직 계산 프로필에서 검증하지 않았습니다.")
     return signature, references
+
+
+def formula_shape(
+    formula: str,
+    *,
+    calculation_mode: str = CALCULATION_MODE_LEGACY,
+    current_sheet: str | None = None,
+    sheet_names: set[str] | None = None,
+) -> tuple[str, set[str]]:
+    shape, references = _formula_shape(
+        formula,
+        calculation_mode=calculation_mode,
+        current_sheet=current_sheet,
+        sheet_names=sheet_names,
+    )
+    if calculation_mode == CALCULATION_MODE_MONTHLY_SHEETS:
+        return shape, {f"{ref.sheet}!{ref.cell}" for ref in references}
+    return shape, {ref.cell for ref in references}
 
 
 def translate_formula(formula: str, anchor: str, target: str) -> str:
@@ -93,9 +188,11 @@ def translate_formula(formula: str, anchor: str, target: str) -> str:
     return translated
 
 
-def coverage(cells: dict) -> dict:
+def coverage(cells: dict, *, calculation_mode: str = CALCULATION_MODE_LEGACY) -> dict:
+    _validate_mode(calculation_mode)
     graph = {}
     combinations = set()
+    sheet_names = set(cells)
     for sheet, rows in cells.items():
         for address, record in rows.items():
             if record["type"] == "date" or record.get("special_format"):
@@ -104,24 +201,42 @@ def coverage(cells: dict) -> dict:
                     "날짜·백분율 표시가 있는 파일의 전체 계산은 아직 지원하지 않습니다.",
                 )
             if record["type"] == "formula":
-                shape, refs = formula_shape(record["value"])
+                shape, refs = _formula_shape(
+                    record["value"],
+                    calculation_mode=calculation_mode,
+                    current_sheet=sheet,
+                    sheet_names=sheet_names,
+                )
+                for ref in refs:
+                    if ref.monthly_sheet:
+                        _validate_monthly_operand(cells, ref)
                 combinations.add(SHAPES[shape])
                 graph[(sheet, address)] = {
-                    (sheet, ref) for ref in refs if rows.get(ref, {}).get("type") == "formula"
+                    (ref.sheet, ref.cell)
+                    for ref in refs
+                    if cells.get(ref.sheet, {}).get(ref.cell, {}).get("type") == "formula"
                 }
-    seen = set()
     visiting = set()
+    longest_paths = {}
 
     def walk(node, depth=0):
-        if depth > 100 or node in visiting:
+        if depth > 100:
             reject("ENGINE_UNSUPPORTED", "순환 참조 또는 계산 깊이 한도를 초과했습니다.")
-        if node in seen:
-            return
+        if node in visiting:
+            reject("ENGINE_UNSUPPORTED", "순환 참조 또는 계산 깊이 한도를 초과했습니다.")
+        if node in longest_paths:
+            if depth + longest_paths[node] > 100:
+                reject("ENGINE_UNSUPPORTED", "순환 참조 또는 계산 깊이 한도를 초과했습니다.")
+            return longest_paths[node]
         visiting.add(node)
+        longest = 0
         for child in graph[node]:
-            walk(child, depth + 1)
+            longest = max(longest, 1 + walk(child, depth + 1))
         visiting.remove(node)
-        seen.add(node)
+        if longest > 100:
+            reject("ENGINE_UNSUPPORTED", "순환 참조 또는 계산 깊이 한도를 초과했습니다.")
+        longest_paths[node] = longest
+        return longest
 
     for node in graph:
         walk(node)
@@ -180,9 +295,15 @@ permission java.lang.management.ManagementPermission "monitor";
     )
 
 
-def calculate(cells: dict, *, timeout_seconds: float = 10.0) -> dict:
+def calculate(
+    cells: dict,
+    *,
+    timeout_seconds: float = 10.0,
+    calculation_mode: str = CALCULATION_MODE_LEGACY,
+) -> dict:
     check_cancelled()
-    cover = coverage(cells)
+    _validate_mode(calculation_mode)
+    cover = coverage(cells, calculation_mode=calculation_mode)
     engine_fingerprint()  # Verify executable dependencies before sending any input.
     java = shutil.which("java")
     if not java or not (ENGINE_DIR / "classes/DeliveryCalc.class").is_file():
@@ -196,6 +317,8 @@ def calculate(cells: dict, *, timeout_seconds: float = 10.0) -> dict:
             policy = scratch / "sandbox.policy"
             policy.write_text(_policy(scratch, Path(java)), encoding="utf-8")
             lines = ["CALC_V1"]
+            if calculation_mode == CALCULATION_MODE_MONTHLY_SHEETS:
+                lines[0] += "\t" + calculation_mode
             for sheet, rows in cells.items():
                 for address, cell in rows.items():
                     lines.append(
@@ -280,6 +403,35 @@ def calculate(cells: dict, *, timeout_seconds: float = 10.0) -> dict:
                     "value": value,
                     "provenance": "ENGINE_CALCULATED",
                 }
+            if calculation_mode == CALCULATION_MODE_MONTHLY_SHEETS:
+                sheet_names = set(cells)
+                for sheet, rows in cells.items():
+                    for address, cell in rows.items():
+                        if cell["type"] != "formula":
+                            continue
+                        shape, refs = _formula_shape(
+                            cell["value"],
+                            calculation_mode=calculation_mode,
+                            current_sheet=sheet,
+                            sheet_names=sheet_names,
+                        )
+                        for ref in refs:
+                            if ref.monthly_sheet:
+                                ref_value = values.get(ref.sheet, {}).get(ref.cell, {})
+                                if ref_value.get("type") != "number" or not math.isfinite(
+                                    float(ref_value.get("value"))
+                                ):
+                                    reject(
+                                        "ENGINE_UNSUPPORTED",
+                                        "monthly operand must resolve to number",
+                                    )
+                        if SHAPES[shape].startswith("MONTHLY_"):
+                            actual = values.get(sheet, {}).get(address, {})
+                            if actual.get("type") != "number":
+                                reject(
+                                    "ENGINE_UNSUPPORTED",
+                                    "monthly formula must resolve to number",
+                                )
             expected = {(s, c) for s, rows in cells.items() for c in rows}
             if expected != {(s, c) for s, rows in values.items() for c in rows}:
                 reject("ENGINE_RESOURCE_FAILURE", "전체 계산 결과가 반환되지 않았습니다.", 422)

@@ -1,0 +1,34 @@
+{
+  "status": "FUNCTIONAL_REVIEW_PASS_UX_TARGET_PENDING",
+  "fresh_checks": [
+    {
+      "command": "npm.cmd run test -- App.navigation",
+      "exit_code": 0,
+      "passed": 14
+    },
+    {
+      "command": "npm.cmd run test -- ProposalFlow -t monthly",
+      "exit_code": 0,
+      "passed": 3,
+      "skipped": 19
+    },
+    {
+      "command": "npm.cmd run build",
+      "exit_code": 0
+    }
+  ],
+  "shell_failure_preserved": "piped test-name filter exited255 before Vitest; safe monthly filter passed",
+  "reused": "Unchanged remaining stage4 tests and stage3 native/approval/artifact proof; no repeated Excel or calculation20 loop",
+  "review": "Independent reviewer PASS source/regression delta and actual downloaded files/screenshots",
+  "ui_evidence": "ui-result.json",
+  "ux_status": "14 core activations vs target10; zero mandatory address/formula entry; four stages. Human usability unverified.",
+  "immutable_hashes_match": true,
+  "native_reference_status": "PASS_CURRENT_FINGERPRINT",
+  "not_run": [
+    "full repository regression",
+    "beta deployment/readiness",
+    "Git commit",
+    "Git push"
+  ],
+  "next_single_proposal": "Reduce required actions toward10 without weakening exact approval or evidence; requires separate scope approval"
+}

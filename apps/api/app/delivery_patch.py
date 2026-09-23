@@ -12,12 +12,16 @@ from lxml import etree
 from openpyxl.utils.cell import column_index_from_string, coordinate_from_string
 
 from .config import Settings
-from .delivery_calculation import calculate
-from .delivery_inputs import NS, inspect_input, reject
+from .delivery_calculation import CALCULATION_MODE_LEGACY, calculate
+from .delivery_inputs import NS, PROFILE_3, inspect_input, reject
 from .delivery_plan import typed_source
 from .scanner import SCANNER_VERSION, run_formula_audit, scan_workbook
 
 PATCH_VERSION = "minimal-ooxml-patch-v1"
+
+
+def _profile_context(plan: dict) -> str | None:
+    return PROFILE_3 if plan.get("profile_version") == PROFILE_3 else None
 
 
 def xml_root(raw: bytes):
@@ -351,8 +355,9 @@ def _detector_summary(source: bytes, output: bytes, plan: dict, settings: Settin
     }
 
 def verify_output(source: bytes, output: bytes, plan: dict, settings: Settings) -> dict:
-    original = inspect_input("workbook.xlsx", source, settings)
-    result = inspect_input("workbook.xlsx", output, settings)
+    profile_context = _profile_context(plan)
+    original = inspect_input("workbook.xlsx", source, settings, profile_context=profile_context)
+    result = inspect_input("workbook.xlsx", output, settings, profile_context=profile_context)
     if (
         original["source_hash"] != plan["source_hash"]
         or original["inventory_hash"] != plan["inventory_hash"]
@@ -454,7 +459,9 @@ def verify_output(source: bytes, output: bytes, plan: dict, settings: Settings) 
                     and b.find(NS + "dimension").get("ref") != c["after"]
                 ):
                     reject("DIMENSION_MISMATCH", "시트 범위가 계획과 다릅니다.", 422)
-    calculated = calculate(result["cells"])
+    calculated = calculate(
+        result["cells"], calculation_mode=plan.get("calculation_mode", CALCULATION_MODE_LEGACY)
+    )
     if calculated["values"] != plan["expected_calculated_values"]:
         reject("POST_CALCULATION_MISMATCH", "후계산 값이 승인한 예상 영향과 다릅니다.", 422)
     detectors = _detector_summary(source, output, plan, settings)

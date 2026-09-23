@@ -1,0 +1,24 @@
+{
+  "id": "MONTHLY-REPAIR-FLOW06-stage1-control-v1",
+  "status": "FROZEN_INDEPENDENT_EXPECTATION",
+  "sheet_count": 6,
+  "workbook_shape": {
+    "sheets": ["Budget", "M08", "M09", "M10", "M11", "M12"],
+    "target": ["Budget", "N18"],
+    "run": "Budget!L18:P18",
+    "headers": "Budget!L14:P14 = M08..M12"
+  },
+  "expected_candidate": {
+    "profile": "RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1",
+    "sheet": "Budget",
+    "cell": "N18",
+    "before_formula": "=N15-N14",
+    "before_value": {"type": "error", "value": "#VALUE!"},
+    "after_formula": "='M10'!B16-'M10'!B15",
+    "after_value": {"type": "number", "value": -5},
+    "derivation": "M10!B16=1001 minus M10!B15=1006",
+    "approval_required": true,
+    "automatic_approval": false
+  },
+  "not_used_as_original_oracle_replacement": true
+}

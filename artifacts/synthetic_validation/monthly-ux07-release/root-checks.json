@@ -1,0 +1,55 @@
+{
+  "status": "PRODUCT_REGRESSION_PASS_AGGREGATED_AFTER_PATH_FIX",
+  "source_review": "Corrected single RP03 group expansion accepted; final evidence pending",
+  "checks": [
+    {
+      "command": "git diff --check (fingerprint-preserved CRLF files)",
+      "exit_code": 1,
+      "result": "CR at end of line treated as whitespace; no source normalization performed"
+    },
+    {
+      "command": "git -c core.whitespace=cr-at-eol diff --check (affected source paths)",
+      "exit_code": 0
+    }
+  ],
+  "regression": {
+    "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/verify.ps1",
+    "session": 74199,
+    "log": "full-regression.log",
+    "web_tests": 175,
+    "worker_tests": 16,
+    "api": {
+      "passed": 315,
+      "failed": 1,
+      "cause": "test fixture path relative to current working directory"
+    },
+    "exit_code": 1,
+    "ruff_exit_code": 0,
+    "sample_pack_exit_code": 0,
+    "sample_pack_expected_candidates": 36,
+    "source_fingerprint_status": {
+      "reference": "PASS",
+      "patch": "PASS"
+    },
+    "targeted_fix_retest": {
+      "root_command": "pytest -p no:cacheprovider tests/test_monthly_repair.py::test_stage1_expected_control_fixture_is_frozen -q",
+      "root_exit": 0,
+      "builder_api_cwd": {
+        "passed": 6,
+        "exit": 0
+      },
+      "builder_repo_cwd": {
+        "passed": 6,
+        "exit": 0
+      },
+      "duplication": "Builder retests and root single retest overlapped due delayed handoff; not additional coverage"
+    }
+  },
+  "release": {
+    "commit": "NOT_RUN",
+    "push": "NOT_RUN",
+    "beta": "NOT_RUN",
+    "browser": "ACCESS_LOGIN_REQUIRED"
+  },
+  "remote_main_before_commit": "d1f75b15885d7e6db90e2be3088af484ae84cdb0"
+}
