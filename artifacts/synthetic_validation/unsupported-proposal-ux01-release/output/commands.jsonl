@@ -1,0 +1,24 @@
+{"phase": "baseline", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "baseline", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "baseline", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "baseline", "command": "wrangler versions view 44ed2196-cca5-4fa9-963c-16497a3ff77a", "exit_code": 0}
+{"phase": "build", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "build", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "build", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "build", "command": "npm build hosted beta", "exit_code": 0}
+{"phase": "upload", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "upload", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "upload", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions upload --dry-run", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions upload --keep-vars", "exit_code": 0}
+{"phase": "upload", "command": "wrangler versions view 4538ee8f-2561-40f6-963f-d37855e50e02", "exit_code": 0}
+{"phase": "upload", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "upload", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler versions view 4538ee8f-2561-40f6-963f-d37855e50e02", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler versions deploy 4538ee8f-2561-40f6-963f-d37855e50e02@100", "exit_code": 0}
+{"phase": "deploy", "command": "wrangler deployments list --json", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services describe workbookcare-api-beta", "exit_code": 0}
+{"phase": "deploy", "command": "gcloud run services get-iam-policy workbookcare-api-beta", "exit_code": 0}

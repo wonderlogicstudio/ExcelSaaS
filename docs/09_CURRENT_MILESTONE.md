@@ -1,3 +1,9 @@
+## 2026-09-27 VERIFIED-CHANGES-RELEASE: committed, pushed, beta verified
+
+Verified source/tests/oracles committed and pushed as f0e1f7f. Latest frontend deployed to Worker4538ee8f-2561-40f6-963f-d37855e50e02; API00037 unchanged. Hosted build/upload/deploy exit0; independent review PASS; bindings/private IAM/9 Access routes preserved. Actual beta AR Aging structure0/formula1/H16 current+4neighbor evidence and hidden default manual entry PASS. Existing settlement sample structure8/formula3 and numeric8 auto-selected PASS. Reused unchanged full512/M4exact36/native3profiles and local mobile evidence; no duplicate full tests/API deploy. Prior three-artifact receipt and raw guard native fixture limitations remain. Unrelated dirty files preserved. STOP. See [release review](delivery-v3_2/reviews/UNSUPPORTED-PROPOSAL-UX01-RELEASE.md).
+
+---
+
 ## 2026-09-27 VERIFIED-CHANGES-RELEASE APPROVED
 
 Owner explicitly approves selective commit, GitHub push and protected beta deployment of verified work to date. Deploy latest frontend only; API00037 is already deployed. Reuse unchanged regression and native evidence; run hosted build, deployment guards and bounded actual beta UI check. Preserve unrelated dirty files and prior records. No new feature or anonymous release.

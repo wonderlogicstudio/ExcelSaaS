@@ -1,0 +1,11 @@
+{
+  "worker": "4538ee8f-2561-40f6-963f-d37855e50e02",
+  "all_bindings_equal": true,
+  "api": {
+    "revision": "workbookcare-api-beta-00037-bid",
+    "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:efdbbba3e20e4958a59a2cfef27d097e8ae1ceb9dd57d957a039f91a7034db28",
+    "iam": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342",
+    "source_freeze_sha256": "6ace155f52567608c039a40b30e21a263ef705fb7933b52a5a928a14ce018dea"
+  },
+  "source_freeze_sha256": "da91ed08f35554bfeacfbe5ba8c25debcb231c539aba96b60684fd97093e3c28"
+}

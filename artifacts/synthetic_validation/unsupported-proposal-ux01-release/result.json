@@ -1,0 +1,51 @@
+{
+  "status": "BETA_DEPLOYED_SCREEN_PASS",
+  "code_commit": "f0e1f7f4ecb5dd09431c2320c30f785622f1c9ea",
+  "worker": "4538ee8f-2561-40f6-963f-d37855e50e02",
+  "api_revision": "workbookcare-api-beta-00037-bid",
+  "bindings_unchanged": true,
+  "access_preserved": true,
+  "fresh_checks": {
+    "baseline_build_upload_deploy_exit": 0,
+    "independent_release_review": "PASS",
+    "actual_beta_AR_Aging": {
+      "structure": 0,
+      "formula": 1,
+      "cell": "H16",
+      "current_formula": "=IF(G15>30,F16*0.97,F16)",
+      "neighbors": [
+        "H14",
+        "H15",
+        "H17",
+        "H18"
+      ],
+      "default_manual_input_hidden": true
+    },
+    "actual_beta_supported_sample": {
+      "structure": 8,
+      "formula": 3,
+      "numeric_targets_selected": 8,
+      "formula_targets_available": 3,
+      "mandatory_address_entry": 0
+    }
+  },
+  "reused_evidence": [
+    "Prior full512 regression/M4exact36",
+    "Latest UI4 tests/type/build and independent review",
+    "Local mobile375 and supported8 calculation32 impact",
+    "Native RP01/RP02/RP03 compatibility"
+  ],
+  "not_run": [
+    "No API redeploy",
+    "No repeated full regression/native Excel",
+    "No new three-artifact receipt verification"
+  ],
+  "known_limits": [
+    "Prior three-artifact local receipt remains unverified",
+    "Raw guard fixture native Excel-open limitation remains"
+  ],
+  "scope_excluded": [
+    "Unrelated dependency lock",
+    "Historical dirty operating/review records and untracked artifacts"
+  ]
+}

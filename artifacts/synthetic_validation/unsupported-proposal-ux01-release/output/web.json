@@ -1,0 +1,18 @@
+{
+  "flags": {
+    "VITE_PRODUCT_ENV": "hosted_beta",
+    "VITE_API_BASE_URL": "/api",
+    "VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED": "true",
+    "VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED": "false",
+    "VITE_FEEDBACK_CAPTURE_ENABLED": "false",
+    "VITE_HOSTED_BETA_FEEDBACK_ENABLED": "false",
+    "VITE_DELIVERY_BETA_ENABLED": "true"
+  },
+  "assets": {
+    "apps/web/dist/index.html": "9de509d82fb9ad595c446d2d76fe4eab534bba27feceecbf7fd66b1b56a4281e",
+    "apps/web/dist/assets/index-Bq7WghxK.css": "22e31633adbd59e0bddb063a4e988b33078c8aa2b7502d9594c7b416626c1cc9",
+    "apps/web/dist/assets/index-CoyRIJ5k.js": "8f64a6b767abc20646ceb1890eeee8895e8c21601dc6272f71beaa2c350cdaa4",
+    "apps/web/dist/assets/workbookEvidence-Dw_F_SwO.js": "68cc6e420024224cb246a1b0cb875574bc1e73442a0a1f2d9e2d7f380d12223e"
+  },
+  "source_freeze_sha256": "da91ed08f35554bfeacfbe5ba8c25debcb231c539aba96b60684fd97093e3c28"
+}
