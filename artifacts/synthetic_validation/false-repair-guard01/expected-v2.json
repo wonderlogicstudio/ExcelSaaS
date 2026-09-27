@@ -1,0 +1,65 @@
+{
+  "id": "FALSE-REPAIR-GUARD01",
+  "frozen_before_execution": true,
+  "sheet": "\uac80\uc99d",
+  "inputs": {
+    "B2": "1,200",
+    "B3": "0",
+    "C2": 2,
+    "D2": 3,
+    "F2": "=C2*D2",
+    "C3": 4,
+    "D3": 5,
+    "F3": null,
+    "F4": null,
+    "G2": "=C2*D2+7",
+    "E2": "00123",
+    "E3": "123",
+    "E4": "1234567890123456",
+    "E5": "1.234,56"
+  },
+  "number_formats": {
+    "E3": "00000"
+  },
+  "approved_changes": {
+    "B2": {
+      "type": "number",
+      "value": 1200
+    },
+    "B3": {
+      "type": "number",
+      "value": 0
+    },
+    "F3": {
+      "type": "formula",
+      "value": "=C3*D3",
+      "calculated": 20
+    }
+  },
+  "keep_unselected": [
+    "F4",
+    "G2",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "C2",
+    "D2",
+    "C3",
+    "D3",
+    "F2"
+  ],
+  "explicit_numeric_request_reject": [
+    "E2",
+    "E3",
+    "E4",
+    "E5"
+  ],
+  "explicit_blank_restore_request_reject": [
+    "G2",
+    "B2"
+  ],
+  "intentional_blank_note": "F4 is not selected/approved and must remain blank; no claim engine can infer intent for an explicitly approved empty cell",
+  "zero_padding_policy": "Text under all-zero integer padding format is ambiguous identifier-like formatting; conservatively refuse automatic RP01 even if caller labels it AMOUNT. Do not claim it proves identifier semantics. Preserve safe General/0/#,##0 formats.",
+  "monthly_boundary": "RP03 remains single-target separate flow. Do not combine or weaken unsupported cross-sheet/whole-workbook gates to fit one-file goal; existing monthly acceptance/negative tests reused."
+}

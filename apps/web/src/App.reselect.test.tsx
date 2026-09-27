@@ -50,6 +50,30 @@ afterEach(() => {
 });
 
 describe('App proposal reselection flow', () => {
+  it('keeps an unsupported-only formula selection out of the numeric form until advanced entry is chosen', async () => {
+    vi.stubEnv('VITE_PRODUCT_ENV', 'internal_beta');
+    vi.stubEnv('VITE_DELIVERY_BETA_ENABLED', 'true');
+    vi.stubEnv('VITE_FORMULA_AUDIT_INTERNAL_BETA_ENABLED', 'false');
+    vi.stubEnv('VITE_FORMULA_AUDIT_HOSTED_BETA_ENABLED', 'false');
+    api.scanWorkbook.mockResolvedValue({ ...demoResult, analysis_id: 'unsupported-only', findings: [{
+      ...finding('H3'), sheet: 'AR Aging', rule_code: 'FORMULA_PATTERN_OUTLIER', title: '수식 패턴 차이',
+      formula_pattern: { pattern_type: 'DOMINANT_NORMALIZED_PATTERN_OUTLIER', pattern_subtype: 'GENERIC_PATTERN_DRIFT',
+        formula_region: 'H2:H4', dominant_pattern_id: 'synthetic-pattern', neighbor_count: 1, evidence_locations: ['H2'], detection_basis: 'synthetic', current_limitations: [] },
+    }] });
+    evidence.readSourceSheets.mockResolvedValue(['AR Aging']);
+    evidence.readSourceCells.mockResolvedValue([{ cell: 'H3', type: 'formula', text: '=F3+G2' }, { cell: 'H2', type: 'formula', text: '=F2+G2' }]);
+    const { default: App } = await import('./App');
+    render(<App />);
+    fireEvent.change(screen.getByLabelText('엑셀 파일 선택'), { target: { files: [new File(['synthetic'], 'synthetic.xlsx')] } });
+    fireEvent.click(await screen.findByRole('button', { name: '시트별 수정 제안 보기' }));
+    await screen.findByText(/수정 제안을 보류하는 이유/);
+    expect(screen.queryByRole('heading', { name: '선택한 항목을 고칠 수 있는지 확인' })).not.toBeInTheDocument();
+    expect(screen.queryByLabelText('대상 셀')).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '셀 직접 지정 열기' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: '셀 직접 지정 열기' }));
+    expect(screen.getByRole('button', { name: '확인할 셀 직접 지정하기' })).toBeInTheDocument();
+  });
+
   it('restarts proposal selection without deleting or reuploading the retained delivery job', async () => {
     vi.stubEnv('VITE_PRODUCT_ENV', 'internal_beta');
     vi.stubEnv('VITE_DELIVERY_BETA_ENABLED', 'true');

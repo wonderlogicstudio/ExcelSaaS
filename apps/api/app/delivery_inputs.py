@@ -137,6 +137,7 @@ def _inspect_input(
                 for si in ET.fromstring(archive.read("xl/sharedStrings.xml"))
             ]
         date_styles: set[int] = set()
+        zero_padding_styles: set[int] = set()
         style_count = 1
         if "xl/styles.xml" in envelope.names:
             styles = ET.fromstring(archive.read("xl/styles.xml"))
@@ -151,6 +152,8 @@ def _inspect_input(
                     r"[ymdhHsS%]", custom.get(fmt, "")
                 ):
                     date_styles.add(i)
+                if re.fullmatch(r"0{2,}", custom.get(fmt, "")):
+                    zero_padding_styles.add(i)
         for sheet in workbook.findall(NS + "sheets/" + NS + "sheet"):
             name = sheet.get("name", "")
             target = relationships.get(sheet.get(REL + "id"), "")
@@ -273,6 +276,8 @@ def _inspect_input(
                     issues.add("UNSUPPORTED_CELL_STYLE")
                 if int(record["style"]) in date_styles:
                     record["special_format"] = True
+                if int(record["style"]) in zero_padding_styles:
+                    record["zero_padding_format"] = True
                 current[address] = record
                 if len(current) + sum(len(c) for c in cells.values()) > MAX_CELLS:
                     reject("LIMIT_EXCEEDED", "사전 수정 검사 셀 한도를 초과했습니다.", 413)

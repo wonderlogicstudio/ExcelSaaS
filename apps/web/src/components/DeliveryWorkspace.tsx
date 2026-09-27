@@ -45,8 +45,8 @@ function draftPolicy(draft:RepairDraft):object{
 }
 function fileBase64(file:File):Promise<string>{return new Promise((resolve,reject)=>{const reader=new FileReader();reader.onerror=()=>reject(new Error('파일을 읽지 못했습니다.'));reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.readAsDataURL(file);});}
 
-export function DeliveryWorkspace({ file, initialJob, reviewDraft, onSourceFixed, compactEntry = false, guidedStep, onProgress, onNextStep, intent, onRestartProposal }: {
-  intent?: RepairIntent; onRestartProposal?: () => void; compactEntry?: boolean; file?: File; initialJob?: DeliveryJob; reviewDraft?: RepairDraft; onSourceFixed?: (fixed: boolean) => void;
+export function DeliveryWorkspace({ file, initialJob, reviewDraft, onSourceFixed, compactEntry = false, manualEntryAvailable = true, guidedStep, onProgress, onNextStep, intent, onRestartProposal }: {
+  intent?: RepairIntent; onRestartProposal?: () => void; compactEntry?: boolean; manualEntryAvailable?: boolean; file?: File; initialJob?: DeliveryJob; reviewDraft?: RepairDraft; onSourceFixed?: (fixed: boolean) => void;
   guidedStep?: CoreStep; onProgress?: (progress: DeliveryProgress) => void; onNextStep?: (step: CoreStep) => void;
 }) {
   const [open, setOpen] = useState(Boolean(initialJob)); const [consent, setConsent] = useState(false); const [job, setJob] = useState<DeliveryJob | null>(initialJob ?? null);
@@ -132,7 +132,7 @@ export function DeliveryWorkspace({ file, initialJob, reviewDraft, onSourceFixed
       if (!signal.aborted) { setJob(prepared); if (viewEpoch.current === epoch) setPlanRevealToken(value => value + 1); }
     }
   }); };
-  if (!open) return <section className={`delivery-entry shell ${compactEntry ? 'delivery-manual' : ''}`}><h3>직접 지정이 필요한 경우</h3><p>수정 제안을 먼저 확인하세요. 목록에 없는 숫자 텍스트 또는 실제 빈 셀을 검사할 때 사용합니다. 셀과 수정 기준을 지정한 뒤 지원 여부를 확인합니다.</p><button className="button button--outline" type="button" disabled={busy} onClick={start}>확인할 셀 직접 지정하기</button>{error && <p role="alert">{error}</p>}</section>;
+  if (!open) return manualEntryAvailable || reviewDraft ? <section className={`delivery-entry shell ${compactEntry ? 'delivery-manual' : ''}`}><h3>직접 지정이 필요한 경우</h3><p>수정 제안을 먼저 확인하세요. 목록에 없는 숫자 텍스트 또는 실제 빈 셀을 검사할 때 사용합니다. 셀과 수정 기준을 지정한 뒤 지원 여부를 확인합니다.</p><button className="button button--outline" type="button" disabled={busy} onClick={start}>확인할 셀 직접 지정하기</button>{error && <p role="alert">{error}</p>}</section> : null;
   return <section id="repair-preflight" className="delivery-workspace shell" aria-label="선택한 항목의 수정 가능 여부">
     <div hidden={!scopeVisible}>
       <h2 ref={heading} tabIndex={-1}>{reviewDraft?.proposal ? '선택한 제안의 실제 결과 확인' : '선택한 항목을 고칠 수 있는지 확인'}</h2>

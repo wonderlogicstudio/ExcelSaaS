@@ -12,6 +12,43 @@ const kindLabel=(profile:string)=>profile===RP01?'숫자 텍스트 정리':profi
 const basketRemoveLabel=(item:BasketItem)=>`${item.draft.sheet} ${item.draft.targets[0]?.replace(/[0-9].*$/,'') || ''}열 ${item.kindLabel} ${item.cellCount}곳 제외`;
 const isMonthlyItem=(item:BasketItem)=>item.draft.profile===RP03;
 
+function UnsupportedEvidence({ proposal, file }: { proposal: RepairProposal; file: File | null }) {
+  const [cells, setCells] = useState<OriginalCell[]>([]), [loading, setLoading] = useState(!!file), [error, setError] = useState(false);
+  const formulaPattern = proposal.findings.some(finding => finding.rule_code.startsWith('FORMULA_PATTERN_'));
+  const comparisons = (finding: Finding) => [...new Set([...(finding.formula_pattern?.comparison_locations ?? []), ...(finding.formula_pattern?.evidence_locations ?? [])])]
+    .filter(cell => /^[A-Z]{1,3}[1-9][0-9]{0,6}$/.test(cell) && cell !== finding.cell).slice(0, 6);
+  const requested = [...new Set(proposal.findings.flatMap(finding => [finding.cell, ...comparisons(finding)]).filter((cell): cell is string => !!cell && /^[A-Z]{1,3}[1-9][0-9]{0,6}$/.test(cell)))];
+  const evidenceKey = requested.join(',');
+  useEffect(() => {
+    if (!formulaPattern || !file || !requested.length) { setCells([]); setLoading(false); setError(false); return; }
+    const controller = new AbortController(); setCells([]); setLoading(true); setError(false);
+    import('../lib/workbookEvidence').then(async module => {
+      const chunks: OriginalCell[][] = [];
+      for (let offset = 0; offset < requested.length; offset += 64) chunks.push(await module.readSourceCells(file, proposal.sheet, requested.slice(offset, offset + 64), controller.signal));
+      return chunks.flat();
+    }).then(value => { if (!controller.signal.aborted) setCells(value); })
+      .catch(() => { if (!controller.signal.aborted) setError(true); })
+      .finally(() => { if (!controller.signal.aborted) setLoading(false); });
+    return () => controller.abort();
+  }, [file, proposal.sheet, evidenceKey, formulaPattern]);
+  const byCell = new Map(cells.map(cell => [cell.cell, cell]));
+  if (!formulaPattern) return <div className="proposal-unsupported-evidence"><p>{proposal.explanation}</p><p>발견 위치: {proposal.findings.map(finding => finding.cell ?? '위치 미확인').join(', ')}</p></div>;
+  return <div className="proposal-unsupported-evidence" aria-label={`${proposal.sheet} 미지원 원본 비교`}>
+    <p><strong>수정 제안을 보류하는 이유:</strong> {proposal.explanation} 주변과 다른 수식만으로 어느 계산이 업무상 맞는지 확정할 수 없어 변경 후 값을 제시하지 않습니다.</p>
+    {loading && <p role="status">원본 수식을 읽고 있습니다.</p>}
+    {error && <p role="status">원본 수식을 읽지 못했습니다. 진단에서 확인한 위치만 표시합니다. 원본을 다시 확인하세요.</p>}
+    <ul>{proposal.findings.map((finding, index) => {
+      const target = finding.cell ? byCell.get(finding.cell) : undefined;
+      const refs = comparisons(finding);
+      return <li key={`${finding.cell ?? 'unknown'}-${index}`}><details><summary>{proposal.sheet} {finding.cell ?? '위치 미확인'} · 원본 수식과 비교 위치</summary>
+        <div>현재 수식: {target?.type === 'formula' ? <code>{target.text}</code> : target ? `원본 수식 확인 불가 (현재 셀 유형: ${target.type})` : '원본 수식 확인 불가'}</div>
+        <div>진단의 비교 위치: {refs.length ? <ul>{refs.map(cell => { const reference = byCell.get(cell); return <li key={cell}>{cell} · {reference?.type === 'formula' ? <code>{reference.text}</code> : reference ? '비교 수식 확인 불가' : '위치만 확인됨'}</li>; })}</ul> : '기록된 비교 위치 없음'}</div>
+      </details></li>;
+    })}</ul>
+    <p>원본 수식과 비교 위치는 참고 근거이며 정답 수식이나 예상 결과가 아닙니다.</p>
+  </div>;
+}
+
 function ProposalDetail({ proposal, file, intent, onPrepare, basketItem, onBasketChange, onBasketRemove }: { proposal: RepairProposal; file: File; intent: RepairIntent; onPrepare: (draft: RepairDraft) => void; basketItem?: BasketItem; onBasketChange: (item: BasketItem) => void; onBasketRemove: (id: string) => void }) {
   const [targets, setTargets] = useState(proposal.findings.slice(0, 50).map(f => f.cell!).filter(Boolean));
   const [role, setRole] = useState(''), [confirmed, setConfirmed] = useState(false), [anchor, setAnchor] = useState('');
@@ -109,7 +146,7 @@ export function RepairProposalPicker({ findings, sheets, file, selection, intent
     <div className="proposal-picker-layout">
       <div className="proposal-picker-main">
         {!visible.length && <p role="status">이 시트에서 발견된 수정 후보가 없습니다. 모든 계산이 맞거나 수정 가능한 시트라는 뜻은 아닙니다.</p>}
-        <div className="proposal-options">{visible.map(g => <article key={g.id} className={g.id === selected?.id ? 'proposal-option is-selected' : 'proposal-option'}><h3>{g.column ? `${g.column}열 · ` : ''}{g.title}</h3><p>{g.findings.length}곳 · {g.profile ? (g.profile===RP03?'검증 필요 후보':'수정 예시를 검증할 후보') : '현재 자동 수정 미지원'}</p>{g.profile ? <button type="button" className="button button--outline" disabled={g.id === selected?.id || !file || !available} onClick={() => setActive(g.id)}>이 수정 제안 보기</button> : <p>{g.explanation}</p>}</article>)}</div>
+        <div className="proposal-options">{visible.map(g => <article key={g.id} className={g.id === selected?.id ? 'proposal-option is-selected' : 'proposal-option'}><h3>{g.column ? `${g.column}열 · ` : ''}{g.title}</h3><p>{g.findings.length}곳 · {g.profile ? (g.profile===RP03?'검증 필요 후보':'수정 예시를 검증할 후보') : '현재 자동 수정 미지원'}</p>{g.profile ? <button type="button" className="button button--outline" disabled={g.id === selected?.id || !file || !available} onClick={() => setActive(g.id)}>이 수정 제안 보기</button> : <UnsupportedEvidence proposal={g} file={file}/>}</article>)}</div>
         {selected && file && available ? <ProposalDetail key={selected.id+selected.findings.map(f=>f.cell).join(',')} proposal={selected} file={file} intent={intent} onPrepare={onPrepare} basketItem={basket.find(item=>item.id===basketId(selected))} onBasketChange={addToBasket} onBasketRemove={removeFromBasket}/> : !file || !available ? <p>직접 업로드한 원본 파일로 보호 베타에서 제안을 검증할 수 있습니다. 일반 구매는 준비 중입니다.</p> : <p>현재 지원하는 제안은 계산용 숫자 텍스트 정리와 실제 빈 칸 수식 복원, 단일 월별 수식 후보 검증입니다. 다른 유형은 예상값을 생성하지 않습니다.</p>}
       </div>
       {basket.length>0&&<aside className="proposal-basket-summary" role="region" aria-label="선택한 수정 목록" aria-live="polite"><div className="proposal-basket-card"><p className="proposal-basket-kicker">1 선택 → 2 검토 → 3 예시 확인</p><h3>선택한 {basketCells}곳</h3><p>{basket.length}개 묶음을 목록에 담았습니다. 다른 묶음을 더 추가하거나 변경 예시를 확인하세요.</p><details className="proposal-basket-list"><summary>담은 묶음 {basket.length}개 보기</summary><ul>{basket.map(item=><li key={item.id}><span><strong>{item.title}</strong><small>{item.draft.sheet} · {item.kindLabel} · {item.cellCount}곳</small></span><button type="button" className="text-link" aria-label={basketRemoveLabel(item)} onClick={()=>removeFromBasket(item.id)}>제외</button></li>)}</ul></details><div className="proposal-basket-actions"><button type="button" className="button button--primary" disabled={!file||!available} onClick={prepareBasket}>선택한 {basketCells}곳의 변경 예시 확인</button><button type="button" className="button button--ghost" onClick={clearBasket}>목록 비우기</button></div></div></aside>}

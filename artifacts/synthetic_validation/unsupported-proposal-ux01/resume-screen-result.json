@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "surface": "LOCAL_REAL_API_BROWSER",
+  "sample": "007-receivables_aging-mutated-948869.xlsx",
+  "structure_count": 0,
+  "formula_count": 1,
+  "target": "AR Aging!H16",
+  "current_formula": "=IF(G15>30,F16*0.97,F16)",
+  "comparison_cells": [
+    "H14",
+    "H15",
+    "H17",
+    "H18"
+  ],
+  "no_default_manual_cell_input": true,
+  "mobile_client_width": 375,
+  "mobile_scroll_width": 375,
+  "mobile_disclosure": "opened and visually inspected",
+  "screenshot": "unsupported-mobile-final-detail.png",
+  "prior_supported8_evidence": "REUSED_UNCHANGED",
+  "beta": "NOT_DEPLOYED"
+}

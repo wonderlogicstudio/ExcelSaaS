@@ -63,12 +63,13 @@ export default function App() {
   const [reviewFindings, setReviewFindings] = useState<Finding[]>([]);
   const [reviewLocked, setReviewLocked] = useState(false);
   const [reviewDraft, setReviewDraft] = useState<RepairDraft>();
+  const [manualDeliveryOpen, setManualDeliveryOpen] = useState(false);
   const [repairIntent, setRepairIntent] = useState<RepairIntent>(noRepairIntent);
   const reviewSelection = { findings: reviewFindings, locked: reviewLocked, toggle: (finding: Finding) => {
     if (!reviewLocked) { setDeliveryProgress(initialDeliveryProgress); setReviewDraft(undefined); setReviewFindings(current => current.some(f => reviewKey(f) === reviewKey(finding))
       ? current.filter(f => reviewKey(f) !== reviewKey(finding)) : [...current, finding]); }
   }};
-  const clearReview = () => { setRepairIntent(noRepairIntent); setActiveStep(1); setPendingStep(null); setDeliveryProgress(initialDeliveryProgress); setReviewFindings([]); setReviewLocked(false); setReviewDraft(undefined); };
+  const clearReview = () => { setRepairIntent(noRepairIntent); setActiveStep(1); setPendingStep(null); setDeliveryProgress(initialDeliveryProgress); setReviewFindings([]); setReviewLocked(false); setReviewDraft(undefined); setManualDeliveryOpen(false); };
   const uploadRef = useRef<HTMLDivElement>(null);
   const activeRequest = useRef(0);
   const activeController = useRef<AbortController | null>(null);
@@ -379,8 +380,9 @@ export default function App() {
         </div>
         <div id="core-work-panel" role="tabpanel" tabIndex={-1} aria-labelledby={`core-tab-${activeStep === 1 ? 2 : activeStep}`} hidden={activeStep === 1}>
           {result && <>
-            <div hidden={activeStep !== 2 || reviewLocked}><RepairProposalPicker findings={proposalFindings} sheets={sourceSheets} file={sourceFile} selection={reviewSelection} intent={repairIntent} available={deliveryBetaEnabled} onPrepare={draft => { setDeliveryProgress(initialDeliveryProgress); setReviewDraft(draft); }}/></div>
-            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={result.analysis_id} file={sourceFile} compactEntry reviewDraft={reviewDraft} intent={repairIntent} onRestartProposal={() => { setReviewLocked(false); setReviewDraft(undefined); setDeliveryProgress(initialDeliveryProgress); setPendingStep(null); setActiveStep(2); }} onSourceFixed={setReviewLocked} guidedStep={activeStep} onProgress={setDeliveryProgress} onNextStep={continueToStep}/>}
+            <div hidden={activeStep !== 2 || reviewLocked}><RepairProposalPicker findings={proposalFindings} sheets={sourceSheets} file={sourceFile} selection={reviewSelection} intent={repairIntent} available={deliveryBetaEnabled} onPrepare={draft => { setManualDeliveryOpen(false); setDeliveryProgress(initialDeliveryProgress); setReviewDraft(draft); }}/></div>
+            {deliveryBetaEnabled && sourceFile && !reviewDraft && !reviewLocked && activeStep === 2 && <section className="delivery-entry shell delivery-manual"><h3>고급: 목록 밖의 셀 직접 지정</h3><p>현재 지원하는 숫자 텍스트나 실제 빈 셀을 별도로 검사할 때만 사용합니다. 위의 미지원 수식 후보를 이 경로에서 수정할 수 있다는 뜻은 아닙니다.</p><button className="button button--outline" type="button" aria-expanded={manualDeliveryOpen} onClick={() => setManualDeliveryOpen(value => !value)}>{manualDeliveryOpen ? '직접 지정 접기' : '셀 직접 지정 열기'}</button></section>}
+            {deliveryBetaEnabled && sourceFile && <DeliveryWorkspace key={result.analysis_id} file={sourceFile} compactEntry manualEntryAvailable={manualDeliveryOpen} reviewDraft={reviewDraft} intent={repairIntent} onRestartProposal={() => { setReviewLocked(false); setReviewDraft(undefined); setManualDeliveryOpen(false); setDeliveryProgress(initialDeliveryProgress); setPendingStep(null); setActiveStep(2); }} onSourceFixed={setReviewLocked} guidedStep={activeStep} onProgress={setDeliveryProgress} onNextStep={continueToStep}/>}
           </>}
         </div>
         </div>

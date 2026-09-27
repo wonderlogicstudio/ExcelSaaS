@@ -21,6 +21,7 @@ def numeric_text_eligible(record: dict) -> bool:
         record.get("type") == "text"
         and numeric_text(record.get("value")) is not None
         and not record.get("special_format")
+        and not record.get("zero_padding_format")
     )
 
 

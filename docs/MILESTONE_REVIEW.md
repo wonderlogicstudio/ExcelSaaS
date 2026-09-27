@@ -1,3 +1,67 @@
+## 2026-09-27 UNSUPPORTED-PROPOSAL-UX01: local verification and review PASS
+
+Remaining fixture/assertion corrections complete; new4tests and type/build exit0. Independent focused review PASS. Actual AR AgingH16 evidence/default-input hiding/mobile375 checked; prior supported8 auto-address calculation proof reused. Engine unchanged. No beta/commit/push. STOP; next proposed unit is protected frontend release and bounded screen verification. See [review](delivery-v3_2/reviews/UNSUPPORTED-PROPOSAL-UX01.md).
+
+---
+
+## 2026-09-27 UNSUPPORTED-PROPOSAL-UX01: implemented; tests/build pending
+
+Unsupported formula evidence and explicit advanced manual entry implemented. Actual local AR AgingH16 evidence and supported numeric8 auto-target/preflight/calculation confirmed. Existing29tests PASS; new2tests/type fixture still fail. First review source-label correction applied, not yet retested. Additional bounded correction awaiting owner under retry limit; no beta/commit/push. See [review](delivery-v3_2/reviews/UNSUPPORTED-PROPOSAL-UX01.md).
+
+---
+
+## 2026-09-27 FALSE-REPAIR-GUARD01-RELEASE: beta deployed; receipt unverified
+
+API00037-bid/imageefdbbba3 deployed; Worker/Access/IAM/Gateway preserved. Full512 tests/M4exact36 PASS, native3profiles refreshed PASS, staged new guard + existing delivery PASS. Beta screen #VALUE! -> -5 and exact approval -> READY confirmed. Three download requests shown; local receipt unverified. Raw guard fixture Excel-open limitation preserved. No commit/push. STOP. See [review](delivery-v3_2/reviews/FALSE-REPAIR-GUARD01-RELEASE.md).
+
+---
+
+## 2026-09-27 FALSE-REPAIR-GUARD01: local rule and artifact review PASS
+
+RP01 now refuses text under pure all-zero padding formats; safe numeric controls remain supported. Real separate XLSX changes only B2/B3/F3 (1200/0/formula result20); source/non-targets/styles preserved. Focused tests and independent review PASS. Original unsupported oracle preserved; supported control separately frozen. Automatic discovery NOT_ESTABLISHED; native compatibility STALE. Full regression/Excel/API delivery/beta/commit/push not run. STOP for next owner-confirmed final verification unit. See [review](delivery-v3_2/reviews/FALSE-REPAIR-GUARD01.md).
+
+---
+
+## 2026-09-27 FULL-REVIEW: automated PASS; browser receipt PARTIAL
+
+Fresh web177/API316/Worker16 tests PASS (509 total), exact M4 candidates36/no extras, type/build/ruff PASS. Initial wrapper failed delayed mock cleanup; test-only correction reviewed PASS and all component gates completed. Two beta artifacts still not received; no general/public readiness claim. No new deploy/commit/push. [Review](delivery-v3_2/reviews/FULL-REVIEW-20260927.md).
+
+---
+
+## 2026-09-27 JOURNEY-DOWNLOAD-FEEDBACK01-RELEASE: beta deployed, receipt partial
+
+Worker44ed2196 deployed; API00033/bindings/Access unchanged. New download feedback verified desktop/mobile. Synthetic repaired XLSX exact-5 PASS. Other2 files absent after automated requests despite owner-reported permission; manual click result pending. No commit/push. [Review](delivery-v3_2/reviews/JOURNEY-DOWNLOAD-FEEDBACK01-RELEASE.md).
+
+---
+
+## 2026-09-27 JOURNEY-DOWNLOAD-FEEDBACK01 ? CODE VERIFIED; beta receipt PARTIAL
+
+Beta synthetic upload -> exact approval -> READY and actual repaired XLSX -5 confirmed. Source preserved; output hash matches prior native proof. Other two files not received. Download-feedback fix (two source/test files) passed27 targeted tests, type/build, independent review after unmount correction. Changes local; no commit/push/deploy. Full three-file receipt and new UI live acceptance pending. Stop; next proposed unit is reviewed frontend beta release plus three-file receipt verification. [Review](delivery-v3_2/reviews/JOURNEY-DOWNLOAD-FEEDBACK01.md).
+
+---
+
+## MONTHLY-UX07 ? protected beta deployed; browser flow pending
+
+Product ffd6647 deployed to Cloud Run workbookcare-api-beta-00033-dum and Worker fbc7c8c0-893e-4a20-985c-624923cd18d6. Immutable image d2265d9e56756fd240e1ddf93509d9fa096bd6d77acd499caff9d41ab1caa5c9 matches staged00031 actual Linux legacy/RP03 proof: expected-5, one patch, candidate1->0, three decoded artifacts, source preserved. Exact baseline runtime settings restored, traffic promoted, temporary tags removed; IAM/Gateway/Access/bindings preserved. Independent release evidence review PASS.
+
+Commands baseline/image/push/stage/proof/live/traffic/after and web baseline/build/upload/deploy ultimately exit0; raw command phase records in resume02/release-tools/output. Initial relative-registry-location failure, failed32 environment restoration, and pre-mutation diagnostic-path failure retained. No failed revision received customer traffic. Existing product/native proof reused.
+
+Authenticated current beta homepage inspected. Automatic file chooser failed Not allowed twice, including after owner enabled Edge file URL access. Manual fixed6sheet file selection requested. Actual beta upload->approval->download acceptance and10-action measurement remain PENDING, not PASS. Real PG/customer usability/commercial readiness remain unverified. Operator evidence/helper changes are local/uncommitted; product ffd6647 already pushed. Evidence: artifacts/synthetic_validation/monthly-ux07-release/resume02/result.json.
+
+---
+
+## MONTHLY-UX07 resume02 ? release review PASS; automatic approval block
+
+User approved beta continuation. Five remaining helper defects were corrected and independently reviewed PASS, including pre-mutation control-plane invariants and manifest digest binding. Read-only live baseline command exit0; existing API00029 and Worker02a4700b unchanged. Image d2265d9e56756fd240e1ddf93509d9fa096bd6d77acd499caff9d41ab1caa5c9 was NOT uploaded: automatic approval review rejected the image/push command before execution, requesting exact registry/payload authorization. A concrete bundled authorization request has been sent. No cloud mutation or deployment. Linux proof, promotion and actual beta UI remain NOT_RUN. Product commit ffd6647 is already pushed; existing product/native evidence reused. Evidence: artifacts/synthetic_validation/monthly-ux07-release/resume02/result.json. Current handoff records are local/uncommitted.
+
+---
+
+## MONTHLY-UX07 final handoff (2026-09-23)
+
+Verified product commit: ffd6647c5c288e86cb2cff51436ea0c4f06331e2 (52 selectively staged files). GitHub push was blocked twice by automatic approval review before execution; exact remote/main/commit authorization requested. Remote last verified d1f75b1. Beta was not deployed because release-tool baseline-preservation defects remain after the allowed correction. No cloud mutation. Current beta unchanged. Product verification passed with documented targeted correction; latest status evidence is artifacts/synthetic_validation/monthly-ux07-release/final-status.json. This post-commit handoff is a local record, not claimed committed/pushed. Stop; do not resume helper work or cloud mutation without the next owner decision.
+
+---
+
 ## MONTHLY-UX07-RELEASE ? deployment blocked; product checkpoint verified (2026-09-23)
 
 Second release-tool review still CHANGES_REQUIRED: stage environment replacement, incomplete command/args restoration, and incomplete service invariants. Initial attempt plus one correction exhausted; no further helper work or cloud mutation. Existing beta is unchanged. Product regression remains PASS as recorded below. Selective product commit/push is authorized and proceeds separately. Beta runtime, screen/download proof and10-action measurement NOT_RUN. Next proposed single unit: repair these deployment guards and independently review before deployment. Evidence: artifacts/synthetic_validation/monthly-ux07-release/release-review-attempt2.json.

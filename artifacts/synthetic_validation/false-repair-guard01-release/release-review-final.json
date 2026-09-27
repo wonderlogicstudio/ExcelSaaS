@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "reviewer": "guard_release_review",
+  "blocker": "nested gcloud argv",
+  "resolution": "deploy_api_guarded.py:365 now uses run([*G, ...]); independently confirmed by reviewer after correction",
+  "targeted_check": "builder AST argv shape exit0; reviewer did not duplicate",
+  "helper_sha256": "385fc36b55e3c12b19e6b8f78937226153a7d6c01f088f3d40858b6b02acfdc3",
+  "image_digest": "efdbbba3e20e4958a59a2cfef27d097e8ae1ceb9dd57d957a039f91a7034db28",
+  "prior_checks": "30 frozen overlay entries, OCI chain, native reference and9 artifact hashes PASS",
+  "unresolved_helper_blockers": [],
+  "remaining": "staged runtime proof, promotion and browser acceptance",
+  "initial_push": "NOT_EXECUTED_AUTO_REVIEW_REFERENCED_RESOLVED_BLOCKER"
+}

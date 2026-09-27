@@ -1,0 +1,47 @@
+{
+  "status": "BETA_DEPLOYED_SCREEN_READY_RECEIPT_UNVERIFIED",
+  "revision": "workbookcare-api-beta-00037-bid",
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:efdbbba3e20e4958a59a2cfef27d097e8ae1ceb9dd57d957a039f91a7034db28",
+  "worker_version": "44ed2196-cca5-4fa9-963c-16497a3ff77a",
+  "security_invariants_preserved": true,
+  "regression": {
+    "exit_code": 0,
+    "web_tests": 177,
+    "worker_tests": 16,
+    "api_tests": 319,
+    "m4_exact_candidates": 36
+  },
+  "native_compatibility": "PASS_RP01_RP02_RP03",
+  "guard_runtime": "PASS_STAGED_LINUX_PADDED_REFUSED_SAFE_CONTROLS_ALLOWED",
+  "browser": {
+    "sample": "monthly-rp03-supported-6sheet.xlsx",
+    "reused_selected_file": true,
+    "before": "#VALUE!",
+    "expected": -5,
+    "actual_preview": -5,
+    "exact_approval": true,
+    "state": "READY",
+    "download_requests": 3,
+    "local_receipt": "NOT_VERIFIED_NO_NEW_MATCH_IN_DOWNLOADS",
+    "new_filechooser": "TIMEOUT"
+  },
+  "limits": [
+    "Old raw guard fixture source and repaired fail native Excel Open; not claimed native PASS",
+    "All3 browser local receipts remain unverified; existing download issue not fixed in this release"
+  ],
+  "git": "NO_COMMIT_OR_PUSH",
+  "screenshot": "beta-ready.png",
+  "release_phases": {
+    "freeze": 0,
+    "build": 0,
+    "baseline": 0,
+    "image": 0,
+    "push": 0,
+    "stage": 0,
+    "proof": 0,
+    "live": 0,
+    "traffic": 0,
+    "after": 0
+  },
+  "approval_review": "Initial push rejected due to obsolete blocker; corrected helper and final PASS evidence recorded, same request subsequently approved; no bypass"
+}

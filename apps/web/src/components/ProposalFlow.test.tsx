@@ -18,7 +18,13 @@ const ok=(v:unknown)=>({ok:true,json:async()=>v} as Response);
 const base:DeliveryJob={job_id:'synthetic',revision:1,status:'INPUT_READY',source_hash:'synthetic-only',expires_at:Date.now()/1000+900,sheets:[{name:'정산',cell_count:10}],preflight:null,purchase_enabled:false,source_unchanged:true};
 const plan:DeliveryJob={...base,revision:3,status:'PREVIEW_VALIDATED',entitlement_active:true,repair_execution_available:true,policy:{profile:RP02,sheet:'정산',targets:['F3'],anchor:'F2',anchor_formula:'=C2*D2',confirmed:true},preflight:{status:'PRELIMINARY_ONLY',eligible_count:1,reason_codes:[],targets:[],purchase_enabled:false},plan_summary:{digest:'plan-a',status:'PREVIEW_VALIDATED',patch_count:1,impact_count:2,formula_impact_count:2,coverage:{formula_count:2},reference:{status:'PASS',case_count:36}}};
 const detail:PlanDetail={digest:'plan-a',expires_at:Date.now()/1000+600,patches:[{candidate_id:'one',sheet:'정산',cell:'F3',before:{type:'blank',value:null},after:{type:'formula',value:'=C3*D3'}}],impact:[{sheet:'정산',cell:'F3',before:{type:'number',value:0},after:{type:'number',value:12}},{sheet:'정산',cell:'J10',before:{type:'number',value:20},after:{type:'number',value:32}}]};
-afterEach(()=>{cleanup();vi.useRealTimers();vi.unstubAllGlobals();vi.clearAllMocks()});
+afterEach(async()=>{
+ cleanup();
+ // Download links revoke their object URLs one second after the click.
+ // Keep the URL mock alive until those callbacks have finished.
+ if(vi.isMockFunction(URL.revokeObjectURL))await new Promise<void>(resolve=>setTimeout(resolve,1100));
+ vi.useRealTimers();vi.unstubAllGlobals();vi.clearAllMocks();
+});
 describe('proposal-led UI contracts, not actual engine evidence',()=>{
  it('offers sheets including no candidates, preserves the exact chosen subset and blocks identifier conversion',async()=>{
   evidence.readSourceCells.mockResolvedValue([{cell:'B2',type:'text',text:'1,200'}]); const prepare=vi.fn();
@@ -238,12 +244,16 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   fireEvent.click(screen.getByRole('button',{name:'세 파일 모두 받기'}));
   await waitFor(()=>expect(actions.filter(a=>a==='download')).toHaveLength(3));
   expect(clicks).toHaveBeenCalledTimes(3);
+ expect(screen.getByRole('list',{name:'파일별 다운로드 요청 상태'})).toHaveTextContent('수정본 XLSX: 브라우저에 다운로드 요청함');
+ expect(screen.getByRole('list',{name:'파일별 다운로드 요청 상태'})).toHaveTextContent('변경내역 XLSX: 브라우저에 다운로드 요청함');
+ expect(screen.getByText(/파일 저장 완료를 확인한 뜻이 아닙니다/)).toBeInTheDocument();
  });
  it('reports a partial all-download failure and prevents repeated clicks while busy',async()=>{
   let release!:()=>void;
   const ready={...plan,status:'READY',approval_status:'APPROVED',delivery:{delivery_id:'d1',patch_count:1,expires_at:Date.now()/1000+600,files:{REPAIRED_XLSX:{bytes:10},CHANGES_XLSX:{bytes:10},VERIFICATION_HTML:{bytes:10}}}};
   const actions:string[]=[];
-  vi.stubGlobal('fetch',vi.fn(async(_url,init)=>{const body=JSON.parse(String(init?.body));actions.push(`${body.action}:${body.kind??''}`); if(body.action==='get')return ok(ready); if(body.kind==='REPAIRED_XLSX')await new Promise<void>(resolve=>{release=resolve;}); if(body.kind==='CHANGES_XLSX')throw new Error('changes download failed'); return ok({filename:`${body.kind}.bin`,mime:'application/octet-stream',file_base64:'eA=='});}));
+  let changesAttempts=0;
+  vi.stubGlobal('fetch',vi.fn(async(_url,init)=>{const body=JSON.parse(String(init?.body));actions.push(`${body.action}:${body.kind??''}`); if(body.kind==='REPAIRED_XLSX')await new Promise<void>(resolve=>{release=resolve;}); if(body.kind==='CHANGES_XLSX'&&changesAttempts++===0)throw new Error('changes download failed'); return ok({filename:`${body.kind}.bin`,mime:'application/octet-stream',file_base64:'eA=='});}));
   vi.stubGlobal('URL',{createObjectURL:vi.fn(()=>'blob:one'),revokeObjectURL:vi.fn()});
   vi.spyOn(HTMLAnchorElement.prototype,'click').mockImplementation(()=>undefined);
   render(<RepairDelivery job={ready as DeliveryJob} detail={detail} onJob={vi.fn()} mode="delivery"/>);
@@ -252,11 +262,43 @@ describe('proposal-led UI contracts, not actual engine evidence',()=>{
   await waitFor(()=>expect(all).toBeDisabled());
   fireEvent.click(all);
   expect(actions.filter(a=>a==='download:REPAIRED_XLSX')).toHaveLength(1);
+  expect(screen.getByRole('list',{name:'파일별 다운로드 요청 상태'})).toHaveTextContent('수정본 XLSX: 다운로드 요청 중');
   await act(async()=>{release();});
-  await screen.findByRole('alert');
-  expect(screen.getByRole('alert')).toHaveTextContent('서버에 연결하지 못했습니다');
-  expect(actions).toContain('get:');
+  await waitFor(()=>expect(screen.getByRole('list',{name:'파일별 다운로드 요청 상태'})).toHaveTextContent('변경내역 XLSX: 요청 실패'));
+  expect(screen.getByRole('list',{name:'파일별 다운로드 요청 상태'})).toHaveTextContent('수정본 XLSX: 브라우저에 다운로드 요청함');
+  expect(screen.getByRole('list',{name:'파일별 다운로드 요청 상태'})).toHaveTextContent('재검증 HTML: 아직 요청하지 않음');
   expect(actions.filter(a=>a.startsWith('download:'))).toEqual(['download:REPAIRED_XLSX','download:CHANGES_XLSX']);
+  fireEvent.click(screen.getByRole('button',{name:'변경내역 XLSX 받기'}));
+  await waitFor(()=>expect(screen.getByRole('list',{name:'파일별 다운로드 요청 상태'})).toHaveTextContent('변경내역 XLSX: 브라우저에 다운로드 요청함'));
+  expect(actions.filter(a=>a.startsWith('download:'))).toEqual(['download:REPAIRED_XLSX','download:CHANGES_XLSX','download:CHANGES_XLSX']);
+ });
+ it('clears request states for a new plan and ignores a late old-job download',async()=>{
+  let finish!:(value:Response)=>void;
+  const ready={...plan,status:'READY',approval_status:'APPROVED',delivery:{delivery_id:'d1',patch_count:1,expires_at:Date.now()/1000+600,files:{REPAIRED_XLSX:{bytes:10}}}};
+  vi.stubGlobal('fetch',vi.fn(async()=>new Promise<Response>(resolve=>{finish=resolve;})));
+  vi.stubGlobal('URL',{createObjectURL:vi.fn(()=>'blob:one'),revokeObjectURL:vi.fn()});
+  const clicks=vi.spyOn(HTMLAnchorElement.prototype,'click').mockImplementation(()=>undefined);
+  function Harness(){const [job,setJob]=useState<DeliveryJob>(ready as DeliveryJob);const [planDetail,setPlanDetail]=useState(detail);return <><button type="button" onClick={()=>{setJob({...ready,job_id:'new-job'} as DeliveryJob);setPlanDetail({...detail,digest:'new-plan'});}}>new job and plan</button><RepairDelivery job={job} detail={planDetail} onJob={vi.fn()} mode="delivery"/></>;}
+  render(<Harness/>);
+  fireEvent.click(screen.getByRole('button',{name:'수정본 XLSX 받기'}));
+  expect(screen.getByRole('list',{name:'파일별 다운로드 요청 상태'})).toHaveTextContent('다운로드 요청 중');
+  fireEvent.click(screen.getByRole('button',{name:'new job and plan'}));
+  expect(screen.getByRole('list',{name:'파일별 다운로드 요청 상태'})).toHaveTextContent('수정본 XLSX: 아직 요청하지 않음');
+  await act(async()=>{finish(ok({filename:'old.bin',mime:'application/octet-stream',file_base64:'eA=='}));});
+  expect(screen.getByRole('list',{name:'파일별 다운로드 요청 상태'})).toHaveTextContent('수정본 XLSX: 아직 요청하지 않음');
+  expect(clicks).not.toHaveBeenCalled();
+ });
+ it('does not click a download link after leaving the delivery step',async()=>{
+  let finish!:(value:Response)=>void;
+  const ready={...plan,status:'READY',approval_status:'APPROVED',delivery:{delivery_id:'d1',patch_count:1,expires_at:Date.now()/1000+600,files:{REPAIRED_XLSX:{bytes:10}}}};
+  vi.stubGlobal('fetch',vi.fn(async()=>new Promise<Response>(resolve=>{finish=resolve;})));
+  const clicks=vi.spyOn(HTMLAnchorElement.prototype,'click').mockImplementation(()=>undefined);
+  function Harness(){const [show,setShow]=useState(true);return <><button type="button" onClick={()=>setShow(false)}>leave delivery</button>{show&&<RepairDelivery job={ready as DeliveryJob} detail={detail} onJob={vi.fn()} mode="delivery"/>}</>;}
+  render(<Harness/>);
+  fireEvent.click(screen.getByRole('button',{name:'수정본 XLSX 받기'}));
+  fireEvent.click(screen.getByRole('button',{name:'leave delivery'}));
+  await act(async()=>{finish(ok({filename:'old.bin',mime:'application/octet-stream',file_base64:'eA=='}));});
+  expect(clicks).not.toHaveBeenCalled();
  });
  it('does not reveal a late execution result after leaving the delivery step',async()=>{
   let finish!:(value:Response)=>void;
