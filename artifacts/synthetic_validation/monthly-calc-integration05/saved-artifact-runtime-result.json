@@ -1,0 +1,105 @@
+{
+  "status": "PASS",
+  "kind": "UNMOCKED_RP01_RP02_SAVED_ARTIFACT_RUNTIME_NO_REFERENCE_LOOP",
+  "reference_and_compatibility": {
+    "reference_status": {
+      "status": "PASS",
+      "case_count": 20,
+      "excel_version": "16.0",
+      "reference_digest": "a841c019a2fc8d240313e6c8feae4d58dfd646f523d1302271050f1d7d752cc4"
+    },
+    "compatibility_status": {
+      "status": "PASS",
+      "excel_version": "16.0",
+      "profiles": [
+        "COMBINED_RP01_RP02"
+      ],
+      "evidence_digest": "0ab55706f85440f4e811559347e3ed67622381f384d15de7b459138903449008"
+    }
+  },
+  "source_sha256": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+  "profiles": [
+    {
+      "label": "rp01",
+      "profile": "RP01_NUMERIC_TEXT_FIELD_V1",
+      "targets": [
+        "B2",
+        "B3"
+      ],
+      "expected_cell": "H2",
+      "typed_expected": {
+        "type": "number",
+        "value": 15500.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "patch_count": 2,
+      "delivery_status": "READY",
+      "source_sha256_preserved": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+      "artifacts": {
+        "REPAIRED_XLSX": {
+          "path": "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp01-repaired.xlsx",
+          "filename": "workbookcare_repaired_92cec489-35f7-41dc-af0c-a679588a97d3.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+          "bytes": 2046
+        },
+        "CHANGES_XLSX": {
+          "path": "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp01-changes.xlsx",
+          "filename": "changes_92cec489-35f7-41dc-af0c-a679588a97d3.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "035b7b209495f23b5547c36864a8bb01b83f06e96c94eb4ecbf5009e8dc42db0",
+          "bytes": 10035
+        },
+        "VERIFICATION_HTML": {
+          "path": "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp01-verification.html",
+          "filename": "verification_92cec489-35f7-41dc-af0c-a679588a97d3.html",
+          "mime": "text/html;charset=utf-8",
+          "sha256": "acaa7f39c0e7c861d8862725d2f0d9d960d0eac45a5048d4d347b02d51f560ba",
+          "bytes": 5114
+        }
+      }
+    },
+    {
+      "label": "rp02",
+      "profile": "RP02_APPROVED_FORMULA_RESTORE_V1",
+      "targets": [
+        "F3"
+      ],
+      "expected_cell": "F12",
+      "typed_expected": {
+        "type": "number",
+        "value": 18200.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "patch_count": 1,
+      "delivery_status": "READY",
+      "source_sha256_preserved": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+      "artifacts": {
+        "REPAIRED_XLSX": {
+          "path": "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp02-repaired.xlsx",
+          "filename": "workbookcare_repaired_f89d0ecc-ad7c-4b73-b6c8-013414408971.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+          "bytes": 2067
+        },
+        "CHANGES_XLSX": {
+          "path": "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp02-changes.xlsx",
+          "filename": "changes_f89d0ecc-ad7c-4b73-b6c8-013414408971.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "6b1d6ac65ab5f2e6d5ece9ddfd9770376446dd26da63ce1f51390a379e1f3b52",
+          "bytes": 9996
+        },
+        "VERIFICATION_HTML": {
+          "path": "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp02-verification.html",
+          "filename": "verification_f89d0ecc-ad7c-4b73-b6c8-013414408971.html",
+          "mime": "text/html;charset=utf-8",
+          "sha256": "c70de74fa488514449c493cbbab91de9e7a66946082ed255aedba28890791a20",
+          "bytes": 5053
+        }
+      }
+    }
+  ],
+  "artifact_count": 6,
+  "mocked": false,
+  "note": "Skips the 20-case reference recalculation loop; uses current unmocked PASS statuses and saves downloaded artifacts before the temporary store is removed."
+}

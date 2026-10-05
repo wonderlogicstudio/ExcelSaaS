@@ -1,0 +1,50 @@
+﻿{
+    "excel_build":  20326,
+    "excel_version":  "16.0",
+    "profiles":  [
+                     "RP01",
+                     "RP02",
+                     "RP03"
+                 ],
+    "kind":  "ACTUAL_PRODUCT_PATCH_AND_INSTALLED_EXCEL_REOPEN",
+    "results":  [
+                    {
+                        "output_hash":  "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+                        "changes_hash":  "2d4df806963d4a2855d0449041f5b0eb1c50b9efd623844f4d78008990bd0216",
+                        "repaired_opened":  true,
+                        "profile":  "RP01",
+                        "native_formula":  null,
+                        "changes_opened":  true,
+                        "verification_html_hash":  "05d390450e62918ce3788a12abae5efe1a2f4a66e76d014d01443578fdd5ecea",
+                        "actual_values_match":  true,
+                        "read_only_hash_unchanged":  true,
+                        "literal_report_formulas":  true
+                    },
+                    {
+                        "output_hash":  "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+                        "changes_hash":  "f81905895d88cb798fc0543ceea7bff78e4d6ab4344d6b1c1a62fd038d6843e3",
+                        "repaired_opened":  true,
+                        "profile":  "RP02",
+                        "native_formula":  null,
+                        "changes_opened":  true,
+                        "verification_html_hash":  "eab4e09102b224638488ef4e7d2023f3eb843889adecc9ee5fd65d4f1743d0f4",
+                        "actual_values_match":  true,
+                        "read_only_hash_unchanged":  true,
+                        "literal_report_formulas":  true
+                    },
+                    {
+                        "output_hash":  "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+                        "changes_hash":  "ea46fa8b07fabf306c7fb6426695f151a36d3fa1fb762042a10b88d53c8c82e2",
+                        "repaired_opened":  true,
+                        "profile":  "RP03",
+                        "native_formula":  "=\u0027M10\u0027!B16-\u0027M10\u0027!B15",
+                        "changes_opened":  true,
+                        "verification_html_hash":  "59c686f9a46ed44ef1da339fc3aef0b7d8b4618564aee451c7beef7c41d2fa30",
+                        "actual_values_match":  true,
+                        "read_only_hash_unchanged":  true,
+                        "literal_report_formulas":  true
+                    }
+                ],
+    "status":  "PASS",
+    "patch_fingerprint":  "0432d8702a6b680ddbe18ffbd0cda3c1b9ff7e94d4f196e98e155fcb573b16c8"
+}

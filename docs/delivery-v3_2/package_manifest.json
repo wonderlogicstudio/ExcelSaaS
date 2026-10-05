@@ -1,0 +1,53 @@
+{
+  "package": "WorkbookCare Approved Delivery V3.2",
+  "date": "2026-09-12",
+  "type": "research+implementation_instructions+public_synthetic_examples",
+  "install_path": "docs/delivery-v3_2",
+  "first_approved_by_pasted_prompt_only": "D01",
+  "product_implemented_by_this_package": false,
+  "live_payment_executed": false,
+  "excel_reference_executed": false,
+  "bundles": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08"
+  ],
+  "core_sequence": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D06",
+    "D07",
+    "D08"
+  ],
+  "independent_comparison_branch": "D05",
+  "preservation": {
+    "previous_filename": "WorkbookCare_Codex_Launch_Final_V3_1_2026-09-12.zip",
+    "copied_as": "reference/previous_v31.zip",
+    "sha256": "5e0fcf164a997549dc02d3b8f26055a41a9e6f8cffeb83fcd523633d68b88588",
+    "source_members": 65,
+    "original_tasks": 120,
+    "original_cf_uxr": 17,
+    "meaning": "원본 보존 증거이며 제품 구현/검증 완료 증거가 아님"
+  },
+  "qa": {
+    "contract_model_passed": 33,
+    "guide_browser_passed": 47,
+    "package_checks_report": "qa/PACKAGE_CHECK_RESULTS.json",
+    "sample_scope": "illustration only",
+    "limitations": "qa/PACKAGE_QA.md"
+  },
+  "key_documents": [
+    "01_PRODUCT_AND_SCOPE.md",
+    "02_CUSTOMER_OUTPUTS.md",
+    "04_EXECUTION_GUIDE.md",
+    "07_ACCEPTANCE_AND_RELEASE.md"
+  ],
+  "sensitive_or_real_customer_data_included": false
+}

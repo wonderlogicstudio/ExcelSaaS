@@ -1,0 +1,16 @@
+﻿{
+    "status":  "ps_utf8_bom_encoding_fixed",
+    "prior_native_first_run":  "exit1 before PASS; PowerShell 5.1 read UTF8 without BOM as ANSI and garbled Korean worksheet name",
+    "native_rerun":  false,
+    "logic_changed":  false,
+    "first_three_bytes":  [
+                              "EF",
+                              "BB",
+                              "BF"
+                          ],
+    "parser_error_count":  0,
+    "parser_errors":  {
+
+                      },
+    "sha256":  "19497f5c80b05056797e117f183955d48a4d008c6f409887fda1220e13a5acb7"
+}

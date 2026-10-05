@@ -1,0 +1,74 @@
+﻿{
+    "id":  "MONTHLY-CALC-DEPTH-02-builder-evidence",
+    "status":  "TARGETED_CHECKS_PASS_REVIEW_READY",
+    "scope":  "Remaining depth guards plus mojibake correction only; no profile/UI/reference/lock/deploy/git/full-regression changes.",
+    "changed_files":  [
+                          "apps/api/app/delivery_calculation.py",
+                          "apps/api/engine/DeliveryCalc.java",
+                          "apps/api/tests/test_monthly_calculation.py"
+                      ],
+    "local_build_outputs":  [
+                                "apps/api/engine/classes/DeliveryCalc.class rebuilt locally; no git status diff shown",
+                                "apps/api/engine/classes/DeliveryCalc$1.class rebuilt locally; no git status diff shown"
+                            ],
+    "commands":  [
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe apps\\\\api\\\\engine\\\\setup.py",
+                         "exit":  0,
+                         "raw_output":  "",
+                         "note":  "Rebuilt local Java evaluator after depth/range guard changes."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_monthly_calculation.py -q",
+                         "exit":  0,
+                         "raw_output":  "................                                                         [100%]",
+                         "result":  "16 passed",
+                         "note":  "Monthly targeted tests after depth/range correction, before style-only formatting fix."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m ruff check apps\\\\api\\\\app\\\\delivery_calculation.py apps\\\\api\\\\tests\\\\test_monthly_calculation.py",
+                         "exit":  1,
+                         "raw_output":  "E501 Line too long (104 \u003e 100) at apps/api/tests/test_monthly_calculation.py:159; Found 1 error.",
+                         "note":  "Style-only failure; fixed one line wrap in test file."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_monthly_calculation.py -q",
+                         "exit":  0,
+                         "raw_output":  "................                                                         [100%]",
+                         "result":  "16 passed",
+                         "note":  "Final monthly test run after style-only test formatting change."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m ruff check apps\\\\api\\\\app\\\\delivery_calculation.py apps\\\\api\\\\tests\\\\test_monthly_calculation.py",
+                         "exit":  0,
+                         "raw_output":  "All checks passed!"
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_real_poi_matches_fixed_independent_oracle apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_combined_policy_calculates_once_against_frozen_complex03 apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_rp02_exact_blank_translation_and_digest_invalidates_on_engine apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_unsupported_never_becomes_iferror_zero apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_circular_reference_and_hard_timeout_cleanup apps\\\\api\\\\tests\\\\test_delivery_inputs.py::test_true_blank_and_unsupported_function_are_distinct -q",
+                         "exit":  0,
+                         "raw_output":  ".............................                                            [100%]; warning: StarletteDeprecationWarning from fastapi/testclient.py",
+                         "result":  "29 passed",
+                         "note":  "Affected legacy subset run once after final source; warning is pre-existing dependency deprecation."
+                     }
+                 ],
+    "implementation_notes":  [
+                                 "Python depth walk now rejects before descending past depth 100 and retains memoized longest-depth checks, preserving depth starting at 0.",
+                                 "Python depth rejection message corrected to Korean text: 순환 참조 또는 계산 깊이 한도를 초과했습니다.",
+                                 "Java depth walk now rejects before descending past depth 100 and checks memoized child depth against the current path depth.",
+                                 "Java AreaPtg dependencies are extracted for same-sheet ranges, with rows*cols capped at 10000 before expansion.",
+                                 "Regression tests cover near-1000 monthly chains in both insertion orders without RecursionError, positive boundary depth 100, raw Java SUM(range) depth bypass rejection, and valid -5 monthly subtraction."
+                             ],
+    "boundaries":  [
+                       "No sheet/formula/cell limits widened; 10-sheet limit unchanged and original 13-sheet fixture remains out of scope.",
+                       "No delivery_inputs, delivery_plan, repair profile, UI, oracle, dependency lockfile, deploy, commit, push, native Excel, or full regression changes.",
+                       "API input ! rejection remains default behavior.",
+                       "delivery_reference/native evidence remains STALE pending later integration refresh."
+                   ],
+    "git_status_short":  [
+                             "M apps/api/app/delivery_calculation.py",
+                             "M apps/api/engine/DeliveryCalc.java",
+                             "?? apps/api/tests/test_monthly_calculation.py"
+                         ],
+    "diff_stat":  "apps/api/app/delivery_calculation.py | 182 ++++++++++++++++++++++++++++++++---; apps/api/engine/DeliveryCalc.java | 87 ++++++++++++++++-; test file untracked/new",
+    "reviewer":  "monthly_calc_review source ready after depth02 evidence."
+}

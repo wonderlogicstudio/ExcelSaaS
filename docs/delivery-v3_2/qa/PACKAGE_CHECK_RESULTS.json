@@ -1,0 +1,147 @@
+{
+  "scope": "package+public illustrative files only; not app/Excel/PG",
+  "passed": 35,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "eight_unique_bundles",
+      "passed": true
+    },
+    {
+      "name": "commands_cover_bundles",
+      "passed": true
+    },
+    {
+      "name": "prompt_files_match",
+      "passed": true
+    },
+    {
+      "name": "start_prompt_matches_D01",
+      "passed": true
+    },
+    {
+      "name": "dependencies_exist",
+      "passed": true
+    },
+    {
+      "name": "dependency_graph_acyclic",
+      "passed": true
+    },
+    {
+      "name": "previous_zip_exact_hash",
+      "passed": true
+    },
+    {
+      "name": "previous_zip_integrity",
+      "passed": true
+    },
+    {
+      "name": "original_comparison_fixture_BASELINE_EXPECTED.json",
+      "passed": true
+    },
+    {
+      "name": "original_comparison_fixture_BASELINE_INPUTS.json",
+      "passed": true
+    },
+    {
+      "name": "original_comparison_fixture_EDGE_CASES.json",
+      "passed": true
+    },
+    {
+      "name": "120_unique_original_tasks",
+      "passed": true
+    },
+    {
+      "name": "120_records_unchanged",
+      "passed": true
+    },
+    {
+      "name": "task_bundle_links_valid",
+      "passed": true
+    },
+    {
+      "name": "17_CF_UXR_records_unchanged",
+      "passed": true
+    },
+    {
+      "name": "no_false_original_completion",
+      "passed": true
+    },
+    {
+      "name": "all_JSON_parse",
+      "passed": true
+    },
+    {
+      "name": "all_Python_parse",
+      "passed": true
+    },
+    {
+      "name": "markdown_local_links_exist",
+      "passed": true
+    },
+    {
+      "name": "HTML_local_links_START_HERE.html",
+      "passed": true
+    },
+    {
+      "name": "HTML_local_links_examples/DELIVERY_GUIDE.html",
+      "passed": true
+    },
+    {
+      "name": "HTML_local_links_examples/repair_delivery/verification_DEMO.html",
+      "passed": true
+    },
+    {
+      "name": "XLSX_ZIP_source_DEMO.xlsx",
+      "passed": true
+    },
+    {
+      "name": "XLSX_ZIP_workbookcare_repaired_DEMO.xlsx",
+      "passed": true
+    },
+    {
+      "name": "XLSX_ZIP_changes_DEMO.xlsx",
+      "passed": true
+    },
+    {
+      "name": "numeric_type_conversion_example",
+      "passed": true
+    },
+    {
+      "name": "formula_restoration_example",
+      "passed": true
+    },
+    {
+      "name": "totals_match_independent_oracle",
+      "passed": true
+    },
+    {
+      "name": "ids_keep_leading_zero",
+      "passed": true
+    },
+    {
+      "name": "example_cell_changes_bounded",
+      "passed": true
+    },
+    {
+      "name": "change_log_formulas_are_literal",
+      "passed": true
+    },
+    {
+      "name": "demo_not_product_verified",
+      "passed": true
+    },
+    {
+      "name": "demo_hashes_match",
+      "passed": true
+    },
+    {
+      "name": "32_negative_acceptance_cases",
+      "passed": true
+    },
+    {
+      "name": "no_live_progress_shipped",
+      "passed": true
+    }
+  ]
+}

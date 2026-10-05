@@ -1,0 +1,89 @@
+{
+  "example_only": true,
+  "product_pipeline_executed": false,
+  "excel_reference_executed": false,
+  "actual_payment": false,
+  "source_hash": "a6d815631f35a57f630c087ea1d694aebf913368d60a91732c9115252106534a",
+  "source_name": "source_DEMO.xlsx",
+  "repaired_hash": "2f490ce8853e667ca47c9c4f9a419f93aa550d04d3532976578b8aebd4f5dbf4",
+  "business_cells": [
+    "C7",
+    "E8"
+  ],
+  "cache_cell": "E10",
+  "example_serializer_changed_parts": [
+    "xl/workbook.xml",
+    "xl/worksheets/sheet1.xml",
+    "_rels/.rels",
+    "xl/_rels/workbook.xml.rels"
+  ],
+  "required_artifacts": [
+    {
+      "kind": "repaired_workbook",
+      "name": "workbookcare_repaired_DEMO.xlsx",
+      "sha256": "2f490ce8853e667ca47c9c4f9a419f93aa550d04d3532976578b8aebd4f5dbf4"
+    },
+    {
+      "kind": "change_log",
+      "name": "changes_DEMO.xlsx",
+      "sha256": "fba841d9826594f53925bb30781fd42cc9c54a5411eec05e262b74f88f297d8e"
+    },
+    {
+      "kind": "verification_report",
+      "name": "verification_DEMO.html",
+      "sha256": "9bd380db8cbfdcc928aa054d5bc669d6f579dc956bac3068a830aadfcb341376"
+    }
+  ],
+  "checks": [
+    {
+      "check": "샘플 원본/수정본 파일 존재",
+      "result": "PASS",
+      "note": "이 폴더의 설명용 파일"
+    },
+    {
+      "check": "C7 text→number 12000",
+      "result": "PASS",
+      "note": "OOXML typed cell 확인"
+    },
+    {
+      "check": "E8 기준 수식과 예시 9500",
+      "result": "PASS",
+      "note": "artifact_tool 예시 계산. 제품 계산 아님"
+    },
+    {
+      "check": "거래 ID의 선행0",
+      "result": "PASS",
+      "note": "텍스트 타입과 값 확인"
+    },
+    {
+      "check": "예시 합계 51000→60500",
+      "result": "PASS",
+      "note": "고정 합성 산술과 cache 비교"
+    },
+    {
+      "check": "제품 최소패치 엔진",
+      "result": "NOT_RUN",
+      "note": "예시는 artifact_tool export. OOXML 관계 ID 등의 재직렬화 존재"
+    },
+    {
+      "check": "Excel reference 호환성",
+      "result": "NOT_RUN",
+      "note": "실제 Windows Excel 실행 안 함"
+    },
+    {
+      "check": "실제 고객 변경승인",
+      "result": "NOT_RUN",
+      "note": "공개 합성 예시"
+    },
+    {
+      "check": "실제 PG·사용권·다운로드 서버",
+      "result": "NOT_RUN",
+      "note": "이 폴더는 비공개 제품을 구현하지 않음"
+    },
+    {
+      "check": "제품 라이브 납품 판정",
+      "result": "NOT_READY",
+      "note": "설명용 산출물만으로 실제 서비스 준비 완료 아님"
+    }
+  ]
+}

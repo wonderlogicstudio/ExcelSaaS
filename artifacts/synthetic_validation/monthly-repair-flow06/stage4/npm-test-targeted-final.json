@@ -1,0 +1,6 @@
+﻿{
+    "command":  "npm.cmd run test -- App.navigation ProposalFlow ProposalExample",
+    "exit_code":  0,
+    "output":  "artifacts/synthetic_validation/monthly-repair-flow06/stage4/npm-test-targeted-final.txt",
+    "timestamp":  "2026-09-22T23:34:50.3053957+09:00"
+}

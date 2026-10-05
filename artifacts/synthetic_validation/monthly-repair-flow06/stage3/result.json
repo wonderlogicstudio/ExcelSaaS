@@ -1,0 +1,62 @@
+﻿{
+    "stage":  "stage3",
+    "status":  "review_ready_before_native_excel",
+    "native_excel_status":  "PENDING_ROOT_COM_READ_ONLY_VERIFICATION",
+    "compatibility_pass_registered":  false,
+    "frozen_monthly_source_hash":  "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+    "compatibility_bootstrap_profiles":  [
+                                             "RP01",
+                                             "RP02",
+                                             "RP03"
+                                         ],
+    "changed_files":  [
+                          "apps/api/app/delivery_api.py",
+                          "apps/api/app/delivery_execution.py",
+                          "apps/api/app/delivery_patch.py",
+                          "apps/api/app/delivery_plan.py",
+                          "apps/api/app/delivery_rehearsal.py",
+                          "apps/api/app/formula_patterns.py",
+                          "apps/api/app/repair_rules/monthly_formula.py",
+                          "apps/api/tests/test_delivery_execution.py",
+                          "apps/api/tests/test_delivery_inputs.py",
+                          "scripts/verify_delivery_patch_compatibility.py",
+                          "scripts/register_delivery_patch_reference.py",
+                          "scripts/verify_delivery_output_excel.ps1",
+                          "artifacts/synthetic_validation/monthly-repair-flow06/stage3/monthly-rp03-supported-6sheet.xlsx",
+                          "artifacts/synthetic_validation/monthly-repair-flow06/stage3/supported-source-manifest.json",
+                          "artifacts/verification/d08/compatibility/inputs.json",
+                          "artifacts/verification/d08/compatibility/RP03-REPAIRED_XLSX.xlsx",
+                          "artifacts/verification/d08/compatibility/RP03-CHANGES_XLSX.xlsx",
+                          "artifacts/verification/d08/compatibility/RP03-VERIFICATION_HTML.html",
+                          "artifacts/verification/d08/compatibility/RP03-manifest.json"
+                      ],
+    "source_hashes":  {
+                          "apps/api/tests/test_delivery_execution.py":  "77e0ea035ac10d037fdce590fb1e2d435d12d515c80fc602c0af4cb026ca4c25",
+                          "scripts/register_delivery_patch_reference.py":  "6b800504c5f413c20cb1773d39e20f9837c39e74042f603d70d6132a6f788983",
+                          "artifacts/verification/d08/compatibility/RP03-VERIFICATION_HTML.html":  "e4870386d5348ae069d6980517c5927a1b9cce8f85ba185f3afcce8b38dc08f7",
+                          "artifacts/verification/d08/compatibility/inputs.json":  "41403ba63150ff953e2860482088b489f4e9f1a6066718210e25b23b021ea678",
+                          "artifacts/synthetic_validation/monthly-repair-flow06/stage3/supported-source-manifest.json":  "ab9dcd219b74210a65792179a5931d9ad9767c0b197f3fe546c62c8e99ab0afc",
+                          "scripts/verify_delivery_patch_compatibility.py":  "2837a844b8561c57eed82bbd2bc3051ed93fee15eb77bd2557b3587d7a0b2c3d",
+                          "apps/api/app/delivery_plan.py":  "5623daa14155c19b43e31ca6dd39e7b057fa2e2e29b89975a9b9af05421aa85c",
+                          "apps/api/tests/test_delivery_inputs.py":  "cc8ba9d8e6eab272502ce843e7bb31517f6457dfc12cc482165f6887f9366a1e",
+                          "artifacts/verification/d08/compatibility/RP03-CHANGES_XLSX.xlsx":  "c3a3462389556a0480f52a4e91b273a11d6d9e4003e43d1cf5b7c403f5d2c674",
+                          "artifacts/verification/d08/compatibility/RP03-REPAIRED_XLSX.xlsx":  "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+                          "artifacts/synthetic_validation/monthly-repair-flow06/stage3/monthly-rp03-supported-6sheet.xlsx":  "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+                          "apps/api/app/delivery_rehearsal.py":  "1447f72ff0a263a97d6b814bae1c3dae7f3a901661ee0e09588ae0cce17b5ee3",
+                          "apps/api/app/delivery_execution.py":  "d17eaa915a33ce1f4fce11ecb73918fec051f2ac46ad08a933db1cbcb97ba82b",
+                          "apps/api/app/formula_patterns.py":  "3f4314d6ef8bb9606bc5207c332869135a0511c1550e37c001c2f7adce46c5ae",
+                          "apps/api/app/delivery_api.py":  "dc645c2c4af6cdebeae3c7251b7ea099b8532496d03ff803d8a4b892866bb15c",
+                          "apps/api/app/repair_rules/monthly_formula.py":  "2777227c2375d1e6493aedd10038347ad07d84c85524945523a3cd5b3d9cbd6d",
+                          "scripts/verify_delivery_output_excel.ps1":  "3cde2b2002872eecebd6a1d5ca637bb3a44476a25f310cf49165319e4ab77ce8",
+                          "artifacts/verification/d08/compatibility/RP03-manifest.json":  "674577abd463cb9939c240c302a8afd8cc3b5a6e106f676027e1b6038c63752a",
+                          "apps/api/app/delivery_patch.py":  "b9ebb3c91cca13e086b8c5c65ae58c3b4747fb3feeb787f0c52700915970dde9"
+                      },
+    "root_excel_validator":  "scripts/verify_delivery_output_excel.ps1 -Stage d08 -Directory compatibility",
+    "register_after_excel_pass":  "scripts/register_delivery_patch_reference.py --stage d08",
+    "stage4_started":  false,
+    "remaining":  [
+                      "independent review",
+                      "root read-only Excel COM verification",
+                      "register compatibility only after actual Excel PASS"
+                  ]
+}

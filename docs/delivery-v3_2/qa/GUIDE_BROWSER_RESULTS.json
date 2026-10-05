@@ -1,0 +1,219 @@
+{
+  "scope": "offline documentation UI only",
+  "loading": [
+    {
+      "document": "START_HERE.html",
+      "mode": "HTML set_content",
+      "reason": "file:// blocked by environment policy; direct mode not verified"
+    },
+    {
+      "document": "DELIVERY_GUIDE.html",
+      "mode": "HTML set_content",
+      "reason": "file:// blocked by environment policy; direct mode not verified"
+    },
+    {
+      "document": "verification_DEMO.html",
+      "mode": "HTML set_content",
+      "reason": "file:// blocked by environment policy; direct mode not verified"
+    }
+  ],
+  "checks": [
+    {
+      "name": "document_loaded",
+      "passed": true
+    },
+    {
+      "name": "eight_choices",
+      "passed": true
+    },
+    {
+      "name": "D01_exact_prompt",
+      "passed": true
+    },
+    {
+      "name": "D01_scope",
+      "passed": true
+    },
+    {
+      "name": "D01_md_link",
+      "passed": true
+    },
+    {
+      "name": "D01_download_content",
+      "passed": true
+    },
+    {
+      "name": "D02_exact_prompt",
+      "passed": true
+    },
+    {
+      "name": "D02_scope",
+      "passed": true
+    },
+    {
+      "name": "D02_md_link",
+      "passed": true
+    },
+    {
+      "name": "D02_download_content",
+      "passed": true
+    },
+    {
+      "name": "D03_exact_prompt",
+      "passed": true
+    },
+    {
+      "name": "D03_scope",
+      "passed": true
+    },
+    {
+      "name": "D03_md_link",
+      "passed": true
+    },
+    {
+      "name": "D03_download_content",
+      "passed": true
+    },
+    {
+      "name": "D04_exact_prompt",
+      "passed": true
+    },
+    {
+      "name": "D04_scope",
+      "passed": true
+    },
+    {
+      "name": "D04_md_link",
+      "passed": true
+    },
+    {
+      "name": "D04_download_content",
+      "passed": true
+    },
+    {
+      "name": "D05_exact_prompt",
+      "passed": true
+    },
+    {
+      "name": "D05_scope",
+      "passed": true
+    },
+    {
+      "name": "D05_md_link",
+      "passed": true
+    },
+    {
+      "name": "D05_download_content",
+      "passed": true
+    },
+    {
+      "name": "D06_exact_prompt",
+      "passed": true
+    },
+    {
+      "name": "D06_scope",
+      "passed": true
+    },
+    {
+      "name": "D06_md_link",
+      "passed": true
+    },
+    {
+      "name": "D06_download_content",
+      "passed": true
+    },
+    {
+      "name": "D07_exact_prompt",
+      "passed": true
+    },
+    {
+      "name": "D07_scope",
+      "passed": true
+    },
+    {
+      "name": "D07_md_link",
+      "passed": true
+    },
+    {
+      "name": "D07_download_content",
+      "passed": true
+    },
+    {
+      "name": "D08_exact_prompt",
+      "passed": true
+    },
+    {
+      "name": "D08_scope",
+      "passed": true
+    },
+    {
+      "name": "D08_md_link",
+      "passed": true
+    },
+    {
+      "name": "D08_download_content",
+      "passed": true
+    },
+    {
+      "name": "selection_range",
+      "passed": true
+    },
+    {
+      "name": "clipboard_denied_fallback",
+      "passed": true
+    },
+    {
+      "name": "no_overflow_1400",
+      "passed": true
+    },
+    {
+      "name": "no_overflow_768",
+      "passed": true
+    },
+    {
+      "name": "no_overflow_390",
+      "passed": true
+    },
+    {
+      "name": "no_overflow_320",
+      "passed": true
+    },
+    {
+      "name": "repair_default_visible",
+      "passed": true
+    },
+    {
+      "name": "comparison_default_hidden",
+      "passed": true
+    },
+    {
+      "name": "comparison_switch",
+      "passed": true
+    },
+    {
+      "name": "repair_switch",
+      "passed": true
+    },
+    {
+      "name": "delivery_mobile_no_overflow",
+      "passed": true
+    },
+    {
+      "name": "sample_not_product_claim",
+      "passed": true
+    },
+    {
+      "name": "sample_not_ready",
+      "passed": true
+    }
+  ],
+  "passed": 47,
+  "failed": 0,
+  "not_tested": [
+    "Windows double click",
+    "real OS clipboard read/write",
+    "production website",
+    "mobile physical device",
+    "screen reader"
+  ]
+}

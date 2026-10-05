@@ -1,0 +1,21 @@
+﻿from pathlib import Path
+p=Path('apps/web/src/App.navigation.test.tsx')
+s=p.read_text(encoding='utf-8')
+s=s.replace("    expect(reviewDisposition({...f,rule_code:'FORMULA_PATTERN_OUTLIER',sheet:'Budget',cell:'N18',formula_pattern:{pattern_type:'DOMINANT_NORMALIZED_PATTERN_OUTLIER',formula_region:'N18',dominant_pattern_id:'x',neighbor_count:4,evidence_locations:['L18','M18','O18','P18'],detection_basis:'synthetic',current_limitations:[],pattern_subtype:'REFERENCE_SHEET_DRIFT',before_formula:'=N15-N14'}}).profile).toBe('RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1');", "    expect(reviewDisposition({...f,rule_code:'FORMULA_PATTERN_OUTLIER',sheet:'Budget',cell:'N18',formula_pattern:{pattern_type:'DOMINANT_NORMALIZED_PATTERN_OUTLIER',formula_region:'N18',dominant_pattern_id:'x',neighbor_count:4,evidence_locations:['L18','M18','O18','P18'],detection_basis:'synthetic',current_limitations:[],pattern_subtype:'REFERENCE_SHEET_DRIFT'}}).profile).toBe('RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1');")
+p.write_text(s,encoding='utf-8',newline='\n')
+
+p=Path('apps/web/src/components/ProposalFlow.test.tsx')
+s=p.read_text(encoding='utf-8')
+s=s.replace("it('sends a monthly RP03 request with finding-derived before_formula and no typed address or formula'", "it('sends a monthly RP03 request with source-derived before_formula and no typed address or formula'")
+s=s.replace("evidence.readSourceCells.mockResolvedValue([{cell:'N18',type:'formula',text:'=M10!B16-M10!B15',cached:'#VALUE!'}]);", "evidence.readSourceCells.mockResolvedValue([{cell:'N18',type:'formula',text:'=N15-N14',cached:'#VALUE!'}]);")
+s=s.replace(",before_formula:'=N15-N14'", "")
+s=s.replace(",before_formula:'=O15-O14'", "")
+s=s.replace("evidence.readSourceCells.mockResolvedValue([{cell:'N18',type:'formula',text:'=M10!B16-M10!B15',cached:'#VALUE!'},{cell:'O18',type:'formula',text:'=M10!B17-M10!B16',cached:'#VALUE!'}]);", "evidence.readSourceCells.mockResolvedValue([{cell:'N18',type:'formula',text:'=N15-N14',cached:'#VALUE!'},{cell:'O18',type:'formula',text:'=O15-O14',cached:'#VALUE!'}]);")
+s=s.replace("  await waitFor(()=>expect(screen.getByRole('checkbox',{name:/월별 수식 후보/})).toBeEnabled());\n  await waitFor(()=>expect(screen.getByRole('checkbox',{name:/월별 수식 후보/})).toBeEnabled());", "  await waitFor(()=>expect(screen.getByRole('checkbox',{name:/월별 수식 후보/})).toBeEnabled());")
+p.write_text(s,encoding='utf-8',newline='\n')
+
+p=Path('apps/web/src/components/ProposalExample.test.tsx')
+s=p.read_text(encoding='utf-8')
+s=s.replace("patches: [{ candidate_id: 'm1', sheet: 'Budget', cell: 'N18', profile_version: RP03, change_kind: 'MONTHLY_FORMULA_REPLACEMENT', before: { type: 'error', value: '#VALUE!' }, after: { type: 'formula', value: \"='M10'!B16-'M10'!B15\" } }],", "patches: [{ candidate_id: 'm1', sheet: 'Budget', cell: 'N18', profile_version: RP03, change_kind: 'MONTHLY_FORMULA_REPLACEMENT', before: { type: 'formula', value: '=N15-N14' }, after: { type: 'formula', value: \"='M10'!B16-'M10'!B15\" } }],")
+s=s.replace("    expect(within(region).getByText('-5')).toBeVisible();", "    expect(within(region).getByText('#VALUE!')).toBeVisible();\n    expect(within(region).getByText('-5')).toBeVisible();\n    expect(within(region).getByText(/원본 수식과 실제 오류/)).toBeVisible();")
+p.write_text(s,encoding='utf-8',newline='\n')

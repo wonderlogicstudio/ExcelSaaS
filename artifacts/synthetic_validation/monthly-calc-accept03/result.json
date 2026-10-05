@@ -1,0 +1,40 @@
+{
+  "status": "ACCEPTANCE_MATRIX_REVIEW_PASS_PENDING_INTEGRATION",
+  "monthly_tests": 43,
+  "execution_breakdown": "42 cases passed in prior suite; one missing-cell test passed separately after focused review; no full suite rerun",
+  "ruff": "PASS",
+  "review": "PASS monthly_calc_review; evidence inspection only",
+  "product_and_class_hashes_unchanged": true,
+  "test_file": "apps/api/tests/test_monthly_calculation.py",
+  "test_sha256": "ba8e9121c355d656cd21394ae1e5d82b492fceb9000bc698b6e632a1b2887932",
+  "initial_failure": {
+    "failed": 1,
+    "passed": 33,
+    "classification": "Test fixture expectation inconsistent with frozen contract; not established product defect",
+    "reason": "B15=A2 with blank A2 evaluates finite numeric0. Monthly operands are B16/B15, not all transitive leaf cells.",
+    "correction": "Assert typed B15numeric0/N18numeric1001 positive; actual empty-string formula and text/boolean/error results reject separately; fixed monthly-5 oracle unchanged"
+  },
+  "scope": [
+    "direct monthly reference numeric control",
+    "unknown and malformed modes",
+    "missing/blank/nonfinite operands",
+    "numeric and nonnumeric formula-derived operands",
+    "raw Java grammar and default-mode boundaries"
+  ],
+  "reused": "Prior unaffected legacy29 and depth correction evidence, no repeat; engine/classes unchanged",
+  "not_run": [
+    "legacy/full regression",
+    "native Excel",
+    "reference refresh",
+    "browser",
+    "deployment",
+    "commit/push"
+  ],
+  "still_pending": [
+    "Native/reference compatibility refresh for changed engine fingerprint",
+    "integration acceptance",
+    "original13-sheet sample exceeds current10-sheet limit",
+    "new formula replacement and customer approval integration"
+  ],
+  "next": "Separately approved Excel/reference compatibility verification; no monthly repair UI release yet"
+}

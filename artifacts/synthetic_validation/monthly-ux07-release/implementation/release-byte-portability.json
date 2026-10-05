@@ -1,0 +1,86 @@
+{
+  "unit": "MONTHLY-UX07-RELEASE release byte portability",
+  "changed_file": ".gitattributes",
+  "policy": "exact -text entries only for fingerprint-bound text source/reference inputs; no broad globs and no compiled class/binary entry added",
+  "entries": [
+    "apps/api/engine/DeliveryCalc.java -text",
+    "apps/api/engine/dependencies.lock.json -text",
+    "apps/api/app/delivery_calculation.py -text",
+    "apps/api/app/delivery_process.py -text",
+    "apps/api/app/delivery_execution_control.py -text",
+    "apps/api/app/formula_patterns.py -text",
+    "apps/api/app/repair_rules/monthly_formula.py -text",
+    "apps/api/app/repair_rules/formula_restore.py -text",
+    "apps/api/app/repair_rules/numeric_text.py -text",
+    "apps/api/app/repair_rules/__init__.py -text",
+    "apps/api/app/delivery_patch.py -text",
+    "apps/api/app/delivery_artifacts.py -text",
+    "apps/api/app/delivery_inputs.py -text",
+    "apps/api/app/delivery_plan.py -text",
+    "apps/api/app/delivery_package.py -text",
+    "apps/api/app/delivery_verification_template.html -text"
+  ],
+  "commands": [
+    {
+      "cmd": "$env:PYTHONPATH='apps/api'; python -c '<fingerprint proof>'",
+      "exit": 1,
+      "result": "default Python missing openpyxl; no product/reference files modified"
+    },
+    {
+      "cmd": "$env:PYTHONPATH='apps/api'; apps\\api\\.venv\\Scripts\\python.exe -c '<fingerprint proof>'",
+      "exit": 0,
+      "result": "engine/reference and patch/compatibility status PASS"
+    }
+  ],
+  "proof": {
+    "engine_fingerprint": "958c9d5aa429b618ee4277b67604c1b516c3d34716a97903b78b6e8a9929cc65",
+    "repair_rule_fingerprint": "4c7633f27ad3ca477d52ff19534e5fa489b8a3b7e3afce3bb608a8ce2284b435",
+    "reference_status": {
+      "status": "PASS",
+      "case_count": 20,
+      "excel_version": "16.0",
+      "reference_digest": "a841c019a2fc8d240313e6c8feae4d58dfd646f523d1302271050f1d7d752cc4"
+    },
+    "patch_fingerprint": "0432d8702a6b680ddbe18ffbd0cda3c1b9ff7e94d4f196e98e155fcb573b16c8",
+    "compatibility_status": {
+      "status": "PASS",
+      "excel_version": "16.0",
+      "profiles": [
+        "RP01",
+        "RP02",
+        "RP03"
+      ],
+      "evidence_digest": "4fc575ebc98eacaceaa97d7c46f37c4d325f4482088f6d77f9736a25a7b6140b"
+    }
+  },
+  "line_endings_observed": {
+    "apps/web/src/components/RepairProposalPicker.tsx": {
+      "crlf": 118,
+      "lf": 118
+    },
+    "apps/web/src/components/RepairPlanPreview.tsx": {
+      "crlf": 126,
+      "lf": 126
+    },
+    "apps/web/src/components/RepairDelivery.tsx": {
+      "crlf": 62,
+      "lf": 62
+    },
+    "apps/web/src/components/ProposalFlow.test.tsx": {
+      "crlf": 317,
+      "lf": 317
+    },
+    ".gitattributes": {
+      "crlf": 0,
+      "lf": 23
+    }
+  },
+  "hashes": {
+    ".gitattributes": "e7da0069bbc5b9e419b38cafa3be7532b9541321ce9ad88673fca938e497610c"
+  },
+  "not_run": [
+    "native Excel",
+    "Git commit/push",
+    "protected beta deployment"
+  ]
+}

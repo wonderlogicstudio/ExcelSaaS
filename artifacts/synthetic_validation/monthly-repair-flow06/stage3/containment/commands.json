@@ -1,0 +1,17 @@
+﻿[
+    {
+        "name":  "containment_script_path_markers",
+        "exit":  0,
+        "result":  "script containment syntax/path-marker checks passed"
+    },
+    {
+        "name":  "missing_repair_rule_fingerprint_stale_plan_test",
+        "exit":  0,
+        "result":  ".                                                                        [100%]\n============================== warnings summary ===============================\napps\\api\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html"
+    },
+    {
+        "name":  "containment_ruff",
+        "exit":  0,
+        "result":  "All checks passed!"
+    }
+]

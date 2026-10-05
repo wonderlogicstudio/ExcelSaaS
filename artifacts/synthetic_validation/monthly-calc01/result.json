@@ -1,0 +1,60 @@
+{
+  "status": "CHANGES_REQUIRED_OWNER_CHECKPOINT",
+  "implemented_locally": [
+    "Explicit internal monthly_sheet_internal calculation mode",
+    "Limited monthly direct/subtraction parsing and qualified dependencies",
+    "Isolated POI protocol opt-in and operand guards"
+  ],
+  "checks": {
+    "monthly_final": 13,
+    "affected_legacy": 29,
+    "ruff": "PASS",
+    "compile": "PASS",
+    "source": "builder-evidence.json, recorded commands/exits; not full regression"
+  },
+  "blocking_review": [
+    {
+      "severity": "HIGH",
+      "file": "apps/api/app/delivery_calculation.py",
+      "issue": "Depth check after recursive descent may raise RecursionError before controlled rejection; early traversal bound required."
+    },
+    {
+      "severity": "HIGH",
+      "file": "apps/api/engine/DeliveryCalc.java",
+      "issue": "AreaPtg dependencies absent, so SUM(range) chain feeding monthly reference can bypass raw Java depth guard."
+    },
+    {
+      "severity": "LOW",
+      "issue": "Corrupted Korean depth error text."
+    }
+  ],
+  "additional_acceptance_pending": [
+    "direct-reference positive",
+    "unknown modes",
+    "missing-cell and nonfinite/formula-derived operands",
+    "raw Java grammar rejection",
+    "deep-chain recursion and AreaPtg regression cases"
+  ],
+  "preserved_boundaries": [
+    "apps/api/app/delivery_inputs.py",
+    "apps/api/app/delivery_plan.py",
+    "apps/api/app/repair_rules/formula_restore.py",
+    "apps/api/app/repair_rules/numeric_text.py",
+    "apps/api/engine/dependencies.lock.json",
+    "apps/api/app/delivery_reference.json"
+  ],
+  "original_fixture_sheets": 13,
+  "sheet_limit": 10,
+  "native_reference": "STALE after engine fingerprint change; no bypass/refresh",
+  "not_run": [
+    "full regression",
+    "native Excel",
+    "browser",
+    "beta deployment",
+    "commit",
+    "push"
+  ],
+  "stop_reason": "AGENTS EFFICIENCY-02 initial attempt plus one correction for same cause; depth guard still incomplete at re-review, owner checkpoint before further correction",
+  "next_single_unit": "Correct the two depth-guard paths and damaged message, add targeted regression cases, rerun affected checks and focused review only",
+  "warning": "Targeted test PASS is not approval to release; existing beta remains unchanged."
+}

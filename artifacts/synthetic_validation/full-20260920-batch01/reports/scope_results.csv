@@ -1,0 +1,61 @@
+audit_skipped,avg_fp_per_workbook,business_domain,candidate_fp,definitive_fp,diagnostic_mismatch,duplicates,excluded,family_id,fp,max_fp_per_workbook,mutation_type,normal_region_fp,split,structural_family,successful_workbooks,tp,unjudged,workbooks
+,0,accounts receivable,0,0,0,0,0,F07-receivables-aging,0,0,base_broken_ref_token,0,dev,aging_buckets_with_manual_adjustment,3,3,0,3
+,0,accounts receivable,0,0,0,0,0,F07-receivables-aging,0,0,base_visible_error_token,0,dev,aging_buckets_with_manual_adjustment,3,3,0,3
+,0,accounts receivable,0,0,0,0,0,F07-receivables-aging,0,0,m4_constant_override,0,dev,aging_buckets_with_manual_adjustment,3,3,0,3
+,0,accounts receivable,0,0,0,0,0,F07-receivables-aging,0,0,m4_formula_gap,0,dev,aging_buckets_with_manual_adjustment,3,3,0,3
+,0,accounts receivable,0,0,0,0,0,F07-receivables-aging,0,0,m4_relative_reference_drift,0,dev,aging_buckets_with_manual_adjustment,3,3,0,3
+,0,accounts receivable,0,0,0,0,0,F07-receivables-aging,0,0,normal,0,dev,aging_buckets_with_manual_adjustment,15,,0,15
+,0,budget versus actual,0,0,0,0,0,F04-budget-horizontal,0,0,base_broken_ref_token,0,train,horizontal_monthly_matrix,3,3,0,3
+,0,budget versus actual,0,0,0,0,0,F04-budget-horizontal,0,0,base_visible_error_token,0,train,horizontal_monthly_matrix,3,3,0,3
+,0,budget versus actual,0,0,0,0,0,F04-budget-horizontal,0,0,m4_constant_override,0,train,horizontal_monthly_matrix,3,,0,3
+,0,budget versus actual,0,0,0,0,0,F04-budget-horizontal,0,0,m4_formula_gap,0,train,horizontal_monthly_matrix,3,,0,3
+,0,budget versus actual,0,0,0,0,0,F04-budget-horizontal,0,0,m4_relative_reference_drift,0,train,horizontal_monthly_matrix,3,,0,3
+,0,budget versus actual,0,0,0,0,0,F04-budget-horizontal,0,0,normal,0,train,horizontal_monthly_matrix,15,,0,15
+,0,cash flow planning,0,0,0,0,0,F09-cashflow-calendar,0,0,base_broken_ref_token,0,holdout,dated_cashflow_schedule,3,3,0,3
+,0,cash flow planning,0,0,0,0,0,F09-cashflow-calendar,0,0,base_visible_error_token,0,holdout,dated_cashflow_schedule,3,3,0,3
+,0,cash flow planning,0,0,0,0,0,F09-cashflow-calendar,0,0,m4_constant_override,0,holdout,dated_cashflow_schedule,3,3,0,3
+,0,cash flow planning,0,0,0,0,0,F09-cashflow-calendar,0,0,m4_formula_gap,0,holdout,dated_cashflow_schedule,3,3,0,3
+,0,cash flow planning,0,0,0,0,0,F09-cashflow-calendar,0,0,m4_relative_reference_drift,0,holdout,dated_cashflow_schedule,3,3,0,3
+,0,cash flow planning,0,0,0,0,0,F09-cashflow-calendar,0,0,normal,0,holdout,dated_cashflow_schedule,15,,0,15
+,0,inventory movement,0,0,0,0,0,F03-inventory-cross-sheet,0,0,base_broken_ref_token,0,train,detail_sheet_references_lookup_sheet,3,3,0,3
+,0,inventory movement,0,0,0,0,0,F03-inventory-cross-sheet,0,0,base_visible_error_token,0,train,detail_sheet_references_lookup_sheet,3,3,0,3
+,0,inventory movement,0,0,0,0,0,F03-inventory-cross-sheet,0,0,m4_constant_override,0,train,detail_sheet_references_lookup_sheet,3,3,0,3
+,0,inventory movement,0,0,0,0,0,F03-inventory-cross-sheet,0,0,m4_formula_gap,0,train,detail_sheet_references_lookup_sheet,3,3,0,3
+,0,inventory movement,0,0,0,0,0,F03-inventory-cross-sheet,0,0,m4_relative_reference_drift,0,train,detail_sheet_references_lookup_sheet,3,3,0,3
+,0,inventory movement,0,0,0,0,0,F03-inventory-cross-sheet,0,0,normal,0,train,detail_sheet_references_lookup_sheet,15,,0,15
+,0,manufacturing cost,0,0,0,0,0,F08-manufacturing-bom,0,0,base_broken_ref_token,0,dev,bom_quantity_cost_rollup,3,3,0,3
+,0,manufacturing cost,0,0,0,0,0,F08-manufacturing-bom,0,0,base_visible_error_token,0,dev,bom_quantity_cost_rollup,3,3,0,3
+,0,manufacturing cost,0,0,0,0,0,F08-manufacturing-bom,0,0,m4_constant_override,0,dev,bom_quantity_cost_rollup,3,3,0,3
+,0,manufacturing cost,0,0,0,0,0,F08-manufacturing-bom,0,0,m4_formula_gap,0,dev,bom_quantity_cost_rollup,3,3,0,3
+,0,manufacturing cost,0,0,0,0,0,F08-manufacturing-bom,0,0,m4_relative_reference_drift,0,dev,bom_quantity_cost_rollup,3,3,0,3
+,0,manufacturing cost,0,0,0,0,0,F08-manufacturing-bom,0,0,normal,0,dev,bom_quantity_cost_rollup,15,,0,15
+,0,payroll and attendance,0,0,0,0,0,F05-payroll-overtime,0,0,base_broken_ref_token,0,train,detail_plus_hidden_rates,3,3,3,3
+,0,payroll and attendance,0,0,0,0,0,F05-payroll-overtime,0,0,base_visible_error_token,0,train,detail_plus_hidden_rates,3,3,3,3
+,0,payroll and attendance,0,0,0,0,0,F05-payroll-overtime,0,0,m4_constant_override,0,train,detail_plus_hidden_rates,3,3,3,3
+,0,payroll and attendance,0,0,0,0,0,F05-payroll-overtime,0,0,m4_formula_gap,0,train,detail_plus_hidden_rates,3,3,3,3
+,0,payroll and attendance,0,0,0,0,0,F05-payroll-overtime,0,0,m4_relative_reference_drift,0,train,detail_plus_hidden_rates,3,3,3,3
+,0,payroll and attendance,0,0,0,0,0,F05-payroll-overtime,0,0,normal,0,train,detail_plus_hidden_rates,15,,15,15
+,0,project profit,0,0,0,0,0,F06-project-profit,0,0,base_broken_ref_token,0,train,multi_section_detail_summary,3,3,0,3
+,0,project profit,0,0,0,0,0,F06-project-profit,0,0,base_visible_error_token,0,train,multi_section_detail_summary,3,3,0,3
+,0,project profit,0,0,0,0,0,F06-project-profit,0,0,m4_constant_override,0,train,multi_section_detail_summary,3,3,0,3
+,0,project profit,0,0,0,0,0,F06-project-profit,0,0,m4_formula_gap,0,train,multi_section_detail_summary,3,3,0,3
+,0,project profit,0,0,0,0,0,F06-project-profit,0,0,m4_relative_reference_drift,0,train,multi_section_detail_summary,3,3,0,3
+,0,project profit,0,0,0,0,0,F06-project-profit,0,0,normal,0,train,multi_section_detail_summary,15,,0,15
+3,0,purchasing and order management,0,0,0,0,0,F02-purchase-table,0,0,base_broken_ref_token,0,train,excel_table_with_summary_band,0,3,0,3
+3,0,purchasing and order management,0,0,0,0,0,F02-purchase-table,0,0,base_visible_error_token,0,train,excel_table_with_summary_band,0,3,0,3
+3,0,purchasing and order management,0,0,0,0,0,F02-purchase-table,0,0,m4_constant_override,0,train,excel_table_with_summary_band,0,,0,3
+3,0,purchasing and order management,0,0,0,0,0,F02-purchase-table,0,0,m4_formula_gap,0,train,excel_table_with_summary_band,0,,0,3
+3,0,purchasing and order management,0,0,0,0,0,F02-purchase-table,0,0,m4_relative_reference_drift,0,train,excel_table_with_summary_band,0,,0,3
+15,0,purchasing and order management,0,0,0,0,0,F02-purchase-table,0,0,normal,0,train,excel_table_with_summary_band,0,,0,15
+,0,retail sales,0,0,0,0,0,F01-retail-vertical-detail,0,0,base_broken_ref_token,0,train,single_sheet_vertical_revenue,3,3,0,3
+,0,retail sales,0,0,0,0,0,F01-retail-vertical-detail,0,0,base_visible_error_token,0,train,single_sheet_vertical_revenue,3,3,0,3
+,0,retail sales,0,0,0,0,0,F01-retail-vertical-detail,0,0,m4_constant_override,0,train,single_sheet_vertical_revenue,3,3,0,3
+,0,retail sales,0,0,0,0,0,F01-retail-vertical-detail,0,0,m4_formula_gap,0,train,single_sheet_vertical_revenue,3,3,0,3
+,0,retail sales,0,0,0,0,0,F01-retail-vertical-detail,0,0,m4_relative_reference_drift,0,train,single_sheet_vertical_revenue,3,3,0,3
+,0,retail sales,0,0,0,0,0,F01-retail-vertical-detail,0,0,normal,0,train,single_sheet_vertical_revenue,15,,0,15
+,0,subscription KPI,0,0,0,0,0,F10-subscriptions-kpi,0,0,base_broken_ref_token,0,holdout,cohort_kpi_detail,3,3,0,3
+,0,subscription KPI,0,0,0,0,0,F10-subscriptions-kpi,0,0,base_visible_error_token,0,holdout,cohort_kpi_detail,3,3,0,3
+,0,subscription KPI,0,0,0,0,0,F10-subscriptions-kpi,0,0,m4_constant_override,0,holdout,cohort_kpi_detail,3,3,0,3
+,0,subscription KPI,0,0,0,0,0,F10-subscriptions-kpi,0,0,m4_formula_gap,0,holdout,cohort_kpi_detail,3,3,0,3
+,0,subscription KPI,0,0,0,0,0,F10-subscriptions-kpi,0,0,m4_relative_reference_drift,0,holdout,cohort_kpi_detail,3,3,0,3
+,0,subscription KPI,0,0,0,0,0,F10-subscriptions-kpi,0,0,normal,0,holdout,cohort_kpi_detail,15,,0,15

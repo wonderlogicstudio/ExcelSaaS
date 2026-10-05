@@ -1,0 +1,1438 @@
+[
+  {
+    "workbook_id": "001-retail_sales_vertical-mutated-745709",
+    "parent_id": "001-retail_sales_vertical-normal-745709",
+    "family_id": "F01-retail-vertical-detail",
+    "scenario_id": "retail_sales_vertical",
+    "business_domain": "retail sales",
+    "structural_family": "single_sheet_vertical_revenue",
+    "split": "train",
+    "kind": "mutated",
+    "seed": 170917,
+    "filename": "001-retail_sales_vertical-mutated-745709.xlsx",
+    "relative_path": "workbooks/001-retail_sales_vertical-mutated-745709.xlsx",
+    "sha256": "392c6f5b934f16b3e730b70d663b0e6ddc94b57349fc629612cdaa54be801137",
+    "mutation_type": "m4_relative_reference_drift",
+    "mutation_target": "Sales Detail!G14",
+    "supported_scope": [
+      "vertical A1 formulas in one detail column"
+    ],
+    "exploratory_scope": [
+      "business correctness of discount rates"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "Sales Detail",
+        "range_ref": "G12:G20",
+        "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "Sales Detail",
+        "cell": "G12",
+        "formula": "=E12*F12*(1-H12)",
+        "semantic_value": 332.5,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G13",
+        "formula": "=E13*F13*(1-H13)",
+        "semantic_value": 1236.9,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G15",
+        "formula": "=E15*F15*(1-H15)",
+        "semantic_value": 4693.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G16",
+        "formula": "=E16*F16*(1-H16)",
+        "semantic_value": 6863.4,
+        "role": "normal_exception",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G17",
+        "formula": "=E17*F17*(1-H17)",
+        "semantic_value": 1786.95,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G18",
+        "formula": "=E18*F18*(1-H18)",
+        "semantic_value": 855.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G19",
+        "formula": "=E19*F19*(1-H19)",
+        "semantic_value": 2114.7,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G20",
+        "formula": "=E20*F20*(1-H20)",
+        "semantic_value": 3923.5,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G21",
+        "formula": "=SUM(G12:G20)",
+        "semantic_value": null,
+        "role": "subtotal",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G14",
+        "formula": "=E13*F14*(1-H14)",
+        "semantic_value": null,
+        "role": "detail",
+        "supported_by_current_m4": true
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "001-retail_sales_vertical-normal-745709-normal-exception-G16",
+        "kind": "normal_exception",
+        "sheet": "Sales Detail",
+        "cell": "G16",
+        "rule_code": null,
+        "pattern_subtype": null,
+        "severity": null,
+        "family_id": "F01-retail-vertical-detail",
+        "mutation_type": null,
+        "notes": "Approved campaign discount line uses a documented higher discount rate."
+      },
+      {
+        "expected_id": "001-retail_sales_vertical-normal-745709-mut-0",
+        "kind": "m4_candidate",
+        "sheet": "Sales Detail",
+        "cell": "G14",
+        "rule_code": "FORMULA_PATTERN_OUTLIER",
+        "pattern_subtype": "RELATIVE_REFERENCE_DRIFT",
+        "severity": null,
+        "family_id": "F01-retail-vertical-detail",
+        "mutation_type": "m4_relative_reference_drift",
+        "notes": "Before value: '=E14*F14*(1-H14)'; after value: '=E13*F14*(1-H14)'"
+      }
+    ],
+    "generation_checks": {
+      "mutation_changed_target": true,
+      "mutation_target_only_changed": true,
+      "unexpected_changed_cells": [],
+      "non_target_snapshot_preserved": true,
+      "formula_string_checks": 10,
+      "semantic_arithmetic_checks": 9,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "mutation_snapshot": {
+      "sheet": "Sales Detail",
+      "cell": "G14",
+      "before_value": "=E14*F14*(1-H14)",
+      "before_data_type": "f",
+      "after_value": "=E13*F14*(1-H14)",
+      "after_data_type": "f",
+      "before_formula": "=E14*F14*(1-H14)",
+      "after_formula": "=E13*F14*(1-H14)"
+    }
+  },
+  {
+    "workbook_id": "001-retail_sales_vertical-normal-745709",
+    "parent_id": null,
+    "family_id": "F01-retail-vertical-detail",
+    "scenario_id": "retail_sales_vertical",
+    "business_domain": "retail sales",
+    "structural_family": "single_sheet_vertical_revenue",
+    "split": "train",
+    "kind": "normal",
+    "seed": 170917,
+    "filename": "001-retail_sales_vertical-normal-745709.xlsx",
+    "relative_path": "workbooks/001-retail_sales_vertical-normal-745709.xlsx",
+    "sha256": "19bfb9e11dbf6f0ff7c6823daadb27ef74ad110786d9b11c1b304256a9b4ef85",
+    "mutation_type": null,
+    "mutation_target": null,
+    "supported_scope": [
+      "vertical A1 formulas in one detail column"
+    ],
+    "exploratory_scope": [
+      "business correctness of discount rates"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "Sales Detail",
+        "range_ref": "G12:G20",
+        "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "Sales Detail",
+        "cell": "G12",
+        "formula": "=E12*F12*(1-H12)",
+        "semantic_value": 332.5,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G13",
+        "formula": "=E13*F13*(1-H13)",
+        "semantic_value": 1236.9,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G14",
+        "formula": "=E14*F14*(1-H14)",
+        "semantic_value": 2690.4,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G15",
+        "formula": "=E15*F15*(1-H15)",
+        "semantic_value": 4693.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G16",
+        "formula": "=E16*F16*(1-H16)",
+        "semantic_value": 6863.4,
+        "role": "normal_exception",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G17",
+        "formula": "=E17*F17*(1-H17)",
+        "semantic_value": 1786.95,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G18",
+        "formula": "=E18*F18*(1-H18)",
+        "semantic_value": 855.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G19",
+        "formula": "=E19*F19*(1-H19)",
+        "semantic_value": 2114.7,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G20",
+        "formula": "=E20*F20*(1-H20)",
+        "semantic_value": 3923.5,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Sales Detail",
+        "cell": "G21",
+        "formula": "=SUM(G12:G20)",
+        "semantic_value": null,
+        "role": "subtotal",
+        "supported_by_current_m4": false
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "001-retail_sales_vertical-normal-745709-normal-exception-G16",
+        "kind": "normal_exception",
+        "sheet": "Sales Detail",
+        "cell": "G16",
+        "rule_code": null,
+        "pattern_subtype": null,
+        "severity": null,
+        "family_id": "F01-retail-vertical-detail",
+        "mutation_type": null,
+        "notes": "Approved campaign discount line uses a documented higher discount rate."
+      }
+    ],
+    "generation_checks": {
+      "formula_string_checks": 10,
+      "semantic_arithmetic_checks": 9,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "mutation_snapshot": null
+  },
+  {
+    "workbook_id": "002-purchase_orders_table-mutated-353213",
+    "parent_id": "002-purchase_orders_table-normal-353213",
+    "family_id": "F02-purchase-table",
+    "scenario_id": "purchase_orders_table",
+    "business_domain": "purchasing and order management",
+    "structural_family": "excel_table_with_summary_band",
+    "split": "train",
+    "kind": "mutated",
+    "seed": 170934,
+    "filename": "002-purchase_orders_table-mutated-353213.xlsx",
+    "relative_path": "workbooks/002-purchase_orders_table-mutated-353213.xlsx",
+    "sha256": "6c8143922deffe8ae9eb9ed8201a96ebf5b02f5c972412dd1da60994153b643d",
+    "mutation_type": "m4_relative_reference_drift",
+    "mutation_target": "PO Lines!H14",
+    "supported_scope": [
+      "base static scanner checks"
+    ],
+    "exploratory_scope": [
+      "Excel Table formula pattern comparison is intentionally unsupported"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "PO Lines",
+        "range_ref": "H8:H15",
+        "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "PO Lines",
+        "cell": "H8",
+        "formula": "=IF(E8>0,F8*G8,0)",
+        "semantic_value": 4392,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H9",
+        "formula": "=IF(E9>0,F9*G9,0)",
+        "semantic_value": 6942,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H10",
+        "formula": "=IF(E10>0,F10*G10,0)",
+        "semantic_value": 1425,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H11",
+        "formula": "=IF(E11>0,F11*G11,0)",
+        "semantic_value": 672,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H12",
+        "formula": "=IF(E12>0,F12*G12,0)",
+        "semantic_value": 1862,
+        "role": "normal_exception",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H13",
+        "formula": "=IF(E13>0,F13*G13,0)",
+        "semantic_value": 3630,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H15",
+        "formula": "=IF(E15>0,F15*G15,0)",
+        "semantic_value": 801,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H16",
+        "formula": "=SUM(H8:H15)",
+        "semantic_value": null,
+        "role": "subtotal",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H14",
+        "formula": "=IF(E13>0,F14*G14,0)",
+        "semantic_value": null,
+        "role": "detail",
+        "supported_by_current_m4": false
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "002-purchase_orders_table-normal-353213-normal-exception-H12",
+        "kind": "user_confirmation",
+        "sheet": "PO Lines",
+        "cell": "H12",
+        "rule_code": null,
+        "pattern_subtype": null,
+        "severity": null,
+        "family_id": "F02-purchase-table",
+        "mutation_type": null,
+        "notes": "Blanket order line is reviewed by purchasing because minimum quantity policy applies."
+      },
+      {
+        "expected_id": "002-purchase_orders_table-normal-353213-mut-0-outscope",
+        "kind": "out_of_scope",
+        "sheet": "PO Lines",
+        "cell": "H14",
+        "rule_code": "FORMULA_PATTERN_OUTLIER",
+        "pattern_subtype": "RELATIVE_REFERENCE_DRIFT",
+        "severity": null,
+        "family_id": "F02-purchase-table",
+        "mutation_type": "m4_relative_reference_drift",
+        "notes": "Current engine support contract does not score this structural family for M4."
+      }
+    ],
+    "generation_checks": {
+      "mutation_changed_target": true,
+      "mutation_target_only_changed": true,
+      "unexpected_changed_cells": [],
+      "non_target_snapshot_preserved": true,
+      "formula_string_checks": 9,
+      "semantic_arithmetic_checks": 8,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "mutation_snapshot": {
+      "sheet": "PO Lines",
+      "cell": "H14",
+      "before_value": "=IF(E14>0,F14*G14,0)",
+      "before_data_type": "f",
+      "after_value": "=IF(E13>0,F14*G14,0)",
+      "after_data_type": "f",
+      "before_formula": "=IF(E14>0,F14*G14,0)",
+      "after_formula": "=IF(E13>0,F14*G14,0)"
+    }
+  },
+  {
+    "workbook_id": "002-purchase_orders_table-normal-353213",
+    "parent_id": null,
+    "family_id": "F02-purchase-table",
+    "scenario_id": "purchase_orders_table",
+    "business_domain": "purchasing and order management",
+    "structural_family": "excel_table_with_summary_band",
+    "split": "train",
+    "kind": "normal",
+    "seed": 170930,
+    "filename": "002-purchase_orders_table-normal-353213.xlsx",
+    "relative_path": "workbooks/002-purchase_orders_table-normal-353213.xlsx",
+    "sha256": "4d5975dd84b35b6ac2b200defe842b80f75ec845802f596c5363721bb73cef48",
+    "mutation_type": null,
+    "mutation_target": null,
+    "supported_scope": [
+      "base static scanner checks"
+    ],
+    "exploratory_scope": [
+      "Excel Table formula pattern comparison is intentionally unsupported"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "PO Lines",
+        "range_ref": "H8:H15",
+        "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "PO Lines",
+        "cell": "H8",
+        "formula": "=IF(E8>0,F8*G8,0)",
+        "semantic_value": 4392,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H9",
+        "formula": "=IF(E9>0,F9*G9,0)",
+        "semantic_value": 6942,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H10",
+        "formula": "=IF(E10>0,F10*G10,0)",
+        "semantic_value": 1425,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H11",
+        "formula": "=IF(E11>0,F11*G11,0)",
+        "semantic_value": 672,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H12",
+        "formula": "=IF(E12>0,F12*G12,0)",
+        "semantic_value": 1862,
+        "role": "normal_exception",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H13",
+        "formula": "=IF(E13>0,F13*G13,0)",
+        "semantic_value": 3630,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H14",
+        "formula": "=IF(E14>0,F14*G14,0)",
+        "semantic_value": 5976,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H15",
+        "formula": "=IF(E15>0,F15*G15,0)",
+        "semantic_value": 801,
+        "role": "detail",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "PO Lines",
+        "cell": "H16",
+        "formula": "=SUM(H8:H15)",
+        "semantic_value": null,
+        "role": "subtotal",
+        "supported_by_current_m4": false
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "002-purchase_orders_table-normal-353213-normal-exception-H12",
+        "kind": "user_confirmation",
+        "sheet": "PO Lines",
+        "cell": "H12",
+        "rule_code": null,
+        "pattern_subtype": null,
+        "severity": null,
+        "family_id": "F02-purchase-table",
+        "mutation_type": null,
+        "notes": "Blanket order line is reviewed by purchasing because minimum quantity policy applies."
+      }
+    ],
+    "generation_checks": {
+      "formula_string_checks": 9,
+      "semantic_arithmetic_checks": 8,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "mutation_snapshot": null
+  },
+  {
+    "workbook_id": "003-inventory_cross_sheet-mutated-996121",
+    "parent_id": "003-inventory_cross_sheet-normal-996121",
+    "family_id": "F03-inventory-cross-sheet",
+    "scenario_id": "inventory_cross_sheet",
+    "business_domain": "inventory movement",
+    "structural_family": "detail_sheet_references_lookup_sheet",
+    "split": "train",
+    "kind": "mutated",
+    "seed": 170951,
+    "filename": "003-inventory_cross_sheet-mutated-996121.xlsx",
+    "relative_path": "workbooks/003-inventory_cross_sheet-mutated-996121.xlsx",
+    "sha256": "652f7db23c3624de612df9026da892f4c335d31666baf30fc53b1af313ad38ce",
+    "mutation_type": "m4_relative_reference_drift",
+    "mutation_target": "Movement!I17",
+    "supported_scope": [
+      "vertical formulas with local A1 references"
+    ],
+    "exploratory_scope": [
+      "full cross-sheet business reconciliation"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "Movement",
+        "range_ref": "I10:I18",
+        "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "Movement",
+        "cell": "I10",
+        "formula": "=Opening!B10+G10-H10",
+        "semantic_value": 107,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I11",
+        "formula": "=Opening!B11+G11-H11",
+        "semantic_value": 108,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I12",
+        "formula": "=Opening!B12+G12-H12",
+        "semantic_value": 109,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I13",
+        "formula": "=Opening!B13+G13-H13",
+        "semantic_value": 110,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I14",
+        "formula": "=Opening!B14+G14-H14",
+        "semantic_value": 202,
+        "role": "normal_exception",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I15",
+        "formula": "=Opening!B15+G15-H15",
+        "semantic_value": 112,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I16",
+        "formula": "=Opening!B16+G16-H16",
+        "semantic_value": 113,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I18",
+        "formula": "=Opening!B18+G18-H18",
+        "semantic_value": 115,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I19",
+        "formula": "=SUM(I10:I18)",
+        "semantic_value": null,
+        "role": "subtotal",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I17",
+        "formula": "=Opening!B16+G17-H17",
+        "semantic_value": null,
+        "role": "detail",
+        "supported_by_current_m4": true
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "003-inventory_cross_sheet-normal-996121-normal-exception-I14",
+        "kind": "normal_exception",
+        "sheet": "Movement",
+        "cell": "I14",
+        "rule_code": null,
+        "pattern_subtype": null,
+        "severity": null,
+        "family_id": "F03-inventory-cross-sheet",
+        "mutation_type": null,
+        "notes": "Opening stock reconciliation line is reviewed against the warehouse count sheet."
+      },
+      {
+        "expected_id": "003-inventory_cross_sheet-normal-996121-mut-0",
+        "kind": "m4_candidate",
+        "sheet": "Movement",
+        "cell": "I17",
+        "rule_code": "FORMULA_PATTERN_OUTLIER",
+        "pattern_subtype": "RELATIVE_REFERENCE_DRIFT",
+        "severity": null,
+        "family_id": "F03-inventory-cross-sheet",
+        "mutation_type": "m4_relative_reference_drift",
+        "notes": "Before value: '=Opening!B17+G17-H17'; after value: '=Opening!B16+G17-H17'"
+      }
+    ],
+    "generation_checks": {
+      "mutation_changed_target": true,
+      "mutation_target_only_changed": true,
+      "unexpected_changed_cells": [],
+      "non_target_snapshot_preserved": true,
+      "formula_string_checks": 10,
+      "semantic_arithmetic_checks": 9,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "mutation_snapshot": {
+      "sheet": "Movement",
+      "cell": "I17",
+      "before_value": "=Opening!B17+G17-H17",
+      "before_data_type": "f",
+      "after_value": "=Opening!B16+G17-H17",
+      "after_data_type": "f",
+      "before_formula": "=Opening!B17+G17-H17",
+      "after_formula": "=Opening!B16+G17-H17"
+    }
+  },
+  {
+    "workbook_id": "003-inventory_cross_sheet-normal-996121",
+    "parent_id": null,
+    "family_id": "F03-inventory-cross-sheet",
+    "scenario_id": "inventory_cross_sheet",
+    "business_domain": "inventory movement",
+    "structural_family": "detail_sheet_references_lookup_sheet",
+    "split": "train",
+    "kind": "normal",
+    "seed": 170943,
+    "filename": "003-inventory_cross_sheet-normal-996121.xlsx",
+    "relative_path": "workbooks/003-inventory_cross_sheet-normal-996121.xlsx",
+    "sha256": "f14afe5f0050852941aeb7a36a130583acb46f31ce717a920e62508bf3367090",
+    "mutation_type": null,
+    "mutation_target": null,
+    "supported_scope": [
+      "vertical formulas with local A1 references"
+    ],
+    "exploratory_scope": [
+      "full cross-sheet business reconciliation"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "Movement",
+        "range_ref": "I10:I18",
+        "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "Movement",
+        "cell": "I10",
+        "formula": "=Opening!B10+G10-H10",
+        "semantic_value": 107,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I11",
+        "formula": "=Opening!B11+G11-H11",
+        "semantic_value": 108,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I12",
+        "formula": "=Opening!B12+G12-H12",
+        "semantic_value": 109,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I13",
+        "formula": "=Opening!B13+G13-H13",
+        "semantic_value": 110,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I14",
+        "formula": "=Opening!B14+G14-H14",
+        "semantic_value": 202,
+        "role": "normal_exception",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I15",
+        "formula": "=Opening!B15+G15-H15",
+        "semantic_value": 112,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I16",
+        "formula": "=Opening!B16+G16-H16",
+        "semantic_value": 113,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I17",
+        "formula": "=Opening!B17+G17-H17",
+        "semantic_value": 114,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I18",
+        "formula": "=Opening!B18+G18-H18",
+        "semantic_value": 115,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Movement",
+        "cell": "I19",
+        "formula": "=SUM(I10:I18)",
+        "semantic_value": null,
+        "role": "subtotal",
+        "supported_by_current_m4": false
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "003-inventory_cross_sheet-normal-996121-normal-exception-I14",
+        "kind": "normal_exception",
+        "sheet": "Movement",
+        "cell": "I14",
+        "rule_code": null,
+        "pattern_subtype": null,
+        "severity": null,
+        "family_id": "F03-inventory-cross-sheet",
+        "mutation_type": null,
+        "notes": "Opening stock reconciliation line is reviewed against the warehouse count sheet."
+      }
+    ],
+    "generation_checks": {
+      "formula_string_checks": 10,
+      "semantic_arithmetic_checks": 9,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "mutation_snapshot": null
+  },
+  {
+    "workbook_id": "004-budget_horizontal_months-mutated-067598",
+    "parent_id": "004-budget_horizontal_months-normal-067598",
+    "family_id": "F04-budget-horizontal",
+    "scenario_id": "budget_horizontal_months",
+    "business_domain": "budget versus actual",
+    "structural_family": "horizontal_monthly_matrix",
+    "split": "train",
+    "kind": "mutated",
+    "seed": 170968,
+    "filename": "004-budget_horizontal_months-mutated-067598.xlsx",
+    "relative_path": "workbooks/004-budget_horizontal_months-mutated-067598.xlsx",
+    "sha256": "3363e25183aee06bf65db3e2cf0a42b316ac81d2183f285a1815b10de7369724",
+    "mutation_type": "m4_relative_reference_drift",
+    "mutation_target": "Budget!N18",
+    "supported_scope": [
+      "base static scanner checks"
+    ],
+    "exploratory_scope": [
+      "horizontal formula repetition is outside current M4 column-local engine"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "Budget",
+        "range_ref": "E18:P18",
+        "notes": "Horizontal repetition is generated as exploratory and is not M4-scored."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "Budget",
+        "cell": "E18",
+        "formula": "=E16-E15",
+        "semantic_value": -23,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "F18",
+        "formula": "=F16-F15",
+        "semantic_value": -21,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "G18",
+        "formula": "=G16-G15",
+        "semantic_value": -19,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "H18",
+        "formula": "=H16-H15",
+        "semantic_value": -17,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "I18",
+        "formula": "=I16-I15",
+        "semantic_value": -15,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "J18",
+        "formula": "=J16-J15",
+        "semantic_value": -13,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "K18",
+        "formula": "=K16-K15",
+        "semantic_value": -11,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "L18",
+        "formula": "=L16-L15",
+        "semantic_value": -9,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "M18",
+        "formula": "=M16-M15",
+        "semantic_value": -7,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "O18",
+        "formula": "=O16-O15",
+        "semantic_value": -3,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "P18",
+        "formula": "=P16-P15",
+        "semantic_value": -1,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "N18",
+        "formula": "=N15-N14",
+        "semantic_value": null,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "004-budget_horizontal_months-normal-067598-mut-0-outscope",
+        "kind": "out_of_scope",
+        "sheet": "Budget",
+        "cell": "N18",
+        "rule_code": "FORMULA_PATTERN_OUTLIER",
+        "pattern_subtype": "RELATIVE_REFERENCE_DRIFT",
+        "severity": null,
+        "family_id": "F04-budget-horizontal",
+        "mutation_type": "m4_relative_reference_drift",
+        "notes": "Current engine support contract does not score this structural family for M4."
+      }
+    ],
+    "generation_checks": {
+      "mutation_changed_target": true,
+      "mutation_target_only_changed": true,
+      "unexpected_changed_cells": [],
+      "non_target_snapshot_preserved": true,
+      "formula_string_checks": 12,
+      "semantic_arithmetic_checks": 12,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "mutation_snapshot": {
+      "sheet": "Budget",
+      "cell": "N18",
+      "before_value": "=N16-N15",
+      "before_data_type": "f",
+      "after_value": "=N15-N14",
+      "after_data_type": "f",
+      "before_formula": "=N16-N15",
+      "after_formula": "=N15-N14"
+    }
+  },
+  {
+    "workbook_id": "004-budget_horizontal_months-normal-067598",
+    "parent_id": null,
+    "family_id": "F04-budget-horizontal",
+    "scenario_id": "budget_horizontal_months",
+    "business_domain": "budget versus actual",
+    "structural_family": "horizontal_monthly_matrix",
+    "split": "train",
+    "kind": "normal",
+    "seed": 170956,
+    "filename": "004-budget_horizontal_months-normal-067598.xlsx",
+    "relative_path": "workbooks/004-budget_horizontal_months-normal-067598.xlsx",
+    "sha256": "c0e654af057f7b2a2b52a5b97ce3a52fc2ff79ea33a891b6edaeabb90b68bdbf",
+    "mutation_type": null,
+    "mutation_target": null,
+    "supported_scope": [
+      "base static scanner checks"
+    ],
+    "exploratory_scope": [
+      "horizontal formula repetition is outside current M4 column-local engine"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "Budget",
+        "range_ref": "E18:P18",
+        "notes": "Horizontal repetition is generated as exploratory and is not M4-scored."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "Budget",
+        "cell": "E18",
+        "formula": "=E16-E15",
+        "semantic_value": -23,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "F18",
+        "formula": "=F16-F15",
+        "semantic_value": -21,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "G18",
+        "formula": "=G16-G15",
+        "semantic_value": -19,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "H18",
+        "formula": "=H16-H15",
+        "semantic_value": -17,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "I18",
+        "formula": "=I16-I15",
+        "semantic_value": -15,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "J18",
+        "formula": "=J16-J15",
+        "semantic_value": -13,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "K18",
+        "formula": "=K16-K15",
+        "semantic_value": -11,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "L18",
+        "formula": "=L16-L15",
+        "semantic_value": -9,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "M18",
+        "formula": "=M16-M15",
+        "semantic_value": -7,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "N18",
+        "formula": "=N16-N15",
+        "semantic_value": -5,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "O18",
+        "formula": "=O16-O15",
+        "semantic_value": -3,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Budget",
+        "cell": "P18",
+        "formula": "=P16-P15",
+        "semantic_value": -1,
+        "role": "exploratory",
+        "supported_by_current_m4": false
+      }
+    ],
+    "expected_findings": [],
+    "generation_checks": {
+      "formula_string_checks": 12,
+      "semantic_arithmetic_checks": 12,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "mutation_snapshot": null
+  },
+  {
+    "workbook_id": "005-payroll_overtime-mutated-261773",
+    "parent_id": "005-payroll_overtime-normal-261773",
+    "family_id": "F05-payroll-overtime",
+    "scenario_id": "payroll_overtime",
+    "business_domain": "payroll and attendance",
+    "structural_family": "detail_plus_hidden_rates",
+    "split": "train",
+    "kind": "mutated",
+    "seed": 170985,
+    "filename": "005-payroll_overtime-mutated-261773.xlsx",
+    "relative_path": "workbooks/005-payroll_overtime-mutated-261773.xlsx",
+    "sha256": "55fc221e1dd06eca324561570ef52f0e505e1b9774f79c8cfaa5134cfef03728",
+    "mutation_type": "m4_relative_reference_drift",
+    "mutation_target": "Payroll!J13",
+    "supported_scope": [
+      "vertical formulas in visible detail sheet"
+    ],
+    "exploratory_scope": [
+      "rate policy validation"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "Payroll",
+        "range_ref": "J11:J19",
+        "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "Payroll",
+        "cell": "J11",
+        "formula": "=H11*'Rate Card'!B11+IF(H11>160,(H11-160)*'Rate Card'!B11*0.5,0)",
+        "semantic_value": 2214.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J12",
+        "formula": "=H12*'Rate Card'!B12+IF(H12>160,(H12-160)*'Rate Card'!B12*0.5,0)",
+        "semantic_value": 2772.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J14",
+        "formula": "=H14*'Rate Card'!B14+IF(H14>160,(H14-160)*'Rate Card'!B14*0.5,0)",
+        "semantic_value": 1260.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J15",
+        "formula": "=H15*'Rate Card'!B15+IF(H15>160,(H15-160)*'Rate Card'!B15*0.5,0)",
+        "semantic_value": 1180.0,
+        "role": "normal_exception",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J16",
+        "formula": "=H16*'Rate Card'!B16+IF(H16>160,(H16-160)*'Rate Card'!B16*0.5,0)",
+        "semantic_value": 1596.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J17",
+        "formula": "=H17*'Rate Card'!B17+IF(H17>160,(H17-160)*'Rate Card'!B17*0.5,0)",
+        "semantic_value": 2046.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J18",
+        "formula": "=H18*'Rate Card'!B18+IF(H18>160,(H18-160)*'Rate Card'!B18*0.5,0)",
+        "semantic_value": 437.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J19",
+        "formula": "=H19*'Rate Card'!B19+IF(H19>160,(H19-160)*'Rate Card'!B19*0.5,0)",
+        "semantic_value": 864.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J20",
+        "formula": "=SUM(J11:J19)",
+        "semantic_value": null,
+        "role": "subtotal",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J13",
+        "formula": "=H12*'Rate Card'!B13+IF(H13>160,(H13-160)*'Rate Card'!B13*0.5,0)",
+        "semantic_value": null,
+        "role": "detail",
+        "supported_by_current_m4": true
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "005-payroll_overtime-normal-261773-normal-exception-J15",
+        "kind": "normal_exception",
+        "sheet": "Payroll",
+        "cell": "J15",
+        "rule_code": null,
+        "pattern_subtype": null,
+        "severity": null,
+        "family_id": "F05-payroll-overtime",
+        "mutation_type": null,
+        "notes": "Union overtime rule requires payroll confirmation for this employee row."
+      },
+      {
+        "expected_id": "005-payroll_overtime-normal-261773-mut-0",
+        "kind": "m4_candidate",
+        "sheet": "Payroll",
+        "cell": "J13",
+        "rule_code": "FORMULA_PATTERN_OUTLIER",
+        "pattern_subtype": "RELATIVE_REFERENCE_DRIFT",
+        "severity": null,
+        "family_id": "F05-payroll-overtime",
+        "mutation_type": "m4_relative_reference_drift",
+        "notes": "Before value: \"=H13*'Rate Card'!B13+IF(H13>160,(H13-160)*'Rate Card'!B13*0.5,0)\"; after value: \"=H12*'Rate Card'!B13+IF(H13>160,(H13-160)*'Rate Card'!B13*0.5,0)\""
+      }
+    ],
+    "generation_checks": {
+      "mutation_changed_target": true,
+      "mutation_target_only_changed": true,
+      "unexpected_changed_cells": [],
+      "non_target_snapshot_preserved": true,
+      "formula_string_checks": 10,
+      "semantic_arithmetic_checks": 9,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "mutation_snapshot": {
+      "sheet": "Payroll",
+      "cell": "J13",
+      "before_value": "=H13*'Rate Card'!B13+IF(H13>160,(H13-160)*'Rate Card'!B13*0.5,0)",
+      "before_data_type": "f",
+      "after_value": "=H12*'Rate Card'!B13+IF(H13>160,(H13-160)*'Rate Card'!B13*0.5,0)",
+      "after_data_type": "f",
+      "before_formula": "=H13*'Rate Card'!B13+IF(H13>160,(H13-160)*'Rate Card'!B13*0.5,0)",
+      "after_formula": "=H12*'Rate Card'!B13+IF(H13>160,(H13-160)*'Rate Card'!B13*0.5,0)"
+    }
+  },
+  {
+    "workbook_id": "005-payroll_overtime-normal-261773",
+    "parent_id": null,
+    "family_id": "F05-payroll-overtime",
+    "scenario_id": "payroll_overtime",
+    "business_domain": "payroll and attendance",
+    "structural_family": "detail_plus_hidden_rates",
+    "split": "train",
+    "kind": "normal",
+    "seed": 170969,
+    "filename": "005-payroll_overtime-normal-261773.xlsx",
+    "relative_path": "workbooks/005-payroll_overtime-normal-261773.xlsx",
+    "sha256": "8ca314231a99552aadf8b483b02ef2059c6c639d4e6514d04262e850cf7c1b06",
+    "mutation_type": null,
+    "mutation_target": null,
+    "supported_scope": [
+      "vertical formulas in visible detail sheet"
+    ],
+    "exploratory_scope": [
+      "rate policy validation"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "Payroll",
+        "range_ref": "J11:J19",
+        "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "Payroll",
+        "cell": "J11",
+        "formula": "=H11*'Rate Card'!B11+IF(H11>160,(H11-160)*'Rate Card'!B11*0.5,0)",
+        "semantic_value": 2214.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J12",
+        "formula": "=H12*'Rate Card'!B12+IF(H12>160,(H12-160)*'Rate Card'!B12*0.5,0)",
+        "semantic_value": 2772.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J13",
+        "formula": "=H13*'Rate Card'!B13+IF(H13>160,(H13-160)*'Rate Card'!B13*0.5,0)",
+        "semantic_value": 725.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J14",
+        "formula": "=H14*'Rate Card'!B14+IF(H14>160,(H14-160)*'Rate Card'!B14*0.5,0)",
+        "semantic_value": 1260.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J15",
+        "formula": "=H15*'Rate Card'!B15+IF(H15>160,(H15-160)*'Rate Card'!B15*0.5,0)",
+        "semantic_value": 1180.0,
+        "role": "normal_exception",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J16",
+        "formula": "=H16*'Rate Card'!B16+IF(H16>160,(H16-160)*'Rate Card'!B16*0.5,0)",
+        "semantic_value": 1596.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J17",
+        "formula": "=H17*'Rate Card'!B17+IF(H17>160,(H17-160)*'Rate Card'!B17*0.5,0)",
+        "semantic_value": 2046.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J18",
+        "formula": "=H18*'Rate Card'!B18+IF(H18>160,(H18-160)*'Rate Card'!B18*0.5,0)",
+        "semantic_value": 437.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J19",
+        "formula": "=H19*'Rate Card'!B19+IF(H19>160,(H19-160)*'Rate Card'!B19*0.5,0)",
+        "semantic_value": 864.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J20",
+        "formula": "=SUM(J11:J19)",
+        "semantic_value": null,
+        "role": "subtotal",
+        "supported_by_current_m4": false
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "005-payroll_overtime-normal-261773-normal-exception-J15",
+        "kind": "normal_exception",
+        "sheet": "Payroll",
+        "cell": "J15",
+        "rule_code": null,
+        "pattern_subtype": null,
+        "severity": null,
+        "family_id": "F05-payroll-overtime",
+        "mutation_type": null,
+        "notes": "Union overtime rule requires payroll confirmation for this employee row."
+      }
+    ],
+    "generation_checks": {
+      "formula_string_checks": 10,
+      "semantic_arithmetic_checks": 9,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "mutation_snapshot": null
+  }
+]

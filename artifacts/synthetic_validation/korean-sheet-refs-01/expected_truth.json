@@ -1,0 +1,295 @@
+{
+  "scope": "standalone Korean sheet reference fixture; not a frozen engine evaluation artifact",
+  "validation_claim": "generation validation and independent arithmetic only; Excel recalculation NOT_RUN",
+  "workbooks": [
+    {
+      "workbook_id": "korean-sheet-refs-normal-001",
+      "parent_id": null,
+      "family_id": "F03-inventory-cross-sheet",
+      "scenario_id": "inventory_cross_sheet",
+      "business_domain": "inventory movement",
+      "structural_family": "detail_sheet_references_lookup_sheet",
+      "split": "train",
+      "kind": "normal",
+      "seed": 170917,
+      "filename": "korean-sheet-refs-normal-001.xlsx",
+      "relative_path": "workbooks/korean-sheet-refs-normal-001.xlsx",
+      "sha256": "169b6002ea3fb53bf1f033ec08a67afa19ac8d41c93e31093d86a5a9bc193c30",
+      "mutation_type": null,
+      "mutation_target": null,
+      "supported_scope": [
+        "vertical formulas with local A1 references"
+      ],
+      "exploratory_scope": [
+        "full cross-sheet business reconciliation"
+      ],
+      "normal_regions": [
+        {
+          "sheet": "재고 이동",
+          "range_ref": "I10:I18",
+          "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+        }
+      ],
+      "formula_cells": [
+        {
+          "sheet": "재고 이동",
+          "cell": "I10",
+          "formula": "='기초 재고'!B10+G10-H10",
+          "semantic_value": 206,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I11",
+          "formula": "='기초 재고'!B11+G11-H11",
+          "semantic_value": 116,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I12",
+          "formula": "='기초 재고'!B12+G12-H12",
+          "semantic_value": 117,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I13",
+          "formula": "='기초 재고'!B13+G13-H13",
+          "semantic_value": 118,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I14",
+          "formula": "='기초 재고'!B14+G14-H14",
+          "semantic_value": 119,
+          "role": "normal_exception",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I15",
+          "formula": "='기초 재고'!B15+G15-H15",
+          "semantic_value": 120,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I16",
+          "formula": "='기초 재고'!B16+G16-H16",
+          "semantic_value": 121,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I17",
+          "formula": "='기초 재고'!B17+G17-H17",
+          "semantic_value": 122,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I18",
+          "formula": "='기초 재고'!B18+G18-H18",
+          "semantic_value": 123,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I19",
+          "formula": "=SUM(I10:I18)",
+          "semantic_value": null,
+          "role": "subtotal",
+          "supported_by_current_m4": false
+        }
+      ],
+      "expected_findings": [
+        {
+          "expected_id": "korean-sheet-refs-normal-001-normal-exception-I14",
+          "kind": "normal_exception",
+          "sheet": "재고 이동",
+          "cell": "I14",
+          "rule_code": null,
+          "pattern_subtype": null,
+          "severity": null,
+          "family_id": "F03-inventory-cross-sheet",
+          "mutation_type": null,
+          "notes": "Opening stock reconciliation line is reviewed against the warehouse count sheet."
+        }
+      ],
+      "generation_checks": {
+        "formula_string_checks": 10,
+        "semantic_arithmetic_checks": 9,
+        "answer_marker_cells": 0,
+        "excel_recalculation": "NOT_RUN"
+      },
+      "mutation_snapshot": null
+    },
+    {
+      "workbook_id": "korean-sheet-refs-mutated-001",
+      "parent_id": "korean-sheet-refs-normal-001",
+      "family_id": "F03-inventory-cross-sheet",
+      "scenario_id": "inventory_cross_sheet",
+      "business_domain": "inventory movement",
+      "structural_family": "detail_sheet_references_lookup_sheet",
+      "split": "train",
+      "kind": "mutated",
+      "seed": 170917,
+      "filename": "korean-sheet-refs-mutated-001.xlsx",
+      "relative_path": "workbooks/korean-sheet-refs-mutated-001.xlsx",
+      "sha256": "c7de0ba8eb19acfe81282014cff7533e1eb2f5e7f472782d42a7c65dfee47e65",
+      "mutation_type": "m4_relative_reference_drift",
+      "mutation_target": "재고 이동!I12",
+      "supported_scope": [
+        "vertical formulas with local A1 references"
+      ],
+      "exploratory_scope": [
+        "full cross-sheet business reconciliation"
+      ],
+      "normal_regions": [
+        {
+          "sheet": "재고 이동",
+          "range_ref": "I10:I18",
+          "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+        }
+      ],
+      "formula_cells": [
+        {
+          "sheet": "재고 이동",
+          "cell": "I10",
+          "formula": "='기초 재고'!B10+G10-H10",
+          "semantic_value": 206,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I11",
+          "formula": "='기초 재고'!B11+G11-H11",
+          "semantic_value": 116,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I13",
+          "formula": "='기초 재고'!B13+G13-H13",
+          "semantic_value": 118,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I14",
+          "formula": "='기초 재고'!B14+G14-H14",
+          "semantic_value": 119,
+          "role": "normal_exception",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I15",
+          "formula": "='기초 재고'!B15+G15-H15",
+          "semantic_value": 120,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I16",
+          "formula": "='기초 재고'!B16+G16-H16",
+          "semantic_value": 121,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I17",
+          "formula": "='기초 재고'!B17+G17-H17",
+          "semantic_value": 122,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I18",
+          "formula": "='기초 재고'!B18+G18-H18",
+          "semantic_value": 123,
+          "role": "detail",
+          "supported_by_current_m4": true
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I19",
+          "formula": "=SUM(I10:I18)",
+          "semantic_value": null,
+          "role": "subtotal",
+          "supported_by_current_m4": false
+        },
+        {
+          "sheet": "재고 이동",
+          "cell": "I12",
+          "formula": "='기초 재고'!B11+G12-H12",
+          "semantic_value": null,
+          "role": "detail",
+          "supported_by_current_m4": true
+        }
+      ],
+      "expected_findings": [
+        {
+          "expected_id": "korean-sheet-refs-normal-001-normal-exception-I14",
+          "kind": "normal_exception",
+          "sheet": "재고 이동",
+          "cell": "I14",
+          "rule_code": null,
+          "pattern_subtype": null,
+          "severity": null,
+          "family_id": "F03-inventory-cross-sheet",
+          "mutation_type": null,
+          "notes": "Opening stock reconciliation line is reviewed against the warehouse count sheet."
+        },
+        {
+          "expected_id": "korean-sheet-refs-normal-001-mut-0",
+          "kind": "m4_candidate",
+          "sheet": "재고 이동",
+          "cell": "I12",
+          "rule_code": "FORMULA_PATTERN_OUTLIER",
+          "pattern_subtype": "RELATIVE_REFERENCE_DRIFT",
+          "severity": null,
+          "family_id": "F03-inventory-cross-sheet",
+          "mutation_type": "m4_relative_reference_drift",
+          "notes": "Before value: \"='기초 재고'!B12+G12-H12\"; after value: \"='기초 재고'!B11+G12-H12\""
+        }
+      ],
+      "generation_checks": {
+        "mutation_changed_target": true,
+        "mutation_target_only_changed": true,
+        "unexpected_changed_cells": [],
+        "non_target_snapshot_preserved": true,
+        "formula_string_checks": 10,
+        "semantic_arithmetic_checks": 9,
+        "answer_marker_cells": 0,
+        "excel_recalculation": "NOT_RUN"
+      },
+      "mutation_snapshot": {
+        "sheet": "재고 이동",
+        "cell": "I12",
+        "before_value": "='기초 재고'!B12+G12-H12",
+        "before_data_type": "f",
+        "after_value": "='기초 재고'!B11+G12-H12",
+        "after_data_type": "f",
+        "before_formula": "='기초 재고'!B12+G12-H12",
+        "after_formula": "='기초 재고'!B11+G12-H12"
+      }
+    }
+  ]
+}

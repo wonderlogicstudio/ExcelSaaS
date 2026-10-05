@@ -1,0 +1,6 @@
+﻿{
+    "command":  "npm.cmd run test -- App.navigation",
+    "exit_code":  0,
+    "output":  "artifacts/synthetic_validation/monthly-repair-flow06/stage4/resume01/npm-test-app-navigation.txt",
+    "timestamp":  "2026-09-22T23:51:17.9666869+09:00"
+}

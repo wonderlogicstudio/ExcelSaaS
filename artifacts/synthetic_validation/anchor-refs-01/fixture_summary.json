@@ -1,0 +1,50 @@
+{
+  "normal": "workbooks/anchor-refs-normal-001.xlsx",
+  "mutated": "workbooks/anchor-refs-mutated-001.xlsx",
+  "mutation_target": "Payroll!J12",
+  "expected_findings": [
+    {
+      "expected_id": "anchor-refs-normal-001-normal-exception-J15",
+      "kind": "normal_exception",
+      "sheet": "Payroll",
+      "cell": "J15",
+      "rule_code": null,
+      "pattern_subtype": null,
+      "severity": null,
+      "family_id": "F05-payroll-overtime",
+      "mutation_type": null,
+      "notes": "Union overtime rule requires payroll confirmation for this employee row."
+    },
+    {
+      "expected_id": "anchor-refs-normal-001-anchor-mut",
+      "kind": "m4_candidate",
+      "sheet": "Payroll",
+      "cell": "J12",
+      "rule_code": "FORMULA_PATTERN_OUTLIER",
+      "pattern_subtype": "REFERENCE_CELL_DRIFT",
+      "severity": null,
+      "family_id": "F05-payroll-overtime",
+      "mutation_type": "m4_anchor_reference_shift",
+      "notes": "Anchor changed from $B$5 to $B$6; independent expected value 3680.0 -> 3600.0."
+    }
+  ],
+  "validation": {
+    "anchor-refs-normal-001": {
+      "formula_checks": 10,
+      "arithmetic_checks": 9,
+      "boundary_checks": 1,
+      "reference_checks": 74,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    },
+    "anchor-refs-mutated-001": {
+      "formula_checks": 10,
+      "arithmetic_checks": 8,
+      "boundary_checks": 1,
+      "reference_checks": 66,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN"
+    }
+  },
+  "excel_recalculation": "NOT_RUN"
+}

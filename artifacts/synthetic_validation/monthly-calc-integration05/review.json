@@ -1,0 +1,8 @@
+{
+  "reviewer": "monthly_calc_review",
+  "status": "PASS",
+  "scope": "Existing RP01/RP02 integration only",
+  "inspected": "8 passing tests, unmocked approval/execution, actual6savedartifacts/hashes/values/changelogs/reports, combinedplan11patches42indirectimpacts/fixedvalues",
+  "not_run": "Reviewer did not rerun tests or Excel",
+  "limits": "No new monthly replacement, combined downloadable delivery, browser acceptance or new native Excel compatibility"
+}

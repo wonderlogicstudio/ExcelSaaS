@@ -1,0 +1,7 @@
+﻿{
+    "command":  "npm.cmd run test -- App.navigation ProposalFlow ProposalExample",
+    "exit_code":  1,
+    "output":  "artifacts/synthetic_validation/monthly-repair-flow06/stage4/npm-test-reviewfix-targeted-rerun.txt",
+    "timestamp":  "2026-09-22T23:43:12.7974943+09:00",
+    "review_fix":  "single correction after value-free test mismatch"
+}

@@ -1,0 +1,36 @@
+﻿[
+    {
+        "name":  "freeze_supported_source",
+        "exit":  0,
+        "result":  "FROZEN_SUPPORTED_MONTHLY_RP03_SOURCE c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab"
+    },
+    {
+        "name":  "stage3_new_targeted_tests",
+        "command":  "python -m pytest -p no:cacheprovider --basetemp artifacts/synthetic_validation/monthly-repair-flow06/stage3/pytest-tmp apps/api/tests/test_delivery_execution.py::test_monthly_actual_patch_and_verification_resolves_target_candidate apps/api/tests/test_delivery_execution.py::test_monthly_execute_requires_current_approval_and_rule_fingerprint apps/api/tests/test_delivery_inputs.py::test_api_monthly_preflight_reinspects_default_upload_with_profile_context -q",
+        "exit":  0,
+        "result":  "3 passed"
+    },
+    {
+        "name":  "stage3_impacted_legacy_tests",
+        "command":  "python -m pytest -p no:cacheprovider --basetemp artifacts/synthetic_validation/monthly-repair-flow06/stage3/pytest-tmp-legacy apps/api/tests/test_delivery_execution.py::test_separate_approval_and_actual_atomic_delivery_redownload apps/api/tests/test_delivery_execution.py::test_invalid_approval_or_right_is_blocked apps/api/tests/test_delivery_execution.py::test_package_references_and_existing_calculation_errors apps/api/tests/test_delivery_plan.py::test_combined_policy_calculates_once_against_frozen_complex03 apps/api/tests/test_delivery_plan.py::test_rp02_exact_blank_translation_and_digest_invalidates_on_engine apps/api/tests/test_repair_rules.py -q",
+        "exit":  0,
+        "result":  "13 passed"
+    },
+    {
+        "name":  "stage3_ruff_initial",
+        "exit":  1,
+        "result":  "format-only: long path and script import ordering"
+    },
+    {
+        "name":  "stage3_ruff_final",
+        "command":  "python -m ruff check --no-cache apps/api/app/delivery_api.py apps/api/app/delivery_execution.py apps/api/app/delivery_patch.py apps/api/app/delivery_plan.py apps/api/app/delivery_rehearsal.py apps/api/app/formula_patterns.py apps/api/app/repair_rules/monthly_formula.py apps/api/tests/test_delivery_execution.py apps/api/tests/test_delivery_inputs.py apps/api/tests/test_delivery_plan.py apps/api/tests/test_monthly_repair.py scripts/verify_delivery_patch_compatibility.py scripts/register_delivery_patch_reference.py",
+        "exit":  0,
+        "result":  "All checks passed!"
+    },
+    {
+        "name":  "compatibility_bootstrap_d08",
+        "command":  "python scripts/verify_delivery_patch_compatibility.py --stage d08",
+        "exit":  0,
+        "result":  "Actual patch, post-calculation and three artifacts created for Excel compatibility verification; not published READY."
+    }
+]

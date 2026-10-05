@@ -1,0 +1,22 @@
+﻿from pathlib import Path
+p=Path('apps/web/src/components/RepairProposalPicker.tsx')
+s=p.read_text(encoding='utf-8')
+s=s.replace("const addLabel=isAdded?'이미 추가됨':needsUpdate?'목록 업데이트':'변경 목록에 추가';", "const addLabel=isAdded?'✓ 추가됨':needsUpdate?'목록 업데이트':'변경 목록에 추가';")
+s=s.replace('목록에 추가되었습니다.', '목록에 추가됐습니다.')
+s=s.replace('제안할 시트<select', '제안을 확인할 시트<select')
+s=s.replace('이전 묶음 {basket.length}개 보기', '담은 묶음 {basket.length}개 보기')
+p.write_text(s,encoding='utf-8',newline='\n')
+
+p=Path('apps/web/src/components/ProposalFlow.test.tsx')
+s=p.read_text(encoding='utf-8')
+s=s.replace("expect(screen.getByText(/검증 필요 후보/)).toBeVisible();", "expect(screen.getAllByText(/검증 필요 후보/).length).toBeGreaterThan(0);")
+s=s.replace("fireEvent.click(screen.getByRole('checkbox',{name:/월별 수식 후보/}));\n  fireEvent.click(screen.getByRole('button',{name:'이 묶음만 변경 예시 확인'}));", "await waitFor(()=>expect(screen.getByRole('checkbox',{name:/월별 수식 후보/})).toBeEnabled());\n  fireEvent.click(screen.getByRole('checkbox',{name:/월별 수식 후보/}));\n  fireEvent.click(screen.getByRole('button',{name:'이 묶음만 변경 예시 확인'}));", 1)
+s=s.replace("fireEvent.click(screen.getByRole('checkbox',{name:/월별 수식 후보/}));\n  fireEvent.click(screen.getByRole('button',{name:'변경 목록에 추가'}));", "await waitFor(()=>expect(screen.getByRole('checkbox',{name:/월별 수식 후보/})).toBeEnabled());\n  fireEvent.click(screen.getByRole('checkbox',{name:/월별 수식 후보/}));\n  fireEvent.click(screen.getByRole('button',{name:'변경 목록에 추가'}));", 1)
+s=s.replace("fireEvent.click(screen.getByRole('checkbox',{name:/월별 수식 후보/}));\n  fireEvent.click(screen.getByRole('button',{name:'변경 목록에 추가'}));", "await waitFor(()=>expect(screen.getByRole('checkbox',{name:/월별 수식 후보/})).toBeEnabled());\n  fireEvent.click(screen.getByRole('checkbox',{name:/월별 수식 후보/}));\n  fireEvent.click(screen.getByRole('button',{name:'변경 목록에 추가'}));", 1)
+s=s.replace("expect(screen.getByText(/월별 수식 후보는 다른 수정 묶음과 함께 보낼 수 없습니다/)).toBeVisible();", "expect(screen.getAllByText(/월별 수식 후보는 다른 수정 묶음과 함께 보낼 수 없습니다/).length).toBeGreaterThan(0);")
+p.write_text(s,encoding='utf-8',newline='\n')
+
+p=Path('apps/web/src/components/ProposalExample.test.tsx')
+s=p.read_text(encoding='utf-8')
+s=s.replace("expect(within(region).getByText(/월별 수식 검증/)).toBeVisible();", "expect(within(region).getAllByText(/월별 수식 검증/).length).toBeGreaterThan(0);")
+p.write_text(s,encoding='utf-8',newline='\n')

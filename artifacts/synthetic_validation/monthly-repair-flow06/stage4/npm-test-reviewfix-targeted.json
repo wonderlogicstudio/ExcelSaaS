@@ -1,0 +1,7 @@
+﻿{
+    "command":  "npm.cmd run test -- App.navigation ProposalFlow ProposalExample",
+    "exit_code":  1,
+    "output":  "artifacts/synthetic_validation/monthly-repair-flow06/stage4/npm-test-reviewfix-targeted.txt",
+    "timestamp":  "2026-09-22T23:42:13.2998113+09:00",
+    "review_fix":  "value-free finding and source-derived before_formula"
+}

@@ -1,0 +1,26 @@
+﻿{
+    "task":  "resume02-live-env-restore-correction",
+    "changed_files":  [
+                          "artifacts/synthetic_validation/monthly-ux07-release/resume02/release-tools/deploy_api_guarded.py",
+                          "artifacts/synthetic_validation/monthly-ux07-release/resume02/release-tools/release_gcloud.py",
+                          "artifacts/synthetic_validation/monthly-ux07-release/resume02/release-tools/test_release_gcloud.py"
+                      ],
+    "cloud_mutation_run":  false,
+    "product_source_changed":  false,
+    "correction":  {
+                       "gcloud_entrypoint":  "direct bundledpython -S google-cloud-sdk/lib/gcloud.py, avoiding gcloud.cmd caret processing",
+                       "env_restore":  "preserve ^DELIM^ gcloud delimiter syntax for direct Python argv; no env values written to evidence",
+                       "live_recovery_gate":  "old baseline revision must remain 100 percent traffic; IAM/Gateway/Worker and baseline revision runtime hashes checked; failed latest revision must use proven staged image and differ from baseline runtime only by env hash before no-traffic recovery deploy"
+                   },
+    "commands":  [
+                     {
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m py_compile artifacts\\synthetic_validation\\monthly-ux07-release\\resume02\\release-tools\\deploy_api_guarded.py artifacts\\synthetic_validation\\monthly-ux07-release\\resume02\\release-tools\\release_gcloud.py artifacts\\synthetic_validation\\monthly-ux07-release\\resume02\\release-tools\\registry_location.py",
+                         "exit_code":  0
+                     },
+                     {
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m pytest artifacts\\synthetic_validation\\monthly-ux07-release\\resume02\\release-tools\\test_release_gcloud.py artifacts\\synthetic_validation\\monthly-ux07-release\\resume02\\release-tools\\test_registry_location.py -q -p no:cacheprovider",
+                         "exit_code":  0,
+                         "result":  "9 passed in 0.11s"
+                     }
+                 ]
+}

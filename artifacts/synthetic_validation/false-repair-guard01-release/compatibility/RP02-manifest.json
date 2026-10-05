@@ -1,0 +1,136 @@
+{
+  "product_id": "APPROVED_REPAIR",
+  "job_id": "1d8073db-e475-4f44-a0b9-c99c004456e6",
+  "sku": "RP02_APPROVED_FORMULA_RESTORE_V1",
+  "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+  "output_hash": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+  "plan_digest": "ef9b91ad9347fee4c014f380354f6da2b4e9bd8ec7a7bae6267a6eb79eb01d12",
+  "engine_version": "apache-poi-5.5.1-adapter-v1",
+  "engine_fingerprint": "958c9d5aa429b618ee4277b67604c1b516c3d34716a97903b78b6e8a9929cc65",
+  "profile_version": "RP02_APPROVED_FORMULA_RESTORE_V1",
+  "report_version": "repair-reports-v1",
+  "created_at": 1790495054.0509095,
+  "expires_at": 1790495949.9719725,
+  "verification": {
+    "checks": [
+      {
+        "code": "SOURCE_IMMUTABLE",
+        "status": "PASS"
+      },
+      {
+        "code": "EXACT_APPROVED_PATCH",
+        "status": "PASS"
+      },
+      {
+        "code": "UNTOUCHED_MEMBERS",
+        "status": "PASS"
+      },
+      {
+        "code": "NON_TARGET_XML_AND_STYLES",
+        "status": "PASS"
+      },
+      {
+        "code": "TYPED_FORMULA_CACHES",
+        "status": "PASS"
+      },
+      {
+        "code": "WHOLE_WORKBOOK_POST_CALCULATION",
+        "status": "PASS"
+      },
+      {
+        "code": "NO_NEW_CALCULATION_ERRORS",
+        "status": "PASS"
+      },
+      {
+        "code": "NO_NEW_STATIC_FINDINGS",
+        "status": "PASS"
+      },
+      {
+        "code": "FORMULA_AUDIT_COMPLETED",
+        "status": "PASS"
+      },
+      {
+        "code": "NO_NEW_FORMULA_CANDIDATES",
+        "status": "PASS"
+      }
+    ],
+    "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+    "output_hash": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+    "plan_digest": "ef9b91ad9347fee4c014f380354f6da2b4e9bd8ec7a7bae6267a6eb79eb01d12",
+    "patch_count": 1,
+    "untouched_member_count": 3,
+    "engine_version": "apache-poi-5.5.1-adapter-v1",
+    "static_scanner_version": "0.1.3",
+    "formula_audit_rule_set_version": "2026.09.5",
+    "static_before": 0,
+    "static_remaining": 0,
+    "static_resolved": 0,
+    "formula_candidates_before": 0,
+    "formula_candidates_remaining": 0,
+    "formula_candidates_resolved": 0,
+    "detectors": {
+      "static": {
+        "before": [],
+        "remaining": [],
+        "resolved": [],
+        "new": [],
+        "target_before": [],
+        "target_remaining": []
+      },
+      "formula": {
+        "before": [],
+        "remaining": [],
+        "resolved": [],
+        "new": [],
+        "target_before": [],
+        "target_remaining": []
+      },
+      "static_scanner_version": "0.1.3",
+      "formula_audit_rule_set_version": "2026.09.5",
+      "formula_audit_before_status": "COMPLETED",
+      "formula_audit_after_status": "COMPLETED",
+      "formula_audit_before_limitations": [
+        "수식 계산 결과, 업무 규칙, 의도된 예외 계산은 확인하지 않았습니다.",
+        "지원하는 A1 참조 수식의 제한된 주변 패턴만 비교했습니다.",
+        "수정 수식 생성·적용이나 자동 수정 가능 여부는 제공하지 않습니다."
+      ],
+      "formula_audit_after_limitations": [
+        "수식 계산 결과, 업무 규칙, 의도된 예외 계산은 확인하지 않았습니다.",
+        "지원하는 A1 참조 수식의 제한된 주변 패턴만 비교했습니다.",
+        "수정 수식 생성·적용이나 자동 수정 가능 여부는 제공하지 않습니다."
+      ],
+      "formula_comparison_status": "COMPLETED"
+    },
+    "coverage": {
+      "scope": "WHOLE_WORKBOOK",
+      "formula_count": 6,
+      "combinations": [
+        "EMPTY_STRING",
+        "ROUND_AMOUNT",
+        "SUM_INTERNAL_RANGE"
+      ],
+      "registry_version": "integer-repair-combinations-v1"
+    },
+    "business_truth_guaranteed": false
+  },
+  "files": {
+    "REPAIRED_XLSX": {
+      "name": "workbookcare_repaired_1d8073db-e475-4f44-a0b9-c99c004456e6.xlsx",
+      "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+      "bytes": 2067
+    },
+    "CHANGES_XLSX": {
+      "name": "changes_1d8073db-e475-4f44-a0b9-c99c004456e6.xlsx",
+      "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "sha256": "3f39c4bcc89c9c6cd4601a390150e9be149265bd36b8f33f597b30c0ee00877a",
+      "bytes": 9949
+    },
+    "VERIFICATION_HTML": {
+      "name": "verification_1d8073db-e475-4f44-a0b9-c99c004456e6.html",
+      "mime": "text/html;charset=utf-8",
+      "sha256": "5bca2ea135a29d1b599f969526e8211e8e3e26f2e55304f04bccace8afa6f36e",
+      "bytes": 4932
+    }
+  }
+}

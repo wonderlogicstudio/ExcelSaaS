@@ -1,0 +1,8 @@
+# JOURNEY-DOWNLOAD-FEEDBACK01 — APPROVED 2026-09-27
+
+Owner accepted one synthetic beta journey and improvement of its largest observed usability defect. Scope: after requesting downloads, show per-file request status without claiming browser save completion. Preserve approval, API, engine and artifact contents.
+
+Allowlist: apps/web/src/components/RepairDelivery.tsx; focused download tests in apps/web/src/components/ProposalFlow.test.tsx or RepairDelivery.test.tsx. PL alone edits this evidence directory and progress records. Preserve all prior dirty files.
+Acceptance: (1) visible pending/requested/not-requested states for each file, (2) partial failure retains successful request statuses and provides individual retry, (3) new job/plan resets status and stale responses cannot label a new job. No new dependencies.
+Checks: focused affected tests and web type/build once, independent read-only review, no repeated passing tests. Stop after one defect; deployment/full regression/Excel replay not part of this defect unit.
+Baseline live beta: synthetic monthly-rp03-supported-6sheet.xlsx, structure0/formula1; exact Budget!N18 =N15-N14 -> ='M10'!B16-'M10'!B15, #VALUE! -> -5; approved and READY with three files. Core app activations10 plus beta-only confirmations2. Filechooser automation succeeded in Chrome2. Bulk download action ran, download event timed out20s; artifact receipt/content NOT_VERIFIED. Browser internal downloads URL was denied; do not bypass.

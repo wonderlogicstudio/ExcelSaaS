@@ -1,0 +1,11 @@
+audit_skipped,avg_fp_per_workbook,business_domain,candidate_fp,definitive_fp,duplicates,excluded,family_id,fp,max_fp_per_workbook,mutation_type,split,structural_family,successful_workbooks,tp,unjudged,workbooks
+,0,budget versus actual,0,0,0,0,F04-budget-horizontal,0,0,m4_relative_reference_drift,train,horizontal_monthly_matrix,1,,0,1
+,0,budget versus actual,0,0,0,0,F04-budget-horizontal,0,0,normal,train,horizontal_monthly_matrix,1,,0,1
+,0,inventory movement,0,0,0,0,F03-inventory-cross-sheet,0,0,m4_relative_reference_drift,train,detail_sheet_references_lookup_sheet,1,1,0,1
+,0,inventory movement,0,0,0,0,F03-inventory-cross-sheet,0,0,normal,train,detail_sheet_references_lookup_sheet,1,,0,1
+,0,payroll and attendance,0,0,0,0,F05-payroll-overtime,0,0,m4_relative_reference_drift,train,detail_plus_hidden_rates,1,1,1,1
+,0,payroll and attendance,0,0,0,0,F05-payroll-overtime,0,0,normal,train,detail_plus_hidden_rates,1,,1,1
+1,0,purchasing and order management,0,0,0,0,F02-purchase-table,0,0,m4_relative_reference_drift,train,excel_table_with_summary_band,0,,0,1
+1,0,purchasing and order management,0,0,0,0,F02-purchase-table,0,0,normal,train,excel_table_with_summary_band,0,,0,1
+,0,retail sales,0,0,0,0,F01-retail-vertical-detail,0,0,m4_relative_reference_drift,train,single_sheet_vertical_revenue,1,1,0,1
+,0,retail sales,0,0,0,0,F01-retail-vertical-detail,0,0,normal,train,single_sheet_vertical_revenue,1,,0,1

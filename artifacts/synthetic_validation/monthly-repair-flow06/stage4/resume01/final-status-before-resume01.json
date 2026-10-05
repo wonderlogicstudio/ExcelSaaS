@@ -1,0 +1,58 @@
+{
+  "unit": "MONTHLY-REPAIR-FLOW-06",
+  "status": "STAGES1_3_REVIEW_PASS_STAGE4_STOPPED",
+  "stage_status": {
+    "1": "REVIEW_PASS",
+    "2": "REVIEW_PASS",
+    "3": "REVIEW_PASS",
+    "4": "STOPPED_AFTER_FAILED_CORRECTION"
+  },
+  "stage3_evidence": "stage3/final-verification.json",
+  "stage4_final_test": {
+    "command": "npm.cmd run test -- App.navigation ProposalFlow ProposalExample",
+    "exit_code": 1,
+    "passed": 40,
+    "failed": 1,
+    "log": "stage4/npm-test-reviewfix-targeted-rerun.txt",
+    "failure": "Contradictory adjacent expectations for the same value-free monthly candidate at App.navigation.test.tsx86-87"
+  },
+  "stage4_review": "Initial CHANGES_REQUIRED: invented API formula fields, incorrect monthly example, invisible basket notice. Correction implemented; not final reviewed due remaining test failure.",
+  "stage4_build": "Initial exit0 applies to pre-review source only; final corrected source NOT_RUN",
+  "browser": {
+    "url": "http://localhost:5186/",
+    "tab_id": "209533813",
+    "actual_file": "stage3/monthly-rp03-supported-6sheet.xlsx",
+    "verified": "Combined free diagnosis visibly shows structure0/formula candidate1",
+    "remaining": [
+      "RP03 selection/preflight/actual -5 example",
+      "exact approval and three downloads through UI",
+      "desktop/mobile visual acceptance"
+    ],
+    "note": "Browser upload control calls took333/778seconds; not measured app processing time. No human usability or UX activation-budget pass claimed."
+  },
+  "local_runtime": {
+    "api_exec_session": 24802,
+    "api_port": 8016,
+    "web_exec_session": 31590,
+    "web_port": 5186,
+    "frontend_options": "hosted_beta presentation + integrated formula audit, API localhost8016",
+    "api_mode": "internal_beta; PAYMENT_MODE=OFF; isolated stage4/private-state",
+    "beta_deployed": false
+  },
+  "preservation": "Historical9 artifact files restored and independently hash-reviewed; unknown prior private DB state not claimed restored. See stage3/recovery.json and preservation-incident.json.",
+  "not_run": [
+    "final stage4 build",
+    "full regression on final combined changes",
+    "completed stage4 browser acceptance",
+    "beta deployment",
+    "git commit",
+    "git push"
+  ],
+  "limits": [
+    "Original13-sheet file remains unsupported by unchanged10-sheet limit",
+    "RP03 supports exactly one validated monthly target, not mixed with RP01/RP02",
+    "No new commercial/payment readiness claim"
+  ],
+  "immutable_hashes_match": true,
+  "next_single_unit": "Remove contradictory obsolete assertion, verify corrected UI delta, complete actual local UI acceptance; no new repair feature"
+}

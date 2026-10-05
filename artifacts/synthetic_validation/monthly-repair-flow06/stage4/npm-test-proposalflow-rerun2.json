@@ -1,0 +1,6 @@
+﻿{
+    "command":  "npm.cmd run test -- ProposalFlow",
+    "exit_code":  0,
+    "output":  "artifacts/synthetic_validation/monthly-repair-flow06/stage4/npm-test-proposalflow-rerun2.txt",
+    "timestamp":  "2026-09-22T23:34:29.1424749+09:00"
+}

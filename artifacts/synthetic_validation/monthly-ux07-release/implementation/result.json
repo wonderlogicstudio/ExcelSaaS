@@ -1,0 +1,52 @@
+{
+  "unit": "MONTHLY-UX07-RELEASE implementation",
+  "scope": "frontend-only 14-to-10 monthly-flow action reduction",
+  "changed_files": [
+    "apps/web/src/components/RepairProposalPicker.tsx",
+    "apps/web/src/components/RepairPlanPreview.tsx",
+    "apps/web/src/components/RepairDelivery.tsx",
+    "apps/web/src/components/ProposalFlow.test.tsx"
+  ],
+  "commands": [
+    {
+      "cmd": "npm.cmd run test --workspace @workbookcare/web -- ProposalFlow -t \"monthly|download|exact\" --run",
+      "exit": 1,
+      "result": "NOT_RESULT; Windows cmd parsed | as pipe before tests ran"
+    },
+    {
+      "cmd": "npm.cmd run test --workspace @workbookcare/web -- ProposalFlow --run",
+      "exit": 1,
+      "result": "23 passed, 1 failed; new partial-download failure test expected raw thrown text while client maps failed fetch to connection error"
+    },
+    {
+      "cmd": "npm.cmd run test --workspace @workbookcare/web -- ProposalFlow --run",
+      "exit": 0,
+      "result": "24 passed"
+    },
+    {
+      "cmd": "npm.cmd run build --workspace @workbookcare/web",
+      "exit": 0,
+      "result": "tsc -b and vite build passed"
+    }
+  ],
+  "implemented": [
+    "RP03 monthly preview no longer requires a redundant request checkbox; explicit validation CTA remains separate from approval",
+    "single exact-change group opens by default before exact approval",
+    "READY state adds one all-files download CTA while retaining individual fallback buttons",
+    "download-all disables repeated clicks while busy and reports partial failure through existing error path"
+  ],
+  "preserved": [
+    "explicit storage consent remains in source step",
+    "exact approval checkbox, approve CTA, and execute CTA remain separate",
+    "RP01/RP02 confirmation and basket behavior remain covered in ProposalFlow",
+    "no backend, engine, native, Git, or deployment actions in this unit"
+  ],
+  "expected_monthly_core_activations_after_change": 10,
+  "browser_note": "The download-all CTA triggers three existing downloads from one app activation; browsers may still ask permission for multiple downloads. Individual buttons remain available.",
+  "source_hashes": {
+    "apps/web/src/components/RepairProposalPicker.tsx": "c7097004385f4f97f37d64298e7ea354b477d982bf07dd279cc5f27a2db3afb9",
+    "apps/web/src/components/RepairPlanPreview.tsx": "9e64d7a4db61342062f2d6aa5bb8e30da66b91c44a37a14c6b3aba64894d184a",
+    "apps/web/src/components/RepairDelivery.tsx": "8225eb1e95877ca79bfd5666e009dd3c8e9b546b2a768752e2cd8cf3fe7a4d76",
+    "apps/web/src/components/ProposalFlow.test.tsx": "b4ec7747d7f05e1c54e48f2a9a09781fb3d578614e3e0fd4621b4a79656f8800"
+  }
+}

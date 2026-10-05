@@ -1,0 +1,40 @@
+{
+  "stage": "stage1-monthly-rule",
+  "status": "PASS_TARGETED",
+  "changed_files": [
+    "apps/api/app/repair_rules/monthly_formula.py",
+    "apps/api/tests/test_monthly_repair.py",
+    "artifacts/synthetic_validation/monthly-repair-flow06/stage1/expected-control.json",
+    "artifacts/synthetic_validation/monthly-repair-flow06/stage1/commands.json",
+    "artifacts/synthetic_validation/monthly-repair-flow06/stage1/result.json"
+  ],
+  "scope_boundaries": {
+    "delivery_inputs": "not changed",
+    "delivery_plan": "not changed",
+    "delivery_patch": "not changed",
+    "formula_patterns": "not changed",
+    "original_13_sheet_oracle": "not changed",
+    "sheet_limit": "not changed",
+    "git_or_deployment": "not run"
+  },
+  "implemented": [
+    "Standalone RP03 monthly candidate derivation from existing detector eligibility.",
+    "Exact before formula and #VALUE! snapshot check.",
+    "Replacement derived from both adjacent verified monthly-sheet formulas, not caller input.",
+    "Finite numeric source operand check for M10!B16 and M10!B15.",
+    "Candidate result explicitly requires approval and is not automatic approval."
+  ],
+  "targeted_checks": {
+    "pytest": {
+      "command": "apps/api/.venv/Scripts/python.exe -m pytest apps/api/tests/test_monthly_repair.py",
+      "exit_code": 0,
+      "result": "4 passed"
+    },
+    "ruff": {
+      "command": "apps/api/.venv/Scripts/python.exe -m ruff check --no-cache apps/api/app/repair_rules/monthly_formula.py apps/api/tests/test_monthly_repair.py",
+      "exit_code": 0,
+      "result": "All checks passed"
+    }
+  },
+  "known_warning": "Pytest could not create .pytest_cache because sandbox denied that write; tests still executed and passed."
+}

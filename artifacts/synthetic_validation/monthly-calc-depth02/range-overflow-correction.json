@@ -1,0 +1,46 @@
+﻿{
+    "id":  "MONTHLY-CALC-DEPTH-02-range-overflow-correction",
+    "status":  "TARGETED_CHECKS_PASS_REVIEW_READY",
+    "scope":  "Single approved correction: Java AreaPtg range cap overflow plus depth boundary test semantics.",
+    "changed_files":  [
+                          "apps/api/engine/DeliveryCalc.java",
+                          "apps/api/tests/test_monthly_calculation.py"
+                      ],
+    "source_context":  [
+                           "DeliveryCalc.java addAreaDependencies now computes long cells=(long)rows*(long)cols before comparing \u003e10000L.",
+                           "test_monthly_calculation.py now covers depth 100 positive boundary via monthly_chain(101), depth 101 rejection via monthly_chain(102), and raw Java huge range SUM(A1:XFD1048576) fail-fast with timeout=2.0."
+                       ],
+    "commands":  [
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe apps\\\\api\\\\engine\\\\setup.py",
+                         "exit":  0,
+                         "raw_output":  "",
+                         "note":  "Rebuilt local Java evaluator after long range-cap correction."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_monthly_calculation.py -q",
+                         "exit":  0,
+                         "raw_output":  ".................                                                        [100%]",
+                         "result":  "17 passed"
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m ruff check apps\\\\api\\\\app\\\\delivery_calculation.py apps\\\\api\\\\tests\\\\test_monthly_calculation.py",
+                         "exit":  0,
+                         "raw_output":  "All checks passed!"
+                     }
+                 ],
+    "not_rerun":  [
+                      "Affected legacy subset was not rerun because the approved correction only changes Java range-size overflow rejection and test assertions; previous final source legacy run remains 29 passed from builder-evidence.json."
+                  ],
+    "boundaries":  [
+                       "No other source changes, no profile/UI/reference/lock/deploy/git/native Excel/full regression changes.",
+                       "No limits widened; range dependency cap remains 10000 and sheet limit remains 10.",
+                       "Existing native/reference evidence remains STALE pending later integration refresh."
+                   ],
+    "git_status_short":  [
+                             "M apps/api/app/delivery_calculation.py",
+                             "M apps/api/engine/DeliveryCalc.java",
+                             "?? apps/api/tests/test_monthly_calculation.py"
+                         ],
+    "reviewer":  "monthly_calc_review/root source ready after range-overflow correction evidence."
+}

@@ -1,0 +1,207 @@
+{
+  "status": "FROZEN",
+  "unit": "MONTHLY-UX07-RELEASE",
+  "live_base": {
+    "api_revision": "workbookcare-api-beta-00029-dir",
+    "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:6f43addbb68f991ab3cc8c625075e17713865f088a88665f4d339d5ee789d6df",
+    "traffic": [
+      {
+        "percent": 100,
+        "revisionName": "workbookcare-api-beta-00029-dir"
+      }
+    ],
+    "worker_version": "02a4700b-3031-4404-aa87-09f18726594e",
+    "private_iam": true,
+    "iam_sha256": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342",
+    "spec_sha256": "d41ca2159e0d50fa0bbcfd51d7f5dd4ad1c314431e58ee812fc15dd16656546b",
+    "payment_mode_effective": "OFF",
+    "payment_mode_source": "explicit env or existing Settings defaultOFF",
+    "prior_attempt": "exit1 requiredexplicitOFF although setting absent; defaultOFF verified in config"
+  },
+  "rp03_precedent": {
+    "path": "artifacts\\synthetic_validation\\monthly-repair-flow06\\stage3\\rp03-saved-artifact-runtime-result.json",
+    "source_sha256": "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+    "expected_value": -5,
+    "raw_formula": "='M10'!B16-'M10'!B15",
+    "monthly_detector_target_candidates": {
+      "before": 1,
+      "after": 0
+    }
+  },
+  "overlay": [
+    {
+      "repo_path": "apps/api/app/delivery_api.py",
+      "image_path": "app/app/delivery_api.py",
+      "sha256": "dc645c2c4af6cdebeae3c7251b7ea099b8532496d03ff803d8a4b892866bb15c",
+      "bytes": 16213
+    },
+    {
+      "repo_path": "apps/api/app/delivery_calculation.py",
+      "image_path": "app/app/delivery_calculation.py",
+      "sha256": "80c7588506ed7ccdb7b847422e5c141a4653d501b6cf15195ea8b266c058145c",
+      "bytes": 18771
+    },
+    {
+      "repo_path": "apps/api/app/delivery_execution.py",
+      "image_path": "app/app/delivery_execution.py",
+      "sha256": "d17eaa915a33ce1f4fce11ecb73918fec051f2ac46ad08a933db1cbcb97ba82b",
+      "bytes": 14302
+    },
+    {
+      "repo_path": "apps/api/app/delivery_inputs.py",
+      "image_path": "app/app/delivery_inputs.py",
+      "sha256": "a3ec9a7efa2a309eac3568405d3994f4c50a52177c374236b995cc742393b176",
+      "bytes": 23013
+    },
+    {
+      "repo_path": "apps/api/app/delivery_patch.py",
+      "image_path": "app/app/delivery_patch.py",
+      "sha256": "b9ebb3c91cca13e086b8c5c65ae58c3b4747fb3feeb787f0c52700915970dde9",
+      "bytes": 21179
+    },
+    {
+      "repo_path": "apps/api/app/delivery_patch_reference.json",
+      "image_path": "app/app/delivery_patch_reference.json",
+      "sha256": "5c5c4c69e1d7f49601f0fa13780db7142e9d29964ec7782448fbb829d79d85cf",
+      "bytes": 1932
+    },
+    {
+      "repo_path": "apps/api/app/delivery_plan.py",
+      "image_path": "app/app/delivery_plan.py",
+      "sha256": "b688ae134d4bb5ea81e559553634998554259a0096e1aecc3d0f56d5f3ea6b5b",
+      "bytes": 14131
+    },
+    {
+      "repo_path": "apps/api/app/delivery_reference.json",
+      "image_path": "app/app/delivery_reference.json",
+      "sha256": "1f45a9070cd2f18d8dca4d45ee8e21fc229e2cf77a6ed8cd2d908c009f972710",
+      "bytes": 2866
+    },
+    {
+      "repo_path": "apps/api/app/delivery_rehearsal.py",
+      "image_path": "app/app/delivery_rehearsal.py",
+      "sha256": "1447f72ff0a263a97d6b814bae1c3dae7f3a901661ee0e09588ae0cce17b5ee3",
+      "bytes": 3439
+    },
+    {
+      "repo_path": "apps/api/app/formula_patterns.py",
+      "image_path": "app/app/formula_patterns.py",
+      "sha256": "3f4314d6ef8bb9606bc5207c332869135a0511c1550e37c001c2f7adce46c5ae",
+      "bytes": 51624
+    },
+    {
+      "repo_path": "apps/api/app/repair_rules/monthly_formula.py",
+      "image_path": "app/app/repair_rules/monthly_formula.py",
+      "sha256": "2777227c2375d1e6493aedd10038347ad07d84c85524945523a3cd5b3d9cbd6d",
+      "bytes": 6496
+    },
+    {
+      "repo_path": "apps/api/engine/DeliveryCalc.java",
+      "image_path": "app/engine/DeliveryCalc.java",
+      "sha256": "b66b6af83103029cd5e12f9c1fb1c619430991602c91d2ebd2406275a69cc871",
+      "bytes": 10170
+    },
+    {
+      "repo_path": "apps/api/engine/classes/DeliveryCalc.class",
+      "image_path": "app/engine/classes/DeliveryCalc.class",
+      "sha256": "443eecd6a70f38d9fcb04f289e4fdcb8f05dd069e1eb50b45c1c5a96d00a2c41",
+      "bytes": 13823
+    },
+    {
+      "repo_path": "apps/api/engine/classes/DeliveryCalc$1.class",
+      "image_path": "app/engine/classes/DeliveryCalc$1.class",
+      "sha256": "e137ab9129d9f12910f931b6762b42a9bb7114683c3bf35b8fa2b98eb5a597c0",
+      "bytes": 829
+    },
+    {
+      "repo_path": "apps/api/engine/lib/SparseBitSet-1.3.jar",
+      "image_path": "app/engine/lib/SparseBitSet-1.3.jar",
+      "sha256": "f76b85adb0c00721ae267b7cfde4da7f71d3121cc2160c9fc00c0c89f8c53c8a",
+      "bytes": 25843
+    },
+    {
+      "repo_path": "apps/api/engine/lib/commons-codec-1.20.0.jar",
+      "image_path": "app/engine/lib/commons-codec-1.20.0.jar",
+      "sha256": "6af66595f9f6a7bb58ce66518d6888d40b547c366d2262f06676eee19528ff66",
+      "bytes": 401021
+    },
+    {
+      "repo_path": "apps/api/engine/lib/commons-collections4-4.5.0.jar",
+      "image_path": "app/engine/lib/commons-collections4-4.5.0.jar",
+      "sha256": "00f93263c267be201b8ae521b44a7137271b16688435340bf629db1bac0a5845",
+      "bytes": 898652
+    },
+    {
+      "repo_path": "apps/api/engine/lib/commons-compress-1.28.0.jar",
+      "image_path": "app/engine/lib/commons-compress-1.28.0.jar",
+      "sha256": "e1522945218456f3649a39bc4afd70ce4bd466221519dba7d378f2141a4642ca",
+      "bytes": 1117221
+    },
+    {
+      "repo_path": "apps/api/engine/lib/commons-io-2.21.0.jar",
+      "image_path": "app/engine/lib/commons-io-2.21.0.jar",
+      "sha256": "7d643a2afea8b058b762aa6fb90e5b256f6c729739f8b3784c3370ddc609e88d",
+      "bytes": 585274
+    },
+    {
+      "repo_path": "apps/api/engine/lib/commons-lang3-3.18.0.jar",
+      "image_path": "app/engine/lib/commons-lang3-3.18.0.jar",
+      "sha256": "4eeeae8d20c078abb64b015ec158add383ac581571cddc45c68f0c9ae0230720",
+      "bytes": 702952
+    },
+    {
+      "repo_path": "apps/api/engine/lib/commons-math3-3.6.1.jar",
+      "image_path": "app/engine/lib/commons-math3-3.6.1.jar",
+      "sha256": "1e56d7b058d28b65abd256b8458e3885b674c1d588fa43cd7d1cbb9c7ef2b308",
+      "bytes": 2213560
+    },
+    {
+      "repo_path": "apps/api/engine/lib/curvesapi-1.08.jar",
+      "image_path": "app/engine/lib/curvesapi-1.08.jar",
+      "sha256": "ad95b08b8bbf9d7d17e5e00814898fa23324f32bc5b62f1a37801e6a56ce0079",
+      "bytes": 117159
+    },
+    {
+      "repo_path": "apps/api/engine/lib/log4j-api-2.24.3.jar",
+      "image_path": "app/engine/lib/log4j-api-2.24.3.jar",
+      "sha256": "5b4a0a0cd0e751ded431c162442bdbdd53328d1f8bb2bae5fc1bbeee0f66d80f",
+      "bytes": 348513
+    },
+    {
+      "repo_path": "apps/api/engine/lib/poi-5.5.1.jar",
+      "image_path": "app/engine/lib/poi-5.5.1.jar",
+      "sha256": "6c52e876ca75775a11b56e4b36a7541f682827f56406725fcd87560b792ee3d8",
+      "bytes": 3006527
+    },
+    {
+      "repo_path": "apps/api/engine/lib/poi-ooxml-5.5.1.jar",
+      "image_path": "app/engine/lib/poi-ooxml-5.5.1.jar",
+      "sha256": "bd7be2fdfe3fd2c1684fa813351c2798fd636b44f6236e0674500d4f8ff1c2f9",
+      "bytes": 2052603
+    },
+    {
+      "repo_path": "apps/api/engine/lib/poi-ooxml-lite-5.5.1.jar",
+      "image_path": "app/engine/lib/poi-ooxml-lite-5.5.1.jar",
+      "sha256": "e6e37adeb6d6ee8b40ec491ad955d934d8f99827ab050f105b18286e59b1d9e7",
+      "bytes": 5995475
+    },
+    {
+      "repo_path": "apps/api/engine/lib/xmlbeans-5.3.0.jar",
+      "image_path": "app/engine/lib/xmlbeans-5.3.0.jar",
+      "sha256": "6cc69da3b4d35b83c5e477cd4daba204e44109833e34af2b9a8a2c8788289917",
+      "bytes": 2211661
+    },
+    {
+      "repo_path": "artifacts/synthetic_validation/monthly-repair-flow06/stage3/monthly-rp03-supported-6sheet.xlsx",
+      "image_path": "app/verification/monthly-rp03-supported-6sheet.xlsx",
+      "sha256": "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+      "bytes": 7320
+    },
+    {
+      "repo_path": "artifacts/synthetic_validation/monthly-ux07-release/release-tools/rp03_startup_wrapper.py",
+      "image_path": "app/release_tools/rp03_startup_wrapper.py",
+      "sha256": "ee6e3022ba55726fce86d4deacb5685cbd27bec57af4c1fc6caf0468ab570677",
+      "bytes": 5271
+    }
+  ]
+}

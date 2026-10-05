@@ -1,0 +1,6 @@
+{
+  "job_id": "6c485e8b-4aee-4ab2-9d57-21f4cbccc014",
+  "command": "python -m app.delivery_rehearsal --job-id <isolated synthetic job>",
+  "exit_code": 0,
+  "kind": "existing internal synthetic grant; no payment or change approval"
+}

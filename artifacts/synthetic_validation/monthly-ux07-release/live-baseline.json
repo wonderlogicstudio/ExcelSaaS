@@ -1,0 +1,17 @@
+{
+  "api_revision": "workbookcare-api-beta-00029-dir",
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:6f43addbb68f991ab3cc8c625075e17713865f088a88665f4d339d5ee789d6df",
+  "traffic": [
+    {
+      "percent": 100,
+      "revisionName": "workbookcare-api-beta-00029-dir"
+    }
+  ],
+  "worker_version": "02a4700b-3031-4404-aa87-09f18726594e",
+  "private_iam": true,
+  "iam_sha256": "294ac4fc8b363b4fd1d2b1b4762667b42118c17e4d83b01daa8ca2a5dc0e7342",
+  "spec_sha256": "d41ca2159e0d50fa0bbcfd51d7f5dd4ad1c314431e58ee812fc15dd16656546b",
+  "payment_mode_effective": "OFF",
+  "payment_mode_source": "explicit env or existing Settings defaultOFF",
+  "prior_attempt": "exit1 requiredexplicitOFF although setting absent; defaultOFF verified in config"
+}

@@ -1,0 +1,9 @@
+{
+  "command": [
+    "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+    "C:/Users/JinwonLee/project/DigitalTwin/.tmp/workbookcare-synthetic01/triage_full_batch.py"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.14,
+  "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-triage.log"
+}

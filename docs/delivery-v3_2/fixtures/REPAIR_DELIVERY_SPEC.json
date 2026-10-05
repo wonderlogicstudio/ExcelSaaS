@@ -1,0 +1,65 @@
+{
+  "fixture_kind": "PUBLIC_SYNTHETIC_CONTRACT_EXAMPLE_NOT_PRODUCT_OUTPUT",
+  "profile_ids": [
+    "RP01_NUMERIC_TEXT_FIELD_V1",
+    "RP02_APPROVED_FORMULA_RESTORE_V1"
+  ],
+  "sheet": "매출",
+  "raw_input": {
+    "A7": {
+      "type": "text",
+      "value": "0002"
+    },
+    "C7": {
+      "type": "text",
+      "value": "12000"
+    },
+    "E8": {
+      "type": "blank",
+      "value": null
+    }
+  },
+  "approved_patches": [
+    {
+      "cell": "C7",
+      "before": {
+        "type": "text",
+        "value": "12000"
+      },
+      "after": {
+        "type": "number",
+        "value": 12000
+      },
+      "reason": "금액/단가 필드 확인 후 타입 정규화; 거래ID 미변경"
+    },
+    {
+      "cell": "E8",
+      "before": {
+        "type": "blank",
+        "value": null
+      },
+      "after": {
+        "type": "formula",
+        "value": "=ROUND(B8*C8*(1-D8),0)"
+      },
+      "reason": "고객이 E6 기준수식을 동일업무로 승인한 예시"
+    }
+  ],
+  "expected_values": {
+    "E6": 27000,
+    "E7": 24000,
+    "E8_after": 9500,
+    "E10_before": 51000,
+    "E10_after": 60500,
+    "E10_delta": 9500
+  },
+  "expectation_origin": "직접 산술한 공개 합성 oracle. 실제 Excel/제품 엔진 기준시험 아님",
+  "required_artifacts": [
+    "repaired_workbook",
+    "change_log",
+    "verification_report"
+  ],
+  "formula_reference_excel_verified": false,
+  "product_pipeline_executed": false,
+  "real_payment_executed": false
+}

@@ -1,0 +1,16 @@
+{
+  "operation": "output-only report revision; no rescoring or engine rerun",
+  "source_summary_sha256": "7510879c0a5fe6dfbf1fe43460cecfebd5a65676b17bc81bd1c825ec3c933e76",
+  "frozen_contract_sha256": "5f5b760bd4a41d7c29b4d07f53166f9a283250f4ac002ca18fae987ba5ede838",
+  "scorer_before_sha256": "4384657c7d9946cbdc1eb50afdb9a35f94e4d6a411d7b578f501a0a23d08f0ce",
+  "scorer_after_sha256": "47fe5ac32f44ea2873efd374acca704f306e32509d5e549dff4b437ad3e9138b",
+  "writer_sha256": "bba9b207c230fad83c7066ddfffc12cc5c90b7031859bfaf40482d03e0cdcfcb",
+  "outputs": {
+    "case_results.csv": "97a489daebea2a94023fdd00200cc7b56bb5a49f793b37868f996fcdf8a538c0",
+    "independent-audit.json": "e60b8017159cdadb23cff81dc4a19c2efa383ed07b590696d5c21099d4656f86",
+    "scope_results.csv": "bda8c0db096af26df1eef074bdc17b1dd3533d9dfcba572e7cb8a6bad69ffcf2",
+    "summary.html": "2388355d5552279a1180418d078517f9ae11830a226f028485a8d057d5296476",
+    "summary.json": "7510879c0a5fe6dfbf1fe43460cecfebd5a65676b17bc81bd1c825ec3c933e76",
+    "workbook_results.csv": "b3b47355796f2f49627aaffec7e58ca48fc3afa6342b77ade27a0962dc0077b1"
+  }
+}

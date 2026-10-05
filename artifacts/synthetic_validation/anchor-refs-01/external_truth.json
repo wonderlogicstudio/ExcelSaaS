@@ -1,0 +1,301 @@
+{
+  "scope": "standalone payroll absolute and mixed anchor reference fixture; not a frozen engine evaluation artifact",
+  "validation_claim": "generation validation and independent arithmetic only; Excel recalculation NOT_RUN",
+  "normal": {
+    "workbook_id": "anchor-refs-normal-001",
+    "parent_id": null,
+    "family_id": "F05-payroll-overtime",
+    "scenario_id": "payroll_overtime",
+    "business_domain": "payroll and attendance",
+    "structural_family": "detail_plus_hidden_rates",
+    "split": "train",
+    "kind": "normal",
+    "seed": 170917,
+    "filename": "anchor-refs-normal-001.xlsx",
+    "relative_path": "workbooks/anchor-refs-normal-001.xlsx",
+    "sha256": "f1c655e32886fff1cdc4bf97d6d68c8f0ce12a1337b8f7f3e320d6aa988a5250",
+    "mutation_type": null,
+    "mutation_target": null,
+    "supported_scope": [
+      "vertical formulas in visible detail sheet"
+    ],
+    "exploratory_scope": [
+      "rate policy validation"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "Payroll",
+        "range_ref": "J11:J19",
+        "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "Payroll",
+        "cell": "J11",
+        "formula": "=H11*'Rate Card'!$B11+IF(H11>C$5,(H11-C$5)*'Rate Card'!$B11*$B$5,0)",
+        "semantic_value": 900.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J12",
+        "formula": "=H12*'Rate Card'!$B12+IF(H12>C$5,(H12-C$5)*'Rate Card'!$B12*$B$5,0)",
+        "semantic_value": 3680.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J13",
+        "formula": "=H13*'Rate Card'!$B13+IF(H13>C$5,(H13-C$5)*'Rate Card'!$B13*$B$5,0)",
+        "semantic_value": 1344.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J14",
+        "formula": "=H14*'Rate Card'!$B14+IF(H14>C$5,(H14-C$5)*'Rate Card'!$B14*$B$5,0)",
+        "semantic_value": 1782.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J15",
+        "formula": "=H15*'Rate Card'!$B15+IF(H15>C$5,(H15-C$5)*'Rate Card'!$B15*$B$5,0)",
+        "semantic_value": 2254.0,
+        "role": "normal_exception",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J16",
+        "formula": "=H16*'Rate Card'!$B16+IF(H16>C$5,(H16-C$5)*'Rate Card'!$B16*$B$5,0)",
+        "semantic_value": 576.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J17",
+        "formula": "=H17*'Rate Card'!$B17+IF(H17>C$5,(H17-C$5)*'Rate Card'!$B17*$B$5,0)",
+        "semantic_value": 1025.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J18",
+        "formula": "=H18*'Rate Card'!$B18+IF(H18>C$5,(H18-C$5)*'Rate Card'!$B18*$B$5,0)",
+        "semantic_value": 1508.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J19",
+        "formula": "=H19*'Rate Card'!$B19+IF(H19>C$5,(H19-C$5)*'Rate Card'!$B19*$B$5,0)",
+        "semantic_value": 2025.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J20",
+        "formula": "=SUM(J11:J19)",
+        "semantic_value": null,
+        "role": "subtotal",
+        "supported_by_current_m4": false
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "anchor-refs-normal-001-normal-exception-J15",
+        "kind": "normal_exception",
+        "sheet": "Payroll",
+        "cell": "J15",
+        "rule_code": null,
+        "pattern_subtype": null,
+        "severity": null,
+        "family_id": "F05-payroll-overtime",
+        "mutation_type": null,
+        "notes": "Union overtime rule requires payroll confirmation for this employee row."
+      }
+    ],
+    "generation_checks": {
+      "formula_string_checks": 10,
+      "semantic_arithmetic_checks": 9,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN",
+      "anchor_fixture_target_row": 12,
+      "anchor_fixture_hours": 176,
+      "anchor_fixture_before_expected": 3680.0,
+      "anchor_fixture_after_expected": 3600.0
+    },
+    "mutation_snapshot": null
+  },
+  "mutated": {
+    "workbook_id": "anchor-refs-mutated-001",
+    "parent_id": "anchor-refs-normal-001",
+    "family_id": "F05-payroll-overtime",
+    "scenario_id": "payroll_overtime",
+    "business_domain": "payroll and attendance",
+    "structural_family": "detail_plus_hidden_rates",
+    "split": "train",
+    "kind": "mutated",
+    "seed": 170917,
+    "filename": "anchor-refs-mutated-001.xlsx",
+    "relative_path": "workbooks/anchor-refs-mutated-001.xlsx",
+    "sha256": "e73a7c545cbf68b317176c45618fc0534f5f4c5f711ae63374f9a099c966c67c",
+    "mutation_type": "m4_anchor_reference_shift",
+    "mutation_target": "Payroll!J12",
+    "supported_scope": [
+      "vertical formulas in visible detail sheet"
+    ],
+    "exploratory_scope": [
+      "rate policy validation"
+    ],
+    "normal_regions": [
+      {
+        "sheet": "Payroll",
+        "range_ref": "J11:J19",
+        "notes": "Detail formulas in this region are checked for unexpected findings when supported by the current engine."
+      }
+    ],
+    "formula_cells": [
+      {
+        "sheet": "Payroll",
+        "cell": "J11",
+        "formula": "=H11*'Rate Card'!$B11+IF(H11>C$5,(H11-C$5)*'Rate Card'!$B11*$B$5,0)",
+        "semantic_value": 900.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J13",
+        "formula": "=H13*'Rate Card'!$B13+IF(H13>C$5,(H13-C$5)*'Rate Card'!$B13*$B$5,0)",
+        "semantic_value": 1344.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J14",
+        "formula": "=H14*'Rate Card'!$B14+IF(H14>C$5,(H14-C$5)*'Rate Card'!$B14*$B$5,0)",
+        "semantic_value": 1782.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J15",
+        "formula": "=H15*'Rate Card'!$B15+IF(H15>C$5,(H15-C$5)*'Rate Card'!$B15*$B$5,0)",
+        "semantic_value": 2254.0,
+        "role": "normal_exception",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J16",
+        "formula": "=H16*'Rate Card'!$B16+IF(H16>C$5,(H16-C$5)*'Rate Card'!$B16*$B$5,0)",
+        "semantic_value": 576.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J17",
+        "formula": "=H17*'Rate Card'!$B17+IF(H17>C$5,(H17-C$5)*'Rate Card'!$B17*$B$5,0)",
+        "semantic_value": 1025.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J18",
+        "formula": "=H18*'Rate Card'!$B18+IF(H18>C$5,(H18-C$5)*'Rate Card'!$B18*$B$5,0)",
+        "semantic_value": 1508.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J19",
+        "formula": "=H19*'Rate Card'!$B19+IF(H19>C$5,(H19-C$5)*'Rate Card'!$B19*$B$5,0)",
+        "semantic_value": 2025.0,
+        "role": "detail",
+        "supported_by_current_m4": true
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J20",
+        "formula": "=SUM(J11:J19)",
+        "semantic_value": null,
+        "role": "subtotal",
+        "supported_by_current_m4": false
+      },
+      {
+        "sheet": "Payroll",
+        "cell": "J12",
+        "formula": "=H12*'Rate Card'!$B12+IF(H12>C$5,(H12-C$5)*'Rate Card'!$B12*$B$6,0)",
+        "semantic_value": null,
+        "role": "detail",
+        "supported_by_current_m4": true
+      }
+    ],
+    "expected_findings": [
+      {
+        "expected_id": "anchor-refs-normal-001-normal-exception-J15",
+        "kind": "normal_exception",
+        "sheet": "Payroll",
+        "cell": "J15",
+        "rule_code": null,
+        "pattern_subtype": null,
+        "severity": null,
+        "family_id": "F05-payroll-overtime",
+        "mutation_type": null,
+        "notes": "Union overtime rule requires payroll confirmation for this employee row."
+      },
+      {
+        "expected_id": "anchor-refs-normal-001-anchor-mut",
+        "kind": "m4_candidate",
+        "sheet": "Payroll",
+        "cell": "J12",
+        "rule_code": "FORMULA_PATTERN_OUTLIER",
+        "pattern_subtype": "REFERENCE_CELL_DRIFT",
+        "severity": null,
+        "family_id": "F05-payroll-overtime",
+        "mutation_type": "m4_anchor_reference_shift",
+        "notes": "Anchor changed from $B$5 to $B$6; independent expected value 3680.0 -> 3600.0."
+      }
+    ],
+    "generation_checks": {
+      "formula_string_checks": 10,
+      "semantic_arithmetic_checks": 9,
+      "answer_marker_cells": 0,
+      "excel_recalculation": "NOT_RUN",
+      "anchor_fixture_target_row": 12,
+      "anchor_fixture_hours": 176,
+      "anchor_fixture_before_expected": 3680.0,
+      "anchor_fixture_after_expected": 3600.0,
+      "mutation_changed_target": true,
+      "mutation_target_only_changed": true,
+      "unexpected_changed_cells": [],
+      "non_target_snapshot_preserved": true
+    },
+    "mutation_snapshot": {
+      "sheet": "Payroll",
+      "cell": "J12",
+      "before_value": "=H12*'Rate Card'!$B12+IF(H12>C$5,(H12-C$5)*'Rate Card'!$B12*$B$5,0)",
+      "before_data_type": "f",
+      "after_value": "=H12*'Rate Card'!$B12+IF(H12>C$5,(H12-C$5)*'Rate Card'!$B12*$B$6,0)",
+      "after_data_type": "f",
+      "before_formula": "=H12*'Rate Card'!$B12+IF(H12>C$5,(H12-C$5)*'Rate Card'!$B12*$B$5,0)",
+      "after_formula": "=H12*'Rate Card'!$B12+IF(H12>C$5,(H12-C$5)*'Rate Card'!$B12*$B$6,0)"
+    }
+  }
+}

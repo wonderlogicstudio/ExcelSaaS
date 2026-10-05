@@ -1,0 +1,24 @@
+{
+  "job_id": "51cb2a3f-394a-4dce-9a0e-e80e30b08af4",
+  "files": {
+    "repaired": {
+      "name": "workbookcare_repaired_51cb2a3f-394a-4dce-9a0e-e80e30b08af4.xlsx",
+      "exists": true,
+      "sha256": "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd"
+    },
+    "changes": {
+      "name": "changes_51cb2a3f-394a-4dce-9a0e-e80e30b08af4.xlsx",
+      "exists": false,
+      "sha256": null
+    },
+    "verification": {
+      "name": "verification_51cb2a3f-394a-4dce-9a0e-e80e30b08af4.html",
+      "exists": false,
+      "sha256": null
+    }
+  },
+  "fixed_expected_minus5": "PASS",
+  "source_preserved": "PASS",
+  "prior_native_excel_hash_match": true,
+  "new_native_excel_run": false
+}

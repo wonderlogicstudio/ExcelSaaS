@@ -1,0 +1,71 @@
+{
+  "unit": "MONTHLY-UX07 resume02 guarded release helper correction",
+  "cloud_mutation": false,
+  "product_source_changed": false,
+  "corrected_local_overlay_image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:d2265d9e56756fd240e1ddf93509d9fa096bd6d77acd499caff9d41ab1caa5c9",
+  "pushed": false,
+  "invalid_do_not_push": [
+    "sha256:a088bc14578202bcd3d0e030826d4222428adb082a991b48f25eb72d38748d57",
+    "sha256:e229f7df95435b69e677f5e9758c956cd0c666c739d8673e76f3410744d75b99"
+  ],
+  "overlay_count": 29,
+  "frontend_source_count": 96,
+  "required_layer_paths_present": {
+    "app/app/delivery_plan.py": true,
+    "app/engine/DeliveryCalc.java": true,
+    "app/engine/classes/DeliveryCalc.class": true,
+    "app/engine/classes/DeliveryCalc$1.class": true,
+    "app/verification/monthly-rp03-supported-6sheet.xlsx": true,
+    "app/verification/monthly-ux07-source-freeze.json": true,
+    "app/release_tools/rp03_startup_wrapper.py": true
+  },
+  "blockers_addressed": [
+    "stage uses update-env-vars so baseline env is not cleared",
+    "live derives literal env and valueFrom secret refs from baseline revision in memory and emits set-env-vars/set-secrets",
+    "empty baseline command/args emit explicit reset flags and post-deploy hashes verify reset",
+    "service/revision invariant hashes cover ingress identity secrets resources scaling command args probe env gateway IAM worker access",
+    "push phase performs same-registry upload and docker-content-digest assertion before pushed=true",
+    "stage/proof/live/traffic bind actual revision image sourcefreeze and runtime proof to pushed digest",
+    "frontend source freeze and dist asset freeze checked before web upload with live API/IAM provider reads"
+  ],
+  "commands": [
+    {
+      "cmd": "python artifacts\\synthetic_validation\\monthly-ux07-release\\resume02\\release-tools\\freeze_release_sources.py",
+      "exit": 0,
+      "result": "29 overlay inputs; 96 frontend source files frozen"
+    },
+    {
+      "cmd": "python artifacts\\synthetic_validation\\monthly-ux07-release\\resume02\\release-tools\\build_api_overlay.py",
+      "exit": 0,
+      "result": "corrected local OCI overlay built; pushed=false"
+    },
+    {
+      "cmd": "python -c ast.parse helpers + tar path inspection",
+      "exit": 0,
+      "result": "6 helpers parsed; required /app paths present"
+    }
+  ],
+  "run_order": "artifacts/synthetic_validation/monthly-ux07-release/resume02/release-tools/README_RUN_ORDER.md",
+  "hashes": {
+    "release-tools/__pycache__/release_config.cpython-313.pyc": "5ff98c291fa47ba0148c3c8b3645115fb3b4b5f970a650a6e214a7ad595ea7af",
+    "release-tools/build_api_overlay.py": "c8b059109d5eb720e9b013a788038e8fa112fa01341d34150f7c092fa79d922e",
+    "release-tools/deploy_api_guarded.py": "ab045a1fd30859c11f856e6e02f52a6d944944bfa6c46533379dffc3347f3b67",
+    "release-tools/freeze_release_sources.py": "e4af6fc6bf136c940c03bc1e2a3d7f68f3c14966f8e7fc1381e762163ca59176",
+    "release-tools/output/image/build.json": "6dd0be2cb05a6d9d52fcae8a6a21509235775f8af9983e21b4ec4d784aee2f8f",
+    "release-tools/output/image/config.json": "779eaf9270734f5e1ab0e0321ff383f609b1e1506f44b6263e44abacd1ef30be",
+    "release-tools/output/image/manifest.json": "d2265d9e56756fd240e1ddf93509d9fa096bd6d77acd499caff9d41ab1caa5c9",
+    "release-tools/output/image/registry-layer.tar.gz": "0c3c2048949a0217670f56cbfb639b33dfaf795be8cc489d26271120b7885574",
+    "release-tools/README_RUN_ORDER.md": "c1783ac53d3e3f17db64d92a307eaead8ce0cf34f068f8b901ccd81e29fe9f6e",
+    "release-tools/release_config.py": "0834bfd5f7d3ca659f64ddba985b64491ad9de2fb0b037f83b2cc717da9d085d",
+    "release-tools/release_web6.py": "a3881b0d16470a72d319b3745264debb5804c98cde15f5743812ee1dc1c0f855",
+    "release-tools/rp03_startup_wrapper.py": "ee6e3022ba55726fce86d4deacb5685cbd27bec57af4c1fc6caf0468ab570677",
+    "release-tools/source-freeze.json": "0ef3f19167db83db4b2c5d733dbc7b5e0a442990718d2062d8635277e8191d04"
+  },
+  "not_run": [
+    "cloud mutation phases",
+    "registry push",
+    "traffic switch",
+    "product tests",
+    "Git operations"
+  ]
+}

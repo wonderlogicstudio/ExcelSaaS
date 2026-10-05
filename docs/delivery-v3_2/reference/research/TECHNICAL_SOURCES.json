@@ -1,0 +1,41 @@
+{
+  "checked_on": "2026-09-12",
+  "kind": "PRIMARY_SOURCE_TECHNICAL_CONFIRMATION_NOT_MARKET_RESEARCH",
+  "sources": [
+    {
+      "id": "S1",
+      "publisher": "openpyxl",
+      "title": "Simple formulae",
+      "url": "https://openpyxl.readthedocs.io/en/stable/simple_formulae.html",
+      "use": "수식 평가 기능을 제공하지 않으므로 값 기반 비교와 재계산을 구분한다."
+    },
+    {
+      "id": "S2",
+      "publisher": "OWASP",
+      "title": "API3:2023 Broken Object Property Level Authorization",
+      "url": "https://owasp.org/API-Security/editions/2023/en/0xa3-broken-object-property-level-authorization/",
+      "use": "객체 접근과 응답 속성별 권한 검사를 적용한다."
+    },
+    {
+      "id": "S3",
+      "publisher": "토스페이먼츠",
+      "title": "코어 API — 결제 승인·조회·취소",
+      "url": "https://docs.tosspayments.com/reference",
+      "use": "서버의 orderId/amount/paymentKey를 공식 승인·조회와 연결한다."
+    },
+    {
+      "id": "S4",
+      "publisher": "OWASP",
+      "title": "CSV Injection",
+      "url": "https://owasp.org/www-community/attacks/CSV_Injection",
+      "use": "비신뢰 텍스트의 CSV 수식 해석 위험을 시험한다."
+    },
+    {
+      "id": "S5",
+      "publisher": "Google Cloud",
+      "title": "Configure request timeout for services",
+      "url": "https://docs.cloud.google.com/run/docs/configuring/request-timeout",
+      "use": "HTTP timeout과 작업 코드 종료가 별개다."
+    }
+  ]
+}

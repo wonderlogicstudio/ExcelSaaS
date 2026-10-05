@@ -1,3 +1,15 @@
+## 2026-10-05 GITHUB-CHECKPOINT: owner-authorized product snapshot
+
+Owner requested commit/push of the original checkout, existing operating records and synthetic verification evidence. No implementation, model trial or deployment is resumed. Scope/exclusions: docs/delivery-v3_2/reviews/GITHUB-CHECKPOINT-20261005.md. Prior milestone records and STOP boundaries remain below.
+
+---
+
+## 2026-09-27 LOCAL-LLM-PREP01: preparation documents ready; STOP
+
+Owner authorized preparation for local LLM quality/commercial expansion. This bounded documentation unit is complete: product flow, proposal/independent-validation/execution boundaries, evaluation protocol and next work order prepared. Root/PL only under EFFICIENCY-01; independent review NOT_RUN. Installation, downloads, product implementation, fixture/oracle freeze, model tests, commit/push/deploy NOT_RUN. Existing dirty work and history preserved. Next LOCAL-LLM-FIXTURE01 is PROPOSED, not approved. [Design](local-llm/00_DESIGN_KO.md) / [Evaluation](local-llm/01_EVALUATION_CONTRACT_KO.md) / [Next order](local-llm/02_NEXT_WORK_ORDER_KO.md) / [Preparation review](local-llm/03_PREPARATION_REVIEW_KO.md).
+
+---
+
 ## 2026-09-27 VERIFIED-CHANGES-RELEASE: committed, pushed, beta verified
 
 Verified source/tests/oracles committed and pushed as f0e1f7f. Latest frontend deployed to Worker4538ee8f-2561-40f6-963f-d37855e50e02; API00037 unchanged. Hosted build/upload/deploy exit0; independent review PASS; bindings/private IAM/9 Access routes preserved. Actual beta AR Aging structure0/formula1/H16 current+4neighbor evidence and hidden default manual entry PASS. Existing settlement sample structure8/formula3 and numeric8 auto-selected PASS. Reused unchanged full512/M4exact36/native3profiles and local mobile evidence; no duplicate full tests/API deploy. Prior three-artifact receipt and raw guard native fixture limitations remain. Unrelated dirty files preserved. STOP. See [release review](delivery-v3_2/reviews/UNSUPPORTED-PROPOSAL-UX01-RELEASE.md).

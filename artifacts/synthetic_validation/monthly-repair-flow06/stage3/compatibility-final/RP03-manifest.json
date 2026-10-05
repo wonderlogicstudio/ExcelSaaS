@@ -1,0 +1,160 @@
+{
+  "product_id": "APPROVED_REPAIR",
+  "job_id": "3f8bb312-032e-447e-a9e5-b9398c573e1c",
+  "sku": "RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1",
+  "source_hash": "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+  "output_hash": "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+  "plan_digest": "df478d0b1a741f971858f9a0e52aa81c0725d398bcfd5f29ca720c067050a11d",
+  "engine_version": "apache-poi-5.5.1-adapter-v1",
+  "engine_fingerprint": "958c9d5aa429b618ee4277b67604c1b516c3d34716a97903b78b6e8a9929cc65",
+  "profile_version": "RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1",
+  "report_version": "repair-reports-v1",
+  "created_at": 1790086420.0533621,
+  "expires_at": 1790087316.359031,
+  "verification": {
+    "checks": [
+      {
+        "code": "SOURCE_IMMUTABLE",
+        "status": "PASS"
+      },
+      {
+        "code": "EXACT_APPROVED_PATCH",
+        "status": "PASS"
+      },
+      {
+        "code": "UNTOUCHED_MEMBERS",
+        "status": "PASS"
+      },
+      {
+        "code": "NON_TARGET_XML_AND_STYLES",
+        "status": "PASS"
+      },
+      {
+        "code": "TYPED_FORMULA_CACHES",
+        "status": "PASS"
+      },
+      {
+        "code": "WHOLE_WORKBOOK_POST_CALCULATION",
+        "status": "PASS"
+      },
+      {
+        "code": "NO_NEW_CALCULATION_ERRORS",
+        "status": "PASS"
+      },
+      {
+        "code": "NO_NEW_STATIC_FINDINGS",
+        "status": "PASS"
+      },
+      {
+        "code": "FORMULA_AUDIT_COMPLETED",
+        "status": "PASS"
+      },
+      {
+        "code": "NO_NEW_FORMULA_CANDIDATES",
+        "status": "PASS"
+      },
+      {
+        "code": "TARGET_FORMULA_CANDIDATES_RESOLVED",
+        "status": "PASS"
+      }
+    ],
+    "source_hash": "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+    "output_hash": "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+    "plan_digest": "df478d0b1a741f971858f9a0e52aa81c0725d398bcfd5f29ca720c067050a11d",
+    "patch_count": 1,
+    "untouched_member_count": 12,
+    "engine_version": "apache-poi-5.5.1-adapter-v1",
+    "static_scanner_version": "0.1.3",
+    "formula_audit_rule_set_version": "2026.09.5",
+    "static_before": 0,
+    "static_remaining": 0,
+    "static_resolved": 0,
+    "formula_candidates_before": 1,
+    "formula_candidates_remaining": 0,
+    "formula_candidates_resolved": 1,
+    "detectors": {
+      "static": {
+        "before": [],
+        "remaining": [],
+        "resolved": [],
+        "new": [],
+        "target_before": [],
+        "target_remaining": []
+      },
+      "formula": {
+        "before": [
+          {
+            "rule_code": "FORMULA_PATTERN_OUTLIER",
+            "sheet": "Budget",
+            "cell": "N18",
+            "pattern_subtype": "REFERENCE_SHEET_DRIFT"
+          }
+        ],
+        "remaining": [],
+        "resolved": [
+          {
+            "rule_code": "FORMULA_PATTERN_OUTLIER",
+            "sheet": "Budget",
+            "cell": "N18",
+            "pattern_subtype": "REFERENCE_SHEET_DRIFT"
+          }
+        ],
+        "new": [],
+        "target_before": [
+          {
+            "rule_code": "FORMULA_PATTERN_OUTLIER",
+            "sheet": "Budget",
+            "cell": "N18",
+            "pattern_subtype": "REFERENCE_SHEET_DRIFT"
+          }
+        ],
+        "target_remaining": []
+      },
+      "static_scanner_version": "0.1.3",
+      "formula_audit_rule_set_version": "2026.09.5",
+      "formula_audit_before_status": "COMPLETED",
+      "formula_audit_after_status": "COMPLETED",
+      "formula_audit_before_limitations": [
+        "수식 계산 결과, 업무 규칙, 의도된 예외 계산은 확인하지 않았습니다.",
+        "지원하는 A1 참조 수식의 제한된 주변 패턴만 비교했습니다.",
+        "수정 수식 생성·적용이나 자동 수정 가능 여부는 제공하지 않습니다."
+      ],
+      "formula_audit_after_limitations": [
+        "수식 계산 결과, 업무 규칙, 의도된 예외 계산은 확인하지 않았습니다.",
+        "지원하는 A1 참조 수식의 제한된 주변 패턴만 비교했습니다.",
+        "수정 수식 생성·적용이나 자동 수정 가능 여부는 제공하지 않습니다."
+      ],
+      "formula_comparison_status": "COMPLETED"
+    },
+    "coverage": {
+      "scope": "WHOLE_WORKBOOK",
+      "formula_count": 15,
+      "combinations": [
+        "MONTHLY_DIRECT_REFERENCE",
+        "MONTHLY_SAME_MONTH_SUBTRACT"
+      ],
+      "registry_version": "integer-repair-combinations-v1"
+    },
+    "business_truth_guaranteed": false
+  },
+  "files": {
+    "REPAIRED_XLSX": {
+      "name": "workbookcare_repaired_3f8bb312-032e-447e-a9e5-b9398c573e1c.xlsx",
+      "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "sha256": "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+      "bytes": 7463
+    },
+    "CHANGES_XLSX": {
+      "name": "changes_3f8bb312-032e-447e-a9e5-b9398c573e1c.xlsx",
+      "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "sha256": "ea46fa8b07fabf306c7fb6426695f151a36d3fa1fb762042a10b88d53c8c82e2",
+      "bytes": 10069
+    },
+    "VERIFICATION_HTML": {
+      "name": "verification_3f8bb312-032e-447e-a9e5-b9398c573e1c.html",
+      "mime": "text/html;charset=utf-8",
+      "sha256": "59c686f9a46ed44ef1da339fc3aef0b7d8b4618564aee451c7beef7c41d2fa30",
+      "bytes": 5245
+    }
+  }
+}

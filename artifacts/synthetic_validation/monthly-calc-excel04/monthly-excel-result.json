@@ -1,0 +1,21 @@
+﻿{
+    "status":  "PASS",
+    "kind":  "REDUCED_MONTHLY_INTERNAL_EXCEL_COM_CONTROL",
+    "excel_version":  "16.0",
+    "excel_build":  20326,
+    "source":  "monthly-repair-spec01 acceptance oracle case.after_formula/after_value/derivation",
+    "formula":  "=\u0027M10\u0027!B16-\u0027M10\u0027!B15",
+    "operands":  {
+                     "M10!B16":  1001,
+                     "M10!B15":  1006
+                 },
+    "expected":  {
+                     "type":  "number",
+                     "value":  -5
+                 },
+    "actual":  {
+                   "type":  "number",
+                   "value":  -5
+               },
+    "note":  "Reduced two-sheet internal calculation control; not a supported full 13-sheet fixture run."
+}

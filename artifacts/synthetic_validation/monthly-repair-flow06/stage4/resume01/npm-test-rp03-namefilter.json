@@ -1,0 +1,6 @@
+﻿{
+    "command":  "npm.cmd run test -- ProposalFlow -t \"monthly|RP03|before_formula\"",
+    "exit_code":  255,
+    "output":  "artifacts/synthetic_validation/monthly-repair-flow06/stage4/resume01/npm-test-rp03-namefilter.txt",
+    "timestamp":  "2026-09-22T23:54:21.2071099+09:00"
+}

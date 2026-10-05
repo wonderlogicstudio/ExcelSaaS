@@ -1,0 +1,11 @@
+{
+  "env_exact_equal": false,
+  "env_entry_count_before": 9,
+  "env_entry_count_after": 2,
+  "runtime_verify_before": "false",
+  "runtime_verify_after": null,
+  "command_equal": true,
+  "args_equal": true,
+  "probe_equal": true,
+  "resources_equal": true
+}

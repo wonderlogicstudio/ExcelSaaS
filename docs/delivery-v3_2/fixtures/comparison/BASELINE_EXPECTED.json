@@ -1,0 +1,141 @@
+{
+  "artifact_kind": "PUBLIC_SYNTHETIC_CONTRACT_EXAMPLE_NOT_PRODUCTION",
+  "summary": {
+    "counts": {
+      "MATCHED": 2,
+      "AMOUNT_DIFF": 1,
+      "ONLY_A": 1,
+      "ONLY_B": 1,
+      "AMBIGUOUS": 1,
+      "INPUT_ERROR": 2
+    },
+    "input_rows": {
+      "A": 8,
+      "B": 6
+    },
+    "known_amount_totals": {
+      "A": "47900",
+      "B": "51000"
+    },
+    "uncompared_known_amounts": {
+      "A": "5900",
+      "B": "6000"
+    },
+    "unknown_amount_row_counts": {
+      "A": 1,
+      "B": 0
+    },
+    "rows_preserved": true,
+    "known_amount_conservation": true,
+    "whole_ledger_correctness_verified": false
+  },
+  "records": [
+    {
+      "key": null,
+      "status": "INPUT_ERROR",
+      "reason": "INVALID_KEY",
+      "A": [
+        6
+      ],
+      "B": [],
+      "amount_A": null,
+      "amount_B": null,
+      "delta": null
+    },
+    {
+      "key": "0001",
+      "status": "MATCHED",
+      "reason": null,
+      "A": [
+        1
+      ],
+      "B": [
+        1
+      ],
+      "amount_A": "10000",
+      "amount_B": "10000",
+      "delta": "0"
+    },
+    {
+      "key": "0002",
+      "status": "AMOUNT_DIFF",
+      "reason": null,
+      "A": [
+        2
+      ],
+      "B": [
+        2
+      ],
+      "amount_A": "25000",
+      "amount_B": "27000",
+      "delta": "-2000"
+    },
+    {
+      "key": "0003",
+      "status": "ONLY_A",
+      "reason": null,
+      "A": [
+        3
+      ],
+      "B": [],
+      "amount_A": "7000",
+      "amount_B": null,
+      "delta": null
+    },
+    {
+      "key": "0004",
+      "status": "AMBIGUOUS",
+      "reason": "DUPLICATE_KEY",
+      "A": [
+        4,
+        5
+      ],
+      "B": [
+        4
+      ],
+      "amount_A": null,
+      "amount_B": "5000",
+      "delta": null
+    },
+    {
+      "key": "0005",
+      "status": "ONLY_B",
+      "reason": null,
+      "A": [],
+      "B": [
+        3
+      ],
+      "amount_A": null,
+      "amount_B": "8000",
+      "delta": null
+    },
+    {
+      "key": "0006",
+      "status": "MATCHED",
+      "reason": null,
+      "A": [
+        7
+      ],
+      "B": [
+        5
+      ],
+      "amount_A": "0",
+      "amount_B": "0",
+      "delta": "0"
+    },
+    {
+      "key": "0007",
+      "status": "INPUT_ERROR",
+      "reason": "INVALID_AMOUNT",
+      "A": [
+        8
+      ],
+      "B": [
+        6
+      ],
+      "amount_A": null,
+      "amount_B": "1000",
+      "delta": null
+    }
+  ]
+}

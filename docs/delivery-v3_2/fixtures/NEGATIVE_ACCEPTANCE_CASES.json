@@ -1,0 +1,194 @@
+[
+  {
+    "id": "N01",
+    "scenario": "진단 확인함만 선택",
+    "condition": "approval 없음",
+    "expected": "수정 실행 거부"
+  },
+  {
+    "id": "N02",
+    "scenario": "결제만 완료",
+    "condition": "approval 없음",
+    "expected": "WAITING_APPROVAL"
+  },
+  {
+    "id": "N03",
+    "scenario": "비교 사용권으로 수정 호출",
+    "condition": "SKU 불일치",
+    "expected": "실행/다운로드 거부"
+  },
+  {
+    "id": "N04",
+    "scenario": "기준수식 변경 후 과거 승인",
+    "condition": "plan mismatch",
+    "expected": "재계획/재승인"
+  },
+  {
+    "id": "N05",
+    "scenario": "원본 교체 후 과거 승인",
+    "condition": "input mismatch",
+    "expected": "재preflight/재승인"
+  },
+  {
+    "id": "N06",
+    "scenario": "고객이 target 일부만 선택",
+    "condition": "subset 변화",
+    "expected": "전체영향 재계산 후 새digest 승인"
+  },
+  {
+    "id": "N07",
+    "scenario": "승인 만료 뒤 실행",
+    "condition": "expired approval",
+    "expected": "실행 거부"
+  },
+  {
+    "id": "N08",
+    "scenario": "유효승인으로 완료 후 승인시각 만료",
+    "condition": "납품권 유효",
+    "expected": "다운로드 허용; 새수정 실행은 금지"
+  },
+  {
+    "id": "N09",
+    "scenario": "수정 0개",
+    "condition": "empty patch",
+    "expected": "quote/실행 불가"
+  },
+  {
+    "id": "N10",
+    "scenario": "ID 00123",
+    "condition": "식별자",
+    "expected": "RP01 거부"
+  },
+  {
+    "id": "N11",
+    "scenario": "빈칸/불명 금액",
+    "condition": "unknown",
+    "expected": "0으로 변환 금지"
+  },
+  {
+    "id": "N12",
+    "scenario": "공백문자열 target",
+    "condition": "진짜 빈셀 아님",
+    "expected": "RP02 거부"
+  },
+  {
+    "id": "N13",
+    "scenario": "IFERROR안의 미지원 함수",
+    "condition": "engine unsupported",
+    "expected": "0 성공값으로 숨기지 않음"
+  },
+  {
+    "id": "N14",
+    "scenario": "수식 계산 timeout",
+    "condition": "engine timeout",
+    "expected": "계산 실패·납품 차단"
+  },
+  {
+    "id": "N15",
+    "scenario": "shared string를 일괄변경",
+    "condition": "다른 셀 변형",
+    "expected": "후검증 FAIL"
+  },
+  {
+    "id": "N16",
+    "scenario": "서식/차트/확장 part 손실",
+    "condition": "보존 실패",
+    "expected": "QUARANTINED"
+  },
+  {
+    "id": "N17",
+    "scenario": "수정본만 성공",
+    "condition": "changes/report 없음",
+    "expected": "납품 성공 차단"
+  },
+  {
+    "id": "N18",
+    "scenario": "보고서만 생성",
+    "condition": "수정본 없음",
+    "expected": "수정 주문 성공 차단"
+  },
+  {
+    "id": "N19",
+    "scenario": "세 파일의 plan/hash 불일치",
+    "condition": "binding mismatch",
+    "expected": "게시 차단"
+  },
+  {
+    "id": "N20",
+    "scenario": "한 patch 실패",
+    "condition": "부분성공",
+    "expected": "전체 승인 묶음 납품 차단"
+  },
+  {
+    "id": "N21",
+    "scenario": "refund 후 늦은worker 완료",
+    "condition": "publication fence",
+    "expected": "게시/다운로드 차단"
+  },
+  {
+    "id": "N22",
+    "scenario": "중복클릭/웹훅",
+    "condition": "같은 idempotency",
+    "expected": "중복 과금/권리/납품 없음"
+  },
+  {
+    "id": "N23",
+    "scenario": "결제응답 유실",
+    "condition": "payment unknown",
+    "expected": "조회 복구, 새과금 금지"
+  },
+  {
+    "id": "N24",
+    "scenario": "브라우저 종료",
+    "condition": "owner 재인증",
+    "expected": "같은 주문/파일 재수령"
+  },
+  {
+    "id": "N25",
+    "scenario": "output 만료",
+    "condition": "artifact expired",
+    "expected": "안내·재생성/보상 정책"
+  },
+  {
+    "id": "N26",
+    "scenario": "다음달 새파일",
+    "condition": "새 input",
+    "expected": "새 작업/견적/승인"
+  },
+  {
+    "id": "N27",
+    "scenario": "B관측값을 정답으로 덮어쓰기",
+    "condition": "comparison",
+    "expected": "수정 경로 시작 금지"
+  },
+  {
+    "id": "N28",
+    "scenario": "고객 변경내역에 수식 필요",
+    "condition": "private artifact",
+    "expected": "owner권한으로 제공; 로그금지"
+  },
+  {
+    "id": "N29",
+    "scenario": "미결제 html bundle에 raw plan",
+    "condition": "UI blur",
+    "expected": "보안 실패"
+  },
+  {
+    "id": "N30",
+    "scenario": "안전한 예시만 통과",
+    "condition": "Excel reference 미실행",
+    "expected": "프로덕션 지원 주장 금지"
+  },
+  {
+    "id": "N31",
+    "scenario": "direct storage URL",
+    "condition": "owner/권리없음",
+    "expected": "거부"
+  },
+  {
+    "id": "N32",
+    "scenario": "readonly styles compare",
+    "condition": "approved part allowlist",
+    "expected": "기술 캐시변경과 업무변경을 분리"
+  }
+]

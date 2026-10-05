@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe",
+    "-m",
+    "pytest",
+    "tools/synthetic_validation/tests/test_diversity_batch.py",
+    "tools/synthetic_validation/tests/test_korean_sheet_refs.py",
+    "tools/synthetic_validation/tests/test_anchor_refs.py",
+    "tools/synthetic_validation/tests/test_scorer.py::GenerationTests::test_generated_normal_tamper_is_rejected",
+    "-q"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 2.29,
+  "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-targeted-tests.log"
+}

@@ -1,0 +1,18 @@
+﻿{
+    "status":  "register_duplicate_correction_and_runner_prepared",
+    "no_bootstrap_native_register_executed":  true,
+    "duplicate_rejection":  "proved duplicate inputs rows reject before reference registration",
+    "runner_prepared":  "artifacts/synthetic_validation/monthly-repair-flow06/stage3/rp03_saved_artifact_runtime.py",
+    "runner_py_compile_exit":  0,
+    "isolated_commands_do_not_execute_until_after_native_registration":  [
+                                                                             "python scripts/verify_delivery_patch_compatibility.py --stage d08 --output-dir artifacts/synthetic_validation/monthly-repair-flow06/stage3/compatibility-final",
+                                                                             "powershell -ExecutionPolicy Bypass -File scripts/verify_delivery_output_excel.ps1 -Stage d08 -Directory ../../synthetic_validation/monthly-repair-flow06/stage3/compatibility-final",
+                                                                             "python scripts/register_delivery_patch_reference.py --stage d08 --evidence-dir artifacts/synthetic_validation/monthly-repair-flow06/stage3/compatibility-final",
+                                                                             "python artifacts/synthetic_validation/monthly-repair-flow06/stage3/rp03_saved_artifact_runtime.py"
+                                                                         ],
+    "source_hashes":  {
+                          "artifacts/synthetic_validation/monthly-repair-flow06/stage3/rp03_saved_artifact_runtime.py":  "98b6b57bc249ea421ba824cd7faed81b0456a5214ad34c3450fffd80ae84c534",
+                          "scripts/register_delivery_patch_reference.py":  "ea82d5ef87b3931ff998376bfe9530ece34f4bf3497a22d6c46674d9c598c1b3",
+                          "artifacts/synthetic_validation/monthly-repair-flow06/stage3/containment/prove_register_duplicate_rejects.py":  "9da6562ed5c6b0bdb257aef9ac952dc13fbc0092371d07feedc89434d04053b1"
+                      }
+}

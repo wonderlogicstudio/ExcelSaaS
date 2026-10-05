@@ -1,0 +1,40 @@
+{
+  "latestCreated": "workbookcare-api-beta-00032-xic",
+  "latestReady": "workbookcare-api-beta-00032-xic",
+  "traffic": [
+    {
+      "revision": "workbookcare-api-beta-00029-dir",
+      "percent": 100,
+      "tag": null
+    },
+    {
+      "revision": "workbookcare-api-beta-00031-wes",
+      "percent": null,
+      "tag": "ux07-rp03"
+    },
+    {
+      "revision": "workbookcare-api-beta-00032-xic",
+      "percent": null,
+      "tag": "ux07-live"
+    }
+  ],
+  "command": [],
+  "args": [],
+  "conditions": [
+    {
+      "type": "Ready",
+      "status": "False",
+      "reason": "HealthCheckContainerError"
+    },
+    {
+      "type": "ConfigurationsReady",
+      "status": "False",
+      "reason": "HealthCheckContainerError"
+    },
+    {
+      "type": "RoutesReady",
+      "status": "False",
+      "reason": "HealthCheckContainerError"
+    }
+  ]
+}

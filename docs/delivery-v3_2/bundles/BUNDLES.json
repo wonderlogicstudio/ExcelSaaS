@@ -1,0 +1,273 @@
+[
+  {
+    "id": "D01",
+    "title": "상품·산출물 경계와 기존 진단 UX 통합",
+    "deps": [],
+    "scope": "공통",
+    "reads": [
+      "01_PRODUCT_AND_SCOPE.md",
+      "contracts/UX_AND_MENU.md"
+    ],
+    "goal": "고객이 무료 진단, 비교 보고서, 승인된 수정본의 차이를 화면에서 이해하고 기존 결과 기능이 유지되게 한다.",
+    "work": [
+      "현행 코드/리뷰와 L01~L08 진도를 한 번 대조하고 acceptance별 재사용 근거를 남긴다. 전체 과거 문서 재독이나 새 초기화 금지.",
+      "기존 catalog/API response 타입을 재사용하여 product_id, capability status, deliverable kinds, includes_repaired_workbook를 구분한다. 원격 catalog의 PLANNED를 구현 없이 AVAILABLE로 바꾸지 않는다.",
+      "무료·대사·수정 상품의 제목/범위/받는 파일/제외/다음 행동을 기존 화면에 반영한다. 미구현 수정은 명확히 준비 중이며 결제 불가다.",
+      "기존 L01의 전체/상세/생략/필터 수, 재검사 completeness, CSV 수식해석 방어와 그룹/전체표/모바일을 재사용하고 실제 남은 결함만 수정한다.",
+      "그룹 확인과 변경승인 UI를 분리하고 진단 상태를 approval 데이터로 매핑하지 않는 회귀시험을 만든다."
+    ],
+    "tests": [
+      "상품 카드·API·CSV의 산출물 명칭 일치",
+      "미구현 수정 상품 구매 불가",
+      "그룹화 전후 leaf/score/CSV 불변",
+      "세분화된 개수/부분검사/필터0건 안내",
+      "다른 기능 progress 불변; UI keyboard/mobile"
+    ],
+    "owner": [
+      "무료 결과의 위치를 찾는다.",
+      "비교에는 수정본이 없고 수정 패키지에는 세 파일이 있는지 읽는다.",
+      "준비 중 기능이 구매되지 않는지 확인한다."
+    ],
+    "notdo": "실제 파일수정·계산엔진·PG·운영 배포·새 규칙 추가."
+  },
+  {
+    "id": "D02",
+    "title": "한 파일 수정 적합성·업무 확인·불변 입력",
+    "deps": [
+      "D01"
+    ],
+    "scope": "공통·수정",
+    "reads": [
+      "contracts/REPAIR_ELIGIBILITY.md",
+      "contracts/SECURITY_OPERATIONS.md"
+    ],
+    "goal": "지원 안 되는 파일/의도를 결제 전에 구분하고 수정 가능한 정확한 원본·필드·앵커·대상 버전을 고정한다.",
+    "work": [
+      "기존 인증·작업·R2/DB·파일 검증을 재사용한다. 새 durable state가 필요하면 local adapter부터 구현하고 운영 비용 승인은 별도로 남긴다.",
+      "한 파일 수정용 input/preflight/job와 owner binding을 추가한다. 원본 hash/inventory와 정책 버전·선택 위치를 저장한다. 원본 overwrite API 금지.",
+      "RP01은 사용자 확인된 금액/수량 필드, RP02는 기준수식·빈 target·동일업무 적용 확인을 받는다. 후보가 0이면 수정 quote 불가다.",
+      "지원 파일·수식·정밀도·지역 형식·매크로/외부 연결·target 종류·whole workbook 계산 coverage를 fail-closed로 검사한다. D03의 계산 프로필 증거가 아직 없으면 PRELIMINARY_ONLY/UNSUPPORTED로 남기고 수정 가능·견적 가능으로 표시하지 않는다. 이후 D03 검증 결과를 이 gate에 연결한다.",
+      "기존 비교 input과 동일 저장/검증 서비스를 재사용하되 input 목적과 상품 소유권을 분리한다. TTL/취소/미구매 projection을 연결한다."
+    ],
+    "tests": [
+      "owner 위조/원본 바꿔치기/만료/동시 업데이트 거부",
+      "ID 00123·비용12원·날짜·빈값·초과정밀도 RP01 거부",
+      "진짜 blank와 빈문자열/formula/상수 구분",
+      "지원 안 되는 part·외부 함수·동적참조 거부",
+      "정책/기준수식 미확인과 NO_ELIGIBLE_CHANGES 결제 차단"
+    ],
+    "owner": [
+      "원본 한 파일로 수정 경로에 들어간다.",
+      "금액열과 ID열의 처리 차이를 본다.",
+      "수정 불가 이유와 다음 준비 행동을 확인한다."
+    ],
+    "notdo": "미지원 프로필 우회·업무정답 추정·실고객 업로드·자동원본 변경."
+  },
+  {
+    "id": "D03",
+    "title": "지원 복합 수식 계산·미리보기·불변 수정계획",
+    "deps": [
+      "D02"
+    ],
+    "scope": "수정",
+    "reads": [
+      "contracts/CALCULATION_AND_PLAN.md",
+      "contracts/REPAIR_ELIGIBILITY.md"
+    ],
+    "goal": "RP01/RP02의 정확한 before/after와 영향을 실제 계산 및 독립 fixture로 검증하고 승인할 plan을 고정한다.",
+    "work": [
+      "기존 CF/M6 parser·dependency graph·calc adapter를 우선 재사용한다. 없으면 제한된 evaluator adapter를 격리 환경에 구현하고 버전/함수조합 registry를 만든다.",
+      "RP01 typed conversion 및 RP02 AST/참조 번역으로 exact patch proposal을 생성한다. 원본은 변경하지 않고 별도 in-memory/scratch evaluation copy에서 계획을 시험한다.",
+      "고정된 synthetic policy oracle와 타깃 Excel reference를 함께 검증한다. Excel 실행근거 없으면 해당 체크 NOT_RUN이며 공개 수정 차단; 나머지 구현을 마무리한다.",
+      "unsupported/time/resource failure와 Excel semantic error를 분리한다. 미지원/실패를 IFERROR의 0으로 처리하지 않는다.",
+      "입력·정책·engine·template·선택patch·expected impact를 canonical plan digest로 결합하고, paid-only 상세 projection과 무료 범위요약을 구현한다.",
+      "전체 선택 집합을 함께 계산하며 subset 선택마다 예상영향/plan을 다시 만든다. 폼의 기준 확인은 execution 승인으로 사용하지 않는다."
+    ],
+    "tests": [
+      "SUM/ROUND 및 IF·AND·ISNUMBER·ROUND 등 검증된 중첩 조합",
+      "절대/상대/혼합참조; 불연속 targets; 누락 vs 공백",
+      "typed errors/IFERROR(engine failure) 차단",
+      "선택·입력·engine 변경 시 digest 변경",
+      "독립 예상값·변경 영향·cache!=calc 분리",
+      "hard timeout/kill/scratch cleanup"
+    ],
+    "owner": [
+      "한 셀의 현재/변경 수식과 기대 영향을 읽는다.",
+      "기준을 바꾸면 계획이 다시 만들어지는지 본다.",
+      "미지원 조합이 계산 0으로 표시되지 않는지 본다."
+    ],
+    "notdo": "전 함수 구현·무조건 IF 리팩터링·제품 납품본 발급·live PG."
+  },
+  {
+    "id": "D04",
+    "title": "승인된 사본 수정·후검증·세 파일 납품",
+    "deps": [
+      "D03"
+    ],
+    "scope": "수정",
+    "reads": [
+      "contracts/PATCH_AND_VALIDATION.md",
+      "02_CUSTOMER_OUTPUTS.md"
+    ],
+    "goal": "범위가 검증된 계획을 별도 사본에만 적용하고 실제 수정본·변경내역·후검증을 하나의 검증된 패키지로 만든다.",
+    "work": [
+      "production에서 발급 불가한 내부 synthetic grant/approval fixture로 엔진을 검증한다. 현재 API의 실제 결제/승인을 우회하는 공개 테스트 토글 금지.",
+      "지원 inventory의 최소 patch writer와 비대상 member/셀/서식 검증을 구현한다. 원본 storage key와 수정 출력 key를 분리한다.",
+      "필요 cache/계산 관계 변경을 사전 계획한 allowlist로 처리하고 계산용 engine save본을 검증 없이 납품하지 않는다.",
+      "원본불변·patch 동등·실제 후계산·참조·새 오류·policy expected 및 원/변경부 보존을 수행한다. 검증 실패는 quarantine다.",
+      "수정본.xlsx, changes.xlsx, verification.html, manifest를 같은 source/plan/output hash로 결합해 원자적으로 게시한다. 고객용 changes의 민감정보를 운영 로그에 내지 않는다.",
+      "재시도·동시worker·취소 fence·누락 report·부분성공에서 정상 납품 차단을 구현한다. 기존 artifact/다운로드 기능을 재사용한다."
+    ],
+    "tests": [
+      "RP01 한 타입변환 + RP02 실제 빈수식 복원",
+      "source hash 동일·target set 정확·untouched cells/styles 동일",
+      "금지 part/차트·확장/서명 등 unsupported 거부",
+      "필수 파일 하나 누락시 READY 금지",
+      "calc failure/unauthorized side effect/partial patch quarantine",
+      "late completion after revoke·중복 실행 하나의 logical delivery"
+    ],
+    "owner": [
+      "별도 수정본을 Excel에서 연다.",
+      "변경내역과 실제 셀을 대조한다.",
+      "재검증 범위·원본 불변·실패 차단을 확인한다."
+    ],
+    "notdo": "원본 overwrite·실고객 납품·미검증 파일 게시·3파일 대신 보고서로 성공 대체."
+  },
+  {
+    "id": "D05",
+    "title": "비교 상품 계승·검토 보고서 완결",
+    "deps": [
+      "D02"
+    ],
+    "scope": "비교 독립 분기",
+    "reads": [
+      "contracts/COMPARISON_AND_BUSINESS.md",
+      "reference/v31_contracts/INPUT_ENGINE.md"
+    ],
+    "goal": "이미 진행한 두 파일 비교 상품을 보존하며 수정 상품과 혼동되지 않는 완전한 보고서 경로를 유지한다.",
+    "work": [
+      "기존 L02/L03/L04 비교 파서·정책·엔진·report를 재사용하고 미완료 acceptance만 구현한다. 원래 exact-key KRW 정수 profile 유지.",
+      "자료오류/중복/한쪽만/금액차이의 판정 순서와 모든 원천 행 보존·미상 금액 분리를 검증한다.",
+      "comparison_report.xlsx와 comparison_verification.html을 생성/검증하고 수정본이 아니라는 상품·receipt 문구를 일치시킨다.",
+      "같은 비교 재시도·재접속·재다운로드와 다음 기간 새 입력을 구분한다. 수정 상품의 사용권/승인을 공유하지 않는다.",
+      "B자료를 authoritative로 선언했다는 이유로 자동 패치를 시작하지 않는다. 비교→수정 제안은 미지원 workflow 안내까지만이다."
+    ],
+    "tests": [
+      "보존된 V3.1 baseline oracle/edge cases",
+      "원천행 총수·타입·금액·source locator와 보고서 일치",
+      "미지원/중복 키로 허위누락/자동 덮어쓰기 없음",
+      "비교 권리로 repair download/execute 불가",
+      "zero differences도 유효 report, 수정 완료 문구 없음"
+    ],
+    "owner": [
+      "두 명세의 차이와 중복을 찾는다.",
+      "검토용 보고서를 내려받는다.",
+      "고객 원본이 바뀌지 않은 것을 확인한다."
+    ],
+    "notdo": "수수료/N:M 배분·ERP·기준B값 덮어쓰기·새 유료SKU."
+  },
+  {
+    "id": "D06",
+    "title": "상품별 결제·변경승인·실패복구·재수령",
+    "deps": [
+      "D02"
+    ],
+    "scope": "공통; 수정은 D04, 비교는 D05 선행",
+    "reads": [
+      "contracts/PAYMENT_APPROVAL_DELIVERY.md",
+      "02_CUSTOMER_OUTPUTS.md"
+    ],
+    "goal": "결제 뒤 고객이 정확한 변경을 승인하고 검증된 필수 산출물을 중복 과금 없이 받게 한다.",
+    "work": [
+      "기존 L05/작업 owner/PG/원장을 재사용한다. 상품별 선행 engine와 deliverables readiness가 없는 quote 및 live 결제를 차단한다.",
+      "공식 sandbox 승인·조회·취소·중복webhook·응답유실을 처리한다. credentials 부족은 NOT_RUN으로 분리하고 mock을 live증거로 쓰지 않는다.",
+      "PAID 이후 상세 plan을 공개하지만 승인 전 작업은 WAITING_APPROVAL. approval snapshot/digest/expiry와 entitlement/SKU/원본 버전을 서버 검증한다.",
+      "변경 선택 수정/거부/승인만료/전부미선택/삭제/환불 경로를 구현한다. 변경 범위가 넓어지면 새 quote/approval, 기술 재시도는 추가 청구 없음.",
+      "수정 주문은 세 파일 전부 validation PASS일 때만 delivery success, 비교는 별도 두 파일. artifact-ready와 job-success와 payment를 분리한다.",
+      "취소/권리회수/만료 도중 완료된 결과는 게시하지 않고 보상·문의·재시도 원장으로 복구한다. 재방문 주문목록은 최소 범위로 제공한다."
+    ],
+    "tests": [
+      "PAID but no approval→no patch/download",
+      "compare entitlement cannot repair",
+      "stale input/plan/profile/subset/approval rejected",
+      "doubleclick/webhook duplicate/out-of-order/payment unknown 복구",
+      "all rejected/no changes/partial failure→not successful repair",
+      "same purchase retry/download no recharge",
+      "mandatory artifact missing/cancel before publication 차단"
+    ],
+    "owner": [
+      "결제 뒤 파일 변경이 승인대기인지 확인한다.",
+      "plan을 승인한 뒤 세 파일을 받는다.",
+      "거부·실패·재방문에서 요금과 결과를 확인한다."
+    ],
+    "notdo": "실금액·환불정책 법적 확정·새클라우드 계약·live 공개."
+  },
+  {
+    "id": "D07",
+    "title": "고객 여정·운영·업무 확장 경계 완성",
+    "deps": [
+      "D06"
+    ],
+    "scope": "공통",
+    "reads": [
+      "contracts/SECURITY_OPERATIONS.md",
+      "contracts/UX_AND_MENU.md"
+    ],
+    "goal": "서비스가 과장 없이 목적별로 연결되고 운영·개인정보·지원·비용 조건이 준비되게 한다.",
+    "work": [
+      "기존 UXR/H3/운영 기능 재사용. 무료·정밀·수정·재검증·자동화 메뉴의 실제 capability와 작업 컨텍스트를 일치시킨다.",
+      "모바일 계획검토/취소/파일수령/상태복구, 입력/권한/제한/실패/만료/부분검사의 실제 state 화면을 검증한다.",
+      "원본·plan·changes·scratch·결과·결제기록의 TTL와 private 접근을 분리하고 기존 삭제 정책의 영향 delta만 시험한다.",
+      "가격/실계약/법률/지원·상담담당/데이터지역/실제 운영 자원은 사람의 결정과 검증근거를 남긴다. 실제 권한 없는 live 호출/배포 금지.",
+      "반복 실행은 저장된 정책을 새 입력에 재확인하는 수동 job까지만. 과거 승인을 다음달 원본에 재사용하지 않는다.",
+      "rollback/kill switch/비용·오류·환불 운영·권리회수·삭제의 기술 rehearsal을 synthetic 환경에서 수행한다."
+    ],
+    "tests": [
+      "로그/피드백 원문 sentinel 미노출, private report에는 필요한 전후값 존재",
+      "TTL/입력 만료 후 복구·늦은 승인 차단",
+      "wrong-owner/refunded/cache/CDN/download/CSRF 부정경로",
+      "desktop/mobile keyboard flow·복귀focus",
+      "가격/납품/지원문구 실제기능 일치; 상담OFF 수집/판매 없음"
+    ],
+    "owner": [
+      "메뉴별 무엇을 받는지 확인한다.",
+      "모바일에서 승인과 다운로드를 완료한다.",
+      "파일 보관·환불·지원 조건을 결정한다."
+    ],
+    "notdo": "무인자동수정·실고객시험/실결제·임의배포·상담 포털 확대."
+  },
+  {
+    "id": "D08",
+    "title": "상품별 종단 수용시험·핵심 완성 판정",
+    "deps": [
+      "D07"
+    ],
+    "scope": "공통; 공개SKU별 선행 조건",
+    "reads": [
+      "07_ACCEPTANCE_AND_RELEASE.md",
+      "02_CUSTOMER_OUTPUTS.md"
+    ],
+    "goal": "문서가 아니라 실제 구매·승인·수정·납품 흐름으로 완성 범위를 입증하고 사람이 공개를 결정할 수 있게 한다.",
+    "work": [
+      "새 synthetic holdout·정상예외·RP01/RP02·실패 계약으로 앱→API→engine→private artifact E2E를 실행한다. 비교 상품을 공개 범위에 포함할 때만 D05의 비교 E2E를 추가한다. 비교가 OFF인 것은 승인 수정 상품의 출시를 차단하지 않지만 비교 완료로 기록하지 않는다.",
+      "sandbox 결제 후 승인/선택변경/거부/만료/재접속/다운로드·재다운로드를 실행하고 output files를 열어 검증한다.",
+      "Excel reference·파일 보존·계산/업무 scope·모바일/키보드·동시성·데이터 삭제·부정권한을 독립 reviewer 기준으로 기록한다. 패키지 테스트를 제품 테스트로 대체하지 않는다.",
+      "상품별 readiness와 missing evidence를 분리한 release_manifest를 만든다. 비교만 ready이면 수정 경로가 완성됐다고 하지 않는다.",
+      "M3 사용자관찰·M3.5 구매증거가 없으면 PENDING/DEFERRED를 유지한다. 내부 수용시험은 가능한 만큼 완료하며 판매 시작·초대는 별도 승인으로 남긴다.",
+      "기존 완료기록을 보존한 최종 review/운영 인수인계/다음 유지보수 범위를 만들고 여기서 정지한다."
+    ],
+    "tests": [
+      "핵심 완료 판정: 두 repair profile의 필수 3파일 검증. 비교도 공개할 때는 comparison 필수 2파일을 별도로 검증",
+      "negative approval/payment/validation/download matrix",
+      "same origin hash와 signed plan receipt 대조",
+      "서버 실제 최소지원범위와 표시 일치",
+      "NOT_RUN/PENDING/FAILED를 성공으로 변환 없음"
+    ],
+    "owner": [
+      "RP01/RP02 실제 수정본·변경내역·후검증을 받아본다.",
+      "비교 상품을 공개하면 수정본이 아님을 확인하고, 공개하지 않으면 판매 OFF를 확인한다.",
+      "상품별 공개 여부와 남은 위험을 승인한다."
+    ],
+    "notdo": "자동 공개·새유료기능·수요/매출 실적 조작·다음 마일스톤 자동 실행."
+  }
+]

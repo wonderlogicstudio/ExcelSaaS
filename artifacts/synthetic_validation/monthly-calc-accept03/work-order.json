@@ -1,0 +1,38 @@
+{
+  "scope": "Test-only remaining monthly calculation acceptance matrix",
+  "approved": "2026-09-22 user next unit",
+  "allowlist": [
+    "apps/api/tests/test_monthly_calculation.py"
+  ],
+  "expected": {
+    "direct_monthly_reference": 1001,
+    "monthly_subtraction": -5,
+    "unknown_modes": "reject",
+    "missing_cell": "reject",
+    "nonfinite_operand": "reject",
+    "formula_number_operand": "calculate expected numeric value",
+    "formula_blank_text_boolean_error": "reject without coercion",
+    "raw_java_unsupported_grammar": "reject with supported control passing",
+    "legacy_raw_cross_sheet": "reject"
+  },
+  "frozen_product_hashes": {
+    "apps/api/app/delivery_calculation.py": "80c7588506ed7ccdb7b847422e5c141a4653d501b6cf15195ea8b266c058145c",
+    "apps/api/engine/DeliveryCalc.java": "b66b6af83103029cd5e12f9c1fb1c619430991602c91d2ebd2406275a69cc871",
+    "apps/api/engine/classes/DeliveryCalc.class": "443eecd6a70f38d9fcb04f289e4fdcb8f05dd069e1eb50b45c1c5a96d00a2c41",
+    "apps/api/engine/classes/DeliveryCalc$1.class": "e137ab9129d9f12910f931b6762b42a9bb7114683c3bf35b8fa2b98eb5a597c0",
+    "apps/api/app/delivery_inputs.py": "726b2788f8f57378d7d2206c14a3e25ca4acb379194463226f876545b305b017",
+    "apps/api/app/delivery_plan.py": "fa7cca830f4957069d7105b19848366c83b84812c1579df6f84f8de7993fe1cb",
+    "apps/api/app/repair_rules/formula_restore.py": "92a97a4843976ee224c825a0515019fcd44831a118bd1c1c4c4990a0c6e00d62",
+    "apps/api/app/repair_rules/numeric_text.py": "97f45343b3d5af74b7678d18f4fb15752ba0f8cb986a249b102c736edb7abd1f",
+    "apps/api/engine/dependencies.lock.json": "4bb18c1a43e322f39682aa4afeac353ca4e1ccbde0662023a5736f5e05ec4dd0",
+    "apps/api/app/delivery_reference.json": "e46aaec14b74685384d2cb8d1632ef279d4eb6697381a09b72dcd4e301e6f2d0"
+  },
+  "not_run": [
+    "legacy suite repeat absent sourcechange",
+    "full regression",
+    "native Excel",
+    "deployment",
+    "commit/push"
+  ],
+  "on_new_failure": "Record precise mismatch and request bounded correction, never change fixed expected value or widen scope silently"
+}

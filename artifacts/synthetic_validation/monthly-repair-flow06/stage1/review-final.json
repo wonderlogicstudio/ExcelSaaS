@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "reviewer": "monthly_calc_review",
+  "scope": "Stage1candidate rule corrections",
+  "checks": "5pytest andRuff0; no reviewer reruns",
+  "condition": "Stage2 before_result must be taken from trusted actual calculation of same source/target; provenance string alone not authentication"
+}

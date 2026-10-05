@@ -1,0 +1,38 @@
+{
+  "status": "IMPLEMENTED_SCREEN_CHECKED_TEST_BUILD_PENDING",
+  "unsupported_sample": "007-receivables_aging-mutated-948869.xlsx",
+  "owner_exact_file": "NOT_CONFIRMED",
+  "expected_outlier": "AR Aging!H16",
+  "source_formula": "=IF(G15>30,F16*0.97,F16)",
+  "neighbors_checked": [
+    "H14",
+    "H15",
+    "H17",
+    "H18"
+  ],
+  "evidence": "Actual local API scan and browser screen; formulas independently read from XLSX XML and existing frozen truth",
+  "default_manual_target_input": "HIDDEN",
+  "supported_sample": "03_\uc815\uc0b0\uc218\uc815_\uc5f0\uc1c4\uacc4\uc0b0.xlsx",
+  "expected_findings": {
+    "structure": 8,
+    "formula": 3
+  },
+  "actual_findings": {
+    "structure": 8,
+    "formula": 3
+  },
+  "numeric_draft": "8 targets auto-transferred without typed addresses",
+  "actual_calculation": {
+    "targets": 8,
+    "affected_formula_cells": 32
+  },
+  "mobile": {
+    "supported_client_width": 375,
+    "supported_scroll_width": 375,
+    "unsupported": "NOT_VERIFIED_VIEWPORT_APPLIED_TO_OTHER_TAB"
+  },
+  "review": "CHANGES_REQUIRED_NONFORMULA_EVIDENCE_LABEL_AND_TEST_BUILD_FAILURES",
+  "tests": "29 existing passed; new1pass2fail; TS fixture invalid subtype",
+  "release": "NOT_RUN",
+  "pending_owner": "Additional bounded correction after retry limit"
+}

@@ -1,0 +1,54 @@
+{
+  "unit": "MONTHLY-UX07 resume02 final helper gate correction",
+  "cloud_mutation": false,
+  "product_source_changed": false,
+  "baseline_readonly_reused": "artifacts/synthetic_validation/monthly-ux07-release/resume02/release-tools/output/api-release/baseline.json",
+  "corrections": [
+    "pre-stage asserts normalized service, IAM, Gateway and Worker invariants before deployment",
+    "pre-live asserts normalized service, IAM, Gateway and Worker invariants before live revision creation",
+    "pre-traffic asserts normalized service, IAM, Gateway and Worker invariants before traffic switch",
+    "registry push asserts local manifest sha256 matches meta.image digest before any registry writes",
+    "registry push asserts remote blob presence and remote manifest config/layer digest chain after upload",
+    "staged wrapper args remain one --args value: -m,release_tools.rp03_startup_wrapper"
+  ],
+  "static_checks": {
+    "helpers_parsed": 6,
+    "pre_stage_gate": true,
+    "pre_live_gate": true,
+    "pre_traffic_gate": true,
+    "manifest_precheck": true,
+    "remote_chain": true,
+    "single_arg": true
+  },
+  "commands": [
+    {
+      "cmd": "python .tmp\\resume02_static_check.py",
+      "exit": 0,
+      "result": "6 helpers parsed; final static gates all true"
+    }
+  ],
+  "hashes": {
+    "release-tools/__pycache__/release_config.cpython-313.pyc": "5ff98c291fa47ba0148c3c8b3645115fb3b4b5f970a650a6e214a7ad595ea7af",
+    "release-tools/build_api_overlay.py": "c8b059109d5eb720e9b013a788038e8fa112fa01341d34150f7c092fa79d922e",
+    "release-tools/deploy_api_guarded.py": "53a0ab84b719127e0f3b091889d6fc17e87a6755909bcf306f5ac326e8e5b8e1",
+    "release-tools/freeze_release_sources.py": "e4af6fc6bf136c940c03bc1e2a3d7f68f3c14966f8e7fc1381e762163ca59176",
+    "release-tools/output/api-release/baseline.json": "e3420bdc254ffc783f8a4ff7488eb582ebdf859f8b7c30fc3ff79a46d2221a30",
+    "release-tools/output/api-release/commands.jsonl": "f19220cf39d4e2aba51bdb47d8d9562bc0c25eced9121274927efeac2cc73413",
+    "release-tools/output/image/build.json": "6dd0be2cb05a6d9d52fcae8a6a21509235775f8af9983e21b4ec4d784aee2f8f",
+    "release-tools/output/image/config.json": "779eaf9270734f5e1ab0e0321ff383f609b1e1506f44b6263e44abacd1ef30be",
+    "release-tools/output/image/manifest.json": "d2265d9e56756fd240e1ddf93509d9fa096bd6d77acd499caff9d41ab1caa5c9",
+    "release-tools/output/image/registry-layer.tar.gz": "0c3c2048949a0217670f56cbfb639b33dfaf795be8cc489d26271120b7885574",
+    "release-tools/README_RUN_ORDER.md": "c1783ac53d3e3f17db64d92a307eaead8ce0cf34f068f8b901ccd81e29fe9f6e",
+    "release-tools/release_config.py": "0834bfd5f7d3ca659f64ddba985b64491ad9de2fb0b037f83b2cc717da9d085d",
+    "release-tools/release_web6.py": "a3881b0d16470a72d319b3745264debb5804c98cde15f5743812ee1dc1c0f855",
+    "release-tools/rp03_startup_wrapper.py": "ee6e3022ba55726fce86d4deacb5685cbd27bec57af4c1fc6caf0468ab570677",
+    "release-tools/source-freeze.json": "0ef3f19167db83db4b2c5d733dbc7b5e0a442990718d2062d8635277e8191d04"
+  },
+  "not_run": [
+    "cloud mutation phases",
+    "registry push",
+    "traffic switch",
+    "product tests",
+    "Git operations"
+  ]
+}

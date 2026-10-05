@@ -1,0 +1,95 @@
+{
+  "unit": "MONTHLY-UX07 release helper correction package",
+  "product_source_frozen": true,
+  "fixture_path_fix": {
+    "file": "apps/api/tests/test_monthly_repair.py",
+    "change": "ARTIFACT_DIR anchored at repo root with Path(__file__).resolve().parents[3]",
+    "commands": [
+      {
+        "cmd": ".venv\\Scripts\\python.exe -m pytest tests\\test_monthly_repair.py -q -p no:cacheprovider",
+        "cwd": "apps/api",
+        "exit": 0,
+        "result": "6 passed"
+      },
+      {
+        "cmd": "apps\\api\\.venv\\Scripts\\python.exe -m pytest apps\\api\\tests\\test_monthly_repair.py -q -p no:cacheprovider",
+        "cwd": "repo root",
+        "exit": 0,
+        "result": "6 passed"
+      }
+    ]
+  },
+  "helper_corrections": [
+    "corrected OCI layer paths to /app/app, /app/engine, /app/verification, /app/release_tools",
+    "packaged monthly-ux07-source-freeze.json in the image and wrapper verifies frozen files before runtime proof",
+    "RP03 startup log emits counts/booleans only; no source, expected, or artifact hashes in cloud log payload",
+    "RP03 runtime asserts original source bytes preserved in store before download checks",
+    "API helper persists env hashes only and derives full env from baseline revision in memory for live restore",
+    "API helper includes callable guarded push and traffic phases with registry digest assertion and old-traffic checks",
+    "Web helper verifies live API/IAM via provider reads and checks dist assets/source freeze before upload",
+    "phase evidence uses no-overwrite writes for baseline/final outputs"
+  ],
+  "invalid_image_do_not_push": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:a088bc14578202bcd3d0e030826d4222428adb082a991b48f25eb72d38748d57",
+  "corrected_local_overlay_image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:e229f7df95435b69e677f5e9758c956cd0c666c739d8673e76f3410744d75b99",
+  "pushed": false,
+  "overlay_count": 29,
+  "required_layer_paths_present": {
+    "app/app/delivery_plan.py": true,
+    "app/engine/DeliveryCalc.java": true,
+    "app/engine/classes/DeliveryCalc.class": true,
+    "app/engine/classes/DeliveryCalc$1.class": true,
+    "app/verification/monthly-rp03-supported-6sheet.xlsx": true,
+    "app/verification/monthly-ux07-source-freeze.json": true,
+    "app/release_tools/rp03_startup_wrapper.py": true
+  },
+  "source_freeze_count": 29,
+  "commands": [
+    {
+      "cmd": "gcloud run deploy --help flag inspection",
+      "exit": 0,
+      "result": "--command, --args, --startup-probe, --set-env-vars supported; no --clear-command/--clear-args used"
+    },
+    {
+      "cmd": "gcloud run services update-traffic --help flag inspection",
+      "exit": 0,
+      "result": "--to-revisions and --remove-tags supported"
+    },
+    {
+      "cmd": "python artifacts\\synthetic_validation\\monthly-ux07-release\\release-tools\\freeze_release_sources.py",
+      "exit": 0,
+      "result": "source-freeze.json written; 29 overlay inputs"
+    },
+    {
+      "cmd": "python artifacts\\synthetic_validation\\monthly-ux07-release\\release-tools\\build_api_overlay.py",
+      "exit": 0,
+      "result": "corrected local OCI overlay built; pushed=false"
+    },
+    {
+      "cmd": "python -c ast.parse helpers + tar path inspection",
+      "exit": 0,
+      "result": "6 helpers parsed; required /app paths present"
+    }
+  ],
+  "run_order": "artifacts/synthetic_validation/monthly-ux07-release/release-tools/README_RUN_ORDER.md",
+  "hashes": {
+    "release-tools/build_api_overlay.py": "c8b059109d5eb720e9b013a788038e8fa112fa01341d34150f7c092fa79d922e",
+    "release-tools/deploy_api_guarded.py": "11b04fb2f182942e1584b1e3293b75722df59159faa95227a186b2e05edd658c",
+    "release-tools/freeze_release_sources.py": "259cb103ebfa202e029eef23ba9dbd113613b8b90cb834c4102b2526a1c958a4",
+    "release-tools/output/image/build.json": "97ad25c99d8cf2ce5db5fe735377c3f5c9fa8600f1f118496e29aec410909c02",
+    "release-tools/output/image/config.json": "1e57f2c260485aa0559d2ef4454108bfaa4f435015f284803a261e5ef669f77d",
+    "release-tools/output/image/manifest.json": "e229f7df95435b69e677f5e9758c956cd0c666c739d8673e76f3410744d75b99",
+    "release-tools/output/image/registry-layer.tar.gz": "3fd9f298f1b6acf78fe6a4b5a4aebbcb5c5b96666eb8c41ee5fff5f75c2ad61c",
+    "release-tools/README_RUN_ORDER.md": "2a083b3ba0af2534bd4fa5e464da636b3b6dceb434146e3627d77ca1ff36474d",
+    "release-tools/release_config.py": "a01ebc980bcd82802cd41ad0dc72a55ef1616681958c5e6b02d1257c1f571eac",
+    "release-tools/release_web6.py": "00a8e9564993510d49259deb788bb30f67837d25adf964f45403511c715254a8",
+    "release-tools/rp03_startup_wrapper.py": "ee6e3022ba55726fce86d4deacb5685cbd27bec57af4c1fc6caf0468ab570677",
+    "release-tools/source-freeze.json": "075550bd92a3bf98a5bdc4c096d89ccab59fbf38636647d0c7ed9f3e2921e1f3"
+  },
+  "not_run": [
+    "cloud mutation phases",
+    "registry push",
+    "traffic switch",
+    "Git commit/push",
+    "deployment"
+  ]
+}

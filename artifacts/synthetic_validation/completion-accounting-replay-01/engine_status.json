@@ -1,0 +1,126 @@
+{
+  "provenance": "HISTORICAL_RESPONSE_REPLAY_ONLY; no engine execution; corrected statuses derived from unchanged raw payloads",
+  "source_run": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01",
+  "records": [
+    {
+      "workbook_id": "001-retail_sales_vertical-mutated-745709",
+      "filename": "001-retail_sales_vertical-mutated-745709.xlsx",
+      "status": "COMPLETED",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_ms": 1247,
+      "raw_output": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\raw_engine\\001-retail_sales_vertical-mutated-745709.json",
+      "raw_sha256": "b79599d6155fa8d2a6506a75f38ac08398d51d2f194cd46d0784783bcd2baa88",
+      "stdout_tail": "{\"status\": \"COMPLETED\", \"elapsed_ms\": 997}\n",
+      "stderr_tail": ""
+    },
+    {
+      "workbook_id": "001-retail_sales_vertical-normal-745709",
+      "filename": "001-retail_sales_vertical-normal-745709.xlsx",
+      "status": "COMPLETED",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_ms": 1046,
+      "raw_output": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\raw_engine\\001-retail_sales_vertical-normal-745709.json",
+      "raw_sha256": "416123a608f5a5a6b5b19deaa9274cb77fa7b061b103c01819b1f238d9f29df0",
+      "stdout_tail": "{\"status\": \"COMPLETED\", \"elapsed_ms\": 800}\n",
+      "stderr_tail": ""
+    },
+    {
+      "workbook_id": "002-purchase_orders_table-mutated-353213",
+      "filename": "002-purchase_orders_table-mutated-353213.xlsx",
+      "status": "PARTIAL",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_ms": 1052,
+      "raw_output": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\raw_engine\\002-purchase_orders_table-mutated-353213.json",
+      "raw_sha256": "16b71910b6ba1674dff63c381bacaabfed3e60abaf21083322499fda0aedb959",
+      "stdout_tail": "{\"status\": \"COMPLETED\", \"elapsed_ms\": 810}\n",
+      "stderr_tail": ""
+    },
+    {
+      "workbook_id": "002-purchase_orders_table-normal-353213",
+      "filename": "002-purchase_orders_table-normal-353213.xlsx",
+      "status": "PARTIAL",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_ms": 1019,
+      "raw_output": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\raw_engine\\002-purchase_orders_table-normal-353213.json",
+      "raw_sha256": "2a937f4c66bba8ddcaf5cf78ff2707423618d468a1214328e1a50858d3022cdc",
+      "stdout_tail": "{\"status\": \"COMPLETED\", \"elapsed_ms\": 773}\n",
+      "stderr_tail": ""
+    },
+    {
+      "workbook_id": "003-inventory_cross_sheet-mutated-996121",
+      "filename": "003-inventory_cross_sheet-mutated-996121.xlsx",
+      "status": "COMPLETED",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_ms": 1178,
+      "raw_output": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\raw_engine\\003-inventory_cross_sheet-mutated-996121.json",
+      "raw_sha256": "72c1ec9fa72e895670fcf556bc50f34b58f830ab1993b381aa1585e3839ea11b",
+      "stdout_tail": "{\"status\": \"COMPLETED\", \"elapsed_ms\": 933}\n",
+      "stderr_tail": ""
+    },
+    {
+      "workbook_id": "003-inventory_cross_sheet-normal-996121",
+      "filename": "003-inventory_cross_sheet-normal-996121.xlsx",
+      "status": "COMPLETED",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_ms": 1127,
+      "raw_output": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\raw_engine\\003-inventory_cross_sheet-normal-996121.json",
+      "raw_sha256": "9b4f6c760f189a630e252c7961cf6769fa6291266edb191eaf1d936a7ccd1592",
+      "stdout_tail": "{\"status\": \"COMPLETED\", \"elapsed_ms\": 861}\n",
+      "stderr_tail": ""
+    },
+    {
+      "workbook_id": "004-budget_horizontal_months-mutated-067598",
+      "filename": "004-budget_horizontal_months-mutated-067598.xlsx",
+      "status": "COMPLETED",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_ms": 1103,
+      "raw_output": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\raw_engine\\004-budget_horizontal_months-mutated-067598.json",
+      "raw_sha256": "943dca99fc3244a8f143008f9ec1141f0cac63b4dfb8dcc7de7ef0232baabd49",
+      "stdout_tail": "{\"status\": \"COMPLETED\", \"elapsed_ms\": 856}\n",
+      "stderr_tail": ""
+    },
+    {
+      "workbook_id": "004-budget_horizontal_months-normal-067598",
+      "filename": "004-budget_horizontal_months-normal-067598.xlsx",
+      "status": "COMPLETED",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_ms": 1158,
+      "raw_output": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\raw_engine\\004-budget_horizontal_months-normal-067598.json",
+      "raw_sha256": "b8953435cc3ff5b275faea59e0d18846400a57ceb7dd20671901bc89d0d0b2d7",
+      "stdout_tail": "{\"status\": \"COMPLETED\", \"elapsed_ms\": 888}\n",
+      "stderr_tail": ""
+    },
+    {
+      "workbook_id": "005-payroll_overtime-mutated-261773",
+      "filename": "005-payroll_overtime-mutated-261773.xlsx",
+      "status": "COMPLETED",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_ms": 1134,
+      "raw_output": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\raw_engine\\005-payroll_overtime-mutated-261773.json",
+      "raw_sha256": "bfcf801a9b5d388ce6e92cd7157dfe76f5870cb99b4243d49f4c2302bf5d8d9e",
+      "stdout_tail": "{\"status\": \"COMPLETED\", \"elapsed_ms\": 890}\n",
+      "stderr_tail": ""
+    },
+    {
+      "workbook_id": "005-payroll_overtime-normal-261773",
+      "filename": "005-payroll_overtime-normal-261773.xlsx",
+      "status": "COMPLETED",
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_ms": 1188,
+      "raw_output": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01\\raw_engine\\005-payroll_overtime-normal-261773.json",
+      "raw_sha256": "9f03785063e5ffa61d11c3cc6f5e9f6160781d192bb5aa0357df32fa6497227a",
+      "stdout_tail": "{\"status\": \"COMPLETED\", \"elapsed_ms\": 945}\n",
+      "stderr_tail": ""
+    }
+  ]
+}

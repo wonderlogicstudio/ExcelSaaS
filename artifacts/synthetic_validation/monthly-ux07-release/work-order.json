@@ -15,5 +15,5 @@
     "native evidence reused only if current fingerprints unchanged",
     "stop/report unresolved failures or expanded scope"
   ],
-  "status": "DESIGN_AND_RELEASE_AUDIT"
+  "status": "BETA_DEPLOYED_REVIEW_PASS_BROWSER_FLOW_PENDING"
 }

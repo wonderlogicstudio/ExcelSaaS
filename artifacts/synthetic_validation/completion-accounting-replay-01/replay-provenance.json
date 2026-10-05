@@ -1,0 +1,84 @@
+{
+  "mode": "HISTORICAL_RESPONSE_REPLAY_ONLY",
+  "source_run": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\smoke-20260920-01",
+  "no_new_engine_execution": true,
+  "source_artifacts_unchanged": true,
+  "analysis_status_counts": {
+    "COMPLETED": 8,
+    "PARTIAL": 2
+  },
+  "analysis_completion_rate": 0.8,
+  "report": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\completion-accounting-replay-01\\reports\\summary.html",
+  "rows": [
+    {
+      "workbook_id": "001-retail_sales_vertical-mutated-745709",
+      "original_execution_status": "COMPLETED",
+      "raw_audit_status": "COMPLETED",
+      "corrected_analysis_status": "COMPLETED",
+      "source_raw_sha256": "b79599d6155fa8d2a6506a75f38ac08398d51d2f194cd46d0784783bcd2baa88"
+    },
+    {
+      "workbook_id": "001-retail_sales_vertical-normal-745709",
+      "original_execution_status": "COMPLETED",
+      "raw_audit_status": "COMPLETED",
+      "corrected_analysis_status": "COMPLETED",
+      "source_raw_sha256": "416123a608f5a5a6b5b19deaa9274cb77fa7b061b103c01819b1f238d9f29df0"
+    },
+    {
+      "workbook_id": "002-purchase_orders_table-mutated-353213",
+      "original_execution_status": "COMPLETED",
+      "raw_audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "corrected_analysis_status": "PARTIAL",
+      "source_raw_sha256": "16b71910b6ba1674dff63c381bacaabfed3e60abaf21083322499fda0aedb959"
+    },
+    {
+      "workbook_id": "002-purchase_orders_table-normal-353213",
+      "original_execution_status": "COMPLETED",
+      "raw_audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "corrected_analysis_status": "PARTIAL",
+      "source_raw_sha256": "2a937f4c66bba8ddcaf5cf78ff2707423618d468a1214328e1a50858d3022cdc"
+    },
+    {
+      "workbook_id": "003-inventory_cross_sheet-mutated-996121",
+      "original_execution_status": "COMPLETED",
+      "raw_audit_status": "COMPLETED",
+      "corrected_analysis_status": "COMPLETED",
+      "source_raw_sha256": "72c1ec9fa72e895670fcf556bc50f34b58f830ab1993b381aa1585e3839ea11b"
+    },
+    {
+      "workbook_id": "003-inventory_cross_sheet-normal-996121",
+      "original_execution_status": "COMPLETED",
+      "raw_audit_status": "COMPLETED",
+      "corrected_analysis_status": "COMPLETED",
+      "source_raw_sha256": "9b4f6c760f189a630e252c7961cf6769fa6291266edb191eaf1d936a7ccd1592"
+    },
+    {
+      "workbook_id": "004-budget_horizontal_months-mutated-067598",
+      "original_execution_status": "COMPLETED",
+      "raw_audit_status": "COMPLETED",
+      "corrected_analysis_status": "COMPLETED",
+      "source_raw_sha256": "943dca99fc3244a8f143008f9ec1141f0cac63b4dfb8dcc7de7ef0232baabd49"
+    },
+    {
+      "workbook_id": "004-budget_horizontal_months-normal-067598",
+      "original_execution_status": "COMPLETED",
+      "raw_audit_status": "COMPLETED",
+      "corrected_analysis_status": "COMPLETED",
+      "source_raw_sha256": "b8953435cc3ff5b275faea59e0d18846400a57ceb7dd20671901bc89d0d0b2d7"
+    },
+    {
+      "workbook_id": "005-payroll_overtime-mutated-261773",
+      "original_execution_status": "COMPLETED",
+      "raw_audit_status": "COMPLETED",
+      "corrected_analysis_status": "COMPLETED",
+      "source_raw_sha256": "bfcf801a9b5d388ce6e92cd7157dfe76f5870cb99b4243d49f4c2302bf5d8d9e"
+    },
+    {
+      "workbook_id": "005-payroll_overtime-normal-261773",
+      "original_execution_status": "COMPLETED",
+      "raw_audit_status": "COMPLETED",
+      "corrected_analysis_status": "COMPLETED",
+      "source_raw_sha256": "9f03785063e5ffa61d11c3cc6f5e9f6160781d192bb5aa0357df32fa6497227a"
+    }
+  ]
+}

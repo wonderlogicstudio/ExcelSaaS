@@ -1,0 +1,134 @@
+{
+  "id": "MONTHLY-REPAIR-FLOW-06",
+  "approval": "User explicitly authorizes stages1-4 with internal tests/review between stages; continue without owner checkpoints, report scope change or unresolved failure",
+  "stages": [
+    "separate monthly existing-formula replacement rule",
+    "strict eligibility and target-only before-error policy",
+    "exact plan/approval/separate3artifact delivery integration",
+    "existing user flow UI integration without mandatory address/formula input"
+  ],
+  "constraints": [
+    "No change to10sheetlimit; original13sheetfixture remains unsupported",
+    "No commit/push/deployment",
+    "RP01/RP02 and combined behavior preserved",
+    "No payment/acknowledgement as approval",
+    "No real data/payments/new paid resources",
+    "Frozenoracle unchanged; supported-size synthetic controls supplement, never replace originalfixture acceptance",
+    "Refresh affected native compatibility after reviewed code freeze, never force PASS",
+    "Local UI proof separate from pending beta proof"
+  ],
+  "baseline_hashes": {
+    "apps/api/app/delivery_calculation.py": "80c7588506ed7ccdb7b847422e5c141a4653d501b6cf15195ea8b266c058145c",
+    "apps/api/engine/DeliveryCalc.java": "b66b6af83103029cd5e12f9c1fb1c619430991602c91d2ebd2406275a69cc871",
+    "apps/api/engine/classes/DeliveryCalc.class": "443eecd6a70f38d9fcb04f289e4fdcb8f05dd069e1eb50b45c1c5a96d00a2c41",
+    "apps/api/engine/classes/DeliveryCalc$1.class": "e137ab9129d9f12910f931b6762b42a9bb7114683c3bf35b8fa2b98eb5a597c0",
+    "apps/api/app/delivery_inputs.py": "726b2788f8f57378d7d2206c14a3e25ca4acb379194463226f876545b305b017",
+    "apps/api/app/delivery_plan.py": "fa7cca830f4957069d7105b19848366c83b84812c1579df6f84f8de7993fe1cb",
+    "apps/api/app/repair_rules/formula_restore.py": "92a97a4843976ee224c825a0515019fcd44831a118bd1c1c4c4990a0c6e00d62",
+    "apps/api/app/repair_rules/numeric_text.py": "97f45343b3d5af74b7678d18f4fb15752ba0f8cb986a249b102c736edb7abd1f",
+    "apps/api/engine/dependencies.lock.json": "4bb18c1a43e322f39682aa4afeac353ca4e1ccbde0662023a5736f5e05ec4dd0",
+    "apps/api/app/delivery_reference.json": "1f45a9070cd2f18d8dca4d45ee8e21fc229e2cf77a6ed8cd2d908c009f972710",
+    "samples/delivery-v3_2/reference-cases.json": "49cde2bbaf9c4752b730e4b03b83209e6eaad7dc6f1e728ad030341d68175303",
+    "artifacts/synthetic_validation/monthly-repair-spec01/acceptance-oracle.json": "63fd69b22b3dc29cc9337b6bfd2d460bdb02c1059adb825aa67929fbe88be161",
+    "apps/api/app/delivery_patch_reference.json": "4c617c2cd3ef64f122de19c7f38c905f77bc0502ed14f418662add09962e7e63",
+    "apps/api/app/delivery_execution.py": "20d390043ce31f7601e56c1c184ea2b28646e49b1fa66f4cf5022d359fd2646f",
+    "apps/api/app/delivery_patch.py": "dcb5b39d3c9773a35911d952c8c15abded93d5e4e9391cbed996ef57e2fa49b0",
+    "apps/api/tests/test_repair_rules.py": "7efb914db3ce749fa42563487999edc30ead974a54808fc7fdf407c9510b8130",
+    "apps/api/tests/test_delivery_patch.py": "5b348553a2c9b48bc734e8e8baddb5b2b71f4b024d932aba08a541133178a26f",
+    "apps/api/tests/test_delivery_execution.py": "61e75e4616037e2197b3c7521f81741f534f856f1ec32fc6de49f65004412edc",
+    "apps/api/tests/test_delivery_plan.py": "ac6c513356d9ee4ae4c359f13cde2db20ab22afe8ec65996c16ea927abaa2ddb"
+  },
+  "immutable_hashes": {
+    "apps/api/engine/dependencies.lock.json": "4bb18c1a43e322f39682aa4afeac353ca4e1ccbde0662023a5736f5e05ec4dd0",
+    "artifacts/synthetic_validation/monthly-repair-spec01/acceptance-oracle.json": "63fd69b22b3dc29cc9337b6bfd2d460bdb02c1059adb825aa67929fbe88be161",
+    "artifacts/synthetic_validation/monthly-repair-spec01/acceptance-oracle.sha256": "e9a470b40a9d6430b9dc7e4da69bb349f06ff77b6667978385a2bd449bd5ccf8",
+    "samples/delivery-v3_2/reference-cases.json": "49cde2bbaf9c4752b730e4b03b83209e6eaad7dc6f1e728ad030341d68175303",
+    "artifacts/synthetic_validation/monthly-repair-flow06/stage1/expected-control.json": "c39443625c646c14f85a3497efa8f8310dad33ccb2f246cbdf27cedb322b6e47"
+  },
+  "stage_status": {
+    "1": "REVIEW_PASS",
+    "2": "REVIEW_PASS",
+    "3": "REVIEW_PASS",
+    "4": "FUNCTIONAL_REVIEW_PASS_UX_TARGET_PENDING"
+  },
+  "policy_override": "For this unit only user authorization supersedes EFFICIENCY-02 per-stage owner checkpoint; same-cause correction limit remains; new scope/unsupported sourcefixture not silently expanded",
+  "stage1_allowlist": [
+    "apps/api/app/repair_rules/monthly_formula.py",
+    "apps/api/tests/test_monthly_repair.py",
+    "apps/api/app/formula_patterns.py only necessary behavior-preserving helper extraction",
+    "artifacts/synthetic_validation/monthly-repair-flow06/stage1"
+  ],
+  "stage1_acceptance": [
+    "Existing detector criteria recomputed, exactly one interior monthly outlier; no formula guessing",
+    "Neighbor-consistent exact monthly replacement and beforeformula matching; strict negative boundaries",
+    "Supported-size synthetic control preserves BudgetN18/1001-1006=-5; original13sheet and oracle unchanged"
+  ],
+  "review_constraints": [
+    "Keep default input inspection unchanged; profile-specific reinspection validates every formula and retains all other issues",
+    "Reject monthly profile in combined repair; explicit dispatch preserves RP02 blank-only",
+    "Only exact single approved target before #VALUE! may be excepted; reject every after-error and every non-target before-error",
+    "Use one server-selected digest-bound calculation mode across before/after/output verification",
+    "Derive target month and exact operand coordinates from agreeing neighbors; never trust supplied replacement",
+    "Bind exact before/after/source/profile/mode/impacts in current approval chain",
+    "Fingerprint new rule; actual native evidence required after impacted code freeze"
+  ],
+  "stage2_allowlist": [
+    "apps/api/app/delivery_inputs.py",
+    "apps/api/app/delivery_plan.py",
+    "apps/api/app/repair_rules/monthly_formula.py only interface plumbing",
+    "apps/api/tests/test_monthly_repair.py",
+    "apps/api/tests/test_delivery_inputs.py",
+    "apps/api/tests/test_delivery_plan.py",
+    "artifacts/synthetic_validation/monthly-repair-flow06/stage2",
+    "apps/api/app/formula_patterns.py only small shared strict-monthly eligibility guard"
+  ],
+  "stage3_allowlist": [
+    "apps/api/app/delivery_patch.py",
+    "apps/api/app/delivery_execution.py",
+    "apps/api/app/delivery_plan.py",
+    "apps/api/app/delivery_inputs.py onlycontextplumbing",
+    "apps/api/app/delivery_api.py",
+    "apps/api/app/repair_rules/monthly_formula.py fingerprinthelper",
+    "apps/api/app/delivery_artifacts.py",
+    "apps/api/app/delivery_artifact_process.py onlyprofileorcontextsupport",
+    "apps/api/app/delivery_package.py onlyprofile/contextsupport",
+    "apps/api/app/delivery_verification_template.html onlyaccuratelabels",
+    "apps/api/app/delivery_patch_reference.json onlyactualreviewednativeevidenceregistration",
+    "apps/api/tests/test_monthly_repair.py",
+    "apps/api/tests/test_delivery_patch.py",
+    "apps/api/tests/test_delivery_execution.py",
+    "apps/api/tests/test_delivery_plan.py",
+    "apps/api/tests/test_delivery_inputs.py",
+    "artifacts/synthetic_validation/monthly-repair-flow06/stage3",
+    "apps/api/app/delivery_rehearsal.py only one frozen synthetic control hash; no entitlement widening",
+    "scripts/verify_delivery_patch_compatibility.py isolatedpath/nooverwriteguard only",
+    "scripts/verify_delivery_output_excel.ps1 sameevidencedirectory andhashbinding only",
+    "scripts/register_delivery_patch_reference.py exactmanifest/nativebinding only"
+  ],
+  "stage3_security_notes": [
+    "Freeze supported6sheet XLSX once before expected/hash registration; do not regenerate timestamp-varying inputs for unmocked acceptance",
+    "Append exact synthetic hash only, preserve production/payment/owner/plan entitlement boundaries",
+    "No broad source allowlist bypass, no public release"
+  ],
+  "incident": "stage3/preservation-incident.json",
+  "incident_resolution": "9 historical artifacts restored from independently verified archive; unknown prior private DB state not claimed restored; isolated outputs and overwrite guard now reviewed",
+  "stage4_allowlist": [
+    "apps/web/src/lib/repairReview.ts",
+    "apps/web/src/lib/repairProposals.ts",
+    "apps/web/src/components/RepairReview.tsx",
+    "apps/web/src/components/RepairProposalPicker.tsx",
+    "apps/web/src/components/RepairPlanPreview.tsx",
+    "apps/web/src/components/ProposalExample.tsx",
+    "related frontend tests",
+    "artifacts/synthetic_validation/monthly-repair-flow06/stage4",
+    "apps/web/src/components/DeliveryWorkspace.tsx request shaping only",
+    "apps/web/src/types.ts temporary frontend shape change removed after review"
+  ],
+  "stage4_acceptance": [
+    "Use actual supported monthly finding/proposal with server eligibility checks, no required address/formula typing",
+    "Verified before error to after -5, separate exact approval and three-file delivery in existing flow",
+    "Preserve existing RP01/RP02/combined basket, no mixing monthly or silently clearing selected items; actual local desktop/mobile UI evidence"
+  ],
+  "resolved_stop_reason": "Final corrected stage4 suite:40 passed1failed; App.navigation.test.tsx86/87 contradictory assertions. Correction limit reached, owner decision before further edit/run.",
+  "resume01_status": "FUNCTIONAL_REVIEW_PASS_UX_TARGET_PENDING"
+}

@@ -1,0 +1,140 @@
+{
+  "status": "HISTORICAL_ARTIFACTS_RECOVERED_PENDING_CONTAINMENT_REVIEW",
+  "cause": "Root failed to constrain reused bootstrap output directory; builder ran --stage d08 without isolated target",
+  "confirmed_overwritten_files": [
+    "inputs.json",
+    "RP01-REPAIRED_XLSX.xlsx",
+    "RP01-CHANGES_XLSX.xlsx",
+    "RP01-VERIFICATION_HTML.html",
+    "RP01-manifest.json",
+    "RP02-REPAIRED_XLSX.xlsx",
+    "RP02-CHANGES_XLSX.xlsx",
+    "RP02-VERIFICATION_HTML.html",
+    "RP02-manifest.json"
+  ],
+  "native_record_preserved_sha256": "cff0ae4af7d6d42ed720c00411d06024000fe5bc89fb5f4aa2fa282695bfe1d5",
+  "no_verified_pre_run_backup": true,
+  "git_tracked_historical_copies": false,
+  "private_state_note": "Bootstrap also uses historical private-state store and cleanup; exact pre-run state not captured",
+  "containment": "New13files copied byte-for-byte to FLOW06/stage3/compatibility; old native evidence deliberately not copied; historical directory not deleted or falsely restored",
+  "new_files": [
+    {
+      "name": "inputs.json",
+      "sha256": "41403ba63150ff953e2860482088b489f4e9f1a6066718210e25b23b021ea678",
+      "bytes": 3990
+    },
+    {
+      "name": "RP01-REPAIRED_XLSX.xlsx",
+      "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+      "bytes": 2046
+    },
+    {
+      "name": "RP01-CHANGES_XLSX.xlsx",
+      "sha256": "83b9f47bbc826bb86eef11360b364544b47c8a2a47ad930b396c8aec610f4120",
+      "bytes": 9982
+    },
+    {
+      "name": "RP01-VERIFICATION_HTML.html",
+      "sha256": "984a0b4d9e0a9bfc8be9f268f4ba00fdb37bbea8b348a34fa7ada063a3dc0291",
+      "bytes": 4993
+    },
+    {
+      "name": "RP01-manifest.json",
+      "sha256": "4a07ef1b19df8dcf9049ad921fb02d88287ff8a010e87c5236c0e2b773d8bd6c",
+      "bytes": 4828
+    },
+    {
+      "name": "RP02-REPAIRED_XLSX.xlsx",
+      "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+      "bytes": 2067
+    },
+    {
+      "name": "RP02-CHANGES_XLSX.xlsx",
+      "sha256": "b06fa95d19776faceaa956178fea1f8926ceb7ecefe3c51f85c419e4fd23de92",
+      "bytes": 9949
+    },
+    {
+      "name": "RP02-VERIFICATION_HTML.html",
+      "sha256": "0be6ad6fc8ef7e46c3e04dbf81178df88817cdb8675115f574ea0f95b6e5fe46",
+      "bytes": 4932
+    },
+    {
+      "name": "RP02-manifest.json",
+      "sha256": "26ea03dd709d071ecc3f0b869bb704198e75e8ba716763a32b1188117877a98f",
+      "bytes": 4841
+    },
+    {
+      "name": "RP03-REPAIRED_XLSX.xlsx",
+      "sha256": "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+      "bytes": 7463
+    },
+    {
+      "name": "RP03-CHANGES_XLSX.xlsx",
+      "sha256": "c3a3462389556a0480f52a4e91b273a11d6d9e4003e43d1cf5b7c403f5d2c674",
+      "bytes": 10069
+    },
+    {
+      "name": "RP03-VERIFICATION_HTML.html",
+      "sha256": "e4870386d5348ae069d6980517c5927a1b9cce8f85ba185f3afcce8b38dc08f7",
+      "bytes": 5245
+    },
+    {
+      "name": "RP03-manifest.json",
+      "sha256": "674577abd463cb9939c240c302a8afd8cc3b5a6e106f676027e1b6038c63752a",
+      "bytes": 5574
+    }
+  ],
+  "not_run": [
+    "native Excel",
+    "compatibility registration",
+    "stage4UI",
+    "deploy",
+    "commit/push"
+  ],
+  "next": "Fix scoped script routing and review blockers, record partial state and stop for owner checkpoint",
+  "recovery": {
+    "status": "HISTORICAL_NINE_ARTIFACTS_RECOVERED_AND_VERIFIED",
+    "archive": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-final01\\archive-before-20260916-111332\\Users__JinwonLee__project__ExcelSaaS__artifacts__verification__d08__compatibility",
+    "native_record_identical": true,
+    "native_manifest_file_hashes_match": true,
+    "restored": [
+      {
+        "name": "inputs.json",
+        "sha256": "4b908772a3ebbad0bcd4b1d02979daa8c2d6f510e0f4b0f8a968a0f963a5a894"
+      },
+      {
+        "name": "RP01-REPAIRED_XLSX.xlsx",
+        "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8"
+      },
+      {
+        "name": "RP01-CHANGES_XLSX.xlsx",
+        "sha256": "4493f7d4c7932977c5b50f2486272a3245ea9706271e4ac66923aab609a62a81"
+      },
+      {
+        "name": "RP01-VERIFICATION_HTML.html",
+        "sha256": "4eb6c55d3bc1550cf99742969d581fb811387ed0a6f97630ac800701f03b5dc0"
+      },
+      {
+        "name": "RP01-manifest.json",
+        "sha256": "609237cbf6a216c208bcaa379b326b83c064fe46ed45c488e54ba908e70b78c8"
+      },
+      {
+        "name": "RP02-REPAIRED_XLSX.xlsx",
+        "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c"
+      },
+      {
+        "name": "RP02-CHANGES_XLSX.xlsx",
+        "sha256": "d92a87fd705dc122656ebba0998544cb4c9ed909a9c215ae3dc2a629bb961607"
+      },
+      {
+        "name": "RP02-VERIFICATION_HTML.html",
+        "sha256": "d37fd9f41caf2293f2cfe14cc6a0b5f132e749f994eb3b7d1d87858745fe9440"
+      },
+      {
+        "name": "RP02-manifest.json",
+        "sha256": "f8ff6f1567be05c6e50a470f2640c47e5274eea986d17d668ed6a0d73571711c"
+      }
+    ],
+    "limitation": "This restores the archived native-validated evidence set; exact pre-run private-state database contents were not captured. Bootstrap store cleanup is not reversed or falsely claimed restored. Existing new RP03 copies in historical folder are inert; do not use historical folder for new verification."
+  }
+}

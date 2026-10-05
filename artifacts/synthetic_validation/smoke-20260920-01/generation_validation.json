@@ -1,0 +1,82 @@
+{
+  "001-retail_sales_vertical-mutated-745709": {
+    "formula_checks": 10,
+    "arithmetic_checks": 8,
+    "boundary_checks": 1,
+    "reference_checks": 26,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "001-retail_sales_vertical-normal-745709": {
+    "formula_checks": 10,
+    "arithmetic_checks": 9,
+    "boundary_checks": 1,
+    "reference_checks": 29,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "002-purchase_orders_table-mutated-353213": {
+    "formula_checks": 9,
+    "arithmetic_checks": 7,
+    "boundary_checks": 1,
+    "reference_checks": 23,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "002-purchase_orders_table-normal-353213": {
+    "formula_checks": 9,
+    "arithmetic_checks": 8,
+    "boundary_checks": 1,
+    "reference_checks": 26,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "003-inventory_cross_sheet-mutated-996121": {
+    "formula_checks": 10,
+    "arithmetic_checks": 8,
+    "boundary_checks": 1,
+    "reference_checks": 26,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "003-inventory_cross_sheet-normal-996121": {
+    "formula_checks": 10,
+    "arithmetic_checks": 9,
+    "boundary_checks": 1,
+    "reference_checks": 29,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "004-budget_horizontal_months-mutated-067598": {
+    "formula_checks": 12,
+    "arithmetic_checks": 11,
+    "boundary_checks": 0,
+    "reference_checks": 22,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "004-budget_horizontal_months-normal-067598": {
+    "formula_checks": 12,
+    "arithmetic_checks": 12,
+    "boundary_checks": 0,
+    "reference_checks": 24,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "005-payroll_overtime-mutated-261773": {
+    "formula_checks": 10,
+    "arithmetic_checks": 8,
+    "boundary_checks": 1,
+    "reference_checks": 42,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "005-payroll_overtime-normal-261773": {
+    "formula_checks": 10,
+    "arithmetic_checks": 9,
+    "boundary_checks": 1,
+    "reference_checks": 47,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  }
+}

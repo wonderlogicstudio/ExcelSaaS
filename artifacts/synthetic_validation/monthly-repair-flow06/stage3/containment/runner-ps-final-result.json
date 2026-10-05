@@ -1,0 +1,16 @@
+﻿{
+    "status":  "runner_data_only_and_ps_native_formula_bound_prepared",
+    "runtime_executed":  false,
+    "bootstrap_executed":  false,
+    "native_executed":  false,
+    "register_executed":  false,
+    "runner_ast_parse_exit":  0,
+    "runner_ast_parse_output":  "runner ast parse passed",
+    "ps_parse_exit":  0,
+    "ps_parse_output":  "ps parser passed",
+    "ps_formula_rule":  "RP03 Excel cell.Formula may differ only by optional quotes around M10 sheet; native_formula is recorded; report literal remains exact.",
+    "source_hashes":  {
+                          "artifacts/synthetic_validation/monthly-repair-flow06/stage3/rp03_saved_artifact_runtime.py":  "50b16515edc1864a1298914a0ec8097d628f2db5bc92b00b14bc385d780a8c14",
+                          "scripts/verify_delivery_output_excel.ps1":  "10d88ceedba38c23aff3e2a24b8569cc1b3111491da676c441049752dc961d3a"
+                      }
+}

@@ -54,3 +54,15 @@ Thumbs.db
 # Reproducible delivery evaluator dependencies / compiled classes
 apps/api/engine/lib/
 apps/api/engine/classes/
+
+# Local verification state and reproducible build caches (GitHub checkpoint 2026-10-05)
+artifacts/synthetic_validation/**/private-state/
+artifacts/synthetic_validation/**/runtime/
+artifacts/synthetic_validation/**/pytest-tmp*/
+artifacts/synthetic_validation/**/vite-cache/
+artifacts/synthetic_validation/**/release-tools/output/
+
+# Public synthetic examples required by the delivery instruction package
+!docs/delivery-v3_2/examples/repair_delivery/source_DEMO.xlsx
+!docs/delivery-v3_2/examples/repair_delivery/workbookcare_repaired_DEMO.xlsx
+!docs/delivery-v3_2/examples/repair_delivery/changes_DEMO.xlsx

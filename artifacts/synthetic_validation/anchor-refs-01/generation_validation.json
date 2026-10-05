@@ -1,0 +1,18 @@
+{
+  "anchor-refs-normal-001": {
+    "formula_checks": 10,
+    "arithmetic_checks": 9,
+    "boundary_checks": 1,
+    "reference_checks": 74,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "anchor-refs-mutated-001": {
+    "formula_checks": 10,
+    "arithmetic_checks": 8,
+    "boundary_checks": 1,
+    "reference_checks": 66,
+    "answer_marker_cells": 0,
+    "excel_recalculation": "NOT_RUN"
+  }
+}

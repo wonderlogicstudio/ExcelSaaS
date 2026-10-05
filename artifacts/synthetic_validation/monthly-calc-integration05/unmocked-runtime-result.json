@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "kind": "UNMOCKED_REFERENCE_COMPATIBILITY_RP01_RP02_RUNTIME",
+  "before": {
+    "reference_status": {
+      "status": "PASS",
+      "case_count": 20,
+      "excel_version": "16.0",
+      "reference_digest": "a841c019a2fc8d240313e6c8feae4d58dfd646f523d1302271050f1d7d752cc4"
+    },
+    "compatibility_status": {
+      "status": "PASS",
+      "excel_version": "16.0",
+      "profiles": [
+        "COMBINED_RP01_RP02"
+      ],
+      "evidence_digest": "0ab55706f85440f4e811559347e3ed67622381f384d15de7b459138903449008"
+    }
+  },
+  "runtime_result": {
+    "event": "delivery_runtime_verified",
+    "reference_cases": 20,
+    "repair_profiles": 2,
+    "artifacts": 6,
+    "payment_tested": false
+  },
+  "boundaries": {
+    "compatibility_mocked": false,
+    "reference_mocked": false,
+    "excel_browser_deploy_git": false,
+    "profiles": [
+      "RP01_NUMERIC_TEXT_FIELD_V1",
+      "RP02_FORMULA_RESTORE_V1"
+    ]
+  }
+}

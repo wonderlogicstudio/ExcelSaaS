@@ -1,0 +1,7 @@
+﻿{
+    "command":  "npm.cmd run test -- ProposalFlow -t monthly",
+    "exit_code":  0,
+    "output":  "artifacts/synthetic_validation/monthly-repair-flow06/stage4/resume01/npm-test-rp03-namefilter-monthly.txt",
+    "timestamp":  "2026-09-22T23:54:42.4330463+09:00",
+    "note":  "previous filter with pipe did not reach vitest on Windows cmd"
+}

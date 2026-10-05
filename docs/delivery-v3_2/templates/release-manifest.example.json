@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "is_template": true,
+  "live_enabled": false,
+  "products": {
+    "APPROVED_REPAIR": {
+      "RP01": "NOT_EVALUATED",
+      "RP02": "NOT_EVALUATED",
+      "required_artifacts": [
+        "repaired_workbook",
+        "change_log",
+        "verification_report"
+      ],
+      "ready": false
+    },
+    "TWO_FILE_COMPARISON": {
+      "required_artifacts": [
+        "comparison_report",
+        "comparison_verification"
+      ],
+      "ready": false
+    }
+  },
+  "owner_approved_products": []
+}

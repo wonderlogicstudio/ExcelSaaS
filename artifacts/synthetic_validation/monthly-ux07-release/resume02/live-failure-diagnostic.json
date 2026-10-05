@@ -1,0 +1,37 @@
+{
+  "conditions": [
+    {
+      "type": "Ready",
+      "status": "False",
+      "reason": "HealthCheckContainerError"
+    },
+    {
+      "type": "Active",
+      "status": "False",
+      "reason": null
+    },
+    {
+      "type": "ContainerHealthy",
+      "status": "False",
+      "reason": "HealthCheckContainerError"
+    },
+    {
+      "type": "ContainerReady",
+      "status": "True",
+      "reason": null
+    },
+    {
+      "type": "ResourcesAvailable",
+      "status": "True",
+      "reason": null
+    }
+  ],
+  "logs": [
+    {
+      "exception_types": [],
+      "system_flags": [
+        "STARTUP HTTP probe failed"
+      ]
+    }
+  ]
+}

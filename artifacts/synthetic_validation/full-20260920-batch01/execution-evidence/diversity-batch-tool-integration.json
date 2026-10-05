@@ -1,0 +1,14 @@
+{
+  "command": [
+    "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+    "-m",
+    "pytest",
+    "tools/synthetic_validation/tests",
+    "-q",
+    "-p",
+    "no:cacheprovider"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 7.52,
+  "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-tool-integration.log"
+}

@@ -1,0 +1,86 @@
+{
+  "patch_fingerprint": "03df36a30f8aac5bff5c4f0b1ec143c2dd72291b6a23fb53ccd88fde8a536d1a",
+  "rows": [
+    {
+      "profile": "RP01",
+      "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+      "plan_digest": "c52f366aaedae9386544d114428574577247102faa47a4595803a7f40401bbcd",
+      "output_hash": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+      "files": {
+        "REPAIRED_XLSX": {
+          "name": "workbookcare_repaired_569d8376-bfb3-45bc-ad94-6f763cf4d5cd.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+          "bytes": 2046
+        },
+        "CHANGES_XLSX": {
+          "name": "changes_569d8376-bfb3-45bc-ad94-6f763cf4d5cd.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "83b9f47bbc826bb86eef11360b364544b47c8a2a47ad930b396c8aec610f4120",
+          "bytes": 9982
+        },
+        "VERIFICATION_HTML": {
+          "name": "verification_569d8376-bfb3-45bc-ad94-6f763cf4d5cd.html",
+          "mime": "text/html;charset=utf-8",
+          "sha256": "984a0b4d9e0a9bfc8be9f268f4ba00fdb37bbea8b348a34fa7ada063a3dc0291",
+          "bytes": 4993
+        }
+      },
+      "ready_published": false
+    },
+    {
+      "profile": "RP02",
+      "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+      "plan_digest": "dee3027ab03fffd77c3cdfb155bf6869700239f4133cccfac099507b85e826b3",
+      "output_hash": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+      "files": {
+        "REPAIRED_XLSX": {
+          "name": "workbookcare_repaired_fae49400-622e-4321-8549-b08e09d291c8.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+          "bytes": 2067
+        },
+        "CHANGES_XLSX": {
+          "name": "changes_fae49400-622e-4321-8549-b08e09d291c8.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "b06fa95d19776faceaa956178fea1f8926ceb7ecefe3c51f85c419e4fd23de92",
+          "bytes": 9949
+        },
+        "VERIFICATION_HTML": {
+          "name": "verification_fae49400-622e-4321-8549-b08e09d291c8.html",
+          "mime": "text/html;charset=utf-8",
+          "sha256": "0be6ad6fc8ef7e46c3e04dbf81178df88817cdb8675115f574ea0f95b6e5fe46",
+          "bytes": 4932
+        }
+      },
+      "ready_published": false
+    },
+    {
+      "profile": "RP03",
+      "source_hash": "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+      "plan_digest": "80112fd7cc90bb7754f0729d856ae031442b87700cceb018612e1555c9457def",
+      "output_hash": "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+      "files": {
+        "REPAIRED_XLSX": {
+          "name": "workbookcare_repaired_633e7aec-8829-4e8d-80df-fab9f7d49382.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "96ffbca2612f4ab0611f5b01bce606008ed603dfed835684eb435f2f873d41cd",
+          "bytes": 7463
+        },
+        "CHANGES_XLSX": {
+          "name": "changes_633e7aec-8829-4e8d-80df-fab9f7d49382.xlsx",
+          "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "sha256": "c3a3462389556a0480f52a4e91b273a11d6d9e4003e43d1cf5b7c403f5d2c674",
+          "bytes": 10069
+        },
+        "VERIFICATION_HTML": {
+          "name": "verification_633e7aec-8829-4e8d-80df-fab9f7d49382.html",
+          "mime": "text/html;charset=utf-8",
+          "sha256": "e4870386d5348ae069d6980517c5927a1b9cce8f85ba185f3afcce8b38dc08f7",
+          "bytes": 5245
+        }
+      },
+      "ready_published": false
+    }
+  ]
+}

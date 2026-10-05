@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "reviewer": "monthly_calc_review",
+  "scope": "Stage2stricteligibility andbeforeerrorgate corrections",
+  "evidence": "9affectedtestsPASS/Ruff0; priorunaffectedtargeted evidence reused; no reviewer reruns",
+  "stage3_condition": "Bind monthly rule andstricthelper inplanstaleness andcompatibility fingerprints"
+}

@@ -1,0 +1,100 @@
+﻿{
+    "status":  "TARGETED_PASS_REVIEW_READY",
+    "unit":  "MONTHLY-CALC-ACCEPT-03",
+    "timestamp":  "2026-09-22T06:49:33.9968018Z",
+    "scope":  {
+                  "allowed_changes":  [
+                                          "apps/api/tests/test_monthly_calculation.py",
+                                          "docs root evidence only"
+                                      ],
+                  "accept03_product_source_changed":  false,
+                  "notes":  [
+                                "ACCEPT-03 was test-only; product source and Java class were not intentionally edited during this acceptance unit.",
+                                "Existing working-tree product/doc diffs are from prior MONTHLY-CALC/depth work and remain part of the broader checkpoint.",
+                                "No compile, legacy subset, full regression, native Excel, deploy, git add, or commit was run for ACCEPT-03."
+                            ]
+              },
+    "changed_files_status":  [
+                                 " M apps/api/app/delivery_calculation.py",
+                                 " M apps/api/engine/DeliveryCalc.java",
+                                 " M docs/09_CURRENT_MILESTONE.md",
+                                 " M docs/10_PROGRESS.md",
+                                 " M docs/MILESTONE_REVIEW.md",
+                                 " M docs/delivery-v3_2/delivery-progress.json",
+                                 " M docs/delivery-v3_2/owner_action.md",
+                                 " M docs/delivery-v3_2/reviews/SYNTHETIC-01.md",
+                                 "?? apps/api/tests/test_monthly_calculation.py"
+                             ],
+    "acceptance_cases_added":  [
+                                   "actual POI quoted and unquoted direct monthly sheet references return 1001",
+                                   "Python unknown calculation mode rejects",
+                                   "raw Java unknown monthly mode and malformed mode header reject",
+                                   "raw Java default CALC_V1 still rejects cross-sheet references",
+                                   "raw Java NaN, Infinity, and -Infinity monthly operands reject with controlled exit 20",
+                                   "formula-derived numeric monthly operand is accepted",
+                                   "blank upstream through =A2 is classified valid because the evaluated operand is numeric 0; typed evidence B15=0.0 and N18=1001.0",
+                                   "formula-derived empty string/text/boolean/error monthly operands reject without silent coercion",
+                                   "direct blank monthly operand rejects before engine launch",
+                                   "raw Java grammar negatives cover anchors, ranges, 3D, external refs, mixed-month subtraction, non-month sheet, and function involving refs with numeric controls",
+                                   "raw Java numeric baseline decodes actual output cells and verifies Budget N18=-5, M10 B16=1001, M10 B15=1006"
+                               ],
+    "reviewer_reclassification":  {
+                                      "initial_failure":  "Earlier ACCEPT-03 monthly run failed 1 failed, 33 passed because blank upstream =A2 did not raise.",
+                                      "decision":  "Reviewer/root classified this as a test-fixture defect: contract requires evaluated monthly operands numeric, not all transitive leaves numeric.",
+                                      "correction":  "Blank-upstream control now asserts B15 numeric 0.0 and N18 numeric 1001.0; nonnumeric formula blank uses =\"\" and rejects."
+                                  },
+    "commands":  [
+                     {
+                         "name":  "initial acceptance monthly run before fixture reclassification",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m pytest apps\\api\\tests\\test_monthly_calculation.py -q",
+                         "exit":  1,
+                         "summary":  "1 failed, 33 passed; failure was test_monthly_formula_operand_must_resolve_to_number expecting blank-upstream =A2 to reject, while product evaluated B15 as numeric 0 and N18 as 1001."
+                     },
+                     {
+                         "name":  "typed diagnostic after initial failure",
+                         "command":  "targeted Python diagnostic for blank/text/boolean/error/formula_empty_string operand cases",
+                         "exit":  0,
+                         "summary":  "blank ACCEPT B15 number 0.0 and N18 number 1001.0; text, boolean, error, and formula_empty_string rejected with ENGINE_UNSUPPORTED."
+                     },
+                     {
+                         "name":  "captured final monthly rerun before parser fix",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m pytest apps\\api\\tests\\test_monthly_calculation.py -q",
+                         "exit":  1,
+                         "summary":  "Product returned raw Java exit 0 and Budget N18 number -5.0, but new _decoded_java_rows parsed a Log4j warning before CALC_RESULT_V1 and failed with ValueError; fixed test helper to start after CALC_RESULT_V1."
+                     },
+                     {
+                         "name":  "final monthly targeted suite",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m pytest apps\\api\\tests\\test_monthly_calculation.py -q",
+                         "exit":  0,
+                         "summary":  "42 collected monthly cases passed; quiet output printed 42 passing dots."
+                     },
+                     {
+                         "name":  "collection-only count confirmation",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m pytest apps\\api\\tests\\test_monthly_calculation.py --collect-only -q",
+                         "exit":  0,
+                         "raw_output":  "tests/test_monthly_calculation.py: 42"
+                     },
+                     {
+                         "name":  "ruff before import-order fix",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m ruff check apps\\api\\app\\delivery_calculation.py apps\\api\\tests\\test_monthly_calculation.py",
+                         "exit":  1,
+                         "summary":  "I001 import block unsorted because base64 was placed after pathlib; fixed test-only import order."
+                     },
+                     {
+                         "name":  "final ruff",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m ruff check apps\\api\\app\\delivery_calculation.py apps\\api\\tests\\test_monthly_calculation.py",
+                         "exit":  0,
+                         "raw_output":  "All checks passed!"
+                     }
+                 ],
+    "prior_depth02_reused":  {
+                                 "monthly_tests":  "17 passed after range-overflow correction",
+                                 "legacy_subset":  "29 passed, reused per root instruction",
+                                 "note":  "No legacy rerun in ACCEPT-03 because source/class unchanged for this test-only unit."
+                             },
+    "caveats":  [
+                    "Native/reference integration evidence remains STALE because engine changes invalidate prior evidence and reference/oracle regeneration was out of scope.",
+                    "The 13-sheet original monthly fixture remains out of scope under the unchanged 10-sheet limit.",
+                    "No full regression or native Excel validation was run."
+                ]
+}

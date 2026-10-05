@@ -1,0 +1,30 @@
+{
+  "status": "AUTOMATED_REGRESSION_PASS_BROWSER_DELIVERY_PARTIAL",
+  "web_tests": 177,
+  "api_tests": 316,
+  "worker_tests": 16,
+  "automated_test_total": 509,
+  "m4c_exact_candidates": 36,
+  "m4c_extras": 0,
+  "type_build": "PASS",
+  "ruff": "PASS",
+  "independent_test_fix_review": "PASS",
+  "initial_verify_script_exit": 1,
+  "final_component_exits": {
+    "web": 0,
+    "build": 0,
+    "worker": 0,
+    "api": 0,
+    "ruff": 0,
+    "m4c": 0
+  },
+  "api_warning": "Starlette/httpx deprecation; no new dependency installation",
+  "test_only_fix": "ProposalFlow.test.tsx delayed revoke callbacks drained before URL mock restore",
+  "beta_repaired_expected_minus5": "PRIOR_VERIFIED_UNCHANGED",
+  "beta_changes_xlsx_receipt": "NOT_VERIFIED",
+  "beta_verification_html_receipt": "NOT_VERIFIED",
+  "public_launch": "NOT_AUTHORIZED_OR_PERFORMED",
+  "new_native_excel_run": false,
+  "commit_push_deploy": "NOT_RUN",
+  "public_launch_recommendation": "public introduction/sample demo, invited synthetic beta first; unrestricted upload deferred"
+}

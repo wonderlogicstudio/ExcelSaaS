@@ -1,0 +1,25 @@
+JOURNEY-DOWNLOAD-FEEDBACK01 builder validation after reviewer unmount correction
+
+Command: npm.cmd test -- --run src/components/ProposalFlow.test.tsx
+Workdir: apps/web
+Exit code: 0
+Output excerpt:
+  ✓ src/components/ProposalFlow.test.tsx (27 tests) 2265ms
+  Test Files  1 passed (1)
+       Tests  27 passed (27)
+  Duration  4.76s
+
+Command: npm.cmd run build
+Workdir: apps/web
+Exit code: 0
+Output excerpt:
+  > tsc -b && vite build
+  vite v6.4.3 building for production...
+  ✓ 1630 modules transformed.
+  dist/index.html                             1.07 kB │ gzip:   0.62 kB
+  dist/assets/index-CJMA2Rml.css             74.52 kB │ gzip:  15.83 kB
+  dist/assets/workbookEvidence-Dw_F_SwO.js    7.21 kB │ gzip:   3.34 kB
+  dist/assets/index-C6ocgFpD.js             375.15 kB │ gzip: 109.32 kB
+  ✓ built in 3.58s
+
+Earlier initial sandbox test attempt exited 1 before tests started: Vite esbuild spawn EPERM. Authorized elevated rerun passed. The reviewer correction adds an unmount guard and a deferred-response unmount test. No backend, engine, delivery artifact, deployment, or browser save proof was run in this builder unit.

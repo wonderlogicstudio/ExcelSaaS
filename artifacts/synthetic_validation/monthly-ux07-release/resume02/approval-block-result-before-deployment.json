@@ -1,0 +1,22 @@
+{
+  "status": "REVIEW_PASS_DEPLOYMENT_BLOCKED_BY_AUTOMATIC_APPROVAL",
+  "product_commit": "ffd6647c5c288e86cb2cff51436ea0c4f06331e2",
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:d2265d9e56756fd240e1ddf93509d9fa096bd6d77acd499caff9d41ab1caa5c9",
+  "review": "PASS after bounded final correction",
+  "baseline_command_exit": 0,
+  "baseline_revision": "workbookcare-api-beta-00029-dir",
+  "baseline_worker": "02a4700b-3031-4404-aa87-09f18726594e",
+  "image_push": "NOT_EXECUTED_AUTOMATIC_APPROVAL_REJECTED",
+  "reason": "Exact image payload and Google Artifact Registry destination require explicit owner authorization according to automatic review",
+  "cloud_mutation": false,
+  "beta_changed": false,
+  "not_run": [
+    "registry upload",
+    "Linux staged RP03 proof",
+    "Cloud Run promotion",
+    "Worker deploy",
+    "beta UI/download proof"
+  ],
+  "next": "Owner explicit destination/image/deployment approval requested; execute reviewed resume02 sequence after approval",
+  "reused": "Product tests/native Excel unchanged; no repeats"
+}

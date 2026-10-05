@@ -1,0 +1,18 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "reviewer": "monthly_calc_review",
+  "findings": [
+    {
+      "severity": "high",
+      "cause": "Cached #VALUE! used as actual before calculation proof",
+      "fix": "Explicit trusted engine-calculated before result, ignore caches for truth; negative/cacheless controls"
+    },
+    {
+      "severity": "medium",
+      "cause": "Finite operands subtraction can overflow engine double result range",
+      "fix": "Reject nonfinite result"
+    }
+  ],
+  "verified_prior": "4 pytest tests and Ruff exit0; no reviewer reruns",
+  "scope": "One combined correction, no stage2 before PASS"
+}

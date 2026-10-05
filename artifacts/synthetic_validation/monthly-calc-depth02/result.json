@@ -1,0 +1,42 @@
+{
+  "status": "DEPTH_CORRECTIONS_REVIEW_PASS_PENDING_OWNER",
+  "scope": "Only two remaining depth guards, overflow-safe range cap and damaged error copy",
+  "monthly_tests": 17,
+  "legacy_tests": 29,
+  "ruff": "PASS",
+  "compile": "PASS",
+  "review": "PASS monthly_calc_review; focused source/evidence inspection, no duplicate tests",
+  "preserved_hashes_verified": true,
+  "source_sha256": {
+    "apps/api/app/delivery_calculation.py": "80c7588506ed7ccdb7b847422e5c141a4653d501b6cf15195ea8b266c058145c",
+    "apps/api/engine/DeliveryCalc.java": "b66b6af83103029cd5e12f9c1fb1c619430991602c91d2ebd2406275a69cc871",
+    "apps/api/tests/test_monthly_calculation.py": "d5d99bf4052d99bd8fa4b08f438f6ac7f4d3de72ea53bfc97444babbbb70ddf3"
+  },
+  "prior_findings": [
+    "Python early recursion guard restored with memoized longest paths",
+    "Java range dependencies included with long multiplication before capped expansion",
+    "Correct Korean depth rejection",
+    "Exact100-edge acceptance and over-boundary rejection checks"
+  ],
+  "issues_preserved": [
+    "Initial Ruff line-length failure fixed",
+    "Focused review found int area multiplication overflow and off-by-one boundary test; one correction followed",
+    "No red-before run for initial depth corrections was recorded; do not claim observed failing-before result"
+  ],
+  "still_pending": [
+    "Broader monthly acceptance matrix from MONTHLY-CALC-01 review",
+    "Native Excel/reference refresh after fingerprint change",
+    "Full integration and protected beta verification",
+    "13-sheet support decision; current10 limit unchanged",
+    "New formula replacement profile/approval UI"
+  ],
+  "not_run": [
+    "full regression",
+    "native Excel",
+    "browser",
+    "deployment",
+    "commit/push"
+  ],
+  "next": "One bounded remaining monthly calculation acceptance-test unit, then separately approve integration; no new repair exposed",
+  "legacy_reuse": "29 passed earlier in this correction unit; reused after only range-size long-multiplication/test-boundary correction, not rerun on final source."
+}

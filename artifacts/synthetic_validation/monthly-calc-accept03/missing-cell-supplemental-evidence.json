@@ -1,0 +1,39 @@
+﻿{
+    "status":  "SUPPLEMENTAL_TARGETED_PASS_REVIEW_READY",
+    "unit":  "MONTHLY-CALC-ACCEPT-03-MISSING-CELL-SUPPLEMENT",
+    "timestamp":  "2026-09-22T06:54:14.3736801Z",
+    "scope":  {
+                  "change":  "Added one missing-cell acceptance test only.",
+                  "changed_files":  [
+                                        "apps/api/tests/test_monthly_calculation.py"
+                                    ],
+                  "product_source_changed":  false,
+                  "no_repeat":  "Did not rerun the prior 42-case monthly suite; reused prior pass per instruction."
+              },
+    "added_case":  {
+                       "name":  "test_monthly_mode_rejects_missing_reference_cell_before_engine",
+                       "behavior":  "Deletes M10!B15 from monthly_cells and asserts WorkbookCareError code ENGINE_UNSUPPORTED with subprocess.Popen monkeypatched to fail if engine starts.",
+                       "distinction":  "Covers missing reference cell separately from the existing missing-sheet rejection."
+                   },
+    "commands":  [
+                     {
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m pytest apps\\api\\tests\\test_monthly_calculation.py::test_monthly_mode_rejects_missing_reference_cell_before_engine -q",
+                         "exit":  0,
+                         "raw_output":  ".                                                                        [100%]"
+                     },
+                     {
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m ruff check apps\\api\\tests\\test_monthly_calculation.py",
+                         "exit":  0,
+                         "raw_output":  "All checks passed!"
+                     }
+                 ],
+    "coverage":  {
+                     "prior_monthly_accept03":  "42 collected monthly cases passed in builder-evidence.json",
+                     "supplemental_new_case":  1,
+                     "combined_targeted_acceptance_coverage":  "42 prior + 1 supplemental missing-cell case passed"
+                 },
+    "caveats":  [
+                    "Product source remains unchanged for this supplemental gap correction.",
+                    "No full monthly rerun, legacy subset, compile, native Excel, deploy, git add, or commit was run."
+                ]
+}

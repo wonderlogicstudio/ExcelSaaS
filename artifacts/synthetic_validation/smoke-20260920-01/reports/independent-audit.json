@@ -1,0 +1,192 @@
+{
+  "status": "RAW_ARTIFACT_AUDIT_PASS",
+  "files": 10,
+  "xlsx_truth_and_raw_hashes_verified": true,
+  "process_failures": 0,
+  "base_scans_untruncated": 10,
+  "finding_counts_envelope": "null on internal entrypoint; issue_count/detail equality and absence of limit findings checked",
+  "audit_statuses": {
+    "COMPLETED": 8,
+    "SKIPPED_UNSUPPORTED_STRUCTURE": 2
+  },
+  "independent_m4_counts": {
+    "tp": 3,
+    "fn": 0,
+    "extra_candidates": 0,
+    "base_findings": 2
+  },
+  "scope": "5 training families, one mutation type (relative reference drift); 3 scored mutations and 2 declared out-of-scope. No holdout, Excel recalculation, HTTP/UI or repair validation.",
+  "known_tool_limits": [
+    "Worker COMPLETED includes SKIPPED_UNSUPPORTED_STRUCTURE: inspect audit_statuses, not just completion header.",
+    "Successful-only scorer counters require correction before interpreting failed/partial full runs.",
+    "Wrong-subtype finding at a mutation target may be mislabeled normal-region FP; none occurred here."
+  ],
+  "workbooks": [
+    {
+      "workbook_id": "001-retail_sales_vertical-mutated-745709",
+      "kind": "mutated",
+      "audit_status": "COMPLETED",
+      "base_scan_truncated": false,
+      "base_finding_count": 0,
+      "expected_m4": [
+        [
+          "Sales Detail",
+          "G14",
+          "FORMULA_PATTERN_OUTLIER",
+          "RELATIVE_REFERENCE_DRIFT"
+        ]
+      ],
+      "actual_m4": [
+        [
+          "Sales Detail",
+          "G14",
+          "FORMULA_PATTERN_OUTLIER",
+          "RELATIVE_REFERENCE_DRIFT"
+        ]
+      ],
+      "excluded_mutations": [],
+      "scanner_version": "0.1.3",
+      "rule_set_version": "2026.09.4"
+    },
+    {
+      "workbook_id": "001-retail_sales_vertical-normal-745709",
+      "kind": "normal",
+      "audit_status": "COMPLETED",
+      "base_scan_truncated": false,
+      "base_finding_count": 0,
+      "expected_m4": [],
+      "actual_m4": [],
+      "excluded_mutations": [],
+      "scanner_version": "0.1.3",
+      "rule_set_version": "2026.09.4"
+    },
+    {
+      "workbook_id": "002-purchase_orders_table-mutated-353213",
+      "kind": "mutated",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "base_scan_truncated": false,
+      "base_finding_count": 0,
+      "expected_m4": [],
+      "actual_m4": [],
+      "excluded_mutations": [
+        "H14"
+      ],
+      "scanner_version": "0.1.3",
+      "rule_set_version": "2026.09.4"
+    },
+    {
+      "workbook_id": "002-purchase_orders_table-normal-353213",
+      "kind": "normal",
+      "audit_status": "SKIPPED_UNSUPPORTED_STRUCTURE",
+      "base_scan_truncated": false,
+      "base_finding_count": 0,
+      "expected_m4": [],
+      "actual_m4": [],
+      "excluded_mutations": [],
+      "scanner_version": "0.1.3",
+      "rule_set_version": "2026.09.4"
+    },
+    {
+      "workbook_id": "003-inventory_cross_sheet-mutated-996121",
+      "kind": "mutated",
+      "audit_status": "COMPLETED",
+      "base_scan_truncated": false,
+      "base_finding_count": 0,
+      "expected_m4": [
+        [
+          "Movement",
+          "I17",
+          "FORMULA_PATTERN_OUTLIER",
+          "RELATIVE_REFERENCE_DRIFT"
+        ]
+      ],
+      "actual_m4": [
+        [
+          "Movement",
+          "I17",
+          "FORMULA_PATTERN_OUTLIER",
+          "RELATIVE_REFERENCE_DRIFT"
+        ]
+      ],
+      "excluded_mutations": [],
+      "scanner_version": "0.1.3",
+      "rule_set_version": "2026.09.4"
+    },
+    {
+      "workbook_id": "003-inventory_cross_sheet-normal-996121",
+      "kind": "normal",
+      "audit_status": "COMPLETED",
+      "base_scan_truncated": false,
+      "base_finding_count": 0,
+      "expected_m4": [],
+      "actual_m4": [],
+      "excluded_mutations": [],
+      "scanner_version": "0.1.3",
+      "rule_set_version": "2026.09.4"
+    },
+    {
+      "workbook_id": "004-budget_horizontal_months-mutated-067598",
+      "kind": "mutated",
+      "audit_status": "COMPLETED",
+      "base_scan_truncated": false,
+      "base_finding_count": 0,
+      "expected_m4": [],
+      "actual_m4": [],
+      "excluded_mutations": [
+        "N18"
+      ],
+      "scanner_version": "0.1.3",
+      "rule_set_version": "2026.09.4"
+    },
+    {
+      "workbook_id": "004-budget_horizontal_months-normal-067598",
+      "kind": "normal",
+      "audit_status": "COMPLETED",
+      "base_scan_truncated": false,
+      "base_finding_count": 0,
+      "expected_m4": [],
+      "actual_m4": [],
+      "excluded_mutations": [],
+      "scanner_version": "0.1.3",
+      "rule_set_version": "2026.09.4"
+    },
+    {
+      "workbook_id": "005-payroll_overtime-mutated-261773",
+      "kind": "mutated",
+      "audit_status": "COMPLETED",
+      "base_scan_truncated": false,
+      "base_finding_count": 1,
+      "expected_m4": [
+        [
+          "Payroll",
+          "J13",
+          "FORMULA_PATTERN_OUTLIER",
+          "RELATIVE_REFERENCE_DRIFT"
+        ]
+      ],
+      "actual_m4": [
+        [
+          "Payroll",
+          "J13",
+          "FORMULA_PATTERN_OUTLIER",
+          "RELATIVE_REFERENCE_DRIFT"
+        ]
+      ],
+      "excluded_mutations": [],
+      "scanner_version": "0.1.3",
+      "rule_set_version": "2026.09.4"
+    },
+    {
+      "workbook_id": "005-payroll_overtime-normal-261773",
+      "kind": "normal",
+      "audit_status": "COMPLETED",
+      "base_scan_truncated": false,
+      "base_finding_count": 1,
+      "expected_m4": [],
+      "actual_m4": [],
+      "excluded_mutations": [],
+      "scanner_version": "0.1.3",
+      "rule_set_version": "2026.09.4"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "status": "BETA_DEPLOYED_REVIEW_PASS_BROWSER_FLOW_PENDING",
+  "product_commit": "ffd6647c5c288e86cb2cff51436ea0c4f06331e2",
+  "api_revision": "workbookcare-api-beta-00033-dum",
+  "worker_version": "fbc7c8c0-893e-4a20-985c-624923cd18d6",
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:d2265d9e56756fd240e1ddf93509d9fa096bd6d77acd499caff9d41ab1caa5c9",
+  "linux_runtime_proof": {
+    "revision": "workbookcare-api-beta-00031-wes",
+    "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:d2265d9e56756fd240e1ddf93509d9fa096bd6d77acd499caff9d41ab1caa5c9",
+    "base_runtime_verified": true,
+    "rp03_runtime_verified": true,
+    "source_freeze_sha256": "0ef3f19167db83db4b2c5d733dbc7b5e0a442990718d2062d8635277e8191d04",
+    "event_count": 2
+  },
+  "security_invariants_preserved": true,
+  "worker_bindings_preserved": true,
+  "independent_release_review": "PASS",
+  "browser": {
+    "authenticated_home": "VERIFIED",
+    "automatic_file_selection": "NOT_ALLOWED_AFTER_PERMISSION_CHANGE",
+    "full_upload_approve_download_flow": "PENDING_MANUAL_FILE_SELECTION",
+    "10_action_target": "NOT_MEASURED"
+  },
+  "failure_history": [
+    "relative registry Location blocked; normalized same-origin; retryPASS",
+    "Windows cmd env transport produced failed revision00032 without traffic; official SDK direct invocation restored exactbaseline in00033",
+    "recovery guard diagnostic path typo stopped before mutation; pointercorrected"
+  ],
+  "reused": "Existing product regression/native Excel proof, successful staged31 proof of unchanged image reused",
+  "not_run": [
+    "actual beta browser full-flow/download acceptance",
+    "real customer usability",
+    "real payment/PG validation"
+  ],
+  "git": "Productffd6647 previously pushed; current operator evidence/helper corrections local uncommitted",
+  "next": "Finish actual beta browser fixed expected-value and downloaded-files verification"
+}

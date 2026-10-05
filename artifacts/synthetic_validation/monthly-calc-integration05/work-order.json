@@ -1,0 +1,45 @@
+{
+  "id": "MONTHLY-CALC-INTEGRATION-05",
+  "scope": "Existing RP01/RP02 plan, actual patch/revalidation and three-artifact delivery with refreshed real reference; combined fixed calculation control",
+  "approval": "User continue next proposed integration unit",
+  "allowed_writes": [
+    "artifacts/synthetic_validation/monthly-calc-integration05",
+    "progress/review records"
+  ],
+  "frozen_hashes": {
+    "apps/api/app/delivery_calculation.py": "80c7588506ed7ccdb7b847422e5c141a4653d501b6cf15195ea8b266c058145c",
+    "apps/api/engine/DeliveryCalc.java": "b66b6af83103029cd5e12f9c1fb1c619430991602c91d2ebd2406275a69cc871",
+    "apps/api/engine/classes/DeliveryCalc.class": "443eecd6a70f38d9fcb04f289e4fdcb8f05dd069e1eb50b45c1c5a96d00a2c41",
+    "apps/api/engine/classes/DeliveryCalc$1.class": "e137ab9129d9f12910f931b6762b42a9bb7114683c3bf35b8fa2b98eb5a597c0",
+    "apps/api/app/delivery_inputs.py": "726b2788f8f57378d7d2206c14a3e25ca4acb379194463226f876545b305b017",
+    "apps/api/app/delivery_plan.py": "fa7cca830f4957069d7105b19848366c83b84812c1579df6f84f8de7993fe1cb",
+    "apps/api/app/repair_rules/formula_restore.py": "92a97a4843976ee224c825a0515019fcd44831a118bd1c1c4c4990a0c6e00d62",
+    "apps/api/app/repair_rules/numeric_text.py": "97f45343b3d5af74b7678d18f4fb15752ba0f8cb986a249b102c736edb7abd1f",
+    "apps/api/engine/dependencies.lock.json": "4bb18c1a43e322f39682aa4afeac353ca4e1ccbde0662023a5736f5e05ec4dd0",
+    "apps/api/app/delivery_reference.json": "1f45a9070cd2f18d8dca4d45ee8e21fc229e2cf77a6ed8cd2d908c009f972710",
+    "samples/delivery-v3_2/reference-cases.json": "49cde2bbaf9c4752b730e4b03b83209e6eaad7dc6f1e728ad030341d68175303",
+    "artifacts/synthetic_validation/monthly-repair-spec01/acceptance-oracle.json": "63fd69b22b3dc29cc9337b6bfd2d460bdb02c1059adb825aa67929fbe88be161",
+    "apps/api/app/delivery_patch_reference.json": "4c617c2cd3ef64f122de19c7f38c905f77bc0502ed14f418662add09962e7e63",
+    "apps/api/app/delivery_execution.py": "20d390043ce31f7601e56c1c184ea2b28646e49b1fa66f4cf5022d359fd2646f",
+    "apps/api/app/delivery_patch.py": "dcb5b39d3c9773a35911d952c8c15abded93d5e4e9391cbed996ef57e2fa49b0",
+    "apps/api/tests/test_repair_rules.py": "7efb914db3ce749fa42563487999edc30ead974a54808fc7fdf407c9510b8130",
+    "apps/api/tests/test_delivery_patch.py": "5b348553a2c9b48bc734e8e8baddb5b2b71f4b024d932aba08a541133178a26f",
+    "apps/api/tests/test_delivery_execution.py": "61e75e4616037e2197b3c7521f81741f534f856f1ec32fc6de49f65004412edc",
+    "apps/api/tests/test_delivery_plan.py": "ac6c513356d9ee4ae4c359f13cde2db20ab22afe8ec65996c16ea927abaa2ddb"
+  },
+  "acceptance": [
+    "Existing numeric and blank formula rules retain expected values and refusal conditions",
+    "Real unmocked reference/compatibility plus actual separate approval and three-artifact generation for both profiles",
+    "Combined fixed11changes/42impacts/values preserved; original/non-target unchanged"
+  ],
+  "not_run": [
+    "monthly43 repeat",
+    "nativeExcel20 repeat",
+    "full regression",
+    "browser",
+    "deploy",
+    "commit/push",
+    "newprofileimplementation"
+  ],
+  "on_failure": "Record mismatch and stop before product edits; one harness correction allowed for same cause"
+}

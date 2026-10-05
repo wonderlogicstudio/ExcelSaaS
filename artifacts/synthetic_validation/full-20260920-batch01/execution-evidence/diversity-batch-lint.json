@@ -1,0 +1,17 @@
+{
+  "command": [
+    "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+    "-m",
+    "ruff",
+    "check",
+    "tools/synthetic_validation/generator.py",
+    "tools/synthetic_validation/scenarios.py",
+    "tools/synthetic_validation/verify_generated.py",
+    "tools/synthetic_validation/tests/test_diversity_batch.py",
+    "--select",
+    "I,F"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 0.18,
+  "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-lint.log"
+}

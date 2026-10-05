@@ -1,0 +1,3 @@
+business_domain,structural_family,mutation_type,split,family_id,fp,candidate_fp,definitive_fp,excluded,unjudged,duplicates,workbooks,successful_workbooks,avg_fp_per_workbook,max_fp_per_workbook
+budget versus actual,horizontal_monthly_matrix,m4_relative_reference_drift,train,F04-budget-horizontal,0,0,0,0,0,0,1,1,0,0
+budget versus actual,horizontal_monthly_matrix,normal,train,F04-budget-horizontal,0,0,0,0,0,0,1,1,0,0

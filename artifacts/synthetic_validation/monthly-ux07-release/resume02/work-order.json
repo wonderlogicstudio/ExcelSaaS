@@ -1,0 +1,21 @@
+{
+  "unit": "MONTHLY-UX07-RELEASE-RESUME02",
+  "authorization": "User explicitly asks beta deployment after exact product commit pushed",
+  "product_commit": "ffd6647c5c288e86cb2cff51436ea0c4f06331e2",
+  "scope": [
+    "correct five guarded release defects",
+    "independent review",
+    "existing protected beta deploy and actual synthetic UI/download proof"
+  ],
+  "preserve": [
+    "product source/native fingerprints",
+    "Access/private IAM/Gateway/storage/payment OFF",
+    "all previous evidence"
+  ],
+  "no": [
+    "new resources",
+    "new product features",
+    "real customer files"
+  ],
+  "status": "BETA_DEPLOYED_REVIEW_PASS_BROWSER_FLOW_PENDING"
+}

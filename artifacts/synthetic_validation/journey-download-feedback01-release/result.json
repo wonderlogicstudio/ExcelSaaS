@@ -1,0 +1,27 @@
+{
+  "status": "BETA_DEPLOYED_RECEIPT_PARTIAL_WAITING_MANUAL_CLICK",
+  "worker_version": "44ed2196-cca5-4fa9-963c-16497a3ff77a",
+  "api_revision": "workbookcare-api-beta-00033-dum",
+  "bindings_unchanged": true,
+  "access_preserved": true,
+  "source_freeze_sha256": "e1991405571b7c4275bd5dbdaf69aebe1ec1a6d6edac0a3eb87ba0f52d7bfc2c",
+  "frontend_feedback": "LIVE_VERIFIED",
+  "desktop_width": 1440,
+  "mobile_width": 390,
+  "mobile_scroll_width": 390,
+  "synthetic_scan": {
+    "structure": 0,
+    "formula": 1
+  },
+  "expected_result": -5,
+  "actual_repaired_file": "PASS_HASH_MATCH_PRIOR_NATIVE_EXCEL",
+  "changes_file": "NOT_RECEIVED",
+  "verification_html": "NOT_RECEIVED",
+  "download_permission_owner_report": "ALLOWED",
+  "manual_click_result": "PENDING",
+  "product_tests": "REUSED_PRIOR_27_PASS",
+  "hosted_build": "PASS",
+  "api_deployment": "NOT_RUN_UNCHANGED",
+  "commit_push": "NOT_RUN",
+  "independent_release_evidence_review": "PASS"
+}

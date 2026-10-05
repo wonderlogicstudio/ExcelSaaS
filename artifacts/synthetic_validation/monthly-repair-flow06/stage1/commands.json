@@ -1,0 +1,65 @@
+{
+  "stage": "stage1-monthly-rule",
+  "commands": [
+    {
+      "command": "python -m pytest apps/api/tests/test_monthly_repair.py",
+      "exit_code": 1,
+      "result": "System Python 3.13 has no pytest module; no tests executed."
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m pytest apps/api/tests/test_monthly_repair.py",
+      "exit_code": 0,
+      "result": "4 passed; PytestCacheWarning because sandbox denied .pytest_cache write."
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m ruff check apps/api/app/repair_rules/monthly_formula.py apps/api/tests/test_monthly_repair.py",
+      "exit_code": 1,
+      "result": "Ruff default cache write denied under apps/api/.ruff_cache."
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m ruff check --no-cache apps/api/app/repair_rules/monthly_formula.py apps/api/tests/test_monthly_repair.py",
+      "exit_code": 1,
+      "result": "Formatting issues only: E501 and I001."
+    },
+    {
+      "command": "parallel: apps/api/.venv/Scripts/python.exe -m pytest apps/api/tests/test_monthly_repair.py ; apps/api/.venv/Scripts/python.exe -m ruff check --no-cache apps/api/app/repair_rules/monthly_formula.py apps/api/tests/test_monthly_repair.py",
+      "exit_code": "pytest 0, ruff 1",
+      "result": "Pytest passed; Ruff still reported one import-order issue."
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m ruff check --no-cache --fix apps/api/tests/test_monthly_repair.py",
+      "exit_code": 1,
+      "result": "Ruff auto-fix could not write the file under sandbox; manual one-line import-block fix applied."
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m pytest apps/api/tests/test_monthly_repair.py",
+      "exit_code": 0,
+      "result": "4 passed after formatting corrections; same PytestCacheWarning."
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m ruff check --no-cache apps/api/app/repair_rules/monthly_formula.py apps/api/tests/test_monthly_repair.py",
+      "exit_code": 0,
+      "result": "All checks passed."
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m pytest apps/api/tests/test_monthly_repair.py",
+      "exit_code": 0,
+      "result": "Review correction rerun: 5 passed; PytestCacheWarning because sandbox denied .pytest_cache write."
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m ruff check --no-cache apps/api/app/repair_rules/monthly_formula.py apps/api/tests/test_monthly_repair.py",
+      "exit_code": 1,
+      "result": "Review correction first Ruff rerun found one E501 formatting issue."
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m ruff check --no-cache apps/api/app/repair_rules/monthly_formula.py apps/api/tests/test_monthly_repair.py",
+      "exit_code": 0,
+      "result": "Review correction final rerun: All checks passed."
+    },
+    {
+      "command": "apps/api/.venv/Scripts/python.exe -m pytest apps/api/tests/test_monthly_repair.py",
+      "exit_code": 0,
+      "result": "Review correction final rerun: 5 passed; same PytestCacheWarning."
+    }
+  ]
+}

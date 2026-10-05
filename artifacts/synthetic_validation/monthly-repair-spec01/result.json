@@ -1,0 +1,19 @@
+{
+  "status": "SPEC_FROZEN_IMPLEMENTATION_NOT_RUN",
+  "base_commit": "d1f75b15885d7e6db90e2be3088af484ae84cdb0",
+  "prior_native_normal_N18": -5,
+  "fixture_hashes_verified": 4,
+  "oracle_sha256": "63fd69b22b3dc29cc9337b6bfd2d460bdb02c1059adb825aa67929fbe88be161",
+  "validation": "JSON/schema fields checked; prior normal native value/formula/pass and four fixture hashes matched; record.py exit0",
+  "new_product_tests": "NOT_RUN",
+  "product_changes": false,
+  "deploy": false,
+  "next_unit": "Bounded internal monthly-sheet calculation/reference graph support with RP01/RP02 rejection boundaries unchanged",
+  "gaps": [
+    "cross-sheet grammar rejected",
+    "dependency graph assumes same sheet",
+    "RP02 only blanks",
+    "all existing calculation errors rejected"
+  ],
+  "owner_checkpoint_required": true
+}

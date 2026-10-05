@@ -1,0 +1,45 @@
+{
+  "status": "HISTORICAL_NINE_ARTIFACTS_RECOVERED_AND_VERIFIED",
+  "archive": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-final01\\archive-before-20260916-111332\\Users__JinwonLee__project__ExcelSaaS__artifacts__verification__d08__compatibility",
+  "native_record_identical": true,
+  "native_manifest_file_hashes_match": true,
+  "restored": [
+    {
+      "name": "inputs.json",
+      "sha256": "4b908772a3ebbad0bcd4b1d02979daa8c2d6f510e0f4b0f8a968a0f963a5a894"
+    },
+    {
+      "name": "RP01-REPAIRED_XLSX.xlsx",
+      "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8"
+    },
+    {
+      "name": "RP01-CHANGES_XLSX.xlsx",
+      "sha256": "4493f7d4c7932977c5b50f2486272a3245ea9706271e4ac66923aab609a62a81"
+    },
+    {
+      "name": "RP01-VERIFICATION_HTML.html",
+      "sha256": "4eb6c55d3bc1550cf99742969d581fb811387ed0a6f97630ac800701f03b5dc0"
+    },
+    {
+      "name": "RP01-manifest.json",
+      "sha256": "609237cbf6a216c208bcaa379b326b83c064fe46ed45c488e54ba908e70b78c8"
+    },
+    {
+      "name": "RP02-REPAIRED_XLSX.xlsx",
+      "sha256": "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c"
+    },
+    {
+      "name": "RP02-CHANGES_XLSX.xlsx",
+      "sha256": "d92a87fd705dc122656ebba0998544cb4c9ed909a9c215ae3dc2a629bb961607"
+    },
+    {
+      "name": "RP02-VERIFICATION_HTML.html",
+      "sha256": "d37fd9f41caf2293f2cfe14cc6a0b5f132e749f994eb3b7d1d87858745fe9440"
+    },
+    {
+      "name": "RP02-manifest.json",
+      "sha256": "f8ff6f1567be05c6e50a470f2640c47e5274eea986d17d668ed6a0d73571711c"
+    }
+  ],
+  "limitation": "This restores the archived native-validated evidence set; exact pre-run private-state database contents were not captured. Bootstrap store cleanup is not reversed or falsely claimed restored. Existing new RP03 copies in historical folder are inert; do not use historical folder for new verification."
+}

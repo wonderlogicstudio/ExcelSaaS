@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>WorkbookCare Synthetic Validation smoke-20260920-01</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 32px; color: #172033; }
+table { border-collapse: collapse; width: 100%; margin-top: 16px; }
+th, td { border: 1px solid #d5d9e2; padding: 8px; text-align: left; }
+th { background: #eef2f8; }
+.note { color: #5c667a; }
+.metric { display: inline-block; margin-right: 20px; }
+</style>
+<p><strong>과거 원시 응답 재집계입니다. 새 엔진 실행이나 새 탐지 성적이 아닙니다.</strong></p><h1>WorkbookCare Synthetic Validation</h1>
+<p class="note">Synthetic diagnostic validation only. This report does not claim customer-file accuracy, Excel recalculation, HTTP/UI coverage, commercial readiness, or repair capability.</p>
+<p>
+  <span class="metric"><b>Run:</b> smoke-20260920-01</span>
+  <span class="metric"><b>Pairs:</b> 5</span>
+  <span class="metric"><b>Workbooks:</b> 10</span>
+</p>
+<p>
+  <span class="metric"><b>Process outputs:</b> 10/10</span>
+  <span class="metric"><b>Fully analyzed:</b> 8/10</span>
+  <span class="metric"><b>Partial:</b> 2</span>
+  <span class="metric"><b>Failures:</b> 0</span>
+  <span class="metric"><b>Timeouts:</b> 0</span>
+  <span class="metric"><b>Not run:</b> 0</span>
+</p>
+<p>
+  <span class="metric"><b>Skipped audits:</b> 2</span>
+  <span class="metric"><b>Abstained audits:</b> 0</span>
+  <span class="metric"><b>Failed audits:</b> 0</span>
+  <span class="metric"><b>Truncated/omitted base scans:</b> 0</span>
+  <span class="metric"><b>Raw process errors:</b> 0</span>
+</p>
+<p>
+  <span class="metric"><b>TP:</b> 3</span>
+  <span class="metric"><b>FN:</b> 0</span>
+  <span class="metric"><b>FP:</b> 0</span>
+  <span class="metric"><b>Candidate FP:</b> 0</span>
+  <span class="metric"><b>Definitive FP:</b> 0</span>
+  <span class="metric"><b>Duplicates:</b> 0</span>
+  <span class="metric"><b>Precision:</b> 1.0</span>
+  <span class="metric"><b>Recall:</b> 1.0</span>
+  <span class="metric"><b>Analysis completion rate:</b> 0.8</span>
+</p>
+<p class="note">Excluded ambiguous or out-of-scope findings are not passes: 0. Unjudged findings are not passes: 2.</p>
+<h2>Scope Results</h2>
+<table>
+<thead><tr><th>Business</th><th>Structure</th><th>Mutation</th><th>Split</th><th>TP</th><th>FN</th><th>FP</th><th>Avg FP</th><th>Max FP</th></tr></thead>
+<tbody><tr><td>budget versus actual</td><td>horizontal_monthly_matrix</td><td>m4_relative_reference_drift</td><td>train</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>budget versus actual</td><td>horizontal_monthly_matrix</td><td>normal</td><td>train</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>inventory movement</td><td>detail_sheet_references_lookup_sheet</td><td>m4_relative_reference_drift</td><td>train</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>inventory movement</td><td>detail_sheet_references_lookup_sheet</td><td>normal</td><td>train</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>payroll and attendance</td><td>detail_plus_hidden_rates</td><td>m4_relative_reference_drift</td><td>train</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>payroll and attendance</td><td>detail_plus_hidden_rates</td><td>normal</td><td>train</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>purchasing and order management</td><td>excel_table_with_summary_band</td><td>m4_relative_reference_drift</td><td>train</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>purchasing and order management</td><td>excel_table_with_summary_band</td><td>normal</td><td>train</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>retail sales</td><td>single_sheet_vertical_revenue</td><td>m4_relative_reference_drift</td><td>train</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>retail sales</td><td>single_sheet_vertical_revenue</td><td>normal</td><td>train</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody>
+</table>
+<h2>Declared Scope</h2>
+<p>Current scored formula-audit rules: FORMULA_PATTERN_OUTLIER and FORMULA_PATTERN_GAP. Base structural findings are scored only when predeclared as FORMULA_REF_ERROR or FORMULA_VISIBLE_ERROR_TOKEN. Exclusions and unjudged findings are reported separately and are never counted as passes.</p><p class="note">Artifacts: dataset/manifest.json, dataset/truth.json, frozen_contract.json, generation_validation.json, engine_status.json, raw_engine/*.json, reports/case_results.csv, reports/workbook_results.csv, reports/scope_results.csv.</p>
+</html>

@@ -1,0 +1,246 @@
+[
+  {
+    "id": "CF00",
+    "original_v31_record": {
+      "id": "CF00",
+      "original_title": "기존 진행 계승·문서 통합·재개 계획",
+      "applies_to": "L01",
+      "decision": "현재 진도 확인에 흡수. 문서 전용 단계 재실행 불필요.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D01"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "CF01",
+    "original_v31_record": {
+      "id": "CF01",
+      "original_title": "공통 복합 수식 IR·지원 Registry 기반",
+      "applies_to": "L01",
+      "decision": "이미 구현된 IR/지원정보 재사용. 대사용 신규 범용 수식 파서는 보류.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D03"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "CF02",
+    "original_v31_record": {
+      "id": "CF02",
+      "original_title": "복합 수식 흐름 설명·그룹화 UI 확장",
+      "applies_to": "L01",
+      "decision": "기존 정적 설명·그룹화 재사용. 미지원은 그대로 공개.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D03",
+      "D07"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "CF03",
+    "original_v31_record": {
+      "id": "CF03",
+      "original_title": "복합 계산 Profile·실제 실행 근거",
+      "applies_to": "FUTURE",
+      "decision": "전체 수식 계산 Profile·trace는 후속 계산 상품.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D03"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "CF04",
+    "original_v31_record": {
+      "id": "CF04",
+      "original_title": "복합 근거와 업무 기대값 연결",
+      "applies_to": "L03,L04 / FUTURE",
+      "decision": "관측값·정책 출처 구분만 적용. 복합 계산 기반 기대값은 보류.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D03"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "CF05",
+    "original_v31_record": {
+      "id": "CF05",
+      "original_title": "복합 수식 수정 후보·전체 맥락 검증",
+      "applies_to": "FUTURE",
+      "decision": "복합수식 자동수정 후보는 후속 승인형 수정.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D03",
+      "D04"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "CF06",
+    "original_v31_record": {
+      "id": "CF06",
+      "original_title": "복합 기능 종단 품질·재검증·반복 실행 연결",
+      "applies_to": "FUTURE",
+      "decision": "수정본/계산 후검증의 원 안전 기준 보존.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D08"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "UXR01",
+    "original_v31_record": {
+      "id": "UXR01",
+      "original_title": "무료 결과 요약·그룹 보기·공통 스타일",
+      "applies_to": "L01",
+      "decision": "무료 결과 구조·그룹·공통 스타일 재사용.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D01"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "UXR02",
+    "original_v31_record": {
+      "id": "UXR02",
+      "original_title": "위치 탐색·셀 상세·모바일 복귀",
+      "applies_to": "L01",
+      "decision": "실제 위치/상세/모바일 복귀 적용.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D01",
+      "D07"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "UXR03",
+    "original_v31_record": {
+      "id": "UXR03",
+      "original_title": "복합 수식 흐름·근거·지원 상태",
+      "applies_to": "L01 / FUTURE",
+      "decision": "검증된 정적 설명만. 신규 trace는 CF 기반 이후.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D03",
+      "D07"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "UXR04",
+    "original_v31_record": {
+      "id": "UXR04",
+      "original_title": "유료 범위·주문·구매 후 상태",
+      "applies_to": "L04,L05",
+      "decision": "단건 대사 구매·후속 수령·실패 상태로 축소.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D06"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "UXR05",
+    "original_v31_record": {
+      "id": "UXR05",
+      "original_title": "업무 입력·정책·기대값 비교",
+      "applies_to": "L02,L03,L04",
+      "decision": "두 자료 매핑·동일 기준·관측값 비교에 적용.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D02",
+      "D05"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "UXR06",
+    "original_v31_record": {
+      "id": "UXR06",
+      "original_title": "승인 기반 수정의 검토·동의·실행 UX",
+      "applies_to": "L06 / FUTURE",
+      "decision": "맞춤 납품 변경승인에 유지. 자동수정 실행 UX는 보류.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D06"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "UXR07",
+    "original_v31_record": {
+      "id": "UXR07",
+      "original_title": "재검증·변경내역·결과 파일",
+      "applies_to": "L01,L04",
+      "decision": "정적 재검사/대사 결과/재수령. 계산 수정 후검증 보류.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D04",
+      "D05"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "UXR08",
+    "original_v31_record": {
+      "id": "UXR08",
+      "original_title": "업무 자동화·재실행·안전한 단축 경로",
+      "applies_to": "L04 / FUTURE",
+      "decision": "수동 설정 재사용만. 무인 자동화 보류.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D07"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "UXR09",
+    "original_v31_record": {
+      "id": "UXR09",
+      "original_title": "전체 메뉴·작업 컨텍스트·상용 공통 화면",
+      "applies_to": "L01,L05,L06",
+      "decision": "현재 제공 메뉴와 작업 상태만 끝까지 연결.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D07"
+    ],
+    "separate_rerun_required": false
+  },
+  {
+    "id": "UXR10",
+    "original_v31_record": {
+      "id": "UXR10",
+      "original_title": "전체 시각·접근성·과업·상용 UX 수용",
+      "applies_to": "L08",
+      "decision": "출시 범위의 접근성·실제 과업·통합 검증.",
+      "preserve_existing_implementation": true
+    },
+    "v32_bundles": [
+      "D08"
+    ],
+    "separate_rerun_required": false
+  }
+]

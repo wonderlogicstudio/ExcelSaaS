@@ -1,0 +1,27 @@
+﻿{
+    "id":  "MONTHLY-CALC-ACCEPT-03-builder-evidence",
+    "status":  "CHANGES_REQUIRED_NEW_ACCEPTANCE_FAILURE",
+    "scope":  "Test-only acceptance matrix in apps/api/tests/test_monthly_calculation.py; no product source edits.",
+    "changed_files":  [
+                          "apps/api/tests/test_monthly_calculation.py"
+                      ],
+    "commands":  [
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_monthly_calculation.py -q",
+                         "exit":  1,
+                         "raw_output_summary":  ".................F................ [100%]; 1 failed, 33 passed",
+                         "failure":  "test_monthly_formula_operand_must_resolve_to_number did not raise WorkbookCareError for a monthly referenced formula resolving to a non-number operand.",
+                         "expected":  "blank/text/boolean/error formula-derived monthly operands reject without silent coercion",
+                         "actual":  "calculate(...) accepted at least one nonnumeric formula-derived operand case in the loop"
+                     }
+                 ],
+    "not_run":  [
+                    "Ruff not run because the new acceptance matrix found a product behavior failure first.",
+                    "No full monthly rerun beyond the failing monthly file; no legacy subset/full regression/native Excel/deploy/git."
+                ],
+    "notes":  [
+                  "Root note received after failure: raw Java finite guard should use Java spellings NaN/Infinity/-Infinity, raw invalid grammar tests need valid numeric controls, and controlled exit 20 should be asserted where applicable. These test-quality refinements remain pending because product failure stopped this unit.",
+                  "Current prior Depth02 result remains separate: monthly targeted 17 passed and Ruff passed before ACCEPT-03 test additions."
+              ],
+    "reviewer":  "monthly_calc_review/root should decide whether to authorize a narrow product fix for formula-derived nonnumeric monthly operands before completing ACCEPT-03."
+}

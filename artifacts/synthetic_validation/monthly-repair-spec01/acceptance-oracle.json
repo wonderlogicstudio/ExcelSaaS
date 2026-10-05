@@ -1,0 +1,92 @@
+{
+  "id": "MONTHLY-REPAIR-SPEC-01-oracle-v1",
+  "status": "FROZEN_REQUIREMENT_NOT_IMPLEMENTATION_PASS",
+  "provenance": "Copied from pre-existing MONTHLY-01 independent oracle and actual native normal result. No new product output used to define expected values.",
+  "case": {
+    "file": "004-budget_horizontal_months-mutated-067598.xlsx",
+    "sheet": "Budget",
+    "cell": "N18",
+    "before_formula": "=N15-N14",
+    "before_value": {
+      "type": "error",
+      "value": "#VALUE!"
+    },
+    "after_formula": "='M10'!B16-'M10'!B15",
+    "after_value": {
+      "type": "number",
+      "value": -5
+    },
+    "derivation": "M10!B16=1001 minus M10!B15=1006 = -5",
+    "expected_patch_count": 1,
+    "expected_target_candidates_after": 0
+  },
+  "controls": [
+    {
+      "case": "normal",
+      "sha256": "973510bb3f44f45cc8f77105726285b0efbefe7a0adfa1a5120d75e81db93e74",
+      "expected_patch_count": 0,
+      "expected_action": "NO_PROPOSAL"
+    },
+    {
+      "case": "equivalent",
+      "sha256": "d4b47d4cb71314669cefb19b3b605ec31291328eaac9fccb26c005d7a84f4b90",
+      "expected_patch_count": 0,
+      "expected_action": "NO_PROPOSAL"
+    },
+    {
+      "case": "grouped_hidden",
+      "sha256": "816bc16d3b55dbae3a24ddce64f8952d93e54869a2951f453db24a7b94a77bf0",
+      "expected_patch_count": 0,
+      "expected_action": "UNSUPPORTED_HIDDEN"
+    }
+  ],
+  "fixture_hashes": {
+    "normal": "973510bb3f44f45cc8f77105726285b0efbefe7a0adfa1a5120d75e81db93e74",
+    "mutant": "602e9c47ed4ddb3af8bff775b6105f79ed8d6bd9a807ffb2c62de5b9d21a443e",
+    "equivalent": "d4b47d4cb71314669cefb19b3b605ec31291328eaac9fccb26c005d7a84f4b90",
+    "grouped_hidden": "816bc16d3b55dbae3a24ddce64f8952d93e54869a2951f453db24a7b94a77bf0"
+  },
+  "contract_cases": [
+    {
+      "id": "AMBIGUOUS_OR_EDGE",
+      "condition": "Fewer than4 contiguous formulas, dominant fewer than3, multiple deviations, unequal immediate neighbors or target at edge",
+      "expected": "NO_PROPOSAL"
+    },
+    {
+      "id": "HEADER_INVALID",
+      "condition": "Missing/duplicate/reversed/ambiguous M01..M12 header or referenced month sheet absent",
+      "expected": "NO_PROPOSAL"
+    },
+    {
+      "id": "NOT_COVERED",
+      "condition": "Table, merged, hidden row/column/header/sheet, summary/manual exception or unsupported OOXML",
+      "expected": "REJECT_NO_PATCH"
+    },
+    {
+      "id": "GRAMMAR_OUTSIDE",
+      "condition": "External workbook, defined/structured refs, functions/ranges/anchors, mixed-month operands or unsupported calculation graph",
+      "expected": "REJECT_NO_PATCH"
+    },
+    {
+      "id": "NON_TARGET_ERROR",
+      "condition": "Any before error outside exact target; any after error, new cycle or new formula candidate",
+      "expected": "REJECT_NO_DELIVERY"
+    },
+    {
+      "id": "VALUE_TYPES",
+      "condition": "Referenced operands not finite numbers, missing or error values",
+      "expected": "REJECT_NO_PATCH"
+    },
+    {
+      "id": "NOT_APPROVED",
+      "condition": "Payment/acknowledgement only, exact approval missing, stale source/plan/policy/engine or expired plan",
+      "expected": "REJECT_NO_PATCH"
+    },
+    {
+      "id": "REPAIR_PROFILE_ISOLATION",
+      "condition": "Existing RP02 receives a nonblank cell; existing profiles receive cross-sheet formula/error file",
+      "expected": "PRESERVE_EXISTING_REJECTION"
+    }
+  ],
+  "not_yet_executed": "Contract cases are acceptance requirements, not test results. No new repair fixture execution, native Excel, browser delivery or beta deployment in this spec unit."
+}

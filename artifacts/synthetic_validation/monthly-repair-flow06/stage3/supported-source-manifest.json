@@ -1,0 +1,15 @@
+{
+  "status": "FROZEN_SUPPORTED_MONTHLY_RP03_SOURCE",
+  "source": "artifacts\\synthetic_validation\\monthly-repair-flow06\\stage3\\monthly-rp03-supported-6sheet.xlsx",
+  "sha256": "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+  "sheet_count": 6,
+  "target": {
+    "sheet": "Budget",
+    "cell": "N18"
+  },
+  "before_formula": "=N15-N14",
+  "after_formula": "='M10'!B16-'M10'!B15",
+  "expected_value": -5,
+  "original_13_sheet_oracle_replaced": false,
+  "compatibility_ready_claimed": false
+}

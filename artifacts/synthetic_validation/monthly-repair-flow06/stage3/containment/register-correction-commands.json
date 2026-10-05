@@ -1,0 +1,12 @@
+﻿[
+    {
+        "name":  "register_duplicate_rows_rejection_proof",
+        "exit":  0,
+        "result":  "duplicate input rows rejected before registration"
+    },
+    {
+        "name":  "register_script_ruff",
+        "exit":  0,
+        "result":  "All checks passed!"
+    }
+]

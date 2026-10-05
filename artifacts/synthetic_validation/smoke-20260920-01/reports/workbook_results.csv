@@ -1,0 +1,11 @@
+workbook_id,split,business_domain,structural_family,mutation_type,family_id,kind,engine_status,audit_status,expected_scored,actual_findings_and_candidates,duplicates_not_fp,false_positives,candidate_false_positives,definitive_false_positives,excluded_ambiguous_or_out_of_scope,unjudged_findings
+001-retail_sales_vertical-mutated-745709,train,retail sales,single_sheet_vertical_revenue,m4_relative_reference_drift,F01-retail-vertical-detail,mutated,COMPLETED,COMPLETED,1,1,0,0,0,0,0,0
+001-retail_sales_vertical-normal-745709,train,retail sales,single_sheet_vertical_revenue,normal,F01-retail-vertical-detail,normal,COMPLETED,COMPLETED,0,0,0,0,0,0,0,0
+002-purchase_orders_table-mutated-353213,train,purchasing and order management,excel_table_with_summary_band,m4_relative_reference_drift,F02-purchase-table,mutated,COMPLETED,SKIPPED_UNSUPPORTED_STRUCTURE,0,0,0,0,0,0,0,0
+002-purchase_orders_table-normal-353213,train,purchasing and order management,excel_table_with_summary_band,normal,F02-purchase-table,normal,COMPLETED,SKIPPED_UNSUPPORTED_STRUCTURE,0,0,0,0,0,0,0,0
+003-inventory_cross_sheet-mutated-996121,train,inventory movement,detail_sheet_references_lookup_sheet,m4_relative_reference_drift,F03-inventory-cross-sheet,mutated,COMPLETED,COMPLETED,1,1,0,0,0,0,0,0
+003-inventory_cross_sheet-normal-996121,train,inventory movement,detail_sheet_references_lookup_sheet,normal,F03-inventory-cross-sheet,normal,COMPLETED,COMPLETED,0,0,0,0,0,0,0,0
+004-budget_horizontal_months-mutated-067598,train,budget versus actual,horizontal_monthly_matrix,m4_relative_reference_drift,F04-budget-horizontal,mutated,COMPLETED,COMPLETED,0,0,0,0,0,0,0,0
+004-budget_horizontal_months-normal-067598,train,budget versus actual,horizontal_monthly_matrix,normal,F04-budget-horizontal,normal,COMPLETED,COMPLETED,0,0,0,0,0,0,0,0
+005-payroll_overtime-mutated-261773,train,payroll and attendance,detail_plus_hidden_rates,m4_relative_reference_drift,F05-payroll-overtime,mutated,COMPLETED,COMPLETED,1,2,0,0,0,0,0,1
+005-payroll_overtime-normal-261773,train,payroll and attendance,detail_plus_hidden_rates,normal,F05-payroll-overtime,normal,COMPLETED,COMPLETED,0,1,0,0,0,0,0,1

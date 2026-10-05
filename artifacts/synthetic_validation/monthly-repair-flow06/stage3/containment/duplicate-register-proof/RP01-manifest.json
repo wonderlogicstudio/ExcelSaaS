@@ -1,0 +1,91 @@
+{
+  "product_id": "APPROVED_REPAIR",
+  "job_id": "f2b589f3-7491-4238-9b60-9145d42ecd5a",
+  "sku": "RP01_NUMERIC_TEXT_FIELD_V1",
+  "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+  "output_hash": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+  "plan_digest": "5e851ff3c0d673a4f847f5628acd755172de2dd54224e86f6bff4228d8759a76",
+  "engine_version": "apache-poi-5.5.1-adapter-v1",
+  "engine_fingerprint": "c4efc7e00d7633fa04220dd52984f11fe82dfedc247fbdce37d90fbd4ac0762f",
+  "profile_version": "RP01_NUMERIC_TEXT_FIELD_V1",
+  "report_version": "repair-reports-v1",
+  "created_at": 1789243092.2379985,
+  "expires_at": 1789243988.271803,
+  "verification": {
+    "checks": [
+      {
+        "code": "SOURCE_IMMUTABLE",
+        "status": "PASS"
+      },
+      {
+        "code": "EXACT_APPROVED_PATCH",
+        "status": "PASS"
+      },
+      {
+        "code": "UNTOUCHED_MEMBERS",
+        "status": "PASS"
+      },
+      {
+        "code": "NON_TARGET_XML_AND_STYLES",
+        "status": "PASS"
+      },
+      {
+        "code": "TYPED_FORMULA_CACHES",
+        "status": "PASS"
+      },
+      {
+        "code": "WHOLE_WORKBOOK_POST_CALCULATION",
+        "status": "PASS"
+      },
+      {
+        "code": "NO_NEW_CALCULATION_ERRORS",
+        "status": "PASS"
+      },
+      {
+        "code": "NO_NEW_STATIC_FINDINGS",
+        "status": "PASS"
+      }
+    ],
+    "source_hash": "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+    "output_hash": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+    "plan_digest": "5e851ff3c0d673a4f847f5628acd755172de2dd54224e86f6bff4228d8759a76",
+    "patch_count": 2,
+    "untouched_member_count": 3,
+    "engine_version": "apache-poi-5.5.1-adapter-v1",
+    "static_scanner_version": "0.1.3",
+    "static_before": 0,
+    "static_remaining": 0,
+    "static_resolved": 0,
+    "coverage": {
+      "scope": "WHOLE_WORKBOOK",
+      "formula_count": 5,
+      "combinations": [
+        "EMPTY_STRING",
+        "ROUND_AMOUNT",
+        "SUM_INTERNAL_RANGE"
+      ],
+      "registry_version": "integer-repair-combinations-v1"
+    },
+    "business_truth_guaranteed": false
+  },
+  "files": {
+    "REPAIRED_XLSX": {
+      "name": "workbookcare_repaired_f2b589f3-7491-4238-9b60-9145d42ecd5a.xlsx",
+      "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "sha256": "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+      "bytes": 2046
+    },
+    "CHANGES_XLSX": {
+      "name": "changes_f2b589f3-7491-4238-9b60-9145d42ecd5a.xlsx",
+      "mime": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "sha256": "4493f7d4c7932977c5b50f2486272a3245ea9706271e4ac66923aab609a62a81",
+      "bytes": 8989
+    },
+    "VERIFICATION_HTML": {
+      "name": "verification_f2b589f3-7491-4238-9b60-9145d42ecd5a.html",
+      "mime": "text/html;charset=utf-8",
+      "sha256": "4eb6c55d3bc1550cf99742969d581fb811387ed0a6f97630ac800701f03b5dc0",
+      "bytes": 4011
+    }
+  }
+}

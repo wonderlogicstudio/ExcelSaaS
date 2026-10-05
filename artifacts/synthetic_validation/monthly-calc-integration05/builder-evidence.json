@@ -1,0 +1,152 @@
+﻿{
+    "status":  "TARGETED_PASS_REVIEW_READY_WITH_SAVED_ARTIFACTS",
+    "unit":  "MONTHLY-CALC-INTEGRATION-05",
+    "timestamp":  "2026-09-22T12:56:12.4277036Z",
+    "scope":  {
+                  "product_edits":  false,
+                  "fixture_oracle_edits":  false,
+                  "full_regression":  false,
+                  "excel_browser_deploy_git":  false,
+                  "monthly43_or_native20_repeated":  false
+              },
+    "unmocked_statuses":  {
+                              "reference_status":  {
+                                                       "status":  "PASS",
+                                                       "case_count":  20,
+                                                       "excel_version":  "16.0",
+                                                       "reference_digest":  "a841c019a2fc8d240313e6c8feae4d58dfd646f523d1302271050f1d7d752cc4"
+                                                   },
+                              "compatibility_status":  {
+                                                           "status":  "PASS",
+                                                           "excel_version":  "16.0",
+                                                           "profiles":  [
+                                                                            "COMBINED_RP01_RP02"
+                                                                        ],
+                                                           "evidence_digest":  "0ab55706f85440f4e811559347e3ed67622381f384d15de7b459138903449008"
+                                                       }
+                          },
+    "commands":  [
+                     {
+                         "name":  "unmocked status precheck",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -c \"from app.delivery_plan import reference_status; from app.delivery_execution import compatibility_status; import json; print(json.dumps({\u0027reference_status\u0027: reference_status(), \u0027compatibility_status\u0027: compatibility_status()}, ensure_ascii=False, sort_keys=True))\"",
+                         "exit":  0,
+                         "summary":  "reference_status PASS case_count 20 excel_version 16.0; compatibility_status PASS excel_version 16.0 profiles COMBINED_RP01_RP02.",
+                         "mocked":  false
+                     },
+                     {
+                         "name":  "selected existing pytest integration checks",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe -m pytest apps\\api\\tests\\test_repair_rules.py::test_numeric_text_rule_matches_preflight_and_plan apps\\api\\tests\\test_repair_rules.py::test_formula_restore_rule_matches_preflight_and_plan apps\\api\\tests\\test_delivery_patch.py::test_actual_minimal_patch_and_whole_calculation apps\\api\\tests\\test_delivery_patch.py::test_partial_patch_blocked_and_shared_string_member_preserved apps\\api\\tests\\test_delivery_execution.py::test_separate_approval_and_actual_atomic_delivery_redownload apps\\api\\tests\\test_delivery_execution.py::test_invalid_approval_or_right_is_blocked[no_ack] apps\\api\\tests\\test_delivery_plan.py::test_combined_policy_calculates_once_against_frozen_complex03 -q",
+                         "exit":  0,
+                         "count":  "8 passed",
+                         "raw_output":  "........ [100%]; one existing StarletteDeprecationWarning from fastapi.testclient import.",
+                         "mocked_boundary":  "test_delivery_execution.py has autouse mocked compatibility_status; counted for approval/artifact/rejection behavior only, not compatibility evidence."
+                     },
+                     {
+                         "name":  "standalone unmocked RP01/RP02 runtime",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe artifacts\\synthetic_validation\\monthly-calc-integration05\\integration05_unmocked_runtime.py",
+                         "exit":  0,
+                         "summary":  "Unmocked reference_status PASS and compatibility_status PASS; delivery_runtime_check.verify returned reference_cases 20, repair_profiles 2, artifacts 6, payment_tested false.",
+                         "mocked":  false
+                     },
+                     {
+                         "name":  "saved-six-artifact runtime first attempt",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe artifacts\\synthetic_validation\\monthly-calc-integration05\\integration05_saved_artifact_runtime.py",
+                         "exit":  1,
+                         "summary":  "Runner used download() return value as bytes; product returned artifact dict with file_base64. No product issue; runner corrected to decode file_base64.",
+                         "mocked":  false
+                     },
+                     {
+                         "name":  "saved-six-artifact runtime final",
+                         "command":  "apps\\api\\.venv\\Scripts\\python.exe artifacts\\synthetic_validation\\monthly-calc-integration05\\integration05_saved_artifact_runtime.py",
+                         "exit":  0,
+                         "summary":  "Unmocked PASS statuses; RP01 and RP02 approve+execute READY; saved REPAIRED_XLSX, CHANGES_XLSX, VERIFICATION_HTML for each profile; asserted original source hash preserved and typed H2/F12 expected values.",
+                         "mocked":  false
+                     }
+                 ],
+    "coverage":  {
+                     "rp01_plan":  "test_numeric_text_rule_matches_preflight_and_plan; expected H2 value 15500 covered by patch test.",
+                     "rp02_plan":  "test_formula_restore_rule_matches_preflight_and_plan; expected F12 value 18200 covered by patch test.",
+                     "actual_patch_revalidation":  "test_actual_minimal_patch_and_whole_calculation covers RP01 and RP02 actual patch, verify_output checks, output_hash change, and A2 non-target preservation.",
+                     "shared_string_non_target":  "test_partial_patch_blocked_and_shared_string_member_preserved covers shared string preservation and incomplete patch rejection.",
+                     "separate_approval_3_artifacts":  "test_separate_approval_and_actual_atomic_delivery_redownload covers approval required before execute, READY delivery, repeated download of REPAIRED_XLSX/CHANGES_XLSX/VERIFICATION_HTML, artifact count 3, incomplete package rejection, delete cleanup; compatibility mocked by fixture.",
+                     "approval_rejection":  "test_invalid_approval_or_right_is_blocked[no_ack] covers missing exact acknowledgement rejection; compatibility mocked by fixture.",
+                     "combined_plan":  "test_combined_policy_calculates_once_against_frozen_complex03 covers combined 11 patches / 42 indirect impacts and frozen values J130=2177677, F31=5232, F64=3551, F107=7800.",
+                     "unmocked_runtime":  "Standalone runner verifies actual reference/compatibility PASS plus RP01/RP02 approve+execute with 6 artifacts total.",
+                     "saved_artifact_runtime":  "integration05_saved_artifact_runtime.py skips the 20-reference loop, uses unmocked PASS statuses, saves six artifacts, and asserts RP01 H2=15500 plus RP02 F12=18200 typed expected values."
+                 },
+    "real_vs_mocked_boundaries":  [
+                                      "Unmocked: reference_status and compatibility_status precheck and standalone runtime runner.",
+                                      "Mocked: test_delivery_execution.py autouse current_patch_compatibility; those tests are not counted as compatibility evidence.",
+                                      "No mock reference or compatibility claim was made for the selected delivery_execution pytest cases.",
+                                      "First standalone runtime used delivery_runtime_check.verify and repeated 20 engine reference calculations; it did not save artifacts because its temporary store was removed. Saved-artifact runtime provides the retained six-file proof."
+                                  ],
+    "files":  [
+                  {
+                      "path":  "artifacts/synthetic_validation/monthly-calc-integration05/integration05_unmocked_runtime.py",
+                      "sha256":  "2370a0076fd0e47c718b1efdad00eab7a409bc988c16f4de52c48e8fddd9aa6c"
+                  },
+                  {
+                      "path":  "artifacts/synthetic_validation/monthly-calc-integration05/unmocked-runtime-result.json",
+                      "sha256":  "9c3f5c24da1ea179f74e55edb7f82c7d11111ae14717190be4c478231d43c645"
+                  },
+                  {
+                      "path":  "artifacts/synthetic_validation/monthly-calc-integration05/integration05_saved_artifact_runtime.py",
+                      "sha256":  "f6d5227dc74528e4b32dc62325ef4bccffcbc3d676d5ab5530a30c7736445147"
+                  },
+                  {
+                      "path":  "artifacts/synthetic_validation/monthly-calc-integration05/saved-artifact-runtime-result.json",
+                      "sha256":  "6738176148720f86f063476780cfad1919c717fb07d92fd3c7cc726a03f42c4d"
+                  }
+              ],
+    "caveats":  [
+                    "No full regression, Excel COM/browser/deploy/Git, product edit, fixture edit, or oracle edit was performed.",
+                    "Full RP01/RP02 delivery integration beyond the selected runtime/helper path remains outside this targeted unit.",
+                    "Monthly43 and native20 evidence were reused, not rerun."
+                ],
+    "saved_artifacts":  [
+                            {
+                                "path":  "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp01-changes.xlsx",
+                                "sha256":  "035b7b209495f23b5547c36864a8bb01b83f06e96c94eb4ecbf5009e8dc42db0",
+                                "bytes":  10035
+                            },
+                            {
+                                "path":  "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp01-repaired.xlsx",
+                                "sha256":  "95a4c1ac76677ad71d7fea8e37394b6fa55f3751ef2a62fae83501ee84d97ab8",
+                                "bytes":  2046
+                            },
+                            {
+                                "path":  "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp01-verification.html",
+                                "sha256":  "acaa7f39c0e7c861d8862725d2f0d9d960d0eac45a5048d4d347b02d51f560ba",
+                                "bytes":  5114
+                            },
+                            {
+                                "path":  "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp02-changes.xlsx",
+                                "sha256":  "6b1d6ac65ab5f2e6d5ece9ddfd9770376446dd26da63ce1f51390a379e1f3b52",
+                                "bytes":  9996
+                            },
+                            {
+                                "path":  "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp02-repaired.xlsx",
+                                "sha256":  "579dae795a8f439e28a08bbde00fd5093d1e290fdf4a7216807cbf0e92727a7c",
+                                "bytes":  2067
+                            },
+                            {
+                                "path":  "artifacts\\synthetic_validation\\monthly-calc-integration05\\saved-artifacts\\rp02-verification.html",
+                                "sha256":  "c70de74fa488514449c493cbbab91de9e7a66946082ed255aedba28890791a20",
+                                "bytes":  5053
+                            }
+                        ],
+    "saved_artifact_result_summary":  {
+                                          "artifact_count":  6,
+                                          "source_sha256":  "e48981a5953e24507e60549fd345f208886049d0d677a3fb06b4d8981b3ac070",
+                                          "rp01":  {
+                                                       "type":  "number",
+                                                       "value":  15500.0,
+                                                       "provenance":  "ENGINE_CALCULATED"
+                                                   },
+                                          "rp02":  {
+                                                       "type":  "number",
+                                                       "value":  18200.0,
+                                                       "provenance":  "ENGINE_CALCULATED"
+                                                   }
+                                      }
+}

@@ -1,0 +1,12 @@
+{
+  "command": [
+    "C:/Users/JinwonLee/project/ExcelSaaS/apps/api/.venv/Scripts/python.exe",
+    "-m",
+    "tools.synthetic_validation.cli",
+    "run-engine",
+    "C:/Users/JinwonLee/project/ExcelSaaS/artifacts/synthetic_validation/full-20260920-batch01"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 330.58,
+  "log": "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\workbookcare-synthetic01\\diversity-batch-full300-engine-absolute.log"
+}

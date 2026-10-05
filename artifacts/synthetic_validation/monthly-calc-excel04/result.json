@@ -1,0 +1,37 @@
+{
+  "status": "PASS_BOUNDED_CALCULATION_EXCEL_COMPATIBILITY",
+  "review": "Independent reviewer PASS",
+  "legacy_reference_cases": 20,
+  "typed_values": 25,
+  "monthly_expected": -5,
+  "monthly_actual": {
+    "monthly-excel-result.json": {
+      "type": "number",
+      "value": -5
+    },
+    "monthly-engine-result.json": {
+      "type": "number",
+      "value": -5.0,
+      "provenance": "ENGINE_CALCULATED"
+    }
+  },
+  "reference_status": {
+    "status": "PASS",
+    "case_count": 20,
+    "excel_version": "16.0",
+    "reference_digest": "a841c019a2fc8d240313e6c8feae4d58dfd646f523d1302271050f1d7d752cc4"
+  },
+  "source_hashes_unchanged": true,
+  "historical_native_evidence_restored": true,
+  "new_evidence_dir": "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\artifacts\\synthetic_validation\\monthly-calc-excel04",
+  "not_run": [
+    "full regression",
+    "full RP01/RP02 delivery integration",
+    "monthly repair approval/download integration",
+    "browser",
+    "beta deploy",
+    "Git commit/push"
+  ],
+  "limits": "Reduced monthly control only; original13-sheet fixture exceeds unchanged10-sheet limit",
+  "next": "Existing RP01/RP02 plan/output integration with refreshed reference; no new profile yet"
+}

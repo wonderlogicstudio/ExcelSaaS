@@ -1,0 +1,38 @@
+test_approval_expired_after_completed_execution (__main__.ContractTests.test_approval_expired_after_completed_execution) ... ok
+test_changed_source (__main__.ContractTests.test_changed_source) ... ok
+test_comparison_has_no_change_approval (__main__.ContractTests.test_comparison_has_no_change_approval) ... ok
+test_current_source_expired_after_completed_execution (__main__.ContractTests.test_current_source_expired_after_completed_execution) ... ok
+test_download_wrong_sku (__main__.ContractTests.test_download_wrong_sku) ... ok
+test_expired_approval (__main__.ContractTests.test_expired_approval) ... ok
+test_expired_output (__main__.ContractTests.test_expired_output) ... ok
+test_expired_source (__main__.ContractTests.test_expired_source) ... ok
+test_failed_prevalidation (__main__.ContractTests.test_failed_prevalidation) ... ok
+test_failed_validation (__main__.ContractTests.test_failed_validation) ... ok
+test_late_completion (__main__.ContractTests.test_late_completion) ... ok
+test_no_patch (__main__.ContractTests.test_no_patch) ... ok
+test_no_payment (__main__.ContractTests.test_no_payment) ... ok
+test_no_profile_evidence (__main__.ContractTests.test_no_profile_evidence) ... ok
+test_not_run_prevalidation (__main__.ContractTests.test_not_run_prevalidation) ... ok
+test_not_run_validation (__main__.ContractTests.test_not_run_validation) ... ok
+test_only_report (__main__.ContractTests.test_only_report) ... ok
+test_only_workbook (__main__.ContractTests.test_only_workbook) ... ok
+test_paid_no_approval (__main__.ContractTests.test_paid_no_approval) ... ok
+test_post_refund (__main__.ContractTests.test_post_refund) ... ok
+test_quarantined_output (__main__.ContractTests.test_quarantined_output) ... ok
+test_refund_pending (__main__.ContractTests.test_refund_pending) ... ok
+test_reviewed_not_approval (__main__.ContractTests.test_reviewed_not_approval) ... ok
+test_revoked_entitlement (__main__.ContractTests.test_revoked_entitlement) ... ok
+test_stale_plan (__main__.ContractTests.test_stale_plan) ... ok
+test_timed_out_job (__main__.ContractTests.test_timed_out_job) ... ok
+test_unapproved_execution (__main__.ContractTests.test_unapproved_execution) ... ok
+test_unknown_payment (__main__.ContractTests.test_unknown_payment) ... ok
+test_valid_repair_download (__main__.ContractTests.test_valid_repair_download) ... ok
+test_valid_repair_execute (__main__.ContractTests.test_valid_repair_execute) ... ok
+test_wrong_output_plan (__main__.ContractTests.test_wrong_output_plan) ... ok
+test_wrong_owner (__main__.ContractTests.test_wrong_owner) ... ok
+test_wrong_sku (__main__.ContractTests.test_wrong_sku) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 0.001s
+
+OK

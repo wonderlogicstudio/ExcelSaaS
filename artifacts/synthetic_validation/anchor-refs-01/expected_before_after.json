@@ -1,0 +1,24 @@
+{
+  "normal_inputs": {
+    "target_row": 12,
+    "target_cell": "J12",
+    "hours": 176,
+    "threshold": 160,
+    "normal_premium_cell": "B5",
+    "normal_premium": 0.5,
+    "mutated_premium_cell": "B6",
+    "mutated_premium": 0.25,
+    "before_expected": 3680.0,
+    "after_expected": 3600.0,
+    "excel_recalculation": "NOT_RUN"
+  },
+  "mutation": {
+    "target_cell": "J12",
+    "before_formula": "=H12*'Rate Card'!$B12+IF(H12>C$5,(H12-C$5)*'Rate Card'!$B12*$B$5,0)",
+    "after_formula": "=H12*'Rate Card'!$B12+IF(H12>C$5,(H12-C$5)*'Rate Card'!$B12*$B$6,0)",
+    "before_expected": 3680.0,
+    "after_expected": 3600.0,
+    "mutation_target_only_changed": true,
+    "excel_recalculation": "NOT_RUN"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "scope": "Correct contradictory test, targeted recheck/build/review, remaining actual local monthly proposal/approval/delivery UI acceptance",
+  "approval": "User: ?? ?? ??? ??",
+  "constraints": [
+    "no engine changes",
+    "preserve original and exact approval",
+    "no Git/deployment",
+    "no duplicate native verification"
+  ],
+  "status": "IN_PROGRESS"
+}

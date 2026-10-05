@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "kind": "REDUCED_MONTHLY_INTERNAL_ENGINE_CONTROL",
+  "source": "monthly-repair-spec01 acceptance oracle case.after_formula/after_value/derivation",
+  "engine_fingerprint": "958c9d5aa429b618ee4277b67604c1b516c3d34716a97903b78b6e8a9929cc65",
+  "formula": "='M10'!B16-'M10'!B15",
+  "operands": {
+    "M10!B16": 1001,
+    "M10!B15": 1006
+  },
+  "expected": {
+    "type": "number",
+    "value": -5
+  },
+  "actual": {
+    "type": "number",
+    "value": -5.0,
+    "provenance": "ENGINE_CALCULATED"
+  },
+  "note": "Reduced two-sheet internal calculation control; not a supported full 13-sheet fixture run."
+}

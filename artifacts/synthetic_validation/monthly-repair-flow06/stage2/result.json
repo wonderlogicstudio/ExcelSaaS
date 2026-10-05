@@ -1,0 +1,34 @@
+﻿{
+    "stage":  "stage2",
+    "status":  "review_ready_after_changes_required",
+    "changes_required_corrections":  [
+                                         "Added strict_monthly_reference_sheet_drift_candidate in formula_patterns.py and made RP03 repair eligibility depend on that dedicated monthly guard instead of generic REFERENCE_SHEET_DRIFT audit candidates.",
+                                         "Added adversarial generic vertical drift control with only M18:N18:O18 monthly row run, plus duplicate-header rejection.",
+                                         "Changed non-target before-error plan test to grammar-valid =P21/P22 with P22=0 and asserted EXISTING_CALCULATION_ERROR."
+                                     ],
+    "pytest_review_exit":  0,
+    "ruff_review_exit":  0,
+    "pytest_review_output":  ".........                                                                [100%]\n============================== warnings summary ===============================\napps\\api\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1\n  C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Lib\\site-packages\\fastapi\\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html",
+    "ruff_review_output":  "All checks passed!",
+    "prior_pytest_status":  "Full targeted stage2 suite passed before later Ruff-only formatting delta; review correction reran only affected monthly rule and monthly plan tests per instruction.",
+    "changed_files":  [
+                          "apps/api/app/formula_patterns.py",
+                          "apps/api/app/repair_rules/monthly_formula.py",
+                          "apps/api/app/delivery_inputs.py",
+                          "apps/api/app/delivery_plan.py",
+                          "apps/api/tests/test_monthly_repair.py",
+                          "apps/api/tests/test_delivery_inputs.py",
+                          "apps/api/tests/test_delivery_plan.py"
+                      ],
+    "source_hashes":  {
+                          "apps/api/tests/test_monthly_repair.py":  "b57cf61d7a958cdc4c2505d0c1a4c71fe855adfe063e405bd247d99fd2811086",
+                          "apps/api/tests/test_delivery_inputs.py":  "d9f34e2d882d1b1df9ab0292d1395e01245d8fdbac65d577e410794c5fec5b30",
+                          "apps/api/tests/test_delivery_plan.py":  "24c9c88a499ffdec2d612155bdbadfcf5316890706c39c6b66742389b6f409bf",
+                          "apps/api/app/delivery_plan.py":  "cb687157aaf5737a83ccb725459673e9465f5004b7ee472765a5bed1a25ae99f",
+                          "apps/api/app/delivery_inputs.py":  "a3ec9a7efa2a309eac3568405d3994f4c50a52177c374236b995cc742393b176",
+                          "apps/api/app/repair_rules/monthly_formula.py":  "2777227c2375d1e6493aedd10038347ad07d84c85524945523a3cd5b3d9cbd6d",
+                          "apps/api/app/formula_patterns.py":  "3f4314d6ef8bb9606bc5207c332869135a0511c1550e37c001c2f7adce46c5ae"
+                      },
+    "stage3_note":  "Future plan/fingerprint binding must include monthly_formula.py and the strict helper source in formula_patterns.py.",
+    "remaining":  "independent review"
+}

@@ -1,0 +1,24 @@
+﻿{
+    "native_reference":  {
+                             "command":  "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\native-reference.ps1",
+                             "exit":  0,
+                             "stdout":  "Excel reference: 20 synthetic cases; saved without modifying source files.",
+                             "path_correction":  "Output path substitution failed; new d03 result preserved as scratch/excel-reference.json and historical d03 bytes restored from pre-run backup. No rerun."
+                         },
+    "monthly_initial":  {
+                            "command":  "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\monthly_fixed_minus5_compare.ps1",
+                            "exit":  1,
+                            "cause":  "COM Worksheets.Add($null,$budget) rejected optional argument at line25; script defect before calculation; no product defect established"
+                        },
+    "monthly_final":  {
+                          "stdout":  "Monthly Excel reduced control: Budget!N18=-5",
+                          "command":  "powershell.exe -NoProfile -ExecutionPolicy Bypass -File C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\monthly_fixed_minus5_compare.ps1",
+                          "correction":  "Worksheets.Add() avoids optional COM argument; no expected value changed",
+                          "exit":  0
+                      },
+    "historical_restore_check":  {
+                                     "status":  "PASS",
+                                     "backup_sha256":  "64ee0542a3dbeceec9cb63fd63a55111a78e501064d07c5b52bb76b1c558788c",
+                                     "restored_sha256":  "64ee0542a3dbeceec9cb63fd63a55111a78e501064d07c5b52bb76b1c558788c"
+                                 }
+}

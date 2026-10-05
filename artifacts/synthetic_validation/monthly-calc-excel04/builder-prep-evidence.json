@@ -1,0 +1,101 @@
+﻿{
+    "status":  "PREPARED_NON_COM_PASS_MONTHLY_COM_CORRECTED_PENDING_RERUN",
+    "unit":  "MONTHLY-CALC-EXCEL-04",
+    "timestamp":  "2026-09-22T12:46:54.9203467Z",
+    "scope":  {
+                  "repo_writes_by_builder":  false,
+                  "excel_launched_by_builder":  false,
+                  "notes":  [
+                                "Prepared scratch-only reference validation and monthly reduced-control COM/engine scripts.",
+                                "Root native20 execution initially wrote historical d03/excel-reference.json because output path replacement failed; root copied fresh result to scratch/excel-reference.json and restored historical reference from backup.",
+                                "Builder did not rerun native20 and did not launch Excel.",
+                                "Monthly reduced-control uses oracle formula and operands from derivation; it is not a supported full 13-sheet fixture run."
+                            ]
+              },
+    "files":  [
+                  {
+                      "name":  "excel-reference.json",
+                      "path":  "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\excel-reference.json",
+                      "sha256":  "64ee0542a3dbeceec9cb63fd63a55111a78e501064d07c5b52bb76b1c558788c",
+                      "length":  9526
+                  },
+                  {
+                      "name":  "verify_delivery_reference.scratch.py",
+                      "path":  "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\verify_delivery_reference.scratch.py",
+                      "sha256":  "4dc35336dab48c7a4d197d42d5d2ed182c60b0d653e41253c193fdf2b986ce5a",
+                      "length":  3032
+                  },
+                  {
+                      "name":  "delivery_reference.candidate.json",
+                      "path":  "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\delivery_reference.candidate.json",
+                      "sha256":  "1f45a9070cd2f18d8dca4d45ee8e21fc229e2cf77a6ed8cd2d908c009f972710",
+                      "length":  2866
+                  },
+                  {
+                      "name":  "reference-validation.json",
+                      "path":  "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\reference-validation.json",
+                      "sha256":  "1f45a9070cd2f18d8dca4d45ee8e21fc229e2cf77a6ed8cd2d908c009f972710",
+                      "length":  2866
+                  },
+                  {
+                      "name":  "monthly_fixed_minus5_engine.py",
+                      "path":  "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\monthly_fixed_minus5_engine.py",
+                      "sha256":  "301168d26c1306e80ac39030a5edf6834ae78180f778562081e5f0f918762099",
+                      "length":  1905
+                  },
+                  {
+                      "name":  "monthly-engine-result.json",
+                      "path":  "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\monthly-engine-result.json",
+                      "sha256":  "d24f0381116edfaf8a44c46234a354433aafc13fa4642b66f779b409288dc748",
+                      "length":  646
+                  },
+                  {
+                      "name":  "monthly_fixed_minus5_compare.ps1",
+                      "path":  "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\monthly_fixed_minus5_compare.ps1",
+                      "sha256":  "fd41e681a94d2dd99099c4ba645a0ee8613f75014aacbd6bc5b537d0ee568a74",
+                      "length":  3061
+                  },
+                  {
+                      "name":  "native-reference.ps1",
+                      "path":  "C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\native-reference.ps1",
+                      "sha256":  "48b237930bd43711a51176d052302d775a2a7fad5c3b467cebe5057a97560290",
+                      "length":  2883
+                  }
+              ],
+    "commands":  [
+                     {
+                         "name":  "scratch reference validation",
+                         "command":  "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\verify_delivery_reference.scratch.py",
+                         "exit":  0,
+                         "summary":  "20 reference cases verified against scratch excel-reference.json and actual isolated POI; wrote delivery_reference.candidate.json and reference-validation.json in scratch."
+                     },
+                     {
+                         "name":  "monthly engine reduced-control first run",
+                         "command":  "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\monthly_fixed_minus5_engine.py",
+                         "exit":  1,
+                         "summary":  "Scratch checker expected exact dict and failed because engine returned expected number -5.0 plus provenance ENGINE_CALCULATED; script corrected to compare typed value while preserving full actual output."
+                     },
+                     {
+                         "name":  "monthly engine reduced-control final run",
+                         "command":  "C:\\Users\\JinwonLee\\project\\ExcelSaaS\\apps\\api\\.venv\\Scripts\\python.exe C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\monthly_fixed_minus5_engine.py",
+                         "exit":  0,
+                         "summary":  "PASS actual Budget!N18 number -5.0 from actual delivery_calculation monthly mode."
+                     },
+                     {
+                         "name":  "monthly Excel COM reduced-control first root run",
+                         "command":  "powershell -ExecutionPolicy Bypass -File C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\monthly_fixed_minus5_compare.ps1",
+                         "exit":  1,
+                         "summary":  "Root run failed with COMException at Worksheets.Add($null,$budget); scratch script corrected to Worksheets.Add() because sheet order is not required for quoted sheet references."
+                     }
+                 ],
+    "pending_root_command":  {
+                                 "name":  "monthly Excel COM reduced-control",
+                                 "command":  "powershell -ExecutionPolicy Bypass -File C:\\Users\\JinwonLee\\project\\DigitalTwin\\.tmp\\monthly-calc-excel04\\monthly_fixed_minus5_compare.ps1",
+                                 "expected_output":  "monthly-excel-result.json with Budget!N18 number -5 from installed Excel COM."
+                             },
+    "caveats":  [
+                    "No repo reference refresh was written by builder; apps/api/app/delivery_reference.json remains for reviewer/root decision.",
+                    "Full RP01/RP02 delivery integration remains pending unless separately covered by retained evidence.",
+                    "Original monthly 13-sheet fixture remains out of scope under unchanged 10-sheet product limit."
+                ]
+}

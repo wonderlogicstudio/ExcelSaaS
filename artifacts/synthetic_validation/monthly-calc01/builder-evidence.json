@@ -1,0 +1,92 @@
+﻿{
+    "id":  "MONTHLY-CALC-01-builder-evidence",
+    "status":  "TARGETED_PASS_REVIEW_CHANGES_REQUIRED",
+    "changed_files":  [
+                          "apps/api/app/delivery_calculation.py",
+                          "apps/api/engine/DeliveryCalc.java",
+                          "apps/api/tests/test_monthly_calculation.py",
+                          "apps/api/engine/classes/DeliveryCalc.class",
+                          "apps/api/engine/classes/DeliveryCalc$1.class"
+                      ],
+    "commands":  [
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe apps\\\\api\\\\engine\\\\setup.py",
+                         "exit":  1,
+                         "note":  "Initial compile failed writing DeliveryCalc$1.class under managed sandbox permissions."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe apps\\\\api\\\\engine\\\\setup.py",
+                         "exit":  0,
+                         "note":  "Escalated compile passed; local DeliveryCalc classes rebuilt from locked jars."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_monthly_calculation.py -q",
+                         "exit":  1,
+                         "note":  "Initial monthly pytest failed before engine because sandbox denied temp chmod/cache writes."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_monthly_calculation.py -q",
+                         "exit":  0,
+                         "result":  "13 passed",
+                         "note":  "Escalated monthly targeted tests passed before Java guard correction."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_real_poi_matches_fixed_independent_oracle apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_combined_policy_calculates_once_against_frozen_complex03 apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_rp02_exact_blank_translation_and_digest_invalidates_on_engine apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_unsupported_never_becomes_iferror_zero apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_circular_reference_and_hard_timeout_cleanup apps\\\\api\\\\tests\\\\test_delivery_inputs.py::test_true_blank_and_unsupported_function_are_distinct -q",
+                         "exit":  1,
+                         "note":  "Detected Java guard regression: non-monthly formulas rejected because shape collection called Ptg.toFormulaString on legacy tokens."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe apps\\\\api\\\\engine\\\\setup.py",
+                         "exit":  0,
+                         "note":  "Recompiled after Java guard correction."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_monthly_calculation.py -q",
+                         "exit":  0,
+                         "result":  "13 passed",
+                         "note":  "Monthly tests still passed after Java guard correction."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_real_poi_matches_fixed_independent_oracle apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_combined_policy_calculates_once_against_frozen_complex03 apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_rp02_exact_blank_translation_and_digest_invalidates_on_engine apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_unsupported_never_becomes_iferror_zero apps\\\\api\\\\tests\\\\test_delivery_plan.py::test_circular_reference_and_hard_timeout_cleanup apps\\\\api\\\\tests\\\\test_delivery_inputs.py::test_true_blank_and_unsupported_function_are_distinct -q",
+                         "exit":  0,
+                         "result":  "29 passed",
+                         "note":  "Reused final PASS; not rerun after style-only test helper edits."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m ruff check apps\\\\api\\\\app\\\\delivery_calculation.py apps\\\\api\\\\tests\\\\test_monthly_calculation.py",
+                         "exit":  1,
+                         "note":  "Ruff reported style issues only; corrected."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m ruff check apps\\\\api\\\\app\\\\delivery_calculation.py apps\\\\api\\\\tests\\\\test_monthly_calculation.py",
+                         "exit":  "aborted",
+                         "note":  "Interrupted before result during prior turn."
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m ruff check apps\\\\api\\\\app\\\\delivery_calculation.py apps\\\\api\\\\tests\\\\test_monthly_calculation.py",
+                         "exit":  0,
+                         "result":  "All checks passed!"
+                     },
+                     {
+                         "command":  "apps\\\\api\\\\.venv\\\\Scripts\\\\python.exe -m pytest apps\\\\api\\\\tests\\\\test_monthly_calculation.py -q",
+                         "exit":  0,
+                         "result":  "13 passed",
+                         "note":  "Final monthly test run after test helper style edits."
+                     }
+                 ],
+    "implementation_notes":  [
+                                 "Added internal opt-in calculation_mode=monthly_sheet_internal; default legacy_local remains unchanged.",
+                                 "Python rejects unknown modes, missing monthly sheets, non-M01..M12 sheets, external/range/anchored/cross-month/function monthly grammar, and nonnumeric operands before evaluation where applicable.",
+                                 "Java protocol accepts CALC_V1 or CALC_V1\\\\tmonthly_sheet_internal only; Ref3DPxg remains rejected outside monthly mode.",
+                                 "Java guard is RPN-aware: POI subtraction token order is M!R M!R -, corrected from initial infix expectation.",
+                                 "Actual POI fixture Budget!N18 = M10!B16 - M10!B15 with 1001 and 1006 returns -5 in monthly tests.",
+                                 "Reviewer unresolved: depth guard remains unsafe; Python can recurse before enforcing depth on near-1000 chains, Java AreaPtg dependencies are missing and can bypass SUM(range) depth, and one depth reject message is mojibake."
+                             ],
+    "boundaries":  [
+                       "No delivery_inputs, delivery_plan, repair profile, UI, oracle, dependency lockfile, deploy, git commit, or full regression changes.",
+                       "API input scanner still rejects formulas containing ! by default.",
+                       "Existing 10-sheet engine limit unchanged; original 13-sheet full fixture remains out of scope for this unit.",
+                       "delivery_reference/fingerprint evidence is stale because engine changed; pending integration reference refresh."
+                   ],
+    "reviewer":  "monthly_calc_review source ready after this evidence record."
+}

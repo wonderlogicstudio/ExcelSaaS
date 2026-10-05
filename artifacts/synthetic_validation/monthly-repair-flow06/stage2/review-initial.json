@@ -1,0 +1,9 @@
+{
+  "status": "CHANGES_REQUIRED",
+  "reviewer": "monthly_calc_review",
+  "findings": [
+    "Shared REFERENCE_SHEET_DRIFT also genericvertical/horizontal; require strictmonthlyrun eligibility, adversarial3run+verticalcandidate mustreject",
+    "Non-target beforeerror fixture =1/0 rejectsgrammar; use validreference division and assertEXISTING_CALCULATION_ERROR"
+  ],
+  "prior_evidence": "Targetedpytest exit0 countnotcaptured; Ruffexit0; no reviewer rerun"
+}

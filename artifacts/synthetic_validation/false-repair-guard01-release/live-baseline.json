@@ -1,0 +1,8 @@
+{
+  "api_revision": "workbookcare-api-beta-00033-dum",
+  "image": "asia-northeast3-docker.pkg.dev/workbookcare-beta/workbookcare-images/workbookcare-api@sha256:d2265d9e56756fd240e1ddf93509d9fa096bd6d77acd499caff9d41ab1caa5c9",
+  "worker_version": "44ed2196-cca5-4fa9-963c-16497a3ff77a",
+  "api_traffic_percent": 100,
+  "worker_traffic_percent": 100,
+  "read_only_provider_verified": "2026-09-27"
+}

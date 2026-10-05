@@ -1,0 +1,442 @@
+{
+  "schema_version": "repair-plan-v1",
+  "owner": "synthetic-runtime",
+  "job_id": "5b75d61e-2297-40c3-81a7-c9300243523b",
+  "product_id": "APPROVED_REPAIR",
+  "sku": "RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1",
+  "source_hash": "c5e4589ca19ca892a005d92b71101aa1abbf7e1ffdb04d97b9b808cc1a617dab",
+  "inventory_hash": "364f79796ceb2bd7c33a1fcc05e7e68f0d54757b2cb279fc90c781924b9f1ebc",
+  "profile_version": "RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1",
+  "policy_version": "ko-KR-integer15-v1",
+  "policy_digest": "1961bea0991b07ab74806add34c72c14e61312d93d6854c12ce7ecae74048b1b",
+  "policy_items": [
+    {
+      "profile": "RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1",
+      "sheet": "Budget",
+      "targets": [
+        "N18"
+      ],
+      "before_formula": "=N15-N14",
+      "confirmed": true
+    }
+  ],
+  "engine_version": "apache-poi-5.5.1-adapter-v1",
+  "calculation_mode": "monthly_sheet_internal",
+  "engine_fingerprint": "958c9d5aa429b618ee4277b67604c1b516c3d34716a97903b78b6e8a9929cc65",
+  "repair_rule_fingerprint": "4c7633f27ad3ca477d52ff19534e5fa489b8a3b7e3afce3bb608a8ce2284b435",
+  "registry_version": "integer-repair-combinations-v1",
+  "template_version": "plain-xlsx-three-artifacts-v1",
+  "patches": [
+    {
+      "candidate_id": "36425a0efbb77caa44fc01e2c403144fef1cc5083be898abcfa9431d74ce4924",
+      "sheet": "Budget",
+      "cell": "N18",
+      "before": {
+        "type": "formula",
+        "value": "=N15-N14",
+        "style": "0"
+      },
+      "before_hash": "cb9f848459f92bf24e0206b04b66ed19fdd8d75962c64dba718a19f44a5d4c17",
+      "after": {
+        "type": "formula",
+        "value": "='M10'!B16-'M10'!B15",
+        "style": "0"
+      },
+      "change_kind": "MONTHLY_FORMULA_REPLACEMENT",
+      "policy_digest": "1961bea0991b07ab74806add34c72c14e61312d93d6854c12ce7ecae74048b1b",
+      "policy_index": 0,
+      "profile_version": "RP03_MONTHLY_SHEET_FORMULA_REPLACEMENT_V1",
+      "anchor": null
+    }
+  ],
+  "exact_targets": [
+    [
+      "Budget",
+      "N18"
+    ]
+  ],
+  "impact": [
+    {
+      "sheet": "Budget",
+      "cell": "N18",
+      "before": {
+        "type": "error",
+        "value": "#VALUE!",
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "after": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    }
+  ],
+  "coverage": {
+    "scope": "WHOLE_WORKBOOK",
+    "formula_count": 15,
+    "combinations": [
+      "MONTHLY_DIRECT_REFERENCE",
+      "MONTHLY_SAME_MONTH_SUBTRACT"
+    ],
+    "registry_version": "integer-repair-combinations-v1"
+  },
+  "expected_calculated_values": {
+    "Budget": {
+      "L14": {
+        "type": "text",
+        "value": "M08",
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "M14": {
+        "type": "text",
+        "value": "M09",
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "N14": {
+        "type": "text",
+        "value": "M10",
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "O14": {
+        "type": "text",
+        "value": "M11",
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "P14": {
+        "type": "text",
+        "value": "M12",
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "L15": {
+        "type": "number",
+        "value": 1008.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "M15": {
+        "type": "number",
+        "value": 1009.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "N15": {
+        "type": "number",
+        "value": 1006.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "O15": {
+        "type": "number",
+        "value": 1011.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "P15": {
+        "type": "number",
+        "value": 1012.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "L16": {
+        "type": "number",
+        "value": 1003.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "M16": {
+        "type": "number",
+        "value": 1004.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "N16": {
+        "type": "number",
+        "value": 1001.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "O16": {
+        "type": "number",
+        "value": 1006.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "P16": {
+        "type": "number",
+        "value": 1007.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "L18": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "M18": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "N18": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "O18": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "P18": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    "M08": {
+      "B15": {
+        "type": "number",
+        "value": 1008.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "B16": {
+        "type": "number",
+        "value": 1003.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    "M09": {
+      "B15": {
+        "type": "number",
+        "value": 1009.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "B16": {
+        "type": "number",
+        "value": 1004.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    "M10": {
+      "B15": {
+        "type": "number",
+        "value": 1006.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "B16": {
+        "type": "number",
+        "value": 1001.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    "M11": {
+      "B15": {
+        "type": "number",
+        "value": 1011.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "B16": {
+        "type": "number",
+        "value": 1006.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    "M12": {
+      "B15": {
+        "type": "number",
+        "value": 1012.0,
+        "provenance": "ENGINE_CALCULATED"
+      },
+      "B16": {
+        "type": "number",
+        "value": 1007.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    }
+  },
+  "value_provenance": "ENGINE_CALCULATED",
+  "source_cache_used": false,
+  "reference": {
+    "status": "PASS",
+    "case_count": 20,
+    "excel_version": "16.0",
+    "reference_digest": "a841c019a2fc8d240313e6c8feae4d58dfd646f523d1302271050f1d7d752cc4"
+  },
+  "technical_changes": [
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "L15",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": 1008.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "M15",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": 1009.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "N15",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": 1006.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "O15",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": 1011.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "P15",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": 1012.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "L16",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": 1003.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "M16",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": 1004.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "N16",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": 1001.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "O16",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": 1006.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "P16",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": 1007.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "L18",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "M18",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "N18",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "O18",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "FORMULA_CACHE",
+      "sheet": "Budget",
+      "cell": "P18",
+      "part": "xl/worksheets/sheet1.xml",
+      "after": {
+        "type": "number",
+        "value": -5.0,
+        "provenance": "ENGINE_CALCULATED"
+      }
+    },
+    {
+      "kind": "RECALCULATION_FLAGS",
+      "part": "xl/workbook.xml",
+      "attributes": {
+        "calcMode": "auto",
+        "fullCalcOnLoad": "1",
+        "forceFullCalc": "1"
+      }
+    }
+  ],
+  "created_at": 1790086838.4370089,
+  "expires_at": 1790087438.4370089,
+  "quote_id": null,
+  "order_id": null,
+  "required_artifacts": [
+    "REPAIRED_XLSX",
+    "CHANGES_XLSX",
+    "VERIFICATION_HTML"
+  ],
+  "exclusions": [],
+  "digest": "8e66686d14c31b7397394728cc512c16a6224cd1c1715dd9403628f901a8ee0e"
+}
